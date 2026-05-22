@@ -7,6 +7,7 @@ import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
 import recipeData from '@/data/recipes.json';
 import { Category } from '@/types';
+import { useSearch } from '@/hooks/useSearch';
 
 const categories = recipeData as Category[];
 
@@ -28,17 +29,21 @@ export const Home: React.FC = () => {
 
   const displayedRecipes = useMemo(() => {
     if (!categoryId) return allRecipes;
-    const category = categories.find(c => c.id === categoryId);
-    if (!category) return [];
     return allRecipes.filter(recipe => recipe.category === categoryId);
   }, [categoryId, allRecipes]);
 
-  const normalizedSearch = useMemo(() => searchTerm.trim().toLowerCase(), [searchTerm]);
+  const normalizedSearch = searchTerm.trim().toLowerCase();
 
+  // API search (triggered when search term is present)
+  const { results: searchResults, loading: searchLoading } = useSearch(searchTerm, allRecipes);
+
+  // Final display: API results > local fallback > category browsing
   const filteredRecipes = useMemo(() => {
     if (!normalizedSearch) return displayedRecipes;
+    if (searchResults) return searchResults;
+    // API search failed or still loading, fall back to local search
     return displayedRecipes.filter(recipe => recipe.name.toLowerCase().includes(normalizedSearch));
-  }, [displayedRecipes, normalizedSearch]);
+  }, [displayedRecipes, normalizedSearch, searchResults]);
 
   return (
     <Layout>
@@ -58,13 +63,16 @@ export const Home: React.FC = () => {
               ({filteredRecipes.length} 道菜)
             </span>
           </h1>
-          <div className="w-full sm:w-72">
+          <div className="w-full sm:w-72 relative">
             <input
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="输入关键词搜索菜谱"
               className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
+            {searchLoading && (
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">...</span>
+            )}
           </div>
         </div>
 

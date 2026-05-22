@@ -6,6 +6,7 @@ import recipeData from '@/data/recipes.json';
 import { Category } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
+import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 
 const categories = recipeData as Category[];
 
@@ -68,13 +69,27 @@ export const RecipeDetail: React.FC = () => {
   const { recipeId } = useParams<{ recipeId: string }>();
   const navigate = useNavigate();
 
-  const recipe = useMemo(() => {
+  // Local JSON fallback
+  const localRecipe = useMemo(() => {
     for (const cat of categories) {
       const found = cat.recipes.find(r => r.id === recipeId);
       if (found) return found;
     }
     return null;
   }, [recipeId]);
+
+  // API-first detail, falls back to localRecipe on error
+  const { recipe, loading } = useRecipeDetail(recipeId, localRecipe);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center py-20">
+          <p className="text-on-surface-variant text-lg font-body">加载中...</p>
+        </div>
+      </Layout>
+    );
+  }
 
   if (!recipe) {
     return (
