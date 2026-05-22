@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>做饭指北 - HowToCook</title>
+    <meta name="description" content="做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。" />
+    <meta property="og:title" content="做饭指北 - HowToCook" />
+    <meta property="og:description" content="做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。" />
+    <meta property="og:site_name" content="做饭指北" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="en" />
+    <meta name="twitter:card" content="summary" />
+    <script>
+      var lang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (!lang.startsWith('zh')) {
+        document.title = 'Awesome Cook - HowToCook';
+        document.querySelector('meta[name="description"]').content = 'Awesome Cook — 500+ recipes with AI-generated images. Browse by category. Even programmers can cook.';
+        document.querySelector('meta[property="og:title"]').content = 'Awesome Cook - HowToCook';
+        document.querySelector('meta[property="og:description"]').content = 'Awesome Cook — 500+ recipes with AI-generated images. Browse by category. Even programmers can cook.';
+        document.querySelector('meta[property="og:site_name"]').content = 'Awesome Cook';
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="module">
+      if (import.meta.hot?.on) {
+        import.meta.hot.on('vite:error', (error) => {
+          if (error.err) {
+            console.error(
+              [error.err.message, error.err.frame].filter(Boolean).join('\n'),
+            )
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

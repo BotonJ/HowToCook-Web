@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Generate menu PDFs
+        run: pnpm run generate-menu-pdfs
+      - name: Compress images to 1k
+        run: pnpm run compress-images -- --quality 92 --height 1376 --output-dir dist/images-1k --overwrite false
+      - name: Generate 1k menu PDFs
+        run: pnpm run generate-menu-pdfs -- --images-dir dist/images-1k --output-dir dist/menus-pdfs-1k
+      - name: Package PDFs
+        run: zip -j dist/menus-pdfs.zip dist/menus-pdfs/*.pdf
+      - name: Package 1k PDFs
+        run: zip -j dist/menus-pdfs_1k.zip dist/menus-pdfs-1k/*.pdf
+      - name: Ensure GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if ! gh release view "${GITHUB_REF_NAME}" >/dev/null 2>&1; then
+            gh release create "${GITHUB_REF_NAME}" --generate-notes
+          fi
+      - name: Upload release assets
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          gh release upload "${GITHUB_REF_NAME}" dist/menus-pdfs.zip dist/menus-pdfs_1k.zip --clobber
