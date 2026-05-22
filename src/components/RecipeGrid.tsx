@@ -10,7 +10,7 @@ export const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes }) => {
   if (recipes.length === 0) {
     return (
       <div className="text-center py-20 text-on-surface-variant">
-        <p>No recipes found in this category.</p>
+        <p>该分类暂无菜谱</p>
       </div>
     );
   }

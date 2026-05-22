@@ -3,19 +3,11 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import recipeData from '@/data/recipes.json';
-import { Category, Recipe } from '@/types';
+import { Category } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
+import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
 
 const categories = recipeData as Category[];
-
-const DIFFICULTY_LABELS = ['', '新手', '简单', '中等', '困难', '大师'];
-
-const COOK_TIME_LABELS: Record<string, string> = {
-  quick: '快手（<15 分钟）',
-  medium: '适中（15-45 分钟）',
-  long: '较长（45-90 分钟）',
-  very_long: '慢工（>90 分钟）',
-};
 
 function renderMarkdownList(text: string) {
   if (!text) return null;
@@ -38,21 +30,33 @@ function renderMarkdownList(text: string) {
 
 function renderSteps(text: string) {
   if (!text) return null;
-  const lines = text.split('\n').filter(l => l.trim());
+  // Group lines by numbered steps: a new step starts with "N." at the beginning of a line
+  const groups: string[] = [];
+  let current = '';
+  for (const line of text.split('\n')) {
+    if (/^\d+\.\s/.test(line.trimStart())) {
+      if (current) groups.push(current);
+      current = line.trimStart().replace(/^\d+\.\s*/, '');
+    } else if (current) {
+      current += '\n' + line;
+    }
+  }
+  if (current) groups.push(current);
+
   return (
     <ol className="space-y-6">
-      {lines.map((line, i) => (
+      {groups.map((content, i) => (
         <li key={i} className="flex gap-4">
           <div className="flex flex-col items-center">
             <span className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-on-primary text-sm font-semibold flex items-center justify-center font-display">
               {i + 1}
             </span>
-            {i < lines.length - 1 && (
+            {i < groups.length - 1 && (
               <div className="w-px flex-1 bg-outline-variant mt-2" />
             )}
           </div>
-          <span className="font-body text-body-lg text-on-surface leading-relaxed pt-1">
-            {line.replace(/^\d+\.\s*/, '')}
+          <span className="font-body text-body-lg text-on-surface leading-relaxed pt-1 whitespace-pre-line">
+            {content}
           </span>
         </li>
       ))}
@@ -85,7 +89,7 @@ export const RecipeDetail: React.FC = () => {
 
   const cleanDescription = recipe.description
     ?.replace(/^(\.jpg\)\s*)+/gm, '')
-    .replace(/^.jpg\).*$/gm, '')
+    .replace(/^\.jpg\).*$/gm, '')
     .replace(/(预估烹饪难度[：:])/g, '\n$1')
     .trim();
 

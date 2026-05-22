@@ -19,7 +19,7 @@ interface SourceNavProps {
 
 export const SourceNav: React.FC<SourceNavProps> = ({ activeSource, onSourceChange }) => {
   return (
-    <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-16 z-30">
+    <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2">
         {sources.map((source) => {
           const isActive = source.id === activeSource;

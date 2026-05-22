@@ -9,10 +9,10 @@ export interface Recipe {
   cook_time: string;
   ingredients: string[];
   main_ingredients: string[];
-  tags: {
-    spicy: boolean;
-    allergens: string[];
-    diet: string[];
+  tags?: {
+    spicy?: boolean;
+    allergens?: string[];
+    diet?: string[];
   };
   source: string;
   description?: string;

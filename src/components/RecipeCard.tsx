@@ -1,42 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Recipe } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
-
-const COOK_TIME_LABELS: Record<string, string> = {
-  quick: '快手',
-  medium: '适中',
-  long: '较久',
-  very_long: '慢工',
-};
-
-const CATEGORY_LABELS: Record<string, string> = {
-  meat_dish: '荤菜',
-  vegetable_dish: '素菜',
-  staple: '主食',
-  aquatic: '水产',
-  breakfast: '早餐',
-  soup: '汤品',
-  drink: '饮品',
-  dessert: '甜品',
-  semi_finished: '半成品',
-  condiment: '酱料',
-  other: '其他',
-};
+import { COOK_TIME_SHORT, CATEGORY_LABELS } from '@/lib/constants';
 
 interface RecipeCardProps {
   recipe: Recipe;
 }
 
 export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
-  const { ref } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const cookTimeLabel = COOK_TIME_LABELS[recipe.cook_time];
+  const cookTimeLabel = COOK_TIME_SHORT[recipe.cook_time];
   const isSpicy = recipe.tags?.spicy;
   const categoryLabel = CATEGORY_LABELS[recipe.category] || recipe.category;
 
@@ -90,7 +64,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
         className="group cursor-pointer"
       >
         <div className="relative overflow-hidden rounded-lg bg-surface-container-lowest shadow-ambient hover:shadow-lg transition-shadow duration-300">
-          <div ref={ref} className="aspect-[9/16] bg-surface-container relative">
+          <div className="aspect-[9/16] bg-surface-container relative">
             <img
               src={withBaseUrl(recipe.imagePath)}
               alt={recipe.name}

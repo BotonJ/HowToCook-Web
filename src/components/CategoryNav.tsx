@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Category } from '@/types';
@@ -8,18 +8,9 @@ interface CategoryNavProps {
 }
 
 export const CategoryNav: React.FC<CategoryNavProps> = ({ categories }) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  // Scroll active item into view
-  useEffect(() => {
-    // This is a simple implementation, a more robust one would find the active element
-    // and scroll it into view.
-  }, []);
-
   return (
-    <div className="w-full bg-stone-50 border-b border-stone-200 sticky top-16 z-30">
-      <div 
-        ref={scrollRef}
+    <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
+      <div
         className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2"
       >
         <NavLink
