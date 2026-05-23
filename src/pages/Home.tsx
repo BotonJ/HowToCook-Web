@@ -28,8 +28,10 @@ export const Home: React.FC = () => {
   }, [activeSource]);
 
   const displayedRecipes = useMemo(() => {
-    if (!categoryId) return allRecipes;
-    return allRecipes.filter(recipe => recipe.category === categoryId);
+    const list = categoryId
+      ? allRecipes.filter(recipe => recipe.category === categoryId)
+      : allRecipes;
+    return [...list].sort((a, b) => (a.imagePath ? 0 : 1) - (b.imagePath ? 0 : 1));
   }, [categoryId, allRecipes]);
 
   const normalizedSearch = searchTerm.trim().toLowerCase();

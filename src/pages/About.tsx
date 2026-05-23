@@ -8,7 +8,7 @@ export const About: React.FC = () => {
         <h1 className="font-display text-headline-xl text-on-surface">关于 HowToCook</h1>
 
         <p className="font-body text-body-lg text-on-surface-variant leading-relaxed">
-          HowToCook 是一个 AI 驱动的菜谱平台，为程序员和家庭厨师提供精确、可执行的烹饪指南。
+          HowToCook 是一个 AI 驱动的菜谱平台，为所有下厨的人提供精确、可执行的烹饪指南。
         </p>
 
         <div className="space-y-6 font-body text-body-md text-on-surface-variant leading-relaxed">

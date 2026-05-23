@@ -29,7 +29,7 @@ export const Navbar: React.FC = () => {
             致谢
           </Link>
           <a
-            href="https://github.com/king-jingxiang/HowToCook"
+            href="https://github.com/BotonJ/HowToCook-Web"
             target="_blank"
             rel="noopener noreferrer"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"

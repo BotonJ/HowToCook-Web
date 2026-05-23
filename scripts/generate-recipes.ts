@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const IMAGES_DIR = path.join(PROJECT_ROOT, 'public/images/dishes');
 const OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes.json');
+const INDEX_FILE = path.resolve(__dirname, '../../howtocook-skill/index.json');
 
 const CATEGORY_MAP: Record<string, string> = {
   'tips': '基础操作',
@@ -38,6 +39,21 @@ interface Category {
   recipes: Recipe[];
 }
 
+function buildSourceMap(): Map<string, string> {
+  const sourceMap = new Map<string, string>();
+  if (!fs.existsSync(INDEX_FILE)) {
+    console.warn(`Index file not found: ${INDEX_FILE}. Defaulting all recipes to "howtocook" source.`);
+    return sourceMap;
+  }
+
+  const index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
+  for (const dish of index.dishes) {
+    sourceMap.set(dish.name, dish.source);
+  }
+  console.log(`Loaded ${sourceMap.size} recipe sources from index.`);
+  return sourceMap;
+}
+
 function scanRecipes(): Category[] {
   if (!fs.existsSync(IMAGES_DIR)) {
     console.error(`Images directory not found: ${IMAGES_DIR}`);
@@ -46,6 +62,7 @@ function scanRecipes(): Category[] {
 
   const categories: Category[] = [];
   const dirs = fs.readdirSync(IMAGES_DIR);
+  const sourceMap = buildSourceMap();
 
   for (const dir of dirs) {
     const dirPath = path.join(IMAGES_DIR, dir);
@@ -63,8 +80,9 @@ function scanRecipes(): Category[] {
       const ext = path.extname(file).toLowerCase();
       if (['.jpg', '.jpeg', '.png', '.webp', '.gif'].includes(ext)) {
         const name = path.basename(file, ext);
+        const source = sourceMap.get(name) ?? 'howtocook';
         recipes.push({
-          id: `${dir}-${name}`,
+          id: `${source}/${name}`,
           name,
           category: dir,
           // Store path relative to public

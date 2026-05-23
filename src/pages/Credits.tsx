@@ -3,17 +3,17 @@ import { Layout } from '@/components/Layout';
 
 const credits = [
   {
-    name: 'HowToCook',
-    description: '开源菜谱项目（GitHub 100k+ stars），361 道程序员风格菜谱。精确量化，步骤带公式。',
+    name: 'HowToCook 源仓库',
+    description: '开源菜谱项目（GitHub 100k+ stars），程序员风格菜谱。精确量化，步骤带公式。',
     link: 'https://github.com/Anduin2017/HowToCook',
   },
   {
     name: '随便做',
-    description: 'B 站美食节目，140 道简易/进阶菜谱，适合新手入门。',
+    description: '火遍全网的国宴大厨隋坡，140 道简易/进阶菜谱。随便一做，怎么都好吃。',
   },
   {
     name: '金谷园',
-    description: '饺子馆招牌甜品配方贡献。',
+    description: '第一个开源的饺子馆 Skill，招牌甜品牛奶醪糟鸡蛋。',
   },
 ];
 
