@@ -55,7 +55,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "猪前肘",
           "食用植物油",
@@ -729,7 +729,7 @@
         "difficulty": 5,
         "cuisine": "东北",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "普通的炒锅",
           "电饭煲/电炖锅",
@@ -884,7 +884,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "西红柿",
           "牛腩",
@@ -1352,7 +1352,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "带皮五花肉",
           "红腐乳",
@@ -1473,7 +1473,7 @@
         "difficulty": 5,
         "cuisine": "川菜",
         "cooking_method": "炖煮",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "猪里脊肉",
           "食用盐",
@@ -1640,7 +1640,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "带皮猪五花肉",
           "商芝",
@@ -1966,7 +1966,7 @@
         "difficulty": 5,
         "cuisine": "东北",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "猪五花肉或猪肉排骨",
           "东北酸菜",
@@ -2077,7 +2077,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "炖煮",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "羊腩",
           "腐竹",
@@ -2209,7 +2209,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "带脚、爪猪前肘",
           "红豆腐乳",
@@ -2252,7 +2252,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "鸡爪",
           "姜",
@@ -3180,7 +3180,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "炖煮",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "牛腱子肉",
           "香叶",
@@ -3595,7 +3595,7 @@
         "difficulty": 3,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -3948,7 +3948,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "鲜仔鸭肉",
           "鲜鸭血",
@@ -4291,7 +4291,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "炖煮",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "鸡汤：鸡",
           "卤汤：水10斤+鸡汤8斤、酱油",
@@ -5585,7 +5585,7 @@
         "difficulty": 5,
         "cuisine": "鲁菜",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "大肠 适量",
           "葱姜蒜 适量",
@@ -5861,7 +5861,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "整鸭",
           "糯米饭",
@@ -5910,7 +5910,7 @@
         "difficulty": 2,
         "cuisine": "粤菜",
         "cooking_method": "炒",
-        "cook_time": "short",
+        "cook_time": "quick",
         "ingredients": [
           "牛肉末",
           "洋葱",
@@ -9176,7 +9176,7 @@
         "difficulty": 5,
         "cuisine": "西式",
         "cooking_method": "烘焙",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "高筋或中筋面粉 *（尽量使用高筋面粉，但**避免使用低筋面粉**。所有无特殊说明的“万能面粉”均为中筋面粉）*",
           "鸡蛋 *（不过分要求大小及重量）*",
@@ -9684,7 +9684,7 @@
         "difficulty": 5,
         "cuisine": "西北",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "全麦面粉",
           "烤鹰嘴豆粉(Sattu)— 可用炒熟的鹰嘴豆磨粉替代",
@@ -10007,7 +10007,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "炖煮",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "巴斯马蒂长粒香米",
           "鸡腿肉",
@@ -10282,7 +10282,7 @@
         "difficulty": 2,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -10304,7 +10304,7 @@
         "difficulty": 3,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -10866,7 +10866,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "擀面杖",
           "面粉",
@@ -12766,7 +12766,7 @@
         "difficulty": 4,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -13167,7 +13167,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "鳜鱼",
           "葱姜",
@@ -13275,7 +13275,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "鳜鱼1.2kg",
           "莴笋",
@@ -13312,7 +13312,7 @@
         "difficulty": 5,
         "cuisine": "苏菜",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "主料：桂鱼一条",
           "辅料：葱姜蒜、淀粉",
@@ -14769,7 +14769,7 @@
         "difficulty": 3,
         "cuisine": "意式",
         "cooking_method": "炖",
-        "cook_time": "short",
+        "cook_time": "quick",
         "ingredients": [
           "意式猪肉香肠/辣香肠/午餐肉",
           "百味来拿坡里意面酱",
@@ -14804,7 +14804,7 @@
         "difficulty": 1,
         "cuisine": "韩式",
         "cooking_method": "煮",
-        "cook_time": "short",
+        "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
           "酱油",
@@ -16708,7 +16708,7 @@
         "difficulty": 2,
         "cuisine": "印度",
         "cooking_method": "煮",
-        "cook_time": "short",
+        "cook_time": "quick",
         "ingredients": [
           "水",
           "全脂牛奶",
@@ -16741,7 +16741,7 @@
         "difficulty": 1,
         "cuisine": "印度",
         "cooking_method": "搅拌",
-        "cook_time": "short",
+        "cook_time": "quick",
         "ingredients": [
           "原味酸奶",
           "熟透的牛油果",
@@ -17132,7 +17132,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "烘焙",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "高筋面粉：",
           "牛奶: ",
@@ -17292,7 +17292,7 @@
         "difficulty": 5,
         "cuisine": "西式",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "荔浦芋头",
           "紫薯粉",
@@ -17455,7 +17455,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "烘焙",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "烤箱",
           "打蛋器（电动最好，手动费力且有一定失败概率）或筷子",
@@ -17822,7 +17822,7 @@
         "difficulty": 5,
         "cuisine": "家常",
         "cooking_method": "其他",
-        "cook_time": "slow",
+        "cook_time": "very_long",
         "ingredients": [
           "牛油 4500 g",
           "（色拉油 或 菜籽油） 1000 ml",
@@ -18271,7 +18271,7 @@
         "difficulty": 2,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -18293,7 +18293,7 @@
         "difficulty": 2,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -18315,7 +18315,7 @@
         "difficulty": 4,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -18337,7 +18337,7 @@
         "difficulty": 4,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -18359,7 +18359,7 @@
         "difficulty": 4,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {
@@ -18381,7 +18381,7 @@
         "difficulty": 4,
         "cuisine": "",
         "cooking_method": "",
-        "cook_time": "",
+        "cook_time": "medium",
         "ingredients": [],
         "main_ingredients": [],
         "tags": {

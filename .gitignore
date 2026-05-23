@@ -26,3 +26,9 @@ dist-ssr
 
 # Worklogs
 worklogs/
+
+# Environment
+.env
+.env.*
+.env.development
+.env.production
