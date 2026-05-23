@@ -66,7 +66,8 @@ function renderSteps(text: string) {
 }
 
 export const RecipeDetail: React.FC = () => {
-  const { recipeId } = useParams<{ recipeId: string }>();
+  const params = useParams();
+  const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
 
   // Local JSON fallback
