@@ -195,7 +195,7 @@ function buildIndexMap(): Map<string, IndexDish> {
   for (const dish of index.dishes) {
     indexMap.set(dish.name, dish);
   }
-  console.log(`Loaded ${indexMap.size} recipes from index.`);
+  console.log(`Loaded ${indexMap.size} entries (${index.dishes.length} dishes, ${index.dishes.length - indexMap.size} duplicates merged).`);
   return indexMap;
 }
 
@@ -246,10 +246,23 @@ function scanRecipes(): Category[] {
   // Group recipes by category
   const categoryRecipes = new Map<string, Recipe[]>();
 
-  for (const [name, dish] of indexMap) {
+  // Detect duplicate names (same name appears in both howtocook and 随便做)
+  const indexArray = Array.from(indexMap.values());
+  const duplicateNames = new Set<string>();
+  for (const dish of indexArray) {
+    if (dish.has_duplicate) {
+      duplicateNames.add(dish.name);
+    }
+  }
+  console.log(`Duplicate names detected: ${duplicateNames.size}`);
+  for (const n of duplicateNames) {
+    console.log(`  ${n}`);
+  }
+
+  for (const dish of indexArray) {
     const category = dish.category;
     if (!CATEGORY_MAP[category]) {
-      console.warn(`Unknown category: ${category} for recipe ${name}`);
+      console.warn(`Unknown category: ${category} for recipe ${dish.name}`);
       continue;
     }
 
@@ -266,15 +279,23 @@ function scanRecipes(): Category[] {
     if (markdownContent) {
       textContent = parseMarkdownSections(markdownContent);
     } else {
-      console.warn(`Could not read markdown for: ${name} (${dish.path})`);
+      console.warn(`Could not read markdown for: ${dish.name} (${dish.path})`);
+    }
+
+    // For duplicate names: 随便做 version gets a suffix so both are preserved
+    let displayName = dish.name;
+    let imageLookupName = dish.name;
+    if (duplicateNames.has(dish.name) && dish.source === '随便做') {
+      displayName = `${dish.name}(随便做)`;
+      // Keep imageLookupName as original so image lookup finds the howtocook version
     }
 
     // Build recipe with all fields
     const recipe: Recipe = {
       id: dish.id,
-      name: dish.name,
+      name: displayName,
       category: dish.category,
-      imagePath: imageMap.get(name),
+      imagePath: imageMap.get(imageLookupName),
       difficulty: dish.difficulty,
       cuisine: dish.cuisine,
       cooking_method: dish.cooking_method,
