@@ -40,7 +40,7 @@ export function Home() {
   // Final display: API results > local fallback > category browsing
   const filteredRecipes = useMemo(() => {
     if (!normalizedSearch) return displayedRecipes;
-    if (searchResults) return searchResults;
+    if (searchResults !== null) return searchResults;
     // API search failed or still loading, fall back to local search
     return displayedRecipes.filter(recipe => recipe.name.toLowerCase().includes(normalizedSearch));
   }, [displayedRecipes, normalizedSearch, searchResults]);
