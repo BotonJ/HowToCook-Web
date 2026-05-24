@@ -23,7 +23,7 @@ export function Home() {
     return categories
       .flatMap(c => c.recipes)
       .filter(recipe => recipe.source === activeSource);
-  }, [activeSource]);
+  }, [categories, activeSource]);
 
   const displayedRecipes = useMemo(() => {
     const list = categoryId

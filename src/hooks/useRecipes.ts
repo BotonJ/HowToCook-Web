@@ -48,6 +48,23 @@ async function fetchFallback(): Promise<Category[]> {
 let cachedCategories: Category[] | null = null;
 let cachedRecipes: Recipe[] | null = null;
 let inflight: Promise<{ categories: Category[]; recipes: Recipe[] }> | null = null;
+let onDataUpdate: ((cats: Category[], recs: Recipe[]) => void) | null = null;
+
+async function fetchFromApiAndUpdate(): Promise<void> {
+  try {
+    const [dishes, apiCategories] = await Promise.all([
+      fetchAllRecipes(),
+      fetchCategories(),
+    ]);
+    const categories = buildCategoriesFromApi(dishes, apiCategories);
+    const recipes = categories.flatMap(c => c.recipes);
+    cachedCategories = categories;
+    cachedRecipes = recipes;
+    if (onDataUpdate) onDataUpdate(categories, recipes);
+  } catch {
+    // API failed, local data already displayed — silent ignore
+  }
+}
 
 async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[] }> {
   if (cachedCategories && cachedRecipes) {
@@ -57,24 +74,16 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
   if (inflight) return inflight;
 
   inflight = (async () => {
-    try {
-      const [dishes, apiCategories] = await Promise.all([
-        fetchAllRecipes(),
-        fetchCategories(),
-      ]);
-      const categories = buildCategoriesFromApi(dishes, apiCategories);
-      const recipes = categories.flatMap(c => c.recipes);
-      cachedCategories = categories;
-      cachedRecipes = recipes;
-      return { categories, recipes };
-    } catch {
-      // API failed, try runtime JSON fallback
-      const categories = await fetchFallback();
-      const recipes = categories.flatMap(c => c.recipes);
-      cachedCategories = categories;
-      cachedRecipes = recipes;
-      return { categories, recipes };
-    }
+    // 1. Load local JSON immediately for instant render
+    const categories = await fetchFallback();
+    const recipes = categories.flatMap(c => c.recipes);
+    cachedCategories = categories;
+    cachedRecipes = recipes;
+
+    // 2. Refresh from API in background (fire-and-forget)
+    fetchFromApiAndUpdate().catch(() => {});
+
+    return { categories, recipes };
   })();
 
   return inflight;
@@ -121,8 +130,18 @@ export function useRecipes(): UseRecipesResult {
 
   useEffect(() => {
     mountedRef.current = true;
+    // Register callback for background API updates
+    onDataUpdate = (cats, recs) => {
+      if (mountedRef.current) {
+        setCategories(cats);
+        setRecipes(recs);
+      }
+    };
     doLoad();
-    return () => { mountedRef.current = false; };
+    return () => {
+      mountedRef.current = false;
+      onDataUpdate = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
