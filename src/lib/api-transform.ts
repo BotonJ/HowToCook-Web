@@ -1,6 +1,22 @@
 import type { Recipe } from '@/types';
-import type { ApiRecipeDetail, ApiSearchResult } from '@/types/api';
+import type { ApiRecipeDetail, ApiSearchResult, DishIndex } from '@/types/api';
 import { withBaseUrl } from '@/lib/utils';
+
+export function transformDishIndex(dish: DishIndex): Recipe {
+  return {
+    id: dish.id,
+    name: dish.name,
+    category: dish.category,
+    difficulty: dish.difficulty,
+    cuisine: dish.cuisine,
+    cooking_method: dish.cooking_method,
+    cook_time: dish.cook_time,
+    ingredients: dish.ingredients,
+    main_ingredients: dish.main_ingredients,
+    tags: dish.tags,
+    source: dish.source,
+  };
+}
 
 export function transformApiRecipe(api: ApiRecipeDetail): Recipe {
   const ingredientsLines = [

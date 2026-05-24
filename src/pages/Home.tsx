@@ -5,11 +5,8 @@ import { CategoryNav } from '@/components/CategoryNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
-import recipeData from '@/data/recipes.json';
-import { Category } from '@/types';
 import { useSearch } from '@/hooks/useSearch';
-
-const categories = recipeData as Category[];
+import { useRecipes } from '@/hooks/useRecipes';
 
 const SOURCE_LABELS: Record<string, string> = {
   howtocook: 'HowToCook',
@@ -20,6 +17,7 @@ export const Home: React.FC = () => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSource, setActiveSource] = useState('howtocook');
+  const { categories, loading, error, retry } = useRecipes();
 
   const allRecipes = useMemo(() => {
     return categories
@@ -46,6 +44,33 @@ export const Home: React.FC = () => {
     // API search failed or still loading, fall back to local search
     return displayedRecipes.filter(recipe => recipe.name.toLowerCase().includes(normalizedSearch));
   }, [displayedRecipes, normalizedSearch, searchResults]);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center py-20">
+          <div className="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+          <p className="text-on-surface-variant text-lg font-body mt-4">加载菜谱中...</p>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="text-center py-20">
+          <p className="text-error text-lg font-body mb-4">{error}</p>
+          <button
+            onClick={retry}
+            className="px-4 py-2 bg-primary text-on-primary rounded-lg font-body hover:opacity-90 transition"
+          >
+            重试
+          </button>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

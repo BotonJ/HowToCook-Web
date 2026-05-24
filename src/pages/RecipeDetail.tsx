@@ -2,13 +2,10 @@ import React, { useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
-import recipeData from '@/data/recipes.json';
-import { Category } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
-
-const categories = recipeData as Category[];
+import { useRecipes } from '@/hooks/useRecipes';
 
 function renderMarkdownList(text: string) {
   if (!text) return null;
@@ -69,18 +66,18 @@ export const RecipeDetail: React.FC = () => {
   const params = useParams();
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
+  const { recipes: allRecipes, loading: recipesLoading } = useRecipes();
 
-  // Local JSON fallback
+  // Local fallback from runtime-fetched data
   const localRecipe = useMemo(() => {
-    for (const cat of categories) {
-      const found = cat.recipes.find(r => r.id === recipeId);
-      if (found) return found;
-    }
-    return null;
-  }, [recipeId]);
+    if (!recipeId || allRecipes.length === 0) return null;
+    return allRecipes.find(r => r.id === recipeId) ?? null;
+  }, [recipeId, allRecipes]);
 
   // API-first detail, falls back to localRecipe on error
-  const { recipe, loading } = useRecipeDetail(recipeId, localRecipe);
+  const { recipe, loading: detailLoading } = useRecipeDetail(recipeId, localRecipe);
+
+  const loading = recipesLoading || detailLoading;
 
   if (loading) {
     return (

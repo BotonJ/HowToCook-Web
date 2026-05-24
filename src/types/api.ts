@@ -44,10 +44,39 @@ export interface ApiRecipeDetail {
   source: string;
 }
 
+export interface DishIndex {
+  id: string;
+  name: string;
+  difficulty: number;
+  category: string;
+  source: string;
+  cuisine: string;
+  cooking_method: string;
+  cook_time: string;
+  main_ingredients: string[];
+  ingredients: string[];
+  tags: {
+    spicy?: boolean;
+    allergens?: string[];
+    diet?: string[];
+  };
+  has_duplicate?: boolean;
+}
+
+export interface ApiRecipesResponse {
+  recipes: DishIndex[];
+  total: number;
+}
+
 export interface ApiCategory {
   id: string;
   name: string;
   count: number;
+}
+
+export interface ApiCategoriesResponse {
+  categories: ApiCategory[];
+  total: number;
 }
 
 export interface ApiCategoriesResponse {
