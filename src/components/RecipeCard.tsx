@@ -1,9 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import { Recipe } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_SHORT, CATEGORY_LABELS } from '@/lib/constants';
+
+/** Shared entrance/hover animation for recipe cards (no `layout` — too expensive with many cards). */
+const cardMotionProps: HTMLMotionProps<'div'> = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, scale: 0.9 },
+  whileHover: { y: -5 },
+};
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -17,14 +25,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
   if (!recipe.imagePath) {
     return (
       <Link to={`/recipe/${recipe.id}`}>
-        <motion.div
-          layout
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          whileHover={{ y: -5 }}
-          className="group cursor-pointer"
-        >
+        <motion.div {...cardMotionProps} className="group cursor-pointer">
           <div className="relative overflow-hidden rounded-lg shadow-ambient hover:shadow-lg transition-shadow duration-300 aspect-[9/16] bg-gradient-to-br from-primary/10 via-surface-container to-secondary/10 flex flex-col items-center justify-center p-6">
             <h3 className="font-display font-bold text-headline-lg text-on-surface text-center leading-tight mb-3">
               {recipe.name}
@@ -55,14 +56,7 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
 
   return (
     <Link to={`/recipe/${recipe.id}`}>
-      <motion.div
-        layout
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9 }}
-        whileHover={{ y: -5 }}
-        className="group cursor-pointer"
-      >
+      <motion.div {...cardMotionProps} className="group cursor-pointer">
         <div className="relative overflow-hidden rounded-lg bg-surface-container-lowest shadow-ambient hover:shadow-lg transition-shadow duration-300">
           <div className="aspect-[9/16] bg-surface-container relative">
             <img

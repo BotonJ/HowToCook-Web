@@ -114,7 +114,13 @@ export const RecipeDetail: React.FC = () => {
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         {/* Back button */}
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => {
+            if (window.history.length > 1) {
+              navigate(-1);
+            } else {
+              navigate('/', { replace: true });
+            }
+          }}
           className="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors mb-6"
         >
           <ArrowLeft size={18} />
