@@ -3,13 +3,14 @@ import { Recipe } from '@/types';
 
 interface RecipeGridProps {
   recipes: Recipe[];
+  emptyMessage?: string;
 }
 
-export function RecipeGrid({ recipes }: RecipeGridProps) {
+export function RecipeGrid({ recipes, emptyMessage }: RecipeGridProps) {
   if (recipes.length === 0) {
     return (
       <div className="text-center py-20 text-on-surface-variant">
-        <p>该分类暂无菜谱</p>
+        <p>{emptyMessage ?? '该分类暂无菜谱'}</p>
       </div>
     );
   }

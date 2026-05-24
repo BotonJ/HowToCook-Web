@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MetaOptions {
   title?: string;
@@ -8,7 +8,10 @@ interface MetaOptions {
 }
 
 export function useMeta({ title, description, ogImage, ogUrl }: MetaOptions) {
+  const trackedRef = useRef<Element[]>([]);
+
   useEffect(() => {
+    const tracked: Element[] = (trackedRef.current = []);
     const fullTitle = title ? `${title} - 做饭指北` : '做饭指北 - HowToCook';
     document.title = fullTitle;
 
@@ -19,6 +22,7 @@ export function useMeta({ title, description, ogImage, ogUrl }: MetaOptions) {
         el = document.createElement('meta');
         el.setAttribute(attr, name);
         document.head.appendChild(el);
+        tracked.push(el);
       }
       el.setAttribute('content', content);
     };
@@ -38,14 +42,20 @@ export function useMeta({ title, description, ogImage, ogUrl }: MetaOptions) {
 
     if (ogUrl) {
       setMeta('og:url', ogUrl, true);
-      // Update canonical link
       let canonical = document.querySelector('link[rel="canonical"]');
       if (!canonical) {
         canonical = document.createElement('link');
         canonical.setAttribute('rel', 'canonical');
         document.head.appendChild(canonical);
+        tracked.push(canonical);
       }
       canonical.setAttribute('href', ogUrl);
     }
+
+    return () => {
+      for (const el of tracked) {
+        el.remove();
+      }
+    };
   }, [title, description, ogImage, ogUrl]);
 }

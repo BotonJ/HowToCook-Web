@@ -103,7 +103,10 @@ export function Home() {
           </div>
         </div>
 
-        <RecipeGrid recipes={filteredRecipes} />
+        <RecipeGrid
+          recipes={filteredRecipes}
+          emptyMessage={normalizedSearch ? '未找到匹配的菜谱，试试其他关键词' : undefined}
+        />
       </div>
     </Layout>
   );

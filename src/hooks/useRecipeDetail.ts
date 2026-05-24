@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { getRecipeDetail } from '@/services/api';
 import { transformApiRecipe } from '@/lib/api-transform';
 import type { Recipe } from '@/types';
@@ -18,6 +18,9 @@ export function useRecipeDetail(
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [fromApi, setFromApi] = useState(false);
+
+  const fallbackRef = useRef(localFallback);
+  fallbackRef.current = localFallback;
 
   useEffect(() => {
     if (!recipeId) {
@@ -40,7 +43,7 @@ export function useRecipeDetail(
       } catch (err) {
         if (!cancelled) {
           setError(err instanceof Error ? err.message : 'Failed to load recipe');
-          setRecipe(localFallback);
+          setRecipe(fallbackRef.current);
           setFromApi(false);
         }
       } finally {
@@ -50,7 +53,7 @@ export function useRecipeDetail(
 
     fetchDetail(recipeId);
     return () => { cancelled = true; };
-  }, [recipeId, localFallback]);
+  }, [recipeId]);
 
   return { recipe, loading, error, fromApi };
 }
