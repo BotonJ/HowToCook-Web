@@ -1,4 +1,3 @@
-import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface SourceTab {
@@ -17,7 +16,7 @@ interface SourceNavProps {
   onSourceChange: (source: string) => void;
 }
 
-export const SourceNav: React.FC<SourceNavProps> = ({ activeSource, onSourceChange }) => {
+export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2">
@@ -49,4 +48,4 @@ export const SourceNav: React.FC<SourceNavProps> = ({ activeSource, onSourceChan
       </div>
     </div>
   );
-};
+}

@@ -1,7 +1,6 @@
-import React from 'react';
 import { Layout } from '@/components/Layout';
 
-export const About: React.FC = () => {
+export function About() {
   return (
     <Layout>
       <div className="py-8 space-y-8 max-w-2xl">
@@ -13,7 +12,7 @@ export const About: React.FC = () => {
 
         <div className="space-y-6 font-body text-body-md text-on-surface-variant leading-relaxed">
           <p>
-            500+ 道菜谱，覆盖川、粤、鲁、湘等 17 大菜系，支持按难度、时间、食材、辣度等多维度筛选。
+            496 道菜谱，覆盖川、粤、鲁、湘等 17 大菜系，支持按难度、时间、食材、辣度等多维度筛选。
             通过偏好学习系统，越用越懂你的口味。
           </p>
           <p>
@@ -23,4 +22,4 @@ export const About: React.FC = () => {
       </div>
     </Layout>
   );
-};
+}

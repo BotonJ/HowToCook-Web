@@ -1,8 +1,7 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChefHat } from 'lucide-react';
 
-export const Navbar: React.FC = () => {
+export function Navbar() {
   return (
     <nav className="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant">
       <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
@@ -40,4 +39,4 @@ export const Navbar: React.FC = () => {
       </div>
     </nav>
   );
-};
+}

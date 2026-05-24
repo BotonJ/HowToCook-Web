@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 import { Recipe } from '@/types';
@@ -17,7 +16,7 @@ interface RecipeCardProps {
   recipe: Recipe;
 }
 
-export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
+export function RecipeCard({ recipe }: RecipeCardProps) {
   const cookTimeLabel = COOK_TIME_SHORT[recipe.cook_time];
   const isSpicy = recipe.tags?.spicy;
   const categoryLabel = CATEGORY_LABELS[recipe.category] || recipe.category;
@@ -90,4 +89,4 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
       </motion.div>
     </Link>
   );
-};
+}

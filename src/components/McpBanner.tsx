@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Copy, Check, Terminal, ChevronDown, ChevronUp } from 'lucide-react';
 
 const INSTALL_COMMAND = 'curl -sSL https://howtocook.cn/install.sh | bash';
 
-export const McpBanner: React.FC = () => {
+export function McpBanner() {
   const [copied, setCopied] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
 
@@ -80,4 +80,4 @@ export const McpBanner: React.FC = () => {
       )}
     </div>
   );
-};
+}

@@ -1,12 +1,12 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { ScrollRestoration } from 'react-router-dom';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <ScrollRestoration />
@@ -19,4 +19,4 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </footer>
     </div>
   );
-};
+}

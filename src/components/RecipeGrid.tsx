@@ -1,4 +1,3 @@
-import React from 'react';
 import { RecipeCard } from './RecipeCard';
 import { Recipe } from '@/types';
 
@@ -6,7 +5,7 @@ interface RecipeGridProps {
   recipes: Recipe[];
 }
 
-export const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes }) => {
+export function RecipeGrid({ recipes }: RecipeGridProps) {
   if (recipes.length === 0) {
     return (
       <div className="text-center py-20 text-on-surface-variant">
@@ -25,4 +24,4 @@ export const RecipeGrid: React.FC<RecipeGridProps> = ({ recipes }) => {
       ))}
     </div>
   );
-};
+}

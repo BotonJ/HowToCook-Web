@@ -1,11 +1,13 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
+import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 import { useRecipes } from '@/hooks/useRecipes';
+import { useMeta } from '@/hooks/useMeta';
 
 function renderMarkdownList(text: string) {
   if (!text) return null;
@@ -62,7 +64,7 @@ function renderSteps(text: string) {
   );
 }
 
-export const RecipeDetail: React.FC = () => {
+export function RecipeDetail() {
   const params = useParams();
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
@@ -78,6 +80,13 @@ export const RecipeDetail: React.FC = () => {
   const { recipe, loading: detailLoading } = useRecipeDetail(recipeId, localRecipe);
 
   const loading = recipesLoading || detailLoading;
+
+  useMeta({
+    title: recipe?.name,
+    description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name} 的做法` : undefined),
+    ogImage: recipe?.imagePath ? `https://howtocook.cn/${recipe.imagePath}` : undefined,
+    ogUrl: recipe ? `https://howtocook.cn/recipe/${encodeURIComponent(recipe.name)}` : undefined,
+  });
 
   if (loading) {
     return (
@@ -108,6 +117,7 @@ export const RecipeDetail: React.FC = () => {
 
   return (
     <Layout>
+      <RecipeJsonLd recipe={recipe} />
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         {/* Back button */}
         <button
@@ -277,4 +287,4 @@ export const RecipeDetail: React.FC = () => {
       </div>
     </Layout>
   );
-};
+}

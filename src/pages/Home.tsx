@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { SourceNav } from '@/components/SourceNav';
 import { CategoryNav } from '@/components/CategoryNav';
@@ -13,7 +13,7 @@ const SOURCE_LABELS: Record<string, string> = {
   '随便做': '随便做',
 };
 
-export const Home: React.FC = () => {
+export function Home() {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeSource, setActiveSource] = useState('howtocook');
@@ -107,4 +107,4 @@ export const Home: React.FC = () => {
       </div>
     </Layout>
   );
-};
+}

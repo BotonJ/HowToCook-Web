@@ -1,4 +1,3 @@
-import React from 'react';
 import { Layout } from '@/components/Layout';
 
 const credits = [
@@ -17,7 +16,7 @@ const credits = [
   },
 ];
 
-export const Credits: React.FC = () => {
+export function Credits() {
   return (
     <Layout>
       <div className="py-8 space-y-8">
@@ -53,4 +52,4 @@ export const Credits: React.FC = () => {
       </div>
     </Layout>
   );
-};
+}

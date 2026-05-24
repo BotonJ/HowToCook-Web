@@ -32,3 +32,4 @@ worklogs/
 .env.*
 .env.development
 .env.production
+.gstack/

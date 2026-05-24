@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Category } from '@/types';
@@ -7,7 +6,7 @@ interface CategoryNavProps {
   categories: Category[];
 }
 
-export const CategoryNav: React.FC<CategoryNavProps> = ({ categories }) => {
+export function CategoryNav({ categories }: CategoryNavProps) {
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div
@@ -42,4 +41,4 @@ export const CategoryNav: React.FC<CategoryNavProps> = ({ categories }) => {
       </div>
     </div>
   );
-};
+}
