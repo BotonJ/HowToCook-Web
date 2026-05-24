@@ -48,7 +48,11 @@ async function fetchFallback(): Promise<Category[]> {
 let cachedCategories: Category[] | null = null;
 let cachedRecipes: Recipe[] | null = null;
 let inflight: Promise<{ categories: Category[]; recipes: Recipe[] }> | null = null;
-let onDataUpdate: ((cats: Category[], recs: Recipe[]) => void) | null = null;
+const listeners = new Set<(cats: Category[], recs: Recipe[]) => void>();
+
+function notifyListeners(cats: Category[], recs: Recipe[]): void {
+  for (const fn of listeners) fn(cats, recs);
+}
 
 async function fetchFromApiAndUpdate(): Promise<void> {
   try {
@@ -60,9 +64,9 @@ async function fetchFromApiAndUpdate(): Promise<void> {
     const recipes = categories.flatMap(c => c.recipes);
     cachedCategories = categories;
     cachedRecipes = recipes;
-    if (onDataUpdate) onDataUpdate(categories, recipes);
-  } catch {
-    // API failed, local data already displayed — silent ignore
+    notifyListeners(categories, recipes);
+  } catch (err) {
+    console.warn('[useRecipes] API refresh failed, using local data:', err instanceof Error ? err.message : err);
   }
 }
 
@@ -130,17 +134,17 @@ export function useRecipes(): UseRecipesResult {
 
   useEffect(() => {
     mountedRef.current = true;
-    // Register callback for background API updates
-    onDataUpdate = (cats, recs) => {
+    const onUpdate = (cats: Category[], recs: Recipe[]) => {
       if (mountedRef.current) {
         setCategories(cats);
         setRecipes(recs);
       }
     };
+    listeners.add(onUpdate);
     doLoad();
     return () => {
       mountedRef.current = false;
-      onDataUpdate = null;
+      listeners.delete(onUpdate);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
