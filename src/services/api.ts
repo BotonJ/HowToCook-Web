@@ -3,9 +3,20 @@ import type { ApiSearchResponse, ApiRecipeDetail } from '@/types/api';
 const API_BASE = import.meta.env.VITE_API_BASE || 'https://api.howtocook.cn';
 
 async function fetchApi<T>(path: string): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`);
-  if (!res.ok) throw new Error(`API error: ${res.status}`);
-  return res.json() as Promise<T>;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
+  try {
+    const res = await fetch(`${API_BASE}${path}`, { signal: controller.signal });
+    if (!res.ok) throw new Error(`API error: ${res.status}`);
+    return res.json() as Promise<T>;
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new Error('请求超时，请稍后重试');
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 export async function searchRecipes(params: {
@@ -17,7 +28,10 @@ export async function searchRecipes(params: {
   limit?: number;
 }): Promise<ApiSearchResponse> {
   const query = new URLSearchParams();
-  if (params.q) query.set('q', params.q);
+  if (params.q) {
+    const sanitized = params.q.trim().slice(0, 200).replace(/[\x00-\x1f]/g, '');
+    if (sanitized) query.set('q', sanitized);
+  }
   if (params.category) query.set('category', params.category);
   if (params.cuisine) query.set('cuisine', params.cuisine);
   if (params.cooking_method) query.set('cooking_method', params.cooking_method);

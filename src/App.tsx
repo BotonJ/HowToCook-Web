@@ -7,13 +7,15 @@ import { useRouteError } from 'react-router-dom';
 
 function ErrorBoundary() {
   const error = useRouteError();
-  console.error('Route error:', error);
   return (
-    <div style={{ padding: '2rem', fontFamily: 'system-ui' }}>
-      <h1>Route Error</h1>
-      <pre style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-        {typeof error === 'object' ? JSON.stringify(error, null, 2) : String(error)}
-      </pre>
+    <div style={{ padding: '2rem', fontFamily: 'system-ui', textAlign: 'center' }}>
+      <h1>出错了</h1>
+      <p>页面加载异常，请<a href="/">返回首页</a></p>
+      {import.meta.env.DEV && (
+        <pre style={{ whiteSpace: 'pre-wrap', textAlign: 'left', background: '#f5f5f5', padding: '1rem', borderRadius: '8px', marginTop: '1rem' }}>
+          {error instanceof Error ? error.stack : String(error)}
+        </pre>
+      )}
     </div>
   );
 }
@@ -22,10 +24,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/category/:categoryId",
     element: <Home />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/recipe/*",
@@ -35,10 +39,12 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/credits",
     element: <Credits />,
+    errorElement: <ErrorBoundary />,
   },
 ]);
 

@@ -61,7 +61,7 @@ function scanRecipes(): Category[] {
   }
 
   const categories: Category[] = [];
-  const dirs = fs.readdirSync(IMAGES_DIR);
+  const dirs = fs.readdirSync(IMAGES_DIR).sort();
   const sourceMap = buildSourceMap();
 
   for (const dir of dirs) {
@@ -72,7 +72,7 @@ function scanRecipes(): Category[] {
     if (!CATEGORY_MAP[dir]) continue;
 
     const recipes: Recipe[] = [];
-    const files = fs.readdirSync(dirPath);
+    const files = fs.readdirSync(dirPath).sort();
 
     for (const file of files) {
       if (file.startsWith('.')) continue; // Skip hidden files
@@ -105,6 +105,10 @@ function scanRecipes(): Category[] {
   return categories;
 }
 
-const categories = scanRecipes();
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(categories, null, 2));
-console.log(`Generated ${categories.length} categories with ${categories.reduce((acc, c) => acc + c.recipes.length, 0)} recipes.`);
+function main() {
+  const categories = scanRecipes();
+  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(categories, null, 2));
+  console.log(`Generated ${categories.length} categories with ${categories.reduce((acc, c) => acc + c.recipes.length, 0)} recipes.`);
+}
+
+main();

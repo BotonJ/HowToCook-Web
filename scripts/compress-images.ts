@@ -167,11 +167,11 @@ async function main() {
     totalBefore += before;
     totalAfter += after;
     processed += 1;
-    const ratio = ((1 - after / before) * 100).toFixed(2);
+    const ratio = before > 0 ? ((1 - after / before) * 100).toFixed(2) : '0.00';
     console.log(`${path.relative(PROJECT_ROOT, target.filePath)}: ${Math.round(before / 1024)}KB -> ${Math.round(after / 1024)}KB (${ratio}%)`);
   });
 
-  const totalRatio = ((1 - totalAfter / totalBefore) * 100).toFixed(2);
+  const totalRatio = totalBefore > 0 ? ((1 - totalAfter / totalBefore) * 100).toFixed(2) : '0.00';
   console.log(`Processed ${processed} images`);
   console.log(`Total: ${Math.round(totalBefore / 1024)}KB -> ${Math.round(totalAfter / 1024)}KB (${totalRatio}%)`);
 }
