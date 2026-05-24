@@ -38,11 +38,28 @@ function buildCategoriesFromApi(
   }));
 }
 
-async function fetchFallback(): Promise<Category[]> {
+async function fetchIndex(): Promise<Category[]> {
+  const res = await fetch('/data/recipes-index.json');
+  if (!res.ok) throw new Error(`Index fetch failed: ${res.status}`);
+  return res.json() as Promise<Category[]>;
+}
+
+async function fetchFullFallback(): Promise<Category[]> {
   const res = await fetch('/data/recipes.json');
   if (!res.ok) throw new Error(`Fallback fetch failed: ${res.status}`);
   return res.json() as Promise<Category[]>;
 }
+
+let fullDataCache: Category[] | null = null;
+
+async function getFullRecipeData(): Promise<Category[]> {
+  if (fullDataCache) return fullDataCache;
+  const data = await fetchFullFallback();
+  fullDataCache = data;
+  return data;
+}
+
+export { getFullRecipeData };
 
 // Module-level cache so data is fetched only once across re-renders/remounts
 let cachedCategories: Category[] | null = null;
@@ -78,8 +95,8 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
   if (inflight) return inflight;
 
   inflight = (async () => {
-    // 1. Load local JSON immediately for instant render
-    const categories = await fetchFallback();
+    // 1. Load local index immediately for instant render (~12KB gzip)
+    const categories = await fetchIndex();
     const recipes = categories.flatMap(c => c.recipes);
     cachedCategories = categories;
     cachedRecipes = recipes;

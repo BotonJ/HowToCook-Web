@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
@@ -6,7 +6,8 @@ import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
-import { useRecipes } from '@/hooks/useRecipes';
+import { useRecipes, getFullRecipeData } from '@/hooks/useRecipes';
+import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
 
 function renderMarkdownList(text: string) {
@@ -68,13 +69,21 @@ export function RecipeDetail() {
   const params = useParams();
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
-  const { recipes: allRecipes, loading: recipesLoading } = useRecipes();
+  const { loading: recipesLoading } = useRecipes();
 
-  // Local fallback from runtime-fetched data
-  const localRecipe = useMemo(() => {
-    if (!recipeId || allRecipes.length === 0) return null;
-    return allRecipes.find(r => r.id === recipeId) ?? null;
-  }, [recipeId, allRecipes]);
+  const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
+  useEffect(() => {
+    if (!recipeId) { setLocalRecipe(null); return; }
+    let cancelled = false;
+    getFullRecipeData()
+      .then(cats => {
+        if (cancelled) return;
+        const all = cats.flatMap(c => c.recipes);
+        setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [recipeId]);
 
   // API-first detail, falls back to localRecipe on error
   const { recipe, loading: detailLoading } = useRecipeDetail(recipeId, localRecipe);
