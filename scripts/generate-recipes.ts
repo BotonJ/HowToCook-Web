@@ -292,7 +292,7 @@ function scanRecipes(): Category[] {
 
     // Build recipe with all fields
     const recipe: Recipe = {
-      id: dish.id,
+      id: `${dish.source}/${dish.name}`,
       name: displayName,
       category: dish.category,
       imagePath: imageMap.get(imageLookupName),

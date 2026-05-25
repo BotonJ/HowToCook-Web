@@ -6,6 +6,7 @@
     "count": 48,
     "recipes": [
       {
+        "id": "howtocook/白灼虾",
         "name": "白灼虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/白灼虾.jpeg",
@@ -46,6 +47,7 @@
         "extra_text": "- 技术细节：\n  - 开始不能大火、防止糊底。\n  - 如果锅盖有通气口、时间要相应调节一下（考虑增加 30 秒中火）。\n  - 蘸料其实也是可选的、也可以是纯的醋，大自然馈赠的鲜虾在没有水带走冲淡鲜甜的情况下口感味道都非常棒的。"
       },
       {
+        "id": "howtocook/鳊鱼炖豆腐",
         "name": "鳊鱼炖豆腐",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/鳊鱼炖豆腐.jpeg",
@@ -90,6 +92,7 @@
         "extra_text": "- 鱼的两面，各煎 2-4 分钟即可\n- 煎鱼的时候全程中小火\n- 最后出锅时，加入一些切碎的大蒜，味道会更好"
       },
       {
+        "id": "随便做/拆烩鲢鱼头",
         "name": "拆烩鲢鱼头",
         "category": "aquatic",
         "difficulty": 4,
@@ -121,6 +124,7 @@
         "extra_text": "- 鱼头一定要够大够新鲜，6斤以上为宜\n- 拆骨是最关键的步骤，一定要耐心慢慢来\n- 烩制时不要搅动，避免破坏鱼头形状\n- 水淀粉要少量多次加入，轻轻晃动即可"
       },
       {
+        "id": "howtocook/蛏抱蛋",
         "name": "蛏抱蛋",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/蛏抱蛋.jpeg",
@@ -160,6 +164,7 @@
         "extra_text": "* 更多情况下，福州当地会选用马蹄（解腻）和马铃薯（洗油），因为疫情期间买不到，所以选用了凤梨\n* 闽菜以甜为主，如果吃不惯的可以放弃白糖\n* 可以通过勺子敲打瘦肉块，听到声响来判断是否炸透瘦肉"
       },
       {
+        "id": "howtocook/葱烧海参",
         "name": "葱烧海参",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/葱烧海参.jpeg",
@@ -189,6 +194,7 @@
         "extra_text": "- 操作时，需要注意观察锅中的水量，如快见底的时候就直接接入水淀粉即可。"
       },
       {
+        "id": "howtocook/葱油桂鱼",
         "name": "葱油桂鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/葱油桂鱼.jpeg",
@@ -234,6 +240,7 @@
         "extra_text": "经过若干次测试，成功率 100%，这道菜容错性很高，无论是什么省份、什么口味的人都能兼容。另外，本套教程虽然叫葱油桂鱼的做法，但原料本身不仅限于桂鱼，可以用鲈鱼、多宝鱼等海鱼代替（淡水鱼本身寄生虫会比海鱼多一点，不建议使用淡水鱼，淡水鱼的做法请参考《红烧鱼》等教程），耦合性低、可扩展性强。"
       },
       {
+        "id": "随便做/醋椒鱼",
         "name": "醋椒鱼",
         "category": "aquatic",
         "difficulty": 3,
@@ -270,6 +277,7 @@
         "extra_text": "- 家庭简易版高汤：整鸡1000g，猪腔骨500g，原料多块泡净血水，冷水下锅焯尽血沫，捞出放入高压锅内加8斤水，高压锅上汽50分钟，打开盖大火把高压锅中的汤煮至浓白即可\n- 鱼片要切得薄厚均匀，这样成熟度一致\n- 烫鱼片的时间不能太长，保持鱼肉的嫩滑"
       },
       {
+        "id": "随便做/大虾烧白菜",
         "name": "大虾烧白菜",
         "category": "aquatic",
         "difficulty": 2,
@@ -304,6 +312,7 @@
         "extra_text": "- 虾头内的沙包一定要去除干净，否则会有泥腥味\n- 虾头熬汤时要用小火慢慢煎出虾油\n- 白菜要煸炒至软烂才能充分吸收虾汤的鲜味"
       },
       {
+        "id": "howtocook/干煎阿根廷红虾",
         "name": "干煎阿根廷红虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/干煎阿根廷红虾.jpeg",
@@ -343,6 +352,7 @@
         "extra_text": "- 柠檬可提升虾的口感，但偏酸，可以根据喜好添加，也可以不用\n- 趁热吃"
       },
       {
+        "id": "随便做/国宴菜翡翠虾球",
         "name": "国宴菜翡翠虾球",
         "category": "aquatic",
         "difficulty": 4,
@@ -373,6 +383,7 @@
         "extra_text": "- 虾仁开背要去除虾线，保持干净\n- 菠菜茸要均匀裹在虾仁上，特别是开背处\n- 汆虾球时动作要快，防止菠菜茸脱落\n- 锅要干净，防止出菜杂色"
       },
       {
+        "id": "随便做/红烧带鱼",
         "name": "红烧带鱼",
         "category": "aquatic",
         "difficulty": 3,
@@ -416,6 +427,7 @@
         "extra_text": "- 带鱼腹腔的黑膜和鱼卵要清理干净，避免腥味\n- 带鱼腌制去腥很重要，浸泡2小时效果更好\n- 煎鱼时表面拍薄淀粉，煎至金黄硬壳\n- 砂锅可以使菜品保温，增加风味"
       },
       {
+        "id": "随便做/红烧鲤鱼",
         "name": "红烧鲤鱼(随便做)",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/红烧鲤鱼.jpeg",
@@ -465,6 +477,7 @@
         "extra_text": "- 煎鱼时要保持大火，避免粘锅\n- 鱼身打花刀要深至入骨，便于入味和熟透\n- 炖鱼时火候不可太大，以免鱼身碎裂\n- 勾芡要浓稠，淋鱼时要均匀"
       },
       {
+        "id": "howtocook/红烧鱼",
         "name": "红烧鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/红烧鱼.jpeg",
@@ -500,6 +513,7 @@
         "calculation_text": "* 鱼 建议新手以一条中等大小的鲫鱼上手，提前划好花刀，方便成熟（不然鱼背上容易夹生）\n* 姜丝，以正常老姜切 2-3 片，然后片丝即可\n* 蒜瓣 3-4 个，拍碎或者切碎或者切片\n* 干辣椒（依照个人口味）2-3 个，切碎\n* 香菜按照个人口味\n* 盐 10g，如果辣椒辣度高，建议多一点\n* 醋 5ml\n* 酱油 5ml\n* 白砂糖 10g\n* 葱 1-2 根，正常就撒葱花\n* 小米椒 1-2，不放也可以，过来人的经验，最多放 2 个，不然辣度过高要菊花残。\n* 味精，看个人口味，不要放多，5g 即可。\n* 蚝油，5g 即可，和味精一个道理"
       },
       {
+        "id": "howtocook/红烧鱼头",
         "name": "红烧鱼头",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/红烧鱼头.jpeg",
@@ -533,6 +547,7 @@
         "calculation_text": "注意，这道菜仅有足够 2 人食用的版本。\n\n* 鱼头一个\n* 大葱 200g\n* 姜 80g\n* 蒜瓣 3-4 个\n* 美人椒 1/4 个\n* 香菜 4 棵\n* 八角两个，干辣椒五个"
       },
       {
+        "id": "随便做/煳辣炝锅鱼",
         "name": "煳辣炝锅鱼",
         "category": "aquatic",
         "difficulty": 4,
@@ -571,6 +586,7 @@
         "extra_text": "- 辣椒炒制是关键，要小火慢炒至似糊非糊的状态\n- 炸鱼时油温要够，六成热以上，全程大火\n- 煨鱼时间不要太长，以免鱼肉失去弹性"
       },
       {
+        "id": "howtocook/黄油煎虾",
         "name": "黄油煎虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/黄油煎虾.jpeg",
@@ -607,6 +623,7 @@
         "extra_text": "- 虾开背才更好入味，不过处理时切记切记小心用刀，新手容易伤到手\n- 冯小厨的菜谱"
       },
       {
+        "id": "howtocook/酱炖蟹",
         "name": "酱炖蟹",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/酱炖蟹.jpeg",
@@ -651,6 +668,7 @@
         "extra_text": "- 咸口放 50 g 豆瓣酱，甜口减少豆瓣酱的用量并加入冰糖和番茄酱\n- 出锅后再撒上一点葱花会更香也更好看\n- 参考资料：秋风起，平湖这道美味很下饭_潮新闻官网"
       },
       {
+        "id": "howtocook/芥末黄油罗氏虾",
         "name": "芥末黄油罗氏虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/芥末黄油罗氏虾.jpeg",
@@ -690,6 +708,7 @@
         "extra_text": "* 酱汁提前调配好，黄油提前备好，防止中间备料耗时。\n* 蒜蓉切记要等虾煎好后捞出再下，防止煎炒过久变黑，发苦。\n* 如果不太能接受芥末就放少点，能接受就放多点，如果放多了，煮久一会儿，芥末味也会散去。"
       },
       {
+        "id": "howtocook/咖喱炒蟹",
         "name": "咖喱炒蟹",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/咖喱炒蟹.jpeg",
@@ -728,6 +747,7 @@
         "extra_text": "- 做法参考：十几年澳门厨房佬教学挂汁的咖喱蟹怎么做"
       },
       {
+        "id": "howtocook/烤鱼",
         "name": "烤鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/烤鱼.jpeg",
@@ -778,6 +798,7 @@
         "extra_text": "- 技术总结：上述\n  - 这道菜的食盐，胡椒粉，孜然粉，食用油，生抽，白糖等的使用量，根据个人口味和食材比例做决定，并不需要严格按照上述分量来做。"
       },
       {
+        "id": "howtocook/鲤鱼炖白菜",
         "name": "鲤鱼炖白菜",
         "category": "aquatic",
         "difficulty": 3,
@@ -817,6 +838,7 @@
         "extra_text": "- 也可以放一些粉条，粉条先凉水/热水，需要泡软，可以和娃娃菜一起放入"
       },
       {
+        "id": "随便做/龙腾盛世麒麟鱼",
         "name": "龙腾盛世麒麟鱼",
         "category": "aquatic",
         "difficulty": 5,
@@ -854,6 +876,7 @@
         "extra_text": "- 清鸡汤做法：整鸡剁块洗净，高压锅50分钟，放气，打开即可\n- 鱼肉打花刀要深至鱼骨但不能断，这样食材才能塞入\n- 蒸鱼时间要根据鱼的大小适当调整，一般5分钟左右\n- 米汤芡要熬到粘稠适度，浇在鱼上要能挂住"
       },
       {
+        "id": "随便做/麻辣小龙虾",
         "name": "麻辣小龙虾",
         "category": "aquatic",
         "difficulty": 3,
@@ -885,6 +908,7 @@
         "extra_text": "- 虾的处理要仔细，虾线、虾头、沙包都要去掉\n- 虾背后剪开便于入味\n- 干辣椒和花椒焐水后再炒更容易出味\n- 糖可以中和麻椒和花椒的苦味，不要省略"
       },
       {
+        "id": "随便做/名菜翠珠鱼花",
         "name": "名菜翠珠鱼花",
         "category": "aquatic",
         "difficulty": 5,
@@ -921,6 +945,7 @@
         "extra_text": "- 这道菜刀工要求极高，鱼肉片要厚薄均匀\n- 莴笋骰子雕刻需要耐心和技巧，多看视频示范\n- 炸鱼时要控制油温，五成热下锅，大火快速定型\n- 糖醋汁勾芡要分次少量多次，避免过稠"
       },
       {
+        "id": "随便做/奶汤鲫鱼",
         "name": "奶汤鲫鱼",
         "category": "aquatic",
         "difficulty": 2,
@@ -960,6 +985,7 @@
         "extra_text": "- 鲫鱼一定要煎透才能炖出奶白色汤汁\n- 炖汤时保持大火，汤才会浓白\n- 豆腐要最后放，避免炖碎"
       },
       {
+        "id": "howtocook/清蒸鲈鱼",
         "name": "清蒸鲈鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/清蒸鲈鱼.jpeg",
@@ -993,6 +1019,7 @@
         "extra_text": "- 技术总结：\n  - 这道菜属于有手就行，关键点在于火候，鱼的大小跟火候都会相关，太久会导致鱼肉太老极度影响口感，太短会导致部分鱼肉没熟。所以大火蒸鱼一般是 10 分钟内较佳。\n  - 切记蒸鱼需要用筷子隔开装鱼的盘子，这样做的好处有两点：\n    - 1、鱼在蒸的过程中会将水滴到盘子，如果鱼直接接触会导致鱼食用时会腥。\n    - 2、能够将鱼均匀受热。\n  - 这道菜难度系数简单，而且味道非常棒哦"
       },
       {
+        "id": "howtocook/清蒸生蚝",
         "name": "清蒸生蚝",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/清蒸生蚝.jpeg",
@@ -1027,6 +1054,7 @@
         "steps_text": "* 将生蚝用刷子刷干净（没有刷子用牙刷）。\n* 蒸锅中放水，将蒸屉放上之后，将 6 个生蚝平铺在蒸屉,使用 50%功率，蒸 3 分钟。\n* 用右手拿着湿抹布掀开烫锅盖，将每个生蚝的外壳掀开一半去掉，生蚝的凸面向下，平面向上，每个放 1 根姜丝,10g 蒜末放到生蚝上。\n* 关上烫锅盖，100%功率蒸 3.5 分钟。\n* 停火，用右手拿着抹布掀开烫锅盖，每个放 5ml 酱油。\n* 盛盘。"
       },
       {
+        "id": "howtocook/肉蟹煲",
         "name": "肉蟹煲",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/肉蟹煲.jpeg",
@@ -1081,6 +1109,7 @@
         "extra_text": "- 建议冷冻 20 分钟让螃蟹昏迷（别冻硬！），或用筷子从口器插入破坏神经\n- 如果使用的是冷冻蟹，完全解冻蟹脚容易掉，并且容易造成肉质流失。建议半解冻后裹粉油炸，并将油炸时间延长至 2 分钟\n- 如果灶具功率较小，食材下油锅后容易迅速降温，建议油温预热到 200 °C，并且分多批次油炸\n- 务必去掉蟹胃（三角包）、蟹腮、蟹心（六角形白片）\n- 裹淀粉的螃蟹下锅前务必擦干，热油遇水容易飞溅\n- 死蟹绝对不能用（买来的就是冷冻的除外，但是解冻后未及时使用的也不行）\n- 不与柿子、浓茶同食\n- 痛风患者慎食\n- 年糕切片后泡冷水，下锅前冲洗不容易粘锅，下锅后放在表面，沉入锅底容易糊锅\n- 要是被螃蟹夹了或者烫伤了，先用冷水冲 15 分钟，严重的话及时就医，如果伤口比较深务必就医"
       },
       {
+        "id": "随便做/赛螃蟹",
         "name": "赛螃蟹",
         "category": "aquatic",
         "difficulty": 4,
@@ -1122,6 +1151,7 @@
         "extra_text": "- 鱼肉要去掉带血线的部分，确保口感\n- 炒蛋清时火候要小，避免温度过高导致蛋清老\n- 翻炒时动作要轻，避免鱼肉破碎\n- 咸蛋黄碾成蟹黄状，模拟螃蟹的口感"
       },
       {
+        "id": "howtocook/水煮鱼",
         "name": "水煮鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/水煮鱼.jpeg",
@@ -1162,6 +1192,7 @@
         "extra_text": "- 垫底的蔬菜组合及用量可自由发挥，但需要注意各种蔬菜的特点，比如改成土豆的时候，需要将土豆片/土豆块煮熟（可以用筷子戳一戳确认）。\n- 红油豆瓣酱（辣度）以及盐的用量可根据个人口味调整。\n- 注意切鱼片的时候可以垂直于鱼片长条的方向先剁成 5cm 的鱼块，然后翻转 90 度斜着撇成薄片。\n- 腌制的时候注意不要太用力抓。\n- How to Fillet a Fish 怎样给鱼剔骨"
       },
       {
+        "id": "随便做/松鼠桂鱼",
         "name": "松鼠桂鱼",
         "category": "aquatic",
         "difficulty": 5,
@@ -1191,6 +1222,7 @@
         "extra_text": "- 花刀技术是这道菜的关键，刀工要均匀细腻\n- 鱼肉裹粉一定要均匀，不能有粘连\n- 炸鱼时油温要控制好，六成热下锅\n- 浇汁要快，趁热上桌才能有最佳效果"
       },
       {
+        "id": "随便做/蒜蓉粉丝虾",
         "name": "蒜蓉粉丝虾",
         "category": "aquatic",
         "difficulty": 3,
@@ -1221,6 +1253,7 @@
         "extra_text": "- 蒜蓉洗去黏液后炸制不易糊锅\n- 炸蒜蓉时火候要控制好，不要炸过头\n- 蒸制时间不宜过长，虾肉会变老"
       },
       {
+        "id": "howtocook/蒜蓉虾",
         "name": "蒜蓉虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/蒜蓉虾.jpeg",
@@ -1251,6 +1284,7 @@
         "steps_text": "* 用刀从从虾头中间切开，切到距离虾尾 1 cm\n* 将蒜蓉酱铺在虾身中间，放在盘子中\n* 锅中倒入热水，将盘子放入锅中，大火蒸 3 分钟\n* 烧热油，倒入虾盘中，倒入生抽"
       },
       {
+        "id": "howtocook/蒜香黄油虾",
         "name": "蒜香黄油虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/蒜香黄油虾.jpeg",
@@ -1288,6 +1322,7 @@
         "extra_text": "- 虾不宜过度烹饪，否则会变硬"
       },
       {
+        "id": "随便做/隋卞带鱼",
         "name": "隋卞带鱼",
         "category": "aquatic",
         "difficulty": 2,
@@ -1318,6 +1353,7 @@
         "extra_text": "- 煎鱼时要确保鱼身干燥，否则容易粘锅\n- 炸油时油温要达到6-7成热再下鱼"
       },
       {
+        "id": "howtocook/糖醋鲤鱼",
         "name": "糖醋鲤鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/糖醋鲤鱼.jpeg",
@@ -1358,6 +1394,7 @@
         "extra_text": "这道菜难度系数算中等吧，对新手还是不太友好的......"
       },
       {
+        "id": "随便做/糖醋鱼片",
         "name": "糖醋鱼片",
         "category": "aquatic",
         "difficulty": 3,
@@ -1388,6 +1425,7 @@
         "extra_text": "- 炸鱼时热锅凉油：锅中倒入油，烧冒烟，再加入凉油\n- 片鱼片时厚度要均匀，2-3mm为宜\n- 炸制时分两次进行，第一次定型，第二次复炸使外皮更酥脆"
       },
       {
+        "id": "howtocook/微波葱姜黑鳕鱼",
         "name": "微波葱姜黑鳕鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/微波葱姜黑鳕鱼.jpeg",
@@ -1424,6 +1462,7 @@
         "steps_text": "- 鱼片分别放入密封袋，鱼皮向下放在盘子中。\n- 取葱白切丝 25g，姜去皮后切丝，10g，混合在一起后分成两半，分别放在袋内鱼片上。\n- 每个袋子倒入 2.5mL 料酒。\n- 封好密封袋，放入微波炉中，中火（800 瓦）微波至*不透明且容易散开*时（约 3.5-5 分钟），从袋中取出鱼片。\n- 去除青葱和姜。\n- 取酱油 25mL，芝麻油 2mL，混合均匀后平均淋在两片鱼片上。\n- 取葱绿切细丝 10g，姜去皮后切丝 3g，混合后分成两份撒在鱼片上。\n- 取花生油 50mL，在小锅中加热至 190℃。\n- 将热油淋到放油葱绿的鱼片上，立刻上桌。"
       },
       {
+        "id": "随便做/西湖醋鱼",
         "name": "西湖醋鱼",
         "category": "aquatic",
         "difficulty": 4,
@@ -1462,6 +1501,7 @@
         "extra_text": "- 鱼片厚度要均匀，确保一起成熟\n- 水煮鱼时火候要小，水不能翻滚，鱼肉才嫩\n- 勾芡时芡汁要少量多次加入，避免汁面大翻滚\n- 醋汁的酸甜比例可以根据个人口味调整"
       },
       {
+        "id": "howtocook/香煎翘嘴鱼",
         "name": "香煎翘嘴鱼",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/香煎翘嘴鱼.jpeg",
@@ -1502,6 +1542,7 @@
         "extra_text": "- 切记鱼是开背杀，腌制时，鱼表面涂抹均匀食盐即可，腌制时间，晾晒时间 1-2 天即可\n- 煎鱼全程小火，刚入锅时不要移动鱼，会破皮\n- 青椒断放入后注意观察熟透程度，里面的青椒很好吃，另外香菜最后放\n- 注意火候的切换，豆瓣酱，白糖的调鲜效果，与陈醋的增香效果"
       },
       {
+        "id": "随便做/响油鳝糊",
         "name": "响油鳝糊",
         "category": "aquatic",
         "difficulty": 3,
@@ -1531,6 +1572,7 @@
         "extra_text": "- 鳝鱼一定要选母的，口感更好\n- 焖制时火候要掌握好，不要过度\n- 浇热油是关键步骤，要烧到冒烟再浇"
       },
       {
+        "id": "howtocook/响油鳝丝",
         "name": "响油鳝丝",
         "category": "aquatic",
         "difficulty": 3,
@@ -1572,6 +1614,7 @@
         "extra_text": "- 不能将鳝鱼的血洗得太干净，否则鳝鱼很容易发黑发臭\n- 鳝鱼可以让摊主帮忙宰杀\n- 可以多加一些胡椒粉和白糖，有利于去腥增香\n- 参考资料：“响油鳝丝”的家常做法，味道很赞，先收藏了 - YouTube"
       },
       {
+        "id": "howtocook/小龙虾",
         "name": "小龙虾",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/小龙虾.jpeg",
@@ -1614,6 +1657,7 @@
         "extra_text": "饭店应该都是油炸一遍，家庭油炸的话，太浪费了，所以在这个菜谱里用油比炒菜油多一些煎一下，实测同样好吃。\n\n去虾线后的虾肉比不去虾线的虾肉口感差一些，并且小龙虾去虾线对新手是一个挑战，能接受虾线的情况下不去虾线也可以。"
       },
       {
+        "id": "随便做/雪菜蒸鱼",
         "name": "雪菜蒸鱼",
         "category": "aquatic",
         "difficulty": 3,
@@ -1650,6 +1694,7 @@
         "extra_text": "- 雪菜可以多泡几遍，去掉咸味，咸度按照自己口味把握\n- 鱼用90℃左右的水烫一下可以去除黏液和腥味\n- 蒸制时间根据鱼的大小调整，不要蒸过头"
       },
       {
+        "id": "随便做/芫爆蛰头",
         "name": "芫爆蛰头",
         "category": "aquatic",
         "difficulty": 3,
@@ -1688,6 +1733,7 @@
         "extra_text": "- 海蜇头浸泡时间要足够，否则会有咸腥味\n- 焯水温度控制在60-70度，过高海蜇会变老变硬\n- 焯水和炒制时间都要短，保持海蜇的脆嫩口感\n- 这道菜必须现做现吃，不能提前预制"
       },
       {
+        "id": "随便做/油焖大虾",
         "name": "油焖大虾(随便做)",
         "category": "aquatic",
         "imagePath": "images/dishes/aquatic/油焖大虾.jpeg",
@@ -1722,6 +1768,7 @@
         "extra_text": "- 大虾要选择新鲜度高、壳色透明的\n- 剪虾时要注意安全，避免扎伤\n- 煎虾时火候要大，快速锁住鲜味\n- 收汁时不断浇汁让虾均匀入味\n- 传统的油焖需要加盖焖1分钟，这个版本没有，对成品没有影响"
       },
       {
+        "id": "随便做/油泼鲍鱼",
         "name": "油泼鲍鱼",
         "category": "aquatic",
         "difficulty": 4,
@@ -1751,6 +1798,7 @@
         "extra_text": "- 必须选用活鲍鱼，死鲍鱼口感不佳\n- 十字花刀要打得深一些，这样更容易入味\n- 焯水时间不能太长，鲍鱼变色即可捞出"
       },
       {
+        "id": "随便做/鱼骨汆鱼丸",
         "name": "鱼骨汆鱼丸",
         "category": "aquatic",
         "difficulty": 3,
@@ -1789,6 +1837,7 @@
     "count": 29,
     "recipes": [
       {
+        "id": "howtocook/茶叶蛋",
         "name": "茶叶蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/茶叶蛋.jpeg",
@@ -1827,6 +1876,7 @@
         "extra_text": "- 鸡蛋捞出过冷水是为了让鸡蛋和壳之间产生间隙\n- 食盐可根据个人口味选择不加\n- 八角，香叶，桂皮，茴香，冰糖，自己没有这么多食材可以买现成的卤料包"
       },
       {
+        "id": "随便做/醋炒蛋",
         "name": "醋炒蛋",
         "category": "breakfast",
         "difficulty": 2,
@@ -1860,6 +1910,7 @@
         "extra_text": "- 煎鸡蛋假如火候把握不准，一开始大火，底部有焦亮了可全程小火\n- 溏心程度可根据个人喜好调整煎制时间"
       },
       {
+        "id": "howtocook/蛋煎糍粑",
         "name": "蛋煎糍粑",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/蛋煎糍粑.jpeg",
@@ -1891,6 +1942,7 @@
         "extra_text": "- 放糍粑进去时候注意把糍粑间隔开来，防止粘在一起\n- 鸡蛋的量根据糍粑的量而定\n- 糖的量根据个人喜好\n\n- 蛋煎糍粑教程"
       },
       {
+        "id": "随便做/剁椒炒鸡蛋",
         "name": "剁椒炒鸡蛋",
         "category": "breakfast",
         "difficulty": 2,
@@ -1921,6 +1973,7 @@
         "extra_text": "- 剁椒一定要泡水去咸味，否则太咸\n- 炒剁椒时要中火，慢慢把水汽炒干\n- 用米饭擦锅可以去除锅壁上的油脂，防止炒蛋时粘锅"
       },
       {
+        "id": "howtocook/桂圆红枣粥",
         "name": "桂圆红枣粥",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/桂圆红枣粥.jpeg",
@@ -1949,6 +2002,7 @@
         "extra_text": "对粥的稀稠程度有不同喜好的朋友可以酌情增加或减少水的用量，煮出来的粥是甜的，可以通过控制加入桂圆的数量控制甜度"
       },
       {
+        "id": "howtocook/韩国麻药鸡蛋",
         "name": "韩国麻药鸡蛋",
         "category": "breakfast",
         "difficulty": 5,
@@ -1986,6 +2040,7 @@
         "extra_text": "- 菜系：韩式\n- 烹饪方式：煮\n- 主料：鸡蛋、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/鸡蛋三明治",
         "name": "鸡蛋三明治",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/鸡蛋三明治.jpeg",
@@ -2023,6 +2078,7 @@
         "extra_text": "- 也可加入芝士、酸黄瓜等食材"
       },
       {
+        "id": "howtocook/煎饺",
         "name": "煎饺",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/煎饺.jpeg",
@@ -2051,6 +2107,7 @@
         "extra_text": "- 操作时，需时刻观察锅内情况，切记不可分神玩手机。"
       },
       {
+        "id": "howtocook/金枪鱼酱三明治",
         "name": "金枪鱼酱三明治",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/金枪鱼酱三明治.jpeg",
@@ -2090,6 +2147,7 @@
         "extra_text": "- 金枪鱼酱可以在前一天晚上在冰箱冷藏\n- 金枪鱼酱建议冷藏时间不超过一周，切需要使用保鲜膜盖住\n- 注意在按压操作之前不要将轻食机电源接通，以免引发安全问题"
       },
       {
+        "id": "howtocook/空气炸锅面包片",
         "name": "空气炸锅面包片",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/空气炸锅面包片.jpeg",
@@ -2119,6 +2177,7 @@
         "extra_text": "营养成分表（数据基于全麦面包片）\n\n- 热量 254 千卡\n- 蛋白质 12.3 克\n- 脂肪 3.5 克\n- 碳水化合物 43.1 克\n- 膳食纤维 6.0 克"
       },
       {
+        "id": "howtocook/美式炒蛋",
         "name": "美式炒蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/美式炒蛋.jpeg",
@@ -2152,6 +2211,7 @@
         "extra_text": "- 想吃的更丰富可以在最后一步那里加上炒好的番茄丁，洋葱丁，培根丁，切好的芝士小丁，等等。(总之不会再出水的东东）\n- 使用平底锅（不粘锅）。\n- 考虑到很多人是一人食就炒一两个鸡蛋，口径比较小的锅或许更方便在锅中均匀搅拌。"
       },
       {
+        "id": "howtocook/牛奶燕麦",
         "name": "牛奶燕麦",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/牛奶燕麦.jpeg",
@@ -2183,6 +2243,7 @@
         "extra_text": "- 由于不同微波炉火力不同，故微波炉火力无法精确表明\n- 不建议混合物超过容器容量 50%，否则加热过程中内容物极有可能溢出\n- 不建议使用玻璃杯进行烹饪，理由同上"
       },
       {
+        "id": "howtocook/手抓饼",
         "name": "手抓饼",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/手抓饼.jpeg",
@@ -2223,6 +2284,7 @@
         "extra_text": "- 使用开水与冷水混合和面，有助于提升饼皮柔韧度。  \n- 面团醒发时间不宜少于 20 分钟，否则不易擀薄。  \n- 可根据个人口味增减配料，建议配料总重控制在 100 克以内。  \n- 剩余生饼皮可冷藏保存 24 小时，使用时回温擀平即可。\n\n---"
       },
       {
+        "id": "howtocook/水煮玉米",
         "name": "水煮玉米",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/水煮玉米.jpeg",
@@ -2252,6 +2314,7 @@
         "steps_text": "- 将新鲜玉米剥去外皮，剩部分玉米皮入锅\n- 加入淹过玉米约半节指头的水，加盐和糖\n- 水煮开之后转至小火，加盖继续煮 15-20 分钟，玉米煮久点没事。\n- 煮熟后沥干水分，冷却后食用。"
       },
       {
+        "id": "howtocook/苏格兰蛋",
         "name": "苏格兰蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/苏格兰蛋.jpeg",
@@ -2289,6 +2352,7 @@
         "extra_text": "- 芝士片、培根片、手抓饼直接淘宝购买即可"
       },
       {
+        "id": "随便做/酸甜荷包蛋",
         "name": "酸甜荷包蛋",
         "category": "breakfast",
         "difficulty": 2,
@@ -2322,6 +2386,7 @@
         "extra_text": "- 油温要够高才能炸出酥脆的外皮\n- 第一次炸定型，第二次复炸使外皮更酥脆\n- 番茄酱汁要根据浓稠度适当加水"
       },
       {
+        "id": "howtocook/太阳蛋",
         "name": "太阳蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/太阳蛋.jpeg",
@@ -2353,6 +2418,7 @@
         "extra_text": "while（太阳蛋的熟度 不符合 个人口味） 用微波炉打（1 分钟）;\n\n- 不可控火候微波炉：\n  - 定义： 即无法控制火候仅能控制时长的微波炉。\n  - 辨别方法： 若在微波炉操作面板上无法找到小火，中火， 大火等字样即为不可控火候微波炉\n- 可控火候微波炉：\n  - 定义：即能控制火候又能控制时长的微波炉，\n  - 辨别方法： 若在微波炉操作面板上能找到小火，中火，大火等字样即为可控火候微波炉"
       },
       {
+        "id": "随便做/溏心茶叶蛋",
         "name": "溏心茶叶蛋",
         "category": "breakfast",
         "difficulty": 1,
@@ -2382,6 +2448,7 @@
         "extra_text": "- 鸡蛋煮四分钟是溏心状态，浸泡后会更入味\n- 泡蛋的汤要完全冷却后才能放鸡蛋\n- 浸泡时间越长越入味，最好能泡24小时以上"
       },
       {
+        "id": "howtocook/溏心蛋",
         "name": "溏心蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/溏心蛋.jpeg",
@@ -2414,6 +2481,7 @@
         "extra_text": "如果觉得鸡蛋不够熟的小伙伴可以依照自己的喜好添加更多的水。\n\n**警告** 溏心蛋有沙门氏菌感染的风险。不建议静置 5 分钟以内。"
       },
       {
+        "id": "howtocook/吐司果酱",
         "name": "吐司果酱",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/吐司果酱.jpeg",
@@ -2444,6 +2512,7 @@
         "extra_text": "面包机一般不会超过一百块,吐司去楼下超市或美团买菜送上门,一般一包十块钱八片,保质期比较短,很干净卫生。"
       },
       {
+        "id": "howtocook/完美水煮蛋",
         "name": "完美水煮蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/完美水煮蛋.jpeg",
@@ -2477,6 +2546,7 @@
         "extra_text": "- 关键参数：\n  - 蛋黄中心温度：67±1°C\n  - 蛋白分层温度：\n    - 外层：100°C→87°C\n    - 中层：87°C→55°C\n    - 内层：55°C→30°C\n- 营养优势：多酚含量比传统煮法高 23%"
       },
       {
+        "id": "howtocook/微波炉蛋糕",
         "name": "微波炉蛋糕",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/微波炉蛋糕.jpeg",
@@ -2514,6 +2584,7 @@
         "extra_text": "- 在夸赞自己之前的操作可以重复多遍做出更大的蛋糕\n- 泡打粉用来让蛋糕更蓬松 大多不含铝 几块钱一包 可以买了在家备着\n- 在 **加入任何喜欢的口味食材！** 这一步骤中 若加入**液体**（如牛奶） 请务必确保下一步可以搅和成**稠酸奶状** 建议少量多次加入以防止水分过量而导致成品湿瘪\n- **食材不要超过容器的3/4!!**"
       },
       {
+        "id": "howtocook/微波炉荷包蛋",
         "name": "微波炉荷包蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/微波炉荷包蛋.jpeg",
@@ -2545,6 +2616,7 @@
         "extra_text": "- 微波炉加热前，如果想进一步避免蛋黄和蛋白溅射，可以在碗上盖个盖子避免弄脏微波炉"
       },
       {
+        "id": "howtocook/微波炉蒸蛋",
         "name": "微波炉蒸蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/微波炉蒸蛋.jpeg",
@@ -2580,6 +2652,7 @@
         "extra_text": "- 水温应在 40–50℃ ，不宜过热。\n- 蛋液与水比例控制在 1:1 至 1:1.2 之间口感最佳。\n- 覆盖保鲜膜并扎孔能防止表面爆开或出现蜂窝。\n- 过筛可显著提升细腻度。\n- 若表面鼓泡或出水，说明加热过头，下次缩短时间即可。"
       },
       {
+        "id": "howtocook/温泉蛋",
         "name": "温泉蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/温泉蛋.jpeg",
@@ -2611,6 +2684,7 @@
         "calculation_text": "- 鸡蛋的用量为 1 个，按照您的食量和锅的大小计算。"
       },
       {
+        "id": "随便做/香煎金钱蛋",
         "name": "香煎金钱蛋",
         "category": "breakfast",
         "difficulty": 2,
@@ -2650,6 +2724,7 @@
         "extra_text": "- 鸡蛋煮好后用冷水冲凉更容易去壳\n- 蒜要用蒜罐子捣至黏糊状态，不能用刀剁\n- 煎蛋时火候不要太大，以免外焦里生\n- 泡辣椒可根据个人口味选择是否添加"
       },
       {
+        "id": "howtocook/燕麦鸡蛋饼",
         "name": "燕麦鸡蛋饼",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/燕麦鸡蛋饼.jpeg",
@@ -2683,6 +2758,7 @@
         "extra_text": "- 如果口味偏咸口，可以在搅拌鸡蛋液时加入盐，胡椒等调料。\n- 煎饼时使用小火，避免燕麦部分煎糊。"
       },
       {
+        "id": "howtocook/蒸花卷",
         "name": "蒸花卷",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/蒸花卷.jpeg",
@@ -2712,6 +2788,7 @@
         "extra_text": "- 操作时，需要注意观察锅里的水不能少于 50ml。"
       },
       {
+        "id": "howtocook/蒸水蛋",
         "name": "蒸水蛋",
         "category": "breakfast",
         "imagePath": "images/dishes/breakfast/蒸水蛋.jpeg",
@@ -2751,6 +2828,7 @@
     "count": 9,
     "recipes": [
       {
+        "id": "howtocook/草莓酱",
         "name": "草莓酱",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/草莓酱.jpeg",
@@ -2780,6 +2858,7 @@
         "steps_text": "- 草莓洗净去叶\n- 将草莓切碎放入合适的碗中\n- 将白糖倒入碗中与草莓搅拌均匀\n- 碗用保鲜膜覆盖静置 1 小时\n- 将静置的草莓和糖的混合物倒入不粘锅中开大火烧开\n- 烧开后转小火不断搅拌直至果酱呈粘稠状关火\n- 待草莓酱冷却后装入准备好的密封罐中"
       },
       {
+        "id": "howtocook/葱油",
         "name": "葱油",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/葱油.jpeg",
@@ -2814,6 +2893,7 @@
         "extra_text": "- 渣后的开洋葱渣也可以食用，葱油可以滤掉这些料渣，也可以保留\n- 开洋可以极大提升葱油鲜香，并增加鲜甜风味"
       },
       {
+        "id": "howtocook/简易版炒糖色",
         "name": "简易版炒糖色",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/简易版炒糖色.jpeg",
@@ -2843,6 +2923,7 @@
         "steps_text": "- 开火，并向锅中倒入 100ml 开水\n- 再向锅中倒入 100ml 油，与第一步间隔越短越好，此时锅为大火中火都可以，着急的话可以大火\n- 放入冰糖（如果冰糖过于耦合，可以提前敲碎，做到耦合度越低越好）\n- 调整火力为中火\n- 开始搅拌\n  - 要一直一直一直搅拌，变成棕褐色，此时**转为小火**\n  - 再变稀，变红茶色，再变成酱红色后起小泡泡，准备好执行下面的`操作1`or`操作2`\n  - 小泡泡会逐渐消失，之后会出现大泡泡，大泡泡出现时糖色完成\n  - 需要在此时快速进行下一步操作（无论哪种操作都一定要提前准备好并快速！否则火候过大糖色发苦），根据菜品派别以及个人口味作出选择\n    - 操作 1：可以直接加 400ml 开水降温\n    - 操作 2：也可以加入葱姜蒜花椒等调味品进行翻炒"
       },
       {
+        "id": "howtocook/蒜香酱油",
         "name": "蒜香酱油",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/蒜香酱油.jpeg",
@@ -2874,6 +2955,7 @@
         "steps_text": "- 拍碎蒜头\n- 往蘸料碟中加入酱油\n- 起锅，加入花生油，等到油温滚烫后加入拍好的蒜头，炸半分钟\n- 半分钟后，关火，把热油倒入蘸料碟，用筷子搅拌即可"
       },
       {
+        "id": "howtocook/糖醋汁",
         "name": "糖醋汁",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/糖醋汁.jpeg",
@@ -2903,6 +2985,7 @@
         "steps_text": "- 按照比例将各调料在小碗中搅拌均匀\n- 按不同菜肴的方式处理完毕后，将配制好的糖醋汁倒入锅中\n- 根据各菜肴的不同，烹制 5-10 分钟\n- 大火收汁，可增加菜的浓度、香味和光泽"
       },
       {
+        "id": "howtocook/油泼辣子",
         "name": "油泼辣子",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/油泼辣子.jpeg",
@@ -2950,6 +3033,7 @@
         "extra_text": "- 五香粉、草寇作为\"调料\"加入，可以增加香味，使油泼辣子更香"
       },
       {
+        "id": "howtocook/油酥",
         "name": "油酥",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/油酥.jpeg",
@@ -2981,6 +3065,7 @@
         "steps_text": "- 面粉盛小碗里，加入盐\n- 加入 200 度的热油\n- 用筷子将其搅拌成无固状物体的糊状。"
       },
       {
+        "id": "howtocook/炸串酱料",
         "name": "炸串酱料",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/炸串酱料.jpeg",
@@ -3016,6 +3101,7 @@
         "extra_text": "- 最后一步的调味可按自己喜好添加。\n- 不得一次性倒入所有热油，必须分次倒入并搅拌。\n- 原料可按比例缩减。"
       },
       {
+        "id": "howtocook/蔗糖糖浆",
         "name": "蔗糖糖浆",
         "category": "condiment",
         "imagePath": "images/dishes/condiment/蔗糖糖浆.jpeg",
@@ -3052,6 +3138,7 @@
     "count": 21,
     "recipes": [
       {
+        "id": "howtocook/奥利奥冰淇淋",
         "name": "奥利奥冰淇淋",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/奥利奥冰淇淋.jpeg",
@@ -3088,6 +3175,7 @@
         "extra_text": "- 剁碎奥利奥的容器注意不要使用易碎容器。\n- 去除奥利奥夹心时切忌注意割到手。\n- 参考资料：5分钟搞定【奥利奥麦旋风】太解馋叭！"
       },
       {
+        "id": "howtocook/草莓冰淇淋",
         "name": "草莓冰淇淋",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/草莓冰淇淋.jpeg",
@@ -3123,6 +3211,7 @@
         "extra_text": "- 制作过程中注意安全，避免割/烫到手。"
       },
       {
+        "id": "howtocook/反沙芋头",
         "name": "反沙芋头",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/反沙芋头.jpeg",
@@ -3154,6 +3243,7 @@
         "extra_text": "- 刚做好的反沙芋头很烫，小心烫嘴哦\n- 再配上茶，啊~真惬意啊"
       },
       {
+        "id": "howtocook/龟苓膏",
         "name": "龟苓膏",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/龟苓膏.jpeg",
@@ -3185,6 +3275,7 @@
         "extra_text": "- 龟苓膏冷却过程中不可随意移动容器，否则可能影响成型。  \n- 加热时应避免使用大火，防止结块或糊底。  \n- 可根据个人口味添加蜂蜜、炼乳或水果食用。  \n- 不同品牌龟苓膏粉浓度略有差异，建议参照包装说明调整配比。\n\n---"
       },
       {
+        "id": "随便做/红薯丸子",
         "name": "红薯丸子",
         "category": "dessert",
         "difficulty": 2,
@@ -3222,6 +3313,7 @@
         "extra_text": "- 家中炸丸子可以小一点，直径2cm就行\n- 油温一定要控制好，四成热时下锅，过高会炸焦，过低丸子会散\n- 红薯泥降温后再揉制，否则太粘手\n- 白心红薯炸出来更脆，红心红薯炸出来更面"
       },
       {
+        "id": "howtocook/红柚蛋糕",
         "name": "红柚蛋糕",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/红柚蛋糕.jpeg",
@@ -3260,6 +3352,7 @@
         "extra_text": "- 如果喜欢较甜的口感可以增加 10g 糖\n- 红柚果肉可以酌情添加，但每份最好不超过 40g 以免影响成品观感\n- 糊状指没有面粉疙瘩且整体颜色均匀\n- 刚出锅的锡纸盘比较烫，请用夹子夹取或使用湿抹布之类的隔热材料拿取"
       },
       {
+        "id": "howtocook/胡萝卜甜糕",
         "name": "胡萝卜甜糕",
         "category": "dessert",
         "difficulty": 5,
@@ -3295,6 +3388,7 @@
         "extra_text": "- 菜系：印度\n- 烹饪方式：慢炖\n- 主料：胡萝卜、全脂牛奶、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/咖啡椰奶冻",
         "name": "咖啡椰奶冻",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/咖啡椰奶冻.jpeg",
@@ -3321,6 +3415,7 @@
         "extra_text": "注意事项：请务必不要让液体煮沸！！！也不要冒泡泡！！！\n关于厨具清洗：建议直接用洗碗机，如果没有的话可以用温水洗。（因为 gelatin 不好清洗，洗碗机会比较好）"
       },
       {
+        "id": "howtocook/烤蛋挞",
         "name": "烤蛋挞",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/烤蛋挞.jpeg",
@@ -3359,6 +3454,7 @@
         "extra_text": "操作时 请务必小心烤箱高温 防止烫伤"
       },
       {
+        "id": "howtocook/烤箱版巴斯克芝士蛋糕",
         "name": "烤箱版巴斯克芝士蛋糕",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/烤箱版巴斯克芝士蛋糕.jpeg",
@@ -3397,6 +3493,7 @@
         "extra_text": "- 烤箱出来成品抖动是正常的，放凉后口感还不是最好的，一定要冷藏才好吃！\n- 参考资料：下厨房 - 巴斯克芝士蛋糕『最简单的蛋糕』零失败🔥芝士控"
       },
       {
+        "id": "随便做/绿豆沙",
         "name": "绿豆沙",
         "category": "dessert",
         "difficulty": 1,
@@ -3428,6 +3525,7 @@
         "extra_text": "- 必须用玻璃锅或不锈钢锅，不能用铁锅和铝锅，否则会变色\n- 绿豆和糯米要提前泡好，这样更容易煮烂\n- 打碎后可以过滤一遍，口感更细腻\n- 冰镇后食用风味更佳"
       },
       {
+        "id": "howtocook/玛格丽特饼干",
         "name": "玛格丽特饼干",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/玛格丽特饼干.jpeg",
@@ -3468,6 +3566,7 @@
         "extra_text": "- 可根据个人口味微调盐与糖的比例，如果喜欢其他风味可以把每份的 3 克玉米淀粉换成可可粉或抹茶粉。\n- 如果条件允许可以把蛋黄、低筋面粉等食材过筛，口感会更好。\n- 介于材料获取难度选择了白砂糖，如果条件允许可以换成糖粉 30 克。\n- 如果没有烤箱可使用微波炉、空气炸锅等，微波炉为高火 2-3 分钟，空气炸锅为 150℃20 分钟\n- 参考资料：第一百种可邮寄的小饼干 酥酥糯糯入口即化~-哔哩哔哩"
       },
       {
+        "id": "howtocook/魔芋蛋糕",
         "name": "魔芋蛋糕",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/魔芋蛋糕.jpeg",
@@ -3507,6 +3606,7 @@
         "extra_text": "* 本食谱主要参考视频Keto Konjac Chocolate Cake｜生酮蛋糕\n* 打发蛋白等部分大幅借鉴戚风蛋糕制作流程"
       },
       {
+        "id": "howtocook/戚风蛋糕",
         "name": "戚风蛋糕",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/戚风蛋糕.jpeg",
@@ -3548,6 +3648,7 @@
         "extra_text": "- 参考了以下教程，文中说明非常详细且有每一步骤的配图。同时，对于为什么做某一个操作、背后的原理也有阐释，以及出现某些问题的分析：\n- 为了做好这个戚风蛋糕，用了一整箱鸡蛋，从此告别凹底和塌陷\n- 对戚风蛋糕而言，蛋清打发是次要问题，关键是**烤制时的温度和时间**。\n- 蛋清容器而言，可有水珠，蛋黄容器不能有。\n  - 原因：油会影响蛋白的打发，蛋清 85%是水，稍有水珠并不影响打发。\n  - 特别新鲜的鸡蛋蛋清会比较硬，应对硬蛋清 5 个鸡蛋配方的话加 15ml 水会帮助蛋清打发（1 个鸡蛋配方则是 3g 水）\n- 蛋清打发途中加的糖，实际也是先融于蛋清中的水里，成为糖浆溶液包裹在气泡外，对打发的气泡起保护作用。\n- 温度对糖融于水的速率以及溶解度影响较大，刚从冰箱拿出的蛋清不易打发。但温度较低的鸡蛋容易分离蛋清蛋黄，建议分离后恢复室温再进行打发。\n- 一些参考图片"
       },
       {
+        "id": "howtocook/酸奶意式奶冻",
         "name": "酸奶意式奶冻",
         "category": "dessert",
         "difficulty": 4,
@@ -3581,6 +3682,7 @@
         "extra_text": "- 传统版本的意式奶冻只用淡奶油，且糖量更大，比较甜腻。此版本做了改良，吃起来负担更小。"
       },
       {
+        "id": "howtocook/提拉米苏",
         "name": "提拉米苏",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/提拉米苏.jpeg",
@@ -3621,6 +3723,7 @@
         "extra_text": "- 下厨房蛋白打发具体教程"
       },
       {
+        "id": "howtocook/无厨师机蜂蜜面包",
         "name": "无厨师机蜂蜜面包",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/无厨师机蜂蜜面包.jpeg",
@@ -3662,6 +3765,7 @@
         "extra_text": "- 发面时间并不固定, 每 1 小时看一下确认就可以, 明显发酵变大即可, 建议发酵 2 - 2.5 倍大。\n- 面团大小不会显著影响口感和烘烤效果，可根据喜好调整。\n- 参考资料：下厨房 - 脆底蜂蜜小面包"
       },
       {
+        "id": "howtocook/雪花酥",
         "name": "雪花酥",
         "category": "dessert",
         "difficulty": 3,
@@ -3699,6 +3803,7 @@
         "extra_text": "- 棉花糖加热时间越长，最后成品越硬\n- 参考资料：【一口小锅 十分钟搞定的网红草莓“雪花酥”-哔哩哔哩】"
       },
       {
+        "id": "howtocook/英式司康",
         "name": "英式司康",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/英式司康.jpeg",
@@ -3738,6 +3843,7 @@
         "extra_text": "- 最简单的分切方案是擀成圆形面皮，用刀切成 6 个扇形"
       },
       {
+        "id": "howtocook/芋泥雪媚娘",
         "name": "芋泥雪媚娘",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/芋泥雪媚娘.jpeg",
@@ -3779,6 +3885,7 @@
         "extra_text": "- 制作时最好佩戴不粘手套\n- 制作完即可食用，不用再加热"
       },
       {
+        "id": "howtocook/炸鲜奶",
         "name": "炸鲜奶",
         "category": "dessert",
         "imagePath": "images/dishes/dessert/炸鲜奶.jpeg",
@@ -3823,6 +3930,7 @@
     "count": 24,
     "recipes": [
       {
+        "id": "howtocook/耙耙柑茶",
         "name": "耙耙柑茶",
         "category": "drink",
         "imagePath": "images/dishes/drink/耙耙柑茶.jpeg",
@@ -3854,6 +3962,7 @@
         "extra_text": "- 耙耙柑可以用其他容易分离果肉的柑橘替代，比如丑橘\n- 果肉和茶水比例为 1 : 1，如果需要配置更大的分量，可按比例提升用量"
       },
       {
+        "id": "howtocook/百香果橙子特调",
         "name": "百香果橙子特调",
         "category": "drink",
         "imagePath": "images/dishes/drink/百香果橙子特调.jpeg",
@@ -3891,6 +4000,7 @@
         "extra_text": "如果缺少或不喜欢茉莉绿茶，可以使用苏打气泡水代替，免去茉莉绿茶的调配流程"
       },
       {
+        "id": "howtocook/冰粉",
         "name": "冰粉",
         "category": "drink",
         "imagePath": "images/dishes/drink/冰粉.jpeg",
@@ -3922,6 +4032,7 @@
         "extra_text": "- 操作时，需要注意观察凉白开的颜色和粘度变化，如颜色过浅或者水不黏，则说明冰粉籽量不足，或者是揉搓力度和时间没有到位。"
       },
       {
+        "id": "howtocook/菠萝咖啡特调",
         "name": "菠萝咖啡特调",
         "category": "drink",
         "imagePath": "images/dishes/drink/菠萝咖啡特调.jpeg",
@@ -3959,6 +4070,7 @@
         "extra_text": "- 咖啡液建议选用花果风味，浓缩可以用中烘豆，冷萃可以用普通水洗或者日晒\n- 倒入奶油时，高度尽量放低，让奶油能均匀漂浮在饮料表面形成奶盖\n- 用新鲜的咖啡液和菠萝汁能大大提升整体风味口感"
       },
       {
+        "id": "howtocook/冬瓜茶",
         "name": "冬瓜茶",
         "category": "drink",
         "imagePath": "images/dishes/drink/冬瓜茶.jpeg",
@@ -3991,6 +4103,7 @@
         "extra_text": "- **口感调整**：冰糖的用量可以调整，以达到个人喜好的甜度。\n- **保存方法**：冷藏保存，建议 1 周内喝完。"
       },
       {
+        "id": "howtocook/海边落日",
         "name": "海边落日",
         "category": "drink",
         "imagePath": "images/dishes/drink/海边落日.jpeg",
@@ -4031,6 +4144,7 @@
         "steps_text": "柠檬的处理\n\n1. 柠檬洗净切出一片\n\n正式调配\n\n1. 选择一个杯子，建议使用容量在 350~400 毫升的透明玻璃杯\n2. 放入大冰块，用搅拌棒搅拌冰杯\n3. 加入红石榴糖浆\n4. 让橙汁沿搅拌棒导入酒杯，到就被一半就行\n5. 轻轻搅拌半圈\n6. 倒入苏打水\n7. 拿出调酒杯，加入白朗姆 + 蓝橙力娇酒 + 柠檬汁 + 冰块。然后 shake，shake\n8. 轻轻倒入酒杯中\n9. 插上柠檬和吸管"
       },
       {
+        "id": "howtocook/金菲士",
         "name": "金菲士",
         "category": "drink",
         "imagePath": "images/dishes/drink/金菲士.jpeg",
@@ -4065,6 +4179,7 @@
         "steps_text": "柠檬的处理\n\n1. 将柠檬对半切（**刀方向垂直于柠檬的头尾连线**），并从其中的一半中切取一片柠檬备用\n2. 再次将柠檬对半切，将得到的 4 角柠檬用压汁器压出柠檬汁置于容器中备用\n\n正式调配（无雪克瓶）\n\n1. 选择一个杯子，建议使用容量在 350~400 毫升的透明玻璃杯\n2. 将 100 克冰块放置在杯底\n3. 倒入 30~40 毫升金酒\n4. 倒入 20 毫升柠檬汁（如果喜酸可以加多点或全加）\n5. 倒入 30~40 克蔗糖糖浆\n6. 用勺子搅拌均匀\n7. 将之前准备的一片柠檬放置好\n8. 缓慢沿杯壁注入苏打气泡水直至满杯（不要倒在冰上，避免起泡流失）\n9. 用勺子轻轻上下提拉将液体搅拌均匀（不要旋转搅拌，避免起泡流失）\n10. 在液面放置好装饰用的绿叶（可选）\n\n如果有雪克瓶，可以将以上步骤 2~6 替换为以下步骤\n\n1. 将冰块、金酒、柠檬汁、蔗糖糖浆倒入雪克瓶，雪克均匀\n2. 将充分雪克的产物倒到杯子中（如果里面的冰太碎了，可以选择过滤其中的冰，重新往杯中补充冰块）"
       },
       {
+        "id": "金谷园/金谷园牛奶醪糟鸡蛋",
         "name": "金谷园牛奶醪糟鸡蛋",
         "category": "drink",
         "difficulty": 1,
@@ -4100,6 +4215,7 @@
         "extra_text": "<!-- 在这里额外补充一些注意事项、参考资料、安全须知等。 -->\n\n**老板说：辅料分两拨——一半煮进去出软糯口感，一半撒上面出干香口感，两种口感才是这碗的灵魂。**\n\n**老板说：鸡蛋别搅太碎了，轻轻搅两下，蛋黄碎了但蛋白没怎么碎，这个状态最好。**\n\n**老板说：全程小火，火大了糊锅。**"
       },
       {
+        "id": "howtocook/金汤力",
         "name": "金汤力",
         "category": "drink",
         "imagePath": "images/dishes/drink/金汤力.jpeg",
@@ -4132,6 +4248,7 @@
         "steps_text": "柠檬的处理\n\n1. 将柠檬对半切（**刀方向垂直于柠檬的头尾连线**），并从其中的一半中切取一片柠檬备用\n2. 再次将柠檬对半切，将得到的 4 角柠檬用压汁器压出柠檬汁置于容器中备用\n\n正式调配\n\n1. 选择一个杯子，建议使用容量在 350~400 毫升的透明玻璃杯\n2. 将 100 克冰块放置在杯底\n3. 倒入 30~40 毫升金酒\n4. 倒入 15 毫升柠檬汁（如果喜酸可以加多点或全加）\n5. 用勺子搅拌均匀\n6. 将之前准备的一片柠檬放置好\n7. 缓慢沿杯壁注入汤力水直至满杯（不要倒在冰上，避免起泡流失）\n8. 用勺子轻轻上下提拉将液体搅拌均匀（不要旋转搅拌，避免起泡流失）\n9. 在液面放置好装饰用的绿叶（可选）"
       },
       {
+        "id": "howtocook/酒酿醪糟",
         "name": "酒酿醪糟",
         "category": "drink",
         "imagePath": "images/dishes/drink/酒酿醪糟.jpeg",
@@ -4163,6 +4280,7 @@
         "extra_text": "- 发酵温度至关重要，低温会发酵缓慢或失败，高温会杀死酒曲\n- 发酵失败常见原因：温度过高、米饭太热时拌入酒曲、容器未清洁干净或进水进油\n- 可搭配汤圆、蛋花、枸杞等加热食用，但注意不要煮沸时间过长以免酒香散失\n- 酒酿汁可用于制作酒酿米糕、酒酿饼等，还可以用作调料为肥牛饭、照烧汁增添风味"
       },
       {
+        "id": "howtocook/可乐桶",
         "name": "可乐桶",
         "category": "drink",
         "imagePath": "images/dishes/drink/可乐桶.jpeg",
@@ -4195,6 +4313,7 @@
         "extra_text": "可乐桶因冰块和可乐的口感掩盖了威士忌的酒味，因此不善酒力的人也容易在不知不觉中过量饮酒，请在保证个人与饮酒者的安全下调配。"
       },
       {
+        "id": "howtocook/奶茶",
         "name": "奶茶",
         "category": "drink",
         "imagePath": "images/dishes/drink/奶茶.jpeg",
@@ -4223,6 +4342,7 @@
         "extra_text": "- 加入沸水后，尽量保持杯子内部温暖，例如使用开口较小的杯子或盖上盖子。如果气温较低时，使用量杯量取可能导致沸水在冲入红茶前冷却，则可以不使用量杯量取而直接估计其体积。\n- 等待时间结束后可提起或搅动茶包以使冲泡更加均匀。"
       },
       {
+        "id": "howtocook/柠檬水",
         "name": "柠檬水",
         "category": "drink",
         "imagePath": "images/dishes/drink/柠檬水.jpeg",
@@ -4255,6 +4375,7 @@
         "extra_text": "- 参考资料：柠檬水教程"
       },
       {
+        "id": "howtocook/牛油果拉西",
         "name": "牛油果拉西",
         "category": "drink",
         "difficulty": 5,
@@ -4286,6 +4407,7 @@
         "extra_text": "- 菜系：印度\n- 烹饪方式：搅拌\n- 主料：原味酸奶、牛油果、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/奇异果菠菜特调",
         "name": "奇异果菠菜特调",
         "category": "drink",
         "imagePath": "images/dishes/drink/奇异果菠菜特调.jpeg",
@@ -4321,6 +4443,7 @@
         "extra_text": "- 关于白砂糖的量：全糖为 12g，可根据个人情况在 0-12g 中调整\n- 本品是仿照宜家的奇异果菠菜汁自己研制的，没有宜家的好喝，但也不错\n- 欢迎改进！"
       },
       {
+        "id": "howtocook/砂糖椰子冰沙",
         "name": "砂糖椰子冰沙",
         "category": "drink",
         "imagePath": "images/dishes/drink/砂糖椰子冰沙.jpeg",
@@ -4348,6 +4471,7 @@
         "extra_text": "- 在以上步骤中，瓶装椰汁可以提前冰冻，但是不宜超过 7 天，否则有变质风险。"
       },
       {
+        "id": "howtocook/酸梅汤",
         "name": "酸梅汤",
         "category": "drink",
         "imagePath": "images/dishes/drink/酸梅汤.jpeg",
@@ -4382,6 +4506,7 @@
         "extra_text": "放入冰箱冷藏后再饮用效果更佳。"
       },
       {
+        "id": "howtocook/酸梅汤（半成品加工）",
         "name": "酸梅汤（半成品加工）",
         "category": "drink",
         "imagePath": "images/dishes/drink/酸梅汤（半成品加工）.jpeg",
@@ -4409,6 +4534,7 @@
         "extra_text": "如果没有准备方糖或北京二锅头，可以省略操作中的第 4 步或第 5 步。\n\n放入冰箱冷藏后再饮用效果更佳。\n\n**饮酒请勿驾车。**"
       },
       {
+        "id": "howtocook/泰国手标红茶",
         "name": "泰国手标红茶",
         "category": "drink",
         "imagePath": "images/dishes/drink/泰国手标红茶.jpeg",
@@ -4443,6 +4569,7 @@
         "steps_text": "- 600cc 水大火烧开\n- 在过滤袋中装入 20g 茶粉，开水倒入过滤袋中，过滤 20 遍\n- 使用克称量取 24g 炼乳、24g 白糖和 18ml 牛奶放入 1000ml 以上的水壶中\n- 将过滤好的茶水倒入水壶中搅拌，直到白糖融化\n- 将水壶放到冰箱 4 小时以上\n- 喝前可以加 6-8 颗冰块"
       },
       {
+        "id": "howtocook/杨枝甘露",
         "name": "杨枝甘露",
         "category": "drink",
         "imagePath": "images/dishes/drink/杨枝甘露.jpeg",
@@ -4474,6 +4601,7 @@
         "steps_text": "- 奇亚籽泡牛奶 10 分钟。\n- 泡籽之时，把半粒芒果、葡萄柚去皮切丁，放入杯中。\n- 半粒芒果切小块放入调理机加冰块、椰奶打成泥。\n- 倒入杯中，放上点缀材料（如有）。\n- 一边享用一边写代码！！"
       },
       {
+        "id": "howtocook/印度奶茶",
         "name": "印度奶茶",
         "category": "drink",
         "difficulty": 5,
@@ -4511,6 +4639,7 @@
         "extra_text": "- 菜系：印度\n- 烹饪方式：煮\n- 主料：红茶、全脂牛奶、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/长岛冰茶",
         "name": "长岛冰茶",
         "category": "drink",
         "imagePath": "images/dishes/drink/长岛冰茶.jpeg",
@@ -4548,6 +4677,7 @@
         "extra_text": "长岛冰茶，不含茶却有着冰茶的口感，是一种有着较高酒精度（约 15%），但口感柔和易于接受的鸡尾酒。\n\n参考资料：国际调酒师协会：长岛冰茶"
       },
       {
+        "id": "howtocook/B52轰炸机",
         "name": "B52轰炸机",
         "category": "drink",
         "imagePath": "images/dishes/drink/B52轰炸机.jpeg",
@@ -4579,6 +4709,7 @@
         "extra_text": "- 喝的时候，现在酒吧常用的方法是提供一个吸管，在火还燃烧的时候插入，然后快速全部吸入。\n- 由于吸管太细，其中氧气不足，所以火苗会灭掉，不必担心。这时候，会感到一股热辣顺着喉咙一直烈到胃，之后就是久久的咖啡奶油回甘。非常刺激又好喝。"
       },
       {
+        "id": "howtocook/Mojito莫吉托",
         "name": "Mojito莫吉托",
         "category": "drink",
         "imagePath": "images/dishes/drink/Mojito莫吉托.jpeg",
@@ -4617,6 +4748,7 @@
     "count": 158,
     "recipes": [
       {
+        "id": "howtocook/澳门湿版免治牛肉饭",
         "name": "澳门湿版免治牛肉饭",
         "category": "meat_dish",
         "difficulty": 5,
@@ -4661,6 +4793,7 @@
         "extra_text": "- 菜系：粤菜\n- 烹饪方式：炒\n- 主料：牛肉末、洋葱、鸡蛋、米饭、\n- 来源：howtocook"
       },
       {
+        "id": "随便做/八宝葫芦鸭",
         "name": "八宝葫芦鸭",
         "category": "meat_dish",
         "difficulty": 5,
@@ -4708,6 +4841,7 @@
         "extra_text": "- 剔骨是这道菜最难的部分，需要极高的刀工技巧，切勿弄破鸭皮\n- 八宝料切丁大小要均匀，确保成熟一致\n- 绑葫芦造型时要注意结实，蒸制过程中不会散开\n- 蒸制时间要足够，确保鸭肉软烂入味"
       },
       {
+        "id": "howtocook/巴基斯坦牛肉咖喱",
         "name": "巴基斯坦牛肉咖喱",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/巴基斯坦牛肉咖喱.jpeg",
@@ -4746,6 +4880,7 @@
         "extra_text": "这道菜是从一个巴基斯坦的朋友那里偷师而来，特地整理了笔记，绝对正宗。\n\n通常配以 烙饼(roti)、馕(naan) 或 米饭 食用。\n\n如果想做 Chicken karahi 流程几乎是一样的，除了是先用油和各种花椒胡椒煎鸡肉变黄。"
       },
       {
+        "id": "随便做/扒肉条",
         "name": "扒肉条",
         "category": "meat_dish",
         "difficulty": 4,
@@ -4774,6 +4909,7 @@
         "extra_text": "- 牛肉要炖煮至软烂才能切片\n- 顶丝切肉是指横切纹理，这样肉片更嫩\n- 勾芡时要少量多次，避免过稠"
       },
       {
+        "id": "howtocook/白菜猪肉炖粉条",
         "name": "白菜猪肉炖粉条",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/白菜猪肉炖粉条.jpeg",
@@ -4812,6 +4948,7 @@
         "extra_text": "- 土豆干粉条煮制时间长，可以放在第一步，期间进行其他步骤\n- 最后一步尝味，如果发现有味道淡、未熟，继续加盖煮一段时间"
       },
       {
+        "id": "随便做/白卤肘子",
         "name": "白卤肘子",
         "category": "meat_dish",
         "difficulty": 3,
@@ -4849,6 +4986,7 @@
         "extra_text": "- 肘子燎毛：火燎至表皮焦黑，去毛，温水浸泡，钢丝球洗净表皮\n- 腌制时间越长越入味，建议至少24小时\n- 高压锅压制后让肘子在汤中浸泡更入味\n- 晾凉后切片更整齐，也可热食"
       },
       {
+        "id": "随便做/宝塔肉",
         "name": "宝塔肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -4877,6 +5015,7 @@
         "extra_text": "- 切肉片是这道菜最难的部分，一定要保持厚度一致不能切断\n- 蒸制时间要够，确保肉质软糯\n- 压制定型可以让成品更美观\n- 梅菜要提前处理干净，煸炒出香味"
       },
       {
+        "id": "随便做/柴把鸡",
         "name": "柴把鸡",
         "category": "meat_dish",
         "difficulty": 4,
@@ -4914,6 +5053,7 @@
         "extra_text": "- 柴鸡要选择肉质紧实的，老鸡肉更适合这道菜\n- 捆扎时葱叶要系紧，确保食材不散\n- 高压锅压制时间要够，确保鸡肉软烂\n- 蒸制是为了让味道进一步渗透"
       },
       {
+        "id": "随便做/炒烤羊肉",
         "name": "炒烤羊肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -4943,6 +5083,7 @@
         "extra_text": "- 羊肉要切薄片，1-2mm为宜，这样更容易熟透入味\n- 腌肉汁要熬出香味后再使用\n- 炒制时分两次进行，每次一半的量，这样受热更均匀\n- 炒肉时要大火快炒，保持肉片的嫩滑"
       },
       {
+        "id": "howtocook/豉汁排骨",
         "name": "豉汁排骨",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/豉汁排骨.jpeg",
@@ -4982,6 +5123,7 @@
         "extra_text": "- 豆豉浸泡后稍微剁碎会更入味\n- 蒸制时间随排骨大小调整，以筷子能轻松插入软骨处为准\n- 传统的豉汁排骨不放撒料和淋热油\n- 吃剩的汤汁可以用来拌饭或者拌面"
       },
       {
+        "id": "howtocook/豉汁蒸白鱔",
         "name": "豉汁蒸白鱔",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/豉汁蒸白鱔.jpeg",
@@ -5023,6 +5165,7 @@
         "extra_text": "- **注意事项**：\n  - 确保白鱔新鲜，购买时选择活鱼，肉质更鲜嫩。\n  - 鱼贩切段时可指定长度 （约 5 厘米为宜），方便蒸制和食用。\n  - 蒸制时间不宜过长，以免白鱔肉质变韧。\n\n- **变种做法**：\n  - 可加入辣椒或 XO 酱，增加辣味和层次感。\n  - 若喜欢更软嫩的口感，可在腌制时加入米酒。"
       },
       {
+        "id": "随便做/葱爆羊肉",
         "name": "葱爆羊肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5058,6 +5201,7 @@
         "extra_text": "- 羊肉要顺着纹理切，口感更嫩\n- 腌制时加水可以使肉更嫩滑\n- 爆炒时油温要够，形成热膜\n- 大葱切成马耳朵状，更容易熟透入味"
       },
       {
+        "id": "随便做/葱烧蹄筋",
         "name": "葱烧蹄筋",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5086,6 +5230,7 @@
         "extra_text": "- 蹄筋发制需要耐心，小火煮60分钟后还要泡3小时\n- 炸葱段时要不断翻动，使其受热均匀\n- 收汁时火候要控制好，不要糊锅"
       },
       {
+        "id": "随便做/脆炸腐乳肉",
         "name": "脆炸腐乳肉",
         "category": "meat_dish",
         "difficulty": 2,
@@ -5117,6 +5262,7 @@
         "extra_text": "- 五花肉要选择肥一点的，油炸后更香\n- 肉片要一片片下锅，避免粘连\n- 控制油温在五成热，不要太热以免炸焦\n- 可以根据口味加入辣椒面增加风味"
       },
       {
+        "id": "howtocook/带把肘子",
         "name": "带把肘子",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/带把肘子.jpeg",
@@ -5158,6 +5304,7 @@
         "extra_text": "- 肘子七成熟要根据实际情况判断，有条件可询问家中长辈。\n- 蒸锅下半放水，上半放肘子，蒸时及时加水防止蒸干。"
       },
       {
+        "id": "随便做/东北饭店锅包肉",
         "name": "东北饭店锅包肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5193,6 +5340,7 @@
         "extra_text": "- 淀粉要选黏性大的土豆淀粉，别的淀粉不行，很关键\n- 肉片切得要均匀，否则成熟度不一致\n- 复炸是为了逼出多余油分，增加酥脆度\n- 糖醋汁下锅后要快速翻匀出锅，保持肉片酥脆"
       },
       {
+        "id": "随便做/东坡肘子",
         "name": "东坡肘子",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5222,6 +5370,7 @@
         "extra_text": "- 燎毛时用火焰外层烤，不会烤焦\n- 炖煮时间要够，确保肘子软烂\n- 蘸料可以根据个人口味调整\n- 砂锅慢炖可以让肘子更加软糯"
       },
       {
+        "id": "howtocook/冬瓜酿肉",
         "name": "冬瓜酿肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/冬瓜酿肉.jpeg",
@@ -5260,6 +5409,7 @@
         "extra_text": "- 操作时，拿出冬瓜酿肉时注意碟子很烫，小心操作。\n- 参考资料：b站视频"
       },
       {
+        "id": "howtocook/豆豉鲮鱼油麦菜",
         "name": "豆豉鲮鱼油麦菜",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/豆豉鲮鱼油麦菜.jpeg",
@@ -5294,6 +5444,7 @@
         "extra_text": "- **注意事项**：\n  1. 鲮鱼罐头本身带味道，加入生抽后够味，无需下盐"
       },
       {
+        "id": "随便做/剁椒蒸鸡",
         "name": "剁椒蒸鸡",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5321,6 +5472,7 @@
         "extra_text": "- 剁椒炒制时火候要控制好，不要炒糊\n- 鸡肉腌制时间不宜过长，10分钟足够入味\n- 蒸制时间根据鸡的大小适当调整"
       },
       {
+        "id": "随便做/番茄炖牛腩",
         "name": "番茄炖牛腩",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5355,6 +5507,7 @@
         "extra_text": "- 牛腩冷水下锅更容易煮出血沫\n- 高压锅可以缩短炖煮时间，30分钟即可\n- 西红柿炒香后要加入适量番茄酱增加风味\n- 糖的用量根据个人口味调整，喜欢酸的可以不加糖"
       },
       {
+        "id": "howtocook/番茄红酱",
         "name": "番茄红酱",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/番茄红酱.jpeg",
@@ -5396,6 +5549,7 @@
         "extra_text": "- **考虑各个品牌的番茄酱内含盐量不同，建议在炒牛肉时少放盐，煮的时候尝一下再调味**\n- **煮酱料期间请搅动，以免粘锅。如果酱料变粘稠就可以出锅啦！**\n- 可根据个人口味，将碎牛肉替换成一半碎猪肉一半碎牛肉，牛奶替换成鸡汤或饮用水。"
       },
       {
+        "id": "随便做/分子锅包肉",
         "name": "分子锅包肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5423,6 +5577,7 @@
         "extra_text": "- 肉片捶打要均匀，厚度要薄\n- 炸肉片时油温控制很重要，不能太高\n- 糖醋汁过滤是为了保证口感更细腻\n- 这道菜讲究\"外酥里嫩\"，复炸是关键技术"
       },
       {
+        "id": "howtocook/粉蒸肉",
         "name": "粉蒸肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/粉蒸肉.jpeg",
@@ -5463,6 +5618,7 @@
         "extra_text": "- 如需自制米粉，可将大米 150g 放入锅中，中小火炒至微黄色（约 8 分钟），再加入干辣椒 1g、花椒 1g、八角 0.5g，炒香后用料理机打碎，过筛备用\n- 蒸制期间如水量低于锅底高度 1cm，应立即补充 500ml 热水（90°C 以上），以维持蒸汽充足"
       },
       {
+        "id": "随便做/腐乳红烧肉",
         "name": "腐乳红烧肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5495,6 +5651,7 @@
         "extra_text": "- 根据个人口味加辣椒或糖都可以\n- 高压锅炖煮更省时间，普通锅小火慢炖也可以\n- 腐乳是这道菜的灵魂调料，不能省略\n- 收汁时火候要控制好，避免糊锅"
       },
       {
+        "id": "howtocook/腐乳肉",
         "name": "腐乳肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/腐乳肉.jpeg",
@@ -5529,6 +5686,7 @@
         "extra_text": "- 建议用单晶冰糖\n- 腐乳自带咸鲜，不用额外放盐\n- 大火收汁时要不断晃动锅体避免粘底\n- 参考资料：【步骤图】腐乳肉的做法_腐乳肉的做法步骤_菜谱_下厨房"
       },
       {
+        "id": "随便做/干巴牛肉",
         "name": "干巴牛肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5557,6 +5715,7 @@
         "extra_text": "- 牛肉最好不要肥肉，要瘦一点，一般选用牛板腱\n- 这道菜的难点在于高压锅压牛肉的时间，太长或者太短都会很影响口感\n- 建议和视频中一样的大小与时间\n- 牛肉要断丝切，这样口感更好"
       },
       {
+        "id": "howtocook/干煸仔鸡",
         "name": "干煸仔鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/干煸仔鸡.jpeg",
@@ -5598,6 +5757,7 @@
         "extra_text": "- 不舍得使用宽油油炸的话，可改用更少的油煎鸡块和土豆块。会增长用时，部分影响口感，但不会影响总体味道。\n- 参考资料：北大餐饮中心官方资讯"
       },
       {
+        "id": "随便做/干炸丸子",
         "name": "干炸丸子",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5629,6 +5789,7 @@
         "extra_text": "- 丸子大小要均匀，3.5cm左右最佳\n- 油温控制在四五成，不要太高以免外焦里生\n- 炸两遍回锅可以让丸子更酥脆\n- 可以搭配花椒盐或老虎酱食用"
       },
       {
+        "id": "随便做/宫保鸡丁",
         "name": "宫保鸡丁(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/宫保鸡丁.jpeg",
@@ -5659,6 +5820,7 @@
         "extra_text": "- 干辣椒与花椒的比例因品质品种有区别需多次尝试，这也是这道菜最难的地方\n- 鸡肉腌制时一定要先加盐再加葱姜水\n- 炒制时不能老翻炒，会导致醋味挥发\n- 花生米要最后加入保持酥脆"
       },
       {
+        "id": "随便做/宫廷十方肉",
         "name": "宫廷十方肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5687,6 +5849,7 @@
         "extra_text": "- 燎毛时注意安全，火焰外层烤不会烤焦\n- 炒糖色一定要用热水，冷水会使糖色凝固\n- 高压锅时间根据肉的大小调整\n- 老抽可以根据是否着急食用减量"
       },
       {
+        "id": "howtocook/咕噜肉",
         "name": "咕噜肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/咕噜肉.jpeg",
@@ -5724,6 +5887,7 @@
         "extra_text": "- 想让肉更有层次可以在生粉中加鸡蛋，炸出来会更香脆"
       },
       {
+        "id": "howtocook/广式萝卜牛腩",
         "name": "广式萝卜牛腩",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/广式萝卜牛腩.jpeg",
@@ -5767,6 +5931,7 @@
         "calculation_text": "一份正好够 3-4 人吃。\n\n- 牛腩 500g\n- 白萝卜 1 根\n- 姜片 8 片\n- 蒜瓣 5 片\n- 葱结 一把\n- 八角 2 片\n- 桂皮 1 小块\n- 干辣椒 2 个\n- 香叶 2 片\n- 南乳 1 块\n- 柱侯酱 30g\n- 蚝油 15g\n- 酱油 15g\n- 冰糖 10g\n- 盐 5g\n- 老抽 15g"
       },
       {
+        "id": "howtocook/贵州辣子鸡",
         "name": "贵州辣子鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/贵州辣子鸡.jpeg",
@@ -5808,6 +5973,7 @@
         "extra_text": "- 操作时，需要注意翻炒，因为糍粑辣椒会糊掉"
       },
       {
+        "id": "随便做/锅烧肘子",
         "name": "锅烧肘子",
         "category": "meat_dish",
         "difficulty": 4,
@@ -5853,6 +6019,7 @@
         "extra_text": "- 肘子解冻：水泡法解冻，大约浸泡2小时\n- 肘子燎毛：火爆至表皮焦黑，去毛，温水浸泡后用钢丝球洗净表皮，即可\n- 鸡蛋淀粉糊中油一定要多，这是酥脆的关键\n- 炸肘子时油温要够高，六成热下锅，迅速定型"
       },
       {
+        "id": "随便做/过桥排骨",
         "name": "过桥排骨",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5882,6 +6049,7 @@
         "extra_text": "- 排骨要炖够时间才能容易拆肉\n- 拆肉时要注意保持肉块完整\n- 配料炒制时火候要掌握好"
       },
       {
+        "id": "howtocook/荷兰豆炒腊肠",
         "name": "荷兰豆炒腊肠",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/荷兰豆炒腊肠.jpeg",
@@ -5913,6 +6081,7 @@
         "extra_text": "- 在制作过程中没有放盐，是因为腊肠本身会有一些味道，同时生抽也会有一些咸味。\n- 腊肠虽然味道不错，但属于不太健康的食物，建议少放。"
       },
       {
+        "id": "随便做/黑粉炸鸡（黑暗料理）",
         "name": "黑粉炸鸡（黑暗料理）",
         "category": "meat_dish",
         "difficulty": 3,
@@ -5956,6 +6125,7 @@
         "extra_text": "- 不加竹炭粉也会是个好吃的炸鸡\n- 浇的火龙果汁儿里面生辣椒味道会有一点点重，可以减半或只放1/3\n- 腌制时间越长越入味，建议腌制1天效果更佳"
       },
       {
+        "id": "howtocook/黑椒牛柳",
         "name": "黑椒牛柳",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/黑椒牛柳.jpeg",
@@ -5991,6 +6161,7 @@
         "steps_text": "- 将牛肉切条，长度最好控制在 8 厘米以下，厚度约 5-10 毫米，宽度约 1 厘米（要求不严格）\n- 利用腌料腌制牛肉，混合均匀后静置，用量与时间请参照商品说明，可以延长不能缩短。\n- 如果使用液态腌料，可以在腌制结束前三分钟撒一层黑胡椒粉，然后再加入淀粉，再次混合均匀后静置 20 分钟。\n- 开火，热锅，加入花生油。\n- 当能看到锅里的油冒出一丝烟时，放入牛肉，翻炒。\n- 开中火偏大，翻炒 2 分钟至牛肉外表变色（即不出现明显血色，有血色部分说明翻炒不到位）（此处应小心油滴溅射）。\n- 放入洋葱和菜椒，翻炒 2 分钟。\n- 加入盐，再次撒一份黑胡椒粉，翻炒 30 秒，搅拌均匀。\n- 观察洋葱已经变软即可关火，出锅，盛盘。"
       },
       {
+        "id": "howtocook/红烧鸡翅",
         "name": "红烧鸡翅",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/红烧鸡翅.jpeg",
@@ -6033,6 +6204,7 @@
         "extra_text": "- 如果闻着有腥味，可以增加一倍香料用量。"
       },
       {
+        "id": "随便做/红烧狮子头",
         "name": "红烧狮子头",
         "category": "meat_dish",
         "difficulty": 4,
@@ -6074,6 +6246,7 @@
         "extra_text": "- 五花肉要切成石榴粒大小，不能剁成泥\n- 肉馅加水要少量多次，确保吸足水分\n- 狮子头要趁热下锅油炸，定型后捞出\n- 炖煮时间要足够，100分钟才能软烂入味"
       },
       {
+        "id": "随便做/红烧肘子",
         "name": "红烧肘子",
         "category": "meat_dish",
         "difficulty": 4,
@@ -6100,6 +6273,7 @@
         "extra_text": "- 需要根据猪肘品质调整煮的时间，如果是冻猪肘可以把猪肘劈开方便入味\n- 炒糖色是关键步骤，火候要控制好\n- 高压锅使用要注意安全，上汽后要转小火"
       },
       {
+        "id": "howtocook/红烧猪蹄",
         "name": "红烧猪蹄",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/红烧猪蹄.jpeg",
@@ -6135,6 +6309,7 @@
         "calculation_text": "一份正好够 3-4 人吃。\n\n- 猪蹄：2~3 根\n- 食用油：30ml\n- 香叶 2 片\n- 姜 5 片\n- 葱半根\n- 桂皮 1 块\n- 冰糖 7-8 粒\n- 料酒 30 ml\n- 生抽 20 ml\n- 老抽 20 ml\n- 盐 8 克\n- 八角 4 个"
       },
       {
+        "id": "随便做/红枣肉丸汤",
         "name": "红枣肉丸汤",
         "category": "meat_dish",
         "difficulty": 2,
@@ -6163,6 +6338,7 @@
         "extra_text": "- 肉馅摔打上劲可以让丸子更有嚼劲\n- 胡椒粉必须在开着锅的时候撒入，否则会成团\n- 汆丸子时水不能大开，以免丸子散开"
       },
       {
+        "id": "howtocook/湖南家常红烧肉",
         "name": "湖南家常红烧肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/湖南家常红烧肉.jpeg",
@@ -6201,6 +6377,7 @@
         "steps_text": "* 带皮五花肉洗净冷水下锅，加入姜片 2~3 片去腥味，煮到沸腾捞出冷水冲净白沫\n* 五花肉切块，尺寸 1.5cm*1.5cm 块状大小\n* 热锅加入油，加入冰糖小火搅拌至焦糖色即可，加入切好的五花肉，中火翻炒上色\n* 加入备好的姜片、八角、桂皮、生抽、老抽、料酒、干小米椒、盐，小火翻炒 1 分钟，加开水没过肉\n* 加盖中火煮沸，转小火慢顿 30 分钟，慢炖期间，间隔 10 分钟搅拌一次防止粘锅\n* 小火慢炖汤汁剩三分之一的时，调成中火收汁出锅。"
       },
       {
+        "id": "howtocook/虎皮肘子",
         "name": "虎皮肘子",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/虎皮肘子.jpeg",
@@ -6245,6 +6422,7 @@
         "extra_text": "- 参考资料：Bilibili老饭骨的视频教程\n\n<!-- 必须保留下面的文字。 -->"
       },
       {
+        "id": "随便做/滑溜里脊",
         "name": "滑溜里脊",
         "category": "meat_dish",
         "difficulty": 3,
@@ -6275,6 +6453,7 @@
         "extra_text": "- 溜菜都不在锅里面调味勾芡，所以碗芡和上浆是一定要提前做的\n- 肉片厚度要切均匀，1mm为宜\n- 上浆时要让肉片充分吸收浆液\n- 滑油时油温不能太高，四成热即可"
       },
       {
+        "id": "howtocook/黄瓜炒肉",
         "name": "黄瓜炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/黄瓜炒肉.jpeg",
@@ -6306,6 +6485,7 @@
         "steps_text": "* 将猪瘦肉切片，放入碗中，倒入食用油 10 克，生抽，搅拌均匀，腌制 10 分钟\n* 将黄瓜切去 5 厘米的头尾，剩余部分斜着切成 0.5 厘米的薄片\n* 将黄瓜倒入碗中，撒上盐 8 克，搅拌均匀，腌制 5 分钟\n* 将蒜瓣去皮，压扁，切成蒜末备用\n* 将小米辣去丁切分成均匀 0.5 厘米的段状\n* 热锅，倒油 40 克，等油温到冒烟，放入蒜蓉小米辣翻炒 5 次\n* 放入腌制好的猪瘦肉，翻炒至肉熟变色\n* 放入黄瓜，加入盐 2 克，大火翻炒均匀半分钟，出锅\n  * 如果无法保证大火，可能会有点生。可以考虑增加到 50 秒。"
       },
       {
+        "id": "howtocook/黄焖鸡",
         "name": "黄焖鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/黄焖鸡.jpeg",
@@ -6345,6 +6525,7 @@
         "calculation_text": "- 鸡腿 = 两只\n- 香菇（干香菇最佳）= 5 朵\n- 青椒 = 两个\n- 生姜片 = 两片\n- 干辣椒 = 5，6 个\n- 盐 = 10g\n- 料酒 = 10ml\n- 白胡椒粉 = 5g\n- 白糖 = 5g\n- 酱油 = 5ml\n- 土豆 = 一个（可选，可使汤汁更粘稠）"
       },
       {
+        "id": "howtocook/黄油鸡",
         "name": "黄油鸡",
         "category": "meat_dish",
         "difficulty": 5,
@@ -6395,6 +6576,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：炖\n- 主料：鸡腿肉、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/徽派红烧肉",
         "name": "徽派红烧肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/徽派红烧肉.jpeg",
@@ -6434,6 +6616,7 @@
         "extra_text": "* 葱是整根，不需要切碎\n* 步骤二加盐的目的是锁住五花肉的油脂\n* 制作过程，用部分五花肉做了水煮处理，跟未处理的一起做后续制作，发现未水煮的肉质更 Q 弹"
       },
       {
+        "id": "随便做/回锅肉",
         "name": "回锅肉(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/回锅肉.jpeg",
@@ -6472,6 +6655,7 @@
         "extra_text": "- 燎毛方法：火燎至表皮焦黑，去毛，温水浸泡，钢丝球洗净表皮，即可\n- 煮肉时不能煮太熟，否则炒不出灯盏窝的形状\n- 肉片要切得薄，这样才能煎出卷曲的效果\n- 全程大火快炒，保持肉片的嫩滑和锅气"
       },
       {
+        "id": "howtocook/尖椒炒牛肉",
         "name": "尖椒炒牛肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/尖椒炒牛肉.jpeg",
@@ -6503,6 +6687,7 @@
         "extra_text": "* 腌制可以加入小苏打使牛肉变嫩，牛肉苏打比例为 500g：3g。\n* 腌制的时候姜片可用料酒代替，料酒的用量为 3 g/人"
       },
       {
+        "id": "howtocook/尖叫牛蛙",
         "name": "尖叫牛蛙",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/尖叫牛蛙.jpeg",
@@ -6546,6 +6731,7 @@
         "extra_text": "- 控干水分的时候可以选择漏勺按压\n- 生粉抓揉的时候要均匀覆盖蛙肉"
       },
       {
+        "id": "howtocook/煎烤羊排",
         "name": "煎烤羊排",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/煎烤羊排.jpeg",
@@ -6588,6 +6774,7 @@
         "extra_text": "- 花椒和白芷是这道菜的关键调料，不可缺少。\n- 炖煮时间不宜过长，羊排过于软烂则在煎制时容易碎裂。\n- 煎制时利用羊排自身煎出的油脂来炒香调料，风味更佳。\n- 焯水、炖煮、煎制过程中会产生较多羊油，处理时请注意不要直接倒入下水道，以防堵塞。"
       },
       {
+        "id": "howtocook/简易红烧肉",
         "name": "简易红烧肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/简易红烧肉.jpeg",
@@ -6619,6 +6806,7 @@
         "calculation_text": "每次制作前需要确定计划做几份。一份正好够 2-3 个人吃。\n\n如果只有 1 人食用，可以考虑食材减半。\n\n- 猪五花肉：约 3~4 斤\n- 姜： 6 片\n- 冰糖：15 克（约 7 块）\n- 生抽：10ml\n- 老抽：15ml\n- 料酒：5ml\n- 开水：没过食材的量，需要 600ml-900ml\n- 香叶：3 片\n- 八角：2 个\n- 鹌鹑蛋（可选，没有鹌鹑蛋，可以用同等重量的鸡蛋代替）：0-2 个\n- 豆皮（可选）：0-80g\n- 盐：2-3g"
       },
       {
+        "id": "howtocook/姜炒鸡",
         "name": "姜炒鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/姜炒鸡.jpeg",
@@ -6653,6 +6841,7 @@
         "steps_text": "- 鸡尽量剁成 1cm 的小块，洗净后滤干，再放生抽腌和料酒腌制 30 分钟\n- 大先热锅到微微冒烟，放入食用油，等 5 秒\n- 下入姜片后转中火炒 30 秒，\n- 下入鸡块翻炒 3 分钟，炒干水分，炒出鸡油\n- 放入各种剁碎的辣椒和大蒜子，加盐和老抽继续翻炒 30 秒\n- 倒入啤酒，中小火焖 2 分钟\n- 大火收汁盛盘"
       },
       {
+        "id": "howtocook/姜葱捞鸡",
         "name": "姜葱捞鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/姜葱捞鸡.jpeg",
@@ -6681,6 +6870,7 @@
         "extra_text": "- 参考: 白饭杀手来啦 #姜葱捞鸡-哔哩哔哩"
       },
       {
+        "id": "howtocook/酱牛肉",
         "name": "酱牛肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/酱牛肉.jpeg",
@@ -6717,6 +6907,7 @@
         "extra_text": "- 操作时，需要注意观察沸腾的水位线，如发现低于 2/3 的食材应加热水至没过食材（约每 30 分钟确认一次）。\n- 用保鲜膜紧密包裹牛肉，放入冰箱冷藏数小时，可以使得切片肉质紧实不散。\n- 用牙签或者叉子在牛肉表面扎孔可以破坏筋膜，便于入味。"
       },
       {
+        "id": "howtocook/酱排骨",
         "name": "酱排骨",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/酱排骨.jpeg",
@@ -6755,6 +6946,7 @@
         "extra_text": "* 增加味道的可以考虑加入豆瓣酱、番茄酱等\n* 大火煮时间可以根据每个人情况做调整\n* 煮排骨期间，可以顺道放入 2-3 个 鸡蛋一起煮，做成简易版卤蛋"
       },
       {
+        "id": "howtocook/茭白炒肉",
         "name": "茭白炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/茭白炒肉.jpeg",
@@ -6788,6 +6980,7 @@
         "extra_text": "* 最后一个步骤，可以考虑加蚝油、生抽代替盐上色"
       },
       {
+        "id": "随便做/椒麻腰花",
         "name": "椒麻腰花",
         "category": "meat_dish",
         "difficulty": 4,
@@ -6816,6 +7009,7 @@
         "extra_text": "- 泡猪腰子时，加入啤酒料酒都可以，家中要是都没有，就加入足量的葱姜水\n- 腰骚一定要片干净，否则会很腥\n- 打花刀时深度要掌握好，2/3处为宜\n- 腰子打卷就要立刻下碗芡，不要炒过头"
       },
       {
+        "id": "howtocook/椒盐排条",
         "name": "椒盐排条",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/椒盐排条.jpeg",
@@ -6856,6 +7050,7 @@
         "extra_text": "- 也可以用面包糠代替炸糊，但口感差距很大。\n- 炸糊也可以用来炸鸡腿、炸鱼等。\n- 参考：椒盐排条的做法"
       },
       {
+        "id": "howtocook/芥末罗氏虾",
         "name": "芥末罗氏虾",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/芥末罗氏虾.jpeg",
@@ -6897,6 +7092,7 @@
         "extra_text": "- **注意事项**：\n  1. 黄油入锅后不宜炸制太久，融化翻拌均匀即可烹入碗汁"
       },
       {
+        "id": "随便做/九转大肠",
         "name": "九转大肠",
         "category": "meat_dish",
         "difficulty": 5,
@@ -6928,6 +7124,7 @@
         "extra_text": "- 大肠一般肠头最好，家庭都可以\n- 焯水前一定要把大肠里外的花椒、葱摘干净"
       },
       {
+        "id": "howtocook/咖喱肥牛",
         "name": "咖喱肥牛",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/咖喱肥牛.jpeg",
@@ -6964,6 +7161,7 @@
         "extra_text": "- 咖喱块不用捣碎，直接整块投入即可。\n- 操作时，需要注意搅拌食材，避免食材调味料不均匀。"
       },
       {
+        "id": "howtocook/烤鸡翅",
         "name": "烤鸡翅",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/烤鸡翅.jpeg",
@@ -6995,6 +7193,7 @@
         "extra_text": "- 可以在腌制鸡翅时加入蜂蜜、酱油、姜蒜粉、五香粉等作为调味料，提升口感和香气\n- 烤鸡翅时，建议将烤盘底部垫上一层锡纸，便于清洁烤盘"
       },
       {
+        "id": "随便做/烤羊排",
         "name": "烤羊排",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7023,6 +7222,7 @@
         "extra_text": "- 腌制时间足够才能入味\n- 低温烤制可以保持羊排的水分\n- 高温上色时要注意观察，避免烤焦\n- 最后撒上辣椒酥和葱花增加风味"
       },
       {
+        "id": "随便做/可乐鸡翅",
         "name": "可乐鸡翅(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/可乐鸡翅.jpeg",
@@ -7051,6 +7251,7 @@
         "extra_text": "- 鸡翅打花刀便于入味，焯水可以去除腥味\n- 炖制时间不宜过长，8分钟足够让鸡翅熟透\n- 收汁时要大火，最后的汁要浓稠但不要糊"
       },
       {
+        "id": "howtocook/口水鸡",
         "name": "口水鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/口水鸡.jpeg",
@@ -7089,6 +7290,7 @@
         "extra_text": "- 口水鸡第二种做法待更\n-"
       },
       {
+        "id": "howtocook/辣椒炒肉",
         "name": "辣椒炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/辣椒炒肉.jpeg",
@@ -7127,6 +7329,7 @@
         "extra_text": "**辣椒只能选择青椒，螺丝椒为最优解，切勿选择其他品种辣椒！**"
       },
       {
+        "id": "随便做/辣椒炒肉汤泡饭",
         "name": "辣椒炒肉汤泡饭",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7157,6 +7360,7 @@
         "extra_text": "- 肥肉丁和瘦肉丁要分开炒，肥肉先炼出油再下瘦肉\n- 煨制时间不宜过长，5分钟足够让肉入味\n- 青蒜最后下锅，保持清脆口感"
       },
       {
+        "id": "随便做/辣椒红烧肉",
         "name": "辣椒红烧肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7185,6 +7389,7 @@
         "extra_text": "- 五花肉切块大小要均匀，便于成熟\n- 高压锅压的时间可以根据肉块大小调整\n- 最后翻炒是为了让辣椒和鹌鹑蛋吸收肉汁的味道"
       },
       {
+        "id": "随便做/辣子鸡",
         "name": "辣子鸡",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7221,6 +7426,7 @@
         "extra_text": "- 鸡翅不去皮，炸出来更香\n- 腌制时盐不要太多，后续调味会补\n- 油炸时注意火候，炸至金黄即可\n- 干辣椒炒香后下鸡块，快速翻炒均匀"
       },
       {
+        "id": "随便做/老醋焖肉",
         "name": "老醋焖肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7247,6 +7453,7 @@
         "extra_text": "- 煮肉时一定要筷子能扎透不冒血水再捞出\n- 炖煮时间足够才能让肉质软糯\n- 收汁时要注意不停搅拌避免糊锅"
       },
       {
+        "id": "howtocook/老妈蹄花",
         "name": "老妈蹄花",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/老妈蹄花.jpeg",
@@ -7288,6 +7495,7 @@
         "calculation_text": "- 猪蹄：3 根\n- 白芸豆：200g\n- 当归：2g\n- 白胡椒粉：5g\n- 姜片：30g\n- 当归：2g\n- 蒜末：8g\n- 鸡精：2g\n- 生抽：25g\n- 葱花：10g"
       },
       {
+        "id": "howtocook/老式锅包肉",
         "name": "老式锅包肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/老式锅包肉.jpeg",
@@ -7333,6 +7541,7 @@
         "extra_text": "- **注意事项**：\n  1. 肉片厚度应为 8mm，过厚过薄都会影响口感。\n  2. 炸制时控制油温，避免外壳过深或不酥脆。\n  3. 熬糖醋汁时，注意熬至粘稠但不结块，避免变成糖浆。\n\n- **参考资料**：\n  - 老饭骨版本\n  - 老东北美食版本"
       },
       {
+        "id": "howtocook/冷吃兔",
         "name": "冷吃兔",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/冷吃兔.jpeg",
@@ -7376,6 +7585,7 @@
         "extra_text": "在操作的第 6 步骤中要注意：油量应该淹没兔肉，若未淹没需要及时补充。\n\n在操作的第 7 步骤中要注意：辣椒极容易炸糊，炸糊会变成黑色，这个过程非常快，所以一定要小火，基本等到没太多水气蒸发时，就可以下兔肉了。"
       },
       {
+        "id": "howtocook/利提巧卡",
         "name": "利提巧卡",
         "category": "meat_dish",
         "difficulty": 7,
@@ -7425,6 +7635,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：烤\n- 主料：全麦面粉、烤鹰嘴豆粉、茄子、番茄、土豆、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/荔枝肉",
         "name": "荔枝肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/荔枝肉.jpeg",
@@ -7466,6 +7677,7 @@
         "extra_text": "* 更多情况下，福州当地会选用马蹄（解腻）和马铃薯（洗油），因为疫情期间买不到，所以选用了凤梨\n* 闽菜以甜为主，如果吃不惯的可以放弃白糖\n* 可以通过勺子敲打瘦肉块，听到声响来判断是否炸透瘦肉"
       },
       {
+        "id": "howtocook/凉拌鸡丝",
         "name": "凉拌鸡丝",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/凉拌鸡丝.jpeg",
@@ -7500,6 +7712,7 @@
         "extra_text": "- 这道菜是隔离期间用现有材料做的，有条件可以加入香菜、小葱等进行调味，喜欢吃辣的可以加入辣椒油"
       },
       {
+        "id": "howtocook/卤菜",
         "name": "卤菜",
         "category": "meat_dish",
         "difficulty": 3,
@@ -7544,6 +7757,7 @@
         "extra_text": "- 卤水可另取一部分做牛肉面，作为白水面条的汤底，再加上自己喜欢的蔬菜，味道极佳。\n\n\n\n卤水："
       },
       {
+        "id": "howtocook/萝卜炖羊排",
         "name": "萝卜炖羊排",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/萝卜炖羊排.jpeg",
@@ -7580,6 +7794,7 @@
         "extra_text": "- 操作时，需要注意观察沸腾的水位线，如发现低于 2/3 的食材应加热水至没过食材。"
       },
       {
+        "id": "随便做/麻辣香锅",
         "name": "麻辣香锅(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/麻辣香锅.jpeg",
@@ -7611,6 +7826,7 @@
         "extra_text": "- 加入火锅底料时，锅边一冒烟赶紧离火翻炒，否则会糊锅\n- 食材可根据个人喜好自由搭配\n- 辣度可根据干辣椒的用量自行调整"
       },
       {
+        "id": "howtocook/蚂蚁上树",
         "name": "蚂蚁上树",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/蚂蚁上树.jpeg",
@@ -7647,6 +7863,7 @@
         "extra_text": "- 粉丝不建议煮太久，易断且口感变差；若时间过长汤汁应适当减少\n- 郫县豆瓣酱含盐量较高，可根据口味酌情减少生抽用量\n- 可加入 0.5g 白胡椒粉调味，风味更佳"
       },
       {
+        "id": "随便做/梅菜扣肉",
         "name": "梅菜扣肉(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/梅菜扣肉.jpeg",
@@ -7683,6 +7900,7 @@
         "extra_text": "- 五花肉要煮到筷子能轻松扎透但不能煮过头\n- 梅干菜一定要炒干水分才能充分吸收肉汁的香味\n- 保鲜膜一定要封严实，防止蒸汽进入\n- 蒸制时间要足够，这样才能达到入口即化的口感"
       },
       {
+        "id": "howtocook/奶酪培根通心粉",
         "name": "奶酪培根通心粉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/奶酪培根通心粉.jpeg",
@@ -7721,6 +7939,7 @@
         "extra_text": "本料理及其不健康，有大约 1300 大卡，80g 脂肪，不建议常吃。"
       },
       {
+        "id": "howtocook/南派红烧肉",
         "name": "南派红烧肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -7748,6 +7967,7 @@
         "steps_text": "建议在此之前查看炒糖色教程\n\n- `猪五花肉`切大块（约 4.5cm ）\n- `生姜`切片（每片厚度约 3mm ）\n- `开水`烧开\n- `凉水`自来水即可\n- `小葱`小葱白色的部分`葱白`切成小段（小葱最佳，大葱也可以）\n- `蒜`中间切开，不要拍扁，否则难以捞出以至最后`收汁`时影响味道\n- 建议先拿出来一半葱姜，再将剩下的`生姜、葱白、蒜、花椒、八角、香叶`提前放入一个碗中备用\n- 凉水锅中放入切好的五花肉，加入料酒与 2/5 葱姜，煮 15 分钟去掉血腥，捞出来后洗干净；\n- 炒糖色，注意采用其中提到的操作 2 来制作糖色。\n- 将准备好的`生姜、葱白、蒜、花椒、八角、香叶`还有`五花肉`倒入锅中`大火`翻炒，期间加入至闻到香味，倒入开水至没过全部肉炖煮 50 分钟-60 分钟\n  - 高压锅的话 40 分钟；\n- 加入 10ml 料酒；\n- 盖上锅盖煮至沸腾后，每隔 25 分钟打开盖子将浮在表面的油和沫捞出；\n- 当水的高度减至肉最高的高度与锅底高度的 3/5 时，转中火，并捞出除肉和水以外的所有辅料，开始收汁；\n- 打开锅盖，待汤汁快没有的时粘稠状出锅（切记不可收干）；"
       },
       {
+        "id": "howtocook/牛排",
         "name": "牛排",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/牛排.jpeg",
@@ -7787,6 +8007,7 @@
         "calculation_text": "每次制作前需要确定计划做几份。一份正好够 2 个人吃。\n\n每份：\n\n- 牛排 450-500g（两片牛排）\n- 黑胡椒粉 2g\n- 盐 5g\n- 大蒜 1 个（约 25-30g，实际用量约为 5-10g）\n- 橄榄油 10-15ml\n- 黄油 20-25g\n- 口蘑 5-10 个\n- 小土豆 5-10 个（每个约 20g）\n- 小番茄 5-10 个（每个约 15g）\n- 百里香 2g（若使用新鲜百里香枝条，取 3-6 根，每根约 10cm 长即可）"
       },
       {
+        "id": "howtocook/农家一碗香",
         "name": "农家一碗香",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/农家一碗香.jpeg",
@@ -7823,6 +8044,7 @@
         "extra_text": "+ 如果第一次炒鸡蛋的时候放的油太多，炒猪肉的时候可以视情况不加油。\n+ 参考资料下厨房"
       },
       {
+        "id": "随便做/糯香猪手",
         "name": "糯香猪手",
         "category": "meat_dish",
         "difficulty": 4,
@@ -7850,6 +8072,7 @@
         "extra_text": "- **红曲米务必捞出**：红曲米不能放入高压锅，否则会影响口感和成品美观。\n- **油炸温度控制**：油温控制在200度左右，筷子插入有细小泡泡时下锅，炸30-45秒至表面微黄酥脆即可，不可炸太久以免猪蹄变硬。\n- **玉米淀粉薄层**：拍粉要薄，均匀覆盖即可，不要太厚影响口感。\n- **辣椒酥最后加**：辣椒酥需要在关火后加入，利用余温煸炒出水汽，保持酥脆口感。"
       },
       {
+        "id": "随便做/皮蛋肉丸",
         "name": "皮蛋肉丸",
         "category": "meat_dish",
         "difficulty": 2,
@@ -7880,6 +8103,7 @@
         "extra_text": "- 肉馅要摔打上劲，口感更好\n- 蒸丸子的时候可以在盘子里倒一点蒸鱼豉油或者酱油兑水\n- 皮蛋碎要裹均匀，确保每个丸子都有\n- 高压锅上汽后蒸14分钟即可"
       },
       {
+        "id": "howtocook/啤酒鸭",
         "name": "啤酒鸭",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/啤酒鸭.jpeg",
@@ -7923,6 +8147,7 @@
         "extra_text": "- 啤酒的量一定要足够把所有鸭肉没过，啤酒最好选择清香型的。"
       },
       {
+        "id": "howtocook/黔式腊肠娃娃菜",
         "name": "黔式腊肠娃娃菜",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/黔式腊肠娃娃菜.jpeg",
@@ -7952,6 +8177,7 @@
         "extra_text": "- 根据锅的大小，建议以水量没过食材为宜，宁多勿少\n- 如果没有刀具，娃娃菜和腊肠不切也可以"
       },
       {
+        "id": "随便做/青椒炒肉丝",
         "name": "青椒炒肉丝",
         "category": "meat_dish",
         "difficulty": 1,
@@ -7979,6 +8205,7 @@
         "extra_text": "- 大火快炒可以保持青椒脆嫩\n- 肥瘦肉丝煸炒时会有油脂析出，可以省去额外加油"
       },
       {
+        "id": "howtocook/青椒土豆炒肉",
         "name": "青椒土豆炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/青椒土豆炒肉.jpeg",
@@ -8015,6 +8242,7 @@
         "steps_text": "- 青椒去除根蒂切小块，土豆去皮切 2mm 薄片，猪肉切 4mm 薄片，葱横纵切 3mm 小段，姜蒜去皮拍散剁碎末；土豆淀粉加入约 15g 水搅拌均匀至水淀粉。\n- 起锅烧油，加热至 7 成热放入猪肉片，缓缓翻滚炒至去肉红色，加入约 3ml 酱油，翻炒肉片均匀上色，放入约 2g 盐。\n- 转 5 成油温，加入葱姜蒜炒 5 秒，然后加入土豆片，转 7 成油温均匀翻炒，加入加入约 5ml 酱油和 2g 盐，炒至土豆断生，表面轻微焦黄。\n- 转 8 成油温加入青椒，大火煸炒出锅气（有白烟冒出），反复均匀翻炒 1 分钟上色，最后在锅周围倒入水淀粉转 4 成火勾芡。\n- 在外观*呈粘稠状态*后关火，盛盘"
       },
       {
+        "id": "随便做/清炖狮子头",
         "name": "清炖狮子头",
         "category": "meat_dish",
         "difficulty": 3,
@@ -8048,6 +8276,7 @@
         "extra_text": "- 这个汤很鲜，狮子头吃完后煮白菜豆腐也很好吃，也可以用来涮火锅\n- 肥瘦比一定要四六或者三七，太瘦了口感不好\n- 一个狮子头大约65克"
       },
       {
+        "id": "随便做/清炖羊肉",
         "name": "清炖羊肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -8073,6 +8302,7 @@
         "extra_text": "- 萝卜削皮时要把白圈以外的部分都削干净，否则会有萝卜的臭味\n- 羊肉清洗要彻底，血水含量太高会让肉发黑\n- 高压锅开盖时要注意安全"
       },
       {
+        "id": "howtocook/清蒸鳜鱼",
         "name": "清蒸鳜鱼",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/清蒸鳜鱼.jpeg",
@@ -8108,6 +8338,7 @@
         "extra_text": "- **注意事项**：\n  1. 鳜鱼背部鱼鳍容易伤人，处理时候需要注意，最好用剪刀剪掉\n  2. 蒸制时间需要根据鱼的大小调整，蒸鱼的关键在于水多汽大火足"
       },
       {
+        "id": "howtocook/肉饼炖蛋",
         "name": "肉饼炖蛋",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/肉饼炖蛋.jpeg",
@@ -8143,6 +8374,7 @@
         "extra_text": "- 在取出肉饼炖蛋时，注意盘子很烫，请小心操作。"
       },
       {
+        "id": "随便做/三不沾",
         "name": "三不沾",
         "category": "meat_dish",
         "difficulty": 4,
@@ -8173,6 +8405,7 @@
         "extra_text": "- 全程需要不断翻炒和揉制，是一道需要耐心和体力的功夫菜\n- 火候控制很重要，快要冒烟时要赶紧离火\n- 操作时用手感判断鸡蛋团的状态"
       },
       {
+        "id": "howtocook/杀猪菜",
         "name": "杀猪菜",
         "category": "meat_dish",
         "difficulty": 4,
@@ -8208,6 +8441,7 @@
         "steps_text": "- 血肠用牙签多扎一些小孔，然后放水中小火煮十分钟，不要让水烧开，保持 80 度，否则血肠非常容易爆开。\n- 煮好的血肠切块备用。\n- 排骨放料酒焯水，控干水分备用。\n- 锅内放入菜籽油，放蒜瓣，干辣椒，姜粉炒香。\n- 放入排骨翻炒至表面金黄。\n- 酸菜洗净拧干水分，放入锅中，加入香油翻炒，香油可以更好的去除酸味而且让酸菜更香，大火翻炒二分钟。\n- 加入 600 毫升热水。\n- 转入电压力锅，加香叶，八角，葱结，盐。\n- 浓香模式压 40 分钟。\n- 到时间后放气开盖。加入血肠和枸杞，盖上锅盖焖二分钟即可，血肠是熟的，不需再加热。\n- 倒入盆中，按照上表调制蘸料，即可开吃。"
       },
       {
+        "id": "howtocook/山西过油肉",
         "name": "山西过油肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/山西过油肉.jpeg",
@@ -8253,6 +8487,7 @@
         "extra_text": "- 炸肉片时，表面微焦即可，注意控制火候。\n- 起锅前也可以打个薄薄的水淀粉，口感更佳。"
       },
       {
+        "id": "howtocook/商芝肉",
         "name": "商芝肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/商芝肉.jpeg",
@@ -8298,6 +8533,7 @@
         "extra_text": "- 商芝属于小地方不特别有名的特产，至少本人在其他地方没有见到过，在制作时可换成其他蕨类蔬菜。"
       },
       {
+        "id": "随便做/烧椒猪肝",
         "name": "烧椒猪肝",
         "category": "meat_dish",
         "difficulty": 3,
@@ -8342,6 +8578,7 @@
         "extra_text": "- 猪肝切片要薄且均匀，这样成熟度一致\n- 线椒干煸时要有耐心，要煸到表面出现虎皮色才能出香味\n- 猪肝下锅后大火快炒，保持嫩滑的口感"
       },
       {
+        "id": "howtocook/瘦肉土豆片",
         "name": "瘦肉土豆片",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/瘦肉土豆片.jpeg",
@@ -8374,6 +8611,7 @@
         "extra_text": "- 土豆片焯水注意不宜太久，防止土豆片变软\n- 腌制瘦肉要搅拌均匀"
       },
       {
+        "id": "随便做/水煮牛肉",
         "name": "水煮牛肉(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/水煮牛肉.jpeg",
@@ -8424,6 +8662,7 @@
         "extra_text": "- 煮完的汤可以下面条，非常好吃\n- 牛肉切片要薄，这样腌制时更容易入味\n- 下牛肉片时一定要等锅开，保持大火\n- 最后浇油的油温要够高，才能激发出香味"
       },
       {
+        "id": "howtocook/水煮肉片",
         "name": "水煮肉片",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/水煮肉片.jpeg",
@@ -8477,6 +8716,7 @@
         "extra_text": "- 垫底的蔬菜根据自己口味选择（蘑菇、白菜、油麦菜等）。\n- 刀口辣椒制作嫌麻烦也可以直接用干辣椒段和青花椒代替。\n- 特别注意肉的腌制（搅拌的时候朝着一个方向、血水处理干净），保证肉滑嫩（鸡蛋清、淀粉搅拌均匀）。\n- 水煮牛肉也可以按照这个做法。"
       },
       {
+        "id": "随便做/酸汤肥牛",
         "name": "酸汤肥牛",
         "category": "meat_dish",
         "difficulty": 3,
@@ -8505,6 +8745,7 @@
         "extra_text": "- 鸡汤吊法：鸡1800g，水10斤，高压锅内50min\n- 鸡蛋高汤：鸡蛋油里煸熟，加热水大火滚至浓白\n- 肥牛焯水时放白醋可以去腥\n- 南瓜茸主要用于上色，使汤呈金黄色"
       },
       {
+        "id": "howtocook/蒜苔炒肉末",
         "name": "蒜苔炒肉末",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/蒜苔炒肉末.jpeg",
@@ -8536,6 +8777,7 @@
         "extra_text": "- 加入食盐前可尝一下咸淡，自行决定是否增减盐量\n- 选用五花肉薄片是因为切肉简单且不用腌制即可入味"
       },
       {
+        "id": "随便做/隋式酱牛肉",
         "name": "隋式酱牛肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -8576,6 +8818,7 @@
         "extra_text": "- 可以拌面食用，风味更佳\n- 腌制时间越长越入味，建议腌制2小时以上\n- 牛肉扎孔有助于调料渗透\n- 卤汤可以重复使用，越老越香"
       },
       {
+        "id": "howtocook/台式卤肉饭",
         "name": "台式卤肉饭",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/台式卤肉饭.jpeg",
@@ -8620,6 +8863,7 @@
         "extra_text": "- 对于五花肉切条步骤，定义：五花肉带皮面向上摆在桌上，此时肉皮所在平面为长宽形成的平面，垂直此平面的为高。肉条最终效果是肥瘦相间的细长条。（注意：此处肉条一定要细，即长宽较小。细肉条更易于炖煮软糯）。\n- 五花肉切条小技巧：\n  - 若五花肉是**未冷冻**的，可以放入冰箱**冷冻室 30 分钟** 再取出切条。\n  - 若是**冷冻五花肉**，可以在**常温**下放置 **30 分钟** 后再切条。\n  - 切条时可以较小的力度将刀刃与肉快速摩擦，如此更易于切割并保护五花肉肥瘦相间的结构。"
       },
       {
+        "id": "随便做/抬格子",
         "name": "抬格子",
         "category": "meat_dish",
         "difficulty": 2,
@@ -8650,6 +8894,7 @@
         "extra_text": "- 五花肉要选肥一点的，口感更好\n- 榨广椒与肉的比例是1:2，不要放太多\n- 蒸制时间要够，确保肉和排骨熟透"
       },
       {
+        "id": "随便做/糖醋里脊",
         "name": "糖醋里脊(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/糖醋里脊.jpeg",
@@ -8681,6 +8926,7 @@
         "extra_text": "- 糊的比例很重要，红薯淀粉：低筋面粉=3:1\n- 炸制时油温要控制好，五成油温下锅\n- 复炸可以增加酥脆度\n- 糖醋汁要提前调好"
       },
       {
+        "id": "随便做/糖醋排骨",
         "name": "糖醋排骨(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/糖醋排骨.jpeg",
@@ -8710,6 +8956,7 @@
         "extra_text": "- 排骨要炸至金黄酥脆，不能炸得太久否则会干柴\n- 收汁时火要大，不断翻炒避免糊锅\n- 最后烹醋可以增加酸味层次"
       },
       {
+        "id": "howtocook/甜辣烤全翅",
         "name": "甜辣烤全翅",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/甜辣烤全翅.jpeg",
@@ -8752,6 +8999,7 @@
         "extra_text": "- 本例中鸡全翅口感为微辣，需增加辣度请增加辣椒粉用量，但不宜超过 30g\n- 鸡全翅指包含翅尖，翅中和翅根的鸡翅\n- 本品效果微焦，如不喜欢焦褐色外观可 不向锡纸盘中倒入残余酱汁并 每面只烤制 20 分钟\n- 实际烤制效果请根据自己空气炸锅的功率判断\n- 甜椒粉起增加色泽和风味作用，本身不能作为辣味剂\n- 腌制时间可自由掌控，建议在 60 分钟到 180 分钟之间为宜\n- 刚出锅的锡纸盘比较烫，请用夹子夹取或使用湿抹布之类的隔热材料拿取"
       },
       {
+        "id": "随便做/土豆炖牛肉",
         "name": "土豆炖牛肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -8794,6 +9042,7 @@
         "extra_text": "- 牛肉一定要冷水下锅焯水，这样才能充分去除血沫\n- 土豆切好后不要浸泡太久，否则炖的时候会太软烂\n- 高压锅上汽后25分钟即可，炖太久肉会太烂\n- 土豆要在牛肉快熟时加入，炖5分钟即可"
       },
       {
+        "id": "howtocook/土豆炖排骨",
         "name": "土豆炖排骨",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/土豆炖排骨.jpeg",
@@ -8834,6 +9083,7 @@
         "extra_text": "这道菜难度系数简单，对新手友好，超级下饭"
       },
       {
+        "id": "随便做/团圆十锦",
         "name": "团圆十锦",
         "category": "meat_dish",
         "difficulty": 4,
@@ -8887,6 +9137,7 @@
         "extra_text": "- 干香菇需要提前泡发\n- 鸡汤制作方法：整鸡洗净，取下鸡腿，其余剁块，焯水，入高压锅加水，压50分钟，取出煮熟的整鸡腿，大火把鸡汤烧开，五分钟至汤浓即可（鸡汤中香菇可加可不加）\n- 摆盘时要按顺序排列，才能呈现美观的效果\n- 食材不一定要完全相同，可以根据季节和喜好调整"
       },
       {
+        "id": "随便做/万能辣卤",
         "name": "万能辣卤",
         "category": "meat_dish",
         "difficulty": 4,
@@ -8938,6 +9189,7 @@
         "extra_text": "- 所有肉类食材都需要提前焯水去除血沫\n- 素菜最后放入，煮2分钟即可，保持脆嫩口感\n- 卤好的食材泡在卤汁中过夜会更入味\n- 卤水可以重复使用，每次使用后要补调料"
       },
       {
+        "id": "howtocook/无骨鸡爪",
         "name": "无骨鸡爪",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/无骨鸡爪.jpeg",
@@ -8981,6 +9233,7 @@
         "extra_text": "- 操作时，需要注意观察沸腾的水位线，如发现低于 3/4 的食材应加热水至没过食材。\n- 鸡爪去骨教程 ：bili_89324373958"
       },
       {
+        "id": "howtocook/西红柿牛腩",
         "name": "西红柿牛腩",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/西红柿牛腩.jpeg",
@@ -9014,6 +9267,7 @@
         "extra_text": "- 用火注意安全、用火注意安全、用火注意安全\n- 用砂锅/铝锅炖肉时，水开后转中小火/小火，使用高压锅见学习使用压力锅\n- 教程中的番茄去皮方式是目前为止本人实践最快的方式\n- 绝对不用番茄酱和少加佐料，尽可能还原食材的原味"
       },
       {
+        "id": "howtocook/西红柿土豆炖牛肉",
         "name": "西红柿土豆炖牛肉",
         "category": "meat_dish",
         "difficulty": 4,
@@ -9056,6 +9310,7 @@
         "extra_text": "- 炖煮时保证汤加入的时候是温热的\n- 炖煮时不要扣盖否则土豆会烂\n- 炖煮时时不时翻动避免糊底\n- 砂锅炖煮会更好吃，可以在炒锅里炒完倒到煮锅里炖，如果用砂锅开锅之前不要用大火避免裂开\n- 酱油总量不要太多，汤汁浓缩的时候会变咸，稀的时候稍微淡点没事，炖煮时候觉得不够也可以再加酱油\n- 不要用鸡精味精，会抢夺牛肉的鲜味"
       },
       {
+        "id": "howtocook/乡村啤酒鸭",
         "name": "乡村啤酒鸭",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/乡村啤酒鸭.jpeg",
@@ -9095,6 +9350,7 @@
         "extra_text": "- 操作时，需要注意观察沸腾的水位线，如发现低于 2/3 的食材应加热水或者加啤酒。\n\n- 厨师长：用土灶烧“乡村啤酒鸭”，味道安逸得不摆了"
       },
       {
+        "id": "howtocook/香干芹菜炒肉",
         "name": "香干芹菜炒肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9136,6 +9392,7 @@
         "extra_text": "- 如果没有买到香芹，或者用的芹菜比较粗，可以考虑焯水，放入滚水中 1 分钟捞出，冷水冲洗（保持爽脆）\n- 如果买到的豆干比较硬、紧实，也可以切条后再焯水\n- 香干芹菜炒肉教程"
       },
       {
+        "id": "howtocook/香干肉丝",
         "name": "香干肉丝",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/香干肉丝.jpeg",
@@ -9169,6 +9426,7 @@
         "extra_text": "**辣椒选择青椒，螺丝椒为最优解，喜欢辣的可以加入小米椒切细碎，同青椒一起加入！**"
       },
       {
+        "id": "howtocook/香菇滑鸡",
         "name": "香菇滑鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/香菇滑鸡.jpeg",
@@ -9199,6 +9457,7 @@
         "extra_text": "- 鸡腿去骨操作较复杂，本人经验可供参考：\n  - 鸡腿于案板摆正，**骨头正对程序员**，从头部划一刀至最底部，刀口要深，确保有碰到骨头\n  - 用手扒拉肉到两边\n  - 用刀尖隔开骨头上沾着的肉\n  - 鸡腿翻面，刀紧贴骨头插入，挑断骨头与肉的连接点\n  - 用刀尖切断最后的粘连即可"
       },
       {
+        "id": "howtocook/香煎五花肉",
         "name": "香煎五花肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/香煎五花肉.jpeg",
@@ -9230,6 +9489,7 @@
         "extra_text": "- 操作时，小心被溅出的油烫到"
       },
       {
+        "id": "howtocook/香辣鸡爪煲",
         "name": "香辣鸡爪煲",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/香辣鸡爪煲.jpeg",
@@ -9272,6 +9532,7 @@
         "steps_text": "- 给鸡爪剪去指甲。如果买的鸡爪只有脚掌部分，对半切开即可。 如果是整只鸡爪，需要去骨。清水洗干净。\n- 鸡爪冷水下锅，葱姜料酒焯水，水开，撇去浮沫。\n- 加入香叶、八角、生抽、老抽，盖盖小火慢煮三十分钟。\n  \n- 捞出鸡爪，留一碗鸡汤备用。\n- 起锅烧油，用小火炒香姜末、蒜末、小米椒，能吃辣再放点辣椒面。加入生抽、老抽、蚝油、五香粉、盐，炒出酱香味。\n- 放入鸡爪，放一点盐调味，翻炒一两分钟，再倒入鸡汤，边炒边搅动。\n- 放入鸡精提鲜，撒入葱段搅拌均匀即可出锅。\n\n注：如果需要加入配菜，请在放入鸡爪之前，底料炒香之后执行。"
       },
       {
+        "id": "howtocook/湘祁米夫鸭",
         "name": "湘祁米夫鸭",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/湘祁米夫鸭.jpeg",
@@ -9310,6 +9571,7 @@
         "extra_text": "这是一道家乡菜。\n鸭子品种不限，这里买的是水鸭，价格 24。\n蒸 20 分钟，是老鸭的话，蒸一个小时以上。\n第一步中粘米粉是主要的粉子，糯米粉是加软糯口感，蒸肉粉是加五香味道，辣椒粉和胡椒粉是加复合香味。\n\n下面贴出重要步骤以供参考："
       },
       {
+        "id": "howtocook/小炒黄牛肉",
         "name": "小炒黄牛肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/小炒黄牛肉.jpeg",
@@ -9342,6 +9604,7 @@
         "extra_text": "- 操作时，全程需要开大火"
       },
       {
+        "id": "howtocook/小炒鸡肝",
         "name": "小炒鸡肝",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/小炒鸡肝.jpeg",
@@ -9374,6 +9637,7 @@
         "extra_text": "- 焯水时，需要注意观察沸腾的水位线，不要让水溢出避免发生危险。\n- 焯完水的鸡肝建议用凉水冲洗，更推荐冰水，可以让口感更好。"
       },
       {
+        "id": "howtocook/小炒肉",
         "name": "小炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/小炒肉.jpeg",
@@ -9409,6 +9673,7 @@
         "steps_text": "- 五花肉切片\n- 把肉放入器皿内，加入淀粉、老抽、盐搅拌腌制半小时\n- 葱切段\n- 小米椒、朝天椒斜刀切好\n- 热锅、倒油\n- 油热后加入五花肉煸炒。炒至变色后盛出来\n- 向锅中加蒜，煸出香味，加入豆豉，翻炒均匀\n- 加入豆瓣酱翻炒均匀\n- 加入炒好的五花肉继续的翻炒均匀\n- 加入小米椒、朝天椒、葱段翻炒 40 秒\n- 出锅。"
       },
       {
+        "id": "howtocook/小米辣炒肉",
         "name": "小米辣炒肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/小米辣炒肉.jpeg",
@@ -9450,6 +9715,7 @@
         "extra_text": "**调料可以根据自己的喜好放，也可以加老抽，老抽更香！**"
       },
       {
+        "id": "howtocook/小酥肉",
         "name": "小酥肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9494,6 +9760,7 @@
         "extra_text": "- 裹粉一定要把红薯粉揉散，不要有干的颗粒裹在里面，否则会炸！！！\n- 如果肉太多吃不完，可以只炸一遍然后放冰箱。后面再吃的时候拿出来复炸，口感基本没影响。"
       },
       {
+        "id": "howtocook/新疆大盘鸡",
         "name": "新疆大盘鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/新疆大盘鸡.jpeg",
@@ -9523,6 +9790,7 @@
         "steps_text": "- 肉先剁好，块状，用清水+盐浸泡 5 分钟，去除血水，去腥，然后空干水\n- 葱蒜辣椒土豆等洗干净，土豆削皮\n- 葱白切长段，长度 4cm 一段，菜椒和线椒切块状\n- 土豆切成滚刀土豆，即切一刀动滚动一下，一块土豆大概有 4cm*4cm 大小即可\n- 炒糖色：先将油加入锅中，然后将白砂糖放入，用锅铲来回搅拌，将糖炒化，然后炒出焦黄色，此时将空干水的鸡肉倒入锅中翻炒，进行上色\n- 放入花椒，香叶，香果，干线椒等进行翻炒\n- 放入 5g 盐，生抽 7ml，蚝油 10g ，料酒 100g，倒入 1 升清水，料酒可以用啤酒代替\n- 调至中火，将水烧开，调制中小火慢炖入味\n- 当水收至鸡肉即将露出时，将土豆放在锅表面：注意不要翻动土豆，就盖在表面，不然翻到下面容易粘锅，继续盖锅盖炖，炖一会后将大葱，菜椒和甜椒放入，继续炖。\n- 炖到汁收的差不多时可以进行翻面，将土豆与汤汁相吸，最后关火盛出。\n\n**另：此做法可以吃面，买粗面剂子，将粗面剂子压扁，然后用手拉成宽面，一定要是宽面，下好后可以放入到大盘鸡中，与汤汁搅拌味道极佳！**"
       },
       {
+        "id": "howtocook/血浆鸭",
         "name": "血浆鸭",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/血浆鸭.jpeg",
@@ -9560,6 +9828,7 @@
         "extra_text": "- 操作时，需要注意观察水位线，调整炉火大小，以防水烧干粘锅。\n- 放入鲜鸭血时，需要不断翻炒搅拌，防止鸭血抱团凝固成块。"
       },
       {
+        "id": "随便做/熏酱猪蹄",
         "name": "熏酱猪蹄",
         "category": "meat_dish",
         "difficulty": 5,
@@ -9592,6 +9861,7 @@
         "extra_text": "- 高压锅吊鸡汤：鸡1800g，水10斤，高压锅内50min\n- 熏制时火候控制很重要，烟变黄时立即盖盖\n- 熏好的肉抹香油可以增加光泽和保护色"
       },
       {
+        "id": "howtocook/羊排焖面",
         "name": "羊排焖面",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/羊排焖面.jpeg",
@@ -9628,6 +9898,7 @@
         "extra_text": "(和面小指南 之 材料）\n\n- 中筋面粉 300 g\n- 盐 3 g\n- 水 180 ml\n\n(和面小指南 之 操作）\n\n- 先把材料混合均匀，加水边和边搅拌，然后把面团和到光滑\n- 醒面（ 10 分钟）\n- 再次和面到光滑\n- 醒面（ 5 分钟）\n- 把面团揉成条，切成 6 到 8 个小剂子\n- 抹上油，等待 5 分钟\n- 把面团剂子擀成面皮\n- 放入锅中焖煮 4 分钟（一片一片操作）"
       },
       {
+        "id": "随便做/羊肉捞面",
         "name": "羊肉捞面",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9653,6 +9924,7 @@
         "extra_text": "- 一定要买小羊，小羊膻味小、肉质嫩\n- 烹炒羊肉时加入的两片姜是去腥的\n- 煸炒羊肉一定不能盖盖儿，切记\n- 面条可根据个人喜好选择其他种类"
       },
       {
+        "id": "howtocook/洋葱炒猪肉",
         "name": "洋葱炒猪肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/洋葱炒猪肉.jpeg",
@@ -9683,6 +9955,7 @@
         "extra_text": "- 猪肉可选猪肩肉片或是切好的肉丝看个人喜好"
       },
       {
+        "id": "howtocook/意式烤鸡",
         "name": "意式烤鸡",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/意式烤鸡.jpeg",
@@ -9714,6 +9987,7 @@
         "extra_text": "- 烤制时可以将鸡肉淋上蜂蜜或其他烤肉酱提升口感\n- 烤箱预热至 180 度，烤制时间根据鸡肉的大小和厚度而定，需确保鸡肉熟透\n- 鸡肉必须全熟才能吃，吃未全熟的鸡肉可能会导致食物中毒和感染细菌，如沙门氏菌和福氏杆菌等。"
       },
       {
+        "id": "howtocook/意式香肠北非蛋",
         "name": "意式香肠北非蛋",
         "category": "meat_dish",
         "difficulty": 5,
@@ -9755,6 +10029,7 @@
         "extra_text": "- 菜系：意式\n- 烹饪方式：炖\n- 主料：意式猪肉香肠、鸡蛋、拿坡里意面酱、\n- 来源：howtocook"
       },
       {
+        "id": "随便做/樱桃肉",
         "name": "樱桃肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9788,6 +10063,7 @@
         "extra_text": "- 五花肉要切得大小均匀，便于成熟一致\n- 红曲米上色后要捞出，否则会有苦味\n- 炒糖色火候要小，避免焦苦\n- 收汁时要不断翻动，避免糊锅"
       },
       {
+        "id": "随便做/油爆双脆",
         "name": "油爆双脆",
         "category": "meat_dish",
         "difficulty": 4,
@@ -9815,6 +10091,7 @@
         "extra_text": "- 猪肚和鸡胗的下锅时间不同，鸡胗先下锅2秒再下猪肚\n- 花刀要打得均匀细密才能呈现漂亮形状\n- 火候是这道菜的关键，大火快炒才能保证脆嫩\n- 碗芡提前兑好，爆炒时来不及调味"
       },
       {
+        "id": "随便做/油焖鸡",
         "name": "油焖鸡",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9852,6 +10129,7 @@
         "extra_text": "- 土豆煮软后再下锅，口感更好\n- 小米辣的用量可根据个人口味调整\n- 番茄酱可选，增加酸甜口感"
       },
       {
+        "id": "随便做/鱼香肉丝",
         "name": "鱼香肉丝(随便做)",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/鱼香肉丝.jpeg",
@@ -9882,6 +10160,7 @@
         "extra_text": "- 家中如果有小苏打，一斤肉加入1g小苏打，浆完放置一小时再滑油，滑完的肉丝就会很饱满\n- 肉丝腌制时要搅拌至表面有黏滑感才能加水\n- 滑油时油温不能太高，以免肉丝粘连"
       },
       {
+        "id": "随便做/枣香红烧肉",
         "name": "枣香红烧肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9915,6 +10194,7 @@
         "extra_text": "- 炒糖色时火候要控制好，糖溶化后要密切观察颜色变化\n- 高压锅压好后可以在汤汁中浸泡更长时间，更加入味\n- 红枣最后要和肉一起收汁，让枣香充分融入肉中"
       },
       {
+        "id": "随便做/炸萝卜丸子",
         "name": "炸萝卜丸子",
         "category": "meat_dish",
         "difficulty": 2,
@@ -9950,6 +10230,7 @@
         "extra_text": "- 萝卜丝焯水后要控干水分，否则脆炸粉挂不住\n- 萝卜丝和粉混合时要反复揉搓，确保根根分明\n- 油温控制在中火，避免外焦里生\n- 趁热食用口感最佳，也可冷冻保存再加热"
       },
       {
+        "id": "随便做/炸酥肉",
         "name": "炸酥肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -9979,6 +10260,7 @@
         "extra_text": "- 挂糊要均匀，肉若隐若现即可\n- 如果下锅起大泡说明糊中油少或挂糊太厚\n- 复炸一遍可以使外皮更酥脆\n- 炸好的酥肉可以直接吃，也可以用于火锅、炖菜等"
       },
       {
+        "id": "随便做/芝士菠萝咕咾肉",
         "name": "芝士菠萝咕咾肉",
         "category": "meat_dish",
         "difficulty": 3,
@@ -10020,6 +10302,7 @@
         "extra_text": "- 五花肉如果太软可以冷冻后再切，更容易操作\n- 芝士球大小要均匀，确保成熟一致\n- 油炸时油温要控制好，五成油温最佳\n- 糖醋汁的口味可以根据个人喜好调整酸甜比例"
       },
       {
+        "id": "howtocook/枝竹羊腩煲",
         "name": "枝竹羊腩煲",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/枝竹羊腩煲.jpeg",
@@ -10070,6 +10353,7 @@
         "extra_text": "- 此菜属于粤菜，正宗做法多会添加马蹄。考虑到萝卜青菜各有所爱，也可根据个人口味替换成土豆、萝卜等其他食材\n- 参考资料：[枝竹羊腩煲 Lamb Stew with Bean Curd Sheet [by 點Cook Guide]](https://www.youtube.com/watch?v=ThVDpVoToDQ)"
       },
       {
+        "id": "howtocook/猪皮冻",
         "name": "猪皮冻",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/猪皮冻.jpeg",
@@ -10097,6 +10381,7 @@
         "extra_text": "- 操作时，需要注意，做猪皮冻，直接下锅煮就“废”了，也是最忌讳的，一定要用白醋和盐不断搓洗猪皮，这样保证煮好的猪皮晶莹剔透，而且还没腥味\n- 参考资料：铭哥说美食"
       },
       {
+        "id": "howtocook/猪肉烩酸菜",
         "name": "猪肉烩酸菜",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/猪肉烩酸菜.jpeg",
@@ -10134,6 +10419,7 @@
         "extra_text": "- 大火收汤时，注意不要糊锅，可以适当翻动来检查水位。\n- 调味的技巧，最后加盐时，可以一点一点加入，搅拌后品尝味道，直到可以接受的口味\n- 本菜品有酸菜的特殊风味"
       },
       {
+        "id": "howtocook/柱候牛腩",
         "name": "柱候牛腩",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/柱候牛腩.jpeg",
@@ -10168,6 +10454,7 @@
         "extra_text": "- 参考: 柱候牛腩+茅根马蹄竹蔗水教程\n- 操作高压锅要注意安全哦！"
       },
       {
+        "id": "howtocook/孜然牛肉",
         "name": "孜然牛肉",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/孜然牛肉.jpeg",
@@ -10203,6 +10490,7 @@
         "steps_text": "* 首先将小米椒切碎，和孜然粒一起放入捣药罐捣碎成颗粒，这样更入味。如果时间紧张可跳过捣碎步骤\n* 青椒切头去籽（喜欢辣的可不去），切成丝。葱切段。\n* 牛肉提前解冻，过一边水洗干净，晾干或用厨用纸吸干，将牛肉顺着纹理切成片\n* 然后进行腌肉，加入生抽，淀粉，油，均匀搅拌，静止 30 分钟。腌肉方法也可参考学习腌\n* 热锅下油，放入葱，爆出香味后放入腌好的牛肉煸炒\n* 牛肉变色后均匀放入孜然辣椒颗粒并炒熟\n* 然后下入青椒丝，断生后放盐\n* 大🔥炒 1 分钟后关火再翻炒 30 秒保证受热均匀即可出锅"
       },
       {
+        "id": "随便做/孜然羊肉",
         "name": "孜然羊肉",
         "category": "meat_dish",
         "difficulty": 2,
@@ -10236,6 +10524,7 @@
         "extra_text": "- 孜然粉和辣椒粉做法：孜然碎和辣椒碎中火炒香，如果是整的孜然，炒香后用擀面杖擀成半颗粒状\n- 羊肉腌制时加水可以使肉更嫩\n- 炸肉时油温要高，快速炸制定型\n- 孜然粉和辣椒粉用余温煸炒即可，不要开大火"
       },
       {
+        "id": "howtocook/醉排骨",
         "name": "醉排骨",
         "category": "meat_dish",
         "imagePath": "images/dishes/meat_dish/醉排骨.jpeg",
@@ -10287,6 +10576,7 @@
     "count": 10,
     "recipes": [
       {
+        "id": "howtocook/半成品意面",
         "name": "半成品意面",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/半成品意面.jpeg",
@@ -10314,6 +10604,7 @@
         "extra_text": "- 传统意大利面非常长。20 世纪下半叶开始流行短的意大利粉，典型长度 25–30 cm。\n- “Spaghettoni”是较厚的意大利粉。“Spaghettini”较细的意大利面。“capellini”是更细版的意大利面。\n- 一个不可见，且不可感知的“飞行着的意大利面条怪物”在“一次严重的酗酒后”，创造了整个宇宙。"
       },
       {
+        "id": "howtocook/空气炸锅鸡翅中",
         "name": "空气炸锅鸡翅中",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/空气炸锅鸡翅中.jpeg",
@@ -10342,6 +10633,7 @@
         "extra_text": "- 推荐购买温控比较好的空气炸锅，不然可能会糊"
       },
       {
+        "id": "howtocook/空气炸锅羊排",
         "name": "空气炸锅羊排",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/空气炸锅羊排.jpeg",
@@ -10379,6 +10671,7 @@
         "extra_text": "- 推荐购买温控比较好的空气炸锅，不然可能会糊"
       },
       {
+        "id": "howtocook/懒人蛋挞",
         "name": "懒人蛋挞",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/懒人蛋挞.jpeg",
@@ -10409,6 +10702,7 @@
         "extra_text": "- 操作时，可以根据焦褐斑大小适当调整时间，如果需要\n- 可以在蛋挞中加 10g 碎芝士，就是一道芝士蛋挞啦~"
       },
       {
+        "id": "howtocook/凉皮",
         "name": "凉皮",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/凉皮.jpeg",
@@ -10439,6 +10733,7 @@
         "extra_text": "个人口味根据地区、天气、时间均有不同，调料的具体使用量请据个人情况而定。"
       },
       {
+        "id": "howtocook/牛油火锅底料",
         "name": "牛油火锅底料",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/牛油火锅底料.jpeg",
@@ -10499,6 +10794,7 @@
         "extra_text": "- **警告：操作时请擦干手上水滴！以免水进入油锅中发生爆炸！造成严重烧伤！**"
       },
       {
+        "id": "howtocook/速冻馄饨",
         "name": "速冻馄饨",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/速冻馄饨.jpeg",
@@ -10530,6 +10826,7 @@
         "extra_text": "* 出锅后也可以加入水煮荷包蛋（太阳蛋）一起食用。"
       },
       {
+        "id": "howtocook/速冻水饺",
         "name": "速冻水饺",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/速冻水饺.jpeg",
@@ -10556,6 +10853,7 @@
         "extra_text": "这道菜存在一些补充做法，包括但不限于：\n\n额外添加下列材料：\n\n* 黑醋 10ml\n* 姜 一小块 50 克\n* 香油 2 滴\n* 大蒜/蒜泥 3 瓣/人\n\n* 考虑搭配黑醋食用。建议用量：10-20ml。\n* 考虑姜切丝，在小碗加入 20ml 的黑醋与姜丝搅拌当蘸料，味道更丰富。\n* 考虑搭配黑醋时加入 1~3 滴香油，搅拌当蘸料。\n* 考虑搭配黑醋时加入砸好的蒜泥，搅拌当蘸料。（口腔内会残留蒜味，若饭后需要与他人面对面谈话建议放弃或清洁口腔）"
       },
       {
+        "id": "howtocook/速冻汤圆",
         "name": "速冻汤圆",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/速冻汤圆.jpeg",
@@ -10583,6 +10881,7 @@
         "extra_text": "- 注意先加汤圆再加热水，不要颠倒，不然汤圆倒入热水可能会溅出烫伤。以及无法控制水面高度可能溢出。\n- 假如微波炉里碗太烫无法取出，可以用毛巾，或者某些微波炉可以连托盘一起取出。"
       },
       {
+        "id": "howtocook/炸薯条",
         "name": "炸薯条",
         "category": "semi-finished",
         "imagePath": "images/dishes/semi-finished/炸薯条.jpeg",
@@ -10617,6 +10916,7 @@
     "count": 29,
     "recipes": [
       {
+        "id": "howtocook/昂刺鱼豆腐汤",
         "name": "昂刺鱼豆腐汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/昂刺鱼豆腐汤.jpeg",
@@ -10653,6 +10953,7 @@
         "steps_text": "* 鱼处理好后洗净，（特别注意肚内的血丝、不洗干净会有腥味），放入大碗中，倒入料酒、10g 姜片、5g 盐，腌制 15 分钟\n* 豆腐切块，放入凉水浸泡 5 分钟，捞出备用\n* 煎鱼前，先用生姜片擦一下锅防止粘锅，倒入油（油量为 15ml * 鱼的条数 ），烧热后放入鱼煎 2~3 分钟，期间需要晃动一下鱼，防止粘底，且需要翻一次身\n* 待鱼全部煎好之后，倒入开水、5ml 料酒、姜片，小火转至大火，盖上锅盖、大火煮 10 分钟（水要稍微多一些，后面会蒸发掉一些）\n* 见汤变白后倒入准备好的豆腐，调中火再煮 5 分钟，加入 10g 盐、3g 胡椒粉调味，最后撒上葱花出锅"
       },
       {
+        "id": "howtocook/陈皮排骨汤",
         "name": "陈皮排骨汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/陈皮排骨汤.jpeg",
@@ -10686,6 +10987,7 @@
         "extra_text": "煲汤盅很烫，拿的时候小心别烫到或者手滑摔破\n广东老火靓汤，讲究用料和火候，只要备好料和炖够一定时辰，就算大功告成！"
       },
       {
+        "id": "随便做/冬瓜薏米老鸭汤",
         "name": "冬瓜薏米老鸭汤",
         "category": "soup",
         "difficulty": 2,
@@ -10712,6 +11014,7 @@
         "extra_text": "- 鸭汤要想炖特别白的话，鸭子炖烂后，再用大火滚一下就行\n- 根据鸭子的老嫩程度，可适当调整炖煮时间\n- 表面有一层鸭油，不喜欢可以打掉\n- 薏米仁有祛湿功效，非常适合这道汤"
       },
       {
+        "id": "随便做/炖鸡汤",
         "name": "炖鸡汤",
         "category": "soup",
         "difficulty": 2,
@@ -10739,6 +11042,7 @@
         "extra_text": "- 炖煮时间越长汤越清澈鲜美\n- 焯水要冷水下锅，慢慢加热才能把血水逼出\n- 如果想要汤清就不要高压锅，用小火慢炖"
       },
       {
+        "id": "howtocook/番茄牛肉蛋花汤",
         "name": "番茄牛肉蛋花汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/番茄牛肉蛋花汤.jpeg",
@@ -10773,6 +11077,7 @@
         "extra_text": "- 可以根据口味加入一定的醋或糖来调整口感\n- 如果喜欢辣味，可以加入一定的辣椒或辣椒酱来调味"
       },
       {
+        "id": "随便做/疙瘩汤",
         "name": "疙瘩汤",
         "category": "soup",
         "difficulty": 2,
@@ -10804,6 +11109,7 @@
         "extra_text": "- 全蛋和面可以让疙瘩更有嚼劲且不易变形\n- 搅疙瘩时要有耐心，慢慢加蛋液\n- 出锅前甩鸡蛋时不要搅动，让蛋花自然成型"
       },
       {
+        "id": "howtocook/勾芡香菇汤",
         "name": "勾芡香菇汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/勾芡香菇汤.jpeg",
@@ -10835,6 +11141,7 @@
         "steps_text": "* 香菇切片（每片厚度 0.5-1 cm,厚点相对薄点更有嚼劲），放入大碗中，倒入 2g 食用盐 浸泡 15 分钟\n* 生粉倒入小碗中，加入 50ml 水，搅拌生粉直至融化没有颗粒（即水淀粉）\n* 倒掉碗中的盐水，适当去掉香菇本身的水分（方便下一步煎炸）【可选】\n* 小火，倒入油，待油开始冒小泡（小火 30s ，看每个锅的功率），倒入香菇，每面煎 10s 【可选】\n* 倒入开水 300ml ，调中火再煮 3-5 分钟\n* 倒入水淀粉，适当搅拌锅中汤汁后，加入 3g 盐、3 g ，最后撒上葱花出锅"
       },
       {
+        "id": "随便做/贵州酸汤火锅",
         "name": "贵州酸汤火锅",
         "category": "soup",
         "difficulty": 4,
@@ -10874,6 +11181,7 @@
         "extra_text": "- 酸汤：水 = 1:3，可根据口味调整\n- 水可换成鸡汤或骨头汤，味道更鲜美\n- 猪肉丸做法：猪肉馅加半个鸡蛋，加两克盐、一克味精、一克胡椒粉、五克淀粉、两克香油，搅拌均匀即可\n- 猪板筋做法：猪板筋切完后加一克盐、0.5克味精、五克淀粉拌匀"
       },
       {
+        "id": "howtocook/黄瓜皮蛋汤",
         "name": "黄瓜皮蛋汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/黄瓜皮蛋汤.jpeg",
@@ -10909,6 +11217,7 @@
         "extra_text": "- 黄瓜可以根据喜好决定是否去皮\n- 黄瓜薄片可以用刮皮刀刮\n- 皮蛋切块时抹点香油不容易粘刀\n- 参考资料：【黄瓜皮蛋汤的做法步骤图，黄瓜皮蛋汤怎么做好吃】是春天呐__下厨房"
       },
       {
+        "id": "howtocook/金针菇汤",
         "name": "金针菇汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/金针菇汤.jpeg",
@@ -10939,6 +11248,7 @@
         "extra_text": "- 如果喜欢在汤里加入鸡蛋，可在步骤 3 中水沸腾之后将打散的鸡蛋液倒入锅中。\n- 出锅后可加入 3-4 滴香油（或者麻油）增香。"
       },
       {
+        "id": "howtocook/菌菇炖乳鸽",
         "name": "菌菇炖乳鸽",
         "category": "soup",
         "imagePath": "images/dishes/soup/菌菇炖乳鸽.jpeg",
@@ -10970,6 +11280,7 @@
         "steps_text": "* 冷水洗干净热心摊主处理好的乳鸽\n* 冷水锅中放入洗干净的乳鸽，加入 15ml 料酒与姜，水煮开即可捞出乳鸽，要不然会丢失营养\n* 把乳鸽放到高压缩或者瓦罐中、倒入的水要没过乳鸽，放入生姜 20 g，玉米 200 g、菌菇 100 g\n\n  注意：高压锅 30 分钟，瓦罐需在水烧开后转小火慢炖 40-60 分钟\n* 时间到了，盛到碗中，加入 3~5g 盐 即可"
       },
       {
+        "id": "howtocook/腊八粥",
         "name": "腊八粥",
         "category": "soup",
         "imagePath": "images/dishes/soup/腊八粥.jpeg",
@@ -11006,6 +11317,7 @@
         "extra_text": "- 往粥锅加入食材时，应当进行搅拌，使食材原料均匀分布在各处，并注意观察水位线，如发现水位线低于米线及食材应立即补水。\n- 注意控制火候，不要过大，定时搅拌。如果使用普通锅，建议烧开水后再下原料，搅拌到再次烧开改小火，避免锅底烧糊。如果有条件，建议改用高压锅或粥锅。\n- 参考资料：全网最正宗腊八粥做法，香甜软糯一次成功！\\_哔哩哔哩\\_bilibili 、 腊八粥（在腊八节用多种食材熬制的粥）_百度百科"
       },
       {
+        "id": "howtocook/罗宋汤",
         "name": "罗宋汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/罗宋汤.jpeg",
@@ -11035,6 +11347,7 @@
         "extra_text": "- 番茄尽量不用新鲜番茄代替，番茄罐头+番茄膏的组合风味更足\n- 除了胡萝卜、洋葱、欧芹、牛肉是必备食材外，其余可自由搭配"
       },
       {
+        "id": "howtocook/米粥",
         "name": "米粥",
         "category": "soup",
         "imagePath": "images/dishes/soup/米粥.jpeg",
@@ -11062,6 +11375,7 @@
         "steps_text": "* （可选）将 Mo ml 的油与洗净的米混合，*尽量确保完全混合，即每粒米上至少都沾上少量油*\n* （可选）将 米-油混合物品冷藏保存，冷藏时间 Tc。\n* 将米和水加入锅中。\n* 开大火，加热到 T1。\n* 在 T1 之前将火关小。**如果忘记此步骤，水可能会漫出而熄灭火焰。非常危险！**\n* 加热到 Tr。在 Tr 时关闭火源。"
       },
       {
+        "id": "随便做/蘑菇汤",
         "name": "蘑菇汤",
         "category": "soup",
         "difficulty": 2,
@@ -11100,6 +11414,7 @@
         "extra_text": "- 用五花肉是为了煸出猪油，使汤更润\n- 大料瓣和五花肉绝配，去腥增香\n- 泡香菇的水不要倒掉，用来熬汤味道更鲜美\n- 香菇条要切得均匀，这样成熟度一致\n- 小火慢炖20分钟，让食材的味道充分融合"
       },
       {
+        "id": "howtocook/奶油蘑菇汤",
         "name": "奶油蘑菇汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/奶油蘑菇汤.jpeg",
@@ -11139,6 +11454,7 @@
         "extra_text": "- 可将部分蘑菇预留作为装饰，提前煎香再添加。  \n- 使用鸡高汤代替清水风味更佳，建议控制总液体不超过 300 毫升/份。  \n- 喜欢浓汤口感可适当增加面粉和淡奶油用量。  \n- 建议现做现吃，不建议冷藏或冷冻保存。\n\n---"
       },
       {
+        "id": "随便做/浓汤菜豆糊",
         "name": "浓汤菜豆糊",
         "category": "soup",
         "difficulty": 4,
@@ -11168,6 +11484,7 @@
         "extra_text": "- 吊鸡汤的方法：1斤鸡，四斤水，高压锅内开盖滚50min\n- 毛豆焯水时间长一些可以让成品更浓稠\n- 小白菜要先焯根茎再焯叶片，保证口感一致"
       },
       {
+        "id": "howtocook/排骨苦瓜汤",
         "name": "排骨苦瓜汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/排骨苦瓜汤.jpeg",
@@ -11202,6 +11519,7 @@
         "extra_text": "- 可以使用其他带有鲜味的食材代替虾皮，如瑶柱"
       },
       {
+        "id": "howtocook/排骨山药玉米汤",
         "name": "排骨山药玉米汤",
         "category": "soup",
         "difficulty": 5,
@@ -11237,6 +11555,7 @@
         "extra_text": "- 菜系：家常菜\n- 烹饪方式：炖\n- 主料：排骨、山药、玉米、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/皮蛋瘦肉粥",
         "name": "皮蛋瘦肉粥",
         "category": "soup",
         "imagePath": "images/dishes/soup/皮蛋瘦肉粥.jpeg",
@@ -11279,6 +11598,7 @@
         "extra_text": "* 作为早餐时可提前一夜准备好主料，保温模式到第二天早餐，再添加配料和酱料"
       },
       {
+        "id": "howtocook/生汆丸子汤",
         "name": "生汆丸子汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/生汆丸子汤.jpeg",
@@ -11323,6 +11643,7 @@
         "extra_text": "参考来自：生汆丸子汤，吃的就是一个鲜、嫩、弹，学会打丸子的这些技巧，这碗汤才地道\n\n* 辣椒油可以根据口味放"
       },
       {
+        "id": "随便做/酸辣鸡蛋汤",
         "name": "酸辣鸡蛋汤",
         "category": "soup",
         "difficulty": 1,
@@ -11355,6 +11676,7 @@
         "extra_text": "- 烧的时候要边烧边搅动，防止淀粉成团\n- 鸡蛋液要慢慢倒入，形成漂亮的蛋花\n- 酸辣比例可以根据个人口味调整"
       },
       {
+        "id": "howtocook/西红柿鸡蛋汤",
         "name": "西红柿鸡蛋汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/西红柿鸡蛋汤.jpeg",
@@ -11389,6 +11711,7 @@
         "extra_text": "味素可加可不加。"
       },
       {
+        "id": "howtocook/小米粥",
         "name": "小米粥",
         "category": "soup",
         "imagePath": "images/dishes/soup/小米粥.jpeg",
@@ -11416,6 +11739,7 @@
         "extra_text": "* 这是普通锅熬制（只需 30-35 分钟即可出锅）,味道最佳。高压锅和电饭锅省事，不过效果下降，水量要适当减少，一般 100 克小米+1800 克水\n* 小米只需用水去除浮灰，千万不可过分淘，会损失掉小米油的\n* 千万记住小米需要在水开的时候下锅\n* 不喜欢放碱，更喜欢原汁原味的小米香"
       },
       {
+        "id": "howtocook/羊肉汤",
         "name": "羊肉汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/羊肉汤.jpeg",
@@ -11449,6 +11773,7 @@
         "extra_text": "- 加入开水时，注意要开大火，使油脂与汤汁更好的融合"
       },
       {
+        "id": "howtocook/银耳莲子粥",
         "name": "银耳莲子粥",
         "category": "soup",
         "imagePath": "images/dishes/soup/银耳莲子粥.jpeg",
@@ -11481,6 +11806,7 @@
         "extra_text": "- 当银耳呈现粘稠状态时，需要用勺子及时搅拌，防止银耳糊在锅底"
       },
       {
+        "id": "howtocook/玉米排骨汤",
         "name": "玉米排骨汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/玉米排骨汤.jpeg",
@@ -11517,6 +11843,7 @@
         "extra_text": "这道菜制作起来并不难，而且食材简单，对新手友好，适合降温的时候来上一大碗。"
       },
       {
+        "id": "howtocook/朱雀汤",
         "name": "朱雀汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/朱雀汤.jpeg",
@@ -11548,6 +11875,7 @@
         "extra_text": "- 鸡蛋一定要打散，水一定要在沸腾冒泡状态倒入鸡蛋液中，否则汤可能会浑浊影响口感\n- 此为豫东地区做法，其他地区有不放白糖放盐的，口味不同，根据个人口味调整\n- 此汤乃去火神器！"
       },
       {
+        "id": "howtocook/紫菜蛋花汤",
         "name": "紫菜蛋花汤",
         "category": "soup",
         "imagePath": "images/dishes/soup/紫菜蛋花汤.jpeg",
@@ -11592,6 +11920,7 @@
     "count": 70,
     "recipes": [
       {
+        "id": "随便做/菜蟒",
         "name": "菜蟒",
         "category": "staple",
         "difficulty": 3,
@@ -11623,6 +11952,7 @@
         "extra_text": "- 面要醒好，擀面时厚度要均匀\n- 韭菜馅加油拌匀可以防止出水\n- 鸡蛋和炒菜要分开晾凉，混合时再一起拌匀\n- 蒸制时间根据菜蟒大小调整，一般5-10分钟即可"
       },
       {
+        "id": "howtocook/炒方便面",
         "name": "炒方便面",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒方便面.jpeg",
@@ -11656,6 +11986,7 @@
         "extra_text": "在北京，可以考虑在盛盘后加入芝麻酱。如果芝麻酱太浓稠，可以 1:1 兑水稀释。"
       },
       {
+        "id": "howtocook/炒河粉",
         "name": "炒河粉",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒河粉.jpeg",
@@ -11690,6 +12021,7 @@
         "extra_text": "个人口味根据地区、天气、时间均有不同，调料的具体使用量请据个人情况而定，喜欢辣椒的可以自行添加。"
       },
       {
+        "id": "howtocook/炒凉粉",
         "name": "炒凉粉",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒凉粉.jpeg",
@@ -11730,6 +12062,7 @@
         "extra_text": "- 选择凉粉时最好选用豌豆淀粉制作成的凉粉，条件不允许的话红薯淀粉或其他也可"
       },
       {
+        "id": "howtocook/炒馍",
         "name": "炒馍",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒馍.jpeg",
@@ -11766,6 +12099,7 @@
         "extra_text": "- 炒的过程中要注意控制火候，以防炒糊\n- 火大补救措施将火调小，可沿锅边加油润锅或洒水，注意不要全倒在一个地方，最好分散开\n- 调味料可根据个人喜好放入其他香料（比如南德调味料）\n- 如果喜欢吃脆的，可以将火开到最小，多翻炒一会，关火后趁锅热再放置一会再倒出，更香脆\n- 辅料也可根据个人口味方位蒜末，蒜苗等，可以单独爆香在混合"
       },
       {
+        "id": "howtocook/炒年糕",
         "name": "炒年糕",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒年糕.jpeg",
@@ -11800,6 +12134,7 @@
         "extra_text": "- 辅料的选择可以根据个人选择酌情添加，如加入瘦肉等\n- 在煮年糕的时候注意搅拌，以免粘锅"
       },
       {
+        "id": "howtocook/炒意大利面",
         "name": "炒意大利面",
         "category": "staple",
         "imagePath": "images/dishes/staple/炒意大利面.jpeg",
@@ -11829,6 +12164,7 @@
         "steps_text": "- 加入 250 克水 / 人\n- 待水烧开，下入面条，中火煮 15 - 20 分钟（这个面通常比较硬，捞起来之前最好尝一下，中心如果有一点硬，需要继续煮）\n- 捞出面条，盛入盘中备用\n- 热锅倒入食用油，待油温中热，下入面条翻炒一分钟（如果太干，加入少量水）\n- 放入 10 克番茄酱、肥牛、加入 2g 食盐，继续翻炒一分钟\n- 起锅"
       },
       {
+        "id": "howtocook/葱油拌面",
         "name": "葱油拌面",
         "category": "staple",
         "imagePath": "images/dishes/staple/葱油拌面.jpeg",
@@ -11863,6 +12199,7 @@
         "extra_text": "- 炸葱油时，火一定要小，要有耐心，才能将葱的香味充分炸出。\n- 制作好的葱油酱汁可以冷藏保存一段时间，下次吃面时直接取用。"
       },
       {
+        "id": "howtocook/蛋包饭",
         "name": "蛋包饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/蛋包饭.jpeg",
@@ -11904,6 +12241,7 @@
         "extra_text": "- 炒饭用隔夜饭不易粘锅，口感更好。\n- 打蛋时加入牛奶可以让蛋皮更加嫩滑。\n- 操作蛋皮时火力需小，避免底部焦糊。\n- 如果不擅长包裹造型，也可以直接将炒饭铺盘后盖上蛋皮。"
       },
       {
+        "id": "howtocook/蛋炒饭",
         "name": "蛋炒饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/蛋炒饭.jpeg",
@@ -11945,6 +12283,7 @@
         "extra_text": "* 技术总结\n  - 使用隔夜的冷饭炒饭最佳，没有冷饭的同学也可以现煮（可以使用冰箱立马给米饭降温），不过要做到“粒粒分明”的口感就需要炒更久。\n  - 炒饭要做到“粒粒分明”其实就是要将饭炒干。为什么要用隔夜的冷饭是因为隔夜已经流失了一定的水分。"
       },
       {
+        "id": "howtocook/电饭煲三文鱼炊饭",
         "name": "电饭煲三文鱼炊饭",
         "category": "staple",
         "difficulty": 2,
@@ -11976,6 +12315,7 @@
         "steps_text": "- 三文鱼去鳞，去骨\n- 金菇、冬菇切碎\n- 洗米三次\n- 把三文鱼、米、牛油放入电饭煲\n- 想口感浓厚一点，可以加多一汤匙牛油\n- 根据电饭煲的刻度放水\n- 把电饭煲調較至煲飯模式，等待大約 30 - 45 分鐘"
       },
       {
+        "id": "howtocook/电饭煲蒸米饭",
         "name": "电饭煲蒸米饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/电饭煲蒸米饭.jpeg",
@@ -12003,6 +12343,7 @@
         "extra_text": "- 技术总结\n  - 不论什么容器，水的量都是可以使用“指尖量水法”煮出好米饭。\n  - 水的多少是能够严重影响一碗好米饭的口感。\n  - 南方一般食用江南米，北方一般食用北方大米，江南米会比较细长，而北方大米会比较短且圆。\n  - 米饭不同品种的米，不同的水量会极度影响口感。\n- 更多信息请参考使用的电饭煲的说明书。"
       },
       {
+        "id": "howtocook/豆角焖面",
         "name": "豆角焖面",
         "category": "staple",
         "imagePath": "images/dishes/staple/豆角焖面.jpeg",
@@ -12045,6 +12386,7 @@
         "calculation_text": "下面的量是仅仅 1 够一个人一餐的主食的量！请针对实际调整用料的量！\n\n* 鲜面条 300g。\n* 肉 100g。\n* 豆角 150g。\n* 盐的用量为：2g。\n* 食用油的用量为 10 - 18 ml。\n* 鸡精的用量为：2g。\n* 生抽的用量为：10ml。\n* 耗油的用量为：5g。\n* 十三香的用量为：1g。\n* 老抽的用量为：5ml。\n* 味精的用量为：1g。\n* 热水的用量为：150ml。\n* 葱 10g。\n* 姜 5g。\n* 蒜 10g。\n\n使用上述条件，计算出计划使用的原材料比例。"
       },
       {
+        "id": "随便做/宫保鸡丁豆沙粽",
         "name": "宫保鸡丁豆沙粽",
         "category": "staple",
         "difficulty": 4,
@@ -12077,6 +12419,7 @@
         "extra_text": "- 包粽子时粽子的角可以不用一定包到滴米不漏\n- 糯米要提前泡半天，这样更容易熟透\n- 粽子的馅料可以根据个人喜好调整比例"
       },
       {
+        "id": "howtocook/韩式拌饭",
         "name": "韩式拌饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/韩式拌饭.jpeg",
@@ -12119,6 +12462,7 @@
         "extra_text": "- 这是道非常简单的菜 过程会比较繁琐 但当将菜肉米饭酱汁搅拌起来吃会很满足\n- 如果对外观有一定要求 可以用砂锅代替普通碗"
       },
       {
+        "id": "howtocook/河南蒸面条",
         "name": "河南蒸面条",
         "category": "staple",
         "imagePath": "images/dishes/staple/河南蒸面条.jpeg",
@@ -12158,6 +12502,7 @@
         "extra_text": "挂面的粗细与口感：\n\n- 细的、圆的 （超市大部分都是这种，口感更加劲道）\n- 宽的、扁的 （口感比较软）"
       },
       {
+        "id": "howtocook/红芸豆拌饭",
         "name": "红芸豆拌饭",
         "category": "staple",
         "difficulty": 5,
@@ -12201,6 +12546,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：炖\n- 主料：红芸豆、大米、\n- 来源：howtocook"
       },
       {
+        "id": "随便做/糊辣椒拌面",
         "name": "糊辣椒拌面",
         "category": "staple",
         "difficulty": 2,
@@ -12235,6 +12581,7 @@
         "extra_text": "- 糊辣椒面炒制方法：干辣椒放到锅里边，炒到棕红色，晾凉捣碎即可\n- 热油分两次浇入可以让辣椒的香味更好释放\n- 面条可以根据个人喜好选择其他种类\n- 糊辣椒的量可以根据个人嗜辣程度调整"
       },
       {
+        "id": "随便做/黄金炒饭",
         "name": "黄金炒饭",
         "category": "staple",
         "difficulty": 2,
@@ -12268,6 +12615,7 @@
         "extra_text": "- 家里剩什么放什么"
       },
       {
+        "id": "随便做/黄金馒头片",
         "name": "黄金馒头片",
         "category": "staple",
         "difficulty": 1,
@@ -12299,6 +12647,7 @@
         "extra_text": "- 蛋黄和蛋白比例2:1可以让馒头片颜色更金黄\n- 油温五成热即可下锅，避免外焦里生\n- 吸去表面浮油可以减少油腻感"
       },
       {
+        "id": "howtocook/火腿饭团",
         "name": "火腿饭团",
         "category": "staple",
         "imagePath": "images/dishes/staple/火腿饭团.jpeg",
@@ -12333,6 +12682,7 @@
         "extra_text": "- 沙拉酱的程度可以根据个人口味酌情删减。\n- 可以尝试混合沙拉酱。\n- 参考资料：小红书 - 干饭选手又困了"
       },
       {
+        "id": "随便做/鸡丝凉面",
         "name": "鸡丝凉面",
         "category": "staple",
         "difficulty": 3,
@@ -12377,6 +12727,7 @@
         "extra_text": "- 调汁用的是焙过的花椒面，方法在以前东坡肘子那一期\n- 辣椒油也在（参考之前做法）\n- 这个汁本质上是川味的怪味汁，各种味道很难平衡，尽量按照我们给的配方\n- 面条煮至断生即可，不要煮过头，否则口感会受影响"
       },
       {
+        "id": "howtocook/基础牛奶面包",
         "name": "基础牛奶面包",
         "category": "staple",
         "imagePath": "images/dishes/staple/基础牛奶面包.jpeg",
@@ -12420,6 +12771,7 @@
         "extra_text": "1. 常见原料的换算（仅供参考）\n\n| 体积 /cup |原料  |质量 /g   |\n|:---------:|:----:|:-------:|\n|1          |黄油  |227      |\n|1          |面粉  |120      |\n|1          |细砂糖|180 ~ 200|\n|1          |粗砂糖|200 ~ 220|\n|1          |糖粉  |130      |\n|1          |碎干果|114      |\n|1          |葡萄干|170      |\n|1          |蜂蜜  |340      |\n\n2. 如何保存多余的面包\n\n  可以把面包切片进行冷冻，在下次使用时可以放置到常温处等待回温，亦或是直接加热。但**千万不要放到冷藏区！** 在冷藏区面包的水分会迅速流失。\n\n3. 推荐食用方式\n\n\n\na. 取一大块面包，上下一分为二。放入锅中小火加热（一般不需要加油，但如果希望脆皮可在面包表面涂抹黄油后再煎烤） 1 ~ 2 分钟。\nb. 锅中用喷壶喷 3 ~ 4 泵油，大火烧至锅中微微冒烟，转最小火。\nc. 然后下入一枚鸡蛋，盖盖子。等待 2 ~ 3 分钟。然后翻面再加热 2 ~ 3 分钟。\n（这是流心蛋的做法，如需要全熟蛋，可在翻面前加入最多 1 ml 的水，转中小火，直至把水烧干。这样就得到了一个全熟蛋）\nd. 将面包双面涂上喜欢的任何酱料，将鸡蛋夹在中间。\n\n------------------------------------------"
       },
       {
+        "id": "howtocook/茄子肉煎饼",
         "name": "茄子肉煎饼",
         "category": "staple",
         "imagePath": "images/dishes/staple/茄子肉煎饼.jpeg",
@@ -12457,6 +12809,7 @@
         "extra_text": "* 用小火煎"
       },
       {
+        "id": "随便做/家常炒面",
         "name": "家常炒面",
         "category": "staple",
         "difficulty": 2,
@@ -12496,6 +12849,7 @@
         "extra_text": "- 面条煮至断生即可，不要煮太熟，否则炒制时容易糊\n- 润锅很重要，可以防止面条粘锅\n- 全程大火快炒，这样才能有锅气\n- 酱油要烹在锅边，这样才能激发出香味"
       },
       {
+        "id": "随便做/家常锅巴",
         "name": "家常锅巴",
         "category": "staple",
         "difficulty": 3,
@@ -12526,6 +12880,7 @@
         "extra_text": "- 电饼铛煎锅巴时要耐心，水汽散尽后才能翻面\n- 炸锅巴时油温要达到7成热，快速炸至酥脆\n- 烧汁要浓稠一些，浇在锅巴上才能入味"
       },
       {
+        "id": "howtocook/鲣鱼海苔玉米饭",
         "name": "鲣鱼海苔玉米饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/鲣鱼海苔玉米饭.jpeg",
@@ -12556,6 +12911,7 @@
         "extra_text": "- 使用米家小饭煲煮东北米的话，水没过米 3 毫米就行，太多水煮出来不是一粒一粒的饭"
       },
       {
+        "id": "howtocook/酱拌荞麦面",
         "name": "酱拌荞麦面",
         "category": "staple",
         "imagePath": "images/dishes/staple/酱拌荞麦面.jpeg",
@@ -12588,6 +12944,7 @@
         "extra_text": "* 荞麦面沥干后可以放冰箱冰镇后口感更佳\n* 配料可以根据个人喜好选择其他，例如虾仁、肉沫等\n* 酱料可以根据个人喜欢选择其他，例如花生酱、芝麻酱等\n* 荞麦面跟其他面条热量几乎一致，所以不适合作为减脂的主食"
       },
       {
+        "id": "howtocook/韭菜盒子",
         "name": "韭菜盒子",
         "category": "staple",
         "imagePath": "images/dishes/staple/韭菜盒子.jpeg",
@@ -12626,6 +12983,7 @@
         "extra_text": "- 制作时可根据个人口味添加豆腐干等配料。\n- 注意煎制时火候，避免外焦内生。"
       },
       {
+        "id": "howtocook/可乐炒饭",
         "name": "可乐炒饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/可乐炒饭.jpeg",
@@ -12668,6 +13026,7 @@
         "extra_text": "- 含糖可乐口感更好\n- 如果喜欢干一点，多炒一会儿\n- 如果嫌麻烦，可以在第一步直接放 3 个鸡蛋，取消挖洞打另一个鸡蛋的步骤"
       },
       {
+        "id": "howtocook/空气炸锅照烧鸡饭",
         "name": "空气炸锅照烧鸡饭",
         "category": "staple",
         "difficulty": 4,
@@ -12698,6 +13057,7 @@
         "extra_text": "- 操作时，需要注意温度以免烫伤。\n- 参考资料：库克美食教程"
       },
       {
+        "id": "随便做/辣皮子拌面",
         "name": "辣皮子拌面",
         "category": "staple",
         "difficulty": 3,
@@ -12732,6 +13092,7 @@
         "extra_text": "- 面条醒面时间要够，才能拉得细且不易断\n- 辣皮子要泡热水后再剁，更容易入味\n- 蒜末分两次加入可增加香气层次"
       },
       {
+        "id": "随便做/懒人焖饭",
         "name": "懒人焖饭",
         "category": "staple",
         "difficulty": 1,
@@ -12761,6 +13122,7 @@
         "extra_text": "- 食材不挑，家里有什么放什么\n- 炒料时火要大，这样酱香味更浓\n- 搅拌米饭时要彻底，让调料均匀分布"
       },
       {
+        "id": "howtocook/醪糟小汤圆",
         "name": "醪糟小汤圆",
         "category": "staple",
         "imagePath": "images/dishes/staple/醪糟小汤圆.jpeg",
@@ -12789,6 +13151,7 @@
         "extra_text": "* 白糖的用量根据个人口味更改\n* 若喜欢更浓的口感可以减少 100 毫升内的水\n* 若喜欢软点的枸杞口感，可以将枸杞和小汤圆同时煮"
       },
       {
+        "id": "howtocook/老干妈拌面",
         "name": "老干妈拌面",
         "category": "staple",
         "imagePath": "images/dishes/staple/老干妈拌面.jpeg",
@@ -12817,6 +13180,7 @@
         "steps_text": "* 将水倒入锅中并煮沸\n* 将面均匀放入锅中\n* 在煮的过程注意搅拌，避免面粘成一坨\n* 当用筷子挑起一根面且该面能自然地从筷子上滑落时再等 30 秒关火\n* 将面夹入碗中\n* 按照上面的计量放入老干妈和酱油\n* 用筷子将碗里的面、老干妈、酱油拌均匀\n* 吃"
       },
       {
+        "id": "howtocook/老友猪肉粉",
         "name": "老友猪肉粉",
         "category": "staple",
         "imagePath": "images/dishes/staple/老友猪肉粉.jpeg",
@@ -12858,6 +13222,7 @@
         "extra_text": "- 记得米粉必须是泡过的才好吃,没有泡过的话是很难吃的！"
       },
       {
+        "id": "howtocook/烙饼",
         "name": "烙饼",
         "category": "staple",
         "imagePath": "images/dishes/staple/烙饼.jpeg",
@@ -12888,6 +13253,7 @@
         "steps_text": "* 将 400g 面粉倒入盆中，一半用凉水和面，一半用热水和面，搅拌成面絮，用手揉成团。用保鲜膜封起来，醒面 40 分钟\n* 离醒面完成时间还有 10 分钟时，请查看小技巧中的油酥做法（热油酥效果更好）\n* 醒好的面不用揉，稍微摁一下，用一横刀一竖刀将其分成四份。\n* 搓圆，擀开，擀成与电饼铛大小差不多的饼，取 1/4 的油酥，将饼表面涂抹均匀\n* 沿饼的半径切开，从外圈将其卷成圆锥形，然后将圆锥尾部捏好，防止油酥外漏。\n* 按压面饼圆锥尖的地方，将其压扁，然后再次擀成与电饼铛大小差不多的面饼（厚度约为 3mm）\n* 将电饼铛预热，涂上凉油（热锅凉油），将擀好的饼放入电饼铛中，将饼的上方也刷点油，涂抹均匀（锁住水分），盖上盖子\n* 大火烙一分钟，打开盖子，将饼翻个面再烙一分钟\n* 重复以上动作，完成饼的烙制"
       },
       {
+        "id": "howtocook/凉粉",
         "name": "凉粉",
         "category": "staple",
         "difficulty": 3,
@@ -12927,6 +13293,7 @@
         "extra_text": "- 参考: 制作凉粉的详细步骤"
       },
       {
+        "id": "howtocook/螺蛳粉",
         "name": "螺蛳粉",
         "category": "staple",
         "imagePath": "images/dishes/staple/螺蛳粉.jpeg",
@@ -12967,6 +13334,7 @@
         "extra_text": "- 如果想要更有嚼劲的粉，可以缩短第二步煮粉的时间\n- 如果想在螺蛳粉中添加炸蛋，请参考炸蛋的教程\n- 配料的选择请依照个人口味"
       },
       {
+        "id": "howtocook/麻辣减脂荞麦面",
         "name": "麻辣减脂荞麦面",
         "category": "staple",
         "imagePath": "images/dishes/staple/麻辣减脂荞麦面.jpeg",
@@ -13000,6 +13368,7 @@
         "extra_text": "* 一定要选半干荞麦面，口感最好\n* 可以随意添加其他东西，比如火锅丸、蛋饺等\n* 火锅底料、花生酱、牛奶一定要加，口味三大巨头\n* 如果不能吃酸，可以不加醋"
       },
       {
+        "id": "howtocook/麻油拌面",
         "name": "麻油拌面",
         "category": "staple",
         "imagePath": "images/dishes/staple/麻油拌面.jpeg",
@@ -13029,6 +13398,7 @@
         "steps_text": "* 将水倒入锅中并煮沸 （喜欢吃 q 弹面的同学，可在水里加入 30 克盐，用盐水煮出来的面会比较 q 弹）\n* 将快熟面放入锅中 3 分钟（也可参考当下品牌快熟面的烹饪时间）\n* 当面开始散了可以开始搅拌，让面受热均匀\n* 将水滤干把面倒入碗中\n* 按照上面的计量放入麻油，老抽，胡椒粉，生抽（可选）\n* 筷子搅拌均匀\n* 一道简单即省钱的懒人麻油拌面就完成啦"
       },
       {
+        "id": "howtocook/披萨饼皮",
         "name": "披萨饼皮",
         "category": "staple",
         "imagePath": "images/dishes/staple/披萨饼皮.jpeg",
@@ -13068,6 +13438,7 @@
         "extra_text": "- 一定要注意水的比例\n- 烤箱品质层次不齐，第一次做注意观察火候对披萨的影响\n- 一般不特别标注是低筋或高筋面粉，基本都是中筋面粉\n- 容易出水的水果不能作为食材，比如西瓜、橘子等"
       },
       {
+        "id": "随便做/炝锅面",
         "name": "炝锅面",
         "category": "staple",
         "difficulty": 2,
@@ -13101,6 +13472,7 @@
         "extra_text": "- 水和面的比例正常为3:1，稀一点4:1，稠一点为2:1\n- 葱要分两次下锅，一次炝锅一次点缀\n- 面条下锅后要适时搅拌避免粘连"
       },
       {
+        "id": "随便做/糗糕",
         "name": "糗糕",
         "category": "staple",
         "difficulty": 1,
@@ -13129,6 +13501,7 @@
         "extra_text": "- 水和米的比例正常为3:1，可根据个人喜好调整稀稠\n- 熬制过程中要不断撇去浮末\n- 糖要最后加，小火熬化即可"
       },
       {
+        "id": "howtocook/热干面",
         "name": "热干面",
         "category": "staple",
         "imagePath": "images/dishes/staple/热干面.jpeg",
@@ -13170,6 +13543,7 @@
         "extra_text": "* 辣椒油看个人口味添加"
       },
       {
+        "id": "howtocook/日式肥牛丼饭",
         "name": "日式肥牛丼饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/日式肥牛丼饭.jpeg",
@@ -13203,6 +13577,7 @@
         "extra_text": "```shell\nstruct Staple{float 咸度;};\nstruct Staple 牛丼\n牛丼.咸度 = 尝一口汤汁;\nwhile(牛丼.咸度 < 预期) 加入(1 g)酱油; 牛丼.咸度 = 尝一口汤汁;\n```"
       },
       {
+        "id": "howtocook/日式咖喱饭",
         "name": "日式咖喱饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/日式咖喱饭.jpeg",
@@ -13237,6 +13612,7 @@
         "calculation_text": "食材用量与咖喱成正比，计算部分以 **半盒好侍咖喱块(115g)** 为例。半盒约六碗份，做好的咖喱在冰箱冷藏后风味更佳，不用担心一个人吃不完。\n\n- 洋葱 2 个\n- 土豆 2 个\n- 胡萝卜 1 根\n- 蒜头 2~3 瓣\n- 肉 2 斤"
       },
       {
+        "id": "howtocook/肉蛋盖饭",
         "name": "肉蛋盖饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/肉蛋盖饭.jpeg",
@@ -13277,6 +13653,7 @@
         "extra_text": "- 如果喜欢甜口可以增加 10g 糖\n- 请务必保证做完饭后关掉燃气设备以免发生危险"
       },
       {
+        "id": "howtocook/陕西油泼面",
         "name": "陕西油泼面",
         "category": "staple",
         "imagePath": "images/dishes/staple/陕西油泼面.jpeg",
@@ -13316,6 +13693,7 @@
         "extra_text": "- 技术总结\n  - 辣椒面的选择很关键，建议使用陕西秦椒面，香而不辣; 陕西八大怪之一: 油泼辣子一道菜😂\n  - 泼油的油温是成败关键，油温过低辣椒不香，油温过高容易糊\n  - 喜欢吃肉的可以加入肉末做成肉臊子油泼面\n  - 传统陕西油泼面讲究“一青二白三红四绿”，即面条、蒜末、辣椒、葱花的颜色搭配"
       },
       {
+        "id": "howtocook/手工水饺",
         "name": "手工水饺",
         "category": "staple",
         "imagePath": "images/dishes/staple/手工水饺.jpeg",
@@ -13349,6 +13727,7 @@
         "extra_text": "- 煮水饺不需要盖锅盖，加三次水就是为了不让饺子一直处于沸腾状态导致表皮破损变成面片。\n\n这道菜存在一些补充做法，包括但不限于：\n\n额外添加下列材料：\n\n* 黑醋 10ml\n* 姜 一小块 50 克\n* 香油 2 滴\n* 大蒜/蒜泥 3 瓣/人\n\n* 考虑搭配黑醋食用。建议用量：10-20ml。\n* 考虑姜切丝，在小碗加入 20ml 的黑醋与姜丝搅拌当蘸料，味道更丰富。\n* 考虑搭配黑醋时加入 1~3 滴香油，搅拌当蘸料。\n* 考虑搭配黑醋时加入砸好的蒜泥，搅拌当蘸料。（口腔内会残留蒜味，若饭后需要与他人面对面谈话建议放弃或清洁口腔）"
       },
       {
+        "id": "howtocook/酸辣蕨根粉",
         "name": "酸辣蕨根粉",
         "category": "staple",
         "imagePath": "images/dishes/staple/酸辣蕨根粉.jpeg",
@@ -13385,6 +13764,7 @@
         "extra_text": "* 葱姜蒜为附加调料，加入可以增添风味，不加也并无大碍\n* 糖和盐根据个人口味，需要加入的具体量不同，请酌情加入\n* 建议使用碗作为最终装盘餐具，因为使用盘子会使吃粉变得困难一些\n* 整体口味偏辣，如果不能吃辣请减少油泼辣子的量并且不加入小米辣"
       },
       {
+        "id": "howtocook/汤面",
         "name": "汤面",
         "category": "staple",
         "imagePath": "images/dishes/staple/汤面.jpeg",
@@ -13427,6 +13807,7 @@
         "extra_text": "- 操作流程可根据自己喜好更改，多多尝试会有惊喜\n- 如掌握不好加盐量，可采用少量多次添加的方法，以免过量"
       },
       {
+        "id": "howtocook/微波炉腊肠煲仔饭",
         "name": "微波炉腊肠煲仔饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/微波炉腊肠煲仔饭.jpeg",
@@ -13468,6 +13849,7 @@
         "steps_text": "- 将米淘洗干净后倒入 `饭碗` 内，加入 400ml 的水，**盖上盖**\n- 放入微波炉，高火，`6` 分钟，煮饭途中准备原料\n  - 切好腊肠\n  - 洗好青菜\n  - 切好红萝卜片\n  - 切好葱花\n  - `青菜碗` 中放入青菜、红萝卜片，倒入 10 ml 油，放入 5 g 盐\n  - `小碗` 中倒入 10 ml 生抽、5 ml 油\n- 6 分钟后，用毛巾或隔热手套取出碗，可以看见米饭已经八分熟\n- 在米饭上摆入切片的腊肠，继续高火 `2` 分钟\n- 取出腊肠饭，放入 `青菜碗`，高火 `4-5` 分钟\n- 在腊肠饭上摆好青菜，磕入鸡蛋，看个人喜好继续高火 `40-60` 秒\n- 取出腊肠饭，此时已经基本完成。\n- 将 `小碗` 放入，继续高火 `30` 秒\n- 在腊肠饭上淋上叮热的生抽，撒上葱花即可\n- 多余的青菜可以沾着酱油吃"
       },
       {
+        "id": "howtocook/西红柿鸡蛋挂面",
         "name": "西红柿鸡蛋挂面",
         "category": "staple",
         "imagePath": "images/dishes/staple/西红柿鸡蛋挂面.jpeg",
@@ -13509,6 +13891,7 @@
         "extra_text": "- 鸡蛋蛋液中可以加入 2g 黑胡椒味道更好\n- 熬臊子过程中加入 2g 白胡椒粉提升香辛口味\n- 煮面条如果一次性煮熟也可以，多次加水是为了让面条口感劲道，面条不粘黏，技巧在于煮沸就加冷水，循环往复两三次即可"
       },
       {
+        "id": "howtocook/鲜肉烧卖",
         "name": "鲜肉烧卖",
         "category": "staple",
         "imagePath": "images/dishes/staple/鲜肉烧卖.jpeg",
@@ -13557,6 +13940,7 @@
         "extra_text": "- 烧卖中的脂肪主要来自肥肉，低脂版本中的肥肉被移除后为保证口感需要使用少量动物油来补偿\n- 如果没有烧卖皮，可用大馄饨皮，或者饺子皮擀薄\n- 皮的直径在 8-10 cm 之间，每张皮重约 10-15g，皮和馅的比例控制在 1:2 - 1:2.5\n- 绞肉机建议用中档，这样肉末不会太细（像糊糊）也不会太粗（像碎块），保持适中纹理，让馅料口感 Q 弹\n- 使用姜末 5 g，葱末 10 g 不容易掩盖鲜肉的味道；姜末 10 g，葱末 20 g 有点像饺子馅\n- 包烧卖的时候在虎口抹点油，收口不会粘手\n- 蒸的时候记得水开了再上笼，这样皮子不会塌掉\n- 做多了可 -18 ℃ 冷冻保存，冷冻保存的需要蒸 12-15 分钟\n- 蘸上玫瑰米醋更好吃，也可以根据口味配上桐乡辣酱、油泼辣子、生抽、姜丝\n- 参考资料：【鲜肉烧麦的做法步骤图，鲜肉烧麦怎么做好吃】小什么l_下厨房"
       },
       {
+        "id": "howtocook/咸肉菜饭",
         "name": "咸肉菜饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/咸肉菜饭.jpeg",
@@ -13590,6 +13974,7 @@
         "extra_text": "- 炒好的咸肉和菜梗铺在饭上，煮饭时千万不要搅匀\n- 尽量不要买“家乡鲜肉”，可以预期会很咸。如果不是淡咸肉可以混入新鲜五花肉丁，或减少咸肉的用量，或将瘦肉部分切下泡入 5% 糖水 20 分钟。\n- 参考资料：咸肉菜饭 - 维基百科"
       },
       {
+        "id": "howtocook/扬州炒饭",
         "name": "扬州炒饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/扬州炒饭.jpeg",
@@ -13631,6 +14016,7 @@
         "extra_text": "- 如做完后胳膊酸痛为正常现象，需加强上肢锻炼\n- 超市有青豆，胡萝卜，玉米粒的混合冷冻包装，可以使用这个省去切丁的烦恼，推荐 Pams Mixed Veges 很便宜，或者类似的都可以用（如下图）"
       },
       {
+        "id": "随便做/洋芋擦擦",
         "name": "洋芋擦擦",
         "category": "staple",
         "difficulty": 2,
@@ -13672,6 +14058,7 @@
         "extra_text": "- 土豆丝要擦得均匀，粗细一致\n- 面粉不宜过多，只需薄薄裹一层\n- 蒸制时间不可过长，3分钟即可保持土豆丝口感\n- 炒制时火要大，迅速翻炒出锅保持软糯"
       },
       {
+        "id": "howtocook/意式肉酱面",
         "name": "意式肉酱面",
         "category": "staple",
         "imagePath": "images/dishes/staple/意式肉酱面.jpeg",
@@ -13701,6 +14088,7 @@
         "extra_text": "- 意大利面分为很多不同的粗细，煮面条之前请注意意面盒子上标注的时间\n- 意大利面酱并不是番茄酱，平常用的番茄酱准确是叫番茄沙司，而意大利面酱虽然和番茄沙司都是调味过的番茄酱，但加的调味料不同"
       },
       {
+        "id": "howtocook/印度烤饼",
         "name": "印度烤饼",
         "category": "staple",
         "difficulty": 5,
@@ -13742,6 +14130,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：烤\n- 主料：中筋面粉、酸奶、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/印度焖饭",
         "name": "印度焖饭",
         "category": "staple",
         "difficulty": 7,
@@ -13796,6 +14185,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：焖\n- 主料：巴斯马蒂香米、鸡腿肉、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/鹰嘴豆炸饼",
         "name": "鹰嘴豆炸饼",
         "category": "staple",
         "difficulty": 5,
@@ -13846,6 +14236,7 @@
         "extra_text": "- 菜系：印度菜\n- 烹饪方式：炸\n- 主料：鹰嘴豆、中筋面粉、\n- 来源：howtocook"
       },
       {
+        "id": "howtocook/炸酱面",
         "name": "炸酱面",
         "category": "staple",
         "imagePath": "images/dishes/staple/炸酱面.jpeg",
@@ -13880,6 +14271,7 @@
         "extra_text": "* 肉推荐瘦肉丁，口感更好，推荐现买现用。\n* *面条*推荐使用*普通面条*。\n* 面条口感关键在于劲道。勿选龙须等细面。\n* 如有条件（另一个锅）且熟练后，第 2、3 步和 1、4、5、6 步可分时并行执行。\n* 甜咸口个人有爱好，两种酱的配比需要自己迭代优化。"
       },
       {
+        "id": "howtocook/照烧鸡腿饭",
         "name": "照烧鸡腿饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/照烧鸡腿饭.jpeg",
@@ -13922,6 +14314,7 @@
         "extra_text": "- 如果使用白砂糖、淀粉组合代替一定让白砂糖和淀粉完全溶解再下锅，否则容易糊锅\n- 焖煮时每隔 3-5 分钟翻搅一下，避免局部过热\n- 如果酱汁冒大泡、颜色变深褐，或边缘出现细密焦糖结晶，立即关火\n\n- 参考资料：【照烧鸡腿饭的做法步骤图，照烧鸡腿饭怎么做好吃】小晓姐姐_下厨房"
       },
       {
+        "id": "howtocook/蒸卤面",
         "name": "蒸卤面",
         "category": "staple",
         "imagePath": "images/dishes/staple/蒸卤面.jpeg",
@@ -13961,6 +14354,7 @@
         "extra_text": "- 技术总结\n  - 切割猪肉时，可以让菜市场摊贩帮忙，根据经验，请求时机把握在已切割后未付款之前成功率最高\n  - 首次做饭时可以提前备好料防止手忙脚乱，后续熟练后可以并发执行\n  - 两次蒸面条时，都要尽量的弄散开，可以避免蒸好后团在一起。面条太长时可以拽断，方便后续搅拌与盛取\n  - 取出蒸好的面条时尽量动作轻一些，避免蒸屉翻到面条触水\n  - 佐餐时啤酒更配呦！"
       },
       {
+        "id": "howtocook/芝麻烧饼",
         "name": "芝麻烧饼",
         "category": "staple",
         "imagePath": "images/dishes/staple/芝麻烧饼.jpeg",
@@ -13996,6 +14390,7 @@
         "extra_text": "- 如果没有电饼铛，也可以用平底锅\n- 芝麻如果没有也可不用，一样好吃"
       },
       {
+        "id": "howtocook/中式馅饼",
         "name": "中式馅饼",
         "category": "staple",
         "imagePath": "images/dishes/staple/中式馅饼.jpeg",
@@ -14040,6 +14435,7 @@
         "extra_text": "- 将肉沫和胡萝卜末加入面糊后，应该尽量搅匀，保证味道扩散到饼内各处。\n- 肉沫和胡萝卜末即馅料可以使用各类熟馅料替代。"
       },
       {
+        "id": "howtocook/猪油拌饭",
         "name": "猪油拌饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/猪油拌饭.jpeg",
@@ -14075,6 +14471,7 @@
         "extra_text": "- 建议搭配瘦肉和蔬菜食用来均衡营养\n- 高胆固醇，不建议经常食用\n- 参考资料：猪油拌饭 - 维基百科，自由的百科全书"
       },
       {
+        "id": "howtocook/煮锅蒸米饭",
         "name": "煮锅蒸米饭",
         "category": "staple",
         "imagePath": "images/dishes/staple/煮锅蒸米饭.jpeg",
@@ -14102,6 +14499,7 @@
         "extra_text": "腐国人研究煮米饭，好想送他们个电饭煲！"
       },
       {
+        "id": "howtocook/煮泡面加蛋",
         "name": "煮泡面加蛋",
         "category": "staple",
         "imagePath": "images/dishes/staple/煮泡面加蛋.jpeg",
@@ -14141,6 +14539,7 @@
     "count": 83,
     "recipes": [
       {
+        "id": "howtocook/拔丝土豆",
         "name": "拔丝土豆",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/拔丝土豆.jpeg",
@@ -14174,6 +14573,7 @@
         "extra_text": "* 土豆煎炸不可太熟透，否则在拔丝端盘时不容易定型，影响美观\n* 对于使用剩余的食用油，可以考虑重新收集到油壶。"
       },
       {
+        "id": "howtocook/白灼菜心",
         "name": "白灼菜心",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/白灼菜心.jpeg",
@@ -14207,6 +14607,7 @@
         "extra_text": "- 选择菜心一定要比较新鲜！新鲜！\n- 锅内烧清水要加油和盐"
       },
       {
+        "id": "随便做/板栗扒白菜",
         "name": "板栗扒白菜",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -14238,6 +14639,7 @@
         "extra_text": "- 鸡汤吊法：鸡1800g，水10斤，高压锅内50min\n- 水必须烧开再下白菜，否则会有臭气味\n- 勾芡要适量，确保白菜挂上汤汁即可"
       },
       {
+        "id": "howtocook/包菜炒鸡蛋粉丝",
         "name": "包菜炒鸡蛋粉丝",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/包菜炒鸡蛋粉丝.jpeg",
@@ -14274,6 +14676,7 @@
         "steps_text": "1. 胡萝卜、包菜切丝备用\n2. 粉丝先用冷水浸泡 1 小时，然后将粉丝放入锅中，加入开水烧至粉丝烫软捞出备用\n3. 鸡蛋打入碗中，加入盐后搅拌 15 秒\n4. 葱、蒜、辣椒切成小粒备用\n5. 起锅烧油，倒入鸡蛋，打散炒熟盛出\n6. 再倒入油，放入葱、蒜、干辣椒翻炒 8 秒\n7. 下胡萝卜、包菜丝儿翻炒 30 秒\n8. 放入粉丝\n9. 放调料，生抽 15 ml，老抽 10 ml，蚝油 10 ml，盐 2 克\n10. 放入之前炒好的鸡蛋，翻炒约 15 秒\n11. 出锅摆盘\n\n![示例菜成品](./1.jpg)"
       },
       {
+        "id": "howtocook/菠菜炒鸡蛋",
         "name": "菠菜炒鸡蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/菠菜炒鸡蛋.jpeg",
@@ -14306,6 +14709,7 @@
         "steps_text": "1. 菠菜去根，洗净，放在篮子里，焯水\n2. 将鸡蛋打入碗中，搅匀\n3. 热锅，加入 10ml 油\n4. 油热后，倒入鸡蛋液，中火翻炒 15 秒，先煎成蛋饼，然后再用锅铲切成小块\n5. 关火，将鸡蛋块 盛到盘子中，不要洗锅\n6. 重新开火，倒入 5ml 油，油热后，放入菠菜，大火 翻炒 15 秒后，倒入鸡蛋块，翻炒均匀\n7. 加入 5g 盐、100ml 饮用水，大火 翻炒 10 秒\n8. 关火，盛盘"
       },
       {
+        "id": "howtocook/炒滑蛋",
         "name": "炒滑蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/炒滑蛋.jpeg",
@@ -14337,6 +14741,7 @@
         "extra_text": "- 最后可根据个人口味撒些黑胡椒或者盐来调味。\n\n参考资料\n\n- [甜琛廚房](http://sweetheartkitchen.com/recipes/scrambled-egg/)"
       },
       {
+        "id": "howtocook/炒茄子",
         "name": "炒茄子",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -14376,6 +14781,7 @@
         "extra_text": "- 过敏原：花生\n- 过敏原：海鲜"
       },
       {
+        "id": "howtocook/炒青菜",
         "name": "炒青菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/炒青菜.jpeg",
@@ -14402,6 +14808,7 @@
         "extra_text": "加入白糖，会让青菜颜色更绿。"
       },
       {
+        "id": "howtocook/葱煎豆腐",
         "name": "葱煎豆腐",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/葱煎豆腐.jpeg",
@@ -14435,6 +14842,7 @@
         "steps_text": "1. 豆腐洗净。切约 5 mm 厚度，置于碟中。\n2. 葱洗净，除去根部，切成葱花，备用。\n3. 辣椒洗净，切开，去籽，切成 1cm * 1cm 状，备用、\n4. 热锅，加入份数 * 9ml 油。\n5. 油入锅后，使其均匀布于锅底，均匀放入豆腐，小火煎至金黄翻面。\n6. 待两面金黄，盛入碟中备用。\n7. 补油至覆盖锅底，倒入辣椒大火翻炒，并铲碾 3 分钟。\n8. 倒入豆腐，翻炒，加入盐与鸡精，中火翻炒 1 分钟后倒入 10 ML 水，大火收汁。\n9. 出锅前撒上之前计算好的葱花，起锅盛盘。"
       },
       {
+        "id": "随便做/葱烧豆腐",
         "name": "葱烧豆腐",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -14472,6 +14880,7 @@
         "extra_text": "- 豆腐要煎到两面金黄才能有外焦里嫩的口感\n- 葱要分两次下锅，第一次煸香的葱要捞出，最后再放入\n- 烧制时间不宜过长，避免豆腐破碎\n- 勾芡要在最后进行，芡汁要薄而均匀"
       },
       {
+        "id": "随便做/葱烧腐竹",
         "name": "葱烧腐竹",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -14503,6 +14912,7 @@
         "extra_text": "- 炸葱时火候要控制好，葱丝炸黄即可，葱段要慢慢炸透\n- 腐竹要提前泡水，泡至软身再炸\n- 葱段浸汤后再烧可以让葱香更好地渗透"
       },
       {
+        "id": "随便做/醋溜白菜",
         "name": "醋溜白菜",
         "category": "vegetable_dish",
         "difficulty": 1,
@@ -14534,6 +14944,7 @@
         "extra_text": "- 白菜要大火快炒，保持脆嫩口感\n- 碗汁提前调好可以加快烹饪节奏\n- 勾芡要在白菜变软后进行"
       },
       {
+        "id": "随便做/醋溜木须",
         "name": "醋溜木须",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -14565,6 +14976,7 @@
         "extra_text": "- 腌制醋溜木须时，加完水之后加淀粉，是为了锁住水分\n- 腌制肉的时候，如果肉稍微老一点，每1斤肉放2g小苏打，腌上半小时再做，肉就会很嫩\n- 羊肉片要切薄一些，这样更容易熟且口感嫩"
       },
       {
+        "id": "howtocook/脆皮豆腐",
         "name": "脆皮豆腐",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -14603,6 +15015,7 @@
         "extra_text": "- 过敏原：蛋\n- 过敏原：麸质"
       },
       {
+        "id": "howtocook/地三鲜",
         "name": "地三鲜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/地三鲜.jpeg",
@@ -14640,6 +15053,7 @@
         "extra_text": "* 糖比淀粉多是非常合理的。淀粉在这里不负责提供味道，它只是一种物理增稠剂。\n* 茄子在煎炸以后，体积会缩小 4 倍。所以拿的时候可能会注意到茄子下锅很多，出锅很少。这是正常的。\n* 青椒下锅的瞬间可能会爆发很多水分，导致油飞溅。务必下锅时用锅盖当盾牌挡在身前，小心下锅。"
       },
       {
+        "id": "随便做/风味茄子",
         "name": "风味茄子",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -14678,6 +15092,7 @@
         "extra_text": "- 茄子条可以适当切细一些，便于挂淀粉和炸透\n- 炸茄子时油温不能太低，否则茄子会吸油\n- 复炸一遍可以让茄子更加酥脆\n- 料汁要提前兑好，一次性倒入快速翻匀"
       },
       {
+        "id": "howtocook/干锅花菜",
         "name": "干锅花菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/干锅花菜.jpeg",
@@ -14711,6 +15126,7 @@
         "steps_text": "1. 花菜朵朝下，没入淡盐水中浸泡 20 分钟。然后洗净用小刀拆成小朵\n2. 入开水锅中焯水 1 分钟，捞出立即用冷水冲淋至完全凉透，沥水备用\n3. 五花肉切成薄片，大蒜白色切下用刀背拍扁，小红辣椒切成段\n4. 锅烧热放油，油热下大葱白爆香\n5. 下五花肉片入锅，用中火煸炒至表面全部变色，继续煸炒一会儿，把肥肉部分的油份逼出一部分\n6. 倒入红辣椒段和花菜，翻炒几下\n7. 加入 10 ml 生抽\n8. 再加入 5 g 白糖，转大火不断翻炒 1 分钟\n9. 把大蒜叶部分切成段，放入锅中，翻炒几下后，关火盖上盖子焖 1 分钟即可"
       },
       {
+        "id": "随便做/裹烧豆腐",
         "name": "裹烧豆腐",
         "category": "vegetable_dish",
         "difficulty": 4,
@@ -14755,6 +15171,7 @@
         "extra_text": "- 豆腐抓碎时要趁热，容易操作\n- 糊要调成非牛顿力流体状态，炸出来更酥脆\n- 豆腐块两面都要裹糊，确保炸制均匀\n- 油温测试时糊能飘起来即可下锅"
       },
       {
+        "id": "howtocook/蚝油三鲜菇",
         "name": "蚝油三鲜菇",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/蚝油三鲜菇.jpeg",
@@ -14798,6 +15215,7 @@
         "steps_text": "1. 蟹味菇、白玉菇 去掉根部泥土，掰散菌朵\n2. 香菇切片（每片厚度 0.5-1 cm，厚点相对薄点更有嚼劲）\n3. 生粉倒入小碗中，加入 50ml 水，搅拌生粉直至融化没有颗粒（即水淀粉）备用\n4. 水开，放入西蓝花，清水煮 3 分钟，放入碗中备用\n5. 洗锅烧开水，加入 5 g 食用盐，倒入蟹味菇、白玉菇、香菇，水煮 1 分钟\n6. 1 分钟后，捞出沥干水分\n7. 起锅烧油，待油开始冒小泡，放入姜末、小米辣、菜椒 煸炒 30 S\n8. 倒入三鲜菇，然后依次倒入生抽、蚝油、鸡精，翻炒均匀后，倒入水淀粉\n9. 中火烧干汁，加入料酒、葱花 出锅\n10. 摆上西蓝花\n\n![示例菜成品](./1.jpeg)\n![示例菜成品](./2.jpeg)"
       },
       {
+        "id": "howtocook/蚝油生菜",
         "name": "蚝油生菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/蚝油生菜.jpeg",
@@ -14833,6 +15251,7 @@
         "extra_text": "这道菜富含维生素，做法简单，尝起来爽口又不上火。"
       },
       {
+        "id": "随便做/河南蒸菜",
         "name": "河南蒸菜",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -14865,6 +15284,7 @@
         "extra_text": "- 萝卜丝清洗后要控水，但不要控太干，否则面粉裹不上\n- 拌粉时不要太用力揉，轻轻抓捏即可保持蔬菜的蓬松\n- 蒸制时间不宜过长，3分钟足够\n- 蒜汁可以提前做好让味道融合"
       },
       {
+        "id": "howtocook/红烧冬瓜",
         "name": "红烧冬瓜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/红烧冬瓜.jpeg",
@@ -14902,6 +15322,7 @@
         "steps_text": "1. 冬瓜去皮，切 边长不超过 2cm 小块\n2. 起锅烧油，放入冬瓜，缓缓翻滚煎炸 2 分钟 ，直至冬瓜表面泛金黄色\n3. 取出冬瓜，放入大碗备用\n4. 利用锅中的剩余油，依次放入姜末、生抽、蚝油，翻炒 15 S\n5. 重新倒入冬瓜，翻炒 30 S 后，加入开水，水要没过冬瓜表面，大火煮 10 分钟\n6. 加入老抽上色，继续煮，直至冬瓜软糯（筷子可以轻松插近冬瓜）\n7. 加入鸡精、料酒、香葱翻炒后 30 S， 取出冬瓜到大碗中\n8. 锅中剩余汤汁保留，倒入水淀粉，煮开后汤汁浇灌在冬瓜表面\n\n![示例菜成品](./1.jpeg)\n![示例菜成品](./2.jpeg)"
       },
       {
+        "id": "howtocook/红烧茄子",
         "name": "红烧茄子",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/红烧茄子.jpeg",
@@ -14944,6 +15365,7 @@
         "extra_text": "在操作的第 4-6 步骤中要注意：\n一定要顺序执行，否则会有灾难性错误......"
       },
       {
+        "id": "howtocook/虎皮青椒",
         "name": "虎皮青椒",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/虎皮青椒.jpeg",
@@ -14977,6 +15399,7 @@
         "extra_text": "![虎皮青椒](./虎皮青椒.jpg)"
       },
       {
+        "id": "howtocook/话梅煮毛豆",
         "name": "话梅煮毛豆",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/话梅煮毛豆.jpeg",
@@ -15006,6 +15429,7 @@
         "steps_text": "1. 清水加入食用盐，毛豆浸泡 15 分钟\n2. 加入开水，倒入毛豆、话梅，水煮 20-30 分钟\n3. 起锅开吃\n\n![示例菜成品](./1.jpeg)"
       },
       {
+        "id": "howtocook/鸡蛋羹",
         "name": "鸡蛋羹",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/鸡蛋羹.jpeg",
@@ -15040,6 +15464,7 @@
         "extra_text": "- 上面介绍的是基础水蒸蛋做法，可以在此基础上派生，添加诸如火腿肠、肉馅、虾皮等材料，丰富鸡蛋羹的口感\n- 鸡蛋 1 个约为 50±5g。若使用其他品种蛋品可按比例增减水量\n- 一定要确保将鸡蛋打散，否则可能会发生轻度鸡蛋爆炸\n- 鸡蛋和水不能超过碗容量的 2/3，否则可能发生溢出"
       },
       {
+        "id": "howtocook/鸡蛋花",
         "name": "鸡蛋花",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/鸡蛋花.jpeg",
@@ -15072,6 +15497,7 @@
         "extra_text": "- 为了防止生鸡蛋中可能含有的沙门氏菌，建议使用刚烧开的、100 ℃ 的滚水，瞬间将鸡蛋液完全烫熟。"
       },
       {
+        "id": "howtocook/鸡蛋火腿炒黄瓜",
         "name": "鸡蛋火腿炒黄瓜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/鸡蛋火腿炒黄瓜.jpeg",
@@ -15106,6 +15532,7 @@
         "extra_text": "- 火腿是咸的，要在调味后才加入，这样不会让火腿也沾上盐"
       },
       {
+        "id": "howtocook/茄子炖土豆",
         "name": "茄子炖土豆",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/茄子炖土豆.jpeg",
@@ -15139,6 +15566,7 @@
         "extra_text": "在操作的第 5-7 步骤中要注意：在此过程中注意锅底如果没有液体（油或水），则加 5 毫升的水再继续翻炒。"
       },
       {
+        "id": "howtocook/家常日本豆腐",
         "name": "家常日本豆腐",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/家常日本豆腐.jpeg",
@@ -15185,6 +15613,7 @@
         "extra_text": "- 煎好的豆腐不要放太久，提前准备好配料\n- 参考资料：[【步骤图】家常红烧日本豆腐～超级下饭菜！🎊的做法_家常红烧日本豆腐～超级下饭菜！🎊的做法步骤_下饭菜_下厨房](https://www.xiachufang.com/recipe/104370279/)"
       },
       {
+        "id": "随便做/尖椒干豆腐",
         "name": "尖椒干豆腐",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -15212,6 +15641,7 @@
         "extra_text": "- 干豆腐焯水可以去除豆腥味\n- 勾芡要均匀，确保每片干豆腐都挂上汁\n- 尖椒和葱蒜分两次炒制，增加香气层次"
       },
       {
+        "id": "howtocook/椒盐玉米",
         "name": "椒盐玉米",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/椒盐玉米.jpeg",
@@ -15243,6 +15673,7 @@
         "extra_text": "玉米粒不要自己剥，费手的，可以直接外卖软件买菜”已经剥好的玉米粒“，30 分钟 送达后温水解冻。\n开水解冻慢就拿开水煮！（ 千万别煮玉米本身，带着包装一起煮，撕掉一个口\n\n\n![椒盐玉米](./椒盐玉米.jpeg)"
       },
       {
+        "id": "howtocook/金钱蛋",
         "name": "金钱蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/金钱蛋.jpeg",
@@ -15284,6 +15715,7 @@
         "extra_text": "- 原汁原味的做法建议放 15 g，不能吃辣的减少到 6 g，还可以剔除辣椒籽\n- 推荐使用不粘锅，使用不粘锅时初次放油可以减少 5 ml\n- 应确保鸡蛋剥皮时已经完全凝固\n- 不宜过度翻炒，容易散\n- 参考资料：[【步骤图】湘菜馆-金钱蛋的做法_湘菜馆-金钱蛋的做法步骤_家常菜_下厨房](https://www.xiachufang.com/recipe/107161729/)"
       },
       {
+        "id": "howtocook/金针菇日本豆腐煲",
         "name": "金针菇日本豆腐煲",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/金针菇日本豆腐煲.jpeg",
@@ -15323,6 +15755,7 @@
         "extra_text": "- 金针菇一定要先炒软\n- 豆腐尽量不要翻炒，容易碎"
       },
       {
+        "id": "howtocook/烤茄子",
         "name": "烤茄子",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/烤茄子.jpeg",
@@ -15359,6 +15792,7 @@
         "extra_text": "最终成品和楼下烧烤摊的烤茄子差不多，太香了！\n\n**注意事项：**\n茄子表面有水分、未涂满食用油或未使用叉子扎孔可能导致**茄子在烤制的过程中爆裂**\n\n**可以改进的环节：**\n第一次用刀划口子的时候，可以直接将茄子竖直切成两半，然后切割出纹路后涂抹上酱料\n\n![示例菜成品](./烤茄子.jpg)"
       },
       {
+        "id": "howtocook/榄菜肉末四季豆",
         "name": "榄菜肉末四季豆",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/榄菜肉末四季豆.jpeg",
@@ -15388,6 +15822,7 @@
         "steps_text": "1. 将四季豆洗净，并把筋撕干净，然后切成大小均匀的颗粒备用。\n2. 将大蒜拍碎剁成蒜末备用。\n3. 将小米辣切成大小均匀的颗粒备用。\n4. 将五花肉去皮，然后剁成肉末备用。\n5. 将锅烧热，然后加入 20ml 油滑锅，锅滑好之后将热油倒出，然后加入 10ml 冷油，这就是传说中热锅冷油，这么做主要是防止肉末粘锅。\n6. 如果家里没有晾油瓶的话，也可以不用滑锅，放入油之后，直接加入肉末开始煸炒，小火煸炒两分钟，炒出猪油。\n7. 肉末炒香之后加入蒜末，橄榄菜和小米辣，炒出香味。\n8. 加入四季豆开中火煸炒，四季豆至少要炒 5 分钟，一定要保证四季豆**熟透**，否则可能会食物中毒。\n9. 四季豆炒熟后加入 2ml 酱油从锅边淋入，然后加入 2g 盐、1g 鸡精、1g 胡椒粉和 0.5g 糖。\n10. 将调料翻炒均匀。\n11. 出锅，装盘。"
       },
       {
+        "id": "howtocook/雷椒皮蛋",
         "name": "雷椒皮蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/雷椒皮蛋.jpeg",
@@ -15427,6 +15862,7 @@
         "steps_text": "1. 青椒清洗，去除根部，侧面切开，去除内部的子后在案板压平，备用（一定要去除青椒子，否则会在锅里炸开）\n2. 葱切成半厘米小段，备用\n3. 蒜去皮，切成碎末，备用\n4. 皮蛋去皮，备用\n5. 小米辣，切成 5-10mm 的小段，备用\n6. 热锅，锅内放入 10ml - 20ml 食用油\n7. 放入全部青椒，改小火保持锅子温度，煎至青椒变软（可以用筷子试一下，插入即透即可）\n8. 关火，将皮蛋和青椒放入小铁盆中\n9. 方法 1： 有擀面杖且砸东西不会吵到邻居：用擀面杖的一头在小盆中砸击皮蛋和青椒，至皮蛋与青椒混合（选项）\n10. 方法 2：将青椒用手撕开，撕成大约半厘米的条状，用叉子将皮蛋压碎（选项）\n11. 小米辣\n12. 倒入生抽，陈醋，白糖，香油，以及其他未使用的备用食材\n13. 均匀搅拌"
       },
       {
+        "id": "howtocook/凉拌豆腐",
         "name": "凉拌豆腐",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌豆腐.jpeg",
@@ -15465,6 +15901,7 @@
         "extra_text": "- 制作凉拌豆腐时，建议选用质地较硬的北豆腐或老豆腐，不易碎裂，口感更佳。\n- 如果喜欢更清淡的口感，可以省略醋和辣椒油。\n- 酱汁的比例可以根据个人口味进行调整。"
       },
       {
+        "id": "howtocook/凉拌黄瓜",
         "name": "凉拌黄瓜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌黄瓜.jpeg",
@@ -15497,6 +15934,7 @@
         "extra_text": "* 部分情况下黄瓜端头有苦味，请洗净切下后确认\n* 做好之后直接开吃，亦可先准备好后放入冰箱冷藏（并非冷冻）后食用\n* 若放入冰箱冷藏，则需使用保鲜膜包紧，并在 8 小时内食用完毕，否则黄瓜会因过度腌制失去清脆口感\n* 推荐黄瓜去皮，口感更好"
       },
       {
+        "id": "howtocook/凉拌金针菇",
         "name": "凉拌金针菇",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌金针菇.jpeg",
@@ -15533,6 +15971,7 @@
         "extra_text": "- 金针菇焯水时间不宜过长，以免影响口感。\n- 酱汁的比例可以根据个人口味喜好进行调整。\n- 如果不喜欢吃辣，可以省略辣椒油。"
       },
       {
+        "id": "howtocook/凉拌木耳",
         "name": "凉拌木耳",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌木耳.jpeg",
@@ -15569,6 +16008,7 @@
         "extra_text": "* 调味品的数量可以根据个人口味进行调整, 如果不喜欢芥末, 可以不加入。\n* 等木耳冷却入味后口味更佳, 约 15 分钟。"
       },
       {
+        "id": "howtocook/凉拌莴笋",
         "name": "凉拌莴笋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌莴笋.jpeg",
@@ -15603,6 +16043,7 @@
         "extra_text": "* 萝卜非必须，只是为了增加菜色\n* 端盘后，可以根据个人口味，额外增加生抽、白砂糖、香醋、芝麻等佐料\n* 莴笋条的大小看个人口感决定，但莴笋皮要尽量多削点，不然真的影响口感\n* 冰镇效果更加"
       },
       {
+        "id": "howtocook/凉拌油麦菜",
         "name": "凉拌油麦菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/凉拌油麦菜.jpeg",
@@ -15641,6 +16082,7 @@
         "extra_text": "* 芝麻酱可以用花生酱代替\n* 芝麻酱一定要和油麦菜混合均匀才更好吃."
       },
       {
+        "id": "随便做/凉拌炸青椒",
         "name": "凉拌炸青椒",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -15672,6 +16114,7 @@
         "extra_text": "- 青椒炸制时火不能太大，以免炸焦\n- 炸好的青椒要用勺子压一压，排出内部气体\n- 浸泡时间越长越入味，建议2小时以上\n- 这道菜可以保存较长时间，是万能小菜"
       },
       {
+        "id": "随便做/凉菜合集（浇汁松花蛋、拍黄瓜、捞汁秋葵、老醋花生米）",
         "name": "凉菜合集（浇汁松花蛋、拍黄瓜、捞汁秋葵、老醋花生米）",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -15714,6 +16157,7 @@
         "extra_text": "- 凉菜现做现吃口感最好\n- 秋葵焯水时加盐和油可保持颜色翠绿\n- 花生米要凉油下锅，炸至没有噼啪声即可捞出\n- 老醋汁要熬到黏稠才能裹住花生米"
       },
       {
+        "id": "随便做/麻婆豆腐",
         "name": "麻婆豆腐(随便做)",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/meat_dish/麻婆豆腐.jpeg",
@@ -15760,6 +16204,7 @@
         "extra_text": "- 豆腐要选择韧豆腐，不容易碎\n- 勾芡要分多次，这样豆腐才能均匀裹上芡汁\n- 牛肉末要炒干炒香，才能出现酥的口感"
       },
       {
+        "id": "howtocook/皮蛋豆腐",
         "name": "皮蛋豆腐",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/皮蛋豆腐.jpeg",
@@ -15802,6 +16247,7 @@
         "extra_text": "- 豆腐先焯水去豆腥味可以去除豆腥味\n- 皮蛋切瓣时刀上可以抹点香油防止粘刀\n- 参考资料：[涼拌皮蛋豆腐 by 低配版小當家 - 愛料理](https://icook.tw/recipes/437531)"
       },
       {
+        "id": "howtocook/蒲烧茄子",
         "name": "蒲烧茄子",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/蒲烧茄子.jpeg",
@@ -15837,6 +16283,7 @@
         "extra_text": "- 这个蒲焼き其实很中国，日式的蒲烧其实是烤的。\n- 灵魂其实在于蒲烧汁？也可以买现成的蒲烧汁。\n- 如果觉得腻可以在装盘后撒点切成 2~5 mm 的小葱，颜色搭配上也能不那么单调。\n- 炒茄子（鱼香茄子、酱爆茄子）墙裂推荐浙茄，细长所以切成滚刀块刚刚好，皮很嫩不像这里需要去皮，茄子的味道适中。"
       },
       {
+        "id": "随便做/炝拌菜心",
         "name": "炝拌菜心",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -15866,6 +16313,7 @@
         "extra_text": "- 油和盐同时放，油适当多些，就能保证不出汤（饺子馅同理）\n- 炸辣椒油时火候要小，避免炸糊\n- 娃娃菜要选黄心的，口感更嫩"
       },
       {
+        "id": "随便做/炝炒莲花白",
         "name": "炝炒莲花白",
         "category": "vegetable_dish",
         "difficulty": 1,
@@ -15900,6 +16348,7 @@
         "extra_text": "- 炝炒莲花白很注重火候，芯和叶成熟时间不同\n- 为了保持脆嫩的口感，只选叶\n- 圆白菜的量如何确定：拿出家中的锅，将圆白菜倒入，不能超过锅（家庭用火和酒店不同，温度不够）\n- 花椒和干辣椒的量可以根据个人口味调整"
       },
       {
+        "id": "howtocook/芹菜拌茶树菇",
         "name": "芹菜拌茶树菇",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/芹菜拌茶树菇.jpeg",
@@ -15936,6 +16385,7 @@
         "extra_text": "- 焯水时的水位需要没过芹菜\n- 芹菜叶太老太硬的话可以不要"
       },
       {
+        "id": "howtocook/清炒花菜",
         "name": "清炒花菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/清炒花菜.jpeg",
@@ -15966,6 +16416,7 @@
         "extra_text": "- 提前将花菜焯水可以缩短炒制时间，并使花菜更容易熟透。\n- 炒制时间可以根据个人喜欢的花菜软硬程度调整。喜欢脆一些可以缩短时间。"
       },
       {
+        "id": "howtocook/清蒸南瓜",
         "name": "清蒸南瓜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/清蒸南瓜.jpeg",
@@ -15995,6 +16446,7 @@
         "extra_text": "- 南瓜的品种不同，甜度和口感会有差异。老南瓜通常更甜更面。\n- 南瓜皮含有营养，如果喜欢也可以不去皮蒸，但需要彻底洗净。\n- 蒸的时间取决于南瓜块的大小和厚度，以及南瓜的品种。用筷子测试是判断是否蒸熟的好方法。"
       },
       {
+        "id": "随便做/砂锅豆腐",
         "name": "砂锅豆腐",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -16029,6 +16481,7 @@
         "extra_text": "- 用冻蟹是因为肉质会散一些，煮的汤会更加浓香\n- 豆腐一定要用手掰，不要刀切，这样才能保持口感\n- 鸡汤的做法：黄油鸡1000g、水5斤、猪皮500g，高压锅内熬50分钟\n- 大火滚20分钟让汤味更加浓郁"
       },
       {
+        "id": "howtocook/陕北熬豆角",
         "name": "陕北熬豆角",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/陕北熬豆角.jpeg",
@@ -16069,6 +16522,7 @@
         "extra_text": "- 加入西红柿后开始继续熬制后，需要偶尔翻搅防止糊底"
       },
       {
+        "id": "howtocook/上汤娃娃菜",
         "name": "上汤娃娃菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/上汤娃娃菜.jpeg",
@@ -16104,6 +16558,7 @@
         "steps_text": "1. 娃娃菜洗净, 竖着切开切成段。\n2. 葱 3g 切 小段。蒜 10g 切片。姜 10g 切小片。\n3. 皮蛋切成丁, 火腿肠或者午餐肉切成丁（1cm 大小的丁）\n4. 金针菇洗净撕开\n5. 烧热水娃娃菜放进去十秒钟出一下水捞出。\n6. 热锅凉油, 加热锅倒入油过一遍就倒出来, 重新倒入一点油。\n7. 调至小火加入葱姜蒜，煎炒出香味即可。\n8. 加入适 300g 清水（水量没过娃娃菜即可）, 放入娃娃菜, 金针菇, 午餐肉\n9. 加入调味料蚝油、糖、盐、味精烧开。\n10. 煮 3 分钟, 煮开后开始装盘, 盛出娃娃菜后皮蛋放在上面把汤汁浇上去就可以了\n11. \n\n    拍照技术有限, 味道还是很不错的"
       },
       {
+        "id": "howtocook/手撕包菜",
         "name": "手撕包菜",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -16141,6 +16596,7 @@
         "extra_text": "- 辣味菜品"
       },
       {
+        "id": "howtocook/水油焖蔬菜",
         "name": "水油焖蔬菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/水油焖蔬菜.jpeg",
@@ -16172,6 +16628,7 @@
         "extra_text": "* 不确定咸淡的情况， 可以先少放盐， 在出锅前尝味， 考虑调整加盐\n* 可以用鸡汤、骨头汤等替代水， 更好吃\n* 焖的时间不可过长"
       },
       {
+        "id": "howtocook/松仁玉米",
         "name": "松仁玉米",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16206,6 +16663,7 @@
         "extra_text": "- 过敏原：坚果\n- 饮食限制：vegetarian"
       },
       {
+        "id": "howtocook/素炒豆角",
         "name": "素炒豆角",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/素炒豆角.jpeg",
@@ -16241,6 +16699,7 @@
         "extra_text": "- 切豆角需要一定的刀工，不会的可以使用剪刀"
       },
       {
+        "id": "随便做/酸辣豆芽",
         "name": "酸辣豆芽",
         "category": "vegetable_dish",
         "difficulty": 1,
@@ -16269,6 +16728,7 @@
         "extra_text": "- 炒豆芽不出汤的关键：\n  1. 锅一定要热（旺火爆炒）\n  2. 豆芽适量，刚好能炒一锅就行\n  3. 炒豆芽时锅不离火，不往上抬，让锅持续加热\n- 豆芽要选短粗的，不要选泡过水的\n- 整个过程要保持大火快炒"
       },
       {
+        "id": "随便做/酸辣土豆丝",
         "name": "酸辣土豆丝(随便做)",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/酸辣土豆丝.jpeg",
@@ -16306,6 +16766,7 @@
         "extra_text": "- 土豆丝要切得粗细均匀，这样成熟度一致\n- 先小火炒香蒜和辣椒，再加入土豆丝\n- 土豆丝炒至半透明即为熟了，不要炒过头\n- 米醋和陈醋结合可以产生更好的酸度层次"
       },
       {
+        "id": "随便做/酸辣小黄瓜",
         "name": "酸辣小黄瓜",
         "category": "vegetable_dish",
         "difficulty": 1,
@@ -16335,6 +16796,7 @@
         "extra_text": "- 花椒油是点睛之笔，不可省略\n- 炼花椒油的方法：花椒倒入油里炸香倒出来（比例大约为：100g油：20个花椒粒）\n- 黄瓜杀水后要挤干净水分，这样更容易入味\n- 制作完成后可以放入冰箱冷藏，口感更佳"
       },
       {
+        "id": "随便做/酸萝卜炒百叶",
         "name": "酸萝卜炒百叶",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16373,6 +16835,7 @@
         "extra_text": "- 这个版本不太辣，想吃更辣的，可以多加点辣椒\n- 百叶焯水时间要控制好，保持脆嫩口感\n- 酸萝卜本身有咸味，加盐时要减少用量\n- 全程大火快炒，保持食材的脆嫩"
       },
       {
+        "id": "howtocook/蒜蓉空心菜",
         "name": "蒜蓉空心菜",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/蒜蓉空心菜.jpeg",
@@ -16406,6 +16869,7 @@
         "extra_text": "* 空心菜尽量选择新鲜，鲜嫩的，否则炒出来口感可能会比较老\n* 实际放入空心菜的量可以根据锅的大小决定，建议不超过一个锅，否则太多的话开始的翻动阶段和后续的翻炒，容易掉出少量空心菜到灶台\n* 炒空心菜时，一定要**开大火**，这样空心菜才能快速变软的同时保持脆嫩的口感，大火也有利于炒出生抽的香味。"
       },
       {
+        "id": "howtocook/蒜蓉西兰花",
         "name": "蒜蓉西兰花",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/蒜蓉西兰花.jpeg",
@@ -16439,6 +16903,7 @@
         "extra_text": "- 焯水时间不宜超过推荐时长，以免影响西兰花的口感和营养。\n- 如果想保留西兰花更脆的口感，可以缩短焯水时间。"
       },
       {
+        "id": "howtocook/糖拌西红柿",
         "name": "糖拌西红柿",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/糖拌西红柿.jpeg",
@@ -16469,6 +16934,7 @@
         "extra_text": "在制作过程中 请您小心使用刀具。"
       },
       {
+        "id": "随便做/文思豆腐",
         "name": "文思豆腐",
         "category": "vegetable_dish",
         "difficulty": 4,
@@ -16501,6 +16967,7 @@
         "extra_text": "- 这一步很重要，90%的人都在这一步都会失败\n- 一定不能用勺子搅，会把丝儿搅断"
       },
       {
+        "id": "howtocook/莴笋叶煎饼",
         "name": "莴笋叶煎饼",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/莴笋叶煎饼.jpeg",
@@ -16536,6 +17003,7 @@
         "extra_text": "* 选择莴笋叶是某省市买到的蔬菜包基本都包含莴笋，可以换成韭菜等\n* 莴笋叶直接焯水后凉拌有苦味，所以选择做成煎饼的配菜"
       },
       {
+        "id": "howtocook/西红柿炒鸡蛋",
         "name": "西红柿炒鸡蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/西红柿炒鸡蛋.jpeg",
@@ -16571,6 +17039,7 @@
         "extra_text": "这道菜根据不同的口味偏好，存在诸多版本，包括且不限于：\n\n* 快速做法：\n  - 直接在有`半熟鸡蛋`的锅中加入 `西红柿块`，与鸡蛋一起翻炒直至西红柿软烂\n  - 继续 第 10 步\n* 加入盐 改为 “加入两滴生抽”"
       },
       {
+        "id": "howtocook/西红柿豆腐汤羹",
         "name": "西红柿豆腐汤羹",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16610,6 +17079,7 @@
         "steps_text": "1. 西红柿切成小丁、鸡蛋打入碗中搅拌、豆腐切块备用\n2. 起锅烧油，放入姜片 5 S 后倒入入西红柿翻炒 30 S\n3. 锅中加入开水，汤水烧开，60 S 后到入鸡蛋液、豆腐块\n4. 汤水重新烧开后，加入水淀粉，沿一个方向搅拌 2 圈\n5. 加入鸡精、盐、香葱，30 S 后起锅\n\n![示例菜成品](./1.jpeg)"
       },
       {
+        "id": "howtocook/西葫芦炒鸡蛋",
         "name": "西葫芦炒鸡蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/西葫芦炒鸡蛋.jpeg",
@@ -16643,6 +17113,7 @@
         "steps_text": "1. 西红柿洗净，切成小块，备用\n2. 西葫芦洗净，切成边长约为 4cm 的菱形，备用\n3. 打三个鸡蛋到碗里，打散搅匀，备用\n4. 热锅，锅内放入 5ml - 10ml 食用油\n5. 倒入鸡蛋，保持翻炒至鸡蛋成固体，用锅铲分成小块后盛到碗里，备用\n6. 锅内放入 5ml - 10ml 食用油，倒入西红柿，炒至变软\n7. 倒入西葫芦一起翻炒均匀，放入 6g 食用盐，将火调小然后**等待 4 - 5 分钟**\n8. 倒入备用的鸡蛋，中火翻炒 15 秒\n9. 关火，盛盘"
       },
       {
+        "id": "随便做/咸蛋黄茄子",
         "name": "咸蛋黄茄子",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16677,6 +17148,7 @@
         "extra_text": "- 用勺背扒拉咸蛋黄，用勺子边容易把茄子杵烂\n- 油温要控制好，六成热即可\n- 茄子炸至软身后即可捞出，不要炸过头"
       },
       {
+        "id": "随便做/香辣土豆丝",
         "name": "香辣土豆丝",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16711,6 +17183,7 @@
         "extra_text": "- 土豆丝切好后要泡水去除淀粉，炸的时候更酥脆\n- 油炸时一次不要加太多土豆丝，以免粘连\n- 全程大火，炸至变硬变色即可\n- 最后关火用筷子抖散可以避免土豆丝破碎"
       },
       {
+        "id": "随便做/小白菜烧豆腐",
         "name": "小白菜烧豆腐",
         "category": "vegetable_dish",
         "difficulty": 2,
@@ -16749,6 +17222,7 @@
         "extra_text": "- 豆腐煎制时不要翻锅，以免破碎\n- 小白菜要先炒菜帮再炒菜叶，成熟度一致\n- 勾芡要稀薄，菜品更美观\n- 花椒油最后加入，增香提味"
       },
       {
+        "id": "howtocook/小炒藕丁",
         "name": "小炒藕丁",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/小炒藕丁.jpeg",
@@ -16783,6 +17257,7 @@
         "extra_text": "- 食用莲藕要挑选外皮呈黄褐色、肉肥厚而白的。如果发黑，有异味，则不宜食用。\n- 请尽量不要使用铁器，会导致莲藕发黑"
       },
       {
+        "id": "howtocook/洋葱炒鸡蛋",
         "name": "洋葱炒鸡蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/洋葱炒鸡蛋.jpeg",
@@ -16817,6 +17292,7 @@
         "steps_text": "1. 鸡蛋打入大碗中，加入洋葱片、盐后搅拌 60 S\n2. 起锅烧油，倒入鸡蛋，一面煎炸 30-45 S ，翻面继续翻炒，反复 2-3 分钟 后散上料酒出锅\n3. 鸡蛋装盘，散上葱花\n\n![示例菜成品](./1.jpeg)"
       },
       {
+        "id": "howtocook/印度葫芦丸子",
         "name": "印度葫芦丸子",
         "category": "vegetable_dish",
         "difficulty": 4,
@@ -16858,6 +17334,7 @@
         "extra_text": "- 辣味菜品\n- 饮食限制：vegetarian"
       },
       {
+        "id": "howtocook/印度土豆花菜",
         "name": "印度土豆花菜",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -16900,6 +17377,7 @@
         "extra_text": "- 辣味菜品\n- 饮食限制：vegetarian"
       },
       {
+        "id": "howtocook/油醋爆蛋",
         "name": "油醋爆蛋",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/vegetable_dish/油醋爆蛋.jpeg",
@@ -16938,6 +17416,7 @@
         "extra_text": "- 亲测老恒和酿造香醋零添加口味最好，醋香是本菜灵魂所在。"
       },
       {
+        "id": "随便做/油辣干锅土豆",
         "name": "油辣干锅土豆",
         "category": "vegetable_dish",
         "difficulty": 3,
@@ -16978,6 +17457,7 @@
         "extra_text": "- 土豆片要切得厚薄均匀，这样炸出来颜色一致\n- 土豆片焯水时间不能过长，否则会断裂\n- 炸土豆片时油温要控制好，六七成热下锅\n- 最后撒入剩余青蒜增加香味和色彩"
       },
       {
+        "id": "随便做/鱼香茄子",
         "name": "鱼香茄子(随便做)",
         "category": "vegetable_dish",
         "imagePath": "images/dishes/meat_dish/鱼香茄子.jpeg",
@@ -17021,6 +17501,7 @@
         "extra_text": "- 茄子丁大小要均匀，这样受热一致\n- 电饼铛煎茄子时可以盖上盖子，加速水分蒸发\n- 鱼香汁提前兑好，一次性倒入炒匀\n- 茄子煎到用铲子轻轻一按就烂的程度最好"
       },
       {
+        "id": "随便做/鱼香土豆泥",
         "name": "鱼香土豆泥",
         "category": "vegetable_dish",
         "difficulty": 2,
