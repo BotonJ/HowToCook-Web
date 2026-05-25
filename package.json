@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "check": "tsc -b --noEmit",
-    "generate-recipes": "tsx scripts/generate-recipes.ts",
+    "generate-recipes": "tsx scripts/generate-recipes.ts && tsx scripts/validate-data.ts",
     "generate-menu-pdfs": "tsx scripts/generate-menu-pdfs.ts",
     "compress-images": "tsx scripts/compress-images.ts"
   },
