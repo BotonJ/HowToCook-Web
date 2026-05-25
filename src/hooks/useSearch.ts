@@ -24,6 +24,11 @@ export function useSearch(
     [localRecipes],
   );
 
+  const sourceIds = useMemo(
+    () => new Set(localRecipes.map(r => r.source)),
+    [localRecipes],
+  );
+
   useEffect(() => {
     const trimmed = query.trim();
     if (!trimmed) {
@@ -39,7 +44,8 @@ export function useSearch(
       try {
         const response = await searchRecipes({ q: trimmed });
         const recipes = response.results
-          .map((r: ApiSearchResult) => transformSearchResult(r, localMap));
+          .map((r: ApiSearchResult) => transformSearchResult(r, localMap))
+          .filter(r => sourceIds.has(r.source));
         setResults(recipes);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Search failed');
@@ -50,7 +56,7 @@ export function useSearch(
     }, debounceMs);
 
     return () => clearTimeout(timer);
-  }, [query, localMap, debounceMs]);
+  }, [query, localMap, sourceIds, debounceMs]);
 
   return { results, loading, error };
 }
