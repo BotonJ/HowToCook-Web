@@ -72,23 +72,26 @@ export function RecipeDetail() {
   const { loading: recipesLoading } = useRecipes();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
+  const [localLoaded, setLocalLoaded] = useState(false);
   useEffect(() => {
-    if (!recipeId) { setLocalRecipe(null); return; }
+    if (!recipeId) { setLocalRecipe(null); setLocalLoaded(true); return; }
     let cancelled = false;
+    setLocalLoaded(false);
     getFullRecipeData()
       .then(cats => {
         if (cancelled) return;
         const all = cats.flatMap(c => c.recipes);
         setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
+        setLocalLoaded(true);
       })
-      .catch(() => {});
+      .catch(() => { if (!cancelled) setLocalLoaded(true); });
     return () => { cancelled = true; };
   }, [recipeId]);
 
   // API-first detail, falls back to localRecipe on error
   const { recipe, loading: detailLoading } = useRecipeDetail(recipeId, localRecipe);
 
-  const loading = recipesLoading || detailLoading;
+  const loading = recipesLoading || detailLoading || !localLoaded;
 
   useMeta({
     title: recipe?.name,
