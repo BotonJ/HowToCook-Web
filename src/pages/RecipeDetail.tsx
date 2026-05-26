@@ -84,7 +84,12 @@ export function RecipeDetail() {
         setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
         setLocalLoaded(true);
       })
-      .catch(() => { if (!cancelled) setLocalLoaded(true); });
+      .catch((err) => {
+        if (!cancelled) {
+          console.warn('[RecipeDetail] local data load failed:', err instanceof Error ? err.message : err);
+          setLocalLoaded(true);
+        }
+      });
     return () => { cancelled = true; };
   }, [recipeId]);
 

@@ -39,7 +39,7 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
     />
   );
 }

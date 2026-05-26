@@ -83,7 +83,7 @@ async function fetchFromApiAndUpdate(): Promise<void> {
     cachedRecipes = recipes;
     notifyListeners(categories, recipes);
   } catch (err) {
-    console.warn('[useRecipes] API refresh failed, using local data:', err instanceof Error ? err.message : err);
+    // API refresh failed silently; local data is already loaded
   }
 }
 
@@ -167,10 +167,10 @@ export function useRecipes(): UseRecipesResult {
   }, []);
 
   const retry = () => {
-    // Reset cache and inflight so a fresh fetch happens
     cachedCategories = null;
     cachedRecipes = null;
     inflight = null;
+    fullDataCache = null;
     doLoad();
   };
 

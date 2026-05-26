@@ -79,10 +79,6 @@ export interface ApiCategoriesResponse {
   total: number;
 }
 
-export interface ApiCategoriesResponse {
-  categories: ApiCategory[];
-}
-
 export interface ApiVersionResponse {
   version: string;
   recipe_count: number;
