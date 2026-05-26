@@ -6,7 +6,7 @@ import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
-import { useRecipes, getFullRecipeData } from '@/hooks/useRecipes';
+import { getFullRecipeData } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
 
@@ -69,7 +69,6 @@ export function RecipeDetail() {
   const params = useParams();
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
-  const { loading: recipesLoading } = useRecipes();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -84,19 +83,17 @@ export function RecipeDetail() {
         setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
         setLocalLoaded(true);
       })
-      .catch((err) => {
-        if (!cancelled) {
-          console.warn('[RecipeDetail] local data load failed:', err instanceof Error ? err.message : err);
-          setLocalLoaded(true);
-        }
-      });
+      .catch(() => { if (!cancelled) setLocalLoaded(true); });
     return () => { cancelled = true; };
   }, [recipeId]);
 
-  // API-first detail, falls back to localRecipe on error
-  const { recipe, loading: detailLoading } = useRecipeDetail(recipeId, localRecipe);
+  // Only call API after local data is ready, so fallback is always valid
+  const { recipe, loading: detailLoading } = useRecipeDetail(
+    localLoaded ? recipeId : undefined,
+    localRecipe,
+  );
 
-  const loading = recipesLoading || detailLoading || !localLoaded;
+  const loading = !localLoaded || (localLoaded && detailLoading);
 
   useMeta({
     title: recipe?.name,
