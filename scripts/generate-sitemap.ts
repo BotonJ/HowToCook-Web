@@ -6,6 +6,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const SITE_URL = 'https://howtocook.cn';
 const DISHES_DIR = resolve(__dirname, '../../howtocook-skill/dishes');
 
+const CATEGORY_IDS = [
+  'meat_dish', 'vegetable_dish', 'staple', 'aquatic', 'breakfast',
+  'soup', 'drink', 'dessert', 'semi-finished', 'condiment', 'other',
+];
+
 interface RecipeEntry {
   id: string;
   name: string;
@@ -37,6 +42,12 @@ function generateSitemap(recipes: RecipeEntry[]): string {
   const urls = [
     { loc: SITE_URL, priority: '1.0', changefreq: 'daily' },
     { loc: `${SITE_URL}/about`, priority: '0.5', changefreq: 'monthly' },
+    { loc: `${SITE_URL}/credits`, priority: '0.3', changefreq: 'monthly' },
+    ...CATEGORY_IDS.map(cat => ({
+      loc: `${SITE_URL}/category/${cat}`,
+      priority: '0.6',
+      changefreq: 'weekly',
+    })),
     ...recipes.map(r => ({
       loc: `${SITE_URL}/recipe/${encodeURIComponent(r.id)}`,
       priority: '0.7',
