@@ -5,6 +5,7 @@ import { CategoryNav } from '@/components/CategoryNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
+import { WebsiteJsonLd } from '@/components/WebsiteJsonLd';
 import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
@@ -86,6 +87,7 @@ export function Home() {
 
   return (
     <Layout>
+      {!categoryId && <WebsiteJsonLd />}
       <SourceNav activeSource={activeSource} onSourceChange={setActiveSource} />
       <div className="mt-4 mb-2 px-2">
         <McpBanner />

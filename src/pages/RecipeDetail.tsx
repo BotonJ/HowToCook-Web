@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
+import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS, SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
@@ -99,7 +100,7 @@ export function RecipeDetail() {
     title: recipe?.name,
     description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name} 的做法` : undefined),
     ogImage: recipe?.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
-    ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.name)}` : undefined,
+    ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.id)}` : undefined,
   });
 
   if (loading) {
@@ -132,6 +133,7 @@ export function RecipeDetail() {
   return (
     <Layout>
       <RecipeJsonLd recipe={recipe} />
+      <BreadcrumbJsonLd categoryName={recipe.category} recipeName={recipe.name} />
       <div className="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         {/* Back button */}
         <button
