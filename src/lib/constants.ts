@@ -1,3 +1,5 @@
+export const SITE_URL = 'https://howtocook.cn';
+
 export const COOK_TIME_LABELS: Record<string, string> = {
   quick: '快手（<15 分钟）',
   medium: '适中（15-45 分钟）',

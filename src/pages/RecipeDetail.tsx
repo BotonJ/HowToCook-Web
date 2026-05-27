@@ -4,7 +4,7 @@ import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from
 import { Layout } from '@/components/Layout';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { withBaseUrl } from '@/lib/utils';
-import { COOK_TIME_LABELS, DIFFICULTY_LABELS } from '@/lib/constants';
+import { COOK_TIME_LABELS, DIFFICULTY_LABELS, SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 import { getFullRecipeData } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
@@ -98,8 +98,8 @@ export function RecipeDetail() {
   useMeta({
     title: recipe?.name,
     description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name} 的做法` : undefined),
-    ogImage: recipe?.imagePath ? `https://howtocook.cn/${recipe.imagePath}` : undefined,
-    ogUrl: recipe ? `https://howtocook.cn/recipe/${encodeURIComponent(recipe.name)}` : undefined,
+    ogImage: recipe?.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
+    ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.name)}` : undefined,
   });
 
   if (loading) {

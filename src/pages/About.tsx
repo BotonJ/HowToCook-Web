@@ -1,6 +1,13 @@
 import { Layout } from '@/components/Layout';
+import { useMeta } from '@/hooks/useMeta';
+import { SITE_URL } from '@/lib/constants';
 
 export function About() {
+  useMeta({
+    title: '关于',
+    description: 'HowToCook — AI 驱动的菜谱平台，500+ 道菜谱覆盖 17 大菜系，支持 MCP 协议接口。',
+    ogUrl: `${SITE_URL}/about`,
+  });
   return (
     <Layout>
       <div className="py-8 space-y-8 max-w-2xl">

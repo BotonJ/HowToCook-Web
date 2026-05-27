@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { SourceNav } from '@/components/SourceNav';
 import { CategoryNav } from '@/components/CategoryNav';
 import { McpBanner } from '@/components/McpBanner';
@@ -7,6 +7,8 @@ import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
 import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
+import { useMeta } from '@/hooks/useMeta';
+import { SITE_URL } from '@/lib/constants';
 
 const SOURCE_LABELS: Record<string, string> = {
   howtocook: 'HowToCook',
@@ -15,9 +17,19 @@ const SOURCE_LABELS: Record<string, string> = {
 
 export function Home() {
   const { categoryId } = useParams<{ categoryId: string }>();
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchParams] = useSearchParams();
+  const initialQuery = searchParams.get('q') || '';
+  const [searchTerm, setSearchTerm] = useState(initialQuery);
   const [activeSource, setActiveSource] = useState('howtocook');
   const { categories, loading, error, retry } = useRecipes();
+
+  useMeta({
+    title: categoryId
+      ? (categories.find(c => c.id === categoryId)?.displayName || '分类')
+      : undefined,
+    description: '做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。',
+    ogUrl: categoryId ? `${SITE_URL}/category/${categoryId}` : SITE_URL,
+  });
 
   const allRecipes = useMemo(() => {
     return categories

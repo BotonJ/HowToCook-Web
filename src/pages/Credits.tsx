@@ -1,4 +1,6 @@
 import { Layout } from '@/components/Layout';
+import { useMeta } from '@/hooks/useMeta';
+import { SITE_URL } from '@/lib/constants';
 
 const credits = [
   {
@@ -17,6 +19,12 @@ const credits = [
 ];
 
 export function Credits() {
+  useMeta({
+    title: '致谢',
+    description: '感谢 HowToCook 源仓库、随便做、金谷园等项目和创作者的贡献。',
+    ogUrl: `${SITE_URL}/credits`,
+  });
+
   return (
     <Layout>
       <div className="py-8 space-y-8">
