@@ -6,32 +6,39 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const SITE_URL = 'https://howtocook.cn';
 const DISHES_DIR = resolve(__dirname, '../../howtocook-skill/dishes');
 
-function getRecipeNames(): string[] {
-  const names: string[] = [];
+interface RecipeEntry {
+  id: string;
+  name: string;
+}
 
-  function scanDir(dir: string) {
+function getRecipes(): RecipeEntry[] {
+  const recipes: RecipeEntry[] = [];
+
+  function scanDir(dir: string, source = '') {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       if (entry.isDirectory()) {
-        scanDir(join(dir, entry.name));
+        const nextSource = source || entry.name;
+        scanDir(join(dir, entry.name), nextSource);
       } else if (entry.name.endsWith('.md') && entry.name !== 'README.md') {
         const name = entry.name.replace(/\.md$/, '');
-        names.push(name);
+        const id = source ? `${source}/${name}` : name;
+        recipes.push({ id, name });
       }
     }
   }
 
   scanDir(DISHES_DIR);
-  return names;
+  return recipes;
 }
 
-function generateSitemap(names: string[]): string {
+function generateSitemap(recipes: RecipeEntry[]): string {
   const today = new Date().toISOString().split('T')[0];
 
   const urls = [
     { loc: SITE_URL, priority: '1.0', changefreq: 'daily' },
     { loc: `${SITE_URL}/about`, priority: '0.5', changefreq: 'monthly' },
-    ...names.map(name => ({
-      loc: `${SITE_URL}/recipe/${encodeURIComponent(name)}`,
+    ...recipes.map(r => ({
+      loc: `${SITE_URL}/recipe/${encodeURIComponent(r.id)}`,
       priority: '0.7',
       changefreq: 'weekly',
     })),
@@ -50,8 +57,8 @@ ${urls.map(u => `  <url>
   return xml;
 }
 
-const names = getRecipeNames();
-const sitemap = generateSitemap(names);
+const recipes = getRecipes();
+const sitemap = generateSitemap(recipes);
 const outPath = resolve(__dirname, '../public/sitemap.xml');
 writeFileSync(outPath, sitemap, 'utf-8');
-console.log(`Generated sitemap.xml with ${names.length} recipes`);
+console.log(`Generated sitemap.xml with ${recipes.length} recipes`);
