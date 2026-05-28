@@ -25,6 +25,19 @@ const CATEGORY_MAP: Record<string, string> = {
   'dessert': '甜品'
 };
 
+const CATEGORY_ORDER = [
+  'breakfast',       // 早餐
+  'staple',          // 主食
+  'meat_dish',       // 荤菜
+  'vegetable_dish',  // 素菜
+  'aquatic',         // 水产
+  'soup',            // 汤粥
+  'drink',           // 饮品
+  'dessert',         // 甜品
+  'condiment',       // 酱料
+  'semi-finished',   // 半成品
+];
+
 interface IndexDish {
   name: string;
   difficulty: number;
@@ -330,7 +343,11 @@ function scanRecipes(): Category[] {
     });
   }
 
-  categories.sort((a, b) => a.name.localeCompare(b.name));
+  categories.sort((a, b) => {
+    const orderA = CATEGORY_ORDER.indexOf(a.id);
+    const orderB = CATEGORY_ORDER.indexOf(b.id);
+    return orderA - orderB;
+  });
   return categories;
 }
 
