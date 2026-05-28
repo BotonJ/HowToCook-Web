@@ -24,8 +24,11 @@ dist-ssr
 *.sw?
 .trae
 
-# Worklogs
+# Worklogs & dev docs
 worklogs/
+docs/
+fix-recipe-not-found.md
+*.txt
 
 # Environment
 .env

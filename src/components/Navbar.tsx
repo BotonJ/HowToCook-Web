@@ -16,6 +16,12 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link
+            to="/academy"
+            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+          >
+            烹饪学院
+          </Link>
+          <Link
             to="/about"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >

@@ -8,7 +8,7 @@ const DISHES_DIR = resolve(__dirname, '../../howtocook-skill/dishes');
 
 const CATEGORY_IDS = [
   'meat_dish', 'vegetable_dish', 'staple', 'aquatic', 'breakfast',
-  'soup', 'drink', 'dessert', 'semi-finished', 'condiment', 'other',
+  'soup', 'drink', 'dessert', 'semi-finished', 'condiment',
 ];
 
 interface RecipeEntry {

@@ -28,7 +28,8 @@ export function Home() {
     title: categoryId
       ? (categories.find(c => c.id === categoryId)?.displayName || '分类')
       : undefined,
-    description: '做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。',
+    description: '做饭指北 — 世界首个 AI 驱动的食谱百科与烹饪 Skill。',
+    ogImage: `${SITE_URL}/og.png`,
     ogUrl: categoryId ? `${SITE_URL}/category/${categoryId}` : SITE_URL,
   });
 

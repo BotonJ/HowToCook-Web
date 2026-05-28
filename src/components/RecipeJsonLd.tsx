@@ -65,14 +65,13 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
       estimatedCost: {
         '@type': 'MonetaryAmount',
         currency: 'CNY',
-        value: recipe.difficulty <= 2 ? '低' : recipe.difficulty <= 3 ? '中' : '高',
+        value: recipe.difficulty <= 2 ? 20 : recipe.difficulty <= 3 ? 50 : 100,
       },
     }),
     ...(recipe.tags?.diet && recipe.tags.diet.length > 0 && {
       suitableForDiet: recipe.tags.diet
         .map(d => DIET_SCHEMA[d])
-        .filter(Boolean)
-        .join(', '),
+        .filter(Boolean),
     }),
     publisher: {
       '@type': 'Organization',

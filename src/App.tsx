@@ -3,6 +3,8 @@ import { Home } from './pages/Home';
 import { RecipeDetail } from './pages/RecipeDetail';
 import { About } from './pages/About';
 import { Credits } from './pages/Credits';
+import { Tips } from './pages/Tips';
+import { TipDetail } from './pages/TipDetail';
 import { useRouteError } from 'react-router-dom';
 
 function ErrorBoundary() {
@@ -39,6 +41,16 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/academy",
+    element: <Tips />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/academy/:slug",
+    element: <TipDetail />,
     errorElement: <ErrorBoundary />,
   },
   {
