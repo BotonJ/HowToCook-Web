@@ -2824,7 +2824,7 @@
   {
     "id": "condiment",
     "name": "condiment",
-    "displayName": "酱料和其它材料",
+    "displayName": "酱料",
     "count": 9,
     "recipes": [
       {
@@ -3926,7 +3926,7 @@
   {
     "id": "drink",
     "name": "drink",
-    "displayName": "饮料",
+    "displayName": "饮品",
     "count": 24,
     "recipes": [
       {
@@ -10572,7 +10572,7 @@
   {
     "id": "semi-finished",
     "name": "semi-finished",
-    "displayName": "半成品加工",
+    "displayName": "半成品",
     "count": 10,
     "recipes": [
       {
@@ -10912,7 +10912,7 @@
   {
     "id": "soup",
     "name": "soup",
-    "displayName": "汤与粥",
+    "displayName": "汤粥",
     "count": 29,
     "recipes": [
       {

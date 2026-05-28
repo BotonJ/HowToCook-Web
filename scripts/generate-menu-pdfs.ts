@@ -20,11 +20,11 @@ const MENU_NAME_MAP: Record<string, string> = {
   aquatic: '水产',
   breakfast: '早餐',
   staple: '主食',
-  soup: '汤与粥',
-  drink: '饮料',
+  soup: '汤粥',
+  drink: '饮品',
   dessert: '甜品',
-  'semi-finished': '半成品加工',
-  condiment: '酱料和其它材料',
+  'semi-finished': '半成品',
+  condiment: '酱料',
 };
 
 async function embedImage(pdfDoc: PDFDocument, imagePath: string) {

@@ -22,10 +22,9 @@ export const CATEGORY_LABELS: Record<string, string> = {
   staple: '主食',
   aquatic: '水产',
   breakfast: '早餐',
-  soup: '汤品',
+  soup: '汤粥',
   drink: '饮品',
   dessert: '甜品',
   'semi-finished': '半成品',
   condiment: '酱料',
-  other: '其他',
 };
