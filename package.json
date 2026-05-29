@@ -14,6 +14,8 @@
     "compress-images": "tsx scripts/compress-images.ts"
   },
   "dependencies": {
+    "@fontsource-variable/literata": "^5.2.8",
+    "@fontsource/plus-jakarta-sans": "^5.2.8",
     "clsx": "^2.1.1",
     "framer-motion": "^12.27.5",
     "lucide-react": "^0.511.0",
