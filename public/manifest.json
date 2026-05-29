@@ -1,0 +1,28 @@
+{
+  "name": "做饭指北 - HowToCook",
+  "short_name": "做饭指北",
+  "description": "500+ 道菜谱，AI 驱动的食谱百科与烹饪 Skill",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A0B0D",
+  "theme_color": "#0A0B0D",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["food", "lifestyle", "utilities"],
+  "lang": "zh-CN",
+  "dir": "ltr"
+}
