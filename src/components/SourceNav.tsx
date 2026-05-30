@@ -7,8 +7,9 @@ interface SourceTab {
 }
 
 const sources: SourceTab[] = [
-  { id: 'howtocook', label: 'HowToCook' },
-  { id: '随便做', label: '随便做' },
+  { id: 'all', label: '全部' },
+  { id: 'zh', label: '中文' },
+  { id: 'en', label: 'English' },
 ];
 
 interface SourceNavProps {

@@ -15,6 +15,7 @@ export interface Recipe {
     diet?: string[];
   };
   source: string;
+  language?: string; // "zh" | "en", 默认 "zh"
   description?: string;
   ingredients_text?: string;
   calculation_text?: string;

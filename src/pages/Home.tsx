@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { SourceNav } from '@/components/SourceNav';
 import { CategoryNav } from '@/components/CategoryNav';
 import { McpBanner } from '@/components/McpBanner';
@@ -10,10 +10,27 @@ import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
 import { SITE_URL } from '@/lib/constants';
+import { getUiLang, getLabels } from '@/lib/ui-labels';
+import type { Recipe } from '@/types';
+
+interface FeaturedCollection {
+  id: string;
+  title: string;
+  filter: (r: Recipe) => boolean;
+}
+
+const FEATURED: FeaturedCollection[] = [
+  { id: 'chinese-recipes', title: 'Chinese Recipes', filter: (r) => r.cuisine === 'chinese' },
+  { id: 'chicken-recipes', title: 'Chicken', filter: (r) => r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')) },
+  { id: 'pasta', title: 'Pasta & Italian', filter: (r) => r.cuisine === 'italian' },
+  { id: 'baking', title: 'Baking', filter: (r) => r.source === 'professional_baking' || r.category === 'dessert' },
+  { id: 'air-fryer', title: 'Air Fryer', filter: (r) => r.name.toLowerCase().includes('air fryer') || r.ingredients.some((i) => i.toLowerCase().includes('air fryer')) },
+];
 
 const SOURCE_LABELS: Record<string, string> = {
-  howtocook: 'HowToCook',
-  '随便做': '随便做',
+  all: '全部',
+  zh: '中文',
+  en: 'English',
 };
 
 export function Home() {
@@ -21,23 +38,40 @@ export function Home() {
   const [searchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [searchTerm, setSearchTerm] = useState(initialQuery);
-  const [activeSource, setActiveSource] = useState('howtocook');
+  const [activeSource, setActiveSource] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
+
+  const t = getLabels(getUiLang(activeSource));
 
   useMeta({
     title: categoryId
-      ? (categories.find(c => c.id === categoryId)?.displayName || '分类')
+      ? (categories.find(c => c.id === categoryId)?.displayName || t.category)
       : undefined,
-    description: '做饭指北 — 世界首个 AI 驱动的食谱百科与烹饪 Skill。',
+    description: t.metaDesc,
     ogImage: `${SITE_URL}/og.png`,
     ogUrl: categoryId ? `${SITE_URL}/category/${categoryId}` : SITE_URL,
   });
 
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
   const allRecipes = useMemo(() => {
     return categories
       .flatMap(c => c.recipes)
-      .filter(recipe => recipe.source === activeSource);
+      .filter(recipe => {
+        if (activeSource === 'all') return true;
+        const lang = recipe.language || 'zh';
+        return lang === activeSource;
+      });
   }, [categories, activeSource]);
+
+  const featuredCollections = useMemo(() => {
+    if (categoryId || normalizedSearch) return [];
+    const all = categories.flatMap(c => c.recipes);
+    return FEATURED.map((col) => {
+      const picks = all.filter(col.filter).slice(0, 8);
+      return { ...col, recipes: picks };
+    }).filter((col) => col.recipes.length > 0);
+  }, [categories, categoryId, normalizedSearch]);
 
   const displayedRecipes = useMemo(() => {
     const list = categoryId
@@ -45,8 +79,6 @@ export function Home() {
       : allRecipes;
     return [...list].sort((a, b) => (a.imagePath ? 0 : 1) - (b.imagePath ? 0 : 1));
   }, [categoryId, allRecipes]);
-
-  const normalizedSearch = searchTerm.trim().toLowerCase();
 
   // API search (triggered when search term is present)
   const { results: searchResults, loading: searchLoading } = useSearch(searchTerm, allRecipes);
@@ -64,7 +96,7 @@ export function Home() {
       <Layout>
         <div className="text-center py-20">
           <div className="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-on-surface-variant text-lg font-body mt-4">加载菜谱中...</p>
+          <p className="text-on-surface-variant text-lg font-body mt-4">{t.loading}</p>
         </div>
       </Layout>
     );
@@ -79,7 +111,7 @@ export function Home() {
             onClick={retry}
             className="px-4 py-2 bg-primary text-on-primary rounded-lg font-body hover:opacity-90 transition"
           >
-            重试
+            {t.retry}
           </button>
         </div>
       </Layout>
@@ -95,21 +127,48 @@ export function Home() {
       </div>
       <CategoryNav categories={categories} />
 
+      {featuredCollections.length > 0 && (
+        <div className="mt-6 px-2">
+          <h2 className="font-display text-title-lg text-on-surface mb-3">{t.featured}</h2>
+          <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+            {featuredCollections.map((col) => (
+              <Link
+                key={col.id}
+                to={`/collection/${col.id}`}
+                className="flex-shrink-0 w-64 group"
+              >
+                <div className="bg-surface-container-low rounded-xl border border-outline-variant p-3 hover:border-primary transition">
+                  <p className="font-body text-label-lg text-primary group-hover:underline mb-2">{col.title}</p>
+                  <div className="flex flex-wrap gap-1">
+                    {col.recipes.slice(0, 4).map((r) => (
+                      <span key={r.id} className="text-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full truncate max-w-[120px]">
+                        {r.name}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-xs text-on-surface-variant mt-2">{t.recipes(col.recipes.length)}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="mt-6">
         <div className="mb-6 px-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="font-display text-headline-lg text-on-surface">
             {categoryId
-              ? categories.find(c => c.id === categoryId)?.displayName || '分类'
+              ? categories.find(c => c.id === categoryId)?.displayName || t.category
               : SOURCE_LABELS[activeSource] || activeSource}
             <span className="text-on-surface-variant text-body-md font-normal ml-3">
-              ({filteredRecipes.length} 道菜)
+              ({t.recipeCount(filteredRecipes.length)})
             </span>
           </h1>
           <div className="w-full sm:w-72 relative">
             <input
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="输入关键词搜索菜谱"
+              placeholder={t.searchPlaceholder}
               className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
             {searchLoading && (
@@ -120,7 +179,7 @@ export function Home() {
 
         <RecipeGrid
           recipes={filteredRecipes}
-          emptyMessage={normalizedSearch ? '未找到匹配的菜谱，试试其他关键词' : undefined}
+          emptyMessage={normalizedSearch ? t.emptySearch : undefined}
         />
       </div>
     </Layout>

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Home } from './pages/Home';
 import { RecipeDetail } from './pages/RecipeDetail';
+import { CollectionPage } from './pages/CollectionPage';
 import { About } from './pages/About';
 import { Credits } from './pages/Credits';
 import { Tips } from './pages/Tips';
@@ -37,6 +38,11 @@ const router = createBrowserRouter([
   {
     path: "/recipe/*",
     element: <RecipeDetail />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "/collection/:collectionId",
+    element: <CollectionPage />,
     errorElement: <ErrorBoundary />,
   },
   {

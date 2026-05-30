@@ -15,6 +15,7 @@ export function transformDishIndex(dish: DishIndex): Recipe {
     main_ingredients: dish.main_ingredients,
     tags: dish.tags,
     source: dish.source,
+    language: dish.language,
   };
 }
 

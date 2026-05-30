@@ -61,6 +61,7 @@ export interface DishIndex {
     diet?: string[];
   };
   has_duplicate?: boolean;
+  language?: string; // "zh" | "en", 默认 "zh"
 }
 
 export interface ApiRecipesResponse {
