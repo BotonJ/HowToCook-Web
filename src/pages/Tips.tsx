@@ -28,10 +28,10 @@ interface TipMeta {
 const tips = tipsData as TipMeta[];
 
 const CATEGORY_LABELS: Record<string, string> = {
-  technique: '技法',
-  equipment: '工具',
-  ingredient: '食材',
-  safety: '安全',
+  technique: 'Techniques',
+  equipment: 'Tools',
+  ingredient: 'Ingredients',
+  safety: 'Safety',
 };
 
 // ── Animated Counter ──────────────────────────────────────────────
@@ -68,10 +68,10 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
 // ── Stats Dashboard ───────────────────────────────────────────────
 
 const STATS = [
-  { label: '道菜谱', value: 481, icon: ChefHat, color: 'text-primary' },
-  { label: '个术语', value: 84, icon: BookOpen, color: 'text-tertiary' },
-  { label: '篇教程', value: 18, icon: Layers, color: 'text-secondary' },
-  { label: '待上线', value: 15000, suffix: '', icon: TrendingUp, color: 'text-on-surface-variant' },
+  { label: 'Recipes', value: 481, icon: ChefHat, color: 'text-primary' },
+  { label: 'Terms', value: 84, icon: BookOpen, color: 'text-tertiary' },
+  { label: 'Tutorials', value: 18, icon: Layers, color: 'text-secondary' },
+  { label: 'Coming Soon', value: 15000, suffix: '', icon: TrendingUp, color: 'text-on-surface-variant' },
 ];
 
 function StatsDashboard() {
@@ -117,41 +117,41 @@ interface RoadmapItem {
 
 const ROADMAP: RoadmapItem[] = [
   {
-    title: '技法教程',
-    description: '炒、蒸、煮、腌、焯水… 18 篇基础技法文章已就绪',
+    title: 'Technique Tutorials',
+    description: 'Stir-fry, steam, boil, marinate, blanch... 18 basic technique articles are ready',
     status: 'ready',
     progress: 100,
   },
   {
-    title: '术语词典',
-    description: '84 个中英对照烹饪术语，涵盖刀工、火候、调味',
+    title: 'Terminology Dictionary',
+    description: '84 bilingual cooking terms covering knife skills, heat control, and seasoning',
     status: 'building',
     progress: 60,
   },
   {
-    title: '15K 菜谱库',
-    description: 'HowToCook 开源菜谱全量接入，覆盖 17 大菜系',
+    title: '15K Recipe Library',
+    description: 'Full integration of HowToCook open-source recipes, covering 17 major cuisines',
     status: 'building',
     progress: 30,
   },
   {
-    title: '最小厨房指南',
-    description: '从锅具刀具到食品安全，14 模块入门手册',
+    title: 'Minimal Kitchen Guide',
+    description: 'From pots and knives to food safety, a 14-module beginner\'s handbook',
     status: 'planned',
     progress: 0,
   },
   {
-    title: '视频教程',
-    description: '关键技法配短视频演示，直观易学',
+    title: 'Video Tutorials',
+    description: 'Short video demos for key techniques, intuitive and easy to learn',
     status: 'planned',
     progress: 0,
   },
 ];
 
 const STATUS_CONFIG: Record<RoadmapStatus, { label: string; icon: typeof CheckCircle2; className: string }> = {
-  ready: { label: '已就绪', icon: CheckCircle2, className: 'bg-primary/10 text-primary' },
-  building: { label: '建设中', icon: Loader2, className: 'bg-tertiary/10 text-tertiary' },
-  planned: { label: '规划中', icon: Sparkles, className: 'bg-surface-container-highest text-on-surface-variant' },
+  ready: { label: 'Ready', icon: CheckCircle2, className: 'bg-primary/10 text-primary' },
+  building: { label: 'Building', icon: Loader2, className: 'bg-tertiary/10 text-tertiary' },
+  planned: { label: 'Planned', icon: Sparkles, className: 'bg-surface-container-highest text-on-surface-variant' },
 };
 
 function StatusBadge({ status }: { status: RoadmapStatus }) {
@@ -184,10 +184,10 @@ function ContentRoadmap() {
     <section className="space-y-4">
       <div className="flex items-center gap-2">
         <TrendingUp size={20} className="text-primary" />
-        <h2 className="font-display text-headline-lg text-on-surface">内容路线图</h2>
+        <h2 className="font-display text-headline-lg text-on-surface">Content Roadmap</h2>
       </div>
       <p className="font-body text-body-md text-on-surface-variant">
-        我们正在持续建设内容库，以下是各方向的进展。
+        We are continuously building the content library. Here is the progress across all areas.
       </p>
       <div className="grid gap-3">
         {ROADMAP.map((item, i) => (
@@ -227,28 +227,28 @@ interface ChangelogEntry {
 const CHANGELOG: ChangelogEntry[] = [
   {
     date: '2026-05-28',
-    title: 'SEO 优化上线',
-    description: '全站 JSON-LD 结构化数据、面包屑导航、Open Graph 标签完善。',
+    title: 'SEO Optimization Launched',
+    description: 'Site-wide JSON-LD structured data, breadcrumb navigation, Open Graph tags complete.',
   },
   {
     date: '2026-05-27',
-    title: '烹饪学院框架搭建',
-    description: '新增 /tips 路由、TipDetail 详情页、generate-tips 数据生成脚本。',
+    title: 'Cooking Academy Framework Built',
+    description: 'Added /tips route, TipDetail page, generate-tips data generation script.',
   },
   {
     date: '2026-05-25',
-    title: 'MCP Banner 上线',
-    description: '首页新增 Claude Code Skill 安装引导，一键复制安装命令。',
+    title: 'MCP Banner Launched',
+    description: 'Homepage added Claude Code Skill install guide with one-click copy.',
   },
   {
     date: '2026-05-20',
-    title: '多源菜谱接入',
-    description: '接入「随便做」和「金谷园」菜谱数据，支持来源切换。',
+    title: 'Multi-Source Recipe Integration',
+    description: 'Integrated Sui Bian Zuo and Jin Gu Yuan recipe data with source switching.',
   },
   {
     date: '2026-05-15',
-    title: '搜索功能上线',
-    description: 'API 搜索 + 本地 fallback，支持关键词实时搜索。',
+    title: 'Search Feature Launched',
+    description: 'API search + local fallback, supporting real-time keyword search.',
   },
 ];
 
@@ -257,7 +257,7 @@ function Changelog() {
     <section className="space-y-4">
       <div className="flex items-center gap-2">
         <Clock size={20} className="text-primary" />
-        <h2 className="font-display text-headline-lg text-on-surface">更新日志</h2>
+        <h2 className="font-display text-headline-lg text-on-surface">Changelog</h2>
       </div>
       <div className="relative pl-6 border-l-2 border-outline-variant space-y-6">
         {CHANGELOG.map((entry, i) => (
@@ -298,7 +298,7 @@ function TipsGrid() {
     <section className="space-y-4">
       <div className="flex items-center gap-2">
         <BookOpen size={20} className="text-primary" />
-        <h2 className="font-display text-headline-lg text-on-surface">技法教程</h2>
+        <h2 className="font-display text-headline-lg text-on-surface">Technique Tutorials</h2>
       </div>
       <div className="grid gap-3">
         {tips.map((tip) => (
@@ -329,8 +329,8 @@ function TipsGrid() {
 
 export function Tips() {
   useMeta({
-    title: '烹饪学院',
-    description: '烹饪基础知识、技法教程、厨房技巧 — 数据仪表盘、内容路线图、更新日志，一站式了解建设进展。',
+    title: 'Cooking Academy',
+    description: 'Cooking basics, technique tutorials, kitchen tips — data dashboard, content roadmap, changelog, all-in-one progress overview.',
     ogUrl: `${SITE_URL}/academy`,
   });
 
@@ -340,10 +340,10 @@ export function Tips() {
         {/* Header */}
         <div>
           <h1 className="font-display text-headline-xl text-on-surface mb-2">
-            烹饪学院
+            Cooking Academy
           </h1>
           <p className="font-body text-body-lg text-on-surface-variant">
-            从零开始的厨房指南 — 菜谱、技法、术语，持续建设中。
+            Kitchen guide from scratch — recipes, techniques, terms, continuously building.
           </p>
         </div>
 

@@ -4,33 +4,33 @@ import { SITE_URL } from '@/lib/constants';
 
 const credits = [
   {
-    name: 'HowToCook 源仓库',
-    description: '开源菜谱项目（GitHub 100k+ stars），程序员风格菜谱。精确量化，步骤带公式。',
+    name: 'HowToCook Source Repo',
+    description: 'Open-source recipe project (GitHub 100k+ stars). Programmer-style recipes with precise quantification and formula-based steps.',
     link: 'https://github.com/Anduin2017/HowToCook',
   },
   {
-    name: '随便做',
-    description: '火遍全网的国宴大厨隋坡，140 道简易/进阶菜谱。随便一做，怎么都好吃。',
+    name: 'Sui Bian Zuo',
+    description: 'Chef Sui Po, famous across China, with 140 easy/advanced recipes. Just cook — it always tastes good.',
   },
   {
-    name: '金谷园',
-    description: '第一个开源的饺子馆 Skill，招牌甜品牛奶醪糟鸡蛋。',
+    name: 'Jin Gu Yuan',
+    description: 'The first open-source dumpling restaurant Skill. Signature dessert: milk醪糟 egg.',
   },
 ];
 
 export function Credits() {
   useMeta({
-    title: '致谢',
-    description: '感谢 HowToCook 源仓库、随便做、金谷园等项目和创作者的贡献。',
+    title: 'Credits',
+    description: 'Thanks to HowToCook Source Repo, Sui Bian Zuo, Jin Gu Yuan and other projects and creators for their contributions.',
     ogUrl: `${SITE_URL}/credits`,
   });
 
   return (
     <Layout>
       <div className="py-8 space-y-8">
-        <h1 className="font-display text-headline-xl text-on-surface">致谢</h1>
+        <h1 className="font-display text-headline-xl text-on-surface">Credits</h1>
         <p className="font-body text-body-lg text-on-surface-variant max-w-xl">
-          感谢以下项目和创作者的贡献，让 HowToCook 的菜谱库不断丰富。
+          Thanks to the following projects and creators for enriching HowToCook&apos;s recipe library.
         </p>
         <div className="grid gap-4 max-w-2xl">
           {credits.map((credit) => (
@@ -51,7 +51,7 @@ export function Credits() {
                   rel="noopener noreferrer"
                   className="inline-block mt-2 text-primary hover:underline font-label-lg text-label-lg"
                 >
-                  访问项目 →
+                  Visit Project →
                 </a>
               )}
             </div>
