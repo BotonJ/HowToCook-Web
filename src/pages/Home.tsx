@@ -16,15 +16,51 @@ import type { Recipe } from '@/types';
 interface FeaturedCollection {
   id: string;
   title: string;
+  emoji: string;
+  description: string;
   filter: (r: Recipe) => boolean;
+  moreLink?: string;
+  moreText?: string;
 }
 
 const FEATURED: FeaturedCollection[] = [
-  { id: 'chinese-recipes', title: 'Chinese Recipes', filter: (r) => r.cuisine === 'chinese' },
-  { id: 'chicken-recipes', title: 'Chicken', filter: (r) => r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')) },
-  { id: 'pasta', title: 'Pasta & Italian', filter: (r) => r.cuisine === 'italian' },
-  { id: 'baking', title: 'Baking', filter: (r) => r.source === 'professional_baking' || r.category === 'dessert' },
-  { id: 'air-fryer', title: 'Air Fryer', filter: (r) => r.name.toLowerCase().includes('air fryer') || r.ingredients.some((i) => i.toLowerCase().includes('air fryer')) },
+  {
+    id: 'chinese-recipes',
+    title: 'Chinese Recipes',
+    emoji: '🥢',
+    description: 'Authentic Chinese cuisine',
+    filter: (r) => r.cuisine === 'chinese',
+    moreLink: '/collection/chinese-all',
+    moreText: 'More Chinese Recipes → 481+ recipes',
+  },
+  {
+    id: 'italian',
+    title: 'Italian',
+    emoji: '🍝',
+    description: 'Classic Italian dishes',
+    filter: (r) => r.cuisine === 'italian',
+  },
+  {
+    id: 'french',
+    title: 'French',
+    emoji: '🥐',
+    description: 'Elegant French cuisine',
+    filter: (r) => r.cuisine === 'french',
+  },
+  {
+    id: 'japanese',
+    title: 'Japanese',
+    emoji: '🍣',
+    description: 'Delicate Japanese flavors',
+    filter: (r) => r.cuisine === 'japanese',
+  },
+  {
+    id: 'baking',
+    title: 'Baking',
+    emoji: '🍰',
+    description: 'Breads, cakes, and pastries',
+    filter: (r) => r.category === 'dessert',
+  },
 ];
 
 const SOURCE_LABELS: Record<string, string> = {
@@ -66,12 +102,15 @@ export function Home() {
 
   const featuredCollections = useMemo(() => {
     if (categoryId || normalizedSearch) return [];
-    const all = categories.flatMap(c => c.recipes);
+    // 只在英文模式或全部模式下显示精选推荐
+    if (activeSource === 'zh') return [];
+    // 筛选英文菜谱
+    const enRecipes = categories.flatMap(c => c.recipes).filter(r => (r.language || 'zh') === 'en');
     return FEATURED.map((col) => {
-      const picks = all.filter(col.filter).slice(0, 8);
+      const picks = enRecipes.filter(col.filter).slice(0, 8);
       return { ...col, recipes: picks };
     }).filter((col) => col.recipes.length > 0);
-  }, [categories, categoryId, normalizedSearch]);
+  }, [categories, categoryId, normalizedSearch, activeSource]);
 
   const displayedRecipes = useMemo(() => {
     const list = categoryId
@@ -134,11 +173,14 @@ export function Home() {
             {featuredCollections.map((col) => (
               <Link
                 key={col.id}
-                to={`/collection/${col.id}`}
+                to={col.moreLink || `/collection/${col.id}`}
                 className="flex-shrink-0 w-64 group"
               >
                 <div className="bg-surface-container-low rounded-xl border border-outline-variant p-3 hover:border-primary transition">
-                  <p className="font-body text-label-lg text-primary group-hover:underline mb-2">{col.title}</p>
+                  <p className="font-body text-label-lg text-primary group-hover:underline mb-1">
+                    {col.emoji} {col.title}
+                  </p>
+                  <p className="text-xs text-on-surface-variant mb-2">{col.description}</p>
                   <div className="flex flex-wrap gap-1">
                     {col.recipes.slice(0, 4).map((r) => (
                       <span key={r.id} className="text-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full truncate max-w-[120px]">
@@ -146,7 +188,11 @@ export function Home() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-xs text-on-surface-variant mt-2">{t.recipes(col.recipes.length)}</p>
+                  {col.moreText ? (
+                    <p className="text-xs text-primary mt-2">{col.moreText}</p>
+                  ) : (
+                    <p className="text-xs text-on-surface-variant mt-2">{t.recipes(col.recipes.length)}</p>
+                  )}
                 </div>
               </Link>
             ))}

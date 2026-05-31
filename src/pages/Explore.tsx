@@ -22,6 +22,7 @@ export function Explore() {
   } = useEpicure();
 
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+  const [slerpTopResult, setSlerpTopResult] = useState<string | null>(null);
 
   useMeta({
     title: '食材探索',
@@ -30,9 +31,11 @@ export function Explore() {
   });
 
   const modes = useMemo(() => {
-    if (!selectedIngredient) return [];
-    return getClosestMode(selectedIngredient, 3);
-  }, [selectedIngredient, getClosestMode]);
+    // When user is exploring with SLERP, show modes for the top SLERP result
+    const target = slerpTopResult || selectedIngredient;
+    if (!target) return [];
+    return getClosestMode(target, 3);
+  }, [selectedIngredient, slerpTopResult, getClosestMode]);
 
   if (loading) {
     return (
@@ -89,8 +92,14 @@ export function Explore() {
             zhMap={zhMap}
             cuisinePoles={cuisinePoles}
             selectedIngredient={selectedIngredient}
+            onSlerpTopResult={setSlerpTopResult}
           />
-          <ModePanel modes={modes} loading={false} />
+          <ModePanel
+            modes={modes}
+            loading={false}
+            targetName={slerpTopResult || selectedIngredient}
+            isSlerpResult={!!slerpTopResult}
+          />
         </div>
       </div>
     </Layout>

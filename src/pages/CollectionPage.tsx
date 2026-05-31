@@ -23,21 +23,28 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: 'Chinese Recipes',
     description: 'Authentic Chinese recipes — stir-fry, braised, steamed, and more.',
     seoKeywords: 'chinese recipe, chinese food, 中餐',
-    filter: (r) => r.cuisine === 'chinese',
+    filter: (r) => r.language === 'en' && r.cuisine === 'chinese',
+  },
+  'chinese-all': {
+    id: 'chinese-all',
+    title: 'All Chinese Recipes',
+    description: 'Complete collection of authentic Chinese recipes — 481+ dishes from every region.',
+    seoKeywords: 'chinese recipe, chinese food, 中餐, all chinese recipes',
+    filter: (r) => r.language !== 'en', // 中文菜谱
   },
   'chicken-recipes': {
     id: 'chicken-recipes',
     title: 'Chicken Recipes',
     description: 'Easy and delicious chicken recipes for every occasion.',
     seoKeywords: 'chicken recipe, chicken dinner',
-    filter: (r) => r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')),
+    filter: (r) => r.language === 'en' && r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')),
   },
   'baking': {
     id: 'baking',
     title: 'Baking Recipes',
     description: 'Breads, cakes, cookies, and pastries from professional baking sources.',
     seoKeywords: 'baking recipes, bread, cake, pastry',
-    filter: (r) => r.source === 'professional_baking' || r.category === 'dessert',
+    filter: (r) => r.language === 'en' && (r.source === 'professional_baking' || r.category === 'dessert'),
   },
   'air-fryer': {
     id: 'air-fryer',
@@ -45,22 +52,96 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     description: 'Quick and healthy air fryer recipes.',
     seoKeywords: 'air fryer recipe, air fryer',
     filter: (r) =>
-      r.name.toLowerCase().includes('air fryer') ||
-      r.ingredients.some((i) => i.toLowerCase().includes('air fryer')),
+      r.language === 'en' && (
+        r.name.toLowerCase().includes('air fryer') ||
+        r.ingredients.some((i) => i.toLowerCase().includes('air fryer'))
+      ),
   },
-  'pasta': {
-    id: 'pasta',
-    title: 'Pasta & Italian Recipes',
-    description: 'Classic pasta and Italian recipes — from carbonara to risotto.',
-    seoKeywords: 'pasta recipe, italian recipe, italian food',
-    filter: (r) => r.cuisine === 'italian',
+  'italian': {
+    id: 'italian',
+    title: 'Italian Recipes',
+    description: 'Classic Italian dishes — pasta, risotto, and more.',
+    seoKeywords: 'italian recipe, italian food, pasta',
+    filter: (r) => r.language === 'en' && r.cuisine === 'italian',
+  },
+  'french': {
+    id: 'french',
+    title: 'French Recipes',
+    description: 'Elegant French cuisine — sauces, pastries, and refined dishes.',
+    seoKeywords: 'french recipe, french cuisine, french food',
+    filter: (r) => r.language === 'en' && r.cuisine === 'french',
+  },
+  'japanese': {
+    id: 'japanese',
+    title: 'Japanese Recipes',
+    description: 'Delicate Japanese flavors — sushi, ramen, and traditional dishes.',
+    seoKeywords: 'japanese recipe, japanese food, sushi, ramen',
+    filter: (r) => r.language === 'en' && r.cuisine === 'japanese',
   },
 };
 
 async function loadRecipeData(): Promise<Category[]> {
-  const res = await fetch('/data/recipes-index.json');
-  if (!res.ok) throw new Error(`Failed to load recipe data: ${res.status}`);
-  return res.json();
+  // 加载中文数据
+  const zhRes = await fetch('/data/recipes-index.json');
+  if (!zhRes.ok) throw new Error(`Failed to load recipe data: ${zhRes.status}`);
+  const zhCategories: Category[] = await zhRes.json();
+
+  // 加载英文数据
+  try {
+    const enRes = await fetch('/data/en_index_curated.json');
+    if (enRes.ok) {
+      const enData = await enRes.json();
+      // 转换英文数据为 Category 格式
+      const enRecipes = enData.dishes.map((dish: any) => ({
+        id: `en/${dish.name}`,
+        name: dish.name,
+        category: dish.category,
+        imagePath: '', // 不使用外部图片，避免侵权
+        difficulty: dish.difficulty,
+        cuisine: dish.cuisine,
+        cooking_method: dish.cooking_method,
+        cook_time: dish.cook_time,
+        ingredients: dish.ingredients,
+        main_ingredients: dish.main_ingredients || [],
+        tags: dish.tags || {},
+        source: dish.source,
+        description: dish.epicurious_meta?.description || '',
+        language: 'en',
+      }));
+
+      // 按 category 分组
+      const grouped = new Map<string, any[]>();
+      for (const recipe of enRecipes) {
+        const list = grouped.get(recipe.category);
+        if (list) {
+          list.push(recipe);
+        } else {
+          grouped.set(recipe.category, [recipe]);
+        }
+      }
+
+      // 合并英文分类
+      for (const [id, recipes] of grouped) {
+        const existing = zhCategories.find(c => c.id === id);
+        if (existing) {
+          existing.recipes.push(...recipes);
+          existing.count = existing.recipes.length;
+        } else {
+          zhCategories.push({
+            id: `en-${id}`,
+            name: `English ${id}`,
+            displayName: `English ${id}`,
+            count: recipes.length,
+            recipes,
+          });
+        }
+      }
+    }
+  } catch {
+    // 英文数据加载失败，继续使用中文数据
+  }
+
+  return zhCategories;
 }
 
 export function CollectionPage() {
