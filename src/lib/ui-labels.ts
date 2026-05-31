@@ -1,50 +1,97 @@
-/** 轻量多语言 UI 标签 —— 跟随 SourceNav 语言切换 */
+/**
+ * Lightweight multilingual UI labels — follows SourceNav language switch.
+ *
+ * This module is a backward-compatible shim over the comprehensive i18n
+ * system in `./i18n/`. New code should prefer `useT()` from `./i18n`.
+ */
 
-export type UiLang = 'zh' | 'en';
+import { zh } from './i18n/zh';
+import { en } from './i18n/en';
+import type { Lang } from './i18n/index';
 
+export type UiLang = Lang;
+
+/** Derive UI language from activeSource: en → 'en', otherwise → 'zh' */
+export function getUiLang(activeSource: string): UiLang {
+  return activeSource === 'en' ? 'en' : 'zh';
+}
+
+/**
+ * Backward-compatible labels object.
+ * Maps the old flat label keys to the new structured locale.
+ */
 const labels = {
   zh: {
-    loading: '加载菜谱中...',
-    retry: '重试',
-    recipeCount: (n: number) => `${n} 道菜`,
-    searchPlaceholder: '输入关键词搜索菜谱',
-    emptySearch: '未找到匹配的菜谱，试试其他关键词',
-    emptyCategory: '该分类暂无菜谱',
-    category: '分类',
-    featured: '精选推荐',
-    recipes: (n: number) => `${n} recipes →`,
-    backHome: '← 返回首页',
-    notFound: '聚合页不存在',
-    metaDesc: '做饭指北 — 世界首个 AI 驱动的食谱百科与烹饪 Skill。',
-    collectionLoading: '加载中...',
-    collectionEmpty: 'No recipes found in this collection.',
-    collectionError: '加载失败',
+    loading: zh.common.loadingRecipes,
+    retry: zh.common.retry,
+    recipeCount: zh.home.recipeCount,
+    searchPlaceholder: zh.home.searchPlaceholder,
+    emptySearch: zh.home.emptySearch,
+    emptyCategory: zh.home.emptyCategory,
+    category: zh.home.category,
+    featured: zh.home.featured,
+    recipes: zh.home.recipes,
+    backHome: zh.common.backHome,
+    notFound: zh.collection.notFound,
+    metaDesc: zh.home.metaDesc,
+    collectionLoading: zh.collection.loading,
+    collectionEmpty: zh.collection.empty,
+    collectionError: zh.collection.error,
+    brandName: zh.nav.siteName,
+    cookingAcademy: zh.nav.academy,
+    collections: zh.nav.collections,
+    ingredientExplorer: zh.nav.explore,
+    about: zh.nav.about,
+    credits: zh.nav.credits,
+    collectionChineseRecipes: zh.nav.collectionLabels['chinese-recipes'],
+    collectionChicken: zh.nav.collectionLabels['chicken-recipes'],
+    collectionBaking: zh.nav.collectionLabels['baking'],
+    collectionAirFryer: zh.nav.collectionLabels['air-fryer'],
+    collectionPasta: zh.nav.collectionLabels['pasta'],
+    spicy: zh.recipe.spicy,
+    errorTitle: '出错了',
+    errorMessage: '页面加载异常，请',
+    returnHome: '返回首页',
+    addToHomeScreen: zh.pwa.addToHome,
+    all: zh.common.all,
   },
   en: {
-    loading: 'Loading recipes...',
-    retry: 'Retry',
-    recipeCount: (n: number) => `${n} recipes`,
-    searchPlaceholder: 'Search recipes...',
-    emptySearch: 'No recipes found. Try different keywords.',
-    emptyCategory: 'No recipes in this category.',
-    category: 'Category',
-    featured: 'Featured',
-    recipes: (n: number) => `${n} recipes →`,
-    backHome: '← Back to Home',
-    notFound: 'Collection not found',
-    metaDesc: 'HowToCook — The AI-powered recipe encyclopedia and cooking Skill.',
-    collectionLoading: 'Loading...',
-    collectionEmpty: 'No recipes found in this collection.',
-    collectionError: 'Failed to load',
+    loading: en.common.loadingRecipes,
+    retry: en.common.retry,
+    recipeCount: en.home.recipeCount,
+    searchPlaceholder: en.home.searchPlaceholder,
+    emptySearch: en.home.emptySearch,
+    emptyCategory: en.home.emptyCategory,
+    category: en.home.category,
+    featured: en.home.featured,
+    recipes: en.home.recipes,
+    backHome: en.common.backHome,
+    notFound: en.collection.notFound,
+    metaDesc: en.home.metaDesc,
+    collectionLoading: en.collection.loading,
+    collectionEmpty: en.collection.empty,
+    collectionError: en.collection.error,
+    brandName: en.nav.siteName,
+    cookingAcademy: en.nav.academy,
+    collections: en.nav.collections,
+    ingredientExplorer: en.nav.explore,
+    about: en.nav.about,
+    credits: en.nav.credits,
+    collectionChineseRecipes: en.nav.collectionLabels['chinese-recipes'],
+    collectionChicken: en.nav.collectionLabels['chicken-recipes'],
+    collectionBaking: en.nav.collectionLabels['baking'],
+    collectionAirFryer: en.nav.collectionLabels['air-fryer'],
+    collectionPasta: en.nav.collectionLabels['pasta'],
+    spicy: en.recipe.spicy,
+    errorTitle: 'Something went wrong',
+    errorMessage: 'Page failed to load, please ',
+    returnHome: 'Return to Home',
+    addToHomeScreen: en.pwa.addToHome,
+    all: en.common.all,
   },
 } as const;
 
 export type Labels = typeof labels['zh'];
-
-/** 从 activeSource 推导 UI 语言：en → 'en'，其他 → 'zh' */
-export function getUiLang(activeSource: string): UiLang {
-  return activeSource === 'en' ? 'en' : 'zh';
-}
 
 export function getLabels(lang: UiLang): Labels {
   return labels[lang] as Labels;
