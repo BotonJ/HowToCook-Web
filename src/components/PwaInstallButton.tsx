@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Download } from 'lucide-react'
+import { useT } from '@/lib/i18n'
 
 export function PwaInstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const t = useT()
 
   useEffect(() => {
     const handler = (e: Event) => {
@@ -44,7 +46,7 @@ export function PwaInstallButton() {
       className="fixed bottom-4 right-4 z-50 bg-primary text-on-primary px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 text-label-md hover:bg-primary-container transition-colors"
     >
       <Download size={18} />
-      <span>添加到主屏幕</span>
+      <span>{t.pwa.addToHome}</span>
     </button>
   )
 }

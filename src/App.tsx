@@ -10,13 +10,15 @@ import { Explore } from './pages/Explore';
 import { useRouteError } from 'react-router-dom';
 import { PwaInstallButton } from './components/PwaInstallButton';
 import { TurnstileProvider } from './components/TurnstileProvider';
+import { LangProvider, useT } from './lib/i18n';
 
 function ErrorBoundary() {
   const error = useRouteError();
+  const t = useT();
   return (
     <div className="p-8 text-center font-system-ui">
-      <h1>出错了</h1>
-      <p>页面加载异常，请<a href="/">返回首页</a></p>
+      <h1>{t.common.notFound}</h1>
+      <p>{t.error.generic}，<a href="/">{t.common.backHome}</a></p>
       {import.meta.env.DEV && (
         <pre className="whitespace-pre-wrap text-left bg-gray-100 p-4 rounded-lg mt-4">
           {error instanceof Error ? error.stack : String(error)}
@@ -76,10 +78,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <TurnstileProvider>
-      <RouterProvider router={router} />
-      <PwaInstallButton />
-    </TurnstileProvider>
+    <LangProvider>
+      <TurnstileProvider>
+        <RouterProvider router={router} />
+        <PwaInstallButton />
+      </TurnstileProvider>
+    </LangProvider>
   );
 }
 

@@ -1,12 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Category } from '@/types';
+import { useT } from '@/lib/i18n';
 
 interface CategoryNavProps {
   categories: Category[];
 }
 
 export function CategoryNav({ categories }: CategoryNavProps) {
+  const t = useT();
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div
@@ -17,12 +19,12 @@ export function CategoryNav({ categories }: CategoryNavProps) {
           end
           className={({ isActive }) => cn(
             "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
-            isActive 
-              ? "bg-orange-500 text-white shadow-sm" 
+            isActive
+              ? "bg-orange-500 text-white shadow-sm"
               : "bg-white text-stone-600 border border-stone-200 hover:border-orange-200 hover:text-orange-600"
           )}
         >
-          全部
+          {t.categoryNav.all}
         </NavLink>
         {categories.map((category) => (
           <NavLink
@@ -30,8 +32,8 @@ export function CategoryNav({ categories }: CategoryNavProps) {
             to={`/category/${category.id}`}
             className={({ isActive }) => cn(
               "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
-              isActive 
-                ? "bg-orange-500 text-white shadow-sm" 
+              isActive
+                ? "bg-orange-500 text-white shadow-sm"
                 : "bg-white text-stone-600 border border-stone-200 hover:border-orange-200 hover:text-orange-600"
             )}
           >
