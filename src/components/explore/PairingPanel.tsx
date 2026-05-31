@@ -43,18 +43,18 @@ export function PairingPanel({
         onSelect={handleSelect}
         searchVocabulary={searchVocabulary}
         zhMap={zhMap}
-        placeholder="搜索食材发现风味搭配..."
+        placeholder="Search ingredients to discover flavor pairings..."
       />
 
       {!ingredient && !selectedIngredient && (
         <p className="text-sm text-on-surface-variant text-center py-8 font-body">
-          搜索食材以发现风味搭配
+          Search ingredients to discover flavor pairings
         </p>
       )}
 
       {displayName && (
         <h3 className="font-display text-headline-sm text-on-surface">
-          <span className="text-primary">{displayName}</span> 的搭配
+          <span className="text-primary">{displayName}</span> Pairings
         </h3>
       )}
 

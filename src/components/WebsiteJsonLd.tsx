@@ -4,7 +4,7 @@ export function WebsiteJsonLd() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: '做饭指北',
+    name: 'HowToCook',
     alternateName: 'HowToCook',
     url: SITE_URL,
     potentialAction: {

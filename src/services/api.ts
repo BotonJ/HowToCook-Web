@@ -11,7 +11,7 @@ async function fetchApi<T>(path: string): Promise<T> {
     return res.json() as Promise<T>;
   } catch (err) {
     if (err instanceof DOMException && err.name === 'AbortError') {
-      throw new Error('请求超时，请稍后重试');
+      throw new Error('Request timed out, please try again later');
     }
     throw err;
   } finally {

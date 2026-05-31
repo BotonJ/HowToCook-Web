@@ -16,12 +16,12 @@ interface FlavorRadarProps {
 }
 
 const DIMENSIONS = [
-  { key: 'sweet' as const, label: '甜' },
-  { key: 'sour' as const, label: '酸' },
-  { key: 'bitter' as const, label: '苦' },
-  { key: 'umami' as const, label: '鲜' },
-  { key: 'spicy' as const, label: '辣' },
-  { key: 'fatty' as const, label: '脂' },
+  { key: 'sweet' as const, label: 'Sweet' },
+  { key: 'sour' as const, label: 'Sour' },
+  { key: 'bitter' as const, label: 'Bitter' },
+  { key: 'umami' as const, label: 'Umami' },
+  { key: 'spicy' as const, label: 'Spicy' },
+  { key: 'fatty' as const, label: 'Fatty' },
 ] as const;
 
 const GRID_LEVELS = [0.2, 0.4, 0.6, 0.8, 1.0];

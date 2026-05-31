@@ -15,7 +15,7 @@ export function BreadcrumbJsonLd({ categoryName, recipeName }: BreadcrumbJsonLdP
       {
         '@type': 'ListItem',
         position: 1,
-        name: '首页',
+        name: 'Home',
         item: SITE_URL,
       },
       {

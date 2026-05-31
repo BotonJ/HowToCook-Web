@@ -22,7 +22,7 @@ export function transformDishIndex(dish: DishIndex): Recipe {
 export function transformApiRecipe(api: ApiRecipeDetail): Recipe {
   const ingredientsLines = [
     ...api.ingredients,
-    ...(api.optional_ingredients?.map(i => `可选：${i}`) ?? []),
+    ...(api.optional_ingredients?.map(i => `Optional: ${i}`) ?? []),
   ];
 
   const stepsText = api.steps

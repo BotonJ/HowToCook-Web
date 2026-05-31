@@ -51,22 +51,22 @@ export function SlerpPanel({
   return (
     <div className="space-y-4">
       <h3 className="font-display text-headline-md text-on-surface">
-        菜系探索
+        Cuisine Explorer
       </h3>
 
       <IngredientSearch
         onSelect={handleSeedSelect}
         searchVocabulary={searchVocabulary}
         zhMap={zhMap}
-        placeholder={selectedIngredient ? selectedIngredient.replace(/_/g, ' ') : '选择种子食材...'}
+        placeholder={selectedIngredient ? selectedIngredient.replace(/_/g, ' ') : 'Select seed ingredient...'}
       />
 
       <div className="space-y-2">
         <label className="text-sm text-on-surface-variant font-body block">
-          菜系方向
+          Cuisine Direction
         </label>
         <p className="text-xs text-on-surface-variant/70 font-body -mt-1">
-          选择目标菜系，系统会从种子食材出发，向该菜系的典型风味方向偏移
+          Select a target cuisine. The system will shift from the seed ingredient toward the typical flavor profile of that cuisine.
         </p>
         <select
           value={direction}
@@ -83,13 +83,13 @@ export function SlerpPanel({
 
       <div className="space-y-1">
         <label className="text-sm text-on-surface-variant font-body block">
-          混合角度：{angle}°
+          Blend Angle: {angle}°
           <span className="text-xs text-on-surface-variant/70 ml-2">
-            {angle === 0 ? '（原始食材）' : angle <= 30 ? '（轻微偏移，风味接近原食材）' : angle <= 60 ? '（中等偏移，融入目标菜系特色）' : '（大幅偏移，接近目标菜系风味）'}
+            {angle === 0 ? '(Original ingredient)' : angle <= 30 ? '(Slight shift, flavor close to original)' : angle <= 60 ? '(Medium shift, blending target cuisine traits)' : '(Large shift, close to target cuisine flavor)'}
           </span>
         </label>
         <p className="text-xs text-on-surface-variant/70 font-body -mt-1">
-          0° = 保持原食材风味，90° = 完全偏向目标菜系。角度越大，推荐的食材越有目标菜系的特色
+          0° = Keep original ingredient flavor, 90° = Fully shift to target cuisine. Larger angles recommend ingredients more characteristic of the target cuisine.
         </p>
         <AngleSlider value={angle} onChange={setAngle} />
       </div>

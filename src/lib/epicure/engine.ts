@@ -245,13 +245,13 @@ export function searchVocabulary(query: string, limit: number): string[] {
 }
 
 const CUISINE_ZH: Record<string, string> = {
-  East_Asian: '东亚',
-  Southeast_Asian: '东南亚',
-  South_Asian: '南亚',
-  Mediterranean: '地中海',
-  Western_Atlantic: '西洋',
-  Eastern_European: '东欧',
-  Latin_American: '拉丁美洲',
+  East_Asian: 'East Asian',
+  Southeast_Asian: 'Southeast Asian',
+  South_Asian: 'South Asian',
+  Mediterranean: 'Mediterranean',
+  Western_Atlantic: 'Western',
+  Eastern_European: 'Eastern European',
+  Latin_American: 'Latin American',
 };
 
 export function getCuisinePoles(): CuisinePole[] {
