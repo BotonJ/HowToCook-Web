@@ -64,7 +64,7 @@ const FEATURED: FeaturedCollection[] = [
 ];
 
 const SOURCE_LABELS: Record<string, string> = {
-  all: '全部',
+  all: 'All',
   zh: '中文',
   en: 'English',
 };

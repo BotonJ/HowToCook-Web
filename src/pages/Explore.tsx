@@ -25,7 +25,7 @@ export function Explore() {
   const [slerpTopResult, setSlerpTopResult] = useState<string | null>(null);
 
   useMeta({
-    title: '食材探索',
+    title: 'Ingredient Explorer',
     description: 'Explore ingredient pairings, flavor profiles, and cuisine directions with our ingredient embedding engine.',
     ogUrl: `${SITE_URL}/explore`,
   });
@@ -67,10 +67,10 @@ export function Explore() {
     <Layout>
       <div className="mb-8">
         <h1 className="font-display text-headline-xl text-on-surface">
-          食材探索
+          Ingredient Explorer
         </h1>
         <p className="font-body text-body-lg text-on-surface-variant mt-1">
-          探索食材搭配、风味特征和菜系方向
+          Explore ingredient pairings, flavor profiles, and cuisine directions
         </p>
       </div>
 
