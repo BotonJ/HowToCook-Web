@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
 import { SITE_URL } from '@/lib/constants';
 import { ArrowLeft } from 'lucide-react';
+import { useBasePath } from '@/lib/i18n';
 
 import tipsData from '@/data/tips.json';
 
@@ -19,6 +20,7 @@ const tips = tipsData as TipMeta[];
 export function TipDetail() {
   const { slug } = useParams<{ slug: string }>();
   const tip = tips.find(t => t.slug === slug);
+  const base = useBasePath();
 
   useMeta({
     title: tip?.title || 'Not Found',
@@ -35,7 +37,7 @@ export function TipDetail() {
             This article is not yet published. Please return to the list to view published content.
           </p>
           <Link
-            to="/academy"
+            to={`${base}/academy`}
             className="inline-flex items-center gap-2 text-primary hover:underline font-label-lg"
           >
             <ArrowLeft size={16} />
@@ -50,7 +52,7 @@ export function TipDetail() {
     <Layout>
       <div className="py-8 max-w-3xl">
         <Link
-          to="/tips"
+          to={`${base}/academy`}
           className="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-label-lg mb-6"
         >
           <ArrowLeft size={16} />

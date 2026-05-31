@@ -4,7 +4,7 @@ import { Recipe } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_SHORT, CATEGORY_LABELS } from '@/lib/constants';
 import { FlavorMini } from '@/components/FlavorMini';
-import { useT } from '@/lib/i18n';
+import { useT, useBasePath } from '@/lib/i18n';
 
 /** Shared entrance/hover animation for recipe cards (no `layout` — too expensive with many cards). */
 const cardMotionProps: HTMLMotionProps<'div'> = {
@@ -23,10 +23,11 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const isSpicy = recipe.tags?.spicy;
   const categoryLabel = CATEGORY_LABELS[recipe.category] || recipe.category;
   const t = useT();
+  const base = useBasePath();
 
   if (!recipe.imagePath) {
     return (
-      <Link to={`/recipe/${recipe.id}`}>
+      <Link to={`${base}/recipe/${recipe.id}`}>
         <motion.div {...cardMotionProps} className="group cursor-pointer">
           <div className="relative overflow-hidden rounded-lg shadow-ambient hover:shadow-lg transition-shadow duration-300 aspect-[9/16] bg-gradient-to-br from-primary/10 via-surface-container to-secondary/10 flex flex-col items-center justify-center p-6">
             <h3 className="font-display font-bold text-headline-lg text-on-surface text-center leading-tight mb-3">
@@ -62,7 +63,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   }
 
   return (
-    <Link to={`/recipe/${recipe.id}`}>
+    <Link to={`${base}/recipe/${recipe.id}`}>
       <motion.div {...cardMotionProps} className="group cursor-pointer">
         <div className="relative overflow-hidden rounded-lg bg-surface-container-lowest shadow-ambient hover:shadow-lg transition-shadow duration-300">
           <div className="aspect-[9/16] bg-surface-container relative">

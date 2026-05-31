@@ -1,12 +1,17 @@
 /**
  * i18n context — lightweight locale system for HowToCook UI strings.
  *
+ * Language is determined by URL path prefix:
+ *   /           → zh (Chinese)
+ *   /en/...     → en (English)
+ *
  * Usage:
  *   const t = useT();
+ *   const base = useBasePath();  // '' or '/en'
  *   t.nav.siteName  // → '做饭指北' or 'HowToCook'
  */
 
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 import { zh } from './zh';
 import { en } from './en';
 
@@ -15,33 +20,26 @@ export type Lang = 'zh' | 'en';
 
 const locales: Record<Lang, typeof zh | typeof en> = { zh, en };
 
-const I18nContext = createContext<Lang>('zh');
+const LangContext = createContext<Lang>('zh');
 
-interface LangContextValue {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
+/** Detect language from current URL path. */
+function detectLang(): Lang {
+  return window.location.pathname.startsWith('/en') ? 'en' : 'zh';
 }
 
-const LangStateContext = createContext<LangContextValue>({
-  lang: 'zh',
-  setLang: () => {},
-});
-
-/** Provider that manages language state. */
+/** Provider that reads language from URL path prefix. */
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('zh');
+  const lang = detectLang();
   return (
-    <I18nContext.Provider value={lang}>
-      <LangStateContext.Provider value={{ lang, setLang }}>
-        {children}
-      </LangStateContext.Provider>
-    </I18nContext.Provider>
+    <LangContext.Provider value={lang}>
+      {children}
+    </LangContext.Provider>
   );
 }
 
 /** Returns the current language code. */
 export function useLang(): Lang {
-  return useContext(I18nContext);
+  return useContext(LangContext);
 }
 
 /** Returns the full locale object for the current language. */
@@ -49,9 +47,15 @@ export function useT(): Locale {
   return locales[useLang()];
 }
 
-/** Returns the setter for the current language. */
-export function useSetLang() {
-  return useContext(LangStateContext).setLang;
+/** Returns the base path prefix: '' for zh, '/en' for en. */
+export function useBasePath(): string {
+  return useLang() === 'en' ? '/en' : '';
 }
 
-export { I18nContext, locales };
+/** Resolve a path with the current language prefix. */
+export function useLocalizedPath(path: string): string {
+  const base = useBasePath();
+  return `${base}${path}`;
+}
+
+export { LangContext, locales };

@@ -8,6 +8,7 @@ import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_LABELS, DIFFICULTY_LABELS, SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
+import { useBasePath } from '@/lib/i18n';
 import { getFullRecipeData } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
@@ -71,6 +72,7 @@ export function RecipeDetail() {
   const params = useParams();
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
+  const base = useBasePath();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -119,7 +121,7 @@ export function RecipeDetail() {
       <Layout>
         <div className="text-center py-20">
           <p className="text-on-surface-variant text-lg font-body">Recipe not found</p>
-          <Link to="/" className="text-primary hover:underline mt-4 inline-block font-body">Back to Home</Link>
+          <Link to={`${base}/`} className="text-primary hover:underline mt-4 inline-block font-body">Back to Home</Link>
         </div>
       </Layout>
     );

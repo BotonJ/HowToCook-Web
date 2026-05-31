@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Category } from '@/types';
-import { useT } from '@/lib/i18n';
+import { useT, useBasePath } from '@/lib/i18n';
 
 interface CategoryNavProps {
   categories: Category[];
@@ -9,13 +9,14 @@ interface CategoryNavProps {
 
 export function CategoryNav({ categories }: CategoryNavProps) {
   const t = useT();
+  const base = useBasePath();
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div
         className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2"
       >
         <NavLink
-          to="/"
+          to={`${base}/`}
           end
           className={({ isActive }) => cn(
             "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
@@ -29,7 +30,7 @@ export function CategoryNav({ categories }: CategoryNavProps) {
         {categories.map((category) => (
           <NavLink
             key={category.id}
-            to={`/category/${category.id}`}
+            to={`${base}/category/${category.id}`}
             className={({ isActive }) => cn(
               "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
               isActive
