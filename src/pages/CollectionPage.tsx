@@ -4,10 +4,8 @@ import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
 import { SITE_URL } from '@/lib/constants';
-import { getLabels } from '@/lib/ui-labels';
+import { useT, useBasePath } from '@/lib/i18n';
 import type { Recipe, Category } from '@/types';
-
-const t = getLabels('en');
 
 interface CollectionDef {
   id: string;
@@ -150,6 +148,8 @@ export function CollectionPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const t = useT();
+  const base = useBasePath();
 
   useMeta({
     title: collection?.title,
@@ -161,7 +161,7 @@ export function CollectionPage() {
   useEffect(() => {
     loadRecipeData()
       .then(setCategories)
-      .catch((err) => setError(err instanceof Error ? err.message : t.collectionError))
+      .catch((err) => setError(err instanceof Error ? err.message : t.collection.error))
       .finally(() => setLoading(false));
   }, []);
 
@@ -176,8 +176,8 @@ export function CollectionPage() {
     return (
       <Layout>
         <div className="text-center py-20">
-          <p className="text-error text-lg font-body">{t.notFound}</p>
-          <Link to="/" className="text-primary underline mt-2 inline-block">{t.backHome}</Link>
+          <p className="text-error text-lg font-body">{t.collection.notFound}</p>
+          <Link to={`${base}/`} className="text-primary underline mt-2 inline-block">{t.collection.backHome}</Link>
         </div>
       </Layout>
     );
@@ -188,7 +188,7 @@ export function CollectionPage() {
       <Layout>
         <div className="text-center py-20">
           <div className="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-on-surface-variant text-lg font-body mt-4">{t.collectionLoading}</p>
+          <p className="text-on-surface-variant text-lg font-body mt-4">{t.collection.loading}</p>
         </div>
       </Layout>
     );
@@ -207,7 +207,7 @@ export function CollectionPage() {
   return (
     <Layout>
       <div className="mt-6 mb-2 px-2">
-        <Link to="/" className="text-primary text-sm hover:underline">{t.backHome}</Link>
+        <Link to={`${base}/`} className="text-primary text-sm hover:underline">{t.collection.backHome}</Link>
       </div>
       <div className="mt-4 mb-6 px-2">
         <h1 className="font-display text-headline-lg text-on-surface">
@@ -221,7 +221,7 @@ export function CollectionPage() {
       <div className="px-2">
         <RecipeGrid
           recipes={filteredRecipes}
-          emptyMessage={t.collectionEmpty}
+          emptyMessage={t.collection.empty}
         />
       </div>
     </Layout>
