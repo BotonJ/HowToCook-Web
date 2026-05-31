@@ -1,18 +1,24 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChefHat, ChevronDown } from 'lucide-react';
+import { useT } from '@/lib/i18n';
 
-const COLLECTIONS = [
-  { id: 'chinese-recipes', label: '中国菜谱', emoji: '🥢' },
-  { id: 'chicken-recipes', label: '鸡肉类', emoji: '🍗' },
-  { id: 'baking', label: '烘焙', emoji: '🍞' },
-  { id: 'air-fryer', label: '空气炸锅', emoji: '🍟' },
-  { id: 'pasta', label: '意面', emoji: '🍝' },
-];
+function useCollections() {
+  const t = useT();
+  return useMemo(() => [
+    { id: 'chinese-recipes', label: t.nav.collectionLabels['chinese-recipes'], emoji: '🥢' },
+    { id: 'chicken-recipes', label: t.nav.collectionLabels['chicken-recipes'], emoji: '🍗' },
+    { id: 'baking', label: t.nav.collectionLabels['baking'], emoji: '🍞' },
+    { id: 'air-fryer', label: t.nav.collectionLabels['air-fryer'], emoji: '🍟' },
+    { id: 'pasta', label: t.nav.collectionLabels['pasta'], emoji: '🍝' },
+  ], [t]);
+}
 
 export function Navbar() {
   const [showCollections, setShowCollections] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const t = useT();
+  const COLLECTIONS = useCollections();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -32,7 +38,7 @@ export function Navbar() {
             <ChefHat size={24} />
           </div>
           <span className="font-display font-bold text-headline-lg text-primary tracking-tight">
-            做饭指北
+            {t.nav.siteName}
           </span>
         </Link>
 
@@ -41,7 +47,7 @@ export function Navbar() {
             to="/academy"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
-            烹饪学院
+            {t.nav.academy}
           </Link>
 
           {/* 专题下拉菜单 */}
@@ -51,7 +57,7 @@ export function Navbar() {
               onClick={() => setShowCollections(!showCollections)}
               className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
             >
-              专题
+              {t.nav.collections}
               <ChevronDown size={16} className={`transition-transform ${showCollections ? 'rotate-180' : ''}`} />
             </button>
             {showCollections && (
@@ -75,19 +81,19 @@ export function Navbar() {
             to="/explore"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
-            食材探索
+            {t.nav.explore}
           </Link>
           <Link
             to="/about"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
-            关于
+            {t.nav.about}
           </Link>
           <Link
             to="/credits"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
-            致谢
+            {t.nav.credits}
           </Link>
           <a
             href="https://github.com/BotonJ/HowToCook-Web"

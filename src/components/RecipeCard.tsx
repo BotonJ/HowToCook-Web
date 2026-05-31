@@ -4,6 +4,7 @@ import { Recipe } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_SHORT, CATEGORY_LABELS } from '@/lib/constants';
 import { FlavorMini } from '@/components/FlavorMini';
+import { useT } from '@/lib/i18n';
 
 /** Shared entrance/hover animation for recipe cards (no `layout` — too expensive with many cards). */
 const cardMotionProps: HTMLMotionProps<'div'> = {
@@ -21,6 +22,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const cookTimeLabel = COOK_TIME_SHORT[recipe.cook_time];
   const isSpicy = recipe.tags?.spicy;
   const categoryLabel = CATEGORY_LABELS[recipe.category] || recipe.category;
+  const t = useT();
 
   if (!recipe.imagePath) {
     return (
@@ -43,7 +45,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
               )}
               {isSpicy && (
                 <span className="bg-surface/80 backdrop-blur-sm text-label-sm px-3 py-1 rounded-full">
-                  🌶️ 辣
+                  🌶️ {t.recipe.spicy}
                 </span>
               )}
             </div>

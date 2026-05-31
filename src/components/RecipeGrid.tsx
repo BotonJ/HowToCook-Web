@@ -1,5 +1,6 @@
 import { RecipeCard } from './RecipeCard';
 import { Recipe } from '@/types';
+import { useT } from '@/lib/i18n';
 
 interface RecipeGridProps {
   recipes: Recipe[];
@@ -7,10 +8,11 @@ interface RecipeGridProps {
 }
 
 export function RecipeGrid({ recipes, emptyMessage }: RecipeGridProps) {
+  const t = useT();
   if (recipes.length === 0) {
     return (
       <div className="text-center py-20 text-on-surface-variant">
-        <p>{emptyMessage ?? '该分类暂无菜谱'}</p>
+        <p>{emptyMessage ?? t.recipeGrid.emptyDefault}</p>
       </div>
     );
   }
