@@ -6,8 +6,10 @@ import { About } from './pages/About';
 import { Credits } from './pages/Credits';
 import { Tips } from './pages/Tips';
 import { TipDetail } from './pages/TipDetail';
+import { Explore } from './pages/Explore';
 import { useRouteError } from 'react-router-dom';
 import { PwaInstallButton } from './components/PwaInstallButton';
+import { TurnstileProvider } from './components/TurnstileProvider';
 
 function ErrorBoundary() {
   const error = useRouteError();
@@ -61,6 +63,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorBoundary />,
   },
   {
+    path: "/explore",
+    element: <Explore />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
     path: "/credits",
     element: <Credits />,
     errorElement: <ErrorBoundary />,
@@ -69,10 +76,10 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <TurnstileProvider>
       <RouterProvider router={router} />
       <PwaInstallButton />
-    </>
+    </TurnstileProvider>
   );
 }
 

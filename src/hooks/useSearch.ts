@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { searchRecipes } from '@/services/api';
+import { useTurnstileToken } from '@/components/TurnstileProvider';
 import type { Recipe } from '@/types';
 import type { ApiSearchResult } from '@/types/api';
 import { transformSearchResult } from '@/lib/api-transform';
@@ -18,6 +19,7 @@ export function useSearch(
   const [results, setResults] = useState<Recipe[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { getToken } = useTurnstileToken();
 
   const localMap = useMemo(
     () => new Map(localRecipes.map(r => [r.id, r])),
@@ -42,7 +44,8 @@ export function useSearch(
       setLoading(true);
       setError(null);
       try {
-        const response = await searchRecipes({ q: trimmed });
+        const turnstileToken = await getToken();
+        const response = await searchRecipes({ q: trimmed, turnstileToken });
         const recipes = response.results
           .map((r: ApiSearchResult) => transformSearchResult(r, localMap))
           .filter(r => sourceIds.has(r.source));
@@ -56,7 +59,7 @@ export function useSearch(
     }, debounceMs);
 
     return () => clearTimeout(timer);
-  }, [query, localMap, sourceIds, debounceMs]);
+  }, [query, localMap, sourceIds, debounceMs, getToken]);
 
   return { results, loading, error };
 }

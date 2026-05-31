@@ -47,5 +47,5 @@ export function getUiLang(activeSource: string): UiLang {
 }
 
 export function getLabels(lang: UiLang): Labels {
-  return labels[lang];
+  return labels[lang] as Labels;
 }
