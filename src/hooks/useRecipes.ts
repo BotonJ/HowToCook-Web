@@ -232,7 +232,7 @@ export function useRecipes(): UseRecipesResult {
       .catch((err: unknown) => {
         if (mountedRef.current) {
           setError(
-            err instanceof Error ? err.message : '加载菜谱数据失败',
+            err instanceof Error ? err.message : 'Failed to load recipe data',
           );
         }
       })

@@ -1,30 +1,30 @@
 export const SITE_URL = 'https://howtocook.cn';
 
 export const COOK_TIME_LABELS: Record<string, string> = {
-  quick: '快手（<15 分钟）',
-  medium: '适中（15-45 分钟）',
-  long: '较长（45-90 分钟）',
-  very_long: '慢工（>90 分钟）',
+  quick: 'Quick (<15 min)',
+  medium: 'Medium (15-45 min)',
+  long: 'Long (45-90 min)',
+  very_long: 'Very Long (>90 min)',
 };
 
 export const COOK_TIME_SHORT: Record<string, string> = {
-  quick: '快手',
-  medium: '适中',
-  long: '较长',
-  very_long: '慢工',
+  quick: 'Quick',
+  medium: 'Medium',
+  long: 'Long',
+  very_long: 'Very Long',
 };
 
-export const DIFFICULTY_LABELS = ['', '新手', '简单', '中等', '困难', '大师'];
+export const DIFFICULTY_LABELS = ['', 'Beginner', 'Easy', 'Medium', 'Hard', 'Expert'];
 
 export const CATEGORY_LABELS: Record<string, string> = {
-  meat_dish: '荤菜',
-  vegetable_dish: '素菜',
-  staple: '主食',
-  aquatic: '水产',
-  breakfast: '早餐',
-  soup: '汤粥',
-  drink: '饮品',
-  dessert: '甜品',
-  'semi-finished': '半成品',
-  condiment: '酱料',
+  meat_dish: 'Meat Dishes',
+  vegetable_dish: 'Vegetable Dishes',
+  staple: 'Staples',
+  aquatic: 'Seafood',
+  breakfast: 'Breakfast',
+  soup: 'Soups & Porridge',
+  drink: 'Beverages',
+  dessert: 'Desserts',
+  'semi-finished': 'Semi-Prepared',
+  condiment: 'Condiments',
 };

@@ -15,7 +15,7 @@ export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePan
   if (loading) {
     return (
       <div className="space-y-3">
-        <h3 className="font-display text-headline-md text-on-surface">风味特征</h3>
+        <h3 className="font-display text-headline-md text-on-surface">Flavor Profile</h3>
         <div className="animate-pulse space-y-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="h-24 bg-surface-container rounded-lg" />
@@ -28,9 +28,9 @@ export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePan
   if (modes.length === 0) {
     return (
       <div className="space-y-3">
-        <h3 className="font-display text-headline-md text-on-surface">风味特征</h3>
+        <h3 className="font-display text-headline-md text-on-surface">Flavor Profile</h3>
         <p className="text-sm text-on-surface-variant font-body">
-          选择食材查看其风味特征
+          Select an ingredient to view its flavor profile
         </p>
       </div>
     );
@@ -39,10 +39,10 @@ export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePan
   return (
     <div className="space-y-4">
       <div>
-        <h3 className="font-display text-headline-md text-on-surface">风味特征</h3>
+        <h3 className="font-display text-headline-md text-on-surface">Flavor Profile</h3>
         {targetName && (
           <p className="text-xs text-on-surface-variant/70 font-body mt-0.5">
-            {isSlerpResult ? '🔄 探索结果：' : ''}{formatName(targetName)} 的风味归属
+            {isSlerpResult ? '🔄 Exploration Results: ' : ''}{formatName(targetName)} Flavor Classification
           </p>
         )}
       </div>

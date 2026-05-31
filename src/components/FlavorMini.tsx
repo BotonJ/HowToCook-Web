@@ -12,12 +12,12 @@ interface FlavorMiniProps {
 }
 
 const DIMENSIONS = [
-  { key: 'sweet' as const, label: '甜', color: '#ff6b9d' },
-  { key: 'sour' as const, label: '酸', color: '#ffd166' },
-  { key: 'bitter' as const, label: '苦', color: '#06d6a0' },
-  { key: 'umami' as const, label: '鲜', color: '#4ecdc4' },
-  { key: 'spicy' as const, label: '辣', color: '#ef476f' },
-  { key: 'fatty' as const, label: '脂', color: '#e0aaff' },
+  { key: 'sweet' as const, label: 'Sweet', color: '#ff6b9d' },
+  { key: 'sour' as const, label: 'Sour', color: '#ffd166' },
+  { key: 'bitter' as const, label: 'Bitter', color: '#06d6a0' },
+  { key: 'umami' as const, label: 'Umami', color: '#4ecdc4' },
+  { key: 'spicy' as const, label: 'Spicy', color: '#ef476f' },
+  { key: 'fatty' as const, label: 'Fatty', color: '#e0aaff' },
 ] as const;
 
 export function FlavorMini({ profile }: FlavorMiniProps) {

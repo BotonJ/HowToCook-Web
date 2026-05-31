@@ -11,7 +11,7 @@ export function IngredientSearch({
   onSelect,
   searchVocabulary,
   zhMap,
-  placeholder = '搜索食材...',
+  placeholder = 'Search ingredients...',
 }: IngredientSearchProps) {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<string[]>([]);
