@@ -3,13 +3,15 @@ import type { ModeResult } from '@/lib/epicure/types';
 interface ModePanelProps {
   modes: ModeResult[];
   loading: boolean;
+  targetName?: string | null;
+  isSlerpResult?: boolean;
 }
 
 function formatName(raw: string): string {
   return raw.replace(/_/g, ' ');
 }
 
-export function ModePanel({ modes, loading }: ModePanelProps) {
+export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePanelProps) {
   if (loading) {
     return (
       <div className="space-y-3">
@@ -36,7 +38,14 @@ export function ModePanel({ modes, loading }: ModePanelProps) {
 
   return (
     <div className="space-y-4">
-      <h3 className="font-display text-headline-md text-on-surface">风味特征</h3>
+      <div>
+        <h3 className="font-display text-headline-md text-on-surface">风味特征</h3>
+        {targetName && (
+          <p className="text-xs text-on-surface-variant/70 font-body mt-0.5">
+            {isSlerpResult ? '🔄 探索结果：' : ''}{formatName(targetName)} 的风味归属
+          </p>
+        )}
+      </div>
       {modes.map((mode) => {
         const pct = Math.max(0, Math.min(100, mode.score * 100));
         return (

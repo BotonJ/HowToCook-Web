@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
+import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
 import { withBaseUrl } from '@/lib/utils';
@@ -232,6 +233,18 @@ export function RecipeDetail() {
                 </div>
               ))}
             </div>
+
+            {/* Flavor Radar */}
+            {recipe.flavorProfile && (
+              <section className="mb-10">
+                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
+                  风味画像
+                </h2>
+                <div className="flex justify-center">
+                  <FlavorRadar profile={recipe.flavorProfile} size={280} interactive />
+                </div>
+              </section>
+            )}
 
             {/* Ingredients */}
             {recipe.ingredients_text && (

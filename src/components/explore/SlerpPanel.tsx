@@ -10,6 +10,7 @@ interface SlerpPanelProps {
   zhMap?: Record<string, string>;
   cuisinePoles: CuisinePole[];
   selectedIngredient: string | null;
+  onSlerpTopResult?: (ingredient: string | null) => void;
 }
 
 export function SlerpPanel({
@@ -18,6 +19,7 @@ export function SlerpPanel({
   zhMap,
   cuisinePoles,
   selectedIngredient,
+  onSlerpTopResult,
 }: SlerpPanelProps) {
   const [seed, setSeed] = useState<string | null>(selectedIngredient);
   const [direction, setDirection] = useState(cuisinePoles[0]?.key ?? '');
@@ -31,6 +33,12 @@ export function SlerpPanel({
     if (!seed || !direction) return [];
     return slerpToCuisine(seed, direction, angle, 10);
   }, [seed, direction, angle, slerpToCuisine]);
+
+  useEffect(() => {
+    if (onSlerpTopResult) {
+      onSlerpTopResult(results.length > 0 ? results[0].name : null);
+    }
+  }, [results, onSlerpTopResult]);
 
   function handleSeedSelect(name: string) {
     setSeed(name);
@@ -57,6 +65,9 @@ export function SlerpPanel({
         <label className="text-sm text-on-surface-variant font-body block">
           菜系方向
         </label>
+        <p className="text-xs text-on-surface-variant/70 font-body -mt-1">
+          选择目标菜系，系统会从种子食材出发，向该菜系的典型风味方向偏移
+        </p>
         <select
           value={direction}
           onChange={(e) => setDirection(e.target.value)}
@@ -72,8 +83,14 @@ export function SlerpPanel({
 
       <div className="space-y-1">
         <label className="text-sm text-on-surface-variant font-body block">
-          混合角度
+          混合角度：{angle}°
+          <span className="text-xs text-on-surface-variant/70 ml-2">
+            {angle === 0 ? '（原始食材）' : angle <= 30 ? '（轻微偏移，风味接近原食材）' : angle <= 60 ? '（中等偏移，融入目标菜系特色）' : '（大幅偏移，接近目标菜系风味）'}
+          </span>
         </label>
+        <p className="text-xs text-on-surface-variant/70 font-body -mt-1">
+          0° = 保持原食材风味，90° = 完全偏向目标菜系。角度越大，推荐的食材越有目标菜系的特色
+        </p>
         <AngleSlider value={angle} onChange={setAngle} />
       </div>
 

@@ -1,7 +1,29 @@
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChefHat } from 'lucide-react';
+import { ChefHat, ChevronDown } from 'lucide-react';
+
+const COLLECTIONS = [
+  { id: 'chinese-recipes', label: '中国菜谱', emoji: '🥢' },
+  { id: 'chicken-recipes', label: '鸡肉类', emoji: '🍗' },
+  { id: 'baking', label: '烘焙', emoji: '🍞' },
+  { id: 'air-fryer', label: '空气炸锅', emoji: '🍟' },
+  { id: 'pasta', label: '意面', emoji: '🍝' },
+];
 
 export function Navbar() {
+  const [showCollections, setShowCollections] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setShowCollections(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <nav className="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant">
       <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
@@ -21,6 +43,34 @@ export function Navbar() {
           >
             烹饪学院
           </Link>
+
+          {/* 专题下拉菜单 */}
+          <div className="relative hidden sm:block" ref={dropdownRef}>
+            <button
+              type="button"
+              onClick={() => setShowCollections(!showCollections)}
+              className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
+            >
+              专题
+              <ChevronDown size={16} className={`transition-transform ${showCollections ? 'rotate-180' : ''}`} />
+            </button>
+            {showCollections && (
+              <div className="absolute top-full right-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-1 z-50">
+                {COLLECTIONS.map((col) => (
+                  <Link
+                    key={col.id}
+                    to={`/collection/${col.id}`}
+                    onClick={() => setShowCollections(false)}
+                    className="flex items-center gap-2 px-4 py-2 text-sm text-on-surface hover:bg-surface-container transition-colors"
+                  >
+                    <span>{col.emoji}</span>
+                    <span>{col.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link
             to="/explore"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
