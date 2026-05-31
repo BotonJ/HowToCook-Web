@@ -22,6 +22,12 @@ export function Navbar() {
             烹饪学院
           </Link>
           <Link
+            to="/explore"
+            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+          >
+            食材探索
+          </Link>
+          <Link
             to="/about"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
