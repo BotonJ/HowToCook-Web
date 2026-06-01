@@ -132,8 +132,8 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
   const isChineseSubOption = activeCuisine.startsWith('chinese-');
 
   return (
-    <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
-      <div className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2 items-center">
+    <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-[9999]">
+      <div className="container mx-auto px-4 py-3 flex gap-2 items-center overflow-visible">
         {primaryCuisines.map((cuisine) => {
           const isActive = cuisine.id === activeCuisine || (cuisine.id === 'chinese' && isChineseSubOption);
 
@@ -154,7 +154,7 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
                   <ChevronDown size={14} className={`transition-transform ${showChinese ? 'rotate-180' : ''}`} />
                 </button>
                 {showChinese && (
-                  <div className="absolute top-full left-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-1 z-50">
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl py-1 z-[9999]" style={{ position: 'absolute' }}>
                     {CHINESE_SUB_OPTIONS.map((option) => {
                       const count = option.id === 'chinese-original'
                         ? (cuisineCounts?.['chinese-original'] || 0)
@@ -218,7 +218,7 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
               <ChevronDown size={14} className={`transition-transform ${showMore ? 'rotate-180' : ''}`} />
             </button>
             {showMore && (
-              <div className="absolute top-full left-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-1 z-50 max-h-64 overflow-y-auto">
+              <div className="absolute top-full left-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-xl py-1 z-[9999] max-h-64 overflow-y-auto" style={{ position: 'absolute' }}>
                 {secondaryCuisines.map((cuisine) => (
                   <button
                     key={cuisine.id}
