@@ -6,9 +6,10 @@ interface CuisineTab {
   id: string;
   label: string;
   count?: number;
+  hasDropdown?: boolean;
 }
 
-// Primary cuisines shown in main nav (Chinese first)
+// Primary cuisines shown in main nav
 const PRIMARY_CUISINES = [
   'all',
   'chinese',
@@ -43,7 +44,7 @@ const SECONDARY_CUISINES = [
 // Display labels for cuisines
 const CUISINE_LABELS: Record<string, string> = {
   all: 'All',
-  chinese: '中餐',
+  chinese: 'Chinese',
   american: 'American',
   italian: 'Italian',
   french: 'French',
@@ -68,6 +69,12 @@ const CUISINE_LABELS: Record<string, string> = {
   german: 'German',
 };
 
+// Chinese sub-options
+const CHINESE_SUB_OPTIONS = [
+  { id: 'chinese-original', label: 'Original' },
+  { id: 'chinese-western', label: 'Western' },
+];
+
 interface CuisineNavProps {
   activeCuisine: string;
   onCuisineChange: (cuisine: string) => void;
@@ -76,13 +83,25 @@ interface CuisineNavProps {
 
 export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: CuisineNavProps) {
   const [showMore, setShowMore] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [showChinese, setShowChinese] = useState(false);
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+  const chineseDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Default to Western in English mode
+  useEffect(() => {
+    if (activeCuisine === 'chinese') {
+      onCuisineChange('chinese-western');
+    }
+  }, []); // Only on mount
 
   const primaryCuisines = useMemo<CuisineTab[]>(() => {
     return PRIMARY_CUISINES.map((id) => ({
       id,
       label: CUISINE_LABELS[id] || id,
-      count: cuisineCounts?.[id],
+      count: id === 'chinese'
+        ? (cuisineCounts?.['chinese'] || 0) + (cuisineCounts?.['chinese-original'] || 0)
+        : cuisineCounts?.[id],
+      hasDropdown: id === 'chinese',
     }));
   }, [cuisineCounts]);
 
@@ -98,8 +117,11 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
         setShowMore(false);
+      }
+      if (chineseDropdownRef.current && !chineseDropdownRef.current.contains(e.target as Node)) {
+        setShowChinese(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -107,12 +129,58 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
   }, []);
 
   const isActiveInDropdown = SECONDARY_CUISINES.includes(activeCuisine);
+  const isChineseSubOption = activeCuisine.startsWith('chinese-');
 
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2 items-center">
         {primaryCuisines.map((cuisine) => {
-          const isActive = cuisine.id === activeCuisine;
+          const isActive = cuisine.id === activeCuisine || (cuisine.id === 'chinese' && isChineseSubOption);
+
+          if (cuisine.hasDropdown) {
+            return (
+              <div key={cuisine.id} className="relative" ref={chineseDropdownRef}>
+                <button
+                  type="button"
+                  onClick={() => setShowChinese(!showChinese)}
+                  className={cn(
+                    'whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1',
+                    isActive
+                      ? 'bg-primary text-on-primary shadow-sm'
+                      : 'bg-surface text-on-surface-variant border border-outline-variant hover:border-primary hover:text-primary'
+                  )}
+                >
+                  {cuisine.label}({cuisine.count})
+                  <ChevronDown size={14} className={`transition-transform ${showChinese ? 'rotate-180' : ''}`} />
+                </button>
+                {showChinese && (
+                  <div className="absolute top-full left-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-1 z-50">
+                    {CHINESE_SUB_OPTIONS.map((option) => {
+                      const count = option.id === 'chinese-original'
+                        ? (cuisineCounts?.['chinese-original'] || 0)
+                        : (cuisineCounts?.['chinese'] || 0);
+                      return (
+                        <button
+                          key={option.id}
+                          onClick={() => {
+                            onCuisineChange(option.id);
+                            setShowChinese(false);
+                          }}
+                          className={cn(
+                            'w-full text-left px-4 py-2 text-sm hover:bg-surface-container transition-colors flex items-center justify-between',
+                            activeCuisine === option.id ? 'text-primary font-medium' : 'text-on-surface'
+                          )}
+                        >
+                          <span>{option.label}</span>
+                          <span className="text-xs text-on-surface-variant">({count})</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            );
+          }
 
           return (
             <button
@@ -135,7 +203,7 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
 
         {/* More dropdown */}
         {secondaryCuisines.length > 0 && (
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative" ref={moreDropdownRef}>
             <button
               type="button"
               onClick={() => setShowMore(!showMore)}
