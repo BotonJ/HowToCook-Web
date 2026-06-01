@@ -1,4 +1,4 @@
-import { useWorkbench } from './WorkbenchContext';
+import { useWorkbenchState } from './WorkbenchContext';
 
 const MODE_CONFIG: Record<
   string,
@@ -25,7 +25,7 @@ const MODE_CONFIG: Record<
 };
 
 export function WorkbenchHeader() {
-  const { state } = useWorkbench();
+  const state = useWorkbenchState();
   const cfg = MODE_CONFIG[state.mode];
 
   return (
