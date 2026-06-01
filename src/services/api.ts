@@ -2,9 +2,14 @@ import type { ApiSearchResponse, ApiRecipeDetail, ApiCategory, ApiRecipesRespons
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'https://api.howtocook.cn';
 
-async function fetchApi<T>(path: string): Promise<T> {
+async function fetchApi<T>(path: string, externalSignal?: AbortSignal): Promise<T> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 10_000);
+
+  // Link external signal so caller can cancel too
+  const onExternalAbort = () => controller.abort();
+  externalSignal?.addEventListener('abort', onExternalAbort);
+
   try {
     const res = await fetch(`${API_BASE}${path}`, { signal: controller.signal });
     if (!res.ok) throw new Error(`API error: ${res.status}`);
@@ -16,6 +21,7 @@ async function fetchApi<T>(path: string): Promise<T> {
     throw err;
   } finally {
     clearTimeout(timeout);
+    externalSignal?.removeEventListener('abort', onExternalAbort);
   }
 }
 
@@ -27,6 +33,7 @@ export async function searchRecipes(params: {
   cook_time?: string;
   limit?: number;
   turnstileToken?: string;
+  signal?: AbortSignal;
 }): Promise<ApiSearchResponse> {
   const query = new URLSearchParams();
   if (params.q) {
@@ -39,11 +46,11 @@ export async function searchRecipes(params: {
   if (params.cook_time) query.set('cook_time', params.cook_time);
   if (params.limit) query.set('limit', String(params.limit));
   if (params.turnstileToken) query.set('cf_turnstile', params.turnstileToken);
-  return fetchApi<ApiSearchResponse>(`/search?${query.toString()}`);
+  return fetchApi<ApiSearchResponse>(`/search?${query.toString()}`, params.signal);
 }
 
-export async function getRecipeDetail(id: string): Promise<ApiRecipeDetail> {
-  return fetchApi<ApiRecipeDetail>(`/recipe/${encodeURIComponent(id)}`);
+export async function getRecipeDetail(id: string, signal?: AbortSignal): Promise<ApiRecipeDetail> {
+  return fetchApi<ApiRecipeDetail>(`/recipe/${encodeURIComponent(id)}`, signal);
 }
 
 export async function fetchAllRecipes(): Promise<DishIndex[]> {

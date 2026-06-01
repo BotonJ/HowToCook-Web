@@ -6,10 +6,10 @@ import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
 import { withBaseUrl } from '@/lib/utils';
-import { COOK_TIME_LABELS, DIFFICULTY_LABELS, SITE_URL } from '@/lib/constants';
+import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
-import { useBasePath } from '@/lib/i18n';
-import { getFullRecipeData } from '@/hooks/useRecipes';
+import { useT, useBasePath } from '@/lib/i18n';
+import { findRecipeById } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
 
@@ -73,6 +73,7 @@ export function RecipeDetail() {
   const recipeId = params['*'] || params.recipeId;
   const navigate = useNavigate();
   const base = useBasePath();
+  const t = useT();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -80,11 +81,10 @@ export function RecipeDetail() {
     if (!recipeId) { setLocalRecipe(null); setLocalLoaded(true); return; }
     let cancelled = false;
     setLocalLoaded(false);
-    getFullRecipeData()
-      .then(cats => {
+    findRecipeById(recipeId)
+      .then(r => {
         if (cancelled) return;
-        const all = cats.flatMap(c => c.recipes);
-        setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
+        setLocalRecipe(r);
         setLocalLoaded(true);
       })
       .catch(() => { if (!cancelled) setLocalLoaded(true); });
@@ -185,7 +185,7 @@ export function RecipeDetail() {
                   <ChefHat size={18} className="text-primary flex-shrink-0" />
                   <div>
                     <div className="text-label-sm text-on-surface-variant">Difficulty</div>
-                    <div className="text-label-lg text-on-surface font-semibold">{DIFFICULTY_LABELS[recipe.difficulty]}</div>
+                    <div className="text-label-lg text-on-surface font-semibold">{t.constants.difficulty[recipe.difficulty]}</div>
                   </div>
                 </div>
               )}
@@ -194,7 +194,7 @@ export function RecipeDetail() {
                   <Clock size={18} className="text-tertiary flex-shrink-0" />
                   <div>
                     <div className="text-label-sm text-on-surface-variant">Time</div>
-                    <div className="text-label-lg text-on-surface font-semibold">{COOK_TIME_LABELS[recipe.cook_time] || recipe.cook_time}</div>
+                    <div className="text-label-lg text-on-surface font-semibold">{(t.constants.cookTime as Record<string, string>)[recipe.cook_time] || recipe.cook_time}</div>
                   </div>
                 </div>
               )}

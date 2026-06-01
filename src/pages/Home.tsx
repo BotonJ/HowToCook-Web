@@ -41,64 +41,60 @@ export function Home() {
 
   const normalizedSearch = searchTerm.trim().toLowerCase();
 
+  // Flat recipe list — computed once, shared by all downstream memos
+  const flatRecipes = useMemo(() => categories.flatMap(c => c.recipes), [categories]);
+
   // Filter recipes based on language and cuisine
   const allRecipes = useMemo(() => {
-    const recipes = categories.flatMap(c => c.recipes);
-
     // Chinese mode: show all Chinese recipes, filtered by source
     if (lang === 'zh') {
-      const zhRecipes = recipes.filter(r => (r.language || 'zh') !== 'en');
+      const zhRecipes = flatRecipes.filter(r => (r.language || 'zh') !== 'en');
       if (activeSource === 'all') return zhRecipes;
       return zhRecipes.filter(r => r.source === activeSource);
     }
 
     // English mode: filter by cuisine
     if (activeCuisine === 'all') {
-      return recipes.filter(r => (r.language || 'zh') === 'en');
+      return flatRecipes.filter(r => (r.language || 'zh') === 'en');
     }
 
     // Chinese sub-options
     if (activeCuisine === 'chinese-original') {
-      return recipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
+      return flatRecipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
     }
     if (activeCuisine === 'chinese-western') {
-      return recipes.filter(r => r.cuisine === 'chinese' && r.language === 'en');
+      return flatRecipes.filter(r => r.cuisine === 'chinese' && r.language === 'en');
     }
 
     // Other cuisines
-    return recipes
+    return flatRecipes
       .filter(r => (r.language || 'zh') === 'en')
       .filter(r => r.cuisine === activeCuisine);
-  }, [categories, lang, activeCuisine, activeSource]);
+  }, [flatRecipes, lang, activeCuisine, activeSource]);
 
   // Calculate cuisine counts for English mode
   const cuisineCounts = useMemo(() => {
     if (lang !== 'en') return {};
-    const allRecipes = categories.flatMap(c => c.recipes);
-
-    // English recipes only
-    const enRecipes = allRecipes.filter(r => (r.language || 'zh') === 'en');
+    const enRecipes = flatRecipes.filter(r => (r.language || 'zh') === 'en');
     const counts: Record<string, number> = { all: enRecipes.length };
 
-    // Count by cuisine
     enRecipes.forEach(r => {
       if (r.cuisine) {
         counts[r.cuisine] = (counts[r.cuisine] || 0) + 1;
       }
     });
 
-    // Chinese sub-counts
-    const zhRecipes = allRecipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
+    const zhRecipes = flatRecipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
     counts['chinese-original'] = zhRecipes.length;
     counts['chinese'] = (counts['chinese'] || 0) + zhRecipes.length;
 
     return counts;
-  }, [categories, lang]);
+  }, [flatRecipes, lang]);
 
   // Calculate source counts for Chinese mode
   const sourceCounts = useMemo(() => {
     if (lang !== 'zh') return {};
-    const zhRecipes = categories.flatMap(c => c.recipes).filter(r => (r.language || 'zh') !== 'en');
+    const zhRecipes = flatRecipes.filter(r => (r.language || 'zh') !== 'en');
     const counts: Record<string, number> = { all: zhRecipes.length };
     zhRecipes.forEach(r => {
       if (r.source) {
@@ -106,7 +102,7 @@ export function Home() {
       }
     });
     return counts;
-  }, [categories, lang]);
+  }, [flatRecipes, lang]);
 
   const displayedRecipes = useMemo(() => {
     const list = categoryId

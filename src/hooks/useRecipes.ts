@@ -153,18 +153,38 @@ async function getFullRecipeData(): Promise<Category[]> {
     fetchFullFallback(),
     fetchFlavorProfiles(),
   ]);
-  // Merge flavor profiles into recipes
-  for (const cat of data) {
-    for (const recipe of cat.recipes) {
+  // Merge flavor profiles immutably — create new recipe and category objects
+  const merged = data.map(cat => ({
+    ...cat,
+    recipes: cat.recipes.map(recipe => {
       const fp = flavorProfiles[recipe.id];
-      if (fp) recipe.flavorProfile = fp;
-    }
-  }
-  fullDataCache = data;
-  return data;
+      return fp ? { ...recipe, flavorProfile: fp } : recipe;
+    }),
+  }));
+  fullDataCache = merged;
+  return merged;
 }
 
 export { getFullRecipeData };
+
+/** Look up a single recipe by ID in O(1) using a pre-built index. */
+let recipeIndexCache: Map<string, Recipe> | null = null;
+
+function getRecipeIndex(categories: Category[]): Map<string, Recipe> {
+  if (recipeIndexCache) return recipeIndexCache;
+  const map = new Map<string, Recipe>();
+  for (const cat of categories) {
+    for (const r of cat.recipes) {
+      map.set(r.id, r);
+    }
+  }
+  recipeIndexCache = map;
+  return map;
+}
+
+export function findRecipeById(id: string): Promise<Recipe | null> {
+  return getFullRecipeData().then(cats => getRecipeIndex(cats).get(id) ?? null);
+}
 
 // Module-level cache so data is fetched only once across re-renders/remounts
 let cachedCategories: Category[] | null = null;
@@ -208,50 +228,61 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
       fetchFlavorProfiles(),
     ]);
 
-    // 2. Merge English categories into Chinese categories
+    // 2. Merge English categories into Chinese categories immutably
     const mergedCategories = [...categories];
     for (const enCat of englishCategories) {
-      const existing = mergedCategories.find(c => c.id === enCat.id.replace('en-', ''));
-      if (existing) {
-        // Add English recipes to existing category
-        existing.recipes.push(...enCat.recipes);
-        existing.count = existing.recipes.length;
+      const existingIdx = mergedCategories.findIndex(c => c.id === enCat.id.replace('en-', ''));
+      if (existingIdx !== -1) {
+        const existing = mergedCategories[existingIdx];
+        mergedCategories[existingIdx] = {
+          ...existing,
+          recipes: [...existing.recipes, ...enCat.recipes],
+          count: existing.recipes.length + enCat.recipes.length,
+        };
       } else {
-        // Add new English category
         mergedCategories.push(enCat);
       }
     }
 
-    // 3. Merge noodle recipes (面食之神) into categories
+    // 3. Merge noodle recipes (面食之神) into categories immutably
     for (const noodleCat of noodleCategories) {
-      const existing = mergedCategories.find(c => c.id === 'staple');
-      if (existing) {
-        // Add noodle recipes to staple category
-        existing.recipes.push(...noodleCat.recipes);
-        existing.count = existing.recipes.length;
+      const existingIdx = mergedCategories.findIndex(c => c.id === 'staple');
+      if (existingIdx !== -1) {
+        const existing = mergedCategories[existingIdx];
+        mergedCategories[existingIdx] = {
+          ...existing,
+          recipes: [...existing.recipes, ...noodleCat.recipes],
+          count: existing.recipes.length + noodleCat.recipes.length,
+        };
       } else {
-        // Add new category
         mergedCategories.push(noodleCat);
       }
     }
 
     const recipes = mergedCategories.flatMap(c => c.recipes);
 
-    // 3. Merge flavor profiles into recipes
-    for (const recipe of recipes) {
+    // 4. Merge flavor profiles into recipes immutably
+    const recipesWithFlavor = recipes.map(recipe => {
       const fp = flavorProfiles[recipe.id];
-      if (fp) {
-        recipe.flavorProfile = fp;
-      }
-    }
+      return fp ? { ...recipe, flavorProfile: fp } : recipe;
+    });
 
-    cachedCategories = mergedCategories;
-    cachedRecipes = recipes;
+    // Rebuild categories with updated recipe references
+    const finalCategories = mergedCategories.map(cat => ({
+      ...cat,
+      recipes: cat.recipes.map(r => {
+        const fp = flavorProfiles[r.id];
+        return fp ? { ...r, flavorProfile: fp } : r;
+      }),
+    }));
 
-    // 4. Refresh from API in background (fire-and-forget)
+    cachedCategories = finalCategories;
+    cachedRecipes = recipesWithFlavor;
+
+    // 5. Refresh from API in background (fire-and-forget)
     fetchFromApiAndUpdate().catch(() => {});
 
-    return { categories: mergedCategories, recipes };
+    return { categories: finalCategories, recipes: recipesWithFlavor };
   })();
 
   return inflight;
@@ -317,6 +348,7 @@ export function useRecipes(): UseRecipesResult {
     cachedRecipes = null;
     inflight = null;
     fullDataCache = null;
+    recipeIndexCache = null;
     doLoad();
   };
 

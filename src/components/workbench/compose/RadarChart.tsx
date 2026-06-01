@@ -1,14 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile } from '@/lib/flavor-profiles';
-
-const DIMS = [
-  { key: 'sweet', label: '甜', color: '#ff6b9d', emoji: '🍬' },
-  { key: 'sour', label: '酸', color: '#ffd166', emoji: '🍋' },
-  { key: 'bitter', label: '苦', color: '#06d6a0', emoji: '🫒' },
-  { key: 'umami', label: '鲜', color: '#4ecdc4', emoji: '🍄' },
-  { key: 'spicy', label: '辣', color: '#ef476f', emoji: '🌶️' },
-  { key: 'fatty', label: '脂', color: '#e0aaff', emoji: '🧈' },
-];
+import { FLAVOR_DIM_CONFIG } from '@/lib/flavor-dims';
 
 const COLORS = ['#ab3500', '#006e1c', '#00677e', '#8d7168', '#594139'];
 
@@ -33,7 +25,7 @@ export function RadarChart({ ingredients }: RadarChartProps) {
   const avgProfile = useMemo(() => {
     if (profiles.length === 0) return null;
     const avg: Record<string, number> = {};
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIM_CONFIG) {
       const sum = profiles.reduce((s, p) => s + (p.profile[dim.key as keyof typeof p.profile] as number), 0);
       avg[dim.key] = sum / profiles.length;
     }
@@ -62,7 +54,7 @@ export function RadarChart({ ingredients }: RadarChartProps) {
         <svg viewBox="0 0 400 400" className="w-full max-w-[320px] h-auto">
           {/* Grid */}
           {gridLevels.map((level) => {
-            const points = DIMS.map((_, i) => {
+            const points = FLAVOR_DIM_CONFIG.map((_, i) => {
               const v = hexVertex(i, (level / 10) * R, cx, cy);
               return `${v.x},${v.y}`;
             }).join(' ');
@@ -79,14 +71,14 @@ export function RadarChart({ ingredients }: RadarChartProps) {
           })}
 
           {/* Axis lines */}
-          {DIMS.map((_, i) => {
+          {FLAVOR_DIM_CONFIG.map((_, i) => {
             const v = hexVertex(i, R, cx, cy);
             return <line key={`axis-${i}`} x1={cx} y1={cy} x2={v.x} y2={v.y} stroke="#e1bfb5" strokeWidth={0.5} opacity={0.5} />;
           })}
 
           {/* Data polygons */}
           {profiles.map((p, pi) => {
-            const points = DIMS.map((dim, i) => {
+            const points = FLAVOR_DIM_CONFIG.map((dim, i) => {
               const val = p.profile[dim.key as keyof typeof p.profile] as number;
               const v = hexVertex(i, (val / 10) * R, cx, cy);
               return `${v.x},${v.y}`;
@@ -108,7 +100,7 @@ export function RadarChart({ ingredients }: RadarChartProps) {
           {/* Average polygon (dashed) */}
           {avgProfile && (
             <polygon
-              points={DIMS.map((dim, i) => {
+              points={FLAVOR_DIM_CONFIG.map((dim, i) => {
                 const val = avgProfile[dim.key];
                 const v = hexVertex(i, (val / 10) * R, cx, cy);
                 return `${v.x},${v.y}`;
@@ -121,7 +113,7 @@ export function RadarChart({ ingredients }: RadarChartProps) {
           )}
 
           {/* Labels */}
-          {DIMS.map((dim, i) => {
+          {FLAVOR_DIM_CONFIG.map((dim, i) => {
             const v = hexVertex(i, R + 22, cx, cy);
             return (
               <text

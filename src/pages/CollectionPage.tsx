@@ -1,12 +1,12 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
+import { useRecipes } from '@/hooks/useRecipes';
 import { SITE_URL } from '@/lib/constants';
 import { useT, useBasePath } from '@/lib/i18n';
-import type { Recipe, Category } from '@/types';
-import type { EnIndexData } from '@/types/api';
+import type { Recipe } from '@/types';
 
 interface CollectionDef {
   id: string;
@@ -79,73 +79,10 @@ const COLLECTIONS: Record<string, CollectionDef> = {
   },
 };
 
-async function loadRecipeData(): Promise<Category[]> {
-  // 加载中文数据
-  const zhRes = await fetch('/data/recipes-index.json');
-  if (!zhRes.ok) throw new Error(`Failed to load recipe data: ${zhRes.status}`);
-  const zhCategories: Category[] = await zhRes.json();
-
-  // 加载英文数据
-  try {
-    const enRes = await fetch('/data/en_index_curated.json');
-    if (enRes.ok) {
-      const enData: EnIndexData = await enRes.json();
-      const enRecipes: Recipe[] = enData.dishes.map((dish) => ({
-        id: `en/${dish.name}`,
-        name: dish.name,
-        category: dish.category,
-        imagePath: '',
-        difficulty: dish.difficulty,
-        cuisine: dish.cuisine,
-        cooking_method: dish.cooking_method,
-        cook_time: dish.cook_time,
-        ingredients: dish.ingredients,
-        main_ingredients: dish.main_ingredients ?? [],
-        tags: dish.tags ?? {},
-        source: dish.source,
-        description: dish.epicurious_meta?.description ?? '',
-        language: 'en' as const,
-      }));
-
-      const grouped = new Map<string, Recipe[]>();
-      for (const recipe of enRecipes) {
-        const list = grouped.get(recipe.category);
-        if (list) {
-          list.push(recipe);
-        } else {
-          grouped.set(recipe.category, [recipe]);
-        }
-      }
-
-      for (const [id, recs] of grouped) {
-        const existing = zhCategories.find(c => c.id === id);
-        if (existing) {
-          existing.recipes.push(...recs);
-          existing.count = existing.recipes.length;
-        } else {
-          zhCategories.push({
-            id: `en-${id}`,
-            name: `English ${id}`,
-            displayName: `English ${id}`,
-            count: recs.length,
-            recipes: recs,
-          });
-        }
-      }
-    }
-  } catch {
-    // 英文数据加载失败，继续使用中文数据
-  }
-
-  return zhCategories;
-}
-
 export function CollectionPage() {
   const { collectionId } = useParams<{ collectionId: string }>();
   const collection = collectionId ? COLLECTIONS[collectionId] : undefined;
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { recipes, loading, error } = useRecipes();
   const t = useT();
   const base = useBasePath();
 
@@ -156,19 +93,10 @@ export function CollectionPage() {
     ogUrl: collectionId ? `${SITE_URL}/collection/${collectionId}` : SITE_URL,
   });
 
-  useEffect(() => {
-    loadRecipeData()
-      .then(setCategories)
-      .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load recipes'))
-      .finally(() => setLoading(false));
-  }, []);
-
   const filteredRecipes = useMemo(() => {
     if (!collection) return [];
-    return categories
-      .flatMap((c) => c.recipes)
-      .filter(collection.filter);
-  }, [categories, collection]);
+    return recipes.filter(collection.filter);
+  }, [recipes, collection]);
 
   if (!collection) {
     return (
