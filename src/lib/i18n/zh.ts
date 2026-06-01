@@ -22,7 +22,7 @@ export const zh = {
     siteName: '做饭指北',
     academy: '烹饪学院',
     collections: '专题',
-    explore: '食材探索',
+    explore: '风味工作台',
     about: '关于',
     credits: '致谢',
     github: 'GitHub',
@@ -187,9 +187,9 @@ export const zh = {
     defaultMetaDesc: '烹饪知识文章',
   },
 
-  // ── 食材探索 ──────────────────────────────────────────────────────
+  // ── 风味工作台 ──────────────────────────────────────────────────────
   explore: {
-    title: '食材探索',
+    title: '风味工作台',
     subtitle: '探索食材搭配、风味特征和菜系方向',
     metaDesc: 'Explore ingredient pairings, flavor profiles, and cuisine directions with our ingredient embedding engine.',
     searchPlaceholder: '搜索食材发现风味搭配...',

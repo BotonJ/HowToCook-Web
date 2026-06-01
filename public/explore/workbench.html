@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>风味工作台 — 模式切换原型</title>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#ab3500',
+        'primary-light': '#ff6b35',
+        'primary-container': '#ffdbd0',
+        secondary: '#006e1c',
+        'secondary-light': '#91f78e',
+        'secondary-container': '#94f990',
+        surface: '#fbf9f8',
+        'surface-container': '#f0eded',
+        'surface-container-high': '#eae8e7',
+        'on-surface': '#1b1c1c',
+        'on-surface-variant': '#594139',
+        outline: '#8d7168',
+        'outline-variant': '#e1bfb5',
+        error: '#ba1a1a',
+        'error-container': '#ffdad6',
+      },
+      fontFamily: {
+        literata: ['Literata', 'serif'],
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      borderRadius: { 'card': '16px', 'feature': '24px' }
+    }
+  }
+}
+</script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #fbf9f8;
+  color: #1b1c1c;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.font-literata { font-family: 'Literata', serif; }
+.ambient-shadow { box-shadow: 0 4px 20px 0 rgba(51,51,51,0.04); }
+.ambient-shadow-lg { box-shadow: 0 8px 40px 0 rgba(51,51,51,0.06); }
+
+/* Search Input */
+.search-input {
+  width: 100%; height: 56px;
+  border: 2px solid #E0E0E0; border-radius: 16px;
+  padding: 0 20px 0 52px; font-size: 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #fff; color: #1b1c1c; outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.search-input::placeholder { color: #8d7168; opacity: 0.6; }
+.search-input:focus { border-color: #ab3500; box-shadow: 0 0 0 3px rgba(171,53,0,0.12); }
+
+/* Chips */
+.ingredient-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 9999px;
+  border: 1.5px solid #e1bfb5; background: #fff;
+  color: #594139; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.25s ease;
+  user-select: none; -webkit-user-select: none;
+}
+.ingredient-chip:hover { border-color: #ab3500; color: #ab3500; background: rgba(171,53,0,0.04); }
+.ingredient-chip.selected { background: #ab3500; color: #fff; border-color: #ab3500; }
+.ingredient-chip.selected:hover { background: #8f2d00; }
+
+/* Selected Tag */
+.selected-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px; border-radius: 9999px;
+  background: #ffdbd0; color: #ab3500;
+  font-size: 13px; font-weight: 600;
+  animation: tagIn 0.25s ease;
+}
+.selected-tag .remove-btn {
+  width: 18px; height: 18px; border-radius: 50%; border: none;
+  background: rgba(171,53,0,0.15); color: #ab3500;
+  font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; line-height: 1;
+}
+.selected-tag .remove-btn:hover { background: rgba(171,53,0,0.3); }
+@keyframes tagIn { from { opacity:0; transform:scale(0.8); } to { opacity:1; transform:scale(1); } }
+
+/* Cards */
+.card {
+  background: #ffffff; border-radius: 16px;
+  padding: 24px; box-shadow: 0 4px 20px 0 rgba(51,51,51,0.04);
+}
+.card-sm {
+  background: #ffffff; border-radius: 12px;
+  padding: 16px; box-shadow: 0 2px 12px 0 rgba(51,51,51,0.03);
+}
+
+/* Main Layout */
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 300px;
+  gap: 1.5rem; align-items: start;
+}
+@media (max-width: 1200px) { .main-layout { grid-template-columns: 260px 1fr 280px; } }
+@media (max-width: 1000px) { .main-layout { grid-template-columns: 1fr; } }
+
+/* Radar */
+.radar-container { display: flex; justify-content: center; align-items: center; }
+.radar-container svg text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+.radar-polygon { transition: all 0.4s cubic-bezier(0.4,0,0.2,1); }
+
+/* Recipe Card */
+.recipe-rec {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 12px;
+  background: #f6f3f2; transition: background 0.2s, transform 0.2s;
+  cursor: default;
+}
+.recipe-rec:hover { background: #f0eded; transform: translateY(-1px); }
+
+/* Dimension Bars */
+.dim-bar-item { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+.dim-bar-label { width: 32px; text-align: right; font-size: 13px; font-weight: 700; color: #594139; flex-shrink: 0; }
+.dim-bar-track { flex: 1; height: 8px; border-radius: 4px; background: #eae8e7; overflow: hidden; }
+.dim-bar-fill { height: 100%; border-radius: 4px; background: #ab3500; transition: width 0.4s ease; }
+.dim-bar-value { width: 36px; text-align: right; font-size: 13px; font-weight: 600; color: #1b1c1c; flex-shrink: 0; }
+
+/* Balance Bars (left panel) */
+.balance-bar-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+.balance-bar-label { width: 28px; text-align: right; font-size: 12px; font-weight: 600; color: #594139; flex-shrink: 0; }
+.balance-bar-track { flex: 1; height: 6px; border-radius: 3px; background: #eae8e7; overflow: hidden; }
+.balance-bar-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease; }
+.balance-bar-val { width: 32px; text-align: right; font-size: 12px; font-weight: 600; color: #1b1c1c; flex-shrink: 0; }
+
+/* Pulse */
+@keyframes pulse-warn {
+  0%,100% { box-shadow: 0 0 0 0 rgba(186,26,26,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(186,26,26,0); }
+}
+.pulse-warn { animation: pulse-warn 2s infinite; }
+@keyframes pulse-info {
+  0%,100% { box-shadow: 0 0 0 0 rgba(0,110,28,0.25); }
+  50% { box-shadow: 0 0 0 8px rgba(0,110,28,0); }
+}
+.pulse-info { animation: pulse-info 2s infinite; }
+
+/* Explore: Flavor Wheel */
+.flavor-wheel-container {
+  position: relative; width: 100%;
+  max-width: 600px; margin: 0 auto; aspect-ratio: 1;
+  background:
+    radial-gradient(ellipse at 25% 20%,rgba(171,53,0,.04) 0%,transparent 50%),
+    radial-gradient(ellipse at 75% 80%,rgba(0,110,28,.03) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(255,107,53,.03) 0%,transparent 60%),
+    radial-gradient(ellipse at 80% 20%,rgba(141,113,104,.03) 0%,transparent 45%),
+    #fbf9f8;
+  border-radius: 24px; padding: 12px;
+  box-shadow: 0 4px 20px 0 rgba(51,51,51,.04),0 0 0 1px rgba(225,191,181,.2);
+}
+.flavor-wheel-container svg { width: 100%; height: 100%; }
+@keyframes wheelFadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.wheel-node { animation: wheelFadeIn 0.4s ease both; }
+
+/* Explore: Profile Bars */
+.explore-bar-row { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+.explore-bar-emoji { width: 28px; text-align: center; font-size: 1rem; }
+.explore-bar-name { width: 32px; font-size: 0.8rem; color: #594139; }
+.explore-bar-track { flex: 1; height: 8px; background: #eae8e7; border-radius: 4px; overflow: hidden; }
+.explore-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+
+/* Explore: Food Group Tags */
+.food-group-tag {
+  font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 100px;
+  border: 1px solid #e1bfb5; color: #594139; display: inline-block;
+}
+.food-group-tag.match { border-color: #006e1c; color: #006e1c; background: rgba(0,110,28,0.06); }
+
+/* Explore: Cluster Cards */
+.cluster-header-explore {
+  display: flex; align-items: center; gap: 0.5rem;
+  margin-bottom: 0.4rem; padding: 0.3rem 0.5rem;
+  margin-left: -0.5rem; margin-right: -0.5rem;
+  border-radius: 8px; transition: background 0.2s;
+}
+.cluster-header-explore.highlight { background: rgba(171,53,0,0.08); }
+.cluster-dot-explore { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.cluster-name-explore { font-size: 0.85rem; font-weight: 600; color: #1b1c1c; }
+.cluster-score-explore { margin-left: auto; font-size: 0.75rem; color: #006e1c; font-weight: 600; }
+.cluster-tags-explore { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.4rem; }
+.cluster-tag-explore {
+  font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 100px;
+  background: rgba(171,53,0,0.04); color: #594139; border: 1px solid #eae8e7;
+}
+
+/* Explore: SLERP Journey */
+.journey-track {
+  position: relative; height: 60px; margin: 1rem 0;
+  display: flex; align-items: center;
+}
+.journey-line {
+  position: absolute; left: 0; right: 0; height: 3px;
+  background: #eae8e7; top: 50%; transform: translateY(-50%);
+}
+.journey-line-fill {
+  height: 100%; background: linear-gradient(90deg, #006e1c, #ab3500);
+  border-radius: 2px; transition: width 0.3s;
+}
+.journey-endpoint {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  font-size: 0.8rem; font-weight: 600; white-space: nowrap;
+}
+.journey-endpoint.start { left: 0; color: #006e1c; }
+.journey-endpoint.end { right: 0; color: #ab3500; }
+.journey-thumb {
+  position: absolute; top: 50%; transform: translate(-50%,-50%);
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #ab3500; border: 3px solid #fff;
+  box-shadow: 0 2px 10px rgba(171,53,0,0.35);
+  cursor: grab; transition: left 0.1s; z-index: 2;
+}
+.journey-label {
+  position: absolute; top: -10px; transform: translateX(-50%);
+  font-size: 0.7rem; color: #ab3500; font-weight: 700;
+  white-space: nowrap; transition: left 0.1s;
+}
+
+/* Explore: Cuisine Pills */
+.cuisine-pills { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
+.cuisine-pill {
+  padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.75rem;
+  border: 1px solid #e1bfb5; background: transparent; color: #594139;
+  cursor: pointer; transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.cuisine-pill:hover { border-color: #ab3500; color: #ab3500; }
+.cuisine-pill.active {
+  background: rgba(171,53,0,0.1); border-color: #ab3500;
+  color: #ab3500; font-weight: 600;
+}
+
+/* Explore: Angle Control */
+.angle-control { display: flex; align-items: center; gap: 0.8rem; margin: 0.8rem 0; }
+.angle-control input[type=range] {
+  flex: 1; -webkit-appearance: none; height: 6px;
+  border-radius: 3px; background: #eae8e7; outline: none;
+}
+.angle-control input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px;
+  border-radius: 50%; background: #ab3500; border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(171,53,0,0.3); cursor: grab;
+}
+.angle-val { font-size: 0.9rem; font-weight: 700; color: #ab3500; width: 40px; text-align: center; }
+.angle-desc { font-size: 0.8rem; color: #594139; margin-top: 0.3rem; }
+
+/* Explore: Journey Result Chips */
+.journey-results { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.journey-chip {
+  display: flex; align-items: center; gap: 0.4rem;
+  padding: 0.3rem 0.7rem; border-radius: 100px;
+  font-size: 0.8rem;
+  background: rgba(171,53,0,0.06); border: 1px solid rgba(171,53,0,0.15);
+  color: #ab3500; transition: all 0.2s; cursor: pointer;
+}
+.journey-chip:hover {
+  background: rgba(171,53,0,0.12); border-color: #ab3500; transform: scale(1.05);
+}
+.journey-chip .rank { font-size: 0.65rem; color: #8d7168; width: 14px; }
+
+/* Tooltip */
+.explore-tooltip {
+  position: fixed; background: #ffffff;
+  border: 1.5px solid #ab3500; border-radius: 12px;
+  padding: 0.8rem 1rem; pointer-events: none; opacity: 0;
+  transition: opacity 0.15s; z-index: 100; min-width: 160px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+.explore-tooltip.show { opacity: 1; }
+.explore-tooltip .tt-name { font-weight: 700; font-size: 1rem; color: #1b1c1c; margin-bottom: 0.2rem; }
+.explore-tooltip .tt-zh { color: #8d7168; font-size: 0.85rem; }
+.explore-tooltip .tt-score { color: #006e1c; font-size: 0.85rem; margin-top: 0.3rem; }
+.explore-tooltip .tt-cluster {
+  margin-top: 0.4rem; padding-top: 0.4rem;
+  border-top: 1px solid #eae8e7; font-size: 0.8rem; color: #594139;
+}
+.explore-tooltip .tt-cluster-tag {
+  display: inline-block; padding: 0.1rem 0.5rem;
+  border-radius: 100px; font-size: 0.7rem; margin-top: 0.3rem; color: #fff;
+}
+
+/* Guide card */
+.guide-card {
+  text-align: center; padding: 4rem 2rem; max-width: 480px; margin: 0 auto;
+}
+.guide-card h2 {
+  font-size: 1.8rem; font-family: 'Literata', serif; margin-bottom: 1rem;
+  background: linear-gradient(135deg, #ab3500, #ff6b35);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.guide-steps { text-align: left; margin: 1.5rem 0; }
+.guide-step { display: flex; gap: 0.8rem; margin-bottom: 1rem; }
+.guide-step .num {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; color: #fff;
+}
+.guide-step:nth-child(1) .num { background: #ab3500; }
+.guide-step:nth-child(2) .num { background: #006e1c; }
+.guide-step:nth-child(3) .num { background: #594139; }
+.guide-step strong { color: #1b1c1c; }
+.guide-step p { color: #594139; font-size: 0.9rem; }
+
+/* Mode indicator */
+.mode-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 12px; border-radius: 9999px;
+  font-size: 12px; font-weight: 700;
+  animation: tagIn 0.3s ease;
+}
+.mode-badge.explore-mode { background: #ffdbd0; color: #ab3500; }
+.mode-badge.compose-mode { background: #d0ffd8; color: #006e1c; }
+
+/* Section divider */
+.section-divider {
+  border: none; border-top: 1px solid #eae8e7; margin: 1rem 0;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #e1bfb5; border-radius: 3px; }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- ==================== DATA ==================== -->
+<script>
+const DATA = {
+  "ingredients": [
+    {"id":"chicken","nameEn":"chicken","nameZh":"鸡肉","emoji":"🐔","flavor":{"sweet":6.7,"sour":6.5,"bitter":7.0,"umami":8.1,"spicy":4.7,"fatty":6.5}},
+    {"id":"pork","nameEn":"pork","nameZh":"猪肉","emoji":"🐷","flavor":{"sweet":6.3,"sour":5.6,"bitter":4.7,"umami":7.1,"spicy":4.2,"fatty":3.9}},
+    {"id":"beef","nameEn":"beef","nameZh":"牛肉","emoji":"🥩","flavor":{"sweet":6.1,"sour":6.2,"bitter":6.5,"umami":7.6,"spicy":3.7,"fatty":5.5}},
+    {"id":"egg","nameEn":"egg","nameZh":"鸡蛋","emoji":"🥚","flavor":{"sweet":5.2,"sour":5.6,"bitter":4.1,"umami":6.5,"spicy":4.1,"fatty":3.0}},
+    {"id":"tofu","nameEn":"tofu","nameZh":"豆腐","emoji":"🧈","flavor":{"sweet":6.2,"sour":6.4,"bitter":4.9,"umami":7.6,"spicy":4.2,"fatty":3.6}},
+    {"id":"tomato","nameEn":"tomato","nameZh":"番茄","emoji":"🍅","flavor":{"sweet":7.6,"sour":8.2,"bitter":7.8,"umami":7.5,"spicy":4.7,"fatty":5.9}},
+    {"id":"potato","nameEn":"potato","nameZh":"土豆","emoji":"🥔","flavor":{"sweet":7.1,"sour":8.1,"bitter":7.7,"umami":8.0,"spicy":4.9,"fatty":6.6}},
+    {"id":"carrot","nameEn":"carrot","nameZh":"胡萝卜","emoji":"🥕","flavor":{"sweet":5.2,"sour":6.1,"bitter":5.2,"umami":7.1,"spicy":4.1,"fatty":4.6}},
+    {"id":"cabbage","nameEn":"cabbage","nameZh":"白菜","emoji":"🥬","flavor":{"sweet":6.4,"sour":6.3,"bitter":4.6,"umami":7.6,"spicy":4.3,"fatty":3.4}},
+    {"id":"eggplant","nameEn":"eggplant","nameZh":"茄子","emoji":"🍆","flavor":{"sweet":6.8,"sour":6.9,"bitter":5.0,"umami":7.3,"spicy":4.8,"fatty":3.9}},
+    {"id":"bell_pepper","nameEn":"bell_pepper","nameZh":"青椒","emoji":"🫑","flavor":{"sweet":7.2,"sour":6.7,"bitter":5.8,"umami":7.5,"spicy":4.9,"fatty":4.9}},
+    {"id":"pork_belly","nameEn":"pork_belly","nameZh":"五花肉","emoji":"🥓","flavor":{"sweet":6.1,"sour":6.0,"bitter":5.0,"umami":6.3,"spicy":4.2,"fatty":4.0}},
+    {"id":"chicken_thigh","nameEn":"chicken_thigh","nameZh":"鸡腿","emoji":"🍗","flavor":{"sweet":6.7,"sour":6.3,"bitter":6.8,"umami":7.1,"spicy":4.4,"fatty":5.9}},
+    {"id":"shiitake_mushroom","nameEn":"shiitake_mushroom","nameZh":"香菇","emoji":"🍄","flavor":{"sweet":7.0,"sour":7.4,"bitter":3.7,"umami":7.4,"spicy":5.9,"fatty":3.2}},
+    {"id":"chinese_celery","nameEn":"chinese_celery","nameZh":"芹菜","emoji":"🥬","flavor":{"sweet":7.2,"sour":7.3,"bitter":5.4,"umami":7.1,"spicy":5.2,"fatty":4.2}}
+  ],
+  "recipes": [
+    {"id":"howtocook/新疆大盘鸡","nameZh":"新疆大盘鸡","flavor":{"sweet":6.9,"sour":6.8,"bitter":6.8,"umami":8.6,"spicy":4.5,"fatty":5.8}},
+    {"id":"howtocook/地三鲜","nameZh":"地三鲜","flavor":{"sweet":6.8,"sour":6.5,"bitter":4.5,"umami":7.3,"spicy":4.7,"fatty":3.1}},
+    {"id":"howtocook/皮蛋瘦肉粥","nameZh":"皮蛋瘦肉粥","flavor":{"sweet":6.8,"sour":6.7,"bitter":5.6,"umami":7.5,"spicy":4.2,"fatty":3.9}},
+    {"id":"howtocook/咕噜肉","nameZh":"咕噜肉","flavor":{"sweet":5.7,"sour":4.6,"bitter":5.0,"umami":6.9,"spicy":3.2,"fatty":4.6}},
+    {"id":"howtocook/小酥肉","nameZh":"小酥肉","flavor":{"sweet":6.0,"sour":5.2,"bitter":3.9,"umami":6.4,"spicy":4.0,"fatty":2.4}},
+    {"id":"howtocook/香菇滑鸡","nameZh":"香菇滑鸡","flavor":{"sweet":8.5,"sour":9.2,"bitter":6.2,"umami":9.1,"spicy":6.6,"fatty":5.4}},
+    {"id":"howtocook/烤茄子","nameZh":"烤茄子","flavor":{"sweet":7.1,"sour":6.9,"bitter":5.5,"umami":7.0,"spicy":3.8,"fatty":3.8}},
+    {"id":"howtocook/鲤鱼炖白菜","nameZh":"鲤鱼炖白菜","flavor":{"sweet":7.4,"sour":6.3,"bitter":4.8,"umami":6.7,"spicy":4.5,"fatty":2.9}},
+    {"id":"howtocook/家常日本豆腐","nameZh":"家常日本豆腐","flavor":{"sweet":5.1,"sour":5.8,"bitter":5.0,"umami":7.6,"spicy":3.3,"fatty":3.8}},
+    {"id":"howtocook/冬瓜酿肉","nameZh":"冬瓜酿肉","flavor":{"sweet":6.6,"sour":6.2,"bitter":4.3,"umami":7.0,"spicy":5.0,"fatty":3.0}},
+    {"id":"howtocook/芹菜拌茶树菇","nameZh":"芹菜拌茶树菇","flavor":{"sweet":5.1,"sour":4.7,"bitter":2.4,"umami":6.1,"spicy":3.2,"fatty":1.3}},
+    {"id":"howtocook/勾芡香菇汤","nameZh":"勾芡香菇汤","flavor":{"sweet":6.9,"sour":7.8,"bitter":3.5,"umami":8.3,"spicy":6.4,"fatty":4.0}},
+    {"id":"howtocook/热干面","nameZh":"热干面","flavor":{"sweet":5.8,"sour":6.5,"bitter":4.7,"umami":7.5,"spicy":3.9,"fatty":3.6}},
+    {"id":"howtocook/上汤娃娃菜","nameZh":"上汤娃娃菜","flavor":{"sweet":5.9,"sour":5.7,"bitter":3.8,"umami":6.5,"spicy":4.3,"fatty":2.1}}
+  ],
+  "flavorDimensions": ["sweet","sour","bitter","umami","spicy","fatty"],
+  "flavorLabelsZh": {"sweet":"甜","sour":"酸","bitter":"苦","umami":"鲜","spicy":"辣","fatty":"脂"},
+  "flavorEmoji": {"sweet":"🍬","sour":"🍋","bitter":"🫒","umami":"🍄","spicy":"🌶️","fatty":"🧈"}
+};
+
+// Cuisine vectors
+const CUISINE_VECTORS = {
+  East_Asian:       { sweet: 5, sour: 4, bitter: 3, umami: 9, spicy: 5, fatty: 3 },
+  Southeast_Asian:  { sweet: 6, sour: 7, bitter: 2, umami: 7, spicy: 8, fatty: 4 },
+  South_Asian:      { sweet: 4, sour: 3, bitter: 4, umami: 6, spicy: 9, fatty: 5 },
+  Mediterranean:    { sweet: 5, sour: 6, bitter: 3, umami: 5, spicy: 3, fatty: 7 },
+  Western_Atlantic: { sweet: 6, sour: 3, bitter: 2, umami: 5, spicy: 2, fatty: 8 },
+  Latin_American:   { sweet: 6, sour: 5, bitter: 3, umami: 5, spicy: 7, fatty: 5 },
+};
+const CUISINE_LABELS = {
+  East_Asian: '东亚', Southeast_Asian: '东南亚', South_Asian: '南亚',
+  Mediterranean: '地中海', Western_Atlantic: '西方', Latin_American: '拉美',
+};
+const CLUSTER_COLORS = {
+  umami: '#ab3500', sweet: '#ff6b35', spicy: '#ba1a1a',
+  sour: '#006e1c', fatty: '#8d7168', bitter: '#594139',
+};
+const CLUSTER_NAMES_ZH = {
+  umami: '鲜味家族', sweet: '甜味家族', spicy: '辣味家族',
+  sour: '酸味家族', fatty: '油脂风味', bitter: '苦味家族',
+};
+const DIMS = DATA.flavorDimensions;
+const LABELS = DATA.flavorLabelsZh;
+const EMOJI = DATA.flavorEmoji;
+
+// Cluster inference
+function inferClusters(flavor) {
+  const clusters = [];
+  const dims = DIMS.slice();
+  const sorted = dims.sort((a, b) => flavor[b] - flavor[a]);
+  for (const dim of sorted.slice(0, 3)) {
+    if (flavor[dim] > 2) {
+      clusters.push({ name: CLUSTER_NAMES_ZH[dim], color: CLUSTER_COLORS[dim], score: +(flavor[dim] / 10).toFixed(2), dim });
+    }
+  }
+  return clusters;
+}
+
+function inferFoodGroups(ig) {
+  const groups = [];
+  const f = ig.flavor;
+  if (f.umami > 7) groups.push('高鲜味');
+  if (f.fatty > 5) groups.push('高脂肪');
+  if (f.sweet > 6.5) groups.push('甜味突出');
+  if (f.sour > 6.5) groups.push('酸味突出');
+  if (f.spicy > 4.5) groups.push('辛辣');
+  if (f.bitter > 6) groups.push('苦味明显');
+  if (['chicken','pork','beef','pork_belly','chicken_thigh'].includes(ig.id)) groups.push('肉类');
+  if (['egg','tofu'].includes(ig.id)) groups.push('蛋白质');
+  if (['tomato','bell_pepper','chinese_celery','shiitake_mushroom'].includes(ig.id)) groups.push('蔬菜');
+  if (['potato','carrot','cabbage','eggplant'].includes(ig.id)) groups.push('根茎蔬菜');
+  if (groups.length === 0) groups.push('通用食材');
+  return groups;
+}
+
+// Flavor math
+function cosineSimilarity(a, b) {
+  let dot = 0, normA = 0, normB = 0;
+  for (const dim of DIMS) { dot += a[dim] * b[dim]; normA += a[dim] * a[dim]; normB += b[dim] * b[dim]; }
+  const denom = Math.sqrt(normA) * Math.sqrt(normB);
+  return denom === 0 ? 0 : dot / denom;
+}
+function averageFlavor(ids) {
+  const result = {};
+  if (ids.length === 0) { DIMS.forEach(d => result[d] = 0); return result; }
+  DIMS.forEach(d => { let sum = 0; ids.forEach(id => { const ig = DATA.ingredients.find(x => x.id === id); if (ig) sum += ig.flavor[d]; }); result[d] = sum / ids.length; });
+  return result;
+}
+function findClosestRecipe(flavor) {
+  let best = null, bestSim = -1;
+  for (const r of DATA.recipes) { const sim = cosineSimilarity(flavor, r.flavor); if (sim > bestSim) { bestSim = sim; best = r; } }
+  return { recipe: best, similarity: bestSim };
+}
+function findClosestIngredients(flavor, excludeIds, count) {
+  return DATA.ingredients.filter(ig => !excludeIds.includes(ig.id))
+    .map(ig => ({ ...ig, sim: cosineSimilarity(flavor, ig.flavor) }))
+    .sort((a, b) => b.sim - a.sim).slice(0, count || 3);
+}
+function generateFlavorComment(flavor) {
+  const dims = DIMS.slice();
+  const sorted = dims.sort((a, b) => flavor[b] - flavor[a]);
+  const top = sorted[0], second = sorted[1];
+  const topLabel = LABELS[top], secondLabel = LABELS[second];
+  const topVal = flavor[top].toFixed(1);
+  if (flavor[top] > 7) return `${topLabel}味突出（${topVal}），${secondLabel}作为辅助，整体风味鲜明有力。`;
+  if (flavor[top] > 5) return `${topLabel}和${secondLabel}为主导，风味均衡有层次。`;
+  return `各维度相对均衡，整体风味温和内敛。`;
+}
+function computePairings(ingredientId) {
+  const ig = DATA.ingredients.find(x => x.id === ingredientId);
+  if (!ig) return [];
+  const scored = DATA.ingredients.filter(x => x.id !== ingredientId)
+    .map(x => {
+      const sim = cosineSimilarity(ig.flavor, x.flavor);
+      const clusters = inferClusters(x.flavor);
+      const topCluster = clusters.length > 0 ? clusters[0].dim : 'umami';
+      return { id: x.id, name: x.nameEn, zh: x.nameZh, score: +sim.toFixed(3), cluster: topCluster };
+    }).sort((a, b) => b.score - a.score);
+  return scored.slice(0, 9);
+}
+function computeSlerp(ingredientId, cuisineKey) {
+  const ig = DATA.ingredients.find(x => x.id === ingredientId);
+  if (!ig) return {};
+  const target = CUISINE_VECTORS[cuisineKey];
+  if (!target) return {};
+  const angles = [0, 15, 30, 45, 60, 75, 90];
+  const result = {};
+  for (const angle of angles) {
+    const t = angle / 90;
+    const interp = {};
+    for (const dim of DIMS) interp[dim] = ig.flavor[dim] * (1 - t) + target[dim] * t;
+    const scored = DATA.ingredients.map(x => ({ ...x, sim: cosineSimilarity(interp, x.flavor) }))
+      .sort((a, b) => b.sim - a.sim).slice(0, 3)
+      .map(x => ({ id: x.id, name: x.nameEn, zh: x.nameZh, score: +x.sim.toFixed(2) }));
+    result[angle] = scored;
+  }
+  return result;
+}
+</script>
+
+<!-- ==================== TOOLTIP ==================== -->
+<div class="explore-tooltip" id="exploreTooltip">
+  <div class="tt-name"></div>
+  <div class="tt-zh"></div>
+  <div class="tt-score"></div>
+  <div class="tt-cluster"></div>
+</div>
+
+<!-- ==================== HEADER ==================== -->
+<header class="pt-10 pb-4 px-6 text-center" style="max-width:1280px;margin:0 auto;">
+  <h1 class="font-literata text-4xl font-bold mb-2" style="background:linear-gradient(135deg,#ab3500 0%,#ff6b35 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2;">风味工作台</h1>
+  <p style="color:#594139;font-size:0.95rem;">选 1 个食材探索风味圈，选 2+ 个食材合成分析</p>
+  <div id="mode-badge" style="margin-top:0.5rem;min-height:24px;"></div>
+</header>
+
+<!-- ==================== GLOBAL SEARCH + CHIPS ==================== -->
+<div style="max-width:700px;margin:0 auto 1.5rem;padding:0 24px;">
+  <div class="relative">
+    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2" style="color:#8d7168;font-size:22px;">search</span>
+    <input type="text" class="search-input" id="global-search" placeholder="搜索食材（支持多选）..." oninput="handleGlobalSearch(this.value)">
+  </div>
+  <div id="global-chips" class="flex flex-wrap gap-2 mt-3 justify-center"></div>
+  <div id="selected-tags-area" class="hidden mt-3">
+    <div class="flex items-center gap-2 mb-2">
+      <span class="text-xs font-semibold uppercase tracking-wider" style="color:#8d7168;">已选食材</span>
+      <button onclick="clearAll()" style="font-size:11px;color:#ab3500;background:none;border:none;cursor:pointer;text-decoration:underline;">清空</button>
+    </div>
+    <div id="selected-tags" class="flex flex-wrap gap-2"></div>
+  </div>
+</div>
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main style="max-width:1280px;margin:0 auto;padding:0 24px 80px;">
+
+<!-- Guide (0 selected) -->
+<div id="guide-view">
+  <div class="guide-card">
+    <div style="font-size:3.5rem;margin-bottom:1rem;">🔬</div>
+    <h2>开始探索风味</h2>
+    <p style="color:#594139;font-size:0.95rem;margin-bottom:1.5rem;">
+      从 15 个核心食材和 14 个菜谱中，发现隐藏的风味关联
+    </p>
+    <div class="guide-steps">
+      <div class="guide-step">
+        <div class="num">1</div>
+        <div>
+          <strong>选 1 个食材</strong>
+          <p>进入探索模式：风味圈 + Cluster 归属 + SLERP 菜系探索</p>
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="num">2</div>
+        <div>
+          <strong>选 2+ 个食材</strong>
+          <p>进入合成模式：雷达图 + 最接近菜谱 + 风味评价 + 平衡检测</p>
+        </div>
+      </div>
+      <div class="guide-step">
+        <div class="num">3</div>
+        <div>
+          <strong>随时切换</strong>
+          <p>增减食材自动切换模式，两种视角互补</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Explore Mode (1 selected) -->
+<div id="explore-view" style="display:none;">
+  <div class="main-layout">
+    <!-- Left: Profile -->
+    <div>
+      <div class="card ambient-shadow">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#ab3500;">bar_chart</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">风味画像</span>
+        </div>
+        <p style="color:#8d7168;font-size:0.8rem;margin-bottom:1rem;" id="explore-profile-desc">六维风味特征</p>
+        <div id="explore-flavor-bars"></div>
+        <div id="explore-food-groups" class="flex flex-wrap gap-1 mt-3"></div>
+      </div>
+    </div>
+
+    <!-- Center: Flavor Wheel -->
+    <div>
+      <div class="flex items-center justify-center gap-2 mb-1">
+        <span id="explore-wheel-title" class="font-semibold" style="color:#1b1c1c;font-size:1rem;">风味圈</span>
+      </div>
+      <p style="color:#8d7168;font-size:0.8rem;text-align:center;margin-bottom:1rem;">距离中心越近 = 搭配度越高。悬停查看详情，点击切换探索起点。</p>
+      <div class="flavor-wheel-container">
+        <svg id="exploreWheel" viewBox="0 0 600 600"></svg>
+      </div>
+    </div>
+
+    <!-- Right: Cluster + SLERP -->
+    <div class="flex flex-col gap-5">
+      <div class="card ambient-shadow">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#006e1c;">category</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">风味归属</span>
+        </div>
+        <p style="color:#8d7168;font-size:0.8rem;margin-bottom:0.8rem;">这个食材属于哪些风味家族</p>
+        <div id="explore-clusters"></div>
+      </div>
+
+      <div class="card ambient-shadow">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#ab3500;">explore</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">菜系探索</span>
+        </div>
+        <p style="color:#8d7168;font-size:0.8rem;margin-bottom:0.8rem;">向目标菜系方向偏移，看看会遇到什么</p>
+        <div class="cuisine-pills" id="explore-cuisine-pills"></div>
+        <div class="journey-track">
+          <div class="journey-line"><div class="journey-line-fill" id="explore-journey-fill" style="width:33%"></div></div>
+          <span class="journey-endpoint start" id="explore-journey-start">食材</span>
+          <span class="journey-endpoint end" id="explore-journey-end">东亚</span>
+          <div class="journey-thumb" id="explore-journey-thumb" style="left:33%"></div>
+          <div class="journey-label" id="explore-journey-label" style="left:33%">30&deg;</div>
+        </div>
+        <div class="angle-control">
+          <input type="range" id="explore-angle-slider" min="0" max="90" step="5" value="30" oninput="updateExploreAngle(this.value)">
+          <span class="angle-val" id="explore-angle-val">30&deg;</span>
+        </div>
+        <div class="angle-desc" id="explore-angle-desc">轻微偏移 — 保持原食材风味，略带目标菜系特色</div>
+        <div class="journey-results" id="explore-journey-results"></div>
+      </div>
+
+      <div class="card ambient-shadow">
+        <div class="flex items-center gap-2 mb-1">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#ab3500;">restaurant</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">相关菜谱</span>
+        </div>
+        <p style="color:#8d7168;font-size:0.8rem;margin-bottom:0.8rem;">含该食材的菜谱推荐</p>
+        <div id="explore-recipes"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Compose Mode (2+ selected) -->
+<div id="compose-view" style="display:none;">
+  <div class="main-layout">
+    <!-- Left: Selected ingredients + Balance -->
+    <div class="flex flex-col gap-5">
+      <div class="card ambient-shadow">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#ab3500;">science</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">合成分析</span>
+        </div>
+        <hr class="section-divider">
+        <div id="compose-dim-bars"></div>
+      </div>
+
+      <!-- Balance Detection (left bottom) -->
+      <div class="card ambient-shadow" id="compose-balance-panel">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="material-symbols-outlined" style="font-size:20px;color:#006e1c;">balance</span>
+          <span class="font-semibold" style="color:#1b1c1c;font-size:0.95rem;">平衡检测</span>
+        </div>
+        <div id="compose-balance-alerts"></div>
+        <hr class="section-divider">
+        <div id="compose-balance-fixes"></div>
+      </div>
+    </div>
+
+    <!-- Center: Radar -->
+    <div class="flex flex-col gap-5">
+      <div class="card ambient-shadow radar-container"><div id="compose-radar"></div></div>
+      <div class="card ambient-shadow">
+        <h3 class="font-literata text-lg font-semibold mb-2" style="color:#1b1c1c;">
+          <span class="material-symbols-outlined align-text-bottom mr-1" style="font-size:20px;color:#ab3500;">auto_awesome</span>
+          风味评价
+        </h3>
+        <p id="compose-comment" class="text-sm leading-relaxed" style="color:#594139;"></p>
+      </div>
+    </div>
+
+    <!-- Right: Closest recipes + Suggestions -->
+    <div class="flex flex-col gap-5">
+      <div class="card ambient-shadow">
+        <h3 class="font-literata text-lg font-semibold mb-3" style="color:#1b1c1c;">
+          <span class="material-symbols-outlined align-text-bottom mr-1" style="font-size:20px;color:#ab3500;">restaurant</span>
+          最接近的菜谱
+        </h3>
+        <div id="compose-closest-recipes"></div>
+      </div>
+      <div class="card ambient-shadow">
+        <h3 class="font-literata text-lg font-semibold mb-2" style="color:#1b1c1c;">
+          <span class="material-symbols-outlined align-text-bottom mr-1" style="font-size:20px;color:#006e1c;">lightbulb</span>
+          缺什么？
+        </h3>
+        <div id="compose-suggestions" class="text-sm" style="color:#594139;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- ==================== JAVASCRIPT ==================== -->
+<script>
+// ============================================================
+// State
+// ============================================================
+const state = {
+  selected: new Set(),
+  mode: 'guide', // 'guide' | 'explore' | 'compose'
+  explore: {
+    currentIngredient: null,
+    currentCuisine: 'East_Asian',
+    currentAngle: 30,
+    slerpSeed: null,
+  },
+  // 保留探索状态：切到合成模式时保存，切回探索时恢复
+  savedExplore: null,
+};
+
+// ============================================================
+// Global Search + Chips
+// ============================================================
+function renderGlobalChips() {
+  const container = document.getElementById('global-chips');
+  container.innerHTML = DATA.ingredients.map(ig =>
+    `<button class="ingredient-chip" data-id="${ig.id}" onclick="toggleGlobal('${ig.id}')">${ig.emoji || ''} ${ig.nameZh}</button>`
+  ).join('');
+}
+
+function handleGlobalSearch(val) {
+  val = val.trim().toLowerCase();
+  if (!val) return;
+  const found = DATA.ingredients.find(ig => ig.nameZh.includes(val) || ig.nameEn.toLowerCase().includes(val));
+  if (found) {
+    // 搜索始终添加（不 toggle），适合搭配流：逐步加食材
+    if (!state.selected.has(found.id)) {
+      state.selected.add(found.id);
+      updateAll();
+    }
+    document.getElementById('global-search').value = '';
+  }
+}
+
+function toggleGlobal(id) {
+  if (state.selected.has(id)) state.selected.delete(id);
+  else state.selected.add(id);
+  updateAll();
+}
+
+function clearAll() {
+  state.selected.clear();
+  state.explore.slerpSeed = null;
+  state.savedExplore = null;
+  updateAll();
+}
+
+function removeIngredient(id) {
+  state.selected.delete(id);
+  updateAll();
+}
+
+function renderSelectedTags() {
+  const area = document.getElementById('selected-tags-area');
+  const tags = document.getElementById('selected-tags');
+  const ids = [...state.selected];
+  if (ids.length === 0) { area.classList.add('hidden'); return; }
+  area.classList.remove('hidden');
+  tags.innerHTML = ids.map(id => {
+    const ig = DATA.ingredients.find(x => x.id === id);
+    return `<span class="selected-tag">${ig.emoji || ''} ${ig.nameZh}<button class="remove-btn" onclick="removeIngredient('${id}')">&times;</button></span>`;
+  }).join('');
+}
+
+function updateChipSelections() {
+  document.querySelectorAll('#global-chips .ingredient-chip').forEach(btn => {
+    btn.classList.toggle('selected', state.selected.has(btn.dataset.id));
+  });
+}
+
+function updateModeBadge() {
+  const el = document.getElementById('mode-badge');
+  if (state.mode === 'guide') { el.innerHTML = ''; return; }
+  if (state.mode === 'explore') {
+    el.innerHTML = '<span class="mode-badge explore-mode">🔬 探索模式</span>';
+  } else {
+    el.innerHTML = '<span class="mode-badge compose-mode">🧪 合成模式</span>';
+  }
+}
+
+// ============================================================
+// Mode Switch
+// ============================================================
+function switchMode(mode) {
+  state.mode = mode;
+  document.getElementById('guide-view').style.display = mode === 'guide' ? '' : 'none';
+  document.getElementById('explore-view').style.display = mode === 'explore' ? '' : 'none';
+  document.getElementById('compose-view').style.display = mode === 'compose' ? '' : 'none';
+  updateModeBadge();
+}
+
+function updateAll() {
+  const ids = [...state.selected];
+  renderSelectedTags();
+  updateChipSelections();
+
+  if (ids.length === 0) {
+    // 清空时保留探索状态以便恢复
+    if (state.mode === 'explore') {
+      state.savedExplore = { ...state.explore };
+    }
+    switchMode('guide');
+    return;
+  }
+
+  if (ids.length === 1) {
+    switchMode('explore');
+    const id = ids[0];
+    // 如果切回的食材和之前探索的相同，恢复状态
+    if (state.savedExplore && state.savedExplore.currentIngredient === id) {
+      state.explore = { ...state.savedExplore };
+      state.savedExplore = null;
+      selectExploreIngredientRestore(id);
+    } else {
+      state.savedExplore = null;
+      selectExploreIngredient(id);
+    }
+  } else {
+    // 切到合成模式时保存探索状态
+    if (state.mode === 'explore') {
+      state.savedExplore = { ...state.explore };
+    }
+    switchMode('compose');
+    updateCompose();
+  }
+}
+
+// ============================================================
+// SVG Radar
+// ============================================================
+const RADAR_SIZE = 300, RADAR_CX = 150, RADAR_CY = 150, RADAR_R = 110;
+
+function radarVertex(dimIndex, radius) {
+  const angle = (Math.PI * 2 * dimIndex / 6) - Math.PI / 2;
+  return { x: RADAR_CX + radius * Math.cos(angle), y: RADAR_CY + radius * Math.sin(angle) };
+}
+function hexPath(radius) {
+  return DIMS.map((_, i) => { const v = radarVertex(i, radius); return (i === 0 ? 'M' : 'L') + v.x.toFixed(1) + ',' + v.y.toFixed(1); }).join(' ') + ' Z';
+}
+function dataPath(flavor) {
+  return DIMS.map((d, i) => { const val = Math.min(flavor[d] / 10, 1); const v = radarVertex(i, RADAR_R * val); return (i === 0 ? 'M' : 'L') + v.x.toFixed(1) + ',' + v.y.toFixed(1); }).join(' ') + ' Z';
+}
+function createRadarSVG(containerId, flavor, color, fillColor) {
+  const container = document.getElementById(containerId);
+  if (!flavor || DIMS.every(d => flavor[d] === 0)) {
+    container.innerHTML = `<svg width="${RADAR_SIZE}" height="${RADAR_SIZE}" viewBox="0 0 ${RADAR_SIZE} ${RADAR_SIZE}">
+      ${[1, 0.66, 0.33].map(r => `<path d="${hexPath(RADAR_R * r)}" fill="none" stroke="#e4e2e1" stroke-width="1"/>`).join('')}
+      ${DIMS.map((d, i) => { const v = radarVertex(i, RADAR_R + 18); return `<text x="${v.x}" y="${v.y}" text-anchor="middle" dominant-baseline="middle" fill="#8d7168" font-size="13">${LABELS[d]}</text>`; }).join('')}
+    </svg>`;
+    return;
+  }
+  container.innerHTML = `<svg width="${RADAR_SIZE}" height="${RADAR_SIZE}" viewBox="0 0 ${RADAR_SIZE} ${RADAR_SIZE}">
+    ${[1, 0.66, 0.33].map(r => `<path d="${hexPath(RADAR_R * r)}" fill="none" stroke="#e4e2e1" stroke-width="1"/>`).join('')}
+    ${DIMS.map((_, i) => { const v = radarVertex(i, RADAR_R); return `<line x1="${RADAR_CX}" y1="${RADAR_CY}" x2="${v.x}" y2="${v.y}" stroke="#e4e2e1" stroke-width="0.5"/>`; }).join('')}
+    <path class="radar-polygon" d="${dataPath(flavor)}" fill="${fillColor}" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>
+    ${DIMS.map((d, i) => { const val = Math.min(flavor[d] / 10, 1); const v = radarVertex(i, RADAR_R * val); return `<circle cx="${v.x}" cy="${v.y}" r="4" fill="${color}" stroke="#fff" stroke-width="2"/>`; }).join('')}
+    ${DIMS.map((d, i) => { const v = radarVertex(i, RADAR_R + 18); return `<text x="${v.x}" y="${v.y}" text-anchor="middle" dominant-baseline="middle" fill="#594139" font-size="13" font-weight="600">${LABELS[d]}</text>`; }).join('')}
+  </svg>`;
+}
+
+// ============================================================
+// Compose Mode
+// ============================================================
+function updateCompose() {
+  const ids = [...state.selected];
+  const flavor = averageFlavor(ids);
+
+  // Radar
+  createRadarSVG('compose-radar', flavor, '#ab3500', 'rgba(171,53,0,0.15)');
+
+  // Dimension bars
+  const meanVal = DIMS.reduce((s, d) => s + flavor[d], 0) / DIMS.length;
+  const variance = DIMS.reduce((s, d) => s + (flavor[d] - meanVal) ** 2, 0) / DIMS.length;
+  const sigma = Math.sqrt(variance);
+  document.getElementById('compose-dim-bars').innerHTML = DIMS.map(d => {
+    const val = flavor[d], pct = Math.min(val / 10 * 100, 100);
+    let barColor = '#ab3500';
+    if (val > meanVal + 2 * sigma) barColor = '#ba1a1a';
+    else if (val < meanVal - 1.5 * sigma) barColor = '#006e1c';
+    return `<div class="dim-bar-item"><span class="dim-bar-label">${LABELS[d]}</span><div class="dim-bar-track"><div class="dim-bar-fill" style="width:${pct}%;background:${barColor}"></div></div><span class="dim-bar-value">${val.toFixed(1)}</span></div>`;
+  }).join('');
+
+  // Flavor comment
+  document.getElementById('compose-comment').textContent = generateFlavorComment(flavor);
+
+  // Closest recipes
+  const recipes = DATA.recipes.map(r => ({ ...r, sim: cosineSimilarity(flavor, r.flavor) })).sort((a, b) => b.sim - a.sim).slice(0, 4);
+  document.getElementById('compose-closest-recipes').innerHTML = recipes.map(r => `
+    <div class="recipe-rec mb-2">
+      <span class="material-symbols-outlined" style="color:#ab3500;font-size:24px;">restaurant</span>
+      <div><p class="font-semibold" style="color:#1b1c1c;">${r.nameZh}</p><p class="text-xs" style="color:#8d7168;">相似度 ${(r.sim * 100).toFixed(0)}%</p></div>
+    </div>`).join('');
+
+  // Suggestions
+  const weakest = DIMS.reduce((a, b) => flavor[a] < flavor[b] ? a : b);
+  const weakVal = flavor[weakest];
+  const avgAll = {};
+  DIMS.forEach(d => { let sum = 0; DATA.ingredients.forEach(ig => sum += ig.flavor[d]); avgAll[d] = sum / DATA.ingredients.length; });
+  if (weakVal < avgAll[weakest] * 0.85) {
+    const boosters = DATA.ingredients.filter(ig => !ids.includes(ig.id)).sort((a, b) => b.flavor[weakest] - a.flavor[weakest]).slice(0, 2);
+    document.getElementById('compose-suggestions').innerHTML = `<p class="mb-2">${LABELS[weakest]}味偏低（${weakVal.toFixed(1)}），建议补充：</p><div class="flex flex-wrap gap-2">${boosters.map(b => `<span class="ingredient-chip" style="cursor:default;">${b.nameZh}（${LABELS[weakest]} ${b.flavor[weakest].toFixed(1)}）</span>`).join('')}</div>`;
+  } else {
+    document.getElementById('compose-suggestions').innerHTML = '<p>风味分布较为均衡，暂无明显短板。</p>';
+  }
+
+  // Balance detection
+  updateComposeBalance(flavor, meanVal, sigma, ids);
+}
+
+function updateComposeBalance(flavor, meanVal, sigma, ids) {
+  const alerts = [];
+  DIMS.forEach(d => {
+    const val = flavor[d];
+    if (val > meanVal + 2 * sigma) alerts.push({ dim: d, type: 'high', val });
+    else if (val < meanVal - 1.5 * sigma) alerts.push({ dim: d, type: 'low', val });
+  });
+
+  const alertsEl = document.getElementById('compose-balance-alerts');
+  if (alerts.length > 0) {
+    alertsEl.innerHTML = alerts.map(a => {
+      const isHigh = a.type === 'high';
+      const bg = isHigh ? '#ffdad6' : '#e8f5e9';
+      const border = isHigh ? '#ba1a1a' : '#006e1c';
+      const icon = isHigh ? 'warning' : 'info';
+      const pulseClass = isHigh ? 'pulse-warn' : 'pulse-info';
+      const label = LABELS[a.dim];
+      const msg = isHigh ? `${label}味过高（${a.val.toFixed(1)}），可能导致风味失衡` : `${label}味偏低（${a.val.toFixed(1)}），可适当补充`;
+      return `<div class="${pulseClass} mb-2 flex items-center gap-2 p-3 rounded-xl" style="background:${bg};border-left:3px solid ${border};"><span class="material-symbols-outlined" style="color:${border};font-size:18px;">${icon}</span><span class="text-xs font-semibold" style="color:${border};">${msg}</span></div>`;
+    }).join('');
+  } else {
+    alertsEl.innerHTML = `<div class="flex items-center gap-2 p-3 rounded-xl" style="background:#e8f5e9;border-left:3px solid #006e1c;"><span class="material-symbols-outlined" style="color:#006e1c;font-size:18px;">check_circle</span><span class="text-xs font-semibold" style="color:#006e1c;">风味分布均衡</span></div>`;
+  }
+
+  const fixesEl = document.getElementById('compose-balance-fixes');
+  if (alerts.length > 0) {
+    fixesEl.innerHTML = alerts.map(a => {
+      const boosters = DATA.ingredients.filter(ig => !ids.includes(ig.id)).sort((x, y) => {
+        return a.type === 'high' ? x.flavor[a.dim] - y.flavor[a.dim] : y.flavor[a.dim] - x.flavor[a.dim];
+      }).slice(0, 2);
+      const action = a.type === 'high' ? '减少' : '补充';
+      return `<div class="mb-3"><p class="text-xs font-semibold mb-1" style="color:#1b1c1c;">${action}${LABELS[a.dim]}味：</p><div class="flex flex-wrap gap-1">${boosters.map(b => `<span style="font-size:11px;padding:3px 8px;border-radius:9999px;background:#f6f3f2;color:#594139;">${b.nameZh}（${b.flavor[a.dim].toFixed(1)}）</span>`).join('')}</div></div>`;
+    }).join('');
+  } else {
+    fixesEl.innerHTML = '<p class="text-xs" style="color:#8d7168;">无需修复。</p>';
+  }
+}
+
+// ============================================================
+// Explore Mode
+// ============================================================
+function selectExploreIngredient(id) {
+  const ig = DATA.ingredients.find(x => x.id === id);
+  if (!ig) return;
+  state.explore.currentIngredient = id;
+  state.explore.slerpSeed = null;
+  state.explore.currentCuisine = 'East_Asian';
+  state.explore.currentAngle = 30;
+  document.getElementById('explore-journey-start').textContent = ig.nameZh;
+  renderExploreWheel(ig);
+  renderExploreProfile(ig);
+  renderExploreClusters(ig);
+  initExploreCuisinePills();
+  renderExploreSlerp();
+  renderExploreRecipes(ig);
+}
+
+// 恢复探索状态（切回时保留菜系/角度/seed）
+function selectExploreIngredientRestore(id) {
+  const ig = DATA.ingredients.find(x => x.id === id);
+  if (!ig) return;
+  document.getElementById('explore-journey-start').textContent = state.explore.slerpSeed
+    ? DATA.ingredients.find(x => x.id === state.explore.slerpSeed)?.nameZh || ig.nameZh
+    : ig.nameZh;
+  renderExploreWheel(ig);
+  renderExploreProfile(ig);
+  renderExploreClusters(ig);
+  initExploreCuisinePills();
+  // 恢复角度滑块 UI
+  const angle = state.explore.currentAngle;
+  document.getElementById('explore-angle-slider').value = angle;
+  document.getElementById('explore-angle-val').textContent = angle + '°';
+  document.getElementById('explore-journey-thumb').style.left = (angle / 90 * 100) + '%';
+  document.getElementById('explore-journey-label').style.left = (angle / 90 * 100) + '%';
+  document.getElementById('explore-journey-label').textContent = angle + '°';
+  document.getElementById('explore-journey-fill').style.width = (angle / 90 * 100) + '%';
+  renderExploreSlerp();
+  renderExploreRecipes(ig);
+}
+
+function initExploreCuisinePills() {
+  const container = document.getElementById('explore-cuisine-pills');
+  container.innerHTML = Object.entries(CUISINE_LABELS).map(([key, label]) => {
+    const active = key === state.explore.currentCuisine ? 'active' : '';
+    return `<button class="cuisine-pill ${active}" onclick="selectExploreCuisine('${key}')">${label}</button>`;
+  }).join('');
+}
+
+function selectExploreCuisine(cuisine) {
+  state.explore.currentCuisine = cuisine;
+  state.explore.slerpSeed = null;
+  document.querySelectorAll('#explore-cuisine-pills .cuisine-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector(`#explore-cuisine-pills [onclick="selectExploreCuisine('${cuisine}')"]`)?.classList.add('active');
+  document.getElementById('explore-journey-end').textContent = CUISINE_LABELS[cuisine] || cuisine;
+  const ig = DATA.ingredients.find(x => x.id === state.explore.currentIngredient);
+  if (ig) document.getElementById('explore-journey-start').textContent = ig.nameZh;
+  renderExploreSlerp();
+}
+
+function updateExploreAngle(val) {
+  state.explore.currentAngle = parseInt(val);
+  document.getElementById('explore-angle-val').textContent = val + '°';
+  document.getElementById('explore-journey-thumb').style.left = (val / 90 * 100) + '%';
+  document.getElementById('explore-journey-label').style.left = (val / 90 * 100) + '%';
+  document.getElementById('explore-journey-label').textContent = val + '°';
+  document.getElementById('explore-journey-fill').style.width = (val / 90 * 100) + '%';
+  const desc = val == 0 ? '原始食材 — 保持原味' :
+    val <= 15 ? '极轻微偏移 — 几乎是原食材' :
+    val <= 30 ? '轻微偏移 — 保持原食材风味，略带目标菜系特色' :
+    val <= 45 ? '中等偏移 — 融入目标菜系的典型调味' :
+    val <= 60 ? '明显偏移 — 目标菜系风味开始主导' :
+    val <= 75 ? '大幅偏移 — 接近目标菜系的典型食材' :
+    '极度偏移 — 几乎完全是目标菜系风味';
+  document.getElementById('explore-angle-desc').textContent = desc;
+  renderExploreSlerp();
+}
+
+function exploreSlerpChipClick(id, zh) {
+  state.explore.slerpSeed = id;
+  document.getElementById('explore-journey-start').textContent = zh;
+  renderExploreSlerp();
+}
+
+// Profile
+function renderExploreProfile(ig) {
+  const bars = document.getElementById('explore-flavor-bars');
+  const dimColors = { sweet: '#ff6b9d', sour: '#ffd166', bitter: '#06d6a0', umami: '#4ecdc4', spicy: '#ef476f', fatty: '#e0aaff' };
+  bars.innerHTML = DIMS.map(d => {
+    const val = ig.flavor[d] || 0;
+    const pct = (val / 10) * 100;
+    return `<div class="explore-bar-row" title="${LABELS[d]}: ${val.toFixed(1)}/10"><span class="explore-bar-emoji">${EMOJI[d]}</span><span class="explore-bar-name">${LABELS[d]}</span><div class="explore-bar-track"><div class="explore-bar-fill" style="width:${pct}%;background:${dimColors[d]}"></div></div></div>`;
+  }).join('');
+  document.getElementById('explore-profile-desc').textContent = ig.nameZh + '的六维风味特征';
+  const groups = inferFoodGroups(ig);
+  document.getElementById('explore-food-groups').innerHTML = groups.map(g => `<span class="food-group-tag match">${g}</span>`).join('');
+}
+
+// Clusters
+function renderExploreClusters(ig) {
+  const clusters = inferClusters(ig.flavor);
+  const container = document.getElementById('explore-clusters');
+  container.innerHTML = clusters.map(c => `
+    <div style="margin-bottom:0.8rem;">
+      <div class="cluster-header-explore" data-cluster="${c.dim}">
+        <div class="cluster-dot-explore" style="background:${c.color}"></div>
+        <span class="cluster-name-explore">${c.name}</span>
+        <span class="cluster-score-explore">${(c.score * 100).toFixed(0)}%</span>
+      </div>
+      <div class="cluster-tags-explore">
+        ${DATA.ingredients.filter(x => { const xC = inferClusters(x.flavor); return xC.some(cc => cc.dim === c.dim) && x.id !== ig.id; }).slice(0, 5).map(x => `<span class="cluster-tag-explore">${x.nameZh}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Flavor Wheel
+function renderExploreWheel(ig) {
+  const svg = document.getElementById('exploreWheel');
+  const cx = 300, cy = 300, R = 240;
+  const CENTER_R = 48; // center emoji circle radius
+  const pairings = computePairings(ig.id);
+  document.getElementById('explore-wheel-title').textContent = ig.emoji + ' ' + ig.nameZh + '的风味圈';
+  let html = '';
+
+  // SVG Defs — shadow filter for nodes
+  html += `<defs><filter id="exploreShadow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6"/></filter></defs>`;
+
+  // 外圈边界 — 双圈柔和风格
+  html += `<circle cx="${cx}" cy="${cy}" r="${R + 5}" fill="none" stroke="#e1bfb5" stroke-width="0.4" opacity="0.25"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#e1bfb5" stroke-width="0.8" opacity="0.5"/>`;
+
+  // Nodes — 黄金角分布 + 碰撞推开
+  // Each node is treated as a "label bounding box" for collision, not just the circle.
+  // Label box: ~80px wide (2-4 Chinese chars at 14px ~ 56px, plus score), ~34px tall (name + score lines)
+  const GOLDEN_ANGLE = 137.508 * (Math.PI / 180);
+  const LABEL_W = 80, LABEL_H = 34, LABEL_OFFSET = 20; // label box dimensions + gap from node edge
+  const MIN_NODE_GAP = 14; // minimum gap between node circles themselves
+
+  const nodes = pairings.map((p, i) => {
+    const angle = GOLDEN_ANGLE * i - Math.PI / 2;
+    // Spread nodes across the full ring between center and outer edge
+    // Ring: inner boundary = CENTER_R + node_r + gap, outer boundary = R - node_r - margin
+    const nodeR = 6 + p.score * 10; // slightly smaller radii (was 6+14=20, now 6+10=16 max)
+    const innerLimit = CENTER_R + nodeR + 20;
+    const outerLimit = R - nodeR - 20;
+    // Use rank-based radial distribution to spread evenly in the ring
+    const rankT = pairings.length > 1 ? i / (pairings.length - 1) : 0.5;
+    // Higher score (i=0) = closer to center, but never inside the center circle
+    const baseDist = outerLimit - rankT * (outerLimit - innerLimit) * 0.85;
+    const dist = Math.max(innerLimit, Math.min(outerLimit, baseDist));
+    return { ...p, x: cx + dist * Math.cos(angle), y: cy + dist * Math.sin(angle), r: nodeR };
+  });
+
+  // Multi-pass collision resolution (20 iterations for convergence)
+  for (let iter = 0; iter < 20; iter++) {
+    // Push node circles apart
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[j].x - nodes[i].x;
+        const dy = nodes[j].y - nodes[i].y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        // Use a larger collision radius that accounts for the label bounding box
+        // The label extends outward from the node, so the effective collision zone
+        // is the node radius + half the label width in the radial direction
+        const collisionR_i = nodes[i].r + LABEL_OFFSET + LABEL_W * 0.4;
+        const collisionR_j = nodes[j].r + LABEL_OFFSET + LABEL_W * 0.4;
+        const minDist = collisionR_i + collisionR_j + MIN_NODE_GAP;
+        if (dist < minDist) {
+          const overlap = (minDist - dist) / 2;
+          const nx = dx / dist, ny = dy / dist;
+          nodes[i].x -= nx * overlap;
+          nodes[i].y -= ny * overlap;
+          nodes[j].x += nx * overlap;
+          nodes[j].y += ny * overlap;
+        }
+      }
+    }
+    // Push nodes away from center circle
+    nodes.forEach(n => {
+      const dx = n.x - cx, dy = n.y - cy;
+      const d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const minD = CENTER_R + n.r + 24; // center radius + node radius + 24px breathing room
+      if (d < minD) {
+        const scale = minD / d;
+        n.x = cx + dx * scale;
+        n.y = cy + dy * scale;
+      }
+    });
+    // Constrain to outer ring boundary
+    nodes.forEach(n => {
+      const dx = n.x - cx, dy = n.y - cy;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      const maxD = R - n.r - 8;
+      if (d > maxD) {
+        const scale = maxD / d;
+        n.x = cx + dx * scale;
+        n.y = cy + dy * scale;
+      }
+    });
+  }
+
+  // Precompute label anchor positions for final overlap check
+  // For each node, compute the label anchor point (outward from center)
+  const labelAnchors = nodes.map(n => {
+    const dx = n.x - cx, dy = n.y - cy;
+    const len = Math.sqrt(dx * dx + dy * dy) || 1;
+    const labelDist = n.r + LABEL_OFFSET;
+    return {
+      x: n.x + (dx / len) * labelDist,
+      y: n.y + (dy / len) * labelDist,
+      // Determine text-anchor based on angle to reduce tangential overlap
+      anchor: Math.abs(dx) > Math.abs(dy) * 0.6 ? (dx > 0 ? 'start' : 'end') : 'middle',
+      angle: Math.atan2(dy, dx)
+    };
+  });
+
+  // Connections — curved cubic bezier, color = cluster
+  nodes.forEach(n => {
+    const w = 1.1 + n.score * 1.5;
+    const opacity = 0.15 + n.score * 0.22;
+    const color = CLUSTER_COLORS[n.cluster] || '#8d7168';
+    const dx = n.x - cx, dy = n.y - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const t1 = .28;
+    const p1x = cx + dx * t1, p1y = cy + dy * t1;
+    const off1 = dist * 0.15;
+    const cp1x = p1x + (-dy / dist) * off1, cp1y = p1y + (dx / dist) * off1;
+    const t2 = .72;
+    const p2x = cx + dx * t2, p2y = cy + dy * t2;
+    const off2 = dist * 0.10;
+    const cp2x = p2x + (dy / dist) * off2, cp2y = p2y + (-dx / dist) * off2;
+    html += `<path d="M${cx},${cy} C${cp1x},${cp1y} ${cp2x},${cp2y} ${n.x},${n.y}" fill="none" stroke="${color}" stroke-width="${w}" opacity="${opacity}" stroke-linecap="round" class="explore-conn-line" data-cluster="${n.cluster}"/>`;
+  });
+
+  // Node circles + labels
+  // Strategy: place name label radially outward from node; for nodes whose label
+  // would land inside the center circle or too close to another label, shift the
+  // label outward or to an alternate quadrant.
+  nodes.forEach((n, idx) => {
+    const r = n.r;
+    const color = CLUSTER_COLORS[n.cluster] || '#8d7168';
+    // Shadow layer
+    html += `<circle cx="${n.x}" cy="${n.y + 2}" r="${r * 1.2}" fill="${color}" opacity="0.1" style="pointer-events:none;filter:url(#exploreShadow)"/>`;
+    // Glass node
+    html += `<circle cx="${n.x}" cy="${n.y}" r="${r}" fill="rgba(255,255,255,0.45)" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" class="wheel-node explore-wheel-node" data-id="${n.id}" data-name="${n.name}" data-zh="${n.zh}" data-score="${n.score}" data-cluster="${n.cluster}" style="cursor:pointer;transition:fill-opacity 0.15s,transform 0.3s cubic-bezier(0.34,1.56,0.64,1);animation-delay:${idx * 0.05}s;transform-origin:${n.x}px ${n.y}px"/>`;
+    // Identity dot
+    html += `<circle cx="${n.x}" cy="${n.y}" r="3" fill="${color}" style="pointer-events:none"/>`;
+
+    const la = labelAnchors[idx];
+    // Base label position
+    let lx = la.x, ly = la.y;
+    let textAnchor = la.anchor;
+
+    // Check if label anchor overlaps center circle — if so, force outward
+    const lacx = lx - cx, lacy = ly - cy;
+    const lacDist = Math.sqrt(lacx * lacx + lacy * lacy);
+    if (lacDist < CENTER_R + 6) {
+      // Push label to just outside center
+      const pushDist = CENTER_R + 6;
+      const scale = pushDist / (lacDist || 1);
+      lx = cx + lacx * scale;
+      ly = cy + lacy * scale;
+    }
+
+    // Check label-to-label overlap with previous labels
+    // Use tangential push (perpendicular to radial direction) to avoid
+    // pushing labels back onto the connection lines toward center
+    for (let pass = 0; pass < 3; pass++) {
+      for (let prev = 0; prev < idx; prev++) {
+        const pla = labelAnchors[prev];
+        const pdx = lx - pla.x, pdy = ly - pla.y;
+        const pdist = Math.sqrt(pdx * pdx + pdy * pdy);
+        if (pdist < 50) { // labels need at least 50px apart (larger font)
+          // Tangential direction: perpendicular to the radial direction from center
+          const dx = n.x - cx, dy = n.y - cy;
+          const d = Math.sqrt(dx * dx + dy * dy) || 1;
+          const tx = dy / d, ty = -dx / d;
+          const push = (50 - pdist) * 0.7;
+          lx = lx + tx * push;
+          ly = ly + ty * push;
+        }
+      }
+      // Ensure label stays radially outward from its node
+      const ndx = n.x - cx, ndy = n.y - cy;
+      const nd = Math.sqrt(ndx * ndx + ndy * ndy) || 1;
+      const nodeRadialX = ndx / nd, nodeRadialY = ndy / nd;
+      const ldx = lx - n.x, ldy = ly - n.y;
+      const radialComponent = ldx * nodeRadialX + ldy * nodeRadialY;
+      // If label is not outward (radial component < labelDist), force it outward
+      if (radialComponent < n.r) {
+        lx = n.x + nodeRadialX * (n.r + LABEL_OFFSET);
+        ly = n.y + nodeRadialY * (n.r + LABEL_OFFSET);
+      }
+    }
+    // Final anchor based on actual position relative to center
+    const finalDx = lx - cx;
+    const finalDy = ly - cy;
+    textAnchor = Math.abs(finalDx) > Math.abs(finalDy) * 0.6 ? (finalDx > 0 ? 'start' : 'end') : 'middle';
+
+    html += `<text x="${lx}" y="${ly}" text-anchor="${textAnchor}" dominant-baseline="middle" fill="${color}" font-size="14" font-weight="700" letter-spacing="0.02em" style="pointer-events:none" class="explore-node-label" data-cluster="${n.cluster}">${n.zh}</text>`;
+    html += `<text x="${lx}" y="${ly + 17}" text-anchor="${textAnchor}" dominant-baseline="middle" fill="#8d7168" font-size="11" font-weight="600" style="pointer-events:none" class="explore-node-score" data-cluster="${n.cluster}">${(n.score * 100).toFixed(0)}%</text>`;
+  });
+
+  // Center (drawn last so it is on top)
+  html += `<circle cx="${cx}" cy="${cy}" r="${CENTER_R + 4}" fill="#fbf9f8" stroke="#e1bfb5" stroke-width="1" style="pointer-events:none"/>`;
+  html += `<circle cx="${cx}" cy="${cy}" r="${CENTER_R}" fill="#fbf9f8" stroke="#ab3500" stroke-width="2.5"/>`;
+  html += `<text x="${cx}" y="${cy - 8}" text-anchor="middle" fill="#ab3500" font-size="28" style="pointer-events:none">${ig.emoji}</text>`;
+  html += `<text x="${cx}" y="${cy + 16}" text-anchor="middle" fill="#ab3500" font-size="14" font-weight="700" style="pointer-events:none">${ig.nameZh}</text>`;
+  svg.innerHTML = html;
+
+  // Events
+  svg.querySelectorAll('.explore-wheel-node').forEach(node => {
+    node.addEventListener('mouseenter', (e) => {
+      showExploreTooltip(e, node);
+      const cluster = node.dataset.cluster;
+      document.querySelectorAll('.cluster-header-explore').forEach(h => h.classList.remove('highlight'));
+      const matchHeader = document.querySelector(`.cluster-header-explore[data-cluster="${cluster}"]`);
+      if (matchHeader) matchHeader.classList.add('highlight');
+      svg.querySelectorAll('.explore-wheel-node').forEach(n => { if (n !== node) { n.style.fillOpacity = '0.05'; n.style.strokeOpacity = '0.3'; } });
+      svg.querySelectorAll('.explore-conn-line').forEach(l => { if (l.dataset.cluster !== cluster) l.style.opacity = '0.03'; });
+      svg.querySelectorAll('.explore-node-label').forEach(l => { if (l.dataset.cluster !== cluster) l.style.opacity = '0.2'; });
+      svg.querySelectorAll('.explore-node-score').forEach(l => { if (l.dataset.cluster !== cluster) l.style.opacity = '0.2'; });
+    });
+    node.addEventListener('mouseleave', () => {
+      hideExploreTooltip();
+      document.querySelectorAll('.cluster-header-explore').forEach(h => h.classList.remove('highlight'));
+      svg.querySelectorAll('.explore-wheel-node').forEach(n => { n.style.fillOpacity = ''; n.style.strokeOpacity = ''; });
+      svg.querySelectorAll('.explore-conn-line').forEach(l => { l.style.opacity = ''; });
+      svg.querySelectorAll('.explore-node-label').forEach(l => { l.style.opacity = ''; });
+      svg.querySelectorAll('.explore-node-score').forEach(l => { l.style.opacity = ''; });
+    });
+    node.addEventListener('click', () => {
+      const id = node.dataset.id;
+      const zh = node.dataset.zh;
+      // wheel click = 同时切换 SLERP seed 并选中该食材（进入新的探索）
+      state.explore.slerpSeed = null;
+      // 替换当前选中为点击的食材（单食材探索模式）
+      state.selected.clear();
+      state.selected.add(id);
+      updateAll();
+    });
+  });
+}
+
+// Tooltip
+function showExploreTooltip(e, node) {
+  const tt = document.getElementById('exploreTooltip');
+  tt.querySelector('.tt-name').textContent = node.dataset.zh;
+  tt.querySelector('.tt-zh').textContent = node.dataset.name.replace(/_/g, ' ');
+  tt.querySelector('.tt-score').textContent = '搭配度: ' + (parseFloat(node.dataset.score) * 100).toFixed(1) + '%';
+  const cluster = node.dataset.cluster;
+  tt.querySelector('.tt-cluster').innerHTML = `<span>风味归属：</span><span class="tt-cluster-tag" style="background:${CLUSTER_COLORS[cluster] || '#8d7168'}">${CLUSTER_NAMES_ZH[cluster] || cluster}</span>`;
+  const rect = node.getBoundingClientRect();
+  tt.style.left = (rect.left + rect.width / 2) + 'px';
+  tt.style.top = (rect.top - 10) + 'px';
+  tt.style.transform = 'translate(-50%, -100%)';
+  tt.classList.add('show');
+}
+function hideExploreTooltip() {
+  document.getElementById('exploreTooltip').classList.remove('show');
+}
+
+// SLERP
+function renderExploreSlerp() {
+  const seedId = state.explore.slerpSeed || state.explore.currentIngredient;
+  const ig = DATA.ingredients.find(x => x.id === seedId) || DATA.ingredients.find(x => x.id === state.explore.currentIngredient);
+  if (!ig) return;
+  const cuisine = state.explore.currentCuisine;
+  const slerpData = computeSlerp(ig.id, cuisine);
+  const angle = state.explore.currentAngle;
+  const angles = Object.keys(slerpData).map(Number).sort((a, b) => a - b);
+  let closestAngle = angles[0];
+  for (const a of angles) { if (a <= angle) closestAngle = a; }
+  const results = slerpData[closestAngle] || [];
+  document.getElementById('explore-journey-results').innerHTML = results.map((r, i) => `
+    <div class="journey-chip" onclick="exploreSlerpChipClick('${r.id}', '${r.zh}')" title="点击将 ${r.zh} 设为新的探索起点">
+      <span class="rank">${i + 1}</span>
+      <span>${r.zh}</span>
+      <span style="color:#8d7168;font-size:0.7rem">${(r.score * 100).toFixed(0)}%</span>
+    </div>
+  `).join('');
+}
+
+// 相关菜谱面板
+function renderExploreRecipes(ig) {
+  const container = document.getElementById('explore-recipes');
+  if (!container) return;
+  // 找含当前食材的菜谱（通过菜谱名或风味相似度匹配）
+  const matches = DATA.recipes.map(r => {
+    const sim = cosineSimilarity(ig.flavor, r.flavor);
+    return { ...r, sim };
+  }).sort((a, b) => b.sim - a.sim).slice(0, 5);
+
+  if (matches.length === 0) {
+    container.innerHTML = '<p class="text-xs" style="color:#8d7168;">暂无相关菜谱。</p>';
+    return;
+  }
+  container.innerHTML = matches.map(r => `
+    <div class="recipe-rec mb-2">
+      <span class="material-symbols-outlined" style="color:#ab3500;font-size:20px;">restaurant</span>
+      <div>
+        <p class="font-semibold" style="color:#1b1c1c;font-size:0.85rem;">${r.nameZh}</p>
+        <p style="color:#8d7168;font-size:0.75rem;">风味相似度 ${(r.sim * 100).toFixed(0)}%</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// SLERP journey drag
+function initExploreJourneyDrag() {
+  const thumb = document.getElementById('explore-journey-thumb');
+  const track = thumb.parentElement;
+  const slider = document.getElementById('explore-angle-slider');
+  let dragging = false;
+  function setPosition(clientX) {
+    const rect = track.getBoundingClientRect();
+    let pct = (clientX - rect.left) / rect.width;
+    pct = Math.max(0, Math.min(1, pct));
+    const angle = Math.round(pct * 90 / 5) * 5;
+    slider.value = angle;
+    updateExploreAngle(angle);
+  }
+  thumb.addEventListener('mousedown', (e) => { e.preventDefault(); dragging = true; });
+  thumb.addEventListener('touchstart', (e) => { e.preventDefault(); dragging = true; }, { passive: false });
+  document.addEventListener('mousemove', (e) => { if (dragging) setPosition(e.clientX); });
+  document.addEventListener('touchmove', (e) => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: false });
+  document.addEventListener('mouseup', () => { dragging = false; });
+  document.addEventListener('touchend', () => { dragging = false; });
+}
+
+// ============================================================
+// Init
+// ============================================================
+function init() {
+  renderGlobalChips();
+  initExploreJourneyDrag();
+}
+init();
+</script>
+</body>
+</html>
