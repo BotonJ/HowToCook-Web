@@ -111,6 +111,30 @@
   color: #dc2626;
 }
 
+.tip-content pre {
+  background-color: #1b1c1c;
+  color: #e5e7eb;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.tip-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.tip-content hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2rem 0;
+}
+
 .tip-content strong {
   font-weight: 600;
   color: #1b1c1c;
