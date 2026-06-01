@@ -19,6 +19,7 @@ export function Explore() {
     searchVocabulary,
     cuisinePoles,
     zhMap,
+    modeLabelsZh,
   } = useEpicure();
 
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
@@ -99,6 +100,7 @@ export function Explore() {
             loading={false}
             targetName={slerpTopResult || selectedIngredient}
             isSlerpResult={!!slerpTopResult}
+            modeLabelsZh={modeLabelsZh}
           />
         </div>
       </div>

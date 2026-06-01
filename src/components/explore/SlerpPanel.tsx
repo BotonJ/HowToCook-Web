@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import type { PairingResult, CuisinePole } from '@/lib/epicure/types';
+import { generateSlerpInterpretation } from '@/lib/epicure/interpretations';
 import { IngredientSearch } from './IngredientSearch';
 import { IngredientCard } from './IngredientCard';
 import { AngleSlider } from './AngleSlider';
@@ -33,6 +34,20 @@ export function SlerpPanel({
     if (!seed || !direction) return [];
     return slerpToCuisine(seed, direction, angle, 10);
   }, [seed, direction, angle, slerpToCuisine]);
+
+  const interpretation = useMemo(() => {
+    if (!seed || !direction || results.length === 0) return null;
+    const pole = cuisinePoles.find((p) => p.key === direction);
+    const seedNameZh = zhMap?.[seed] ?? '';
+    return generateSlerpInterpretation({
+      seedName: seed,
+      seedNameZh,
+      cuisineKey: direction,
+      cuisineLabel: pole?.label ?? direction,
+      angle,
+      topResults: results.slice(0, 3),
+    });
+  }, [seed, direction, angle, results, cuisinePoles, zhMap]);
 
   useEffect(() => {
     if (onSlerpTopResult) {
@@ -93,6 +108,20 @@ export function SlerpPanel({
         </p>
         <AngleSlider value={angle} onChange={setAngle} />
       </div>
+
+      {interpretation && (
+        <div className="rounded-xl bg-surface-container-low border border-outline-variant p-4 space-y-2">
+          <h4 className="font-display text-title-md text-on-surface">
+            {interpretation.title}
+          </h4>
+          <p className="font-body text-sm text-on-surface-variant leading-relaxed">
+            {interpretation.description}
+          </p>
+          <p className="font-body text-xs text-on-surface-variant/70 italic">
+            {interpretation.tip}
+          </p>
+        </div>
+      )}
 
       {results.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
