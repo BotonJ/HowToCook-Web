@@ -229,26 +229,35 @@ export function About() {
   });
   return (
     <Layout>
-      <div className="py-8 space-y-10 max-w-3xl">
-        <h1 className="font-display text-headline-xl text-on-surface">{t.about.title}</h1>
+      <div className="py-8">
+        <h1 className="font-display text-headline-xl text-on-surface mb-8">{t.about.title}</h1>
 
-        <p className="font-body text-body-lg text-on-surface-variant leading-relaxed">
-          {t.about.intro}
-        </p>
+        <div className="flex flex-col lg:flex-row gap-10">
+          {/* Left: main content */}
+          <div className="flex-1 space-y-10 min-w-0">
+            <p className="font-body text-body-lg text-on-surface-variant leading-relaxed">
+              {t.about.intro}
+            </p>
 
-        <div className="space-y-6 font-body text-body-md text-on-surface-variant leading-relaxed">
-          <p>{t.about.description1}</p>
-          <p>{t.about.description2}</p>
+            <div className="space-y-6 font-body text-body-md text-on-surface-variant leading-relaxed">
+              <p>{t.about.description1}</p>
+              <p>{t.about.description2}</p>
+            </div>
+
+            {/* Stats */}
+            <StatsDashboard />
+
+            {/* Roadmap */}
+            <ContentRoadmap />
+          </div>
+
+          {/* Right: Changelog */}
+          <aside className="lg:w-80 flex-shrink-0">
+            <div className="lg:sticky lg:top-28">
+              <Changelog />
+            </div>
+          </aside>
         </div>
-
-        {/* Stats */}
-        <StatsDashboard />
-
-        {/* Roadmap */}
-        <ContentRoadmap />
-
-        {/* Changelog */}
-        <Changelog />
       </div>
     </Layout>
   );
