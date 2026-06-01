@@ -1,6 +1,7 @@
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
+import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 import {
   TrendingUp,
@@ -8,8 +9,80 @@ import {
   CheckCircle2,
   Loader2,
   Sparkles,
+  ChefHat,
+  BookOpen,
+  Layers,
 } from 'lucide-react';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+// ── Animated Counter ──────────────────────────────────────────────
+
+function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-40px' });
+
+  useEffect(() => {
+    if (!inView) return;
+    const duration = 1200;
+    const start = performance.now();
+
+    function tick(now: number) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  }, [inView, target]);
+
+  return (
+    <span ref={ref} className="tabular-nums">
+      {count.toLocaleString()}{suffix}
+    </span>
+  );
+}
+
+// ── Stats Dashboard ───────────────────────────────────────────────
+
+function StatsDashboard() {
+  const t = useT();
+  const STATS = [
+    { label: t.tips.stats.recipes, value: 481, icon: ChefHat, color: 'text-primary' },
+    { label: t.tips.stats.terms, value: 84, icon: BookOpen, color: 'text-tertiary' },
+    { label: t.tips.stats.tutorials, value: 18, icon: Layers, color: 'text-secondary' },
+    { label: t.tips.stats.upcoming, value: 15000, suffix: '', icon: TrendingUp, color: 'text-on-surface-variant' },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-2 md:grid-cols-4 gap-4"
+    >
+      {STATS.map((stat) => {
+        const Icon = stat.icon;
+        return (
+          <div
+            key={stat.label}
+            className="bg-surface-container-low rounded-2xl p-5 text-center"
+          >
+            <Icon size={20} className={`mx-auto mb-2 ${stat.color}`} />
+            <div className={`font-display text-headline-lg ${stat.color}`}>
+              <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+            </div>
+            <p className="font-body text-body-sm text-on-surface-variant mt-1">
+              {stat.label}
+            </p>
+          </div>
+        );
+      })}
+    </motion.div>
+  );
+}
 
 // ── Content Roadmap ───────────────────────────────────────────────
 
@@ -224,6 +297,9 @@ export function About() {
             This site also provides MCP protocol interface, supporting AI assistants like Claude Code to directly access the recipe engine for smart recommendations and shopping list generation.
           </p>
         </div>
+
+        {/* Stats */}
+        <StatsDashboard />
 
         {/* Roadmap */}
         <ContentRoadmap />
