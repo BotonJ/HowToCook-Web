@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { cosineSimilarity } from '@/lib/epicure/engine';
 
 interface RecipeInfo {
   id: string;
@@ -13,20 +14,7 @@ interface ExploreRecipesProps {
   zhMap: Record<string, string>;
 }
 
-function cosineSimilarity(a: Float32Array, b: Float32Array): number {
-  let dot = 0;
-  let normA = 0;
-  let normB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
-  }
-  const denom = Math.sqrt(normA) * Math.sqrt(normB);
-  return denom === 0 ? 0 : dot / denom;
-}
-
-export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, zhMap }: ExploreRecipesProps) {
+export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, zhMap: _zhMap }: ExploreRecipesProps) {
   const [recipes, setRecipes] = useState<RecipeInfo[]>([]);
   const [loading, setLoading] = useState(true);
 

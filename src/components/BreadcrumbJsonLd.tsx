@@ -1,4 +1,5 @@
 import { SITE_URL, CATEGORY_LABELS } from '@/lib/constants';
+import { safeJsonLd } from '@/lib/utils';
 
 interface BreadcrumbJsonLdProps {
   categoryName: string;
@@ -35,7 +36,7 @@ export function BreadcrumbJsonLd({ categoryName, recipeName }: BreadcrumbJsonLdP
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
     />
   );
 }

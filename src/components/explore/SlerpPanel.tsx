@@ -59,7 +59,7 @@ export function SlerpPanel({
     setSeed(name);
   }
 
-  function handleResultClick(name: string) {
+  function handleResultClick(_name: string) {
     // No-op for slerp results — just display
   }
 

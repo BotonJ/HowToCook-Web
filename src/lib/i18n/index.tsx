@@ -47,7 +47,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const setLang = (newLang: Lang) => {
     setLangState(newLang);
     localStorage.setItem(STORAGE_KEY, newLang);
-    // Update document meta
+    document.documentElement.lang = newLang === 'zh' ? 'zh-CN' : 'en';
     document.title = newLang === 'zh' ? '做饭指北 - HowToCook' : 'HowToCook - Recipe Encyclopedia';
     const desc = document.querySelector('meta[name="description"]');
     if (desc) {
@@ -59,6 +59,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Apply initial language on mount
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     const desc = document.querySelector('meta[name="description"]');
     if (desc) {
       desc.setAttribute('content', lang === 'zh'

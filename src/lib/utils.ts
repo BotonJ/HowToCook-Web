@@ -13,3 +13,14 @@ export function withBaseUrl(path: string) {
   const normalizedPath = path.startsWith("/") ? path.slice(1) : path
   return `${normalizedBase}${normalizedPath}`
 }
+
+/**
+ * Safely serialize JSON-LD for injection into <script type="application/ld+json">.
+ * Escapes HTML-significant characters to prevent </script> breakout and XSS.
+ */
+export function safeJsonLd(obj: unknown): string {
+  return JSON.stringify(obj)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/\//g, '\\u002f')
+}

@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile, getAllFlavorProfiles } from '@/lib/flavor-profiles';
-
-const DIMS = ['sweet', 'sour', 'bitter', 'umami', 'spicy', 'fatty'] as const;
-const LABELS: Record<string, string> = {
-  sweet: '甜', sour: '酸', bitter: '苦', umami: '鲜', spicy: '辣', fatty: '脂',
-};
+import { FLAVOR_DIMS, FLAVOR_LABELS_ZH } from '@/lib/flavor-dims';
 
 interface SuggestionsProps {
   ingredients: string[];
@@ -23,12 +19,12 @@ export function Suggestions({ ingredients, onAdd }: SuggestionsProps) {
     if (profiles.length === 0) return [];
 
     const avg: Record<string, number> = {};
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIMS) {
       avg[dim] = profiles.reduce((s, p) => s + (p[dim] as number), 0) / profiles.length;
     }
 
     // Find weakest dimension
-    const sorted = [...DIMS].sort((a, b) => avg[a] - avg[b]);
+    const sorted = [...FLAVOR_DIMS].sort((a, b) => avg[a] - avg[b]);
     const weakest = sorted[0];
     const weakestVal = avg[weakest];
 
@@ -51,7 +47,7 @@ export function Suggestions({ ingredients, onAdd }: SuggestionsProps) {
     return candidates.slice(0, 5).map((c) => ({
       id: c.id,
       dim: weakest,
-      dimLabel: LABELS[weakest],
+      dimLabel: FLAVOR_LABELS_ZH[weakest],
       value: c.value,
     }));
   }, [ingredients]);

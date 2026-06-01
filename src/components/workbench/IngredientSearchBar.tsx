@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useWorkbench } from './WorkbenchContext';
 import { Search, X } from 'lucide-react';
+import { formatName } from '@/lib/epicure/engine';
 
 interface IngredientSearchBarProps {
   ready: boolean;
@@ -26,10 +27,6 @@ const CORE_INGREDIENTS = [
   'onion',
   'shrimp',
 ];
-
-function formatName(raw: string): string {
-  return raw.replace(/_/g, ' ');
-}
 
 export function IngredientSearchBar({
   ready,
@@ -134,6 +131,7 @@ export function IngredientSearchBar({
           onFocus={() => results.length > 0 && setShowDropdown(true)}
           onKeyDown={handleKeyDown}
           placeholder="搜索食材（中文或英文）..."
+          aria-label="搜索食材"
           className="w-full rounded-full border border-outline-variant bg-surface-container-lowest pl-10 pr-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
         />
         {showDropdown && (

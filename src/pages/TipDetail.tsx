@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useMemo } from 'react';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
@@ -52,7 +53,7 @@ export function TipDetail() {
   const t = useT();
 
   const renderedContent = useMemo(
-    () => (tip ? marked.parse(tip.content) : ''),
+    () => (tip ? DOMPurify.sanitize(marked.parse(tip.content) as string) : ''),
     [tip],
   );
 

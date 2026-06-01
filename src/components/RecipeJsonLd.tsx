@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import { SITE_URL } from '@/lib/constants';
+import { safeJsonLd } from '@/lib/utils';
 
 const COOK_TIME_ISO: Record<string, string> = {
   quick: 'PT15M',
@@ -10,7 +11,7 @@ const COOK_TIME_ISO: Record<string, string> = {
 
 const DIET_SCHEMA: Record<string, string> = {
   Vegetarian: 'https://schema.org/VegetarianDiet',
-  Halal: 'https://schema.org/KosherDiet',
+  Halal: 'https://schema.org/HalalDiet',
   'Low Carb': 'https://schema.org/LowCalorieDiet',
 };
 
@@ -83,7 +84,7 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
     />
   );
 }

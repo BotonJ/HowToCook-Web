@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile } from '@/lib/flavor-profiles';
-
-const DIMS = ['sweet', 'sour', 'bitter', 'umami', 'spicy', 'fatty'] as const;
-const LABELS: Record<string, string> = {
-  sweet: '甜', sour: '酸', bitter: '苦', umami: '鲜', spicy: '辣', fatty: '脂',
-};
+import { FLAVOR_DIMS, FLAVOR_LABELS_ZH } from '@/lib/flavor-dims';
 
 interface FlavorCommentProps {
   ingredients: string[];
@@ -19,16 +15,16 @@ export function FlavorComment({ ingredients }: FlavorCommentProps) {
     if (profiles.length === 0) return null;
 
     const avg: Record<string, number> = {};
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIMS) {
       avg[dim] = profiles.reduce((s, p) => s + (p[dim] as number), 0) / profiles.length;
     }
 
-    const sorted = [...DIMS].sort((a, b) => avg[b] - avg[a]);
+    const sorted = [...FLAVOR_DIMS].sort((a, b) => avg[b] - avg[a]);
     const top = sorted[0];
     const second = sorted[1];
     const topVal = avg[top];
-    const topLabel = LABELS[top];
-    const secondLabel = LABELS[second];
+    const topLabel = FLAVOR_LABELS_ZH[top];
+    const secondLabel = FLAVOR_LABELS_ZH[second];
 
     if (topVal > 7) return `${topLabel}味突出（${topVal.toFixed(1)}），${secondLabel}作为辅助，整体风味鲜明有力。`;
     if (topVal > 5) return `${topLabel}和${secondLabel}为主导，风味均衡有层次。`;
