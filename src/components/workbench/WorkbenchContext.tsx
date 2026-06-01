@@ -53,12 +53,12 @@ function reducer(state: WorkbenchState, action: WorkbenchAction): WorkbenchState
   }
 }
 
-interface WorkbenchContextValue {
-  state: WorkbenchState;
-  dispatch: React.Dispatch<WorkbenchAction>;
-}
+// Split into two independent contexts to avoid cascade re-renders.
+// DispatchContext value never changes, so consumers that only need dispatch
+// (or only state) won't re-render when the other slice updates.
 
-const WorkbenchContext = createContext<WorkbenchContextValue | null>(null);
+const DispatchContext = createContext<React.Dispatch<WorkbenchAction> | null>(null);
+const StateContext = createContext<WorkbenchState | null>(null);
 
 export function WorkbenchProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(reducer, {
@@ -67,14 +67,36 @@ export function WorkbenchProvider({ children }: { children: ReactNode }) {
   });
 
   return (
-    <WorkbenchContext.Provider value={{ state, dispatch }}>
-      {children}
-    </WorkbenchContext.Provider>
+    <DispatchContext.Provider value={dispatch}>
+      <StateContext.Provider value={state}>
+        {children}
+      </StateContext.Provider>
+    </DispatchContext.Provider>
   );
 }
 
+/** Subscribe to state changes only (e.g. WorkbenchHeader, FlavorWorkbench). */
+export function useWorkbenchState(): WorkbenchState {
+  const state = useContext(StateContext);
+  if (!state) throw new Error('useWorkbenchState must be used within WorkbenchProvider');
+  return state;
+}
+
+/** Subscribe to dispatch only — value never changes, so no re-renders. */
+export function useWorkbenchDispatch(): React.Dispatch<WorkbenchAction> {
+  const dispatch = useContext(DispatchContext);
+  if (!dispatch) throw new Error('useWorkbenchDispatch must be used within WorkbenchProvider');
+  return dispatch;
+}
+
+interface WorkbenchContextValue {
+  state: WorkbenchState;
+  dispatch: React.Dispatch<WorkbenchAction>;
+}
+
+/** Backward-compatible hook: subscribes to both state and dispatch. */
 export function useWorkbench(): WorkbenchContextValue {
-  const ctx = useContext(WorkbenchContext);
-  if (!ctx) throw new Error('useWorkbench must be used within WorkbenchProvider');
-  return ctx;
+  const state = useWorkbenchState();
+  const dispatch = useWorkbenchDispatch();
+  return { state, dispatch };
 }

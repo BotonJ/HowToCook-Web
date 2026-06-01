@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { WorkbenchProvider, useWorkbench } from './WorkbenchContext';
+import { WorkbenchProvider, useWorkbenchState } from './WorkbenchContext';
 import { WorkbenchHeader } from './WorkbenchHeader';
 import { IngredientSearchBar } from './IngredientSearchBar';
 import { GuideView } from './GuideView';
@@ -10,7 +10,7 @@ import { loadFlavorProfiles, isFlavorProfilesLoaded } from '@/lib/flavor-profile
 
 function WorkbenchInner() {
   const epicure = useEpicure();
-  const { state } = useWorkbench();
+  const state = useWorkbenchState();
   const [flavorReady, setFlavorReady] = useState(isFlavorProfilesLoaded());
 
   useEffect(() => {
