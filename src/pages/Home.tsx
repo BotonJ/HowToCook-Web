@@ -9,7 +9,7 @@ import { WebsiteJsonLd } from '@/components/WebsiteJsonLd';
 import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
-import { useT, useLang } from '@/lib/i18n';
+import { useI18n } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 
 export function Home() {
@@ -19,8 +19,7 @@ export function Home() {
   const [searchTerm, setSearchTerm] = useState(initialQuery);
   const [activeCuisine, setActiveCuisine] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
-  const t = useT();
-  const lang = useLang();
+  const { lang, t } = useI18n();
 
   useMeta({
     title: categoryId
@@ -37,18 +36,18 @@ export function Home() {
   const allRecipes = useMemo(() => {
     const recipes = categories.flatMap(c => c.recipes);
 
-    // English version: only show English recipes, filter by cuisine
+    // English mode: only show English recipes, filter by cuisine
     if (lang === 'en') {
       return recipes
         .filter(r => (r.language || 'zh') === 'en')
         .filter(r => activeCuisine === 'all' || r.cuisine === activeCuisine);
     }
 
-    // Chinese version: show all Chinese recipes
+    // Chinese mode: show all Chinese recipes
     return recipes.filter(r => (r.language || 'zh') !== 'en');
   }, [categories, lang, activeCuisine]);
 
-  // Calculate cuisine counts for English version
+  // Calculate cuisine counts for English mode
   const cuisineCounts = useMemo(() => {
     if (lang !== 'en') return {};
     const recipes = categories.flatMap(c => c.recipes).filter(r => (r.language || 'zh') === 'en');
