@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChefHat, ChevronDown, Languages } from 'lucide-react';
+import { ChevronDown, Languages } from 'lucide-react';
 import { useI18n, useT } from '@/lib/i18n';
 
 function useCollections() {
@@ -39,9 +39,11 @@ export function Navbar() {
     <nav className="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant">
       <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="bg-primary p-2 rounded-lg text-on-primary group-hover:bg-primary-container transition-colors">
-            <ChefHat size={24} />
-          </div>
+          <img
+            src={lang === 'zh' ? '/images/logo_cn.png' : '/images/logo_en.png'}
+            alt={t.nav.siteName}
+            className="h-10 w-auto"
+          />
           <span className="font-display font-bold text-headline-lg text-primary tracking-tight">
             {t.nav.siteName}
           </span>

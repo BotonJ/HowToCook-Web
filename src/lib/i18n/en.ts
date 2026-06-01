@@ -22,7 +22,7 @@ export const en = {
     siteName: 'HowToCook',
     academy: 'Cooking Academy',
     collections: 'Collections',
-    explore: 'Ingredient Explorer',
+    explore: 'Flavor Workbench',
     about: 'About',
     credits: 'Credits',
     github: 'GitHub',
@@ -187,9 +187,9 @@ export const en = {
     defaultMetaDesc: 'Cooking knowledge article',
   },
 
-  // ── Ingredient Explorer ───────────────────────────────────────────
+  // ── Flavor Workbench ───────────────────────────────────────────────
   explore: {
-    title: 'Ingredient Explorer',
+    title: 'Flavor Workbench',
     subtitle: 'Explore ingredient pairings, flavor profiles, and cuisine directions',
     metaDesc: 'Explore ingredient pairings, flavor profiles, and cuisine directions with our ingredient embedding engine.',
     searchPlaceholder: 'Search ingredients for flavor pairings...',
