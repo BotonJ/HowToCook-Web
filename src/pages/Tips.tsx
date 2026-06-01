@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
+import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 import { BookOpen, Layers } from 'lucide-react';
 
@@ -38,7 +39,7 @@ function AcademySeries() {
     <section className="space-y-4">
       <div className="flex items-center gap-2">
         <Layers size={20} className="text-primary" />
-        <h2 className="font-display text-headline-lg text-on-surface">最小厨房 MVP</h2>
+        <h2 className="font-display text-headline-lg text-on-surface">最小厨房 MVK</h2>
         <span className="text-label-sm text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded-full">
           {academyModules.length} 模块
         </span>
@@ -133,9 +134,10 @@ function TipsArticles() {
 // ── Page ──────────────────────────────────────────────────────────
 
 export function Tips() {
+  const t = useT();
   useMeta({
-    title: 'Cooking Academy',
-    description: 'Cooking basics, technique tutorials, kitchen tips — minimal kitchen MVP series and essential cooking techniques.',
+    title: t.tips.metaTitle,
+    description: t.tips.metaDesc,
     ogUrl: `${SITE_URL}/academy`,
   });
 
@@ -145,14 +147,14 @@ export function Tips() {
         {/* Header */}
         <div>
           <h1 className="font-display text-headline-xl text-on-surface mb-2">
-            Cooking Academy
+            {t.tips.title}
           </h1>
           <p className="font-body text-body-lg text-on-surface-variant">
-            厨房从零开始 — 系列教程 + 实用技法，持续建设中。
+            {t.tips.subtitle}
           </p>
         </div>
 
-        {/* MVP Series */}
+        {/* MVK Series */}
         <AcademySeries />
 
         {/* Tips Articles */}
