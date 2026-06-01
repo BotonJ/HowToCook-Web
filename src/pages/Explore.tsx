@@ -1,4 +1,5 @@
 import { Layout } from '@/components/Layout';
+import { FlavorWorkbench } from '@/components/workbench/FlavorWorkbench';
 import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
@@ -6,19 +7,14 @@ import { SITE_URL } from '@/lib/constants';
 export function Explore() {
   const t = useT();
   useMeta({
-    title: t.explore.title,
-    description: t.explore.metaDesc,
+    title: t.nav.explore,
+    description: '探索食材风味关联，发现搭配灵感，分析多食材合成风味。',
     ogUrl: `${SITE_URL}/explore`,
   });
 
   return (
     <Layout>
-      <iframe
-        src="/explore/workbench.html"
-        title={t.explore.title}
-        className="w-full border-0"
-        style={{ minHeight: 'calc(100vh - 200px)' }}
-      />
+      <FlavorWorkbench />
     </Layout>
   );
 }

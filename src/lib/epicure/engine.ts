@@ -329,6 +329,41 @@ export function getIngredientName(index: number): string | undefined {
   return meta?.itos[index];
 }
 
+export function getEmbedding(index: number): Float32Array | null {
+  if (!embeddings) return null;
+  return getRow(index);
+}
+
+export function computeRecipeEmbeddings(
+  recipes: Array<{ id: string; ingredients: string[] }>,
+): Array<{ id: string; embedding: Float32Array }> {
+  if (!embeddings || !meta) return [];
+
+  const results: Array<{ id: string; embedding: Float32Array }> = [];
+
+  for (const recipe of recipes) {
+    const vecs: Float32Array[] = [];
+    for (const ing of recipe.ingredients) {
+      const idx = meta.vocab[ing];
+      if (idx !== undefined) {
+        vecs.push(getRow(idx));
+      }
+    }
+
+    if (vecs.length === 0) continue;
+
+    const avg = new Float32Array(DIMS);
+    for (let d = 0; d < DIMS; d++) {
+      let sum = 0;
+      for (const v of vecs) sum += v[d];
+      avg[d] = sum / vecs.length;
+    }
+    results.push({ id: recipe.id, embedding: avg });
+  }
+
+  return results;
+}
+
 export function getZhMap(): Record<string, string> {
   return zhMap ?? {};
 }

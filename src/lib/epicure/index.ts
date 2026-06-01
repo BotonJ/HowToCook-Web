@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import type { PairingResult, ModeResult, CuisinePole } from './types';
 import * as engine from './engine';
 
-interface UseEpicureResult {
+export interface UseEpicureResult {
   loaded: boolean;
   loading: boolean;
   error: string | null;
@@ -11,6 +11,9 @@ interface UseEpicureResult {
   slerpToCuisine: (seed: string, cuisineKey: string, angleDeg: number, k: number) => PairingResult[];
   getClosestMode: (ingredient: string, k: number) => ModeResult[];
   searchVocabulary: (query: string, limit: number) => string[];
+  getEmbedding: (index: number) => Float32Array | null;
+  computeRecipeEmbeddings: (recipes: Array<{ id: string; ingredients: string[] }>) => Array<{ id: string; embedding: Float32Array }>;
+  getIngredientIndex: (name: string) => number | undefined;
   cuisinePoles: CuisinePole[];
   zhMap: Record<string, string>;
   modeLabelsZh: Record<string, string>;
@@ -90,6 +93,30 @@ export function useEpicure(): UseEpicureResult {
     [],
   );
 
+  const getEmbedding = useCallback(
+    (index: number): Float32Array | null => {
+      if (!engine.isLoaded()) return null;
+      return engine.getEmbedding(index);
+    },
+    [],
+  );
+
+  const computeRecipeEmbeddings = useCallback(
+    (recipes: Array<{ id: string; ingredients: string[] }>): Array<{ id: string; embedding: Float32Array }> => {
+      if (!engine.isLoaded()) return [];
+      return engine.computeRecipeEmbeddings(recipes);
+    },
+    [],
+  );
+
+  const getIngredientIndex = useCallback(
+    (name: string): number | undefined => {
+      if (!engine.isLoaded()) return undefined;
+      return engine.getIngredientIndex(name);
+    },
+    [],
+  );
+
   const cuisinePoles = engine.isLoaded() ? engine.getCuisinePoles() : [];
   const zhMap = engine.isLoaded() ? engine.getZhMap() : {};
   const modeLabelsZh = engine.isLoaded() ? engine.getModeLabelsZh() : {};
@@ -103,6 +130,9 @@ export function useEpicure(): UseEpicureResult {
     slerpToCuisine,
     getClosestMode,
     searchVocabulary,
+    getEmbedding,
+    computeRecipeEmbeddings,
+    getIngredientIndex,
     cuisinePoles,
     zhMap,
     modeLabelsZh,

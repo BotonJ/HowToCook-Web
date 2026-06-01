@@ -1,34 +1,23 @@
-const CACHE_NAME = 'howtocook-v1'
-const STATIC_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
-  '/logo.png',
-]
+const CACHE_NAME = 'howtocook-v2'
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS)
-    }),
-  )
+// ── Install: skip waiting to activate immediately ──────────────
+self.addEventListener('install', () => {
   self.skipWaiting()
 })
 
+// ── Activate: clean old caches, claim clients ─────────────────
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name)),
-      )
-    }),
+    caches.keys().then((names) =>
+      Promise.all(
+        names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n)),
+      ),
+    ),
   )
   self.clients.claim()
 })
+
+// ── Fetch strategies ───────────────────────────────────────────
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return
@@ -36,32 +25,69 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url)
   if (url.origin !== self.location.origin) return
 
-  // Skip API calls and dynamic data
+  // Skip API calls
   if (url.pathname.startsWith('/api/')) return
 
-  event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) return cached
+  // 1. Navigation (HTML): network-first — always get latest page
+  if (event.request.mode === 'navigate') {
+    event.respondWith(networkFirst(event.request))
+    return
+  }
 
-      return fetch(event.request)
-        .then((response) => {
-          if (!response || response.status !== 200 || response.type !== 'basic') {
-            return response
-          }
+  // 2. Hashed assets (/assets/*): cache-first — filenames change on update
+  if (url.pathname.startsWith('/assets/')) {
+    event.respondWith(cacheFirst(event.request))
+    return
+  }
 
-          const responseToCache = response.clone()
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache)
-          })
-
-          return response
-        })
-        .catch(() => {
-          // Offline fallback for navigation requests
-          if (event.request.mode === 'navigate') {
-            return caches.match('/')
-          }
-        })
-    }),
-  )
+  // 3. Everything else (images, fonts, data, etc.): stale-while-revalidate
+  event.respondWith(staleWhileRevalidate(event.request))
 })
+
+// ── Strategies ─────────────────────────────────────────────────
+
+async function networkFirst(request) {
+  const cache = await caches.open(CACHE_NAME)
+  try {
+    const response = await fetch(request)
+    if (response.ok) {
+      cache.put(request, response.clone())
+    }
+    return response
+  } catch {
+    const cached = await cache.match(request)
+    return cached || new Response('Offline', { status: 503 })
+  }
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request)
+  if (cached) return cached
+
+  const cache = await caches.open(CACHE_NAME)
+  try {
+    const response = await fetch(request)
+    if (response.ok) {
+      cache.put(request, response.clone())
+    }
+    return response
+  } catch {
+    return new Response('', { status: 408 })
+  }
+}
+
+async function staleWhileRevalidate(request) {
+  const cache = await caches.open(CACHE_NAME)
+  const cached = await cache.match(request)
+
+  const fetchPromise = fetch(request)
+    .then((response) => {
+      if (response.ok) {
+        cache.put(request, response.clone())
+      }
+      return response
+    })
+    .catch(() => cached)
+
+  return cached || fetchPromise
+}
