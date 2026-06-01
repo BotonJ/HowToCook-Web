@@ -159,7 +159,7 @@ export function CollectionPage() {
   useEffect(() => {
     loadRecipeData()
       .then(setCategories)
-      .catch((err) => setError(err instanceof Error ? err.message : t.collection.error))
+      .catch((err) => setError(err instanceof Error ? err.message : 'Failed to load recipes'))
       .finally(() => setLoading(false));
   }, []);
 

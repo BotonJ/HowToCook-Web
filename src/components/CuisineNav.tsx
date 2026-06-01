@@ -87,13 +87,6 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
   const moreDropdownRef = useRef<HTMLDivElement>(null);
   const chineseDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Default to Western in English mode
-  useEffect(() => {
-    if (activeCuisine === 'chinese') {
-      onCuisineChange('chinese-western');
-    }
-  }, []); // Only on mount
-
   const primaryCuisines = useMemo<CuisineTab[]>(() => {
     return PRIMARY_CUISINES.map((id) => ({
       id,
