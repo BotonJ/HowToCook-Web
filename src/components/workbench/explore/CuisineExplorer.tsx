@@ -13,7 +13,7 @@ export function CuisineExplorer({
   ingredient,
   slerpToCuisine,
   cuisinePoles,
-  zhMap,
+  zhMap: _zhMap,
   onSelect,
 }: CuisineExplorerProps) {
   const [activeCuisine, setActiveCuisine] = useState<string | null>(null);

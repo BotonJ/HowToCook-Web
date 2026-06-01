@@ -1,4 +1,5 @@
 import type { ModeResult } from '@/lib/epicure/types';
+import { formatName } from '@/lib/epicure/engine';
 
 interface ModePanelProps {
   modes: ModeResult[];
@@ -6,10 +7,6 @@ interface ModePanelProps {
   targetName?: string | null;
   isSlerpResult?: boolean;
   modeLabelsZh?: Record<string, string>;
-}
-
-function formatName(raw: string): string {
-  return raw.replace(/_/g, ' ');
 }
 
 export function ModePanel({ modes, loading, targetName, isSlerpResult, modeLabelsZh }: ModePanelProps) {

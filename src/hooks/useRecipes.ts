@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { fetchAllRecipes, fetchCategories } from '@/services/api';
 import { transformDishIndex } from '@/lib/api-transform';
 import type { Recipe, Category } from '@/types';
-import type { DishIndex, ApiCategory } from '@/types/api';
+import type { DishIndex, ApiCategory, EnIndexData, NoodleData } from '@/types/api';
 
 interface UseRecipesResult {
   recipes: Recipe[];
@@ -48,26 +48,24 @@ async function fetchEnglishIndex(): Promise<Category[]> {
   try {
     const res = await fetch('/data/en_index_curated.json');
     if (!res.ok) return [];
-    const data = await res.json();
-    // Transform English dishes to Category format
-    const recipes = data.dishes.map((dish: any) => ({
+    const data: EnIndexData = await res.json();
+    const recipes: Recipe[] = data.dishes.map((dish) => ({
       id: `en/${dish.name}`,
       name: dish.name,
       category: dish.category,
-      imagePath: '', // 不使用外部图片，避免侵权
+      imagePath: '',
       difficulty: dish.difficulty,
       cuisine: dish.cuisine,
       cooking_method: dish.cooking_method,
       cook_time: dish.cook_time,
       ingredients: dish.ingredients,
-      main_ingredients: dish.main_ingredients || [],
-      tags: dish.tags || {},
+      main_ingredients: dish.main_ingredients ?? [],
+      tags: dish.tags ?? {},
       source: dish.source,
-      description: dish.epicurious_meta?.description || '',
-      language: 'en',
+      description: dish.epicurious_meta?.description ?? '',
+      language: 'en' as const,
     }));
-    // Group by category
-    const grouped = new Map<string, any[]>();
+    const grouped = new Map<string, Recipe[]>();
     for (const recipe of recipes) {
       const list = grouped.get(recipe.category);
       if (list) {
@@ -76,12 +74,12 @@ async function fetchEnglishIndex(): Promise<Category[]> {
         grouped.set(recipe.category, [recipe]);
       }
     }
-    return Array.from(grouped.entries()).map(([id, recipes]) => ({
+    return Array.from(grouped.entries()).map(([id, recs]) => ({
       id: `en-${id}`,
       name: `English ${id}`,
       displayName: `English ${id}`,
-      count: recipes.length,
-      recipes,
+      count: recs.length,
+      recipes: recs,
     }));
   } catch {
     return [];
@@ -92,9 +90,8 @@ async function fetchNoodleRecipes(): Promise<Category[]> {
   try {
     const res = await fetch('/data/noodle-recipes.json');
     if (!res.ok) return [];
-    const data = await res.json();
-    // Transform noodle dishes to Category format
-    const recipes = data.dishes.map((dish: any) => ({
+    const data: NoodleData = await res.json();
+    const recipes: Recipe[] = data.dishes.map((dish) => ({
       id: dish.id,
       name: dish.name,
       category: dish.category,
@@ -104,15 +101,14 @@ async function fetchNoodleRecipes(): Promise<Category[]> {
       cooking_method: dish.cooking_method,
       cook_time: dish.cook_time,
       ingredients: dish.ingredients,
-      main_ingredients: dish.main_ingredients || [],
+      main_ingredients: dish.main_ingredients ?? [],
       tags: {},
       source: dish.source,
-      description: dish.description || '',
-      language: 'zh',
-      steps_text: dish.steps_text || '',
+      description: dish.description,
+      language: 'zh' as const,
+      steps_text: dish.steps_text,
     }));
-    // Group by category
-    const grouped = new Map<string, any[]>();
+    const grouped = new Map<string, Recipe[]>();
     for (const recipe of recipes) {
       const list = grouped.get(recipe.category);
       if (list) {
@@ -121,12 +117,12 @@ async function fetchNoodleRecipes(): Promise<Category[]> {
         grouped.set(recipe.category, [recipe]);
       }
     }
-    return Array.from(grouped.entries()).map(([id, recipes]) => ({
+    return Array.from(grouped.entries()).map(([id, recs]) => ({
       id: `noodle-${id}`,
       name: `面食之神 ${id}`,
-      displayName: `面食之神`,
-      count: recipes.length,
-      recipes,
+      displayName: '面食之神',
+      count: recs.length,
+      recipes: recs,
     }));
   } catch {
     return [];
@@ -191,7 +187,7 @@ async function fetchFromApiAndUpdate(): Promise<void> {
     cachedCategories = categories;
     cachedRecipes = recipes;
     notifyListeners(categories, recipes);
-  } catch (err) {
+  } catch {
     // API refresh failed silently; local data is already loaded
   }
 }
@@ -314,7 +310,6 @@ export function useRecipes(): UseRecipesResult {
       mountedRef.current = false;
       listeners.delete(onUpdate);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const retry = () => {

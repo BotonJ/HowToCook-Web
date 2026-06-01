@@ -61,7 +61,11 @@ export function FlavorRadar({ profile, size = 240, interactive = false }: Flavor
         height={size}
         viewBox={`0 0 ${size} ${size}`}
         className="select-none"
+        role="img"
+        aria-label={`Flavor profile: ${DIMENSIONS.map(d => `${d.label} ${profile[d.key]?.toFixed(1) ?? 0}`).join(', ')}`}
       >
+        <title>Flavor Profile Radar Chart</title>
+        <desc>Radar chart showing flavor dimensions for this recipe</desc>
         {/* Grid hexagons */}
         {GRID_LEVELS.map((level) => {
           const pts = hexagonPoints(cx, cy, maxRadius * level);

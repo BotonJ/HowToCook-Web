@@ -30,7 +30,7 @@ export function PwaInstallButton() {
     // @ts-expect-error - beforeinstallprompt event has prompt method
     deferredPrompt.prompt()
 
-    // @ts-expect-error
+    // @ts-expect-error -- BeforeInstallPromptEvent.userChoice is not in standard types
     const { outcome } = await deferredPrompt.userChoice
     if (outcome === 'accepted') {
       setIsVisible(false)

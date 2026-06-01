@@ -1,10 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile } from '@/lib/flavor-profiles';
-
-const DIMS = ['sweet', 'sour', 'bitter', 'umami', 'spicy', 'fatty'] as const;
-const LABELS: Record<string, string> = {
-  sweet: '甜', sour: '酸', bitter: '苦', umami: '鲜', spicy: '辣', fatty: '脂',
-};
+import { FLAVOR_DIMS, FLAVOR_LABELS_ZH } from '@/lib/flavor-dims';
 
 interface BalanceDetectionProps {
   ingredients: string[];
@@ -19,13 +15,13 @@ export function BalanceDetection({ ingredients }: BalanceDetectionProps) {
     if (profiles.length === 0) return [];
 
     const values: Record<string, number[]> = {};
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIMS) {
       values[dim] = profiles.map((p) => p[dim] as number);
     }
 
     const mean: Record<string, number> = {};
     const std: Record<string, number> = {};
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIMS) {
       const arr = values[dim];
       const m = arr.reduce((s, v) => s + v, 0) / arr.length;
       mean[dim] = m;
@@ -35,14 +31,14 @@ export function BalanceDetection({ ingredients }: BalanceDetectionProps) {
 
     const result: Array<{ dim: string; label: string; type: 'high' | 'low'; value: number; mean: number; suggestion: string }> = [];
 
-    for (const dim of DIMS) {
+    for (const dim of FLAVOR_DIMS) {
       const diff = Math.abs(mean[dim] - 5);
       if (diff > 2 && std[dim] < 1.5) {
         const type = mean[dim] > 5 ? 'high' : 'low';
         const suggestion = type === 'high'
-          ? `建议减少${LABELS[dim]}味食材，或增加对立维度平衡`
-          : `建议补充${LABELS[dim]}味突出的食材`;
-        result.push({ dim, label: LABELS[dim], type, value: mean[dim], mean: mean[dim], suggestion });
+          ? `建议减少${FLAVOR_LABELS_ZH[dim]}味食材，或增加对立维度平衡`
+          : `建议补充${FLAVOR_LABELS_ZH[dim]}味突出的食材`;
+        result.push({ dim, label: FLAVOR_LABELS_ZH[dim], type, value: mean[dim], mean: mean[dim], suggestion });
       }
     }
 

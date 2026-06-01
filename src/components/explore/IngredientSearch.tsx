@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { formatName } from '@/lib/epicure/engine';
 
 interface IngredientSearchProps {
   onSelect: (ingredient: string) => void;
@@ -51,10 +52,6 @@ export function IngredientSearch({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  function formatName(raw: string): string {
-    return raw.replace(/_/g, ' ');
-  }
-
   function formatDisplayName(ingredient: string): string {
     const zh = zhMap?.[ingredient];
     const en = formatName(ingredient);
@@ -96,6 +93,7 @@ export function IngredientSearch({
         onFocus={() => results.length > 0 && setShowDropdown(true)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
+        aria-label={placeholder}
         className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
       />
       {showDropdown && (

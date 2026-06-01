@@ -1,15 +1,12 @@
 import { useState, useEffect } from 'react';
 import type { ModeResult } from '@/lib/epicure/types';
+import { formatName } from '@/lib/epicure/engine';
 
 interface ClusterPanelProps {
   ingredient: string;
   getClosestMode: (ingredient: string, k: number) => ModeResult[];
   modeLabelsZh: Record<string, string>;
   zhMap: Record<string, string>;
-}
-
-function formatName(raw: string): string {
-  return raw.replace(/_/g, ' ');
 }
 
 const MODE_KIND_COLORS: Record<string, string> = {

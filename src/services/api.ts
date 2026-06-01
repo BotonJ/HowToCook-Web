@@ -30,7 +30,7 @@ export async function searchRecipes(params: {
 }): Promise<ApiSearchResponse> {
   const query = new URLSearchParams();
   if (params.q) {
-    const sanitized = params.q.trim().slice(0, 200).replace(/[\x00-\x1f]/g, '');
+    const sanitized = params.q.trim().slice(0, 200).replace(/[\x00-\x1f]/gu, ''); // eslint-disable-line no-control-regex
     if (sanitized) query.set('q', sanitized);
   }
   if (params.category) query.set('category', params.category);

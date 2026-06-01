@@ -195,6 +195,7 @@ export function Home() {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder={t.home.searchPlaceholder}
+              aria-label={t.home.searchPlaceholder}
               className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
             {searchLoading && (

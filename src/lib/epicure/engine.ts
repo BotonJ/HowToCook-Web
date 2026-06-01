@@ -28,7 +28,7 @@ function getRow(i: number): Float32Array {
   return embeddings!.subarray(i * DIMS, (i + 1) * DIMS);
 }
 
-function cosineSimilarity(a: Float32Array, b: Float32Array): number {
+export function cosineSimilarity(a: Float32Array, b: Float32Array): number {
   let dot = 0;
   let normA = 0;
   let normB = 0;
@@ -41,7 +41,7 @@ function cosineSimilarity(a: Float32Array, b: Float32Array): number {
   return denom === 0 ? 0 : dot / denom;
 }
 
-function formatName(raw: string): string {
+export function formatName(raw: string): string {
   return raw.replace(/_/g, ' ');
 }
 

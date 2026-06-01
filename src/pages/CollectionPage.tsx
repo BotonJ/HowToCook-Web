@@ -6,6 +6,7 @@ import { useMeta } from '@/hooks/useMeta';
 import { SITE_URL } from '@/lib/constants';
 import { useT, useBasePath } from '@/lib/i18n';
 import type { Recipe, Category } from '@/types';
+import type { EnIndexData } from '@/types/api';
 
 interface CollectionDef {
   id: string;
@@ -88,27 +89,25 @@ async function loadRecipeData(): Promise<Category[]> {
   try {
     const enRes = await fetch('/data/en_index_curated.json');
     if (enRes.ok) {
-      const enData = await enRes.json();
-      // 转换英文数据为 Category 格式
-      const enRecipes = enData.dishes.map((dish: any) => ({
+      const enData: EnIndexData = await enRes.json();
+      const enRecipes: Recipe[] = enData.dishes.map((dish) => ({
         id: `en/${dish.name}`,
         name: dish.name,
         category: dish.category,
-        imagePath: '', // 不使用外部图片，避免侵权
+        imagePath: '',
         difficulty: dish.difficulty,
         cuisine: dish.cuisine,
         cooking_method: dish.cooking_method,
         cook_time: dish.cook_time,
         ingredients: dish.ingredients,
-        main_ingredients: dish.main_ingredients || [],
-        tags: dish.tags || {},
+        main_ingredients: dish.main_ingredients ?? [],
+        tags: dish.tags ?? {},
         source: dish.source,
-        description: dish.epicurious_meta?.description || '',
-        language: 'en',
+        description: dish.epicurious_meta?.description ?? '',
+        language: 'en' as const,
       }));
 
-      // 按 category 分组
-      const grouped = new Map<string, any[]>();
+      const grouped = new Map<string, Recipe[]>();
       for (const recipe of enRecipes) {
         const list = grouped.get(recipe.category);
         if (list) {
@@ -118,19 +117,18 @@ async function loadRecipeData(): Promise<Category[]> {
         }
       }
 
-      // 合并英文分类
-      for (const [id, recipes] of grouped) {
+      for (const [id, recs] of grouped) {
         const existing = zhCategories.find(c => c.id === id);
         if (existing) {
-          existing.recipes.push(...recipes);
+          existing.recipes.push(...recs);
           existing.count = existing.recipes.length;
         } else {
           zhCategories.push({
             id: `en-${id}`,
             name: `English ${id}`,
             displayName: `English ${id}`,
-            count: recipes.length,
-            recipes,
+            count: recs.length,
+            recipes: recs,
           });
         }
       }
