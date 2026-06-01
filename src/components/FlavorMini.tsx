@@ -1,11 +1,6 @@
-interface FlavorProfile {
-  sweet: number;
-  sour: number;
-  bitter: number;
-  umami: number;
-  spicy: number;
-  fatty: number;
-}
+import type { FlavorVector } from '@/lib/epicure/types';
+
+type FlavorProfile = FlavorVector;
 
 interface FlavorMiniProps {
   profile: FlavorProfile;

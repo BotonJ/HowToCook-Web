@@ -17,7 +17,9 @@ function WorkbenchInner() {
     if (!isFlavorProfilesLoaded()) {
       loadFlavorProfiles()
         .then(() => setFlavorReady(true))
-        .catch((err) => console.error('Failed to load flavor profiles:', err));
+        .catch(() => {
+          // Flavor profiles failed to load — workbench will show loading state
+        });
     }
   }, []);
 

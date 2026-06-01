@@ -21,8 +21,8 @@ export function CategoryNav({ categories }: CategoryNavProps) {
           className={({ isActive }) => cn(
             "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
             isActive
-              ? "bg-orange-500 text-white shadow-sm"
-              : "bg-white text-stone-600 border border-stone-200 hover:border-orange-200 hover:text-orange-600"
+              ? "bg-primary text-on-primary shadow-sm"
+              : "bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:border-primary/30 hover:text-primary"
           )}
         >
           {t.categoryNav.all}
@@ -34,8 +34,8 @@ export function CategoryNav({ categories }: CategoryNavProps) {
             className={({ isActive }) => cn(
               "whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-all",
               isActive
-                ? "bg-orange-500 text-white shadow-sm"
-                : "bg-white text-stone-600 border border-stone-200 hover:border-orange-200 hover:text-orange-600"
+                ? "bg-primary text-on-primary shadow-sm"
+                : "bg-surface-container-lowest text-on-surface-variant border border-outline-variant hover:border-primary/30 hover:text-primary"
             )}
           >
             {category.displayName}

@@ -1,14 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile } from '@/lib/flavor-profiles';
-
-const DIM_CONFIG = [
-  { key: 'sweet', label: '甜', color: '#ff6b9d' },
-  { key: 'sour', label: '酸', color: '#ffd166' },
-  { key: 'bitter', label: '苦', color: '#06d6a0' },
-  { key: 'umami', label: '鲜', color: '#4ecdc4' },
-  { key: 'spicy', label: '辣', color: '#ef476f' },
-  { key: 'fatty', label: '脂', color: '#e0aaff' },
-];
+import { FLAVOR_DIM_CONFIG } from '@/lib/flavor-dims';
 
 interface ComposeDimBarsProps {
   ingredients: string[];
@@ -24,7 +16,7 @@ export function ComposeDimBars({ ingredients }: ComposeDimBarsProps) {
   const avg = useMemo(() => {
     if (profiles.length === 0) return null;
     const result: Record<string, number> = {};
-    for (const dim of DIM_CONFIG) {
+    for (const dim of FLAVOR_DIM_CONFIG) {
       const sum = profiles.reduce((s, p) => s + (p[dim.key as keyof typeof p] as number), 0);
       result[dim.key] = sum / profiles.length;
     }
@@ -52,7 +44,7 @@ export function ComposeDimBars({ ingredients }: ComposeDimBarsProps) {
         {mixedTier === 3 && <span className="text-xs text-on-surface-variant/60">参考值</span>}
       </div>
       <div className="space-y-3">
-        {DIM_CONFIG.map((dim) => {
+        {FLAVOR_DIM_CONFIG.map((dim) => {
           const val = avg[dim.key];
           const pct = Math.min(100, Math.max(0, (val / 10) * 100));
           return (

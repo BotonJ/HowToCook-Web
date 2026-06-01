@@ -33,12 +33,8 @@ export function GuideView() {
         {STEPS.map((step, i) => {
           const Icon = step.icon;
           return (
-            <button
+            <div
               key={i}
-              type="button"
-              onClick={() => {
-                // Step 1 click focuses search — handled by UI naturally
-              }}
               className="text-left rounded-xl border border-outline-variant bg-surface-container-lowest p-5 transition hover:shadow-md hover:border-primary/30"
             >
               <div
@@ -48,7 +44,7 @@ export function GuideView() {
               </div>
               <h3 className="font-semibold text-on-surface mb-1">{step.title}</h3>
               <p className="text-sm text-on-surface-variant leading-relaxed">{step.desc}</p>
-            </button>
+            </div>
           );
         })}
       </div>

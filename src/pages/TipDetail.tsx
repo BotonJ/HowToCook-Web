@@ -1,16 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
-import { useT } from '@/lib/i18n';
+import { useT, useBasePath } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useBasePath } from '@/lib/i18n';
-
-import tipsData from '@/data/tips.json';
-import cookingAcademyData from '@/data/cooking-academy.json';
 
 interface TipMeta {
   slug: string;
@@ -20,10 +16,6 @@ interface TipMeta {
   content: string;
 }
 
-const academyModules = cookingAcademyData as TipMeta[];
-const tipsArticles = tipsData as TipMeta[];
-
-// Build unified list with series info
 type SeriesType = 'academy' | 'tips';
 
 interface SeriesItem {
@@ -36,32 +28,73 @@ interface SeriesItem {
   index: number;
 }
 
-const allItems: SeriesItem[] = [
-  ...academyModules.map((item, i) => ({ ...item, series: 'academy' as SeriesType, index: i })),
-  ...tipsArticles.map((item, i) => ({ ...item, series: 'tips' as SeriesType, index: i })),
-];
+// Module-level cache — fetched once, shared across mounts
+let cachedItems: SeriesItem[] | null = null;
+let cachedAcademyCount = 0;
+let cachedTipsCount = 0;
 
-const SERIES_META: Record<SeriesType, { label: string; total: number }> = {
-  academy: { label: '最小厨房 MVK', total: academyModules.length },
-  tips: { label: '基础技法', total: tipsArticles.length },
+async function loadAllItems(): Promise<SeriesItem[]> {
+  if (cachedItems) return cachedItems;
+  const [academyModules, tipsArticles] = await Promise.all([
+    fetch('/data/cooking-academy.json').then(r => r.json()) as Promise<TipMeta[]>,
+    fetch('/data/tips.json').then(r => r.json()) as Promise<TipMeta[]>,
+  ]);
+  cachedAcademyCount = academyModules.length;
+  cachedTipsCount = tipsArticles.length;
+  cachedItems = [
+    ...academyModules.map((item, i) => ({ ...item, series: 'academy' as SeriesType, index: i })),
+    ...tipsArticles.map((item, i) => ({ ...item, series: 'tips' as SeriesType, index: i })),
+  ];
+  return cachedItems;
+}
+
+const SERIES_LABELS: Record<SeriesType, string> = {
+  academy: '最小厨房 MVK',
+  tips: '基础技法',
 };
 
 export function TipDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const tip = allItems.find(t => t.slug === slug);
   const base = useBasePath();
   const t = useT();
 
-  const renderedContent = useMemo(
-    () => (tip ? DOMPurify.sanitize(marked.parse(tip.content) as string) : ''),
-    [tip],
-  );
+  const [allItems, setAllItems] = useState<SeriesItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadAllItems().then(items => {
+      if (!cancelled) {
+        setAllItems(items);
+        setLoading(false);
+      }
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  const tip = useMemo(() => allItems.find(item => item.slug === slug), [allItems, slug]);
+
+  const renderedContent = useMemo(() => {
+    if (!tip) return '';
+    const raw = marked.parse(tip.content, { async: false });
+    return DOMPurify.sanitize(typeof raw === 'string' ? raw : '');
+  }, [tip]);
 
   useMeta({
     title: tip?.title || t.tipDetail.defaultMetaTitle,
     description: tip?.summary || t.tipDetail.defaultMetaDesc,
     ogUrl: `${SITE_URL}/academy/${slug}`,
   });
+
+  if (loading) {
+    return (
+      <Layout>
+        <div className="text-center py-20">
+          <div className="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+        </div>
+      </Layout>
+    );
+  }
 
   if (!tip) {
     return (
@@ -88,7 +121,7 @@ export function TipDetail() {
   const currentIndex = seriesItems.findIndex(item => item.slug === slug);
   const prevItem = currentIndex > 0 ? seriesItems[currentIndex - 1] : null;
   const nextItem = currentIndex < seriesItems.length - 1 ? seriesItems[currentIndex + 1] : null;
-  const seriesMeta = SERIES_META[tip.series];
+  const seriesTotal = tip.series === 'academy' ? cachedAcademyCount : cachedTipsCount;
 
   return (
     <Layout>
@@ -105,11 +138,11 @@ export function TipDetail() {
           {/* Series breadcrumb */}
           <div className="flex items-center gap-2 mb-4 text-label-sm text-on-surface-variant">
             <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-              {seriesMeta.label}
+              {SERIES_LABELS[tip.series]}
             </span>
             {tip.series === 'academy' && (
               <span className="text-on-surface-variant">
-                {currentIndex + 1} / {seriesMeta.total}
+                {currentIndex + 1} / {seriesTotal}
               </span>
             )}
           </div>

@@ -1,9 +1,12 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { searchRecipes } from '@/services/api';
 import { useTurnstileToken } from '@/components/TurnstileProvider';
 import type { Recipe } from '@/types';
 import type { ApiSearchResult } from '@/types/api';
 import { transformSearchResult } from '@/lib/api-transform';
+
+const RATE_LIMIT_WINDOW = 30_000;
+const RATE_LIMIT_MAX = 10;
 
 interface UseSearchResult {
   results: Recipe[] | null;
@@ -31,6 +34,8 @@ export function useSearch(
     [localRecipes],
   );
 
+  const apiTimestamps = useRef<number[]>([]);
+
   useEffect(() => {
     const trimmed = query.trim();
     if (!trimmed) {
@@ -41,9 +46,21 @@ export function useSearch(
     }
 
     const timer = setTimeout(async () => {
+      // Client-side rate limiting: max 10 API requests per 30s
+      const now = Date.now();
+      apiTimestamps.current = apiTimestamps.current.filter(t => now - t < RATE_LIMIT_WINDOW);
+      if (apiTimestamps.current.length >= RATE_LIMIT_MAX) {
+        // Rate limited — fallback to local search
+        const local = localRecipes.filter(r => r.name.toLowerCase().includes(trimmed.toLowerCase()));
+        setResults(local);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
       try {
+        apiTimestamps.current.push(Date.now());
         const turnstileToken = await getToken();
         const response = await searchRecipes({ q: trimmed, turnstileToken });
         const recipes = response.results

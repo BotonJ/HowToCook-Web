@@ -334,6 +334,25 @@ export function getEmbedding(index: number): Float32Array | null {
   return getRow(index);
 }
 
+/**
+ * Cached recipe embeddings — computed once per session, shared across components.
+ * Avoids O(R×I×D) recomputation on every ingredient change.
+ */
+let cachedRecipeEmbeddings: Map<string, Float32Array> | null = null;
+
+export function getOrComputeRecipeEmbeddings(
+  recipes: Array<{ id: string; ingredients: string[] }>,
+): Map<string, Float32Array> {
+  if (cachedRecipeEmbeddings) return cachedRecipeEmbeddings;
+  const computed = computeRecipeEmbeddings(recipes);
+  const map = new Map<string, Float32Array>();
+  for (const r of computed) {
+    map.set(r.id, r.embedding);
+  }
+  cachedRecipeEmbeddings = map;
+  return map;
+}
+
 export function computeRecipeEmbeddings(
   recipes: Array<{ id: string; ingredients: string[] }>,
 ): Array<{ id: string; embedding: Float32Array }> {

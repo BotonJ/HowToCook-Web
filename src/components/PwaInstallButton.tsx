@@ -3,12 +3,12 @@ import { Download } from 'lucide-react'
 import { useT } from '@/lib/i18n'
 
 export function PwaInstallButton() {
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isVisible, setIsVisible] = useState(false)
   const t = useT()
 
   useEffect(() => {
-    const handler = (e: Event) => {
+    const handler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault()
       setDeferredPrompt(e)
       setIsVisible(true)
@@ -27,10 +27,8 @@ export function PwaInstallButton() {
   const handleInstall = async () => {
     if (!deferredPrompt) return
 
-    // @ts-expect-error - beforeinstallprompt event has prompt method
     deferredPrompt.prompt()
 
-    // @ts-expect-error -- BeforeInstallPromptEvent.userChoice is not in standard types
     const { outcome } = await deferredPrompt.userChoice
     if (outcome === 'accepted') {
       setIsVisible(false)

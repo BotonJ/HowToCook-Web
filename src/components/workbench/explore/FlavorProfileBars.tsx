@@ -1,14 +1,6 @@
 import { useMemo } from 'react';
 import { getFlavorProfile } from '@/lib/flavor-profiles';
-
-const DIM_CONFIG: { key: string; label: string; color: string; emoji: string }[] = [
-  { key: 'sweet', label: '甜', color: '#ff6b9d', emoji: '🍬' },
-  { key: 'sour', label: '酸', color: '#ffd166', emoji: '🍋' },
-  { key: 'bitter', label: '苦', color: '#06d6a0', emoji: '🫒' },
-  { key: 'umami', label: '鲜', color: '#4ecdc4', emoji: '🍄' },
-  { key: 'spicy', label: '辣', color: '#ef476f', emoji: '🌶️' },
-  { key: 'fatty', label: '脂', color: '#e0aaff', emoji: '🧈' },
-];
+import { FLAVOR_DIM_CONFIG } from '@/lib/flavor-dims';
 
 interface FlavorProfileBarsProps {
   ingredient: string;
@@ -45,7 +37,7 @@ export function FlavorProfileBars({ ingredient }: FlavorProfileBarsProps) {
         )}
       </div>
       <div className="space-y-3">
-        {DIM_CONFIG.map((dim) => {
+        {FLAVOR_DIM_CONFIG.map((dim) => {
           const val = profile[dim.key as keyof typeof profile] as number;
           const pct = Math.min(100, Math.max(0, (val / 10) * 100));
           return (

@@ -117,22 +117,18 @@ export function useEpicure(): UseEpicureResult {
     [],
   );
 
-  // Memoize derived values — engine.isLoaded() reads module-level state
-  // that changes when loadData() resolves, so loaded state triggers recomputation.
+  // Memoize derived values — recomputed when `loaded` state flips to true
   const cuisinePoles = useMemo(
-    () => (engine.isLoaded() ? engine.getCuisinePoles() : []),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [engine.isLoaded()],
+    () => (loaded ? engine.getCuisinePoles() : []),
+    [loaded],
   );
   const zhMap = useMemo(
-    () => (engine.isLoaded() ? engine.getZhMap() : {}),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [engine.isLoaded()],
+    () => (loaded ? engine.getZhMap() : {}),
+    [loaded],
   );
   const modeLabelsZh = useMemo(
-    () => (engine.isLoaded() ? engine.getModeLabelsZh() : {}),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [engine.isLoaded()],
+    () => (loaded ? engine.getModeLabelsZh() : {}),
+    [loaded],
   );
 
   return {

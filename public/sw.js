@@ -1,8 +1,8 @@
 const CACHE_NAME = 'howtocook-v2'
 
-// ── Install: skip waiting to activate immediately ──────────────
+// ── Install: wait for natural activation (no skipWaiting) ──────
 self.addEventListener('install', () => {
-  self.skipWaiting()
+  // Removed skipWaiting() — let browser activate after old tabs close
 })
 
 // ── Activate: clean old caches, claim clients ─────────────────
@@ -15,6 +15,7 @@ self.addEventListener('activate', (event) => {
     ),
   )
   self.clients.claim()
+  trimCache()
 })
 
 // ── Fetch strategies ───────────────────────────────────────────
@@ -45,6 +46,29 @@ self.addEventListener('fetch', (event) => {
 })
 
 // ── Strategies ─────────────────────────────────────────────────
+
+const MAX_CACHE_BYTES = 50 * 1024 * 1024 // 50 MB
+
+async function trimCache() {
+  const cache = await caches.open(CACHE_NAME)
+  const keys = await cache.keys()
+  let totalSize = 0
+  const entries = []
+  for (const req of keys) {
+    const resp = await cache.match(req)
+    const size = resp ? parseInt(resp.headers.get('content-length') || '0', 10) : 0
+    totalSize += size
+    entries.push({ req, size })
+  }
+  // Remove oldest entries until under limit
+  while (totalSize > MAX_CACHE_BYTES && entries.length) {
+    const oldest = entries.shift()
+    if (oldest) {
+      totalSize -= oldest.size
+      await cache.delete(oldest.req)
+    }
+  }
+}
 
 async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME)

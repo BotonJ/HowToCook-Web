@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { UseEpicureResult } from '@/lib/epicure';
-import { cosineSimilarity } from '@/lib/epicure/engine';
+import { cosineSimilarity, getOrComputeRecipeEmbeddings } from '@/lib/epicure/engine';
 
 interface RecipeInfo {
   id: string;
@@ -11,6 +11,25 @@ interface RecipeInfo {
 interface ClosestRecipesProps {
   ingredients: string[];
   epicure: UseEpicureResult;
+}
+
+// Shared module-level recipe data cache — fetched once across components
+let recipeDataCache: Array<{ id: string; name: string; ingredients: string[] }> | undefined;
+
+async function getRecipeList(): Promise<Array<{ id: string; name: string; ingredients: string[] }>> {
+  if (recipeDataCache) return recipeDataCache;
+  const resp = await fetch('/data/recipes.json');
+  if (!resp.ok) return [];
+  const categories: Array<{ recipes: Array<{ id: string; name: string; ingredients: string[] }> }> =
+    await resp.json();
+  const all: Array<{ id: string; name: string; ingredients: string[] }> = [];
+  for (const cat of categories) {
+    for (const r of cat.recipes) {
+      all.push(r);
+    }
+  }
+  recipeDataCache = all;
+  return all;
 }
 
 export function ClosestRecipes({ ingredients, epicure }: ClosestRecipesProps) {
@@ -46,28 +65,22 @@ export function ClosestRecipes({ ingredients, epicure }: ClosestRecipesProps) {
         composite[d] = sum / vecs.length;
       }
 
-      const resp = await fetch('/data/recipes.json');
-      if (!resp.ok) {
+      const allRecipes = await getRecipeList();
+      if (allRecipes.length === 0) {
         setRecipes([]);
         setLoading(false);
         return;
       }
 
-      const categories: Array<{ recipes: Array<{ id: string; name: string; ingredients: string[] }> }> =
-        await resp.json();
+      // Use cached embeddings — computed once globally
+      const recipeEmbMap = getOrComputeRecipeEmbeddings(allRecipes);
 
-      const allRecipes: Array<{ id: string; name: string; ingredients: string[] }> = [];
-      for (const cat of categories) {
-        for (const r of cat.recipes) {
-          allRecipes.push(r);
-        }
-      }
-
-      const recipeEmbeddings = epicure.computeRecipeEmbeddings(allRecipes);
       const scored: RecipeInfo[] = [];
-      for (const re of recipeEmbeddings) {
-        const sim = cosineSimilarity(composite, re.embedding);
-        scored.push({ id: re.id, name: allRecipes.find((r) => r.id === re.id)?.name || re.id, similarity: sim });
+      for (const r of allRecipes) {
+        const rEmb = recipeEmbMap.get(r.id);
+        if (!rEmb) continue;
+        const sim = cosineSimilarity(composite, rEmb);
+        scored.push({ id: r.id, name: r.name, similarity: sim });
       }
 
       scored.sort((a, b) => b.similarity - a.similarity);

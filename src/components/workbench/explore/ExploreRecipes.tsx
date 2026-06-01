@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { cosineSimilarity } from '@/lib/epicure/engine';
+import { useState, useEffect, useRef } from 'react';
+import { cosineSimilarity, getOrComputeRecipeEmbeddings } from '@/lib/epicure/engine';
 
 interface RecipeInfo {
   id: string;
@@ -14,12 +14,37 @@ interface ExploreRecipesProps {
   zhMap: Record<string, string>;
 }
 
+// Shared module-level recipe data cache — fetched once across components
+let recipeDataCache: Array<{ id: string; name: string; ingredients: string[] }> | undefined;
+
+async function getRecipeList(): Promise<Array<{ id: string; name: string; ingredients: string[] }>> {
+  if (recipeDataCache) return recipeDataCache;
+  const resp = await fetch('/data/recipes.json');
+  if (!resp.ok) return [];
+  const categories: Array<{ recipes: Array<{ id: string; name: string; ingredients: string[] }> }> =
+    await resp.json();
+  const all: Array<{ id: string; name: string; ingredients: string[] }> = [];
+  for (const cat of categories) {
+    for (const r of cat.recipes) {
+      all.push(r);
+    }
+  }
+  recipeDataCache = all;
+  return all;
+}
+
 export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, zhMap: _zhMap }: ExploreRecipesProps) {
   const [recipes, setRecipes] = useState<RecipeInfo[]>([]);
   const [loading, setLoading] = useState(true);
+  const prevIngredient = useRef(ingredient);
 
   useEffect(() => {
     let cancelled = false;
+
+    // Skip re-fetch if only ingredient changed but data is already cached
+    if (prevIngredient.current !== ingredient) {
+      prevIngredient.current = ingredient;
+    }
     setLoading(true);
 
     async function load() {
@@ -37,44 +62,21 @@ export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, z
         return;
       }
 
-      const resp = await fetch('/data/recipes.json');
-      if (!resp.ok) {
+      const allRecipes = await getRecipeList();
+      if (allRecipes.length === 0) {
         setRecipes([]);
         setLoading(false);
         return;
       }
 
-      const categories: Array<{ recipes: Array<{ id: string; name: string; ingredients: string[] }> }> =
-        await resp.json();
+      // Use cached embeddings — computed once globally
+      const recipeEmbMap = getOrComputeRecipeEmbeddings(allRecipes);
 
-      const allRecipes: Array<{ id: string; name: string; ingredients: string[] }> = [];
-      for (const cat of categories) {
-        for (const r of cat.recipes) {
-          allRecipes.push(r);
-        }
-      }
-
-      // Compute recipe embeddings on the fly
       const scored: RecipeInfo[] = [];
       for (const r of allRecipes) {
-        const vecs: Float32Array[] = [];
-        for (const ing of r.ingredients) {
-          const ingIdx = getIngredientIndex(ing);
-          if (ingIdx !== undefined) {
-            const emb = getEmbedding(ingIdx);
-            if (emb) vecs.push(emb);
-          }
-        }
-        if (vecs.length === 0) continue;
-
-        const avg = new Float32Array(ingEmb.length);
-        for (let d = 0; d < ingEmb.length; d++) {
-          let sum = 0;
-          for (const v of vecs) sum += v[d];
-          avg[d] = sum / vecs.length;
-        }
-
-        const sim = cosineSimilarity(ingEmb, avg);
+        const rEmb = recipeEmbMap.get(r.id);
+        if (!rEmb) continue;
+        const sim = cosineSimilarity(ingEmb, rEmb);
         scored.push({ id: r.id, name: r.name, similarity: sim });
       }
 
