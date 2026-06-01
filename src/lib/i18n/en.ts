@@ -292,6 +292,9 @@ export const en = {
     generic: 'Failed to load',
     recipeLoad: 'Failed to load recipe',
     networkError: 'Network error. Please check your connection and try again.',
+    notFound: 'Page Not Found',
+    somethingWrong: 'Something went wrong.',
+    backHome: 'Back to Home',
   },
 
   // ── SourceNav ─────────────────────────────────────────────────────

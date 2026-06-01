@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ChefHat, ChevronDown, Globe } from 'lucide-react';
-import { useT, useBasePath, useLang, saveLangPreference } from '@/lib/i18n';
+import { Link } from 'react-router-dom';
+import { ChefHat, ChevronDown, Languages } from 'lucide-react';
+import { useI18n, useT } from '@/lib/i18n';
 
 function useCollections() {
   const t = useT();
@@ -14,27 +14,12 @@ function useCollections() {
   ], [t]);
 }
 
-/** Get the equivalent path in the other language. */
-function useAlternatePath(): string {
-  const location = useLocation();
-  const lang = useLang();
-  const { pathname } = location;
-  if (lang === 'en') {
-    // /en/xxx → /xxx
-    return pathname.replace(/^\/en/, '') || '/';
-  }
-  // /xxx → /en/xxx
-  return `/en${pathname}`;
-}
-
 export function Navbar() {
   const [showCollections, setShowCollections] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { lang, setLang } = useI18n();
   const t = useT();
-  const base = useBasePath();
-  const lang = useLang();
   const COLLECTIONS = useCollections();
-  const alternatePath = useAlternatePath();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -46,10 +31,14 @@ export function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const toggleLang = () => {
+    setLang(lang === 'zh' ? 'en' : 'zh');
+  };
+
   return (
     <nav className="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant">
       <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
-        <Link to={`${base}/`} className="flex items-center gap-2 group">
+        <Link to="/" className="flex items-center gap-2 group">
           <div className="bg-primary p-2 rounded-lg text-on-primary group-hover:bg-primary-container transition-colors">
             <ChefHat size={24} />
           </div>
@@ -60,7 +49,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-4">
           <Link
-            to={`${base}/academy`}
+            to="/academy"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
             {t.nav.academy}
@@ -81,7 +70,7 @@ export function Navbar() {
                 {COLLECTIONS.map((col) => (
                   <Link
                     key={col.id}
-                    to={`${base}/collection/${col.id}`}
+                    to={`/collection/${col.id}`}
                     onClick={() => setShowCollections(false)}
                     className="flex items-center gap-2 px-4 py-2 text-sm text-on-surface hover:bg-surface-container transition-colors"
                   >
@@ -94,34 +83,33 @@ export function Navbar() {
           </div>
 
           <Link
-            to={`${base}/explore`}
+            to="/explore"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
             {t.nav.explore}
           </Link>
           <Link
-            to={`${base}/about`}
+            to="/about"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
             {t.nav.about}
           </Link>
           <Link
-            to={`${base}/credits`}
+            to="/credits"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
             {t.nav.credits}
           </Link>
 
-          {/* Language switcher */}
-          <Link
-            to={alternatePath}
-            onClick={() => saveLangPreference(lang === 'en' ? 'zh' : 'en')}
+          {/* Language switcher - state toggle, no page reload */}
+          <button
+            onClick={toggleLang}
             className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
-            title={lang === 'en' ? '切换到中文' : 'Switch to English'}
+            title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
           >
-            <Globe size={16} />
-            <span>{lang === 'en' ? '中文' : 'EN'}</span>
-          </Link>
+            <Languages size={18} />
+            <span className="hidden sm:inline">{lang === 'zh' ? 'EN' : '中'}</span>
+          </button>
 
           <a
             href="https://github.com/BotonJ/HowToCook-Web"

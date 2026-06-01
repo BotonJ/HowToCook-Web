@@ -292,6 +292,9 @@ export const zh = {
     generic: '加载失败',
     recipeLoad: '加载菜谱失败',
     networkError: '网络错误，请检查连接后重试',
+    notFound: '页面未找到',
+    somethingWrong: '页面加载异常，请',
+    backHome: '返回首页',
   },
 
   // ── SourceNav ─────────────────────────────────────────────────────
