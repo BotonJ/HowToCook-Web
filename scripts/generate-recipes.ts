@@ -297,7 +297,7 @@ function scanRecipes(): Category[] {
 
     // For duplicate names: 随便做 version gets a suffix so both are preserved
     let displayName = dish.name;
-    let imageLookupName = dish.name;
+    const imageLookupName = dish.name;
     if (duplicateNames.has(dish.name) && dish.source === '随便做') {
       displayName = `${dish.name}(随便做)`;
       // Keep imageLookupName as original so image lookup finds the howtocook version

@@ -92,10 +92,10 @@ function markdownToHtml(md: string): string {
     }
 
     // unordered list
-    if (trimmed.match(/^[*\-]\s/)) {
+    if (trimmed.match(/^[*-]\s/)) {
       const listItems: string[] = [];
-      while (i < lines.length && lines[i].trim().match(/^[*\-]\s/)) {
-        listItems.push(inlineMarkup(lines[i].trim().replace(/^[*\-]\s+/, '')));
+      while (i < lines.length && lines[i].trim().match(/^[*-]\s/)) {
+        listItems.push(inlineMarkup(lines[i].trim().replace(/^[*-]\s+/, '')));
         i++;
       }
       html.push(`<ul>${listItems.map(item => `<li>${item}</li>`).join('')}</ul>`);
@@ -124,7 +124,7 @@ function markdownToHtml(md: string): string {
 
     // regular paragraph
     const paraLines: string[] = [];
-    while (i < lines.length && lines[i].trim() && !lines[i].trim().startsWith('#') && !lines[i].trim().startsWith('|') && !lines[i].trim().startsWith('>') && !lines[i].trim().match(/^[*\-]\s/) && !lines[i].trim().match(/^\d+\.\s/)) {
+    while (i < lines.length && lines[i].trim() && !lines[i].trim().startsWith('#') && !lines[i].trim().startsWith('|') && !lines[i].trim().startsWith('>') && !lines[i].trim().match(/^[*-]\s/) && !lines[i].trim().match(/^\d+\.\s/)) {
       paraLines.push(lines[i].trim());
       i++;
     }

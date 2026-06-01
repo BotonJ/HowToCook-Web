@@ -25,7 +25,7 @@ export function Home() {
   const [searchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [searchTerm, setSearchTerm] = useState(initialQuery);
-  const [activeCuisine, setActiveCuisine] = useState('all');
+  const [activeCuisine, setActiveCuisine] = useState<string>('all');
   const [activeSource, setActiveSource] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
   const { lang, t } = useI18n();

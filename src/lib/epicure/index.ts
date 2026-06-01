@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import type { PairingResult, ModeResult, CuisinePole } from './types';
 import * as engine from './engine';
 
@@ -117,9 +117,23 @@ export function useEpicure(): UseEpicureResult {
     [],
   );
 
-  const cuisinePoles = engine.isLoaded() ? engine.getCuisinePoles() : [];
-  const zhMap = engine.isLoaded() ? engine.getZhMap() : {};
-  const modeLabelsZh = engine.isLoaded() ? engine.getModeLabelsZh() : {};
+  // Memoize derived values — engine.isLoaded() reads module-level state
+  // that changes when loadData() resolves, so loaded state triggers recomputation.
+  const cuisinePoles = useMemo(
+    () => (engine.isLoaded() ? engine.getCuisinePoles() : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [engine.isLoaded()],
+  );
+  const zhMap = useMemo(
+    () => (engine.isLoaded() ? engine.getZhMap() : {}),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [engine.isLoaded()],
+  );
+  const modeLabelsZh = useMemo(
+    () => (engine.isLoaded() ? engine.getModeLabelsZh() : {}),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [engine.isLoaded()],
+  );
 
   return {
     loaded,
