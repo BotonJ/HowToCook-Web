@@ -1,9 +1,10 @@
 /**
  * i18n context — lightweight locale system for HowToCook UI strings.
  *
- * Language is determined by URL path prefix:
- *   /           → zh (Chinese)
- *   /en/...     → en (English)
+ * Language detection priority:
+ *   1. URL path prefix (/en/... → en, / → zh)
+ *   2. localStorage preference (htc-lang)
+ *   3. Browser language (navigator.language)
  *
  * Usage:
  *   const t = useT();
@@ -19,12 +20,24 @@ export type Locale = typeof zh | typeof en;
 export type Lang = 'zh' | 'en';
 
 const locales: Record<Lang, typeof zh | typeof en> = { zh, en };
+const STORAGE_KEY = 'htc-lang';
 
 const LangContext = createContext<Lang>('zh');
 
-/** Detect language from current URL path. */
+/** Detect language with priority: URL > localStorage > browser. */
 function detectLang(): Lang {
-  return window.location.pathname.startsWith('/en') ? 'en' : 'zh';
+  // 1. URL prefix takes priority (for /en/ routes)
+  if (window.location.pathname.startsWith('/en')) return 'en';
+  // 2. localStorage preference
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved === 'zh' || saved === 'en') return saved;
+  // 3. Browser language
+  return navigator.language.startsWith('zh') ? 'zh' : 'zh'; // default to zh
+}
+
+/** Save language preference to localStorage. */
+export function saveLangPreference(lang: Lang): void {
+  localStorage.setItem(STORAGE_KEY, lang);
 }
 
 /** Provider that reads language from URL path prefix. */

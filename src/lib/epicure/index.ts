@@ -13,6 +13,7 @@ interface UseEpicureResult {
   searchVocabulary: (query: string, limit: number) => string[];
   cuisinePoles: CuisinePole[];
   zhMap: Record<string, string>;
+  modeLabelsZh: Record<string, string>;
 }
 
 export function useEpicure(): UseEpicureResult {
@@ -91,6 +92,7 @@ export function useEpicure(): UseEpicureResult {
 
   const cuisinePoles = engine.isLoaded() ? engine.getCuisinePoles() : [];
   const zhMap = engine.isLoaded() ? engine.getZhMap() : {};
+  const modeLabelsZh = engine.isLoaded() ? engine.getModeLabelsZh() : {};
 
   return {
     loaded,
@@ -103,5 +105,6 @@ export function useEpicure(): UseEpicureResult {
     searchVocabulary,
     cuisinePoles,
     zhMap,
+    modeLabelsZh,
   };
 }

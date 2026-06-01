@@ -5,13 +5,14 @@ interface ModePanelProps {
   loading: boolean;
   targetName?: string | null;
   isSlerpResult?: boolean;
+  modeLabelsZh?: Record<string, string>;
 }
 
 function formatName(raw: string): string {
   return raw.replace(/_/g, ' ');
 }
 
-export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePanelProps) {
+export function ModePanel({ modes, loading, targetName, isSlerpResult, modeLabelsZh }: ModePanelProps) {
   if (loading) {
     return (
       <div className="space-y-3">
@@ -54,7 +55,9 @@ export function ModePanel({ modes, loading, targetName, isSlerpResult }: ModePan
             className="bg-surface-container-low rounded-xl p-4 border border-outline-variant"
           >
             <div className="flex items-center justify-between mb-1">
-              <span className="font-body text-label-lg text-on-surface">{mode.label}</span>
+              <span className="font-body text-label-lg text-on-surface">
+                {modeLabelsZh?.[mode.label] || mode.label}
+              </span>
               <span className="text-xs text-on-surface-variant font-body">
                 {mode.property} ({mode.kind})
               </span>

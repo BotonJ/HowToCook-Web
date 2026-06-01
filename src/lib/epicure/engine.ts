@@ -21,6 +21,7 @@ let embeddings: Float32Array | null = null;
 let meta: RawMetadata | null = null;
 let zhMap: Record<string, string> | null = null;
 let zhReverse: Map<string, string> | null = null; // zh -> en reverse index
+let modeLabelsZh: Record<string, string> | null = null;
 const DIMS = 300;
 
 function getRow(i: number): Float32Array {
@@ -63,10 +64,14 @@ export async function loadData(): Promise<void> {
   if (!embResp.ok) throw new Error(`Failed to load embeddings: ${embResp.status}`);
   if (!metaResp.ok) throw new Error(`Failed to load metadata: ${metaResp.status}`);
 
-  const [buffer, metaData, zhData] = await Promise.all([
+  const [buffer, metaData, zhData, modeZhData] = await Promise.all([
     embResp.arrayBuffer(),
     metaResp.json() as Promise<RawMetadata>,
     fetch('/data/epicure/epicure_vocab_zh.json').then(async (r) => {
+      if (!r.ok) return {} as Record<string, string>;
+      return r.json() as Promise<Record<string, string>>;
+    }).catch(() => ({} as Record<string, string>)),
+    fetch('/data/epicure/mode-labels-zh.json').then(async (r) => {
       if (!r.ok) return {} as Record<string, string>;
       return r.json() as Promise<Record<string, string>>;
     }).catch(() => ({} as Record<string, string>)),
@@ -75,6 +80,7 @@ export async function loadData(): Promise<void> {
   embeddings = new Float32Array(buffer);
   meta = metaData;
   zhMap = zhData;
+  modeLabelsZh = modeZhData;
 
   // Build reverse index: zh -> en
   zhReverse = new Map();
@@ -245,13 +251,13 @@ export function searchVocabulary(query: string, limit: number): string[] {
 }
 
 const CUISINE_ZH: Record<string, string> = {
-  East_Asian: 'East Asian',
-  Southeast_Asian: 'Southeast Asian',
-  South_Asian: 'South Asian',
-  Mediterranean: 'Mediterranean',
-  Western_Atlantic: 'Western',
-  Eastern_European: 'Eastern European',
-  Latin_American: 'Latin American',
+  East_Asian: '东亚',
+  Southeast_Asian: '东南亚',
+  South_Asian: '南亚',
+  Mediterranean: '地中海',
+  Western_Atlantic: '西洋',
+  Eastern_European: '东欧',
+  Latin_American: '拉美',
 };
 
 export function getCuisinePoles(): CuisinePole[] {
@@ -325,4 +331,12 @@ export function getIngredientName(index: number): string | undefined {
 
 export function getZhMap(): Record<string, string> {
   return zhMap ?? {};
+}
+
+export function getModeLabelZh(enLabel: string): string {
+  return modeLabelsZh?.[enLabel] ?? '';
+}
+
+export function getModeLabelsZh(): Record<string, string> {
+  return modeLabelsZh ?? {};
 }

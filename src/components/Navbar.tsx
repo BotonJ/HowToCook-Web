@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChefHat, ChevronDown, Globe } from 'lucide-react';
-import { useT, useBasePath, useLang } from '@/lib/i18n';
+import { useT, useBasePath, useLang, saveLangPreference } from '@/lib/i18n';
 
 function useCollections() {
   const t = useT();
@@ -115,6 +115,7 @@ export function Navbar() {
           {/* Language switcher */}
           <Link
             to={alternatePath}
+            onClick={() => saveLangPreference(lang === 'en' ? 'zh' : 'en')}
             className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
             title={lang === 'en' ? '切换到中文' : 'Switch to English'}
           >
