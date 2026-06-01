@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { CategoryNav } from '@/components/CategoryNav';
 import { CuisineNav } from '@/components/CuisineNav';
+import { SourceNav } from '@/components/SourceNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
@@ -12,12 +13,20 @@ import { useMeta } from '@/hooks/useMeta';
 import { useI18n } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 
+const SOURCE_LABELS: Record<string, string> = {
+  all: '全部',
+  howtocook: 'HowToCook',
+  '随便做': '随便做',
+  'noodle-god': '面食之神',
+};
+
 export function Home() {
   const { categoryId } = useParams<{ categoryId: string }>();
   const [searchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [searchTerm, setSearchTerm] = useState(initialQuery);
   const [activeCuisine, setActiveCuisine] = useState('all');
+  const [activeSource, setActiveSource] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
   const { lang, t } = useI18n();
 
@@ -36,9 +45,11 @@ export function Home() {
   const allRecipes = useMemo(() => {
     const recipes = categories.flatMap(c => c.recipes);
 
-    // Chinese mode: show all Chinese recipes
+    // Chinese mode: show all Chinese recipes, filtered by source
     if (lang === 'zh') {
-      return recipes.filter(r => (r.language || 'zh') !== 'en');
+      const zhRecipes = recipes.filter(r => (r.language || 'zh') !== 'en');
+      if (activeSource === 'all') return zhRecipes;
+      return zhRecipes.filter(r => r.source === activeSource);
     }
 
     // English mode: filter by cuisine
@@ -58,7 +69,7 @@ export function Home() {
     return recipes
       .filter(r => (r.language || 'zh') === 'en')
       .filter(r => r.cuisine === activeCuisine);
-  }, [categories, lang, activeCuisine]);
+  }, [categories, lang, activeCuisine, activeSource]);
 
   // Calculate cuisine counts for English mode
   const cuisineCounts = useMemo(() => {
@@ -81,6 +92,19 @@ export function Home() {
     counts['chinese-original'] = zhRecipes.length;
     counts['chinese'] = (counts['chinese'] || 0) + zhRecipes.length;
 
+    return counts;
+  }, [categories, lang]);
+
+  // Calculate source counts for Chinese mode
+  const sourceCounts = useMemo(() => {
+    if (lang !== 'zh') return {};
+    const zhRecipes = categories.flatMap(c => c.recipes).filter(r => (r.language || 'zh') !== 'en');
+    const counts: Record<string, number> = { all: zhRecipes.length };
+    zhRecipes.forEach(r => {
+      if (r.source) {
+        counts[r.source] = (counts[r.source] || 0) + 1;
+      }
+    });
     return counts;
   }, [categories, lang]);
 
@@ -136,7 +160,7 @@ export function Home() {
         <McpBanner />
       </div>
 
-      {/* Navigation: CategoryNav for Chinese, CuisineNav for English */}
+      {/* Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
       {lang === 'en' ? (
         <CuisineNav
           activeCuisine={activeCuisine}
@@ -144,7 +168,14 @@ export function Home() {
           cuisineCounts={cuisineCounts}
         />
       ) : (
-        <CategoryNav categories={categories} />
+        <>
+          <SourceNav
+            activeSource={activeSource}
+            onSourceChange={setActiveSource}
+            sourceCounts={sourceCounts}
+          />
+          <CategoryNav categories={categories} />
+        </>
       )}
 
       <div className="mt-6">
@@ -152,13 +183,9 @@ export function Home() {
           <h1 className="font-display text-headline-lg text-on-surface">
             {categoryId
               ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
-              : activeCuisine === 'all'
-                ? (lang === 'en' ? 'All Recipes' : t.home.category)
-                : activeCuisine === 'chinese-original'
-                  ? 'Original Chinese'
-                  : activeCuisine === 'chinese-western'
-                    ? 'Western Chinese'
-                    : activeCuisine}
+              : lang === 'en'
+                ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
+                : (activeSource === 'all' ? t.home.category : SOURCE_LABELS[activeSource] || activeSource)}
             <span className="text-on-surface-variant text-body-md font-normal ml-3">
               ({t.home.recipeCount(filteredRecipes.length)})
             </span>

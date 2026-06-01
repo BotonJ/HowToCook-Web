@@ -300,8 +300,8 @@ export const en = {
   // ── SourceNav ─────────────────────────────────────────────────────
   sourceNav: {
     all: 'All',
-    zh: 'Chinese',
-    en: 'English',
+    suibianzuo: 'Sui Bian Zuo',
+    noodleGod: 'Noodle God',
   },
 
   // ── CategoryNav ───────────────────────────────────────────────────

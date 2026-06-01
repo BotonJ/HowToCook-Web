@@ -300,8 +300,8 @@ export const zh = {
   // ── SourceNav ─────────────────────────────────────────────────────
   sourceNav: {
     all: '全部',
-    zh: '中文',
-    en: 'English',
+    suibianzuo: '随便做',
+    noodleGod: '面食之神',
   },
 
   // ── CategoryNav ───────────────────────────────────────────────────

@@ -12,17 +12,19 @@ function useSources() {
   const t = useT();
   return useMemo<SourceTab[]>(() => [
     { id: 'all', label: t.sourceNav.all },
-    { id: 'zh', label: t.sourceNav.zh },
-    { id: 'en', label: t.sourceNav.en },
+    { id: 'howtocook', label: 'HowToCook' },
+    { id: '随便做', label: t.sourceNav.suibianzuo },
+    { id: 'noodle-god', label: t.sourceNav.noodleGod },
   ], [t]);
 }
 
 interface SourceNavProps {
   activeSource: string;
   onSourceChange: (source: string) => void;
+  sourceCounts?: Record<string, number>;
 }
 
-export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
+export function SourceNav({ activeSource, onSourceChange, sourceCounts }: SourceNavProps) {
   const sources = useSources();
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
@@ -30,6 +32,7 @@ export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
         {sources.map((source) => {
           const isActive = source.id === activeSource;
           const isDisabled = source.disabled;
+          const count = sourceCounts?.[source.id];
 
           return (
             <button
@@ -46,6 +49,9 @@ export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
               )}
             >
               {source.label}
+              {count !== undefined && count > 0 && (
+                <span className="ml-1.5 text-xs opacity-70">{count}</span>
+              )}
               {isDisabled && (
                 <span className="ml-1.5 text-xs opacity-70">coming soon</span>
               )}
