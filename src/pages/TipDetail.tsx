@@ -1,6 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
+import { useMemo } from 'react';
+import { marked } from 'marked';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
+import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useBasePath } from '@/lib/i18n';
@@ -38,7 +41,7 @@ const allItems: SeriesItem[] = [
 ];
 
 const SERIES_META: Record<SeriesType, { label: string; total: number }> = {
-  academy: { label: '最小厨房 MVP', total: academyModules.length },
+  academy: { label: '最小厨房 MVK', total: academyModules.length },
   tips: { label: '基础技法', total: tipsArticles.length },
 };
 
@@ -46,10 +49,16 @@ export function TipDetail() {
   const { slug } = useParams<{ slug: string }>();
   const tip = allItems.find(t => t.slug === slug);
   const base = useBasePath();
+  const t = useT();
+
+  const renderedContent = useMemo(
+    () => (tip ? marked.parse(tip.content) : ''),
+    [tip],
+  );
 
   useMeta({
-    title: tip?.title || 'Not Found',
-    description: tip?.summary || 'Cooking Knowledge Article',
+    title: tip?.title || t.tipDetail.defaultMetaTitle,
+    description: tip?.summary || t.tipDetail.defaultMetaDesc,
     ogUrl: `${SITE_URL}/academy/${slug}`,
   });
 
@@ -57,16 +66,16 @@ export function TipDetail() {
     return (
       <Layout>
         <div className="py-20 text-center">
-          <h1 className="font-display text-headline-xl text-on-surface mb-4">Article Not Found</h1>
+          <h1 className="font-display text-headline-xl text-on-surface mb-4">{t.tipDetail.notFoundTitle}</h1>
           <p className="font-body text-body-lg text-on-surface-variant mb-6">
-            This article is not yet published. Please return to the list to view published content.
+            {t.tipDetail.notFoundDesc}
           </p>
           <Link
             to={`${base}/academy`}
             className="inline-flex items-center gap-2 text-primary hover:underline font-label-lg"
           >
             <ArrowLeft size={16} />
-            Back to Cooking Academy
+            {t.tipDetail.backToAcademy}
           </Link>
         </div>
       </Layout>
@@ -88,7 +97,7 @@ export function TipDetail() {
           className="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-label-lg mb-6"
         >
           <ArrowLeft size={16} />
-          Cooking Academy
+          {t.tipDetail.backToAcademy}
         </Link>
 
         <article className="tip-content max-w-none">
@@ -106,8 +115,8 @@ export function TipDetail() {
 
           <h1 className="font-display text-headline-xl text-on-surface mb-4">{tip.title}</h1>
           <div
-            className="font-body text-body-md text-on-surface-variant leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: tip.content }}
+            className="font-body text-body-md text-on-surface-variant leading-relaxed tip-content"
+            dangerouslySetInnerHTML={{ __html: renderedContent }}
           />
         </article>
 
