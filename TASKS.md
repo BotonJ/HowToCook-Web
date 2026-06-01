@@ -5,149 +5,69 @@
 
 ---
 
-## 任务列表
+## 已完成 ✅
 
-### 任务 1：更换网站 LOGO
-
-- **状态**：🔴 待确认文件
-- **优先级**：P2
-- **描述**：网站 LOGO 需要更换，已准备好但可能未上传
-- **需要确认**：
-  - [ ] 新 LOGO 文件在哪里？
-  - [ ] 格式是什么？（SVG/PNG）
-  - [ ] 尺寸要求？
-- **改动文件**：
-  - `src/components/Navbar.tsx`
-  - `public/` 目录（放置新 LOGO 文件）
-- **验收标准**：
-  - [ ] 新 LOGO 正确显示
-  - [ ] 移动端和桌面端都正常
-  - [ ] 深色/浅色模式都可见
+- [x] 更换网站 LOGO（语言感知 + 透明底）
+- [x] 食材探索 → 风味工作台
+- [x] CuisineNav z-index 遮挡 Collections 下拉菜单
+- [x] MCP Skill 语言切换（McpBanner 接入 i18n）
+- [x] 中英文翻译：About、Credits、McpBanner、Tips 页面
+- [x] 油泼辣子重复数据修复
+- [x] 烹饪学院统计数据移到关于页面
+- [x] 烹饪学院标题中文显示
+- [x] MVP → MVK 改名
+- [x] 烹饪学院内容 markdown 渲染
+- [x] 关于页面双栏布局（Changelog 右侧）
+- [x] OG 图片替换为 logo
+- [x] Service Worker 升级为 network-first 策略
 
 ---
 
-### 任务 2：修复 MCP Skill 语言切换问题
+## 待修复
 
-- **状态**：🔴 待排查
+### 任务 1：菜谱卡片时间显示英文
+
+- **状态**：🔴 待修复
 - **优先级**：P1
-- **描述**：切换为英语后，MCP Skill 本身和安装说明也变成了英语，无法切回中文
-- **排查方向**：
-  - [ ] 检查 McpBanner 组件的 i18n 逻辑
-  - [ ] 确认是否独立于全局语言状态
-  - [ ] 检查语言切换后状态是否正确更新
+- **描述**：中文页面下菜谱卡片的时间显示为 "Quick"、"verylong" 等英文，应显示中文
 - **改动文件**：
-  - `src/components/McpBanner.tsx`
-  - `src/lib/i18n/zh.ts`
-  - `src/lib/i18n/en.ts`
+  - `src/components/RecipeCard.tsx`
+  - `src/lib/i18n/zh.ts`（确认 cookTime 翻译）
 - **验收标准**：
-  - [ ] 语言切换后，Skill 安装说明正确显示对应语言
-  - [ ] 可以从英文切回中文
-  - [ ] 语言偏好持久化
+  - [ ] 中文页面显示"快手"、"适中"、"较长"、"慢工"
 
 ---
 
-### 任务 3：食材探索页面改名
-
-- **状态**：🔴 待确认名称
-- **优先级**：P2
-- **描述**：食材探索这个标签和页面需要改名，内容已经准备好
-- **需要确认**：
-  - [ ] 新名称是什么？
-- **改动文件**：
-  - `src/components/Navbar.tsx` — 导航标签
-  - `src/pages/Explore.tsx` — 页面标题
-  - `src/lib/i18n/zh.ts` — 中文翻译
-  - `src/lib/i18n/en.ts` — 英文翻译
-- **验收标准**：
-  - [ ] 导航标签显示新名称
-  - [ ] 页面标题显示新名称
-  - [ ] 中英文翻译都正确
-
----
-
-### 任务 4：完善中英文切换的完整翻译
+### 任务 2：移动端适配优化
 
 - **状态**：🔴 待检查
 - **优先级**：P1
-- **描述**：中英文切换后网站还没有完全切换为对应语言，需检查
+- **描述**：手机端显示需要优化，具体问题待补充
 - **检查清单**：
-  - [ ] Navbar 所有链接
-  - [ ] CategoryNav 标签
-  - [ ] RecipeCard 徽章（难度、时间、菜系）
-  - [ ] RecipeDetail 标签
-  - [ ] About 页面内容
-  - [ ] Credits 页面内容
-  - [ ] Cooking Academy 内容
-  - [ ] McpBanner 内容
-  - [ ] PwaInstallButton 文本
-  - [ ] 错误页面
-- **改动文件**：
-  - `src/lib/i18n/zh.ts`
-  - `src/lib/i18n/en.ts`
-  - 各组件文件（添加 useI18n 或 useT）
+  - [ ] Logo 在移动端的显示大小
+  - [ ] Navbar 移动端布局
+  - [ ] 菜谱卡片在小屏幕的排列
+  - [ ] 烹饪学院内容在移动端的阅读体验
 - **验收标准**：
-  - [ ] 切换语言后，所有 UI 元素显示对应语言
-  - [ ] 无遗漏的硬编码中文/英文
-  - [ ] 语言偏好持久化
+  - [ ] 移动端各页面布局正常
+  - [ ] 文字可读，按钮可点击
 
 ---
 
-### 任务 5：上线新数据源和烹饪学园内容
+### 任务 3：风味工作台优化
 
-- **状态**：🟡 进行中
+- **状态**：🔴 待补充细节
 - **优先级**：P1
-- **描述**：
-  1. 新菜谱数据源：掌管面食的神（36 道面点菜谱）
-  2. 烹饪学院：模块 0-9（最小厨房 MVP）
-- **子任务**：
-  - [x] 面食菜谱转换脚本
-  - [x] 面食菜谱集成到 useRecipes
-  - [x] 烹饪学院内容转换
-  - [x] 烹饪学院内容集成到 Tips 页面
-  - [ ] **恢复数据源筛选（HowToCook/随便做/面食之神）**
-  - [ ] **烹饪学院改版（系列合集布局）**
+- **描述**：风味工作台已可用，但有需要修复的问题
+- **待补充**：
+  - [ ] 具体问题列表
 - **改动文件**：
-  - `scripts/convert-noodle-recipes.ts`
-  - `public/data/noodle-recipes.json`
-  - `scripts/convert-cooking-academy.ts`
-  - `src/data/cooking-academy.json`
-  - `src/hooks/useRecipes.ts`
-  - `src/pages/Tips.tsx`
-  - `src/components/SourceNav.tsx`
-  - `src/pages/Home.tsx`
-- **验收标准**：
-  - [ ] 主页显示三个数据源标签
-  - [ ] 切换数据源后菜谱正确筛选
-  - [ ] 烹饪学院显示系列合集布局
-  - [ ] 模块间导航正常
-
----
-
-## 依赖关系
-
-```
-任务 5 (P0) ← 任务 4 (P1) ← 任务 2 (P1)
-                ↓
-            任务 3 (P2)
-                ↓
-            任务 1 (P2)
-```
-
-## 提交计划
-
-| 任务 | 提交信息 |
-|------|----------|
-| 5 | `fix(source): restore HowToCook/随便做/面食之神 source tabs` |
-| 5 | `feat(academy): redesign cooking academy with series layout` |
-| 4 | `fix(i18n): complete translation for all components` |
-| 2 | `fix(skill): restore language toggle for MCP install instructions` |
-| 3 | `feat(explore): rename explore page` |
-| 1 | `feat(logo): update website logo` |
+  - 待确认
 
 ---
 
 ## 备注
 
-- 所有任务在 `feature/i18n-en` 分支完成后再合并到 `main`
-- 每个任务完成后部署到 preview 测试
-- 用户确认后再合并到 production
+- 已合并到 main 并部署到 production
+- 未推送 origin（可清理提交历史后再 push）
+- 后续修改直接在 main 上提交或新建分支
