@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 
 import tipsData from '@/data/tips.json';
+import cookingAcademyData from '@/data/cooking-academy.json';
 
 interface TipMeta {
   slug: string;
@@ -25,9 +26,11 @@ interface TipMeta {
   content: string;
 }
 
-const tips = tipsData as TipMeta[];
+// Merge both data sources
+const tips = [...(tipsData as TipMeta[]), ...(cookingAcademyData as TipMeta[])];
 
 const CATEGORY_LABELS: Record<string, string> = {
+  overview: 'Overview',
   technique: 'Techniques',
   equipment: 'Tools',
   ingredient: 'Ingredients',
