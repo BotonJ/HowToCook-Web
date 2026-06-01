@@ -88,6 +88,51 @@ async function fetchEnglishIndex(): Promise<Category[]> {
   }
 }
 
+async function fetchNoodleRecipes(): Promise<Category[]> {
+  try {
+    const res = await fetch('/data/noodle-recipes.json');
+    if (!res.ok) return [];
+    const data = await res.json();
+    // Transform noodle dishes to Category format
+    const recipes = data.dishes.map((dish: any) => ({
+      id: dish.id,
+      name: dish.name,
+      category: dish.category,
+      imagePath: '',
+      difficulty: dish.difficulty,
+      cuisine: dish.cuisine,
+      cooking_method: dish.cooking_method,
+      cook_time: dish.cook_time,
+      ingredients: dish.ingredients,
+      main_ingredients: dish.main_ingredients || [],
+      tags: {},
+      source: dish.source,
+      description: dish.description || '',
+      language: 'zh',
+      steps_text: dish.steps_text || '',
+    }));
+    // Group by category
+    const grouped = new Map<string, any[]>();
+    for (const recipe of recipes) {
+      const list = grouped.get(recipe.category);
+      if (list) {
+        list.push(recipe);
+      } else {
+        grouped.set(recipe.category, [recipe]);
+      }
+    }
+    return Array.from(grouped.entries()).map(([id, recipes]) => ({
+      id: `noodle-${id}`,
+      name: `面食之神 ${id}`,
+      displayName: `面食之神`,
+      count: recipes.length,
+      recipes,
+    }));
+  } catch {
+    return [];
+  }
+}
+
 async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; sour: number; bitter: number; umami: number; spicy: number; fatty: number }>> {
   try {
     const res = await fetch('/data/epicure/flavor-profiles.json');
@@ -160,9 +205,10 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
 
   inflight = (async () => {
     // 1. Load local index immediately for instant render (~12KB gzip)
-    const [categories, englishCategories, flavorProfiles] = await Promise.all([
+    const [categories, englishCategories, noodleCategories, flavorProfiles] = await Promise.all([
       fetchIndex(),
       fetchEnglishIndex(),
+      fetchNoodleRecipes(),
       fetchFlavorProfiles(),
     ]);
 
@@ -177,6 +223,19 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
       } else {
         // Add new English category
         mergedCategories.push(enCat);
+      }
+    }
+
+    // 3. Merge noodle recipes (面食之神) into categories
+    for (const noodleCat of noodleCategories) {
+      const existing = mergedCategories.find(c => c.id === 'staple');
+      if (existing) {
+        // Add noodle recipes to staple category
+        existing.recipes.push(...noodleCat.recipes);
+        existing.count = existing.recipes.length;
+      } else {
+        // Add new category
+        mergedCategories.push(noodleCat);
       }
     }
 
