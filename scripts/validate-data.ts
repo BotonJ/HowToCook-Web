@@ -17,6 +17,10 @@ interface Recipe {
   source?: string;
   category?: string;
   difficulty?: number;
+  cuisine?: string;
+  cooking_method?: string;
+  cook_time?: string;
+  ingredients?: string[];
 }
 
 interface Category {
