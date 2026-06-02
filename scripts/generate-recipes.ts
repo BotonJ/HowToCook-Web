@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const IMAGES_DIR = path.join(PROJECT_ROOT, 'public/images/dishes');
 const OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes.json');
+const META_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-meta.json');
+const DETAIL_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-detail.json');
 const INDEX_FILE = path.resolve(__dirname, '../../howtocook-skill/index.json');
 const DISHES_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes');
 
@@ -364,8 +366,38 @@ function main() {
   const categories = scanRecipes();
   const totalRecipes = categories.reduce((acc, c) => acc + c.recipes.length, 0);
 
+  // Full output (legacy, keep for compatibility)
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(categories, null, 2));
+
+  // Meta output (card fields only, for首屏)
+  const metaCategories = categories.map(cat => ({
+    ...cat,
+    recipes: cat.recipes.map(r => ({
+      id: r.id,
+      name: r.name,
+      category: r.category,
+      imagePath: r.imagePath,
+      difficulty: r.difficulty,
+      cuisine: r.cuisine,
+      cooking_method: r.cooking_method,
+      cook_time: r.cook_time,
+      ingredients: r.ingredients,
+      main_ingredients: r.main_ingredients,
+      tags: r.tags,
+      source: r.source,
+      language: r.language,
+    }))
+  }));
+  fs.writeFileSync(META_OUTPUT_FILE, JSON.stringify(metaCategories, null, 2));
+
+  // Detail output (full data, for 详情页)
+  fs.writeFileSync(DETAIL_OUTPUT_FILE, JSON.stringify(categories, null, 2));
+
+  const metaSize = fs.statSync(META_OUTPUT_FILE).size;
+  const detailSize = fs.statSync(DETAIL_OUTPUT_FILE).size;
   console.log(`Generated ${categories.length} categories with ${totalRecipes} recipes.`);
+  console.log(`  Meta:   ${(metaSize / 1024).toFixed(0)} KB`);
+  console.log(`  Detail: ${(detailSize / 1024).toFixed(0)} KB`);
 
   // Verify field completeness
   let missingFields = 0;
