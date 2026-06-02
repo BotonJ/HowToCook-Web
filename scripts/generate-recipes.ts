@@ -75,6 +75,7 @@ interface Recipe {
     diet?: string[];
   };
   source: string;
+  language?: string;
   description?: string;
   ingredients_text?: string;
   calculation_text?: string;
@@ -304,11 +305,15 @@ function scanRecipes(): Category[] {
     }
 
     // Build recipe with all fields
+    const imagePath = imageMap.get(imageLookupName);
+    if (!imagePath) {
+      console.warn(`  ⚠ 无图片: ${dish.name} (${dish.source})`);
+    }
     const recipe: Recipe = {
       id: `${dish.source}/${dish.name}`,
       name: displayName,
       category: dish.category,
-      imagePath: imageMap.get(imageLookupName),
+      imagePath,
       difficulty: dish.difficulty,
       cuisine: dish.cuisine,
       cooking_method: dish.cooking_method,
@@ -317,6 +322,7 @@ function scanRecipes(): Category[] {
       main_ingredients: dish.main_ingredients,
       tags: dish.tags,
       source: dish.source,
+      language: 'zh',
       description: textContent.description || undefined,
       ingredients_text: textContent.ingredients_text || undefined,
       calculation_text: textContent.calculation_text || undefined,
