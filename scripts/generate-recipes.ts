@@ -165,8 +165,10 @@ function parseMarkdownSections(content: string): {
     }
 
     // Collect lines for current section or description
-    if (foundTitle && !currentSection && stripped && !stripped.startsWith('![')) {
-      // This is description text before any section
+    if (foundTitle && !currentSection && stripped && !stripped.startsWith('![')
+      && !stripped.startsWith('<!--') && !stripped.startsWith('[!video')
+      && !stripped.startsWith('>')) {
+      // This is description text before any section (skip HTML comments, video embeds, blockquotes)
       sectionLines.push(line);
     } else if (currentSection) {
       sectionLines.push(line);
@@ -206,9 +208,10 @@ function buildIndexMap(): Map<string, IndexDish> {
 
   const index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
   for (const dish of index.dishes) {
-    indexMap.set(dish.name, dish);
+    if (dish.source === '面食之神') continue; // P0-2: 面食之神由 noodle-recipes.json 独立管理
+    indexMap.set(`${dish.source}/${dish.name}`, dish);
   }
-  console.log(`Loaded ${indexMap.size} entries (${index.dishes.length} dishes, ${index.dishes.length - indexMap.size} duplicates merged).`);
+  console.log(`Loaded ${indexMap.size} entries from ${index.dishes.length} index dishes (filtered 面食之神 + dedup by source/name).`);
   return indexMap;
 }
 
@@ -305,7 +308,7 @@ function scanRecipes(): Category[] {
 
     // Build recipe with all fields
     const recipe: Recipe = {
-      id: `${dish.source}/${dish.name}`,
+      id: dish.id || `${dish.source}/${dish.name}`,
       name: displayName,
       category: dish.category,
       imagePath: imageMap.get(imageLookupName),
