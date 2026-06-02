@@ -39,7 +39,7 @@ function buildCategoriesFromApi(
 }
 
 async function fetchIndex(): Promise<Category[]> {
-  const res = await fetch('/data/recipes-index.json');
+  const res = await fetch('/data/recipes-meta.json');
   if (!res.ok) throw new Error(`Index fetch failed: ${res.status}`);
   return res.json() as Promise<Category[]>;
 }
@@ -140,7 +140,7 @@ async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; so
 }
 
 async function fetchFullFallback(): Promise<Category[]> {
-  const res = await fetch('/data/recipes.json');
+  const res = await fetch('/data/recipes-detail.json');
   if (!res.ok) throw new Error(`Fallback fetch failed: ${res.status}`);
   return res.json() as Promise<Category[]>;
 }

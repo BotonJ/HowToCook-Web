@@ -22,7 +22,7 @@ let recipeDataCache: Array<{ id: string; name: string; ingredients: string[] }> 
 
 async function getRecipeList(): Promise<Array<{ id: string; name: string; ingredients: string[] }>> {
   if (recipeDataCache) return recipeDataCache;
-  const resp = await fetch('/data/recipes.json');
+  const resp = await fetch('/data/recipes-meta.json');
   if (!resp.ok) return [];
   const categories: Array<{ recipes: Array<{ id: string; name: string; ingredients: string[] }> }> =
     await resp.json();
