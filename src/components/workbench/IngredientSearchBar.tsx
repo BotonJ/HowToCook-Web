@@ -155,21 +155,26 @@ export function IngredientSearchBar({
         )}
       </div>
 
-      {/* Quick chips */}
-      {selectedList.length === 0 && (
-        <div className="flex flex-wrap gap-2">
-          {CORE_INGREDIENTS.map((ing) => (
+      {/* Quick chips — always visible; already-selected items highlighted */}
+      <div className="flex flex-wrap gap-2">
+        {CORE_INGREDIENTS.map((ing) => {
+          const isSelected = state.selected.has(ing);
+          return (
             <button
               key={ing}
               type="button"
               onClick={() => dispatch({ type: 'TOGGLE', ingredient: ing })}
-              className="inline-flex items-center rounded-full border border-outline-variant bg-surface-container-low px-3 py-1 text-xs text-on-surface transition hover:border-primary hover:bg-primary-container hover:text-primary"
+              className={`inline-flex items-center rounded-full border px-3 py-1 text-xs transition ${
+                isSelected
+                  ? 'border-primary bg-primary-container text-primary font-medium'
+                  : 'border-outline-variant bg-surface-container-low text-on-surface hover:border-primary hover:bg-primary-container hover:text-primary'
+              }`}
             >
-              {formatDisplayName(ing)}
+              {isSelected && '✓ '}{formatDisplayName(ing)}
             </button>
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
 
       {/* Selected tags */}
       {selectedList.length > 0 && (

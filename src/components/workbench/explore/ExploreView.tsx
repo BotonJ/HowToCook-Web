@@ -34,7 +34,7 @@ export function ExploreView({ epicure }: ExploreViewProps) {
           ingredient={ingredient}
           getNearestNeighbors={epicure.getNearestNeighbors}
           zhMap={epicure.zhMap}
-          onSelect={(id) => dispatch({ type: 'SET', ingredients: [id] })}
+          onSelect={(id) => dispatch({ type: 'ADD', ingredient: id })}
         />
       </div>
       <CuisineExplorer
@@ -42,12 +42,12 @@ export function ExploreView({ epicure }: ExploreViewProps) {
         slerpToCuisine={epicure.slerpToCuisine}
         cuisinePoles={epicure.cuisinePoles}
         zhMap={epicure.zhMap}
-        onSelect={(id) => dispatch({ type: 'SET', ingredients: [id] })}
+        onSelect={(id) => dispatch({ type: 'ADD', ingredient: id })}
       />
       <CooccurrencePanel
         ingredient={ingredient}
         epicure={epicure}
-        onSelect={(id) => dispatch({ type: 'SET', ingredients: [id] })}
+        onSelect={(id) => dispatch({ type: 'ADD', ingredient: id })}
       />
       <ExploreRecipes
         ingredient={ingredient}
