@@ -244,9 +244,11 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
       }
     }
 
-    // 3. Merge noodle recipes (面食之神) into categories immutably
+    // 3. Merge noodle recipes (面食之神) into their real categories immutably
     for (const noodleCat of noodleCategories) {
-      const existingIdx = mergedCategories.findIndex(c => c.id === 'staple');
+      // noodleCat.id is like "noodle-staple" — extract real category id
+      const realCatId = noodleCat.id.replace('noodle-', '');
+      const existingIdx = mergedCategories.findIndex(c => c.id === realCatId);
       if (existingIdx !== -1) {
         const existing = mergedCategories[existingIdx];
         mergedCategories[existingIdx] = {
