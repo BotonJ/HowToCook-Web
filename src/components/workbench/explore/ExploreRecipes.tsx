@@ -72,7 +72,7 @@ export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, z
       const allRecipes = await getRecipeList();
       if (allRecipes.length > 0 && !cancelled) {
         const ids = allRecipes.map((r) => r.id);
-        epicure.loadPrecomputedRecipeEmbeddings(ids);
+        await epicure.loadPrecomputedRecipeEmbeddings(ids);
       }
       if (!cancelled) {
         await epicure.loadInternationalRecipes();
@@ -114,7 +114,8 @@ export function ExploreRecipes({ ingredient, getEmbedding, getIngredientIndex, z
         return;
       }
 
-      // Use cached embeddings — computed once globally (prefers precomputed)
+      // Wait for precomputed embeddings before computing
+      await epicure.loadPrecomputedRecipeEmbeddings(allRecipes.map((r) => r.id));
       const recipeEmbMap = getOrComputeRecipeEmbeddings(allRecipes);
 
       const scored: RecipeInfo[] = [];
