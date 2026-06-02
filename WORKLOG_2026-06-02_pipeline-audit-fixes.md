@@ -1,7 +1,7 @@
 # 2026-06-02 Pipeline Audit Fixes — website
 
 **审计报告**：`docs/pipeline-audit-2026-06-02.md`
-**修复范围**：P0-2, P1-1, P1-2, P1-5（面食之神数据链路 + description 清理）
+**修复范围**：P0-2, P1-1, P1-2, P1-5, P2-6, P2-7, P2-10
 
 ---
 
@@ -30,6 +30,21 @@
 - **改动**：description 收集时过滤 `<!-- -->`、`[!video](...)`、`> 引用块` 三种非内容行
 - **提交**：`d5ee7c3`
 
+### P2-6. `validate-data.ts` 检查项远少于生成脚本
+- **文件**：`scripts/validate-data.ts:72-77`
+- **改动**：增加 `difficulty`、`cuisine`、`cooking_method`、`cook_time`、`ingredients` 五项必填校验，与 generate-recipes.ts 对齐
+- **提交**：`a788182`
+
+### P2-7. `buildImageMap` 静默 miss
+- **文件**：`scripts/generate-recipes.ts:307`
+- **改动**：图片名不匹配时输出 `⚠ 无图片: {name} ({source})` warning
+- **提交**：`a788182`
+
+### P2-10. 中文菜谱缺 `language` 字段
+- **文件**：`scripts/generate-recipes.ts`
+- **改动**：Recipe 接口新增 `language?: string`；中文菜谱构建时显式设 `language: 'zh'`
+- **提交**：`a788182`
+
 ---
 
 ## 提交记录
@@ -38,9 +53,11 @@
 |---|---|
 | `b123fb5` | feat: add CN/EN logo v2 |
 | `d5ee7c3` | fix: 面食之神数据链路修复 (P0-2/P1-1/P1-2/P1-5) |
+| `c67167d` | docs: pipeline audit 修复 worklog |
+| `a788182` | fix: validate-data 增强 (P2-6) + 图片缺失告警 (P2-7) + language 字段 (P2-10) |
 
 ## 待做
 
 - P1-6: URL 编码 `%2F` 隐式依赖（需线上 curl 验证）
 - P1-8: 面食之神风味画像缺失（需写补丁脚本）
-- P2-6/7/8/10: validate-data 增强、imageMap miss 告警、search:index 拆分、language 字段
+- P2-8: search:index 拆分（当前 25MiB 上限远够，暂不处理）
