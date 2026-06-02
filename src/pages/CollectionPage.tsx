@@ -17,66 +17,145 @@ interface CollectionDef {
 }
 
 const COLLECTIONS: Record<string, CollectionDef> = {
-  'chinese-recipes': {
-    id: 'chinese-recipes',
-    title: 'Chinese Recipes',
-    description: 'Authentic Chinese recipes — stir-fry, braised, steamed, and more.',
-    seoKeywords: 'chinese recipe, chinese food, 中餐',
-    filter: (r) => r.language === 'en' && r.cuisine === 'chinese',
-  },
-  'chinese-all': {
-    id: 'chinese-all',
-    title: 'All Chinese Recipes',
-    description: 'Complete collection of authentic Chinese recipes — 481+ dishes from every region.',
-    seoKeywords: 'chinese recipe, chinese food, 中餐, all chinese recipes',
-    filter: (r) => r.language !== 'en', // 中文菜谱
-  },
-  'chicken-recipes': {
-    id: 'chicken-recipes',
-    title: 'Chicken Recipes',
-    description: 'Easy and delicious chicken recipes for every occasion.',
-    seoKeywords: 'chicken recipe, chicken dinner',
-    filter: (r) => r.language === 'en' && r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')),
-  },
-  'baking': {
-    id: 'baking',
-    title: 'Baking Recipes',
-    description: 'Breads, cakes, cookies, and pastries from professional baking sources.',
-    seoKeywords: 'baking recipes, bread, cake, pastry',
-    filter: (r) => r.language === 'en' && (r.source === 'professional_baking' || r.category === 'dessert'),
-  },
+  // ── 中文专题（2026-06-02） ──────────────────────────────────────────
   'air-fryer': {
     id: 'air-fryer',
-    title: 'Air Fryer Recipes',
-    description: 'Quick and healthy air fryer recipes.',
-    seoKeywords: 'air fryer recipe, air fryer',
-    filter: (r) =>
-      r.language === 'en' && (
-        r.name.toLowerCase().includes('air fryer') ||
-        r.ingredients.some((i) => i.toLowerCase().includes('air fryer'))
-      ),
+    title: '空气炸锅系列',
+    description: '用空气炸锅做出美味佳肴，简单又健康',
+    seoKeywords: '空气炸锅, air fryer, 炸鸡翅, 烤肉',
+    filter: (r) => {
+      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
+      return r.language === 'zh' && text.includes('空气炸锅');
+    },
   },
-  'italian': {
-    id: 'italian',
-    title: 'Italian Recipes',
-    description: 'Classic Italian dishes — pasta, risotto, and more.',
-    seoKeywords: 'italian recipe, italian food, pasta',
-    filter: (r) => r.language === 'en' && r.cuisine === 'italian',
+  'microwave': {
+    id: 'microwave',
+    title: '微波炉快手菜',
+    description: '叮一下就好，懒人必备',
+    seoKeywords: '微波炉, microwave, 快手菜',
+    filter: (r) => {
+      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
+      return r.language === 'zh' && text.includes('微波炉');
+    },
   },
-  'french': {
-    id: 'french',
-    title: 'French Recipes',
-    description: 'Elegant French cuisine — sauces, pastries, and refined dishes.',
-    seoKeywords: 'french recipe, french cuisine, french food',
-    filter: (r) => r.language === 'en' && r.cuisine === 'french',
+  'rice-cooker': {
+    id: 'rice-cooker',
+    title: '电饭煲料理',
+    description: '一个电饭煲搞定一餐，懒人福音',
+    seoKeywords: '电饭煲, rice cooker, 焖饭, 懒人料理',
+    filter: (r) => {
+      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
+      return r.language === 'zh' && text.includes('电饭煲');
+    },
   },
-  'japanese': {
-    id: 'japanese',
-    title: 'Japanese Recipes',
-    description: 'Delicate Japanese flavors — sushi, ramen, and traditional dishes.',
-    seoKeywords: 'japanese recipe, japanese food, sushi, ramen',
-    filter: (r) => r.language === 'en' && r.cuisine === 'japanese',
+  'lazy-meal': {
+    id: 'lazy-meal',
+    title: '懒人菜谱',
+    description: '简单省事，一学就会',
+    seoKeywords: '懒人菜谱, 简单菜, 快手菜, 新手菜',
+    filter: (r) => {
+      if (r.language !== 'zh') return false;
+      if (r.difficulty > 2) return false;
+      if (r.cook_time !== 'quick') return false;
+      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
+      // 使用更严格的关键词组合
+      const strictKeywords = ['懒人', '省事', '一锅', '新手友好', '零失败', '小白'];
+      const hasStrict = strictKeywords.some(kw => text.includes(kw));
+      // 或者：名称中包含"简单"且难度为1
+      const isSimpleAndEasy = r.name.includes('简单') && r.difficulty === 1;
+      return hasStrict || isSimpleAndEasy;
+    },
   },
+  'rice-killer': {
+    id: 'rice-killer',
+    title: '下饭菜',
+    description: '一口菜扒三碗饭',
+    seoKeywords: '下饭菜, 拌饭, 盖饭, 炒饭',
+    filter: (r) => {
+      if (r.language !== 'zh') return false;
+      if (r.difficulty > 2) return false;
+      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
+      // 名称中包含关键词
+      const nameKeywords = ['下饭', '拌饭', '盖饭', '炒饭'];
+      const hasInName = nameKeywords.some(kw => r.name.includes(kw));
+      // 或者描述中明确提到"下饭"
+      const hasInDesc = text.includes('下饭');
+      return hasInName || hasInDesc;
+    },
+  },
+  'oven': {
+    id: 'oven',
+    title: '烤箱烘焙',
+    description: '烤出美味，烘焙幸福',
+    seoKeywords: '烤箱, oven, 烘焙, 烤肉, 烤鸡翅',
+    filter: (r) => {
+      if (r.language !== 'zh') return false;
+      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
+      return text.includes('烤箱') || r.cooking_method === '烤';
+    },
+  },
+
+  // ── 英文专题（保留原有） ─────────────────────────────────────────────
+  // 'chinese-recipes': {
+  //   id: 'chinese-recipes',
+  //   title: 'Chinese Recipes',
+  //   description: 'Authentic Chinese recipes — stir-fry, braised, steamed, and more.',
+  //   seoKeywords: 'chinese recipe, chinese food, 中餐',
+  //   filter: (r) => r.language === 'en' && r.cuisine === 'chinese',
+  // },
+  // 'chinese-all': {
+  //   id: 'chinese-all',
+  //   title: 'All Chinese Recipes',
+  //   description: 'Complete collection of authentic Chinese recipes — 481+ dishes from every region.',
+  //   seoKeywords: 'chinese recipe, chinese food, 中餐, all chinese recipes',
+  //   filter: (r) => r.language !== 'en', // 中文菜谱
+  // },
+  // 'chicken-recipes': {
+  //   id: 'chicken-recipes',
+  //   title: 'Chicken Recipes',
+  //   description: 'Easy and delicious chicken recipes for every occasion.',
+  //   seoKeywords: 'chicken recipe, chicken dinner',
+  //   filter: (r) => r.language === 'en' && r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')),
+  // },
+  // 'baking': {
+  //   id: 'baking',
+  //   title: 'Baking Recipes',
+  //   description: 'Breads, cakes, cookies, and pastries from professional baking sources.',
+  //   seoKeywords: 'baking recipes, bread, cake, pastry',
+  //   filter: (r) => r.language === 'en' && (r.source === 'professional_baking' || r.category === 'dessert'),
+  // },
+  // 'air-fryer-en': {
+  //   id: 'air-fryer-en',
+  //   title: 'Air Fryer Recipes',
+  //   description: 'Quick and healthy air fryer recipes.',
+  //   seoKeywords: 'air fryer recipe, air fryer',
+  //   filter: (r) =>
+  //     r.language === 'en' && (
+  //       r.name.toLowerCase().includes('air fryer') ||
+  //       r.ingredients.some((i) => i.toLowerCase().includes('air fryer'))
+  //     ),
+  // },
+  // 'italian': {
+  //   id: 'italian',
+  //   title: 'Italian Recipes',
+  //   description: 'Classic Italian dishes — pasta, risotto, and more.',
+  //   seoKeywords: 'italian recipe, italian food, pasta',
+  //   filter: (r) => r.language === 'en' && r.cuisine === 'italian',
+  // },
+  // 'french': {
+  //   id: 'french',
+  //   title: 'French Recipes',
+  //   description: 'Elegant French cuisine — sauces, pastries, and refined dishes.',
+  //   seoKeywords: 'french recipe, french cuisine, french food',
+  //   filter: (r) => r.language === 'en' && r.cuisine === 'french',
+  // },
+  // 'japanese': {
+  //   id: 'japanese',
+  //   title: 'Japanese Recipes',
+  //   description: 'Delicate Japanese flavors — sushi, ramen, and traditional dishes.',
+  //   seoKeywords: 'japanese recipe, japanese food, sushi, ramen',
+  //   filter: (r) => r.language === 'en' && r.cuisine === 'japanese',
+  // },
 };
 
 export function CollectionPage() {

@@ -27,11 +27,19 @@ export const zh = {
     credits: '致谢',
     github: 'GitHub',
     collectionLabels: {
-      'chinese-recipes': '中国菜谱',
-      'chicken-recipes': '鸡肉类',
-      'baking': '烘焙',
-      'air-fryer': '空气炸锅',
-      'pasta': '意面',
+      // ── 中文专题（2026-06-02） ──────────────────────────────────
+      'air-fryer': '空气炸锅系列',
+      'microwave': '微波炉快手菜',
+      'rice-cooker': '电饭煲料理',
+      'lazy-meal': '懒人菜谱',
+      'rice-killer': '下饭菜',
+      'oven': '烤箱烘焙',
+      // ── 英文专题（保留原有） ─────────────────────────────────────
+      // 'chinese-recipes': '中国菜谱',
+      // 'chicken-recipes': '鸡肉类',
+      // 'baking': '烘焙',
+      // 'air-fryer-en': '空气炸锅',
+      // 'pasta': '意面',
     },
   },
 
