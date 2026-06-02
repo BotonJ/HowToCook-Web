@@ -127,8 +127,8 @@ function parseMarkdownSections(content: string): {
       continue;
     }
 
-    // Detect section headers
-    if (stripped.startsWith('##')) {
+    // Detect section headers (## only, not ### sub-headers)
+    if (stripped.startsWith('## ') ) {
       // Save previous section
       if (currentSection && sectionLines.length > 0) {
         const text = sectionLines.join('\n').trim();
