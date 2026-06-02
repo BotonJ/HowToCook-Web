@@ -1,7 +1,7 @@
 # 2026-06-02 Pipeline Audit Fixes — website
 
 **审计报告**：`docs/pipeline-audit-2026-06-02.md`
-**修复范围**：P0-2, P1-1, P1-2, P1-5, P2-6, P2-7, P2-10
+**修复范围**：P0-2, P1-1, P1-2, P1-5, P1-8, P2-6, P2-7, P2-10
 
 ---
 
@@ -30,6 +30,15 @@
 - **改动**：description 收集时过滤 `<!-- -->`、`[!video](...)`、`> 引用块` 三种非内容行
 - **提交**：`d5ee7c3`
 
+### P1-8. 面食之神风味画像缺失
+- **文件**：`public/data/epicure/flavor-profiles.json` + `scripts/append-noodle-flavor-profiles.py`（新增）
+- **改动**：
+  - 补丁脚本读取 noodle-recipes.json 的 ingredients，通过 zh_to_epicure.json + ingredient-flavor-profiles.json 计算 6 维风味向量
+  - 32/33 道生成成功（擀饺子皮为纯技法教程，无食材映射）
+  - key 格式 `noodle/xxx` 与前端 recipe.id 对齐
+  - flavor-profiles.json: 481 → 513 条
+- **提交**：`a501bda`
+
 ### P2-6. `validate-data.ts` 检查项远少于生成脚本
 - **文件**：`scripts/validate-data.ts:72-77`
 - **改动**：增加 `difficulty`、`cuisine`、`cooking_method`、`cook_time`、`ingredients` 五项必填校验，与 generate-recipes.ts 对齐
@@ -55,9 +64,15 @@
 | `d5ee7c3` | fix: 面食之神数据链路修复 (P0-2/P1-1/P1-2/P1-5) |
 | `c67167d` | docs: pipeline audit 修复 worklog |
 | `a788182` | fix: validate-data 增强 (P2-6) + 图片缺失告警 (P2-7) + language 字段 (P2-10) |
+| `a501bda` | feat: 面食之神 32 道风味画像补丁 (P1-8) |
 
-## 待做
+## 已知风险（不修复）
 
-- P1-6: URL 编码 `%2F` 隐式依赖（需线上 curl 验证）
-- P1-8: 面食之神风味画像缺失（需写补丁脚本）
+### P1-6. URL 编码 `%2F` 隐式依赖 Hono 解码行为
+- **现状**：前端 `encodeURIComponent(id)` 将 `/` 编码为 `%2F`；后端 `safeDecode` 兜底已覆盖两种情况
+- **风险**：Hono 未来版本改变解码行为时可能崩，但 `safeDecode` 兜底使当前不会出 bug
+- **建议**：升级 Hono 时手动验证 `/recipe/howtocook%2F茶叶蛋` 能否正常返回
+
+## 暂不处理
+
 - P2-8: search:index 拆分（当前 25MiB 上限远够，暂不处理）
