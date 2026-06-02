@@ -6,11 +6,19 @@ import { useI18n, useT } from '@/lib/i18n';
 function useCollections() {
   const t = useT();
   return useMemo(() => [
-    { id: 'chinese-recipes', label: t.nav.collectionLabels['chinese-recipes'], emoji: '🥢' },
-    { id: 'chicken-recipes', label: t.nav.collectionLabels['chicken-recipes'], emoji: '🍗' },
-    { id: 'baking', label: t.nav.collectionLabels['baking'], emoji: '🍞' },
-    { id: 'air-fryer', label: t.nav.collectionLabels['air-fryer'], emoji: '🍟' },
-    { id: 'pasta', label: t.nav.collectionLabels['pasta'], emoji: '🍝' },
+    // ── 中文专题（2026-06-02） ──────────────────────────────────────
+    { id: 'air-fryer', label: t.nav.collectionLabels['air-fryer'], emoji: '🍳' },
+    { id: 'microwave', label: t.nav.collectionLabels['microwave'], emoji: '📡' },
+    { id: 'rice-cooker', label: t.nav.collectionLabels['rice-cooker'], emoji: '🍚' },
+    { id: 'lazy-meal', label: t.nav.collectionLabels['lazy-meal'], emoji: '😴' },
+    { id: 'rice-killer', label: t.nav.collectionLabels['rice-killer'], emoji: '🍚' },
+    { id: 'oven', label: t.nav.collectionLabels['oven'], emoji: '🔥' },
+    // ── 英文专题（保留原有） ────────────────────────────────────────
+    // { id: 'chinese-recipes', label: t.nav.collectionLabels['chinese-recipes'], emoji: '🥢' },
+    // { id: 'chicken-recipes', label: t.nav.collectionLabels['chicken-recipes'], emoji: '🍗' },
+    // { id: 'baking', label: t.nav.collectionLabels['baking'], emoji: '🍞' },
+    // { id: 'air-fryer-en', label: t.nav.collectionLabels['air-fryer-en'], emoji: '🍟' },
+    // { id: 'pasta', label: t.nav.collectionLabels['pasta'], emoji: '🍝' },
   ], [t]);
 }
 
@@ -40,7 +48,7 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <img
-            src={lang === 'zh' ? '/images/logo_cn.png' : '/images/logo_en.png'}
+            src={lang === 'zh' ? '/images/logo_cn_v2.png' : '/images/logo_en_v2.png'}
             alt={t.nav.siteName}
             className="h-10 w-auto"
           />
