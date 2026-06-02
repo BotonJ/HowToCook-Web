@@ -6,19 +6,21 @@
  *   2. Browser language (navigator.language)
  *   3. Default: zh (Chinese)
  *
+ * The current locale is loaded synchronously; the other locale is
+ * dynamically imported only when the user switches language (P-7).
+ *
  * Usage:
  *   const { lang, setLang, t } = useI18n();
  *   t.nav.siteName  // → '做饭指北' or 'HowToCook'
  */
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, useCallback, type ReactNode } from 'react';
 import { zh } from './zh';
-import { en } from './en';
+import type { en } from './en';
 
 export type Locale = typeof zh | typeof en;
 export type Lang = 'zh' | 'en';
 
-const locales: Record<Lang, typeof zh | typeof en> = { zh, en };
 const STORAGE_KEY = 'htc-lang';
 
 interface I18nContextValue {
@@ -40,39 +42,56 @@ function getInitialLang(): Lang {
   return navigator.language.startsWith('zh') ? 'zh' : 'en';
 }
 
-/** Provider that manages language state. */
-export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(getInitialLang);
+/** Apply document-level language metadata. */
+function applyDocumentLang(lang: Lang) {
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+  document.title = lang === 'zh' ? '做饭指北 - HowToCook' : 'HowToCook - Recipe Encyclopedia';
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) {
+    desc.setAttribute('content', lang === 'zh'
+      ? '做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。'
+      : 'HowToCook — 500+ recipes with AI-generated images. Browse by category. Even programmers can cook.');
+  }
+}
 
-  const setLang = (newLang: Lang) => {
+/** Provider that manages language state with lazy-loaded non-current locale. */
+export function LangProvider({ children }: { children: ReactNode }) {
+  const initialLang = useRef(getInitialLang()).current;
+  const [lang, setLangState] = useState<Lang>(initialLang);
+  const [t, setT] = useState<Locale>(zh);
+
+  // Cache for loaded locale modules (starts with the statically imported zh).
+  const locales = useRef<Partial<Record<Lang, Locale>>>({ zh });
+
+  // Lazily load the non-current locale on first switch.
+  const loadLocale = useCallback(async (target: Lang): Promise<Locale> => {
+    if (locales.current[target]) return locales.current[target]!;
+    const mod = target === 'en'
+      ? (await import('./en')).en
+      : (await import('./zh')).zh;
+    locales.current[target] = mod;
+    return mod;
+  }, []);
+
+  // If initial language is en, load it eagerly once.
+  useEffect(() => {
+    if (initialLang === 'en') {
+      loadLocale('en').then(setT);
+    }
+  }, [initialLang, loadLocale]);
+
+  const setLang = useCallback((newLang: Lang) => {
     setLangState(newLang);
     localStorage.setItem(STORAGE_KEY, newLang);
-    document.documentElement.lang = newLang === 'zh' ? 'zh-CN' : 'en';
-    document.title = newLang === 'zh' ? '做饭指北 - HowToCook' : 'HowToCook - Recipe Encyclopedia';
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) {
-      desc.setAttribute('content', newLang === 'zh'
-        ? '做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。'
-        : 'HowToCook — 500+ recipes with AI-generated images. Browse by category. Even programmers can cook.');
-    }
-  };
+    applyDocumentLang(newLang);
+    loadLocale(newLang).then(setT);
+  }, [loadLocale]);
 
   useEffect(() => {
-    // Apply initial language on mount
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) {
-      desc.setAttribute('content', lang === 'zh'
-        ? '做饭指北 — 500+ 道菜谱，按分类浏览，附 AI 生成图片。程序员也能做好饭。'
-        : 'HowToCook — 500+ recipes with AI-generated images. Browse by category. Even programmers can cook.');
-    }
+    applyDocumentLang(lang);
   }, [lang]);
 
-  const value: I18nContextValue = {
-    lang,
-    setLang,
-    t: locales[lang],
-  };
+  const value: I18nContextValue = { lang, setLang, t };
 
   return (
     <I18nContext.Provider value={value}>
@@ -101,4 +120,4 @@ export function useBasePath(): string {
   return '';  // No URL prefix in state-based approach
 }
 
-export { I18nContext, locales };
+export { I18nContext };

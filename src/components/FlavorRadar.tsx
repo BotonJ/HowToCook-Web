@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import type { FlavorVector } from '@/lib/epicure/types';
+import { useT } from '@/lib/i18n';
+import { FLAVOR_DIMS } from '@/lib/flavor-dims';
 
 type FlavorProfile = FlavorVector;
 
@@ -9,15 +11,6 @@ interface FlavorRadarProps {
   interactive?: boolean;
 }
 
-const DIMENSIONS = [
-  { key: 'sweet' as const, label: 'Sweet' },
-  { key: 'sour' as const, label: 'Sour' },
-  { key: 'bitter' as const, label: 'Bitter' },
-  { key: 'umami' as const, label: 'Umami' },
-  { key: 'spicy' as const, label: 'Spicy' },
-  { key: 'fatty' as const, label: 'Fatty' },
-] as const;
-
 const GRID_LEVELS = [0.2, 0.4, 0.6, 0.8, 1.0];
 
 function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
@@ -26,7 +19,7 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 }
 
 function hexagonPoints(cx: number, cy: number, r: number) {
-  return DIMENSIONS.map((_, i) => {
+  return FLAVOR_DIMS.map((_, i) => {
     const angle = (360 / 6) * i;
     return polarToCartesian(cx, cy, r, angle);
   });
@@ -34,13 +27,14 @@ function hexagonPoints(cx: number, cy: number, r: number) {
 
 export function FlavorRadar({ profile, size = 240, interactive = false }: FlavorRadarProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const t = useT();
 
   const cx = size / 2;
   const cy = size / 2;
   const maxRadius = size / 2 - 32; // padding for labels
 
-  const dataPoints = DIMENSIONS.map((dim, i) => {
-    const value = Math.min(10, Math.max(0, profile[dim.key]));
+  const dataPoints = FLAVOR_DIMS.map((key, i) => {
+    const value = Math.min(10, Math.max(0, profile[key]));
     const ratio = value / 10;
     const angle = (360 / 6) * i;
     return polarToCartesian(cx, cy, maxRadius * ratio, angle);
@@ -56,7 +50,7 @@ export function FlavorRadar({ profile, size = 240, interactive = false }: Flavor
         viewBox={`0 0 ${size} ${size}`}
         className="select-none"
         role="img"
-        aria-label={`Flavor profile: ${DIMENSIONS.map(d => `${d.label} ${profile[d.key]?.toFixed(1) ?? 0}`).join(', ')}`}
+        aria-label={`Flavor profile: ${FLAVOR_DIMS.map(key => `${t.flavor[key]} ${profile[key]?.toFixed(1) ?? 0}`).join(', ')}`}
       >
         <title>Flavor Profile Radar Chart</title>
         <desc>Radar chart showing flavor dimensions for this recipe</desc>
@@ -115,14 +109,14 @@ export function FlavorRadar({ profile, size = 240, interactive = false }: Flavor
         ))}
 
         {/* Labels */}
-        {DIMENSIONS.map((dim, i) => {
+        {FLAVOR_DIMS.map((key, i) => {
           const angle = (360 / 6) * i;
           const labelPos = polarToCartesian(cx, cy, maxRadius + 20, angle);
-          const value = profile[dim.key];
+          const value = profile[key];
           const isHovered = hoveredIndex === i;
 
           return (
-            <g key={dim.key}>
+            <g key={key}>
               <text
                 x={labelPos.x}
                 y={labelPos.y}
@@ -133,7 +127,7 @@ export function FlavorRadar({ profile, size = 240, interactive = false }: Flavor
                 fontWeight={isHovered ? 600 : 400}
                 className="font-body pointer-events-none"
               >
-                {dim.label}
+                {t.flavor[key]}
               </text>
               {interactive && isHovered && (
                 <text
