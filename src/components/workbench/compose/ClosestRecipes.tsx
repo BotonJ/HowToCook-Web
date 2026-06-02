@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import type { UseEpicureResult } from '@/lib/epicure';
 import { cosineSimilarity, getOrComputeRecipeEmbeddings } from '@/lib/epicure/engine';
 
+// Precomputed embeddings loaded once
+let precomputedLoaded = false;
+
 interface RecipeInfo {
   id: string;
   name: string;
@@ -35,6 +38,17 @@ async function getRecipeList(): Promise<Array<{ id: string; name: string; ingred
 export function ClosestRecipes({ ingredients, epicure }: ClosestRecipesProps) {
   const [recipes, setRecipes] = useState<RecipeInfo[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Load precomputed embeddings once
+  useEffect(() => {
+    if (precomputedLoaded) return;
+    getRecipeList().then((allRecipes) => {
+      if (allRecipes.length > 0) {
+        epicure.loadPrecomputedRecipeEmbeddings(allRecipes.map((r) => r.id));
+        precomputedLoaded = true;
+      }
+    });
+  }, [epicure]);
 
   useEffect(() => {
     let cancelled = false;

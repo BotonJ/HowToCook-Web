@@ -4,6 +4,7 @@ import { FlavorProfileBars } from './FlavorProfileBars';
 import { ClusterPanel } from './ClusterPanel';
 import { FlavorWheel } from './FlavorWheel';
 import { CuisineExplorer } from './CuisineExplorer';
+import { CooccurrencePanel } from './CooccurrencePanel';
 import { ExploreRecipes } from './ExploreRecipes';
 import type { UseEpicureResult } from '@/lib/epicure';
 
@@ -43,11 +44,17 @@ export function ExploreView({ epicure }: ExploreViewProps) {
         zhMap={epicure.zhMap}
         onSelect={(id) => dispatch({ type: 'SET', ingredients: [id] })}
       />
+      <CooccurrencePanel
+        ingredient={ingredient}
+        epicure={epicure}
+        onSelect={(id) => dispatch({ type: 'SET', ingredients: [id] })}
+      />
       <ExploreRecipes
         ingredient={ingredient}
         getEmbedding={epicure.getEmbedding}
         getIngredientIndex={epicure.getIngredientIndex}
         zhMap={epicure.zhMap}
+        epicure={epicure}
       />
     </div>
   );
