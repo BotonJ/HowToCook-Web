@@ -149,12 +149,29 @@ let fullDataCache: Category[] | null = null;
 
 async function getFullRecipeData(): Promise<Category[]> {
   if (fullDataCache) return fullDataCache;
-  const [data, flavorProfiles] = await Promise.all([
+  const [data, noodleCategories, flavorProfiles] = await Promise.all([
     fetchFullFallback(),
+    fetchNoodleRecipes(),
     fetchFlavorProfiles(),
   ]);
-  // Merge flavor profiles immutably — create new recipe and category objects
-  const merged = data.map(cat => ({
+  // Merge noodle recipes into categories (same logic as loadRecipes)
+  const mergedCategories = [...data];
+  for (const noodleCat of noodleCategories) {
+    const realCatId = noodleCat.id.replace('noodle-', '');
+    const existingIdx = mergedCategories.findIndex(c => c.id === realCatId);
+    if (existingIdx !== -1) {
+      const existing = mergedCategories[existingIdx];
+      mergedCategories[existingIdx] = {
+        ...existing,
+        recipes: [...existing.recipes, ...noodleCat.recipes],
+        count: existing.recipes.length + noodleCat.recipes.length,
+      };
+    } else {
+      mergedCategories.push(noodleCat);
+    }
+  }
+  // Merge flavor profiles immutably
+  const merged = mergedCategories.map(cat => ({
     ...cat,
     recipes: cat.recipes.map(recipe => {
       const fp = flavorProfiles[recipe.id];
