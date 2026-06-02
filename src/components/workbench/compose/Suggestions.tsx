@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { getFlavorProfile, getAllFlavorProfiles } from '@/lib/flavor-profiles';
 import { FLAVOR_DIMS, FLAVOR_LABELS_ZH } from '@/lib/flavor-dims';
+import { getZhMap } from '@/lib/epicure/engine';
 
 interface SuggestionsProps {
   ingredients: string[];
@@ -61,6 +62,8 @@ export function Suggestions({ ingredients, onAdd }: SuggestionsProps) {
     );
   }
 
+  const zhMap = getZhMap();
+
   return (
     <div className="rounded-2xl border border-outline-variant bg-surface-container-low p-5">
       <h3 className="font-display text-headline-sm text-on-surface mb-4">补充建议</h3>
@@ -75,7 +78,7 @@ export function Suggestions({ ingredients, onAdd }: SuggestionsProps) {
             onClick={() => onAdd?.(s.id)}
             className="inline-flex items-center gap-1.5 rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 text-sm text-on-surface transition hover:border-primary hover:bg-primary-container"
           >
-            <span className="font-medium">{s.id.replace(/_/g, ' ')}</span>
+            <span className="font-medium">{zhMap[s.id] ?? s.id.replace(/_/g, ' ')}</span>
             <span className="text-xs text-on-surface-variant">{s.dimLabel} {s.value.toFixed(1)}</span>
           </button>
         ))}

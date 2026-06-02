@@ -198,15 +198,15 @@
     "nRecipes": 0
   },
   "aji_panca": {
-    "sweet": 7.9,
-    "sour": 8.25,
-    "bitter": 8.15,
-    "umami": 7.5,
-    "spicy": 4.6,
-    "fatty": 6.050000000000001,
+    "sweet": 7.5,
+    "sour": 7.1,
+    "bitter": 5.3,
+    "umami": 7.3,
+    "spicy": 5.1,
+    "fatty": 3.7,
     "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "ajvar": {
     "sweet": 5,
@@ -275,15 +275,15 @@
     "nRecipes": 0
   },
   "all_purpose_flour": {
-    "sweet": 4.65,
-    "sour": 5.949999999999999,
-    "bitter": 5.1,
-    "umami": 6.45,
-    "spicy": 4.15,
-    "fatty": 4.35,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 5.32,
+    "sour": 6.08,
+    "bitter": 5.3,
+    "umami": 6.6,
+    "spicy": 4.46,
+    "fatty": 4.5,
+    "tier": 2,
+    "confidence": 0.5,
+    "nRecipes": 5
   },
   "alligator": {
     "sweet": 5,
@@ -319,15 +319,15 @@
     "nRecipes": 0
   },
   "almond": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 5.4,
+    "sour": 5.6,
+    "bitter": 4.4,
+    "umami": 5.3,
+    "spicy": 6.2,
+    "fatty": 4.9,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "almond_butter": {
     "sweet": 5,
@@ -539,15 +539,15 @@
     "nRecipes": 0
   },
   "angelica_root": {
-    "sweet": 7.55,
-    "sour": 7.25,
-    "bitter": 5.216666666666667,
-    "umami": 6.683333333333333,
-    "spicy": 5.566666666666666,
-    "fatty": 3.75,
+    "sweet": 7.619999999999999,
+    "sour": 7.3,
+    "bitter": 5.32,
+    "umami": 6.659999999999999,
+    "spicy": 5.58,
+    "fatty": 3.8,
     "tier": 2,
-    "confidence": 0.6,
-    "nRecipes": 6
+    "confidence": 0.5,
+    "nRecipes": 5
   },
   "angelica_sinensis": {
     "sweet": 6.8,
@@ -902,15 +902,15 @@
     "nRecipes": 0
   },
   "avocado": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 6.7,
+    "sour": 6.7,
+    "bitter": 6.7,
+    "umami": 6.9,
+    "spicy": 5.8,
+    "fatty": 7.7,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "avocado_oil": {
     "sweet": 5,
@@ -1034,26 +1034,26 @@
     "nRecipes": 0
   },
   "baking_powder": {
-    "sweet": 3.225,
-    "sour": 3.7499999999999996,
-    "bitter": 2.8,
-    "umami": 4.2749999999999995,
-    "spicy": 3.8000000000000003,
-    "fatty": 2.7750000000000004,
+    "sweet": 3.6399999999999997,
+    "sour": 4.22,
+    "bitter": 3.3,
+    "umami": 4.88,
+    "spicy": 3.9799999999999995,
+    "fatty": 3.16,
     "tier": 2,
-    "confidence": 0.4,
-    "nRecipes": 4
+    "confidence": 0.5,
+    "nRecipes": 5
   },
   "baking_soda": {
-    "sweet": 5.550000000000001,
-    "sour": 5.699999999999999,
-    "bitter": 4.05,
-    "umami": 6.15,
-    "spicy": 5.5,
-    "fatty": 4.15,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 6.266666666666667,
+    "sour": 6.366666666666667,
+    "bitter": 5.1000000000000005,
+    "umami": 6.400000000000001,
+    "spicy": 5.333333333333333,
+    "fatty": 4.633333333333334,
+    "tier": 2,
+    "confidence": 0.3,
+    "nRecipes": 3
   },
   "balado_seasoning": {
     "sweet": 5,
@@ -1309,15 +1309,15 @@
     "nRecipes": 0
   },
   "bay_leaf": {
-    "sweet": 7.611538461538462,
-    "sour": 7.069230769230769,
-    "bitter": 5.6269230769230765,
-    "umami": 6.880769230769232,
-    "spicy": 5.134615384615385,
-    "fatty": 4.000000000000001,
+    "sweet": 7.628000000000001,
+    "sour": 7.071999999999999,
+    "bitter": 5.664,
+    "umami": 6.884000000000001,
+    "spicy": 5.12,
+    "fatty": 4.020000000000001,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 26
+    "nRecipes": 25
   },
   "bean": {
     "sweet": 5,
@@ -1760,15 +1760,15 @@
     "nRecipes": 0
   },
   "black_sesame_seed": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 4.3,
+    "sour": 4.7,
+    "bitter": 3.8,
+    "umami": 5.9,
+    "spicy": 4.3,
+    "fatty": 3.5,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "black_tea": {
     "sweet": 5.2,
@@ -2981,15 +2981,15 @@
     "nRecipes": 0
   },
   "cardamom": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 7.6,
+    "sour": 6.1,
+    "bitter": 5.9,
+    "umami": 5.1,
+    "spicy": 5.9,
+    "fatty": 5.4,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "cardoon": {
     "sweet": 5,
@@ -3025,15 +3025,15 @@
     "nRecipes": 0
   },
   "carp": {
-    "sweet": 6.85,
-    "sour": 5.9,
-    "bitter": 4.75,
-    "umami": 6.5,
-    "spicy": 4.05,
-    "fatty": 2.8,
+    "sweet": 6.9,
+    "sour": 6.3,
+    "bitter": 5.9,
+    "umami": 7.6,
+    "spicy": 4.1,
+    "fatty": 4.3,
     "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "carrageenan": {
     "sweet": 5,
@@ -3091,15 +3091,15 @@
     "nRecipes": 0
   },
   "cashew": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 6.35,
+    "sour": 6.65,
+    "bitter": 5.65,
+    "umami": 6.1,
+    "spicy": 5.6,
+    "fatty": 5.2,
+    "tier": 3,
+    "confidence": 0.2,
+    "nRecipes": 2
   },
   "cassava": {
     "sweet": 5,
@@ -3740,12 +3740,12 @@
     "nRecipes": 6
   },
   "chili_paste": {
-    "sweet": 8.2,
-    "sour": 6.4,
-    "bitter": 5.8,
-    "umami": 6.2,
-    "spicy": 4.4,
-    "fatty": 4.1,
+    "sweet": 6.9,
+    "sour": 6.3,
+    "bitter": 5.9,
+    "umami": 7.6,
+    "spicy": 4.1,
+    "fatty": 4.3,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -4004,15 +4004,15 @@
     "nRecipes": 0
   },
   "choux_pastry": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 6.5,
+    "sour": 6.7,
+    "bitter": 6.6,
+    "umami": 6.7,
+    "spicy": 4.1,
+    "fatty": 5.3,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "choy_sum": {
     "sweet": 5,
@@ -4103,12 +4103,12 @@
     "nRecipes": 0
   },
   "cinnamon": {
-    "sweet": 7.4,
-    "sour": 6.5,
-    "bitter": 5.2,
-    "umami": 6.1,
-    "spicy": 4.9,
-    "fatty": 3.1,
+    "sweet": 7.6,
+    "sour": 6.1,
+    "bitter": 5.9,
+    "umami": 5.1,
+    "spicy": 5.9,
+    "fatty": 5.4,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -4224,15 +4224,15 @@
     "nRecipes": 0
   },
   "clove": {
-    "sweet": 7.6,
-    "sour": 6.8,
-    "bitter": 5.3,
-    "umami": 7,
-    "spicy": 4.949999999999999,
-    "fatty": 4.05,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 7.599999999999999,
+    "sour": 6.566666666666666,
+    "bitter": 5.5,
+    "umami": 6.366666666666667,
+    "spicy": 5.266666666666667,
+    "fatty": 4.5,
+    "tier": 2,
+    "confidence": 0.3,
+    "nRecipes": 3
   },
   "clover": {
     "sweet": 5,
@@ -4664,15 +4664,15 @@
     "nRecipes": 0
   },
   "coriander": {
-    "sweet": 7.9,
-    "sour": 8.25,
-    "bitter": 8.15,
-    "umami": 7.5,
-    "spicy": 4.6,
-    "fatty": 6.050000000000001,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 6.925,
+    "sour": 6.799999999999999,
+    "bitter": 5.575,
+    "umami": 7.725,
+    "spicy": 4.199999999999999,
+    "fatty": 4.175,
+    "tier": 2,
+    "confidence": 0.4,
+    "nRecipes": 4
   },
   "coriander_root": {
     "sweet": 5,
@@ -4686,15 +4686,15 @@
     "nRecipes": 0
   },
   "corn": {
-    "sweet": 8.600000000000001,
-    "sour": 7.85,
-    "bitter": 8.25,
-    "umami": 8.05,
-    "spicy": 5.8,
-    "fatty": 7.449999999999999,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 8.233333333333333,
+    "sour": 8,
+    "bitter": 7.766666666666667,
+    "umami": 7.933333333333334,
+    "spicy": 5.766666666666666,
+    "fatty": 6.866666666666667,
+    "tier": 2,
+    "confidence": 0.3,
+    "nRecipes": 3
   },
   "corn_flakes": {
     "sweet": 5,
@@ -5291,12 +5291,12 @@
     "nRecipes": 9
   },
   "cumin": {
-    "sweet": 7.8,
-    "sour": 8.4,
-    "bitter": 8.3,
-    "umami": 7.9,
-    "spicy": 4.7,
-    "fatty": 6.4,
+    "sweet": 5.8,
+    "sour": 6.3,
+    "bitter": 5.8,
+    "umami": 6.5,
+    "spicy": 3.4,
+    "fatty": 4.1,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -6127,12 +6127,12 @@
     "nRecipes": 0
   },
   "five_spice_powder": {
-    "sweet": 5.7,
+    "sweet": 5.3,
     "sour": 4.8,
-    "bitter": 4.2,
-    "umami": 6.3,
-    "spicy": 3.2,
-    "fatty": 2.7,
+    "bitter": 3.9,
+    "umami": 6.7,
+    "spicy": 3,
+    "fatty": 2.6,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -6468,15 +6468,15 @@
     "nRecipes": 0
   },
   "garam_masala": {
-    "sweet": 7.9,
-    "sour": 8.25,
-    "bitter": 8.15,
-    "umami": 7.5,
-    "spicy": 4.6,
-    "fatty": 6.050000000000001,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 7.466666666666666,
+    "sour": 7.716666666666666,
+    "bitter": 7.483333333333334,
+    "umami": 7.083333333333333,
+    "spicy": 4.583333333333333,
+    "fatty": 5.7,
+    "tier": 2,
+    "confidence": 0.6,
+    "nRecipes": 6
   },
   "garlic": {
     "sweet": 6,
@@ -6545,15 +6545,15 @@
     "nRecipes": 0
   },
   "ghee": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 6.8,
+    "sour": 7.35,
+    "bitter": 6.8,
+    "umami": 7.1,
+    "spicy": 4.5,
+    "fatty": 5.5,
+    "tier": 3,
+    "confidence": 0.2,
+    "nRecipes": 2
   },
   "ghost_pepper": {
     "sweet": 5,
@@ -6996,26 +6996,26 @@
     "nRecipes": 0
   },
   "ground_beef": {
-    "sweet": 6.5,
-    "sour": 5.7,
-    "bitter": 4.1,
-    "umami": 6.8,
-    "spicy": 3.8,
-    "fatty": 2.4,
+    "sweet": 5.8,
+    "sour": 5.550000000000001,
+    "bitter": 4.449999999999999,
+    "umami": 7,
+    "spicy": 3.75,
+    "fatty": 3.0999999999999996,
+    "tier": 3,
+    "confidence": 0.2,
+    "nRecipes": 2
+  },
+  "ground_pork": {
+    "sweet": 4.9,
+    "sour": 5.5,
+    "bitter": 5.3,
+    "umami": 6.6,
+    "spicy": 3,
+    "fatty": 5.6,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
-  },
-  "ground_pork": {
-    "sweet": 6.06,
-    "sour": 5.799999999999999,
-    "bitter": 3.7600000000000002,
-    "umami": 6.9799999999999995,
-    "spicy": 4.5,
-    "fatty": 2.8600000000000003,
-    "tier": 2,
-    "confidence": 0.5,
-    "nRecipes": 5
   },
   "grouper": {
     "sweet": 5,
@@ -7403,15 +7403,15 @@
     "nRecipes": 4
   },
   "honey": {
-    "sweet": 7.280000000000001,
-    "sour": 6.4,
-    "bitter": 5.16,
-    "umami": 7.139999999999999,
-    "spicy": 5.42,
-    "fatty": 5.1,
+    "sweet": 7.1833333333333345,
+    "sour": 6.45,
+    "bitter": 5.416666666666667,
+    "umami": 7.099999999999999,
+    "spicy": 5.483333333333333,
+    "fatty": 5.533333333333334,
     "tier": 2,
-    "confidence": 0.5,
-    "nRecipes": 5
+    "confidence": 0.6,
+    "nRecipes": 6
   },
   "honey_citron_tea": {
     "sweet": 5,
@@ -7700,15 +7700,15 @@
     "nRecipes": 0
   },
   "ketchup": {
-    "sweet": 5.116666666666666,
-    "sour": 5.208333333333333,
-    "bitter": 4.7250000000000005,
-    "umami": 6.783333333333332,
-    "spicy": 3.225,
-    "fatty": 3.758333333333334,
+    "sweet": 5.115384615384615,
+    "sour": 5.223076923076922,
+    "bitter": 4.730769230769231,
+    "umami": 6.815384615384615,
+    "spicy": 3.2615384615384615,
+    "fatty": 3.761538461538462,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 12
+    "nRecipes": 13
   },
   "kidney": {
     "sweet": 5,
@@ -7722,15 +7722,15 @@
     "nRecipes": 0
   },
   "kidney_bean": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 7.5,
+    "sour": 7.7,
+    "bitter": 7.9,
+    "umami": 7,
+    "spicy": 4.2,
+    "fatty": 5.7,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "kimchi": {
     "sweet": 5,
@@ -7920,15 +7920,15 @@
     "nRecipes": 4
   },
   "light_soy_sauce": {
-    "sweet": 6.2838383838383844,
-    "sour": 6.074747474747474,
-    "bitter": 4.248484848484847,
-    "umami": 6.942424242424242,
-    "spicy": 4.426262626262625,
-    "fatty": 2.984848484848483,
+    "sweet": 6.270192307692308,
+    "sour": 6.065384615384614,
+    "bitter": 4.283653846153845,
+    "umami": 6.9586538461538465,
+    "spicy": 4.41153846153846,
+    "fatty": 3.0211538461538456,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 99
+    "nRecipes": 104
   },
   "lima_bean": {
     "sweet": 5,
@@ -8206,15 +8206,15 @@
     "nRecipes": 0
   },
   "milk": {
-    "sweet": 6.4,
-    "sour": 7.9,
-    "bitter": 7.8,
-    "umami": 8.6,
-    "spicy": 5,
-    "fatty": 7.7,
+    "sweet": 6.5,
+    "sour": 5.85,
+    "bitter": 5.15,
+    "umami": 5.199999999999999,
+    "spicy": 6.050000000000001,
+    "fatty": 5.15,
     "tier": 3,
-    "confidence": 0.1,
-    "nRecipes": 1
+    "confidence": 0.2,
+    "nRecipes": 2
   },
   "milk_powder": {
     "sweet": 2.7,
@@ -8239,12 +8239,12 @@
     "nRecipes": 1
   },
   "mint": {
-    "sweet": 10,
-    "sour": 6.6,
-    "bitter": 7,
-    "umami": 6.4,
-    "spicy": 7.6,
-    "fatty": 9.7,
+    "sweet": 6.7,
+    "sour": 6.7,
+    "bitter": 6.7,
+    "umami": 6.9,
+    "spicy": 5.8,
+    "fatty": 7.7,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -8404,26 +8404,26 @@
     "nRecipes": 0
   },
   "mutton": {
-    "sweet": 8.1,
-    "sour": 7.8,
-    "bitter": 7.5,
-    "umami": 7,
-    "spicy": 4.7,
-    "fatty": 5.1,
+    "sweet": 5.8,
+    "sour": 6.3,
+    "bitter": 5.8,
+    "umami": 6.5,
+    "spicy": 3.4,
+    "fatty": 4.1,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
   },
   "napa_cabbage": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 5.3,
+    "sour": 6.2,
+    "bitter": 2.6,
+    "umami": 7,
+    "spicy": 4.4,
+    "fatty": 2.4,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "navy_bean": {
     "sweet": 5,
@@ -8536,23 +8536,23 @@
     "nRecipes": 0
   },
   "olive_oil": {
-    "sweet": 4.675000000000001,
-    "sour": 6.3,
-    "bitter": 7.1,
-    "umami": 6.925,
-    "spicy": 3.475,
-    "fatty": 6.2,
+    "sweet": 4.6000000000000005,
+    "sour": 6.220000000000001,
+    "bitter": 7.039999999999999,
+    "umami": 7.159999999999999,
+    "spicy": 3.44,
+    "fatty": 6.220000000000001,
     "tier": 2,
-    "confidence": 0.4,
-    "nRecipes": 4
+    "confidence": 0.5,
+    "nRecipes": 5
   },
   "onion": {
-    "sweet": 3.9,
-    "sour": 9.5,
-    "bitter": 9.6,
-    "umami": 10,
-    "spicy": 4.8,
-    "fatty": 9.5,
+    "sweet": 5.3,
+    "sour": 6.1,
+    "bitter": 5.3,
+    "umami": 7.3,
+    "spicy": 4.7,
+    "fatty": 4.7,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -8613,15 +8613,15 @@
     "nRecipes": 0
   },
   "oyster_sauce": {
-    "sweet": 6.330555555555556,
-    "sour": 6.122222222222223,
-    "bitter": 4.211111111111112,
-    "umami": 6.9111111111111105,
-    "spicy": 4.383333333333333,
-    "fatty": 2.877777777777778,
+    "sweet": 6.339473684210526,
+    "sour": 6.110526315789474,
+    "bitter": 4.234210526315791,
+    "umami": 6.915789473684209,
+    "spicy": 4.371052631578947,
+    "fatty": 2.8868421052631588,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 36
+    "nRecipes": 38
   },
   "palm_oil": {
     "sweet": 5,
@@ -9229,15 +9229,15 @@
     "nRecipes": 1
   },
   "pork_ribs": {
-    "sweet": 6.783333333333334,
-    "sour": 6.733333333333334,
-    "bitter": 4.766666666666667,
-    "umami": 7,
-    "spicy": 4.866666666666667,
-    "fatty": 3.8499999999999996,
+    "sweet": 6.885714285714286,
+    "sour": 6.957142857142857,
+    "bitter": 5.057142857142857,
+    "umami": 7.1000000000000005,
+    "spicy": 4.985714285714286,
+    "fatty": 4.114285714285714,
     "tier": 2,
-    "confidence": 0.6,
-    "nRecipes": 6
+    "confidence": 0.7,
+    "nRecipes": 7
   },
   "pork_tenderloin": {
     "sweet": 6.5,
@@ -9438,15 +9438,15 @@
     "nRecipes": 1
   },
   "raisin": {
-    "sweet": 3.7,
-    "sour": 4.1,
-    "bitter": 2.4,
-    "umami": 4.6,
-    "spicy": 5.8,
-    "fatty": 3.9,
+    "sweet": 4.550000000000001,
+    "sour": 4.85,
+    "bitter": 3.4000000000000004,
+    "umami": 4.949999999999999,
+    "spicy": 6,
+    "fatty": 4.4,
     "tier": 3,
-    "confidence": 0.1,
-    "nRecipes": 1
+    "confidence": 0.2,
+    "nRecipes": 2
   },
   "rambutan": {
     "sweet": 5,
@@ -9548,15 +9548,15 @@
     "nRecipes": 1
   },
   "red_bell_pepper": {
-    "sweet": 7.166666666666667,
-    "sour": 6.400000000000001,
-    "bitter": 4.833333333333333,
-    "umami": 7.1000000000000005,
-    "spicy": 4.833333333333333,
-    "fatty": 3.6666666666666665,
+    "sweet": 7.1,
+    "sour": 6.375000000000001,
+    "bitter": 5.1,
+    "umami": 7.225,
+    "spicy": 4.65,
+    "fatty": 3.825,
     "tier": 2,
-    "confidence": 0.3,
-    "nRecipes": 3
+    "confidence": 0.4,
+    "nRecipes": 4
   },
   "red_snapper": {
     "sweet": 5,
@@ -9790,15 +9790,15 @@
     "nRecipes": 0
   },
   "salt": {
-    "sweet": 5.797546012269938,
-    "sour": 5.97484662576687,
-    "bitter": 4.6815950920245415,
-    "umami": 6.736809815950921,
-    "spicy": 4.028220858895708,
-    "fatty": 3.413496932515336,
+    "sweet": 5.855357142857143,
+    "sour": 6.025595238095236,
+    "bitter": 4.748809523809525,
+    "umami": 6.745238095238095,
+    "spicy": 4.056547619047622,
+    "fatty": 3.4726190476190473,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 163
+    "nRecipes": 168
   },
   "salted_egg": {
     "sweet": 5,
@@ -9966,12 +9966,12 @@
     "nRecipes": 0
   },
   "sesame_seed": {
-    "sweet": 7.2,
-    "sour": 7,
-    "bitter": 4.7,
-    "umami": 6.8,
-    "spicy": 5.5,
-    "fatty": 3.5,
+    "sweet": 5.3,
+    "sour": 6.2,
+    "bitter": 2.6,
+    "umami": 7,
+    "spicy": 4.4,
+    "fatty": 2.4,
     "tier": 3,
     "confidence": 0.1,
     "nRecipes": 1
@@ -10241,12 +10241,12 @@
     "nRecipes": 0
   },
   "soybean_paste": {
-    "sweet": 7.1499999999999995,
-    "sour": 6.2,
-    "bitter": 5.000000000000001,
-    "umami": 6.8500000000000005,
-    "spicy": 4.449999999999999,
-    "fatty": 3.3000000000000003,
+    "sweet": 7.1000000000000005,
+    "sour": 6.166666666666667,
+    "bitter": 4.983333333333333,
+    "umami": 6.816666666666666,
+    "spicy": 4.3999999999999995,
+    "fatty": 3.266666666666666,
     "tier": 2,
     "confidence": 0.6,
     "nRecipes": 6
@@ -10384,15 +10384,15 @@
     "nRecipes": 0
   },
   "sugar": {
-    "sweet": 5.452941176470587,
-    "sour": 5.05,
-    "bitter": 3.6911764705882355,
-    "umami": 5.844117647058823,
-    "spicy": 3.988235294117646,
-    "fatty": 2.7882352941176474,
+    "sweet": 5.481081081081081,
+    "sour": 5.102702702702702,
+    "bitter": 3.832432432432433,
+    "umami": 5.813513513513513,
+    "spicy": 4.094594594594594,
+    "fatty": 2.9891891891891897,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 34
+    "nRecipes": 37
   },
   "sumac": {
     "sweet": 5,
@@ -10450,12 +10450,12 @@
     "nRecipes": 0
   },
   "sweet_bean_paste": {
-    "sweet": 6.4,
-    "sour": 6.225,
-    "bitter": 4.449999999999999,
-    "umami": 6.8999999999999995,
-    "spicy": 4.574999999999999,
-    "fatty": 3.1750000000000003,
+    "sweet": 7.025,
+    "sour": 7.225,
+    "bitter": 4.85,
+    "umami": 7.5249999999999995,
+    "spicy": 5.2749999999999995,
+    "fatty": 3.85,
     "tier": 2,
     "confidence": 0.4,
     "nRecipes": 4
@@ -10527,15 +10527,15 @@
     "nRecipes": 0
   },
   "tahini": {
-    "sweet": 5.55,
-    "sour": 6.15,
-    "bitter": 4.35,
-    "umami": 7.25,
-    "spicy": 3.75,
-    "fatty": 3.25,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 5.8,
+    "sour": 6.8,
+    "bitter": 4.025,
+    "umami": 7.375,
+    "spicy": 4.55,
+    "fatty": 3.4000000000000004,
+    "tier": 2,
+    "confidence": 0.4,
+    "nRecipes": 4
   },
   "tamarillo": {
     "sweet": 5,
@@ -10835,15 +10835,15 @@
     "nRecipes": 0
   },
   "turmeric": {
-    "sweet": 7.9,
-    "sour": 8.25,
-    "bitter": 8.15,
-    "umami": 7.5,
-    "spicy": 4.6,
-    "fatty": 6.050000000000001,
-    "tier": 3,
-    "confidence": 0.2,
-    "nRecipes": 2
+    "sweet": 7.466666666666666,
+    "sour": 7.716666666666666,
+    "bitter": 7.483333333333334,
+    "umami": 7.083333333333333,
+    "spicy": 4.583333333333333,
+    "fatty": 5.7,
+    "tier": 2,
+    "confidence": 0.6,
+    "nRecipes": 6
   },
   "turnip": {
     "sweet": 5,
@@ -11099,15 +11099,15 @@
     "nRecipes": 0
   },
   "whipping_cream": {
-    "sweet": 3.2000000000000006,
-    "sour": 2.783333333333333,
-    "bitter": 2.85,
-    "umami": 4.233333333333333,
-    "spicy": 3.9166666666666665,
-    "fatty": 4.1000000000000005,
+    "sweet": 3.7857142857142847,
+    "sour": 3.4857142857142853,
+    "bitter": 3.4285714285714284,
+    "umami": 4.614285714285714,
+    "spicy": 4.071428571428571,
+    "fatty": 4.3,
     "tier": 2,
-    "confidence": 0.6,
-    "nRecipes": 6
+    "confidence": 0.7,
+    "nRecipes": 7
   },
   "whiskey": {
     "sweet": 7.4,
@@ -11154,15 +11154,15 @@
     "nRecipes": 1
   },
   "white_rice": {
-    "sweet": 5.762499999999999,
-    "sour": 6.1499999999999995,
-    "bitter": 4.999999999999999,
-    "umami": 7.6000000000000005,
-    "spicy": 4.35,
-    "fatty": 4.4125000000000005,
+    "sweet": 5.688888888888888,
+    "sour": 6.066666666666666,
+    "bitter": 4.977777777777777,
+    "umami": 7.555555555555555,
+    "spicy": 4.277777777777778,
+    "fatty": 4.344444444444445,
     "tier": 2,
-    "confidence": 0.8,
-    "nRecipes": 8
+    "confidence": 0.9,
+    "nRecipes": 9
   },
   "white_sugar": {
     "sweet": 7.7,
@@ -11176,15 +11176,15 @@
     "nRecipes": 1
   },
   "white_vinegar": {
-    "sweet": 6.2272727272727275,
-    "sour": 5.927272727272728,
-    "bitter": 4.8909090909090915,
-    "umami": 6.845454545454545,
-    "spicy": 4.045454545454546,
-    "fatty": 3.4818181818181824,
+    "sweet": 6.13,
+    "sour": 5.82,
+    "bitter": 4.91,
+    "umami": 6.85,
+    "spicy": 3.9,
+    "fatty": 3.4800000000000004,
     "tier": 2,
     "confidence": 1,
-    "nRecipes": 11
+    "nRecipes": 10
   },
   "whitebait": {
     "sweet": 5,
@@ -11218,6 +11218,17 @@
     "tier": 4,
     "confidence": 0,
     "nRecipes": 0
+  },
+  "whole_wheat_flour": {
+    "sweet": 7.1,
+    "sour": 8,
+    "bitter": 7,
+    "umami": 7.5,
+    "spicy": 4.9,
+    "fatty": 5.7,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "wild_boar": {
     "sweet": 5,
@@ -11297,15 +11308,15 @@
     "nRecipes": 0
   },
   "yam": {
-    "sweet": 5,
-    "sour": 5,
-    "bitter": 5,
-    "umami": 5,
-    "spicy": 5,
-    "fatty": 5,
-    "tier": 4,
-    "confidence": 0,
-    "nRecipes": 0
+    "sweet": 7.5,
+    "sour": 8.3,
+    "bitter": 6.8,
+    "umami": 7.7,
+    "spicy": 5.7,
+    "fatty": 5.7,
+    "tier": 3,
+    "confidence": 0.1,
+    "nRecipes": 1
   },
   "yeast": {
     "sweet": 0,

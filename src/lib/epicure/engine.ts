@@ -507,7 +507,12 @@ export function computeRecipeEmbeddings(
   for (const recipe of recipes) {
     const vecs: Float32Array[] = [];
     for (const ing of recipe.ingredients) {
-      const idx = meta.vocab[ing];
+      let idx = meta.vocab[ing];
+      // Try Chinese → English translation if direct lookup fails
+      if (idx === undefined && zhReverse) {
+        const enName = zhReverse.get(ing);
+        if (enName) idx = meta.vocab[enName];
+      }
       if (idx !== undefined) {
         vecs.push(getRow(idx));
       }
