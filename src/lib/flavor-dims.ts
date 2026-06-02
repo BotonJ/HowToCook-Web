@@ -15,7 +15,7 @@ export const FLAVOR_LABELS_ZH: Record<FlavorDim, string> = {
   bitter: '苦',
   umami: '鲜',
   spicy: '辣',
-  fatty: '脂',
+  fatty: '脂肪',
 };
 
 /** Canonical per-dimension config used by RadarChart, DimBars, FlavorProfileBars, etc. */
@@ -30,5 +30,5 @@ export const FLAVOR_DIM_CONFIG: ReadonlyArray<{
   { key: 'bitter', label: '苦', color: '#06d6a0', emoji: '🫒' },
   { key: 'umami',  label: '鲜', color: '#4ecdc4', emoji: '🍄' },
   { key: 'spicy',  label: '辣', color: '#ef476f', emoji: '🌶️' },
-  { key: 'fatty',  label: '脂', color: '#e0aaff', emoji: '🧈' },
+  { key: 'fatty',  label: '脂肪', color: '#e0aaff', emoji: '🧈' },
 ] as const;
