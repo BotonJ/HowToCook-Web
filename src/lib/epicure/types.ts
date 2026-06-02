@@ -33,3 +33,15 @@ export interface FlavorProfile extends FlavorVector {
   confidence: number;
   nRecipes: number;
 }
+
+export interface CooccurrencePair {
+  ingredient: string;
+  pmi: number;
+  count: number;
+}
+
+export interface InternationalRecipe {
+  id: string;
+  cuisine: string;
+  name: string;
+}

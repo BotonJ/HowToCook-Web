@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import type { PairingResult, ModeResult, CuisinePole } from './types';
+import type { PairingResult, ModeResult, CuisinePole, CooccurrencePair, InternationalRecipe } from './types';
 import * as engine from './engine';
 
 export interface UseEpicureResult {
@@ -17,6 +17,12 @@ export interface UseEpicureResult {
   cuisinePoles: CuisinePole[];
   zhMap: Record<string, string>;
   modeLabelsZh: Record<string, string>;
+  loadPrecomputedRecipeEmbeddings: (recipeIds: string[]) => Promise<Map<string, Float32Array> | null>;
+  loadCooccurrenceData: () => Promise<void>;
+  getCooccurrencePairs: (ingredient: string, zhName: string, k: number) => CooccurrencePair[];
+  loadInternationalRecipes: () => Promise<void>;
+  getInternationalRecipes: (ingredient: string) => InternationalRecipe[];
+  getEnName: (zhName: string) => string;
 }
 
 export function useEpicure(): UseEpicureResult {
@@ -117,6 +123,40 @@ export function useEpicure(): UseEpicureResult {
     [],
   );
 
+  const loadPrecomputedRecipeEmbeddings = useCallback(
+    (recipeIds: string[]) => engine.loadPrecomputedRecipeEmbeddings(recipeIds),
+    [],
+  );
+
+  const loadCooccurrenceData = useCallback(
+    () => engine.loadCooccurrenceData(),
+    [],
+  );
+
+  const getCooccurrencePairs = useCallback(
+    (ingredient: string, zhName: string, k: number): CooccurrencePair[] => {
+      return engine.getCooccurrencePairs(ingredient, zhName, k);
+    },
+    [],
+  );
+
+  const loadInternationalRecipes = useCallback(
+    () => engine.loadInternationalRecipes(),
+    [],
+  );
+
+  const getInternationalRecipes = useCallback(
+    (ingredient: string): InternationalRecipe[] => {
+      return engine.getInternationalRecipes(ingredient);
+    },
+    [],
+  );
+
+  const getEnName = useCallback(
+    (zhName: string): string => engine.getEnName(zhName),
+    [],
+  );
+
   // Memoize derived values — recomputed when `loaded` state flips to true
   const cuisinePoles = useMemo(
     () => (loaded ? engine.getCuisinePoles() : []),
@@ -146,5 +186,11 @@ export function useEpicure(): UseEpicureResult {
     cuisinePoles,
     zhMap,
     modeLabelsZh,
+    loadPrecomputedRecipeEmbeddings,
+    loadCooccurrenceData,
+    getCooccurrencePairs,
+    loadInternationalRecipes,
+    getInternationalRecipes,
+    getEnName,
   };
 }

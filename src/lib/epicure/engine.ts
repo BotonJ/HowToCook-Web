@@ -1,4 +1,4 @@
-import type { PairingResult, ModeResult, CuisinePole } from './types';
+import type { PairingResult, ModeResult, CuisinePole, CooccurrencePair, InternationalRecipe } from './types';
 
 interface RawMetadata {
   version: string;
@@ -23,6 +23,18 @@ let zhMap: Record<string, string> | null = null;
 let zhReverse: Map<string, string> | null = null; // zh -> en reverse index
 let modeLabelsZh: Record<string, string> | null = null;
 const DIMS = 300;
+
+// Precomputed recipe embeddings (lazy loaded)
+let precomputedRecipeEmbeddings: Map<string, Float32Array> | null = null;
+let precomputedRecipeEmbeddingsLoading: Promise<Map<string, Float32Array> | null> | null = null;
+
+// Cooccurrence data (lazy loaded)
+let cooccurrenceAdjacency: Record<string, Array<{ ingredient: string; pmi: number; count: number }>> | null = null;
+let cooccurrenceLoading: Promise<void> | null = null;
+
+// International recipes data (lazy loaded)
+let internationalRecipes: Record<string, string[]> | null = null;
+let internationalRecipesLoading: Promise<void> | null = null;
 
 function getRow(i: number): Float32Array {
   return embeddings!.subarray(i * DIMS, (i + 1) * DIMS);
@@ -336,14 +348,57 @@ export function getEmbedding(index: number): Float32Array | null {
 
 /**
  * Cached recipe embeddings — computed once per session, shared across components.
- * Avoids O(R×I×D) recomputation on every ingredient change.
+ * Tries precomputed binary file first, falls back to runtime computation.
  */
 let cachedRecipeEmbeddings: Map<string, Float32Array> | null = null;
+
+export async function loadPrecomputedRecipeEmbeddings(
+  recipeIds: string[],
+): Promise<Map<string, Float32Array> | null> {
+  if (precomputedRecipeEmbeddings) return precomputedRecipeEmbeddings;
+  if (precomputedRecipeEmbeddingsLoading) return precomputedRecipeEmbeddingsLoading;
+
+  precomputedRecipeEmbeddingsLoading = (async () => {
+    try {
+      const resp = await fetch('/data/epicure/recipe-embeddings.f32');
+      if (!resp.ok) return null;
+      const buffer = await resp.arrayBuffer();
+      const floats = new Float32Array(buffer);
+      const nRecipes = floats.length / DIMS;
+
+      if (nRecipes !== recipeIds.length) {
+        console.warn(
+          `recipe-embeddings.f32 has ${nRecipes} entries but recipes.json has ${recipeIds.length}. Falling back to runtime computation.`,
+        );
+        return null;
+      }
+
+      const map = new Map<string, Float32Array>();
+      for (let i = 0; i < nRecipes; i++) {
+        map.set(recipeIds[i], floats.subarray(i * DIMS, (i + 1) * DIMS));
+      }
+      precomputedRecipeEmbeddings = map;
+      return map;
+    } catch {
+      return null;
+    }
+  })();
+
+  return precomputedRecipeEmbeddingsLoading;
+}
 
 export function getOrComputeRecipeEmbeddings(
   recipes: Array<{ id: string; ingredients: string[] }>,
 ): Map<string, Float32Array> {
   if (cachedRecipeEmbeddings) return cachedRecipeEmbeddings;
+
+  // If precomputed is available, use it
+  if (precomputedRecipeEmbeddings) {
+    cachedRecipeEmbeddings = precomputedRecipeEmbeddings;
+    return cachedRecipeEmbeddings;
+  }
+
+  // Fallback: compute at runtime
   const computed = computeRecipeEmbeddings(recipes);
   const map = new Map<string, Float32Array>();
   for (const r of computed) {
@@ -351,6 +406,95 @@ export function getOrComputeRecipeEmbeddings(
   }
   cachedRecipeEmbeddings = map;
   return map;
+}
+
+// ---------------------------------------------------------------------------
+// Cooccurrence data (lazy loaded)
+// ---------------------------------------------------------------------------
+
+export async function loadCooccurrenceData(): Promise<void> {
+  if (cooccurrenceAdjacency) return;
+  if (cooccurrenceLoading) return cooccurrenceLoading;
+
+  cooccurrenceLoading = (async () => {
+    try {
+      const resp = await fetch('/data/epicure/ingredient-cooccurrence.json');
+      if (!resp.ok) return;
+      const data = await resp.json() as {
+        adjacency: Record<string, Array<{ ingredient: string; pmi: number; count: number }>>;
+      };
+      cooccurrenceAdjacency = data.adjacency ?? {};
+    } catch {
+      cooccurrenceAdjacency = {};
+    }
+  })();
+
+  return cooccurrenceLoading;
+}
+
+export function getCooccurrencePairs(
+  ingredient: string,
+  zhName: string,
+  k: number,
+): CooccurrencePair[] {
+  if (!cooccurrenceAdjacency) return [];
+
+  // Try Chinese name first (cooccurrence data uses Chinese names)
+  const results = cooccurrenceAdjacency[zhName];
+  if (results) {
+    return results
+      .sort((a, b) => b.pmi - a.pmi)
+      .slice(0, k)
+      .map((r) => ({ ingredient: r.ingredient, pmi: r.pmi, count: r.count }));
+  }
+
+  // Fallback: try English name
+  const enName = ingredient.replace(/ /g, '_');
+  const enResults = cooccurrenceAdjacency[enName];
+  if (enResults) {
+    return enResults
+      .sort((a, b) => b.pmi - a.pmi)
+      .slice(0, k)
+      .map((r) => ({ ingredient: r.ingredient, pmi: r.pmi, count: r.count }));
+  }
+
+  return [];
+}
+
+// ---------------------------------------------------------------------------
+// International recipes (lazy loaded)
+// ---------------------------------------------------------------------------
+
+export async function loadInternationalRecipes(): Promise<void> {
+  if (internationalRecipes) return;
+  if (internationalRecipesLoading) return internationalRecipesLoading;
+
+  internationalRecipesLoading = (async () => {
+    try {
+      const resp = await fetch('/data/epicure/ingredient-recipes-flat.json');
+      if (!resp.ok) return;
+      internationalRecipes = await resp.json();
+    } catch {
+      internationalRecipes = {};
+    }
+  })();
+
+  return internationalRecipesLoading;
+}
+
+export function getInternationalRecipes(ingredient: string): InternationalRecipe[] {
+  if (!internationalRecipes) return [];
+
+  const recipes = internationalRecipes[ingredient];
+  if (!recipes || recipes.length === 0) return [];
+
+  return recipes.map((id: string) => {
+    // Parse "recipenlg/cuisine/recipe name" format
+    const parts = id.split('/');
+    const cuisine = parts.length >= 2 ? parts[1] : 'unknown';
+    const name = parts.length >= 3 ? parts.slice(2).join('/') : id;
+    return { id, cuisine, name };
+  });
 }
 
 export function computeRecipeEmbeddings(
@@ -393,4 +537,12 @@ export function getModeLabelZh(enLabel: string): string {
 
 export function getModeLabelsZh(): Record<string, string> {
   return modeLabelsZh ?? {};
+}
+
+/**
+ * Reverse lookup: Chinese name → Epicure English name.
+ * Returns empty string if not found.
+ */
+export function getEnName(zhName: string): string {
+  return zhReverse?.get(zhName) ?? '';
 }
