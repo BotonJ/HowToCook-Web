@@ -110,6 +110,10 @@ export const zh = {
         name: '金谷园',
         description: '第一个开源的饺子馆 Skill，招牌甜品牛奶醪糟鸡蛋。',
       },
+      jingxiang: {
+        name: 'king-jingxiang 菜谱图片版',
+        description: '基于 NanoBananaPro 将原版 Markdown 教程全量转化为精美菜谱图片，让厨房实操更加直观。',
+      },
     },
   },
 

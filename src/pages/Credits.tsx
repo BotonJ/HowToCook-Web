@@ -3,9 +3,10 @@ import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 
-const CREDIT_KEYS = ['howtocook', 'suibo', 'jinguyuan'] as const;
+const CREDIT_KEYS = ['howtocook', 'jingxiang', 'suibo', 'jinguyuan'] as const;
 const CREDIT_LINKS: Record<string, string> = {
   howtocook: 'https://github.com/Anduin2017/HowToCook',
+  jingxiang: 'https://king-jingxiang.github.io/HowToCook/',
 };
 
 export function Credits() {

@@ -46,7 +46,7 @@ describe('transformDishIndex', () => {
   })
 
   it('handles missing optional fields', () => {
-    const dish: DishIndex = { ...minimalDish, tags: undefined, language: undefined }
+    const dish = { ...minimalDish, tags: undefined, language: undefined } as unknown as DishIndex
     const result = transformDishIndex(dish)
     expect(result.tags).toBeUndefined()
     expect(result.language).toBeUndefined()
