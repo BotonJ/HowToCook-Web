@@ -109,6 +109,10 @@ export const en = {
         name: 'Jing Gu Yuan',
         description: 'The first open-source dumpling restaurant Skill, signature dessert: milk fermented rice with egg.',
       },
+      jingxiang: {
+        name: 'king-jingxiang Recipe Images',
+        description: 'Converts the original Markdown tutorials into beautifully styled recipe images using NanoBananaPro, making kitchen practice more intuitive.',
+      },
     },
   },
 
