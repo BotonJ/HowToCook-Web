@@ -1,5 +1,5 @@
 import { Layout } from '@/components/Layout';
-import { FlavorWorkbench } from '@/components/workbench/FlavorWorkbench';
+import { FlavorWorkbench } from '@/components/flavor-workbench/FlavorWorkbench';
 import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
