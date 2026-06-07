@@ -14,7 +14,7 @@ function useSources() {
     { id: 'all', label: t.sourceNav.all },
     { id: 'howtocook', label: 'HowToCook' },
     { id: '随便做', label: t.sourceNav.suibianzuo },
-    { id: 'noodle-god', label: t.sourceNav.noodleGod },
+    { id: '面食之神', label: t.sourceNav.noodleGod },
   ], [t]);
 }
 

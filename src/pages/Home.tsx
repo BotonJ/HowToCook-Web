@@ -17,7 +17,7 @@ const SOURCE_LABELS: Record<string, string> = {
   all: '全部',
   howtocook: 'HowToCook',
   '随便做': '随便做',
-  'noodle-god': '面食之神',
+  '面食之神': '面食之神',
 };
 
 export function Home() {
