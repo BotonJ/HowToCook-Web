@@ -184,34 +184,54 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return score * (zoom > 1 ? 1.5 : zoom < 0.7 ? 0.5 : 1);
   }, [vectorA, vectorB, neighbors, ingA, ingB, zoom]);
 
-  // 自适应节点过滤
+  // 自适应节点过滤 - 结合距离过滤和重要性评分
   const visibleIngredients = useMemo(() => {
-    const scored = activeIngredients.map(ing => ({
+    // 先用距离过滤（保留原版的 60px 阈值）
+    const corridorPoints = arcPoints;
+    const distanceFiltered = activeIngredients
+      .filter(ing => {
+        if (ing.id === vectorA || ing.id === vectorB) return true;
+        const ingPos = { x: ing.pca[0], y: ing.pca[1] };
+        let minDist = Infinity;
+        for (const pt of corridorPoints) {
+          const dist = Math.sqrt((ingPos.x - pt.x) ** 2 + (ingPos.y - pt.y) ** 2);
+          minDist = Math.min(minDist, dist);
+        }
+        return minDist < 80; // 稍微放宽到 80px
+      });
+
+    // 然后用重要性评分排序并限制数量
+    const scored = distanceFiltered.map(ing => ({
       ing,
       score: importanceScore(ing)
     })).sort((a, b) => b.score - a.score);
 
-    // 基于缩放动态调整显示数量
-    const maxVisible = Math.floor(20 + zoom * 60); // 20-80 个节点
+    // 更激进的节点数量控制
+    const maxVisible = Math.floor(15 + zoom * 25); // 15-40 个节点（比 demo 更激进）
     return scored.slice(0, maxVisible).map(s => s.ing);
-  }, [activeIngredients, zoom, importanceScore]);
+  }, [activeIngredients, zoom, importanceScore, arcPoints, vectorA, vectorB]);
 
-  // 动态标签显示判断
+  // 动态标签显示判断 - 更保守的标签策略
   const shouldShowLabel = useCallback((ing: Ingredient): boolean => {
-    // 始终显示核心节点标签
-    const neighborIds = neighbors.map(n => 'id' in n ? n.id : n.name);
-    if ([vectorA, vectorB, ...neighborIds].includes(ing.id)) {
+    // 始终显示核心节点标签（起点、终点）
+    if ([vectorA, vectorB].includes(ing.id)) {
       return true;
     }
 
-    // 高缩放时显示更多标签
-    const labelThreshold = zoom > 1.5 ? 0.3 :
-                          zoom > 1 ? 0.1 :
-                          0.05;
+    // 邻居节点只有最重要的才显示标签
+    const neighborIds = neighbors.map(n => 'id' in n ? n.id : n.name);
+    if (neighborIds.includes(ing.id)) {
+      // 只显示前 3 个邻居的标签
+      const neighborIndex = neighborIds.indexOf(ing.id);
+      return neighborIndex < 3;
+    }
 
-    // 基于重要性和随机采样
-    return importanceScore(ing) > 50 &&
-           Math.random() > (1 - labelThreshold);
+    // 其他节点几乎不显示标签，除非非常高缩放
+    if (zoom > 2.0 && importanceScore(ing) > 100) {
+      return Math.random() > 0.7; // 30% 概率显示
+    }
+
+    return false;
   }, [zoom, vectorA, vectorB, neighbors, importanceScore]);
 
   // 自动缩放到相关节点
