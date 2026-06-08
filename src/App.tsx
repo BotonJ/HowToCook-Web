@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { createBrowserRouter, RouterProvider, useRouteError } from 'react-router-dom';
+import { lazy, Suspense, Component, type ReactNode, type ErrorInfo } from 'react';
+import { createBrowserRouter, RouterProvider, useRouteError, Link } from 'react-router-dom';
 import { PwaInstallButton } from './components/PwaInstallButton';
 import { TurnstileProvider } from './components/TurnstileProvider';
 import { LangProvider, useI18n } from './lib/i18n';
@@ -37,11 +37,60 @@ function ErrorBoundary() {
   );
 }
 
+interface LazyErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class LazyErrorBoundary extends Component<
+  { children: ReactNode },
+  LazyErrorBoundaryState
+> {
+  state: LazyErrorBoundaryState = { hasError: false, error: null };
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('[LazyLoad] chunk load failed:', error, info);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-8 text-center font-system-ui">
+          <h1 className="text-2xl font-bold mb-4">页面加载失败</h1>
+          <p className="text-on-surface-variant mb-6">
+            页面加载出错，请刷新重试。
+          </p>
+          <a href="/" className="text-primary hover:underline">返回首页</a>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function LazyPage({ children }: { children: React.ReactNode }) {
   return (
-    <Suspense fallback={<PageLoader />}>
-      {children}
-    </Suspense>
+    <LazyErrorBoundary>
+      <Suspense fallback={<PageLoader />}>
+        {children}
+      </Suspense>
+    </LazyErrorBoundary>
+  );
+}
+
+function NotFoundPage() {
+  const { t } = useI18n();
+  return (
+    <div className="p-8 text-center font-system-ui">
+      <h1 className="text-2xl font-bold mb-4">{t.error.notFound}</h1>
+      <p className="text-on-surface-variant mb-6">
+        <Link to="/" className="text-primary hover:underline">{t.error.backHome}</Link>
+      </p>
+    </div>
   );
 }
 
@@ -55,6 +104,7 @@ const router = createBrowserRouter([
   { path: '/academy/:slug', element: <LazyPage><TipDetail /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '/explore', element: <LazyPage><Explore /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '/credits', element: <LazyPage><Credits /></LazyPage>, errorElement: <ErrorBoundary /> },
+  { path: '*', element: <NotFoundPage /> },
 ]);
 
 function App() {

@@ -12,7 +12,7 @@ const COOK_TIME_ISO: Record<string, string> = {
 const DIET_SCHEMA: Record<string, string> = {
   Vegetarian: 'https://schema.org/VegetarianDiet',
   Halal: 'https://schema.org/HalalDiet',
-  'Low Carb': 'https://schema.org/LowCalorieDiet',
+  'Low Carb': 'https://schema.org/Diet',
 };
 
 function parseSteps(text: string) {
@@ -46,7 +46,9 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
     name: recipe.name,
     description: recipe.description || `${recipe.name} Recipe`,
     url: recipeUrl,
-    image: recipe.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
+    image: recipe.imagePath
+      ? (recipe.imagePath.startsWith('http') ? recipe.imagePath : `${SITE_URL}/${recipe.imagePath}`)
+      : undefined,
     recipeCategory: recipe.category,
     recipeCuisine: recipe.cuisine || 'Chinese',
     keywords: [recipe.name, recipe.cuisine, recipe.cooking_method].filter(Boolean).join(', '),

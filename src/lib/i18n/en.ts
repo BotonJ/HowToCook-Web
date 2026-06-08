@@ -27,14 +27,14 @@ export const en = {
     credits: 'Credits',
     github: 'GitHub',
     collectionLabels: {
-      // ── 中文专题（2026-06-02） ──────────────────────────────────
+      // ── Chinese Collections (2026-06-02) ──────────────────────────────────
       'air-fryer': 'Air Fryer Series',
       'microwave': 'Microwave Quick Meals',
       'rice-cooker': 'Rice Cooker Recipes',
       'lazy-meal': 'Lazy Meals',
       'rice-killer': 'Rice Killers',
       'oven': 'Oven & Baking',
-      // ── 英文专题（保留原有） ─────────────────────────────────────
+      // ── English Collections (original) ─────────────────────────────────────
       'chinese-recipes': 'Chinese Recipes',
       'chicken-recipes': 'Chicken',
       'baking': 'Baking',

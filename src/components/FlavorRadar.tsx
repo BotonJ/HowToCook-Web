@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { FlavorVector } from '@/lib/epicure/types';
 import { useT } from '@/lib/i18n';
 import { FLAVOR_DIMS } from '@/lib/flavor-dims';
@@ -25,7 +25,7 @@ function hexagonPoints(cx: number, cy: number, r: number) {
   });
 }
 
-export function FlavorRadar({ profile, size = 240, interactive = false }: FlavorRadarProps) {
+export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240, interactive = false }: FlavorRadarProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const t = useT();
 
@@ -164,4 +164,4 @@ export function FlavorRadar({ profile, size = 240, interactive = false }: Flavor
       </svg>
     </div>
   );
-}
+});
