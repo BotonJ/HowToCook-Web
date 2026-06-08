@@ -180,20 +180,19 @@ let loaded = false;
 export async function loadWorkbenchData(): Promise<void> {
   if (loaded) return;
 
-  // Strategy: try real data first; if ingredients exist but recipes don't,
-  // fall back to full mock data because IDs are incompatible between real and mock.
+  // Strategy: try real data first — only require ingredients to be present.
+  // Recipes/substitutions/allergens are optional (loaded separately by TabRecipes).
   let useRealData = false;
 
   try {
     const resp = await fetch('/data/flavor-workbench/workbench-data.json');
     if (resp.ok) {
       const data = await resp.json();
-      if (data.ingredients?.length && data.recipes?.length) {
-        // Real data is complete — use it
+      if (data.ingredients?.length) {
         state.ingredients = data.ingredients;
         state.cooccurrencePairs = data.cooccurrence || [];
         state.surprisePairs = data.surprise || [];
-        state.recipes = data.recipes;
+        state.recipes = data.recipes || [];
         state.substitutions = data.substitutions || [];
         state.commonAllergens = data.allergens || [];
         state.scenarioExplanations = data.scenarioExplanations || {};
