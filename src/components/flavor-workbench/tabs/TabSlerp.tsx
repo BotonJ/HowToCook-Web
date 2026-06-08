@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getIngredients, CATEGORY_COLORS } from '../data/ingredients';
+import { getIngredients, CATEGORY_COLORS, type Ingredient } from '../data/ingredients';
 import { getActiveIngredients } from '../data/ingredients-active';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
 import { RadarChart } from '../ui/RadarChart';
@@ -8,58 +8,18 @@ import { Search, X } from 'lucide-react';
 
 const TIMELINE_STOPS = [0, 0.25, 0.5, 0.75, 1.0];
 
-// 辅助函数：计算点到弧线的距离
-const distanceToArc = (point: Vec2, start: Vec2, end: Vec2): number => {
-  const A = point.x - start.x;
-  const B = point.y - start.y;
-  const C = end.x - start.x;
-  const D = end.y - start.y;
-
-  const dot = A * C + B * D;
-  const lenSq = C * C + D * D;
-  let param = -1;
-
-  if (lenSq !== 0) param = dot / lenSq;
-
-  let xx, yy;
-
-  if (param < 0) {
-    xx = start.x;
-    yy = start.y;
-  } else if (param > 1) {
-    xx = end.x;
-    yy = end.y;
-  } else {
-    xx = start.x + param * C;
-    yy = start.y + param * D;
-  }
-
-  const dx = point.x - xx;
-  const dy = point.y - yy;
-  return Math.sqrt(dx * dx + dy * dy);
-};
-
-// 检查是否为稀有类别
-const isRareCategory = (category: string): boolean => {
-  const commonCategories = ['蔬菜', '肉类', '调料', '水产'];
-  return !commonCategories.includes(category);
-};
-
 export function TabSlerp() {
   const [vectorA, setVectorA] = useState('');
   const [vectorB, setVectorB] = useState('');
 
-  // Only show ingredients that have at least 1 cooccurrence pair
   const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
 
   const ingA = useMemo(() => getIngredients().find(i => i.id === vectorA), [vectorA]);
   const ingB = useMemo(() => getIngredients().find(i => i.id === vectorB), [vectorB]);
 
-  // Guard: show empty state when no ingredients selected
   if (!ingA || !ingB) {
     return (
       <div className="flex flex-col gap-4">
-        {/* Core concept */}
         <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-5">
           <h2 className="text-lg font-bold text-[#2c2825] mb-2">
             SLERP Lab — 风味走廊
@@ -72,7 +32,6 @@ export function TabSlerp() {
           </p>
         </div>
 
-        {/* Empty state + ingredient selector */}
         <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-5">
           <div className="flex flex-col items-center justify-center py-10 text-center">
             <h3 className="text-lg font-semibold text-[#2c2825] mb-2">开始探索</h3>
@@ -106,8 +65,6 @@ export function TabSlerp() {
   return <TabSlerpInner ingA={ingA} ingB={ingB} vectorA={vectorA} vectorB={vectorB} setVectorA={setVectorA} setVectorB={setVectorB} activeIngredients={activeIngredients} />;
 }
 
-import type { Ingredient } from '../data/ingredients';
-
 interface TabSlerpInnerProps {
   ingA: Ingredient;
   ingB: Ingredient;
@@ -127,6 +84,20 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
   const [searchA, setSearchA] = useState('');
   const [searchB, setSearchB] = useState('');
   const [autoFitEnabled, setAutoFitEnabled] = useState(true);
+  const [highlightSearch, setHighlightSearch] = useState('');
+  const [recentPicks, setRecentPicks] = useState<string[]>([]);
+
+  const MAX_ZOOM = 2;
+
+  const trackPick = useCallback((id: string) => {
+    setRecentPicks(prev => {
+      const next = [id, ...prev.filter(x => x !== id)].slice(0, 8);
+      return next;
+    });
+  }, []);
+
+  const handlePickA = useCallback((id: string) => { trackPick(id); setVectorA(id); setSearchA(''); }, [trackPick, setVectorA]);
+  const handlePickB = useCallback((id: string) => { trackPick(id); setVectorB(id); setSearchB(''); }, [trackPick, setVectorB]);
 
   const currentPos = useMemo((): Vec2 => {
     return slerp2d(
@@ -152,101 +123,112 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return nearestK(currentPos, allIngredients, 6, [vectorA, vectorB]);
   }, [currentPos, vectorA, vectorB]);
 
-  // 重要性评分算法
-  const importanceScore = useCallback((ing: Ingredient): number => {
-    let score = 0;
+  // Corridor stop neighbors (for Level 0 waypoints)
+  const corridorNeighbors = useMemo(() => {
+    const allIngredients = getIngredients().map(i => ({
+      id: i.id,
+      name: i.name, nameEn: i.nameEn, pos: { x: i.pca[0], y: i.pca[1] } as Vec2, category: i.category,
+    }));
+    return TIMELINE_STOPS.map(stop => {
+      const pos = slerp2d(
+        { x: ingA.pca[0], y: ingA.pca[1] },
+        { x: ingB.pca[0], y: ingB.pca[1] },
+        stop,
+      );
+      return nearestK(pos, allIngredients, 1, [vectorA, vectorB])[0];
+    });
+  }, [ingA, ingB, vectorA, vectorB]);
 
-    // 核心节点加权
-    if (ing.id === vectorA || ing.id === vectorB) score += 1000;
-    else if (neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id)) score += 500;
+  // ── Level-based node visibility ──────────────────────────────
+  // Level 0 (zoom ≤ 1): A/B + 5 corridor waypoints only (~12 nodes)
+  // Level 1 (zoom 1-2): expand to corridor neighborhood, max ~40
 
-    // 距离弧线越近越重要
-    const distToArc = distanceToArc(
-      { x: ing.pca[0], y: ing.pca[1] },
-      { x: ingA.pca[0], y: ingA.pca[1] },
-      { x: ingB.pca[0], y: ingB.pca[1] }
-    );
-    score += Math.max(0, 50 - distToArc * 100);
-
-    // 类别多样性加权
-    if (isRareCategory(ing.category)) score += 30;
-
-    // 缩放级别调整
-    return score * (zoom > 1 ? 1.5 : zoom < 0.7 ? 0.5 : 1);
-  }, [vectorA, vectorB, neighbors, ingA, ingB, zoom]);
-
-  // 自适应节点过滤 - 结合距离过滤和重要性评分
   const visibleIngredients = useMemo(() => {
-    // 先用距离过滤（保留原版的 60px 阈值）
-    const corridorPoints = arcPoints;
-    const distanceFiltered = activeIngredients
-      .filter(ing => {
-        if (ing.id === vectorA || ing.id === vectorB) return true;
+    const all = activeIngredients.length > 0 ? activeIngredients : getIngredients();
+    const excludeSet = new Set([vectorA, vectorB]);
+
+    const waypointIds = new Set(
+      corridorNeighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name)
+    );
+    const neighborIds = new Set(
+      neighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name)
+    );
+
+    if (zoom <= 1) {
+      return all.filter(ing =>
+        excludeSet.has(ing.id) || waypointIds.has(ing.id) || neighborIds.has(ing.id)
+      ).slice(0, 15);
+    }
+
+    // Level 1: expand with distance scoring
+    const maxVisible = Math.floor(15 + (zoom - 1) * 25); // 15→40
+
+    const scored = all
+      .filter(ing => !excludeSet.has(ing.id))
+      .map(ing => {
         const ingPos = { x: ing.pca[0], y: ing.pca[1] };
         let minDist = Infinity;
-        for (const pt of corridorPoints) {
-          const dist = Math.sqrt((ingPos.x - pt.x) ** 2 + (ingPos.y - pt.y) ** 2);
-          minDist = Math.min(minDist, dist);
+        for (let i = 0; i < arcPoints.length; i += 3) {
+          const dist = Math.sqrt((ingPos.x - arcPoints[i].x) ** 2 + (ingPos.y - arcPoints[i].y) ** 2);
+          if (dist < minDist) minDist = dist;
         }
-        return minDist < 80; // 稍微放宽到 80px
-      });
+        let score = -minDist;
+        if (waypointIds.has(ing.id)) score += 200;
+        if (neighborIds.has(ing.id)) score += 100;
+        return { ing, score };
+      })
+      .sort((a, b) => b.score - a.score)
+      .slice(0, maxVisible)
+      .map(s => s.ing);
 
-    // 然后用重要性评分排序并限制数量
-    const scored = distanceFiltered.map(ing => ({
-      ing,
-      score: importanceScore(ing)
-    })).sort((a, b) => b.score - a.score);
+    return scored;
+  }, [activeIngredients, zoom, arcPoints, corridorNeighbors, neighbors, vectorA, vectorB]);
 
-    // 更激进的节点数量控制
-    const maxVisible = Math.floor(15 + zoom * 25); // 15-40 个节点（比 demo 更激进）
-    return scored.slice(0, maxVisible).map(s => s.ing);
-  }, [activeIngredients, zoom, importanceScore, arcPoints, vectorA, vectorB]);
-
-  // 动态标签显示判断 - 更保守的标签策略
+  // Deterministic label visibility
   const shouldShowLabel = useCallback((ing: Ingredient): boolean => {
-    // 始终显示核心节点标签（起点、终点）
-    if ([vectorA, vectorB].includes(ing.id)) {
-      return true;
-    }
+    if ([vectorA, vectorB].includes(ing.id)) return true;
 
-    // 邻居节点只有最重要的才显示标签
-    const neighborIds = neighbors.map(n => 'id' in n ? n.id : n.name);
-    if (neighborIds.includes(ing.id)) {
-      // 只显示前 3 个邻居的标签
-      const neighborIndex = neighborIds.indexOf(ing.id);
-      return neighborIndex < 3;
-    }
+    const neighborIdList = neighbors.map(n => 'id' in n ? n.id : n.name);
+    const waypointIdList = corridorNeighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name);
 
-    // 其他节点几乎不显示标签，除非非常高缩放
-    if (zoom > 2.0 && importanceScore(ing) > 100) {
-      return Math.random() > 0.7; // 30% 概率显示
+    // Neighbors: show top 3
+    const nIdx = neighborIdList.indexOf(ing.id);
+    if (nIdx >= 0 && nIdx < 3) return true;
+
+    // Waypoints always get labels
+    if (waypointIdList.includes(ing.id)) return true;
+
+    // Search highlight
+    if (highlightSearch && (
+      ing.name.includes(highlightSearch) ||
+      ing.nameEn.toLowerCase().includes(highlightSearch.toLowerCase())
+    )) return true;
+
+    // At zoom > 1.3, show labels for nearby ingredients deterministically
+    if (zoom > 1.3) {
+      const hash = ing.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+      return hash % 3 === 0;
     }
 
     return false;
-  }, [zoom, vectorA, vectorB, neighbors, importanceScore]);
+  }, [zoom, vectorA, vectorB, neighbors, corridorNeighbors, highlightSearch]);
 
-  // 自动缩放到相关节点
+  // Auto-fit to A, B + neighbors
   const autoFitView = useCallback(() => {
     if (!autoFitEnabled) return;
 
-    // 计算相关节点的边界框（只使用实际的 Ingredient 对象）
     const relevantNodes = [ingA, ingB];
     const positions = relevantNodes.map(n => ({ x: n.pca[0], y: n.pca[1] }));
-
-    // 添加邻居节点的位置（从 pos 字段获取）
-    neighbors.slice(0, 8).forEach(n => {
-      positions.push(n.pos);
-    });
+    neighbors.slice(0, 8).forEach(n => positions.push(n.pos));
 
     const bounds = {
       minX: Math.min(...positions.map(p => p.x)),
       maxX: Math.max(...positions.map(p => p.x)),
       minY: Math.min(...positions.map(p => p.y)),
-      maxY: Math.max(...positions.map(p => p.y))
+      maxY: Math.max(...positions.map(p => p.y)),
     };
 
-    // 计算最佳缩放级别
-    const padding = 1.3; // 30% 边距
+    const padding = 1.3;
     const contentWidth = (bounds.maxX - bounds.minX) * padding;
     const contentHeight = (bounds.maxY - bounds.minY) * padding;
 
@@ -258,19 +240,16 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
       viewHeight / contentHeight
     );
 
-    // 限制缩放范围
-    setZoom(Math.max(0.6, Math.min(newZoom, 2.0)));
+    setZoom(Math.max(0.6, Math.min(newZoom, MAX_ZOOM)));
   }, [autoFitEnabled, ingA, ingB, neighbors]);
 
-  // 在食材选择变化时自动缩放
   useEffect(() => {
     autoFitView();
   }, [vectorA, vectorB, autoFitView]);
 
-  // 手动缩放时禁用自动缩放
   const handleZoomChange = useCallback((newZoom: number) => {
     setAutoFitEnabled(false);
-    setZoom(newZoom);
+    setZoom(Math.min(newZoom, MAX_ZOOM));
   }, []);
 
   const corridorPanorama = useMemo(() => {
@@ -301,17 +280,28 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return result;
   }, [ingA, ingB, t]);
 
+  // Adaptive PCA→SVG mapping: short corridors get stretched so nodes spread out
+  const pcaRange = Math.max(
+    Math.abs(ingA.pca[0] - ingB.pca[0]),
+    Math.abs(ingA.pca[1] - ingB.pca[1]),
+    1, // minimum range to avoid division by zero
+  );
+  // Scale factor: corridors shorter than 80 PCA units get stretched
+  const stretchFactor = Math.max(80 / pcaRange, 1);
+
   const mapX = useCallback((x: number) => {
     const centerX = (ingA.pca[0] + ingB.pca[0]) / 2;
-    const base = 300 + ((x - centerX) / 160) * 250;
+    const scale = 250 / 80; // 80 PCA units = 250 SVG pixels at zoom=1
+    const base = 300 + ((x - centerX) * stretchFactor * scale);
     return 300 + (base - 300) * zoom + pan.x;
-  }, [ingA, ingB, zoom, pan.x]);
+  }, [ingA, ingB, zoom, pan.x, stretchFactor]);
 
   const mapY = useCallback((y: number) => {
     const centerY = (ingA.pca[1] + ingB.pca[1]) / 2;
-    const base = 210 - ((y - centerY) / 130) * 170;
+    const scale = 170 / 80;
+    const base = 210 - ((y - centerY) * stretchFactor * scale);
     return 210 + (base - 210) * zoom + pan.y;
-  }, [ingA, ingB, zoom, pan.y]);
+  }, [ingA, ingB, zoom, pan.y, stretchFactor]);
 
   const arcD = useMemo(() => {
     return arcPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${mapX(p.x)} ${mapY(p.y)}`).join(' ');
@@ -338,6 +328,11 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
 
   const handleMouseUp = useCallback(() => setIsDragging(false), []);
 
+  // Zoom level indicator label
+  const zoomLevelLabel = zoom <= 1 ? '概览' : '深入';
+  const visibleCount = visibleIngredients.length;
+  const totalCount = activeIngredients.length || getIngredients().length;
+
   return (
     <div className="flex flex-col gap-4">
       {/* Core concept */}
@@ -359,9 +354,14 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
         <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-4">
           <div className="flex items-start justify-between mb-2">
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a]">风味空间</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a]">
+                风味空间
+                <span className="ml-2 text-[10px] font-normal text-[#8c7168]">
+                  [{zoomLevelLabel}] {visibleCount}/{totalCount}
+                </span>
+              </h4>
               <p className="text-[10px] text-[#8c7168] mt-0.5">
-                点击任意食材设为终点，点击端点可交换起点与终点。拖拽空白处可平移。
+                放大可查看更多食材。点击食材设为终点，点击端点交换 A↔B。拖拽平移。
               </p>
               <div className="text-sm text-[#8c7168] mt-1.5">
                 <span className="font-semibold text-[#ae3a04]">{ingA.name}</span>
@@ -369,43 +369,47 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 <span className="font-semibold text-[#4a7c8c]">{ingB.name}</span>
               </div>
             </div>
-            <div className="flex flex-col gap-1">
-              <button
-                onClick={() => handleZoomChange(Math.min(zoom * 1.2, 3))}
-                className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-sm font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
-                title="放大"
-              >
-                +
-              </button>
-              <button
-                onClick={() => handleZoomChange(Math.max(zoom / 1.2, 0.5))}
-                className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-sm font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
-                title="缩小"
-              >
-                −
-              </button>
-              <button
-                onClick={() => {
-                  setAutoFitEnabled(true);
-                  setZoom(1);
-                  setPan({ x: 0, y: 0 });
-                }}
-                className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-[10px] font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
-                title="重置"
-              >
-                ⌂
-              </button>
-              <button
-                onClick={() => setAutoFitEnabled(!autoFitEnabled)}
-                className={`w-8 h-8 rounded-lg border flex items-center justify-center text-[10px] font-bold transition ${
-                  autoFitEnabled
-                    ? 'bg-[#ae3a04] text-white border-[#ae3a04]'
-                    : 'bg-white shadow-md border-[#e0c0b5]/40 text-[#58413a] hover:bg-[#f5ece7]'
-                }`}
-                title={autoFitEnabled ? "自动缩放开启" : "自动缩放关闭"}
-              >
-                AUTO
-              </button>
+
+            {/* Highlight search: find a specific ingredient on the map */}
+            <div className="flex items-center gap-1.5">
+              <div className="relative">
+                <Search size={10} className="absolute left-1.5 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+                <input
+                  type="text"
+                  value={highlightSearch}
+                  onChange={e => setHighlightSearch(e.target.value)}
+                  placeholder="定位食材..."
+                  className="w-20 pl-6 pr-1.5 py-1 rounded-lg bg-[#f5ece7] border-none text-[10px] outline-none placeholder:text-[#8c7168]"
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <button
+                  onClick={() => handleZoomChange(Math.min(zoom * 1.3, MAX_ZOOM))}
+                  className="w-7 h-7 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-xs font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
+                  title="放大"
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => handleZoomChange(Math.max(zoom / 1.3, 0.5))}
+                  className="w-7 h-7 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-xs font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
+                  title="缩小"
+                >
+                  −
+                </button>
+                <button
+                  onClick={() => {
+                    setAutoFitEnabled(true);
+                    setZoom(1);
+                    setPan({ x: 0, y: 0 });
+                  }}
+                  className="w-7 h-7 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-[9px] font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
+                  title="重置"
+                >
+                  ⌂
+                </button>
+              </div>
             </div>
           </div>
 
@@ -428,57 +432,60 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
               </defs>
               <rect width="100%" height="100%" fill="url(#slerp-grid)" />
 
-              {(() => {
-                // 使用智能过滤的节点渲染
-                return visibleIngredients.map(ing => {
-                  const x = mapX(ing.pca[0]);
-                  const y = mapY(ing.pca[1]);
-                  if (ing.id === vectorA || ing.id === vectorB) return null;
+              {/* Corridor scatter nodes */}
+              {visibleIngredients.map(ing => {
+                const x = mapX(ing.pca[0]);
+                const y = mapY(ing.pca[1]);
+                if (ing.id === vectorA || ing.id === vectorB) return null;
 
-                  const showLabel = shouldShowLabel(ing);
-                  const isNeighbor = neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id);
-                  const nodeSize = isNeighbor ? 9 : 7;
-                  const nodeOpacity = isNeighbor ? 0.8 : 0.5;
-                  const strokeWidth = isNeighbor ? 2 : 1.5;
-                  const fontSize = isNeighbor ? 12 : 11;
-                  const fontWeight = isNeighbor ? 600 : 400;
-                  const labelOpacity = isNeighbor ? 1 : 0.7;
+                const showLabel = shouldShowLabel(ing);
+                const isNeighbor = neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id);
+                const isWaypoint = corridorNeighbors.some(n => n && ('id' in n ? n.id : n.name) === ing.id);
+                const isHighlighted = highlightSearch && (
+                  ing.name.includes(highlightSearch) ||
+                  ing.nameEn.toLowerCase().includes(highlightSearch.toLowerCase())
+                );
 
-                  return (
-                    <g
-                      key={ing.id}
-                      onClick={(e) => { e.stopPropagation(); handleSelectIngredient(ing.id); }}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      <circle
-                        cx={x}
-                        cy={y}
-                        r={nodeSize}
-                        fill={CATEGORY_COLORS[ing.category]}
-                        fillOpacity={nodeOpacity}
-                        stroke="white"
-                        strokeWidth={strokeWidth}
-                      />
-                      {showLabel && (
-                        <text
-                          x={x + nodeSize + 3}
-                          y={y + 4}
-                          fontSize={fontSize}
-                          fontWeight={fontWeight}
-                          fill="#58413a"
-                          fontFamily="Quicksand, sans-serif"
-                          opacity={labelOpacity}
-                        >
-                          {ing.name}
-                        </text>
-                      )}
-                    </g>
-                  );
-                });
-              })()}
+                const nodeSize = isHighlighted ? 10 : isWaypoint ? 8 : isNeighbor ? 7 : 5;
+                const nodeOpacity = isHighlighted ? 1 : isWaypoint ? 0.9 : isNeighbor ? 0.75 : 0.4;
+                const strokeW = isHighlighted ? 3 : isWaypoint ? 2 : 1.5;
+                const fontSize = isHighlighted ? 12 : isWaypoint ? 11 : isNeighbor ? 11 : 10;
 
+                return (
+                  <g
+                    key={ing.id}
+                    onClick={(e) => { e.stopPropagation(); handleSelectIngredient(ing.id); }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <circle
+                      cx={x}
+                      cy={y}
+                      r={nodeSize}
+                      fill={isHighlighted ? '#ae3a04' : CATEGORY_COLORS[ing.category]}
+                      fillOpacity={nodeOpacity}
+                      stroke={isHighlighted ? '#ae3a04' : 'white'}
+                      strokeWidth={strokeW}
+                    />
+                    {showLabel && (
+                      <text
+                        x={x + nodeSize + 3}
+                        y={y + 4}
+                        fontSize={fontSize}
+                        fontWeight={isHighlighted ? 700 : isWaypoint ? 600 : 400}
+                        fill={isHighlighted ? '#ae3a04' : '#58413a'}
+                        fontFamily="Quicksand, sans-serif"
+                      >
+                        {ing.name}
+                      </text>
+                    )}
+                  </g>
+                );
+              })}
+
+              {/* Arc path */}
               <path d={arcD} fill="none" stroke="#ae3a04" strokeWidth={3} strokeDasharray="6 4" opacity={0.5} strokeLinecap="round" />
 
+              {/* Endpoint A */}
               <g onClick={(e) => { e.stopPropagation(); handleSelectIngredient(vectorA); }} style={{ cursor: 'pointer' }}>
                 <circle cx={mapX(ingA.pca[0])} cy={mapY(ingA.pca[1])} r={11} fill="#ae3a04" stroke="white" strokeWidth={2.5} />
                 <text x={mapX(ingA.pca[0])} y={mapY(ingA.pca[1]) - 18} textAnchor="middle" fontSize={14} fontWeight={700} fill="#2c2825" fontFamily="Quicksand, sans-serif">
@@ -486,6 +493,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 </text>
               </g>
 
+              {/* Endpoint B */}
               <g onClick={(e) => { e.stopPropagation(); handleSelectIngredient(vectorB); }} style={{ cursor: 'pointer' }}>
                 <circle cx={mapX(ingB.pca[0])} cy={mapY(ingB.pca[1])} r={11} fill="#4a7c8c" stroke="white" strokeWidth={2.5} />
                 <text x={mapX(ingB.pca[0])} y={mapY(ingB.pca[1]) - 18} textAnchor="middle" fontSize={14} fontWeight={700} fill="#2c2825" fontFamily="Quicksand, sans-serif">
@@ -493,7 +501,8 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 </text>
               </g>
 
-              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y)} r={18} fill="#ae3a04" opacity="0.18" className="pulse-dot" />
+              {/* Current position marker */}
+              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y)} r={18} fill="#ae3a04" opacity="0.18" />
               <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y)} r={11} fill="white" stroke="#ae3a04" strokeWidth={3.5} />
             </svg>
           </div>
@@ -509,82 +518,25 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
               越靠左，味道越像起点食材；越往右，终点食材的特征越突出。
             </p>
 
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div>
-                <label className="text-[10px] text-[#8c7168] uppercase tracking-wider font-bold mb-1 block">起点</label>
-                <div className="relative">
-                  <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
-                  <input
-                    type="text"
-                    value={searchA}
-                    onChange={e => setSearchA(e.target.value)}
-                    placeholder={ingA.name}
-                    className="w-full pl-7 pr-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none placeholder:text-[#8c7168]"
-                  />
-                  {searchA && (
-                    <button
-                      onClick={() => setSearchA('')}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
-                    >
-                      <X size={12} />
-                    </button>
-                  )}
-                </div>
-                {searchA && (
-                  <div className="mt-1 max-h-24 overflow-y-auto rounded-lg bg-white border border-[#e0c0b5]/30">
-                    {activeIngredients
-                      .filter(i => i.name.includes(searchA) || i.nameEn.toLowerCase().includes(searchA.toLowerCase()))
-                      .slice(0, 10)
-                      .map(i => (
-                        <button
-                          key={i.id}
-                          onClick={() => { setVectorA(i.id); setSearchA(''); }}
-                          className="w-full px-2 py-1 text-left text-xs hover:bg-[#f5ece7] transition"
-                        >
-                          {i.name}
-                        </button>
-                      ))}
-                  </div>
-                )}
-              </div>
-              <div>
-                <label className="text-[10px] text-[#8c7168] uppercase tracking-wider font-bold mb-1 block">终点</label>
-                <div className="relative">
-                  <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
-                  <input
-                    type="text"
-                    value={searchB}
-                    onChange={e => setSearchB(e.target.value)}
-                    placeholder={ingB.name}
-                    className="w-full pl-7 pr-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none placeholder:text-[#8c7168]"
-                  />
-                  {searchB && (
-                    <button
-                      onClick={() => setSearchB('')}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
-                    >
-                      <X size={12} />
-                    </button>
-                  )}
-                </div>
-                {searchB && (
-                  <div className="mt-1 max-h-24 overflow-y-auto rounded-lg bg-white border border-[#e0c0b5]/30">
-                    {activeIngredients
-                      .filter(i => i.name.includes(searchB) || i.nameEn.toLowerCase().includes(searchB.toLowerCase()))
-                      .slice(0, 10)
-                      .map(i => (
-                        <button
-                          key={i.id}
-                          onClick={() => { setVectorB(i.id); setSearchB(''); }}
-                          className="w-full px-2 py-1 text-left text-xs hover:bg-[#f5ece7] transition"
-                        >
-                          {i.name}
-                        </button>
-                      ))}
-                  </div>
-                )}
-              </div>
-            </div>
+            {/* Endpoint selectors with preset chips + search */}
+            <EndpointPicker
+              label="起点"
+              currentId={vectorA}
+              search={searchA}
+              onSearchChange={setSearchA}
+              onPick={handlePickA}
+              activeIngredients={activeIngredients}
+              recentPicks={recentPicks}
+            />
+            <EndpointPicker
+              label="终点"
+              currentId={vectorB}
+              search={searchB}
+              onSearchChange={setSearchB}
+              onPick={handlePickB}
+              activeIngredients={activeIngredients}
+              recentPicks={recentPicks}
+            />
 
             <div className="mb-3">
               <div className="flex items-center justify-between mb-1">
@@ -645,7 +597,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
         </div>
       </div>
 
-      {/* Bottom: Corridor Panorama spans full width */}
+      {/* Bottom: Corridor Panorama */}
       <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-4">
         <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a] mb-1">
           走廊全景
@@ -695,7 +647,126 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
   );
 }
 
-// Ingredient selector component
+// ── Endpoint picker with preset chips + search + recent history ──
+
+const PRESET_IDS = ['chicken', 'pork', 'beef', 'shrimp', 'tofu', 'garlic', 'chili', 'tomato', 'mushroom', 'coconut-milk'];
+
+interface EndpointPickerProps {
+  label: string;
+  currentId: string;
+  search: string;
+  onSearchChange: (v: string) => void;
+  onPick: (id: string) => void;
+  activeIngredients: Ingredient[];
+  recentPicks: string[];
+}
+
+function EndpointPicker({ label, currentId, search, onSearchChange, onPick, activeIngredients, recentPicks }: EndpointPickerProps) {
+  const current = activeIngredients.find(i => i.id === currentId);
+
+  // Chips: presets + recent picks (deduplicated, excluding current)
+  const chips = useMemo(() => {
+    const seen = new Set([currentId]);
+    const result: Ingredient[] = [];
+    // Recent picks first
+    for (const id of recentPicks) {
+      if (seen.has(id)) continue;
+      const ing = activeIngredients.find(i => i.id === id);
+      if (ing) { result.push(ing); seen.add(id); }
+    }
+    // Then presets
+    for (const id of PRESET_IDS) {
+      if (seen.has(id)) continue;
+      const ing = activeIngredients.find(i => i.id === id);
+      if (ing) { result.push(ing); seen.add(id); }
+    }
+    return result.slice(0, 12);
+  }, [currentId, recentPicks, activeIngredients]);
+
+  // Search results
+  const searchResults = useMemo(() => {
+    if (!search) return [];
+    return activeIngredients
+      .filter(i => i.name.includes(search) || i.nameEn.toLowerCase().includes(search.toLowerCase()))
+      .slice(0, 8);
+  }, [search, activeIngredients]);
+
+  return (
+    <div className="mb-3">
+      <div className="flex items-center justify-between mb-1.5">
+        <label className="text-[10px] text-[#8c7168] uppercase tracking-wider font-bold">{label}</label>
+        {current && (
+          <span className="text-xs font-semibold text-[#2c2825]">{current.name}</span>
+        )}
+      </div>
+
+      {/* Search input */}
+      <div className="relative mb-1.5">
+        <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+        <input
+          type="text"
+          value={search}
+          onChange={e => onSearchChange(e.target.value)}
+          placeholder="搜索食材..."
+          className="w-full pl-7 pr-6 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none placeholder:text-[#8c7168]"
+        />
+        {search && (
+          <button
+            onClick={() => onSearchChange('')}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
+          >
+            <X size={12} />
+          </button>
+        )}
+      </div>
+
+      {/* Search results dropdown */}
+      {search && searchResults.length > 0 && (
+        <div className="mb-1.5 max-h-28 overflow-y-auto rounded-lg bg-white border border-[#e0c0b5]/30">
+          {searchResults.map(i => (
+            <button
+              key={i.id}
+              onClick={() => onPick(i.id)}
+              className="w-full px-2.5 py-1.5 text-left text-xs hover:bg-[#f5ece7] transition flex items-center gap-2"
+            >
+              <div
+                className="w-4 h-4 rounded-full flex items-center justify-center text-white text-[8px] font-bold flex-shrink-0"
+                style={{ background: CATEGORY_COLORS[i.category] }}
+              >
+                {i.name[0]}
+              </div>
+              <span>{i.name}</span>
+              <span className="text-[#8c7168] ml-auto text-[10px]">{i.nameEn}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Preset + recent chips */}
+      <div className="flex flex-wrap gap-1">
+        {chips.map(ing => {
+          const isCurrent = ing.id === currentId;
+          return (
+            <button
+              key={ing.id}
+              onClick={() => onPick(ing.id)}
+              className="px-2 py-0.5 rounded-full text-[10px] font-medium transition-all"
+              style={{
+                background: isCurrent ? CATEGORY_COLORS[ing.category] : CATEGORY_COLORS[ing.category] + '15',
+                color: isCurrent ? 'white' : CATEGORY_COLORS[ing.category],
+                boxShadow: isCurrent ? `0 2px 0 ${CATEGORY_COLORS[ing.category]}80` : 'none',
+              }}
+            >
+              {ing.name}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// Ingredient selector dropdown component
 interface IngredientSelectorProps {
   value: string;
   onChange: (value: string) => void;
