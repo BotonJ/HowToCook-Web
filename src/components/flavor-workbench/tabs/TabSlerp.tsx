@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getIngredients, getCooccurrencePairs, CATEGORY_COLORS } from '../data/ingredients';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
@@ -6,6 +6,43 @@ import { RadarChart } from '../ui/RadarChart';
 import { Search, X } from 'lucide-react';
 
 const TIMELINE_STOPS = [0, 0.25, 0.5, 0.75, 1.0];
+
+// 辅助函数：计算点到弧线的距离
+const distanceToArc = (point: Vec2, start: Vec2, end: Vec2): number => {
+  const A = point.x - start.x;
+  const B = point.y - start.y;
+  const C = end.x - start.x;
+  const D = end.y - start.y;
+
+  const dot = A * C + B * D;
+  const lenSq = C * C + D * D;
+  let param = -1;
+
+  if (lenSq !== 0) param = dot / lenSq;
+
+  let xx, yy;
+
+  if (param < 0) {
+    xx = start.x;
+    yy = start.y;
+  } else if (param > 1) {
+    xx = end.x;
+    yy = end.y;
+  } else {
+    xx = start.x + param * C;
+    yy = start.y + param * D;
+  }
+
+  const dx = point.x - xx;
+  const dy = point.y - yy;
+  return Math.sqrt(dx * dx + dy * dy);
+};
+
+// 检查是否为稀有类别
+const isRareCategory = (category: string): boolean => {
+  const commonCategories = ['蔬菜', '肉类', '调料', '水产'];
+  return !commonCategories.includes(category);
+};
 
 export function TabSlerp() {
   const [vectorA, setVectorA] = useState('');
@@ -98,6 +135,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [searchA, setSearchA] = useState('');
   const [searchB, setSearchB] = useState('');
+  const [autoFitEnabled, setAutoFitEnabled] = useState(true);
 
   const currentPos = useMemo((): Vec2 => {
     return slerp2d(
@@ -117,10 +155,112 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
 
   const neighbors = useMemo(() => {
     const allIngredients = getIngredients().map(i => ({
+      id: i.id,
       name: i.name, nameEn: i.nameEn, pos: { x: i.pca[0], y: i.pca[1] } as Vec2, category: i.category,
     }));
-    return nearestK(currentPos, allIngredients, 4, [vectorA, vectorB]);
+    return nearestK(currentPos, allIngredients, 6, [vectorA, vectorB]);
   }, [currentPos, vectorA, vectorB]);
+
+  // 重要性评分算法
+  const importanceScore = useCallback((ing: Ingredient): number => {
+    let score = 0;
+
+    // 核心节点加权
+    if (ing.id === vectorA || ing.id === vectorB) score += 1000;
+    else if (neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id)) score += 500;
+
+    // 距离弧线越近越重要
+    const distToArc = distanceToArc(
+      { x: ing.pca[0], y: ing.pca[1] },
+      { x: ingA.pca[0], y: ingA.pca[1] },
+      { x: ingB.pca[0], y: ingB.pca[1] }
+    );
+    score += Math.max(0, 50 - distToArc * 100);
+
+    // 类别多样性加权
+    if (isRareCategory(ing.category)) score += 30;
+
+    // 缩放级别调整
+    return score * (zoom > 1 ? 1.5 : zoom < 0.7 ? 0.5 : 1);
+  }, [vectorA, vectorB, neighbors, ingA, ingB, zoom]);
+
+  // 自适应节点过滤
+  const visibleIngredients = useMemo(() => {
+    const scored = activeIngredients.map(ing => ({
+      ing,
+      score: importanceScore(ing)
+    })).sort((a, b) => b.score - a.score);
+
+    // 基于缩放动态调整显示数量
+    const maxVisible = Math.floor(20 + zoom * 60); // 20-80 个节点
+    return scored.slice(0, maxVisible).map(s => s.ing);
+  }, [activeIngredients, zoom, importanceScore]);
+
+  // 动态标签显示判断
+  const shouldShowLabel = useCallback((ing: Ingredient): boolean => {
+    // 始终显示核心节点标签
+    const neighborIds = neighbors.map(n => 'id' in n ? n.id : n.name);
+    if ([vectorA, vectorB, ...neighborIds].includes(ing.id)) {
+      return true;
+    }
+
+    // 高缩放时显示更多标签
+    const labelThreshold = zoom > 1.5 ? 0.3 :
+                          zoom > 1 ? 0.1 :
+                          0.05;
+
+    // 基于重要性和随机采样
+    return importanceScore(ing) > 50 &&
+           Math.random() > (1 - labelThreshold);
+  }, [zoom, vectorA, vectorB, neighbors, importanceScore]);
+
+  // 自动缩放到相关节点
+  const autoFitView = useCallback(() => {
+    if (!autoFitEnabled) return;
+
+    // 计算相关节点的边界框（只使用实际的 Ingredient 对象）
+    const relevantNodes = [ingA, ingB];
+    const positions = relevantNodes.map(n => ({ x: n.pca[0], y: n.pca[1] }));
+
+    // 添加邻居节点的位置（从 pos 字段获取）
+    neighbors.slice(0, 8).forEach(n => {
+      positions.push(n.pos);
+    });
+
+    const bounds = {
+      minX: Math.min(...positions.map(p => p.x)),
+      maxX: Math.max(...positions.map(p => p.x)),
+      minY: Math.min(...positions.map(p => p.y)),
+      maxY: Math.max(...positions.map(p => p.y))
+    };
+
+    // 计算最佳缩放级别
+    const padding = 1.3; // 30% 边距
+    const contentWidth = (bounds.maxX - bounds.minX) * padding;
+    const contentHeight = (bounds.maxY - bounds.minY) * padding;
+
+    const viewWidth = 600;
+    const viewHeight = 380;
+
+    const newZoom = Math.min(
+      viewWidth / contentWidth,
+      viewHeight / contentHeight
+    );
+
+    // 限制缩放范围
+    setZoom(Math.max(0.6, Math.min(newZoom, 2.0)));
+  }, [autoFitEnabled, ingA, ingB, neighbors]);
+
+  // 在食材选择变化时自动缩放
+  useEffect(() => {
+    autoFitView();
+  }, [vectorA, vectorB, autoFitView]);
+
+  // 手动缩放时禁用自动缩放
+  const handleZoomChange = useCallback((newZoom: number) => {
+    setAutoFitEnabled(false);
+    setZoom(newZoom);
+  }, []);
 
   const corridorPanorama = useMemo(() => {
     const allIngredients = getIngredients().map(i => ({
@@ -220,25 +360,40 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
             </div>
             <div className="flex flex-col gap-1">
               <button
-                onClick={() => setZoom(z => Math.min(z * 1.2, 3))}
+                onClick={() => handleZoomChange(Math.min(zoom * 1.2, 3))}
                 className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-sm font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
                 title="放大"
               >
                 +
               </button>
               <button
-                onClick={() => setZoom(z => Math.max(z / 1.2, 0.5))}
+                onClick={() => handleZoomChange(Math.max(zoom / 1.2, 0.5))}
                 className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-sm font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
                 title="缩小"
               >
                 −
               </button>
               <button
-                onClick={() => { setZoom(1); setPan({ x: 0, y: 0 }); }}
+                onClick={() => {
+                  setAutoFitEnabled(true);
+                  setZoom(1);
+                  setPan({ x: 0, y: 0 });
+                }}
                 className="w-8 h-8 rounded-lg bg-white shadow-md border border-[#e0c0b5]/40 flex items-center justify-center text-[10px] font-bold text-[#58413a] hover:bg-[#f5ece7] transition"
                 title="重置"
               >
                 ⌂
+              </button>
+              <button
+                onClick={() => setAutoFitEnabled(!autoFitEnabled)}
+                className={`w-8 h-8 rounded-lg border flex items-center justify-center text-[10px] font-bold transition ${
+                  autoFitEnabled
+                    ? 'bg-[#ae3a04] text-white border-[#ae3a04]'
+                    : 'bg-white shadow-md border-[#e0c0b5]/40 text-[#58413a] hover:bg-[#f5ece7]'
+                }`}
+                title={autoFitEnabled ? "自动缩放开启" : "自动缩放关闭"}
+              >
+                AUTO
               </button>
             </div>
           </div>
@@ -263,37 +418,20 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
               <rect width="100%" height="100%" fill="url(#slerp-grid)" />
 
               {(() => {
-                // Filter ingredients to show only those near the corridor path
-                const corridorPoints = arcPoints;
-                const shownIngredients = activeIngredients
-                  .filter(ing => {
-                    if (ing.id === vectorA || ing.id === vectorB) return false;
-                    const ingPos = { x: mapX(ing.pca[0]), y: mapY(ing.pca[1]) };
-                    // Find minimum distance to any point on the arc
-                    let minDist = Infinity;
-                    for (const pt of corridorPoints) {
-                      const ptX = mapX(pt.x);
-                      const ptY = mapY(pt.y);
-                      const dist = Math.sqrt((ingPos.x - ptX) ** 2 + (ingPos.y - ptY) ** 2);
-                      minDist = Math.min(minDist, dist);
-                    }
-                    // Only show ingredients within 60px of the corridor
-                    return minDist < 60;
-                  })
-                  .slice(0, 20); // Limit to 20 nearest ingredients
-
-                return shownIngredients.map(ing => {
+                // 使用智能过滤的节点渲染
+                return visibleIngredients.map(ing => {
                   const x = mapX(ing.pca[0]);
                   const y = mapY(ing.pca[1]);
-                  // Calculate distance to corridor for label priority
-                  let minDist = Infinity;
-                  for (const pt of corridorPoints) {
-                    const ptX = mapX(pt.x);
-                    const ptY = mapY(pt.y);
-                    const dist = Math.sqrt((x - ptX) ** 2 + (y - ptY) ** 2);
-                    minDist = Math.min(minDist, dist);
-                  }
-                  const showLabel = minDist < 30; // Only show labels for very close ingredients
+                  if (ing.id === vectorA || ing.id === vectorB) return null;
+
+                  const showLabel = shouldShowLabel(ing);
+                  const isNeighbor = neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id);
+                  const nodeSize = isNeighbor ? 9 : 7;
+                  const nodeOpacity = isNeighbor ? 0.8 : 0.5;
+                  const strokeWidth = isNeighbor ? 2 : 1.5;
+                  const fontSize = isNeighbor ? 12 : 11;
+                  const fontWeight = isNeighbor ? 600 : 400;
+                  const labelOpacity = isNeighbor ? 1 : 0.7;
 
                   return (
                     <g
@@ -301,9 +439,25 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                       onClick={(e) => { e.stopPropagation(); handleSelectIngredient(ing.id); }}
                       style={{ cursor: 'pointer' }}
                     >
-                      <circle cx={x} cy={y} r={6} fill={CATEGORY_COLORS[ing.category]} fillOpacity={0.35} stroke="white" strokeWidth={1} />
+                      <circle
+                        cx={x}
+                        cy={y}
+                        r={nodeSize}
+                        fill={CATEGORY_COLORS[ing.category]}
+                        fillOpacity={nodeOpacity}
+                        stroke="white"
+                        strokeWidth={strokeWidth}
+                      />
                       {showLabel && (
-                        <text x={x + 9} y={y + 3} fontSize={10} fill="#58413a" fontFamily="Quicksand, sans-serif" opacity={0.75}>
+                        <text
+                          x={x + nodeSize + 3}
+                          y={y + 4}
+                          fontSize={fontSize}
+                          fontWeight={fontWeight}
+                          fill="#58413a"
+                          fontFamily="Quicksand, sans-serif"
+                          opacity={labelOpacity}
+                        >
                           {ing.name}
                         </text>
                       )}
