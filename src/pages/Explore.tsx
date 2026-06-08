@@ -1,4 +1,3 @@
-import { Layout } from '@/components/Layout';
 import { FlavorWorkbench } from '@/components/flavor-workbench/FlavorWorkbench';
 import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
@@ -12,9 +11,5 @@ export function Explore() {
     ogUrl: `${SITE_URL}/explore`,
   });
 
-  return (
-    <Layout>
-      <FlavorWorkbench />
-    </Layout>
-  );
+  return <FlavorWorkbench />;
 }
