@@ -182,7 +182,10 @@ export function TabPairing() {
     if (alerts.length === 0) {
       paragraphs.push('风味分布均衡，无明显偏颇。');
     } else {
-      paragraphs.push(alerts.join(''));
+      // Each alert as its own paragraph for readability
+      for (const alert of alerts) {
+        paragraphs.push(alert);
+      }
     }
 
     // Supplement suggestions
@@ -195,7 +198,7 @@ export function TabPairing() {
         .sort((a, b) => b.flavor[weakest] - a.flavor[weakest])
         .slice(0, 3);
       if (candidates.length > 0) {
-        paragraphs.push(`${DIM_LABELS[weakest]}味偏弱，可尝试添加 ${candidates.map(c => c.name).join('、')} 来增强此维度。`);
+        paragraphs.push(`总结：${DIM_LABELS[weakest]}味偏弱，可尝试添加 ${candidates.map(c => c.name).join('、')} 来增强此维度。`);
       }
     }
 
