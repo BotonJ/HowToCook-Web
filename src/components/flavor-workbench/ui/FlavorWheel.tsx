@@ -165,7 +165,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       const contentH = maxY - minY;
       if (contentW > 0 && contentH > 0) {
         const scale = Math.min(available / contentW, available / contentH, 1.2);
-        fitZoom = scale * 0.7;
+        fitZoom = scale * 0.55; // Reduced from 0.7 to 0.55 for smaller default zoom
 
         const contentCx = (minX + maxX) / 2;
         const contentCy = (minY + maxY) / 2;

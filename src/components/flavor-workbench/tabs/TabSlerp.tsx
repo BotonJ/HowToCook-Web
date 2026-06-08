@@ -262,23 +262,55 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
               </defs>
               <rect width="100%" height="100%" fill="url(#slerp-grid)" />
 
-              {activeIngredients.map(ing => {
-                const x = mapX(ing.pca[0]);
-                const y = mapY(ing.pca[1]);
-                if (ing.id === vectorA || ing.id === vectorB) return null;
-                return (
-                  <g
-                    key={ing.id}
-                    onClick={(e) => { e.stopPropagation(); handleSelectIngredient(ing.id); }}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <circle cx={x} cy={y} r={7} fill={CATEGORY_COLORS[ing.category]} fillOpacity={0.6} stroke="white" strokeWidth={1.5} />
-                    <text x={x + 10} y={y + 4} fontSize={11} fill="#58413a" fontFamily="Quicksand, sans-serif" opacity={0.9}>
-                      {ing.name}
-                    </text>
-                  </g>
-                );
-              })}
+              {(() => {
+                // Filter ingredients to show only those near the corridor path
+                const corridorPoints = arcPoints;
+                const shownIngredients = activeIngredients
+                  .filter(ing => {
+                    if (ing.id === vectorA || ing.id === vectorB) return false;
+                    const ingPos = { x: mapX(ing.pca[0]), y: mapY(ing.pca[1]) };
+                    // Find minimum distance to any point on the arc
+                    let minDist = Infinity;
+                    for (const pt of corridorPoints) {
+                      const ptX = mapX(pt.x);
+                      const ptY = mapY(pt.y);
+                      const dist = Math.sqrt((ingPos.x - ptX) ** 2 + (ingPos.y - ptY) ** 2);
+                      minDist = Math.min(minDist, dist);
+                    }
+                    // Only show ingredients within 60px of the corridor
+                    return minDist < 60;
+                  })
+                  .slice(0, 20); // Limit to 20 nearest ingredients
+
+                return shownIngredients.map(ing => {
+                  const x = mapX(ing.pca[0]);
+                  const y = mapY(ing.pca[1]);
+                  // Calculate distance to corridor for label priority
+                  let minDist = Infinity;
+                  for (const pt of corridorPoints) {
+                    const ptX = mapX(pt.x);
+                    const ptY = mapY(pt.y);
+                    const dist = Math.sqrt((x - ptX) ** 2 + (y - ptY) ** 2);
+                    minDist = Math.min(minDist, dist);
+                  }
+                  const showLabel = minDist < 30; // Only show labels for very close ingredients
+
+                  return (
+                    <g
+                      key={ing.id}
+                      onClick={(e) => { e.stopPropagation(); handleSelectIngredient(ing.id); }}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <circle cx={x} cy={y} r={6} fill={CATEGORY_COLORS[ing.category]} fillOpacity={0.35} stroke="white" strokeWidth={1} />
+                      {showLabel && (
+                        <text x={x + 9} y={y + 3} fontSize={10} fill="#58413a" fontFamily="Quicksand, sans-serif" opacity={0.75}>
+                          {ing.name}
+                        </text>
+                      )}
+                    </g>
+                  );
+                });
+              })()}
 
               <path d={arcD} fill="none" stroke="#ae3a04" strokeWidth={3} strokeDasharray="6 4" opacity={0.5} strokeLinecap="round" />
 

@@ -407,16 +407,17 @@ export function TabPairing() {
             )}
 
             {/* Analysis paragraphs */}
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {analysisParagraphs.map((para, i) => (
                 <motion.div
                   key={i}
-                  className="text-sm text-[#2c2825] leading-relaxed pl-3 border-l-2 border-[#e0c0b5]"
+                  className="text-sm text-[#2c2825] leading-relaxed flex items-start gap-2"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
-                  {para}
+                  <span className="text-[#ae3a04] font-bold mt-0.5">•</span>
+                  <span>{para}</span>
                 </motion.div>
               ))}
             </div>
