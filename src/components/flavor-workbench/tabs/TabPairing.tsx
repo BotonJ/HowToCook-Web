@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Search } from 'lucide-react';
 import {
   getIngredients,
   getCooccurrencePairs,
@@ -10,7 +11,7 @@ import {
 import { RadarChart } from '../ui/RadarChart';
 import type { RadarDataset } from '../ui/RadarChart';
 
-const MAX_SELECT = 4;
+const MAX_SELECT = 6;
 
 const DIM_LABELS: Record<string, string> = {
   sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fat: '脂肪',
@@ -45,6 +46,14 @@ export function TabPairing() {
   const selectedIngredients = useMemo(
     () => selectedIds.map(id => getIngredients().find(i => i.id === id)!).filter(Boolean),
     [selectedIds]
+  );
+
+  const [search, setSearch] = useState('');
+  const filteredIngredients = useMemo(
+    () => getIngredients().filter(i =>
+      !search || i.name.includes(search) || i.nameEn.toLowerCase().includes(search.toLowerCase())
+    ),
+    [search]
   );
 
   // ── Synthesis flavor (average) ──
@@ -269,15 +278,35 @@ export function TabPairing() {
       <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-semibold text-[#2c2825]">选择食材</h3>
-          <span className="text-xs text-[#8c7168]">
-            {selectedIds.length}/{MAX_SELECT}
-            {selectedIds.length >= MAX_SELECT && (
-              <span className="text-[#ba1a1a] ml-1">已达上限</span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[#8c7168]">
+              {selectedIds.length}/{MAX_SELECT}
+              {selectedIds.length >= MAX_SELECT && (
+                <span className="text-[#ba1a1a] ml-1">已达上限</span>
+              )}
+            </span>
+            {selectedIds.length > 0 && (
+              <button
+                onClick={() => setSelectedIds([getIngredients()[0]?.id].filter(Boolean))}
+                className="text-xs text-[#ae3a04] hover:underline"
+              >
+                清空
+              </button>
             )}
-          </span>
+          </div>
+        </div>
+        <div className="relative mb-2">
+          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+          <input
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="搜索食材..."
+            className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168]"
+          />
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
-          {getIngredients().slice(0, 80).map(i => {
+          {filteredIngredients.slice(0, 80).map(i => {
             const active = selectedIds.includes(i.id);
             const disabled = !active && selectedIds.length >= MAX_SELECT;
             return (
@@ -378,17 +407,17 @@ export function TabPairing() {
             )}
 
             {/* Analysis paragraphs */}
-            <div className="space-y-3">
+            <div className="space-y-2">
               {analysisParagraphs.map((para, i) => (
-                <motion.p
+                <motion.div
                   key={i}
-                  className="text-sm text-[#2c2825] leading-relaxed"
+                  className="text-sm text-[#2c2825] leading-relaxed pl-3 border-l-2 border-[#e0c0b5]"
                   initial={{ opacity: 0, y: 5 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                 >
                   {para}
-                </motion.p>
+                </motion.div>
               ))}
             </div>
           </div>

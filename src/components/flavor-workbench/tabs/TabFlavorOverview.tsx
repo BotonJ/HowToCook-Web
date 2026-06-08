@@ -12,6 +12,7 @@ export function TabFlavorOverview() {
   const [selectedId, setSelectedId] = useState<string>('chicken');
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   const selected = useMemo(
     () => getIngredients().find(i => i.id === selectedId) || getIngredients()[0],
@@ -58,9 +59,9 @@ export function TabFlavorOverview() {
 
             <button
               onClick={() => setShowSearch(!showSearch)}
-              className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#f5ece7] transition flex-shrink-0"
+              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f5ece7] transition flex-shrink-0"
             >
-              {showSearch ? <X size={14} /> : <Search size={14} />}
+              {showSearch ? <X size={16} className="text-[#58413a]" /> : <Search size={16} className="text-[#58413a]" />}
             </button>
 
             <AnimatePresence>
@@ -107,7 +108,7 @@ export function TabFlavorOverview() {
             )}
 
             <div className="flex flex-wrap gap-1 flex-1 max-h-20 overflow-y-auto">
-              {getIngredients().slice(0, 60).map(i => (
+              {(showAll ? getIngredients() : getIngredients().slice(0, 24)).map(i => (
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}
@@ -127,8 +128,13 @@ export function TabFlavorOverview() {
                   {i.name}
                 </button>
               ))}
-              {getIngredients().length > 60 && (
-                <span className="text-[10px] text-[#8c7168] self-center">+{getIngredients().length - 60} 更多食材可搜索</span>
+              {getIngredients().length > 24 && (
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="text-[10px] text-[#ae3a04] hover:underline self-center"
+                >
+                  {showAll ? '收起' : `+${getIngredients().length - 24} 更多`}
+                </button>
               )}
             </div>
           </div>

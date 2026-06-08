@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, ChefHat, X, Plus } from 'lucide-react';
+import { Clock, ChefHat, X, Plus, Search } from 'lucide-react';
 import {
   getIngredients, getRecipes, getSubstitutions, getCommonAllergens,
   CATEGORY_COLORS, getScenarioExplanations,
@@ -30,6 +30,8 @@ export function TabRecipes() {
   const [customAllergen, setCustomAllergen] = useState('');
   const [showAllergenPicker, setShowAllergenPicker] = useState(false);
   const [excludedIngredients, setExcludedIngredients] = useState<string[]>([]);
+  const [ingredientSearch, setIngredientSearch] = useState('');
+  const [recipeSearch, setRecipeSearch] = useState('');
 
   const toggleIngredient = (id: string) => {
     setSelected(prev =>
@@ -38,6 +40,13 @@ export function TabRecipes() {
         : prev.length < MAX_SELECT ? [...prev, id] : prev
     );
   };
+
+  const filteredIngredients = useMemo(
+    () => getIngredients().filter(i =>
+      !ingredientSearch || i.name.includes(ingredientSearch) || i.nameEn.toLowerCase().includes(ingredientSearch.toLowerCase())
+    ),
+    [ingredientSearch]
+  );
 
   const toggleAllergen = (id: string) => {
     setExcludedAllergens(prev =>
@@ -119,19 +128,48 @@ export function TabRecipes() {
 
   const selectedNames = selected.map(id => getIngredients().find(i => i.id === id)?.name || id);
 
+  const filteredExact = useMemo(
+    () => recipeSearch ? exact.filter(r => r.name.includes(recipeSearch)) : exact,
+    [exact, recipeSearch]
+  );
+  const filteredPartial = useMemo(
+    () => recipeSearch ? partial.filter(r => r.name.includes(recipeSearch)) : partial,
+    [partial, recipeSearch]
+  );
+
   return (
     <div className="flex flex-col gap-5">
       {/* Ingredient picker with max limit */}
       <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-4">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-semibold text-[#2c2825]">选择食材</h3>
-          <span className="text-xs text-[#8c7168]">
-            {selected.length}/{MAX_SELECT}
-            {selected.length >= MAX_SELECT && <span className="text-[#ba1a1a] ml-1">已达上限</span>}
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-[#8c7168]">
+              {selected.length}/{MAX_SELECT}
+              {selected.length >= MAX_SELECT && <span className="text-[#ba1a1a] ml-1">已达上限</span>}
+            </span>
+            {selected.length > 0 && (
+              <button
+                onClick={() => setSelected([getIngredients()[0]?.id].filter(Boolean))}
+                className="text-xs text-[#ae3a04] hover:underline"
+              >
+                清空
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="relative mb-2">
+          <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+          <input
+            type="text"
+            value={ingredientSearch}
+            onChange={e => setIngredientSearch(e.target.value)}
+            placeholder="搜索食材..."
+            className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168]"
+          />
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
-          {getIngredients().slice(0, 80).map(i => {
+          {filteredIngredients.slice(0, 80).map(i => {
             const active = selected.includes(i.id);
             const disabled = !active && selected.length >= MAX_SELECT;
             return (
@@ -279,28 +317,42 @@ export function TabRecipes() {
 
       {/* Recipe results */}
       <div>
-        <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a] mb-3">
-          🍳 匹配菜谱
-        </h4>
+        <div className="flex items-center justify-between mb-3">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a]">
+            🍳 匹配菜谱
+          </h4>
+          {(exact.length > 0 || partial.length > 0) && (
+            <div className="relative">
+              <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+              <input
+                type="text"
+                value={recipeSearch}
+                onChange={e => setRecipeSearch(e.target.value)}
+                placeholder="搜索菜谱..."
+                className="pl-8 pr-3 py-1.5 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168] w-40"
+              />
+            </div>
+          )}
+        </div>
 
         {selected.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-8 text-center">
             <p className="text-sm text-[#8c7168]">请选择至少一种食材</p>
           </div>
-        ) : exact.length === 0 && partial.length === 0 ? (
+        ) : filteredExact.length === 0 && filteredPartial.length === 0 ? (
           <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-8 text-center">
             <p className="text-sm text-[#8c7168]">没有匹配的菜谱，试试减少食材或调整筛选条件</p>
           </div>
         ) : (
           <>
             {/* Exact matches */}
-            {exact.length > 0 && (
+            {filteredExact.length > 0 && (
               <div className="mb-4">
                 <div className="text-xs text-[#4a7c59] font-semibold mb-2">
-                  ✓ 完全匹配（包含全部所选食材）— {exact.length} 道
+                  ✓ 完全匹配（包含全部所选食材）— {filteredExact.length} 道
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {exact.map((r, i) => (
+                  {filteredExact.map((r, i) => (
                     <RecipeCard key={r.id} recipe={r} selected={selected} delay={i * 0.05} />
                   ))}
                 </div>
@@ -308,13 +360,13 @@ export function TabRecipes() {
             )}
 
             {/* Partial matches */}
-            {partial.length > 0 && (
+            {filteredPartial.length > 0 && (
               <div>
                 <div className="text-xs text-[#8c7168] font-semibold mb-2">
-                  部分匹配（包含部分所选食材）— {partial.length} 道
+                  部分匹配（包含部分所选食材）— {filteredPartial.length} 道
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {partial.map((r, i) => (
+                  {filteredPartial.map((r, i) => (
                     <RecipeCard key={r.id} recipe={r} selected={selected} delay={i * 0.05} />
                   ))}
                 </div>
