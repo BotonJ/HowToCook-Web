@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { getIngredients, getCooccurrencePairs, CATEGORY_COLORS } from '../data/ingredients';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
