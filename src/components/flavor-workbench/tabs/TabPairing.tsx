@@ -20,10 +20,7 @@ const DIM_LABELS: Record<string, string> = {
 const DIM_ORDER = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'];
 
 export function TabPairing() {
-  const [selectedIds, setSelectedIds] = useState<string[]>(() => {
-    const ingredients = getIngredients();
-    return ingredients.length > 0 ? [ingredients[0].id] : [];
-  });
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   const toggleIngredient = (id: string) => {
     setSelectedIds(prev =>
@@ -33,27 +30,30 @@ export function TabPairing() {
     );
   };
 
-  // Auto-select first ingredient when data loads asynchronously
-  useEffect(() => {
-    if (selectedIds.length === 0) {
-      const ingredients = getIngredients();
-      if (ingredients.length > 0) {
-        setSelectedIds([ingredients[0].id]);
-      }
-    }
-  }, [selectedIds.length]);
-
   const selectedIngredients = useMemo(
     () => selectedIds.map(id => getIngredients().find(i => i.id === id)!).filter(Boolean),
     [selectedIds]
   );
 
+  // Only show ingredients that have at least 1 cooccurrence pair (sync with TabFlavorOverview)
+  const activeIngredients = useMemo(() => {
+    const all = getIngredients();
+    if (all.length === 0) return [];
+    const pairs = getCooccurrencePairs();
+    const connectedIds = new Set<string>();
+    for (const p of pairs) {
+      connectedIds.add(p.a);
+      connectedIds.add(p.b);
+    }
+    return all.filter(i => connectedIds.has(i.id));
+  }, [getIngredients().length]);
+
   const [search, setSearch] = useState('');
   const filteredIngredients = useMemo(
-    () => getIngredients().filter(i =>
+    () => activeIngredients.filter(i =>
       !search || i.name.includes(search) || i.nameEn.toLowerCase().includes(search.toLowerCase())
     ),
-    [search]
+    [search, activeIngredients]
   );
 
   // ── Synthesis flavor (average) ──
@@ -133,7 +133,7 @@ export function TabPairing() {
     const paragraphs: string[] = [];
 
     if (selectedIngredients.length === 0) {
-      paragraphs.push('请选择食材开始探索搭配效果。');
+      paragraphs.push('请从下方选择 1-6 种食材，开始探索搭配效果。分析将显示合成风味、经典搭配和风味桥接建议。');
       return paragraphs;
     }
 
@@ -287,7 +287,7 @@ export function TabPairing() {
             </span>
             {selectedIds.length > 0 && (
               <button
-                onClick={() => setSelectedIds([getIngredients()[0]?.id].filter(Boolean))}
+                onClick={() => setSelectedIds([])}
                 className="text-xs text-[#ae3a04] hover:underline"
               >
                 清空
@@ -306,7 +306,7 @@ export function TabPairing() {
           />
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
-          {filteredIngredients.slice(0, 80).map(i => {
+          {filteredIngredients.map(i => {
             const active = selectedIds.includes(i.id);
             const disabled = !active && selectedIds.length >= MAX_SELECT;
             return (
@@ -464,7 +464,11 @@ export function TabPairing() {
             ))}
           </div>
           {classicPairs.length === 0 && (
-            <p className="text-xs text-[#8c7168] mt-2">暂无经典搭配推荐</p>
+            <p className="text-xs text-[#8c7168] mt-2">
+              {selectedIds.length === 0
+                ? '选择食材后将显示经典搭配推荐'
+                : '当前选择的食材暂无经典搭配数据'}
+            </p>
           )}
         </div>
 
@@ -476,7 +480,11 @@ export function TabPairing() {
             化学成分相似但很少在菜谱中共现的食材——值得尝试的新搭配
           </p>
           {bridges.length === 0 ? (
-            <p className="text-xs text-[#8c7168]">该食材暂无风味桥接推荐</p>
+            <p className="text-xs text-[#8c7168]">
+              {selectedIds.length === 0
+                ? '选择食材后将显示风味桥接推荐'
+                : '当前选择的食材暂无风味桥接数据'}
+            </p>
           ) : (
             <div className="flex flex-col gap-2">
               {bridges.map((b, i) => (
