@@ -20,6 +20,16 @@ const DIM_LABELS: Record<string, string> = {
 
 const DIM_ORDER = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'];
 
+/** Get flavor value, mapping 'fatty' → 'fat' for real data compatibility */
+const getFlavor = (ing: Ingredient, dim: string): number => {
+  if (dim === 'fatty') {
+    const v = ing.flavor.fatty;
+    if (v !== undefined) return v;
+    return (ing.flavor as Record<string, number>)['fat'] ?? 0;
+  }
+  return ing.flavor[dim] ?? 0;
+};
+
 export function TabPairing() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
@@ -52,7 +62,7 @@ export function TabPairing() {
     if (selectedIngredients.length === 0) return null;
     const avg: Record<string, number> = {};
     for (const dim of DIM_ORDER) {
-      const sum = selectedIngredients.reduce((s, ing) => s + ing.flavor[dim], 0);
+      const sum = selectedIngredients.reduce((s, ing) => s + getFlavor(ing, dim), 0);
       avg[dim] = sum / selectedIngredients.length;
     }
     return avg as Ingredient['flavor'];
@@ -88,7 +98,7 @@ export function TabPairing() {
     if (selectedIngredients.length < 2) return null;
     const values: Record<string, number[]> = {};
     for (const dim of DIM_ORDER) {
-      values[dim] = selectedIngredients.map(ing => ing.flavor[dim]);
+      values[dim] = selectedIngredients.map(ing => getFlavor(ing, dim));
     }
     const mean: Record<string, number> = {};
     const std: Record<string, number> = {};
@@ -106,15 +116,15 @@ export function TabPairing() {
   // ── Dimension changes (增幅分析) ──
   const dimChanges = useMemo(() => {
     if (selectedIngredients.length < 2) return [];
-    const base = selectedIngredients[0].flavor;
     const avg: Record<string, number> = {};
     for (const dim of DIM_ORDER) {
-      const sum = selectedIngredients.reduce((s, ing) => s + ing.flavor[dim], 0);
+      const sum = selectedIngredients.reduce((s, ing) => s + getFlavor(ing, dim), 0);
       avg[dim] = sum / selectedIngredients.length;
     }
     return DIM_ORDER.map(dim => {
-      const change = avg[dim] - base[dim];
-      const pct = base[dim] > 0 ? (change / base[dim]) * 100 : 0;
+      const baseVal = getFlavor(selectedIngredients[0], dim);
+      const change = avg[dim] - baseVal;
+      const pct = baseVal > 0 ? (change / baseVal) * 100 : 0;
       return { dim, label: DIM_LABELS[dim], avg: avg[dim], change, pct };
     }).sort((a, b) => Math.abs(b.change) - Math.abs(a.change));
   }, [selectedIngredients]);
@@ -130,17 +140,17 @@ export function TabPairing() {
 
     if (selectedIngredients.length === 1) {
       const ing = selectedIngredients[0];
-      const sorted = [...DIM_ORDER].sort((a, b) => ing.flavor[b] - ing.flavor[a]);
+      const sorted = [...DIM_ORDER].sort((a, b) => getFlavor(ing, b) - getFlavor(ing, a));
       const top = sorted[0];
       const second = sorted[1];
-      paragraphs.push(`${ing.name} 以${DIM_LABELS[top]}味为主导（${(ing.flavor[top] * 10).toFixed(1)}），${DIM_LABELS[second]}为辅。选择第二种食材以探索搭配效果。`);
+      paragraphs.push(`${ing.name} 以${DIM_LABELS[top]}味为主导（${(getFlavor(ing, top) * 10).toFixed(1)}），${DIM_LABELS[second]}为辅。选择第二种食材以探索搭配效果。`);
       return paragraphs;
     }
 
     // Flavor evaluation
     const avg: Record<string, number> = {};
     for (const dim of DIM_ORDER) {
-      const sum = selectedIngredients.reduce((s, ing) => s + ing.flavor[dim], 0);
+      const sum = selectedIngredients.reduce((s, ing) => s + getFlavor(ing, dim), 0);
       avg[dim] = sum / selectedIngredients.length;
     }
     const sorted = [...DIM_ORDER].sort((a, b) => avg[b] - avg[a]);
@@ -156,7 +166,7 @@ export function TabPairing() {
 
     // Balance detection
     const values: Record<string, number[]> = {};
-    for (const dim of DIM_ORDER) values[dim] = selectedIngredients.map(ing => ing.flavor[dim]);
+    for (const dim of DIM_ORDER) values[dim] = selectedIngredients.map(ing => getFlavor(ing, dim));
     const mean: Record<string, number> = {};
     const std: Record<string, number> = {};
     for (const dim of DIM_ORDER) {
@@ -194,8 +204,8 @@ export function TabPairing() {
     if (weakestVal <= 0.6) {
       const selectedSet = new Set(selectedIds);
       const candidates = getIngredients()
-        .filter(ing => !selectedSet.has(ing.id) && ing.flavor[weakest] >= 0.7)
-        .sort((a, b) => b.flavor[weakest] - a.flavor[weakest])
+        .filter(ing => !selectedSet.has(ing.id) && getFlavor(ing, weakest) >= 0.7)
+        .sort((a, b) => getFlavor(b, weakest) - getFlavor(a, weakest))
         .slice(0, 3);
       if (candidates.length > 0) {
         paragraphs.push(`总结：${DIM_LABELS[weakest]}味偏弱，可尝试添加 ${candidates.map(c => c.name).join('、')} 来增强此维度。`);

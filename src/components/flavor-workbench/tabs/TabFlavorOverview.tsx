@@ -195,7 +195,8 @@ export function TabFlavorOverview() {
             </h4>
             <div className="flex flex-col gap-1.5">
               {flavorBars.map(({ key, label, color }) => {
-                const val = selected.flavor[key as keyof typeof selected.flavor];
+                const raw = selected.flavor[key as keyof typeof selected.flavor];
+                const val = raw !== undefined ? raw : key === 'fatty' ? (selected.flavor as Record<string, number>)['fat'] ?? 0 : 0;
                 return (
                   <div key={key} className="flex items-center gap-1.5">
                     <span className="text-[10px] font-semibold w-3 text-right" style={{ color }}>

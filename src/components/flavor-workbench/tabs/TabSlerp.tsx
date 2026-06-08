@@ -216,7 +216,9 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     const dims = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'] as const;
     const result: Record<string, number> = {};
     for (const dim of dims) {
-      result[dim] = ingA.flavor[dim] * (1 - t) + ingB.flavor[dim] * t;
+      const a = dim === 'fatty' ? (ingA.flavor.fatty ?? (ingA.flavor as Record<string, number>)['fat'] ?? 0) : (ingA.flavor[dim] ?? 0);
+      const b = dim === 'fatty' ? (ingB.flavor.fatty ?? (ingB.flavor as Record<string, number>)['fat'] ?? 0) : (ingB.flavor[dim] ?? 0);
+      result[dim] = a * (1 - t) + b * t;
     }
     return result;
   }, [ingA, ingB, t]);
