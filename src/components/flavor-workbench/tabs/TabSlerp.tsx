@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { INGREDIENTS, CATEGORY_COLORS } from '../data/ingredients';
+import { getIngredients, CATEGORY_COLORS } from '../data/ingredients';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
 import { RadarChart } from '../ui/RadarChart';
 
@@ -12,14 +12,15 @@ export function TabSlerp() {
 
   // Auto-select defaults when data loads
   useEffect(() => {
-    if (INGREDIENTS.length > 0) {
-      if (!vectorA || !INGREDIENTS.find(i => i.id === vectorA)) setVectorA(INGREDIENTS[0].id);
-      if (!vectorB || !INGREDIENTS.find(i => i.id === vectorB)) setVectorB(INGREDIENTS[Math.min(5, INGREDIENTS.length - 1)].id);
+    const ingredients = getIngredients();
+    if (ingredients.length > 0) {
+      if (!vectorA || !ingredients.find(i => i.id === vectorA)) setVectorA(ingredients[0].id);
+      if (!vectorB || !ingredients.find(i => i.id === vectorB)) setVectorB(ingredients[Math.min(5, ingredients.length - 1)].id);
     }
-  }, [INGREDIENTS.length]);
+  }, [getIngredients().length]);
 
-  const ingA = useMemo(() => INGREDIENTS.find(i => i.id === vectorA), [vectorA]);
-  const ingB = useMemo(() => INGREDIENTS.find(i => i.id === vectorB), [vectorB]);
+  const ingA = useMemo(() => getIngredients().find(i => i.id === vectorA), [vectorA]);
+  const ingB = useMemo(() => getIngredients().find(i => i.id === vectorB), [vectorB]);
 
   // Guard: don't render inner component until both ingredients are resolved
   if (!ingA || !ingB) {
@@ -33,9 +34,11 @@ export function TabSlerp() {
   return <TabSlerpInner ingA={ingA} ingB={ingB} vectorA={vectorA} vectorB={vectorB} setVectorA={setVectorA} setVectorB={setVectorB} />;
 }
 
+import type { Ingredient } from '../data/ingredients';
+
 interface TabSlerpInnerProps {
-  ingA: typeof INGREDIENTS[number];
-  ingB: typeof INGREDIENTS[number];
+  ingA: Ingredient;
+  ingB: Ingredient;
   vectorA: string;
   vectorB: string;
   setVectorA: (v: string) => void;
@@ -66,14 +69,14 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
   }, [ingA, ingB]);
 
   const neighbors = useMemo(() => {
-    const allIngredients = INGREDIENTS.map(i => ({
+    const allIngredients = getIngredients().map(i => ({
       name: i.name, nameEn: i.nameEn, pos: { x: i.pca[0], y: i.pca[1] } as Vec2, category: i.category,
     }));
     return nearestK(currentPos, allIngredients, 4, [vectorA, vectorB]);
   }, [currentPos, vectorA, vectorB]);
 
   const corridorPanorama = useMemo(() => {
-    const allIngredients = INGREDIENTS.map(i => ({
+    const allIngredients = getIngredients().map(i => ({
       id: i.id,
       name: i.name,
       nameEn: i.nameEn,
@@ -212,7 +215,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
               </defs>
               <rect width="100%" height="100%" fill="url(#slerp-grid)" />
 
-              {INGREDIENTS.map(ing => {
+              {getIngredients().map(ing => {
                 const x = mapX(ing.pca[0]);
                 const y = mapY(ing.pca[1]);
                 if (ing.id === vectorA || ing.id === vectorB) return null;
@@ -270,7 +273,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
                   onChange={e => setVectorA(e.target.value)}
                   className="w-full px-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none"
                 >
-                  {INGREDIENTS.map(i => (
+                  {getIngredients().map(i => (
                     <option key={i.id} value={i.id}>{i.name}</option>
                   ))}
                 </select>
@@ -282,7 +285,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
                   onChange={e => setVectorB(e.target.value)}
                   className="w-full px-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none"
                 >
-                  {INGREDIENTS.map(i => (
+                  {getIngredients().map(i => (
                     <option key={i.id} value={i.id}>{i.name}</option>
                   ))}
                 </select>

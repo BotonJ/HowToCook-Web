@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { INGREDIENTS, COOCCURRENCE_PAIRS, SURPRISE_PAIRS, CATEGORY_COLORS, type Ingredient } from '../data/ingredients';
+import { getIngredients, getCooccurrencePairs, getSurprisePairs, CATEGORY_COLORS, type Ingredient } from '../data/ingredients';
 
 interface FlavorWheelProps {
   selectedId?: string;
@@ -49,7 +49,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
   // Find related pairs for selected ingredient
   const relatedPairs = useMemo(() => {
     if (!selectedId) return [];
-    return COOCCURRENCE_PAIRS
+    return getCooccurrencePairs()
       .filter(p => p.a === selectedId || p.b === selectedId)
       .sort((a, b) => b.pmi - a.pmi)
       .slice(0, 10);
@@ -62,7 +62,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
   // Find flavor bridges
   const bridgePairs = useMemo(() => {
     if (!selectedId) return [];
-    return SURPRISE_PAIRS
+    return getSurprisePairs()
       .filter(p => (p.a === selectedId || p.b === selectedId) && p.semanticSim > 0.55 && p.pmi < 0.5)
       .sort((a, b) => b.score - a.score)
       .slice(0, 4);
@@ -72,7 +72,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
   const positions = useMemo((): NodePosition[] => {
     if (!selectedId) return [];
 
-    const selected = INGREDIENTS.find(i => i.id === selectedId);
+    const selected = getIngredients().find(i => i.id === selectedId);
     if (!selected) return [];
 
     const result: NodePosition[] = [];
@@ -92,7 +92,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     const orbitR = baseOrbitR * zoom;
     relatedPairs.forEach((pair, i) => {
       const otherId = pair.a === selectedId ? pair.b : pair.a;
-      const other = INGREDIENTS.find(ing => ing.id === otherId);
+      const other = getIngredients().find(ing => ing.id === otherId);
       if (!other) return;
 
       const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;
@@ -115,7 +115,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     const bOrbitR = bridgeOrbitR * zoom;
     bridgePairs.forEach((pair, i) => {
       const otherId = pair.a === selectedId ? pair.b : pair.a;
-      const other = INGREDIENTS.find(ing => ing.id === otherId);
+      const other = getIngredients().find(ing => ing.id === otherId);
       if (!other || connectedIds.has(otherId)) return;
 
       const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;

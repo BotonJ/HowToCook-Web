@@ -54,10 +54,14 @@ export function FlavorWorkbench() {
     <div className="min-h-screen" style={{ backgroundColor: '#fff8f5' }}>
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#fff8f5]/80 backdrop-blur-sm border-b border-[#e0c0b5]">
-        <div className="max-w-[1200px] mx-auto px-4 h-14 flex items-center justify-center">
+        <div className="max-w-[1200px] mx-auto px-4 h-14 flex items-center justify-between">
+          <a href="/" className="text-xs text-[#8c7168] hover:text-[#ae3a04] transition-colors">
+            ← 返回首页
+          </a>
           <h1 className="text-base font-bold text-[#ae3a04] flex items-center gap-2">
             <span>🔥</span> 风味工作台
           </h1>
+          <div className="w-16" />
         </div>
       </header>
 

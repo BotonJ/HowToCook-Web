@@ -90,15 +90,27 @@ export interface Allergen {
   relatedIngredients: string[];
 }
 
-// ── Placeholder: will be populated from recipe-embedding data ──
+// ── Private mutable state ──────────────────────────────────────
 
-export let INGREDIENTS: Ingredient[] = [];
-export let COOCCURRENCE_PAIRS: CooccurrencePair[] = [];
-export let SURPRISE_PAIRS: SurprisePair[] = [];
-export let RECIPES: Recipe[] = [];
-export let SUBSTITUTIONS: Substitution[] = [];
-export let COMMON_ALLERGENS: Allergen[] = [];
-export let SCENARIO_EXPLANATIONS: Record<string, string> = {};
+const state = {
+  ingredients: [] as Ingredient[],
+  cooccurrencePairs: [] as CooccurrencePair[],
+  surprisePairs: [] as SurprisePair[],
+  recipes: [] as Recipe[],
+  substitutions: [] as Substitution[],
+  commonAllergens: [] as Allergen[],
+  scenarioExplanations: {} as Record<string, string>,
+};
+
+// ── Getters (immutable — return the same array reference) ──────
+
+export const getIngredients = () => state.ingredients;
+export const getCooccurrencePairs = () => state.cooccurrencePairs;
+export const getSurprisePairs = () => state.surprisePairs;
+export const getRecipes = () => state.recipes;
+export const getSubstitutions = () => state.substitutions;
+export const getCommonAllergens = () => state.commonAllergens;
+export const getScenarioExplanations = () => state.scenarioExplanations;
 
 // ── Data loader ──────────────────────────────────────────────
 
@@ -117,13 +129,13 @@ export async function loadWorkbenchData(): Promise<void> {
       const data = await resp.json();
       if (data.ingredients?.length && data.recipes?.length) {
         // Real data is complete — use it
-        INGREDIENTS = data.ingredients;
-        COOCCURRENCE_PAIRS = data.cooccurrence || [];
-        SURPRISE_PAIRS = data.surprise || [];
-        RECIPES = data.recipes;
-        SUBSTITUTIONS = data.substitutions || [];
-        COMMON_ALLERGENS = data.allergens || [];
-        SCENARIO_EXPLANATIONS = data.scenarioExplanations || {};
+        state.ingredients = data.ingredients;
+        state.cooccurrencePairs = data.cooccurrence || [];
+        state.surprisePairs = data.surprise || [];
+        state.recipes = data.recipes;
+        state.substitutions = data.substitutions || [];
+        state.commonAllergens = data.allergens || [];
+        state.scenarioExplanations = data.scenarioExplanations || {};
         useRealData = true;
       }
     }
@@ -144,7 +156,7 @@ export function isWorkbenchDataLoaded(): boolean {
 // ── Mock data (fallback when recipe-embedding data unavailable) ──
 
 async function loadMockData(): Promise<void> {
-  INGREDIENTS = [
+  state.ingredients = [
     { id: 'chicken', name: '鸡肉', nameEn: 'Chicken', category: 'meat', flavor: { sweet: 0.1, umami: 0.6, fat: 0.5, spicy: 0, bitter: 0, sour: 0 }, pca: [-80, 40] },
     { id: 'pork', name: '猪肉', nameEn: 'Pork', category: 'meat', flavor: { sweet: 0.15, umami: 0.7, fat: 0.7, spicy: 0, bitter: 0, sour: 0 }, pca: [-90, 60] },
     { id: 'beef', name: '牛肉', nameEn: 'Beef', category: 'meat', flavor: { sweet: 0.05, umami: 0.8, fat: 0.6, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-100, 50] },
@@ -187,7 +199,7 @@ async function loadMockData(): Promise<void> {
     { id: 'lemon', name: '柠檬', nameEn: 'Lemon', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0, bitter: 0.1, sour: 0.85 }, pca: [50, -30] },
   ];
 
-  COOCCURRENCE_PAIRS = [
+  state.cooccurrencePairs = [
     { a: 'chicken', b: 'ginger', pmi: 2.8, recipes: 87 },
     { a: 'chicken', b: 'scallion', pmi: 2.5, recipes: 72 },
     { a: 'chicken', b: 'soy-sauce', pmi: 2.3, recipes: 65 },
@@ -235,7 +247,7 @@ async function loadMockData(): Promise<void> {
     { a: 'sesame-oil', b: 'scallion', pmi: 2.3, recipes: 55 },
   ];
 
-  SURPRISE_PAIRS = [
+  state.surprisePairs = [
     { a: 'chicken', b: 'coconut-milk', semanticSim: 0.72, pmi: 0.3, culturalDist: 0.8, score: 0.46, explanation: '化学相似度高但中餐很少搭配——东南亚经典组合' },
     { a: 'beef', b: 'lime', semanticSim: 0.65, pmi: 0.2, culturalDist: 0.85, score: 0.44, explanation: '牛肉的铁质与青柠的酸产生意外的清新感' },
     { a: 'tofu', b: 'star-anise', semanticSim: 0.58, pmi: 0.15, culturalDist: 0.7, score: 0.34, explanation: '豆腐的温和遇上八角的浓烈——卤水豆腐的隐藏配方' },
@@ -244,7 +256,7 @@ async function loadMockData(): Promise<void> {
     { a: 'pork', b: 'fish-sauce', semanticSim: 0.7, pmi: 0.35, culturalDist: 0.65, score: 0.29, explanation: '猪肉遇上鱼露——越南 phở 的秘密武器' },
   ];
 
-  RECIPES = [
+  state.recipes = [
     { id: 'r1', name: '宫保鸡丁', ingredients: ['chicken', 'peanut', 'chili', 'scallion', 'soy-sauce', 'vinegar'], difficulty: 2, time: '25 min', tags: ['经典', '下饭'] },
     { id: 'r2', name: '红烧肉', ingredients: ['pork', 'soy-sauce', 'star-anise', 'ginger', 'scallion'], difficulty: 2, time: '90 min', tags: ['经典', '炖煮'] },
     { id: 'r3', name: '麻婆豆腐', ingredients: ['tofu', 'pork', 'sichuan-pepper', 'chili', 'garlic', 'scallion'], difficulty: 2, time: '20 min', tags: ['川菜', '下饭'] },
@@ -259,7 +271,7 @@ async function loadMockData(): Promise<void> {
     { id: 'r12', name: '酸辣汤', ingredients: ['tofu', 'mushroom', 'egg', 'vinegar', 'chili', 'scallion', 'sesame-oil'], difficulty: 2, time: '20 min', tags: ['汤', '酸辣'] },
   ];
 
-  SUBSTITUTIONS = [
+  state.substitutions = [
     { scenario: 'allergy', label: '过敏', icon: '⚠️', replace: 'peanut', with: 'sesame-oil', reason: '花生过敏 → 芝麻油替代' },
     { scenario: 'allergy', label: '过敏', icon: '⚠️', replace: 'shrimp', with: 'tofu', reason: '海鲜过敏 → 豆腐替代蛋白质' },
     { scenario: 'vegan', label: '素食', icon: '🌱', replace: 'chicken', with: 'tofu', reason: '鸡肉 → 豆腐（蛋白质替代）' },
@@ -271,7 +283,7 @@ async function loadMockData(): Promise<void> {
     { scenario: 'lowfat', label: '减脂', icon: '💪', replace: 'coconut-milk', with: 'tofu', reason: '椰奶（高脂）→ 豆腐（低脂）' },
   ];
 
-  COMMON_ALLERGENS = [
+  state.commonAllergens = [
     { id: 'peanut', name: '花生', icon: '🥜', relatedIngredients: ['peanut'] },
     { id: 'shellfish', name: '虾蟹', icon: '🦐', relatedIngredients: ['shrimp', 'shrimp-paste'] },
     { id: 'seafood', name: '海鲜', icon: '🐟', relatedIngredients: ['shrimp', 'shrimp-paste', 'salmon', 'fish-sauce'] },
@@ -280,7 +292,7 @@ async function loadMockData(): Promise<void> {
     { id: 'egg', name: '鸡蛋', icon: '🥚', relatedIngredients: ['egg'] },
   ];
 
-  SCENARIO_EXPLANATIONS = {
+  state.scenarioExplanations = {
     allergy: '排除含有特定过敏原的菜谱。点击后选择你要排除的过敏源（花生、海鲜、大豆等），也可以自定义输入。',
     vegan: '排除所有含肉类、海鲜、动物制品的菜谱，只保留纯素食选项。',
     keto: '排除高碳水食材（米饭、面条、土豆等）的菜谱，保留低碳水、高脂肪的选项。',

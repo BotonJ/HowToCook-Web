@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import {
-  INGREDIENTS,
+  getIngredients,
   CATEGORY_COLORS,
   CATEGORY_LABELS,
 } from '../data/ingredients';
@@ -14,21 +14,22 @@ export function TabFlavorOverview() {
   const [showSearch, setShowSearch] = useState(false);
 
   const selected = useMemo(
-    () => INGREDIENTS.find(i => i.id === selectedId) || INGREDIENTS[0],
+    () => getIngredients().find(i => i.id === selectedId) || getIngredients()[0],
     [selectedId],
   );
 
   // Update selectedId if current one doesn't exist after data loads
   useEffect(() => {
-    if (INGREDIENTS.length > 0 && !INGREDIENTS.find(i => i.id === selectedId)) {
-      setSelectedId(INGREDIENTS[0].id);
+    const ingredients = getIngredients();
+    if (ingredients.length > 0 && !ingredients.find(i => i.id === selectedId)) {
+      setSelectedId(ingredients[0].id);
     }
-  }, [INGREDIENTS.length, selectedId]);
+  }, [getIngredients().length, selectedId]);
 
   const filtered = useMemo(
     () =>
       search
-        ? INGREDIENTS.filter(
+        ? getIngredients().filter(
             i =>
               i.name.includes(search) ||
               i.nameEn.toLowerCase().includes(search.toLowerCase()),
@@ -106,7 +107,7 @@ export function TabFlavorOverview() {
             )}
 
             <div className="flex flex-wrap gap-1 flex-1 max-h-20 overflow-y-auto">
-              {INGREDIENTS.slice(0, 60).map(i => (
+              {getIngredients().slice(0, 60).map(i => (
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}
@@ -126,8 +127,8 @@ export function TabFlavorOverview() {
                   {i.name}
                 </button>
               ))}
-              {INGREDIENTS.length > 60 && (
-                <span className="text-[10px] text-[#8c7168] self-center">+{INGREDIENTS.length - 60} 更多食材可搜索</span>
+              {getIngredients().length > 60 && (
+                <span className="text-[10px] text-[#8c7168] self-center">+{getIngredients().length - 60} 更多食材可搜索</span>
               )}
             </div>
           </div>

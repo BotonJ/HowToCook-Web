@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
-  INGREDIENTS,
-  COOCCURRENCE_PAIRS,
-  SURPRISE_PAIRS,
+  getIngredients,
+  getCooccurrencePairs,
+  getSurprisePairs,
   CATEGORY_COLORS,
   type Ingredient,
 } from '../data/ingredients';
@@ -19,7 +19,10 @@ const DIM_LABELS: Record<string, string> = {
 const DIM_ORDER = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'];
 
 export function TabPairing() {
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [selectedIds, setSelectedIds] = useState<string[]>(() => {
+    const ingredients = getIngredients();
+    return ingredients.length > 0 ? [ingredients[0].id] : [];
+  });
 
   const toggleIngredient = (id: string) => {
     setSelectedIds(prev =>
@@ -29,15 +32,18 @@ export function TabPairing() {
     );
   };
 
-  // Auto-select first ingredient when data loads
+  // Auto-select first ingredient when data loads asynchronously
   useEffect(() => {
-    if (selectedIds.length === 0 && INGREDIENTS.length > 0) {
-      setSelectedIds([INGREDIENTS[0].id]);
+    if (selectedIds.length === 0) {
+      const ingredients = getIngredients();
+      if (ingredients.length > 0) {
+        setSelectedIds([ingredients[0].id]);
+      }
     }
-  }, [INGREDIENTS.length]);
+  }, [selectedIds.length]);
 
   const selectedIngredients = useMemo(
-    () => selectedIds.map(id => INGREDIENTS.find(i => i.id === id)!).filter(Boolean),
+    () => selectedIds.map(id => getIngredients().find(i => i.id === id)!).filter(Boolean),
     [selectedIds]
   );
 
@@ -184,7 +190,7 @@ export function TabPairing() {
     const weakestVal = avg[weakest];
     if (weakestVal <= 0.6) {
       const selectedSet = new Set(selectedIds);
-      const candidates = INGREDIENTS
+      const candidates = getIngredients()
         .filter(ing => !selectedSet.has(ing.id) && ing.flavor[weakest] >= 0.7)
         .sort((a, b) => b.flavor[weakest] - a.flavor[weakest])
         .slice(0, 3);
@@ -199,7 +205,7 @@ export function TabPairing() {
   // ── Classic pairings ──
   const classicPairs = useMemo(() => {
     if (selectedIds.length === 0) return [];
-    const related = COOCCURRENCE_PAIRS
+    const related = getCooccurrencePairs()
       .filter(p => {
         const aSelected = selectedIds.includes(p.a);
         const bSelected = selectedIds.includes(p.b);
@@ -207,7 +213,7 @@ export function TabPairing() {
       })
       .map(p => {
         const otherId = selectedIds.includes(p.a) ? p.b : p.a;
-        const other = INGREDIENTS.find(i => i.id === otherId);
+        const other = getIngredients().find(i => i.id === otherId);
         return { ...p, otherId, other };
       })
       .filter(p => p.other);
@@ -231,7 +237,7 @@ export function TabPairing() {
   // ── Flavor bridges ──
   const bridges = useMemo(() => {
     if (selectedIds.length === 0) return [];
-    const related = SURPRISE_PAIRS
+    const related = getSurprisePairs()
       .filter(p => {
         const aSelected = selectedIds.includes(p.a);
         const bSelected = selectedIds.includes(p.b);
@@ -239,7 +245,7 @@ export function TabPairing() {
       })
       .map(p => {
         const otherId = selectedIds.includes(p.a) ? p.b : p.a;
-        const other = INGREDIENTS.find(i => i.id === otherId);
+        const other = getIngredients().find(i => i.id === otherId);
         return { ...p, otherId, other };
       })
       .filter(p => p.other && p.semanticSim > 0.55 && p.pmi < 0.5);
@@ -271,7 +277,7 @@ export function TabPairing() {
           </span>
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
-          {INGREDIENTS.slice(0, 80).map(i => {
+          {getIngredients().slice(0, 80).map(i => {
             const active = selectedIds.includes(i.id);
             const disabled = !active && selectedIds.length >= MAX_SELECT;
             return (

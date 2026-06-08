@@ -2,8 +2,8 @@ import { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, ChefHat, X, Plus } from 'lucide-react';
 import {
-  INGREDIENTS, RECIPES, SUBSTITUTIONS, COMMON_ALLERGENS,
-  CATEGORY_COLORS, SCENARIO_EXPLANATIONS,
+  getIngredients, getRecipes, getSubstitutions, getCommonAllergens,
+  CATEGORY_COLORS, getScenarioExplanations,
 } from '../data/ingredients';
 
 const MAX_SELECT = 6;
@@ -21,10 +21,10 @@ export function TabRecipes() {
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
-    if (selected.length === 0 && INGREDIENTS.length > 0) {
-      setSelected([INGREDIENTS[0].id]);
+    if (selected.length === 0 && getIngredients().length > 0) {
+      setSelected([getIngredients()[0].id]);
     }
-  }, [INGREDIENTS.length]);
+  }, [getIngredients().length]);
   const [scenario, setScenario] = useState<Scenario | null>(null);
   const [excludedAllergens, setExcludedAllergens] = useState<string[]>([]);
   const [customAllergen, setCustomAllergen] = useState('');
@@ -57,7 +57,7 @@ export function TabRecipes() {
   const allergenExcludedIds = useMemo(() => {
     const ids = new Set<string>();
     for (const allergenId of excludedAllergens) {
-      const allergen = COMMON_ALLERGENS.find(a => a.id === allergenId);
+      const allergen = getCommonAllergens().find(a => a.id === allergenId);
       if (allergen) allergen.relatedIngredients.forEach(i => ids.add(i));
     }
     return ids;
@@ -67,7 +67,7 @@ export function TabRecipes() {
   const scenarioExcludedIds = useMemo(() => {
     if (!scenario) return new Set<string>();
     if (scenario === 'vegan') {
-      return new Set(INGREDIENTS.filter(i => ['meat', 'seafood', 'dairy'].includes(i.category)).map(i => i.id));
+      return new Set(getIngredients().filter(i => ['meat', 'seafood', 'dairy'].includes(i.category)).map(i => i.id));
     }
     if (scenario === 'keto') {
       return new Set(['rice', 'noodle', 'corn', 'potato']);
@@ -81,7 +81,7 @@ export function TabRecipes() {
 
     const allExcluded = new Set([...allergenExcludedIds, ...excludedIngredients]);
 
-    const scored = RECIPES.map(r => {
+    const scored = getRecipes().map(r => {
       // Check if recipe contains excluded ingredients
       const hasExcluded = r.ingredients.some(i => allExcluded.has(i));
       if (hasExcluded) return null;
@@ -111,13 +111,13 @@ export function TabRecipes() {
 
   const subs = useMemo(() => {
     if (!scenario) return [];
-    return SUBSTITUTIONS.filter(s => {
+    return getSubstitutions().filter(s => {
       if (s.scenario !== scenario) return false;
       return s.replace === selected[0] || s.with === selected[0];
     });
   }, [scenario, selected]);
 
-  const selectedNames = selected.map(id => INGREDIENTS.find(i => i.id === id)?.name || id);
+  const selectedNames = selected.map(id => getIngredients().find(i => i.id === id)?.name || id);
 
   return (
     <div className="flex flex-col gap-5">
@@ -131,7 +131,7 @@ export function TabRecipes() {
           </span>
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">
-          {INGREDIENTS.slice(0, 80).map(i => {
+          {getIngredients().slice(0, 80).map(i => {
             const active = selected.includes(i.id);
             const disabled = !active && selected.length >= MAX_SELECT;
             return (
@@ -203,7 +203,7 @@ export function TabRecipes() {
             animate={{ height: 'auto', opacity: 1 }}
             className="p-3 rounded-lg bg-[#f5ece7] text-xs text-[#58413a] leading-relaxed"
           >
-            {SCENARIO_EXPLANATIONS[scenario]}
+            {getScenarioExplanations()[scenario]}
           </motion.div>
         )}
 
@@ -217,7 +217,7 @@ export function TabRecipes() {
               className="mt-3 overflow-hidden"
             >
               <div className="flex flex-wrap gap-1.5 mb-3">
-                {COMMON_ALLERGENS.map(a => {
+                {getCommonAllergens().map(a => {
                   const active = excludedAllergens.includes(a.id);
                   return (
                     <button
@@ -256,7 +256,7 @@ export function TabRecipes() {
               {(excludedAllergens.length > 0 || excludedIngredients.length > 0) && (
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {excludedAllergens.map(id => {
-                    const a = COMMON_ALLERGENS.find(x => x.id === id);
+                    const a = getCommonAllergens().find(x => x.id === id);
                     return a ? (
                       <span key={id} className="px-2 py-0.5 rounded-full bg-[#ba1a1a] text-white text-[10px] flex items-center gap-1">
                         {a.icon} {a.name}
@@ -334,7 +334,7 @@ export function TabRecipes() {
             {subs.map((s, i) => {
               const info = SCENE_INFO[s.scenario];
               const otherId = s.replace === selected[0] ? s.with : s.replace;
-              const other = INGREDIENTS.find(x => x.id === otherId);
+              const other = getIngredients().find(x => x.id === otherId);
               return (
                 <div key={i} className="flex items-center gap-2.5 p-2.5 rounded-lg bg-[#f5ece7]">
                   <span className="text-sm">{info.icon}</span>
@@ -383,7 +383,7 @@ function RecipeCard({ recipe, selected, delay }: {
 
       <div className="flex flex-wrap gap-1 mb-2">
         {recipe.ingredients.map(id => {
-          const ing = INGREDIENTS.find(x => x.id === id);
+          const ing = getIngredients().find(x => x.id === id);
           const matched = selected.includes(id);
           return (
             <span
