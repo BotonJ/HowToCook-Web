@@ -6,23 +6,37 @@ import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
 import { RadarChart } from '../ui/RadarChart';
 import { Search } from 'lucide-react';
 
-const TIMELINE_STOPS = [0, 0.25, 0.5, 0.75, 1.0];
+const TIMELINE_STOPS = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
 const MAX_ZOOM = 2;
 
 export function TabSlerp() {
-  const [vectorA, setVectorA] = useState('chicken');
-  const [vectorB, setVectorB] = useState('fish-sauce');
+  const [vectorA, setVectorA] = useState('');
+  const [vectorB, setVectorB] = useState('');
+  const [initialized, setInitialized] = useState(false);
 
   const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
+
+  // Auto-pick first two active ingredients once data is loaded
+  useEffect(() => {
+    if (initialized) return;
+    const active = getActiveIngredients();
+    if (active.length >= 2 && !vectorA && !vectorB) {
+      setVectorA(active[0].id);
+      setVectorB(active[1].id);
+      setInitialized(true);
+    }
+  }, [activeIngredients, initialized, vectorA, vectorB]);
 
   const ingA = useMemo(() => getIngredients().find(i => i.id === vectorA), [vectorA]);
   const ingB = useMemo(() => getIngredients().find(i => i.id === vectorB), [vectorB]);
 
-  // Fallback if defaults not in data
   if (!ingA || !ingB) {
     return (
       <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-8 text-center">
-        <p className="text-sm text-[#8c7168]">正在加载食材数据...</p>
+        <div className="animate-pulse flex items-center justify-center gap-3 text-[#8c7168]">
+          <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-[#ae3a04] border-t-transparent" />
+          加载风味数据中...
+        </div>
       </div>
     );
   }
@@ -96,8 +110,10 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
   }, [ingA, ingB, vectorA, vectorB]);
 
   // ── Level-based node visibility ──────────────────────────────
+  // Use ALL ingredients (9253) as candidate pool, not just active (88).
+  // The layered filter + score-based ranking keeps rendered count small.
   const visibleIngredients = useMemo(() => {
-    const all = activeIngredients.length > 0 ? activeIngredients : getIngredients();
+    const all = getIngredients();
     const excludeSet = new Set([vectorA, vectorB]);
 
     const waypointIds = new Set(
@@ -223,8 +239,11 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return 210 + (base - 210) * zoom + pan.y;
   }, [ingA, ingB, zoom, pan.y, stretchFactor]);
 
+  // Arc offset: push corridor line below node centers by fixed distance
+  const ARC_Y_OFFSET = 20;
+
   const arcD = useMemo(() => {
-    return arcPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${mapX(p.x)} ${mapY(p.y)}`).join(' ');
+    return arcPoints.map((p, i) => `${i === 0 ? 'M' : 'L'} ${mapX(p.x)} ${mapY(p.y) + ARC_Y_OFFSET}`).join(' ');
   }, [arcPoints, mapX, mapY]);
 
   const handleSelectIngredient = useCallback((id: string) => {
@@ -250,7 +269,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
 
   const zoomLevelLabel = zoom <= 1 ? '概览' : '深入';
   const visibleCount = visibleIngredients.length;
-  const totalCount = activeIngredients.length || getIngredients().length;
+  const totalCount = getIngredients().length;
 
   return (
     <div className="flex flex-col gap-4">
@@ -371,6 +390,10 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
 
               <path d={arcD} fill="none" stroke="#ae3a04" strokeWidth={3} strokeDasharray="6 4" opacity={0.5} strokeLinecap="round" />
 
+              {/* Connector lines from endpoints to arc */}
+              <line x1={mapX(ingA.pca[0])} y1={mapY(ingA.pca[1])} x2={mapX(ingA.pca[0])} y2={mapY(ingA.pca[1]) + ARC_Y_OFFSET} stroke="#ae3a04" strokeWidth={1.5} opacity={0.4} />
+              <line x1={mapX(ingB.pca[0])} y1={mapY(ingB.pca[1])} x2={mapX(ingB.pca[0])} y2={mapY(ingB.pca[1]) + ARC_Y_OFFSET} stroke="#ae3a04" strokeWidth={1.5} opacity={0.4} />
+
               <g onClick={(e) => { e.stopPropagation(); handleSelectIngredient(vectorA); }} style={{ cursor: 'pointer' }}>
                 <circle cx={mapX(ingA.pca[0])} cy={mapY(ingA.pca[1])} r={11} fill="#ae3a04" stroke="white" strokeWidth={2.5} />
                 <text x={mapX(ingA.pca[0])} y={mapY(ingA.pca[1]) - 18} textAnchor="middle" fontSize={14} fontWeight={700} fill="#2c2825" fontFamily="Quicksand, sans-serif">{ingA.name}</text>
@@ -381,8 +404,8 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 <text x={mapX(ingB.pca[0])} y={mapY(ingB.pca[1]) - 18} textAnchor="middle" fontSize={14} fontWeight={700} fill="#2c2825" fontFamily="Quicksand, sans-serif">{ingB.name}</text>
               </g>
 
-              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y)} r={18} fill="#ae3a04" opacity="0.18" />
-              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y)} r={11} fill="white" stroke="#ae3a04" strokeWidth={3.5} />
+              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y) + ARC_Y_OFFSET} r={18} fill="#ae3a04" opacity="0.18" />
+              <circle cx={mapX(currentPos.x)} cy={mapY(currentPos.y) + ARC_Y_OFFSET} r={11} fill="white" stroke="#ae3a04" strokeWidth={3.5} />
             </svg>
           </div>
         </div>
@@ -483,7 +506,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
         </p>
         <div className="flex gap-3 overflow-x-auto pb-1">
           {corridorPanorama.map((stop, i) => {
-            const isCurrent = Math.abs(stop.stop - t) < 0.125;
+            const isCurrent = Math.abs(stop.stop - t) < 0.05;
             return (
               <motion.div key={stop.stop}
                 className="flex-shrink-0 flex flex-col items-center p-4 rounded-lg transition-colors min-w-[100px]"
