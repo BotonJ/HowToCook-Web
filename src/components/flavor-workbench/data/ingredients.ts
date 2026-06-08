@@ -124,6 +124,11 @@ export const INGREDIENT_DESCRIPTIONS: Record<string, {
     bestPairs: ['香茅（冬阴功）', '南姜（增香）', '辣椒（咖喱）'],
     tips: '椰奶加热时容易分离，最后再加入。',
   },
+  sugar: {
+    summary: '纯甜味来源，在中餐中常用于提鲜和平衡酸辣。',
+    bestPairs: ['番茄', '醋', '酱油'],
+    tips: '少量糖可以让咸味更柔和，酸味更圆润。',
+  },
 };
 
 export const getIngredientDescription = (id: string) => INGREDIENT_DESCRIPTIONS[id];
@@ -253,6 +258,7 @@ async function loadMockData(): Promise<void> {
     { id: 'corn', name: '玉米', nameEn: 'Corn', category: 'grain', flavor: { sweet: 0.6, umami: 0.15, fat: 0.1, spicy: 0, bitter: 0, sour: 0 }, pca: [-10, -15] },
     { id: 'lime', name: '青柠', nameEn: 'Lime', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0, bitter: 0.1, sour: 0.9 }, pca: [55, -35] },
     { id: 'lemon', name: '柠檬', nameEn: 'Lemon', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0, bitter: 0.1, sour: 0.85 }, pca: [50, -30] },
+    { id: 'sugar', name: '白糖', nameEn: 'Sugar', category: 'other', flavor: { sweet: 0.95, umami: 0, fat: 0, spicy: 0, bitter: 0, sour: 0 }, pca: [0, -50] },
   ];
 
   state.cooccurrencePairs = [
