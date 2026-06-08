@@ -35,6 +35,7 @@ export function useSearch(
   );
 
   const apiTimestamps = useRef<number[]>([]);
+  const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     const trimmed = query.trim();
@@ -44,6 +45,11 @@ export function useSearch(
       setError(null);
       return;
     }
+
+    // Abort any in-flight fetch from a previous keystroke
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     const timer = setTimeout(async () => {
       // Client-side rate limiting: max 10 API requests per 30s
@@ -62,21 +68,29 @@ export function useSearch(
       try {
         apiTimestamps.current.push(Date.now());
         const turnstileToken = await getToken();
+        if (controller.signal.aborted) return;
         const response = await searchRecipes({ q: trimmed, turnstileToken });
+        if (controller.signal.aborted) return;
         const recipes = response.results
           .map((r: ApiSearchResult) => transformSearchResult(r, localMap))
           .filter(r => sourceIds.has(r.source));
         setResults(recipes);
       } catch (err) {
+        if (controller.signal.aborted) return;
         setError(err instanceof Error ? err.message : 'Search failed');
         setResults(null);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
       }
     }, debounceMs);
 
-    return () => clearTimeout(timer);
-  }, [query, localMap, sourceIds, debounceMs, getToken]);
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [query, localMap, sourceIds, debounceMs, getToken, localRecipes]);
 
   return { results, loading, error };
 }

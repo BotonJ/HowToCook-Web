@@ -24,8 +24,9 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     description: '用空气炸锅做出美味佳肴，简单又健康',
     seoKeywords: '空气炸锅, air fryer, 炸鸡翅, 烤肉',
     filter: (r) => {
+      if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return r.language === 'zh' && text.includes('空气炸锅');
+      return text.includes('空气炸锅');
     },
   },
   'microwave': {
@@ -34,8 +35,9 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     description: '叮一下就好，懒人必备',
     seoKeywords: '微波炉, microwave, 快手菜',
     filter: (r) => {
+      if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return r.language === 'zh' && text.includes('微波炉');
+      return text.includes('微波炉');
     },
   },
   'rice-cooker': {
@@ -44,8 +46,9 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     description: '一个电饭煲搞定一餐，懒人福音',
     seoKeywords: '电饭煲, rice cooker, 焖饭, 懒人料理',
     filter: (r) => {
+      if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return r.language === 'zh' && text.includes('电饭煲');
+      return text.includes('电饭煲');
     },
   },
   'lazy-meal': {
@@ -89,7 +92,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     description: '烤出美味，烘焙幸福',
     seoKeywords: '烤箱, oven, 烘焙, 烤肉, 烤鸡翅',
     filter: (r) => {
-      if (r.language !== 'zh') return false;
+      if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
       return text.includes('烤箱') || r.cooking_method === '烤';
     },

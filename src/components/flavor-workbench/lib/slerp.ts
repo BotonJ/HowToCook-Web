@@ -12,6 +12,13 @@ export function lerp(a: Vec2, b: Vec2, t: number): Vec2 {
 
 /** SLERP on 2D projected points (approximation: great-circle on unit circle) */
 export function slerp2d(a: Vec2, b: Vec2, t: number): Vec2 {
+  // Input validation: check for finite numbers
+  if (!Number.isFinite(a.x) || !Number.isFinite(a.y) ||
+      !Number.isFinite(b.x) || !Number.isFinite(b.y) ||
+      !Number.isFinite(t)) {
+    return lerp(a, b, t);
+  }
+
   const normA = Math.sqrt(a.x * a.x + a.y * a.y);
   const normB = Math.sqrt(b.x * b.x + b.y * b.y);
   if (normA === 0 || normB === 0) return lerp(a, b, t);
@@ -23,7 +30,8 @@ export function slerp2d(a: Vec2, b: Vec2, t: number): Vec2 {
   // Dot product → angle
   const dot = ax * bx + ay * by;
   const omega = Math.acos(Math.min(1, Math.max(-1, dot)));
-  if (omega < 1e-6) return lerp(a, b, t);
+  // Guard for near-identical or antipodal points (omega ≈ 0 or omega ≈ π)
+  if (omega < 1e-6 || Math.abs(Math.PI - omega) < 1e-6) return lerp(a, b, t);
 
   const sinOmega = Math.sin(omega);
   const w1 = Math.sin((1 - t) * omega) / sinOmega;
@@ -49,6 +57,10 @@ export function nearestK(
   k: number,
   exclude: string[] = [],
 ) {
+  // Input validation
+  if (!items || !Array.isArray(items)) return [];
+  if (k <= 0) return [];
+
   return items
     .filter(i => !exclude.includes(i.name))
     .map(i => ({ ...i, distance: dist(point, i.pos) }))

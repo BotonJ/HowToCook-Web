@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 interface CuisineTab {
   id: string;
@@ -108,18 +109,8 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
       }));
   }, [cuisineCounts]);
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (moreDropdownRef.current && !moreDropdownRef.current.contains(e.target as Node)) {
-        setShowMore(false);
-      }
-      if (chineseDropdownRef.current && !chineseDropdownRef.current.contains(e.target as Node)) {
-        setShowChinese(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useClickOutside([moreDropdownRef], () => setShowMore(false), showMore);
+  useClickOutside([chineseDropdownRef], () => setShowChinese(false), showChinese);
 
   const isActiveInDropdown = SECONDARY_CUISINES.includes(activeCuisine);
   const isChineseSubOption = activeCuisine.startsWith('chinese-');
@@ -135,6 +126,8 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
               <div key={cuisine.id} className="relative" ref={chineseDropdownRef}>
                 <button
                   type="button"
+                  aria-haspopup="true"
+                  aria-expanded={showChinese}
                   onClick={() => setShowChinese(!showChinese)}
                   className={cn(
                     'whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1',
@@ -199,6 +192,8 @@ export function CuisineNav({ activeCuisine, onCuisineChange, cuisineCounts }: Cu
           <div className="relative" ref={moreDropdownRef}>
             <button
               type="button"
+              aria-haspopup="true"
+              aria-expanded={showMore}
               onClick={() => setShowMore(!showMore)}
               className={cn(
                 'whitespace-nowrap px-4 py-1.5 rounded-lg text-sm font-medium transition-all flex items-center gap-1',

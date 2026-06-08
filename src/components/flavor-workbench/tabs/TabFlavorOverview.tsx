@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import {
   getIngredients,
-  getCooccurrencePairs,
   CATEGORY_COLORS,
   CATEGORY_LABELS,
   getIngredientDescription,
 } from '../data/ingredients';
+import { getActiveIngredients } from '../data/ingredients-active';
 import { FlavorWheel } from '../ui/FlavorWheel';
 
 export function TabFlavorOverview() {
@@ -16,17 +16,7 @@ export function TabFlavorOverview() {
   const [showSearch, setShowSearch] = useState(false);
 
   // Only show ingredients that have at least 1 cooccurrence pair
-  const activeIngredients = useMemo(() => {
-    const all = getIngredients();
-    if (all.length === 0) return [];
-    const pairs = getCooccurrencePairs();
-    const connectedIds = new Set<string>();
-    for (const p of pairs) {
-      connectedIds.add(p.a);
-      connectedIds.add(p.b);
-    }
-    return all.filter(i => connectedIds.has(i.id));
-  }, [getIngredients().length]);
+  const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
 
   // Set default selectedId to the first active ingredient
   useEffect(() => {
@@ -65,7 +55,7 @@ export function TabFlavorOverview() {
     { key: 'bitter', label: '苦', color: '#6c5b3e' },
     { key: 'spicy', label: '辣', color: '#c44569' },
     { key: 'umami', label: '鲜', color: '#ae3a04' },
-    { key: 'fat', label: '脂肪', color: '#7c4a7c' },
+    { key: 'fatty', label: '脂肪', color: '#7c4a7c' },
   ];
 
   // Guard: don't render until data is loaded and a valid ingredient is selected

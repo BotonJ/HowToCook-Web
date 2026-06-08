@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getIngredients, getCooccurrencePairs, CATEGORY_COLORS } from '../data/ingredients';
+import { getIngredients, CATEGORY_COLORS } from '../data/ingredients';
+import { getActiveIngredients } from '../data/ingredients-active';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
 import { RadarChart } from '../ui/RadarChart';
 import { Search, X } from 'lucide-react';
@@ -49,17 +50,7 @@ export function TabSlerp() {
   const [vectorB, setVectorB] = useState('');
 
   // Only show ingredients that have at least 1 cooccurrence pair
-  const activeIngredients = useMemo(() => {
-    const all = getIngredients();
-    if (all.length === 0) return [];
-    const pairs = getCooccurrencePairs();
-    const connectedIds = new Set<string>();
-    for (const p of pairs) {
-      connectedIds.add(p.a);
-      connectedIds.add(p.b);
-    }
-    return all.filter(i => connectedIds.has(i.id));
-  }, [getIngredients().length]);
+  const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
 
   const ingA = useMemo(() => getIngredients().find(i => i.id === vectorA), [vectorA]);
   const ingB = useMemo(() => getIngredients().find(i => i.id === vectorB), [vectorB]);
@@ -302,7 +293,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
   }, [ingA, ingB, vectorA, vectorB]);
 
   const currentFlavor = useMemo(() => {
-    const dims = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'] as const;
+    const dims = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'] as const;
     const result: Record<string, number> = {};
     for (const dim of dims) {
       result[dim] = ingA.flavor[dim] * (1 - t) + ingB.flavor[dim] * t;
@@ -606,6 +597,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 max={100}
                 value={Math.round(t * 100)}
                 onChange={e => setT(Number(e.target.value) / 100)}
+                aria-label="Mix ratio"
               />
               <p className="text-[10px] text-[#8c7168] mt-1">
                 {Math.round(t * 100) === 0
@@ -633,10 +625,10 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
             <div className="flex flex-col sm:flex-row items-center gap-5">
               <RadarChart datasets={[{ label: '当前', data: currentFlavor, color: '#ae3a04' }, { label: ingA.name, data: ingA.flavor, color: '#8c7168', dashed: true }]} size={180} />
               <div className="flex-1 w-full flex flex-col gap-2">
-                {(['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'] as const).map(dim => {
+                {(['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'] as const).map(dim => {
                   const val = currentFlavor[dim];
-                  const labels: Record<string, string> = { sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fat: '脂肪' };
-                  const colors: Record<string, string> = { sour: '#4a7c8c', sweet: '#e68a4f', bitter: '#6c5b3e', spicy: '#c44569', umami: '#ae3a04', fat: '#7c4a7c' };
+                  const labels: Record<string, string> = { sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fatty: '脂肪' };
+                  const colors: Record<string, string> = { sour: '#4a7c8c', sweet: '#e68a4f', bitter: '#6c5b3e', spicy: '#c44569', umami: '#ae3a04', fatty: '#7c4a7c' };
                   return (
                     <div key={dim} className="flex items-center gap-2">
                       <span className="text-xs font-semibold w-4" style={{ color: colors[dim] }}>{labels[dim]}</span>

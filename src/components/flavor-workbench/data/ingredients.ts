@@ -11,7 +11,7 @@ export interface Ingredient {
   flavor: {
     sweet: number;
     umami: number;
-    fat: number;
+    fatty: number;
     spicy: number;
     bitter: number;
     sour: number;
@@ -188,6 +188,20 @@ export async function loadWorkbenchData(): Promise<void> {
     const resp = await fetch('/data/flavor-workbench/workbench-data.json');
     if (resp.ok) {
       const data = await resp.json();
+      // Basic runtime validation: ensure the parsed data has the expected structure
+      if (!data || typeof data !== 'object') {
+        throw new Error('Invalid workbench data: expected a JSON object');
+      }
+      if (!Array.isArray(data.ingredients)) {
+        throw new Error('Invalid workbench data: "ingredients" must be an array');
+      }
+      // Spot-check the first ingredient has the required fields
+      if (data.ingredients.length > 0) {
+        const first = data.ingredients[0];
+        if (!first || typeof first !== 'object' || typeof first.id !== 'string' || typeof first.name !== 'string') {
+          throw new Error('Invalid workbench data: ingredient entries must have "id" and "name" string fields');
+        }
+      }
       if (data.ingredients?.length) {
         state.ingredients = data.ingredients;
         state.cooccurrencePairs = data.cooccurrence || [];
@@ -199,8 +213,9 @@ export async function loadWorkbenchData(): Promise<void> {
         useRealData = true;
       }
     }
-  } catch {
-    // Fall through to mock data
+  } catch (err) {
+    // Log the error before falling back to mock data
+    console.error('[FlavorWorkbench] Failed to load real data, using mock data as fallback:', err);
   }
 
   if (!useRealData) {
@@ -217,47 +232,47 @@ export function isWorkbenchDataLoaded(): boolean {
 
 async function loadMockData(): Promise<void> {
   state.ingredients = [
-    { id: 'chicken', name: '鸡肉', nameEn: 'Chicken', category: 'meat', flavor: { sweet: 0.1, umami: 0.6, fat: 0.5, spicy: 0, bitter: 0, sour: 0 }, pca: [-80, 40] },
-    { id: 'pork', name: '猪肉', nameEn: 'Pork', category: 'meat', flavor: { sweet: 0.15, umami: 0.7, fat: 0.7, spicy: 0, bitter: 0, sour: 0 }, pca: [-90, 60] },
-    { id: 'beef', name: '牛肉', nameEn: 'Beef', category: 'meat', flavor: { sweet: 0.05, umami: 0.8, fat: 0.6, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-100, 50] },
-    { id: 'lamb', name: '羊肉', nameEn: 'Lamb', category: 'meat', flavor: { sweet: 0.05, umami: 0.65, fat: 0.6, spicy: 0.1, bitter: 0.05, sour: 0 }, pca: [-95, 70] },
-    { id: 'duck', name: '鸭肉', nameEn: 'Duck', category: 'meat', flavor: { sweet: 0.1, umami: 0.7, fat: 0.75, spicy: 0, bitter: 0, sour: 0 }, pca: [-85, 55] },
-    { id: 'fish-sauce', name: '鱼露', nameEn: 'Fish Sauce', category: 'fermented', flavor: { sweet: 0.05, umami: 0.95, fat: 0.05, spicy: 0, bitter: 0, sour: 0.2 }, pca: [100, 30] },
-    { id: 'shrimp', name: '虾', nameEn: 'Shrimp', category: 'seafood', flavor: { sweet: 0.2, umami: 0.75, fat: 0.15, spicy: 0, bitter: 0, sour: 0 }, pca: [60, 20] },
-    { id: 'shrimp-paste', name: '虾酱', nameEn: 'Shrimp Paste', category: 'fermented', flavor: { sweet: 0.05, umami: 0.9, fat: 0.1, spicy: 0.05, bitter: 0, sour: 0.15 }, pca: [90, 40] },
-    { id: 'salmon', name: '三文鱼', nameEn: 'Salmon', category: 'seafood', flavor: { sweet: 0.1, umami: 0.7, fat: 0.65, spicy: 0, bitter: 0, sour: 0.05 }, pca: [50, 45] },
-    { id: 'ginger', name: '生姜', nameEn: 'Ginger', category: 'spice', flavor: { sweet: 0.1, umami: 0.1, fat: 0, spicy: 0.7, bitter: 0.1, sour: 0.05 }, pca: [30, -60] },
-    { id: 'garlic', name: '大蒜', nameEn: 'Garlic', category: 'spice', flavor: { sweet: 0.1, umami: 0.3, fat: 0, spicy: 0.6, bitter: 0.1, sour: 0 }, pca: [20, -50] },
-    { id: 'scallion', name: '葱', nameEn: 'Scallion', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.15, fat: 0, spicy: 0.4, bitter: 0.05, sour: 0 }, pca: [10, -40] },
-    { id: 'chili', name: '辣椒', nameEn: 'Chili', category: 'spice', flavor: { sweet: 0.05, umami: 0.1, fat: 0, spicy: 0.95, bitter: 0.1, sour: 0.05 }, pca: [40, -80] },
-    { id: 'lemongrass', name: '香茅', nameEn: 'Lemongrass', category: 'spice', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0.3, bitter: 0.05, sour: 0.2 }, pca: [50, -55] },
-    { id: 'galangal', name: '南姜', nameEn: 'Galangal', category: 'spice', flavor: { sweet: 0.05, umami: 0.1, fat: 0, spicy: 0.5, bitter: 0.15, sour: 0.05 }, pca: [45, -65] },
-    { id: 'tofu', name: '豆腐', nameEn: 'Tofu', category: 'grain', flavor: { sweet: 0.1, umami: 0.3, fat: 0.2, spicy: 0, bitter: 0, sour: 0 }, pca: [-20, 10] },
-    { id: 'mushroom', name: '蘑菇', nameEn: 'Mushroom', category: 'vegetable', flavor: { sweet: 0.05, umami: 0.7, fat: 0.05, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-10, 30] },
-    { id: 'eggplant', name: '茄子', nameEn: 'Eggplant', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.2, fat: 0.1, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-5, -10] },
-    { id: 'tomato', name: '番茄', nameEn: 'Tomato', category: 'fruit', flavor: { sweet: 0.4, umami: 0.35, fat: 0.05, spicy: 0, bitter: 0.05, sour: 0.5 }, pca: [20, -20] },
-    { id: 'coconut-milk', name: '椰奶', nameEn: 'Coconut Milk', category: 'dairy', flavor: { sweet: 0.4, umami: 0.1, fat: 0.8, spicy: 0, bitter: 0, sour: 0 }, pca: [-40, -30] },
-    { id: 'soy-sauce', name: '酱油', nameEn: 'Soy Sauce', category: 'fermented', flavor: { sweet: 0.15, umami: 0.85, fat: 0.05, spicy: 0, bitter: 0.05, sour: 0.1 }, pca: [80, 20] },
-    { id: 'oyster-sauce', name: '蚝油', nameEn: 'Oyster Sauce', category: 'fermented', flavor: { sweet: 0.25, umami: 0.8, fat: 0.1, spicy: 0, bitter: 0, sour: 0.05 }, pca: [75, 35] },
-    { id: 'vinegar', name: '醋', nameEn: 'Vinegar', category: 'fermented', flavor: { sweet: 0.05, umami: 0.1, fat: 0, spicy: 0, bitter: 0, sour: 0.95 }, pca: [60, -40] },
-    { id: 'rice', name: '米饭', nameEn: 'Rice', category: 'grain', flavor: { sweet: 0.3, umami: 0.15, fat: 0.05, spicy: 0, bitter: 0, sour: 0 }, pca: [-30, -5] },
-    { id: 'noodle', name: '面条', nameEn: 'Noodle', category: 'grain', flavor: { sweet: 0.2, umami: 0.2, fat: 0.1, spicy: 0, bitter: 0, sour: 0 }, pca: [-25, 5] },
-    { id: 'sesame-oil', name: '芝麻油', nameEn: 'Sesame Oil', category: 'spice', flavor: { sweet: 0.1, umami: 0.2, fat: 0.85, spicy: 0.05, bitter: 0.05, sour: 0 }, pca: [10, 50] },
-    { id: 'peanut', name: '花生', nameEn: 'Peanut', category: 'grain', flavor: { sweet: 0.15, umami: 0.3, fat: 0.7, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-15, 40] },
-    { id: 'egg', name: '鸡蛋', nameEn: 'Egg', category: 'dairy', flavor: { sweet: 0.05, umami: 0.5, fat: 0.5, spicy: 0, bitter: 0, sour: 0 }, pca: [-25, 20] },
-    { id: 'cilantro', name: '香菜', nameEn: 'Cilantro', category: 'vegetable', flavor: { sweet: 0.05, umami: 0.1, fat: 0, spicy: 0.15, bitter: 0.1, sour: 0.05 }, pca: [25, -35] },
-    { id: 'basil', name: '罗勒', nameEn: 'Basil', category: 'spice', flavor: { sweet: 0.1, umami: 0.1, fat: 0, spicy: 0.2, bitter: 0.1, sour: 0 }, pca: [35, -45] },
-    { id: 'star-anise', name: '八角', nameEn: 'Star Anise', category: 'spice', flavor: { sweet: 0.2, umami: 0.05, fat: 0, spicy: 0.3, bitter: 0.15, sour: 0 }, pca: [55, -70] },
-    { id: 'cinnamon', name: '肉桂', nameEn: 'Cinnamon', category: 'spice', flavor: { sweet: 0.35, umami: 0, fat: 0, spicy: 0.4, bitter: 0.1, sour: 0 }, pca: [45, -75] },
-    { id: 'sichuan-pepper', name: '花椒', nameEn: 'Sichuan Pepper', category: 'spice', flavor: { sweet: 0, umami: 0.05, fat: 0, spicy: 0.85, bitter: 0.2, sour: 0.05 }, pca: [50, -85] },
-    { id: 'bell-pepper', name: '甜椒', nameEn: 'Bell Pepper', category: 'vegetable', flavor: { sweet: 0.5, umami: 0.1, fat: 0, spicy: 0.05, bitter: 0.05, sour: 0.1 }, pca: [15, -25] },
-    { id: 'cabbage', name: '白菜', nameEn: 'Cabbage', category: 'vegetable', flavor: { sweet: 0.2, umami: 0.15, fat: 0, spicy: 0.05, bitter: 0.05, sour: 0.05 }, pca: [-5, -20] },
-    { id: 'carrot', name: '胡萝卜', nameEn: 'Carrot', category: 'vegetable', flavor: { sweet: 0.55, umami: 0.1, fat: 0, spicy: 0, bitter: 0.05, sour: 0.05 }, pca: [0, -30] },
-    { id: 'potato', name: '土豆', nameEn: 'Potato', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.2, fat: 0.05, spicy: 0, bitter: 0, sour: 0 }, pca: [-20, 0] },
-    { id: 'corn', name: '玉米', nameEn: 'Corn', category: 'grain', flavor: { sweet: 0.6, umami: 0.15, fat: 0.1, spicy: 0, bitter: 0, sour: 0 }, pca: [-10, -15] },
-    { id: 'lime', name: '青柠', nameEn: 'Lime', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0, bitter: 0.1, sour: 0.9 }, pca: [55, -35] },
-    { id: 'lemon', name: '柠檬', nameEn: 'Lemon', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fat: 0, spicy: 0, bitter: 0.1, sour: 0.85 }, pca: [50, -30] },
-    { id: 'sugar', name: '白糖', nameEn: 'Sugar', category: 'other', flavor: { sweet: 0.95, umami: 0, fat: 0, spicy: 0, bitter: 0, sour: 0 }, pca: [0, -50] },
+    { id: 'chicken', name: '鸡肉', nameEn: 'Chicken', category: 'meat', flavor: { sweet: 0.1, umami: 0.6, fatty:0.5, spicy: 0, bitter: 0, sour: 0 }, pca: [-80, 40] },
+    { id: 'pork', name: '猪肉', nameEn: 'Pork', category: 'meat', flavor: { sweet: 0.15, umami: 0.7, fatty:0.7, spicy: 0, bitter: 0, sour: 0 }, pca: [-90, 60] },
+    { id: 'beef', name: '牛肉', nameEn: 'Beef', category: 'meat', flavor: { sweet: 0.05, umami: 0.8, fatty:0.6, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-100, 50] },
+    { id: 'lamb', name: '羊肉', nameEn: 'Lamb', category: 'meat', flavor: { sweet: 0.05, umami: 0.65, fatty:0.6, spicy: 0.1, bitter: 0.05, sour: 0 }, pca: [-95, 70] },
+    { id: 'duck', name: '鸭肉', nameEn: 'Duck', category: 'meat', flavor: { sweet: 0.1, umami: 0.7, fatty:0.75, spicy: 0, bitter: 0, sour: 0 }, pca: [-85, 55] },
+    { id: 'fish-sauce', name: '鱼露', nameEn: 'Fish Sauce', category: 'fermented', flavor: { sweet: 0.05, umami: 0.95, fatty:0.05, spicy: 0, bitter: 0, sour: 0.2 }, pca: [100, 30] },
+    { id: 'shrimp', name: '虾', nameEn: 'Shrimp', category: 'seafood', flavor: { sweet: 0.2, umami: 0.75, fatty:0.15, spicy: 0, bitter: 0, sour: 0 }, pca: [60, 20] },
+    { id: 'shrimp-paste', name: '虾酱', nameEn: 'Shrimp Paste', category: 'fermented', flavor: { sweet: 0.05, umami: 0.9, fatty:0.1, spicy: 0.05, bitter: 0, sour: 0.15 }, pca: [90, 40] },
+    { id: 'salmon', name: '三文鱼', nameEn: 'Salmon', category: 'seafood', flavor: { sweet: 0.1, umami: 0.7, fatty:0.65, spicy: 0, bitter: 0, sour: 0.05 }, pca: [50, 45] },
+    { id: 'ginger', name: '生姜', nameEn: 'Ginger', category: 'spice', flavor: { sweet: 0.1, umami: 0.1, fatty:0, spicy: 0.7, bitter: 0.1, sour: 0.05 }, pca: [30, -60] },
+    { id: 'garlic', name: '大蒜', nameEn: 'Garlic', category: 'spice', flavor: { sweet: 0.1, umami: 0.3, fatty:0, spicy: 0.6, bitter: 0.1, sour: 0 }, pca: [20, -50] },
+    { id: 'scallion', name: '葱', nameEn: 'Scallion', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.15, fatty:0, spicy: 0.4, bitter: 0.05, sour: 0 }, pca: [10, -40] },
+    { id: 'chili', name: '辣椒', nameEn: 'Chili', category: 'spice', flavor: { sweet: 0.05, umami: 0.1, fatty:0, spicy: 0.95, bitter: 0.1, sour: 0.05 }, pca: [40, -80] },
+    { id: 'lemongrass', name: '香茅', nameEn: 'Lemongrass', category: 'spice', flavor: { sweet: 0.1, umami: 0.05, fatty:0, spicy: 0.3, bitter: 0.05, sour: 0.2 }, pca: [50, -55] },
+    { id: 'galangal', name: '南姜', nameEn: 'Galangal', category: 'spice', flavor: { sweet: 0.05, umami: 0.1, fatty:0, spicy: 0.5, bitter: 0.15, sour: 0.05 }, pca: [45, -65] },
+    { id: 'tofu', name: '豆腐', nameEn: 'Tofu', category: 'grain', flavor: { sweet: 0.1, umami: 0.3, fatty:0.2, spicy: 0, bitter: 0, sour: 0 }, pca: [-20, 10] },
+    { id: 'mushroom', name: '蘑菇', nameEn: 'Mushroom', category: 'vegetable', flavor: { sweet: 0.05, umami: 0.7, fatty:0.05, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-10, 30] },
+    { id: 'eggplant', name: '茄子', nameEn: 'Eggplant', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.2, fatty:0.1, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-5, -10] },
+    { id: 'tomato', name: '番茄', nameEn: 'Tomato', category: 'fruit', flavor: { sweet: 0.4, umami: 0.35, fatty:0.05, spicy: 0, bitter: 0.05, sour: 0.5 }, pca: [20, -20] },
+    { id: 'coconut-milk', name: '椰奶', nameEn: 'Coconut Milk', category: 'dairy', flavor: { sweet: 0.4, umami: 0.1, fatty:0.8, spicy: 0, bitter: 0, sour: 0 }, pca: [-40, -30] },
+    { id: 'soy-sauce', name: '酱油', nameEn: 'Soy Sauce', category: 'fermented', flavor: { sweet: 0.15, umami: 0.85, fatty:0.05, spicy: 0, bitter: 0.05, sour: 0.1 }, pca: [80, 20] },
+    { id: 'oyster-sauce', name: '蚝油', nameEn: 'Oyster Sauce', category: 'fermented', flavor: { sweet: 0.25, umami: 0.8, fatty:0.1, spicy: 0, bitter: 0, sour: 0.05 }, pca: [75, 35] },
+    { id: 'vinegar', name: '醋', nameEn: 'Vinegar', category: 'fermented', flavor: { sweet: 0.05, umami: 0.1, fatty:0, spicy: 0, bitter: 0, sour: 0.95 }, pca: [60, -40] },
+    { id: 'rice', name: '米饭', nameEn: 'Rice', category: 'grain', flavor: { sweet: 0.3, umami: 0.15, fatty:0.05, spicy: 0, bitter: 0, sour: 0 }, pca: [-30, -5] },
+    { id: 'noodle', name: '面条', nameEn: 'Noodle', category: 'grain', flavor: { sweet: 0.2, umami: 0.2, fatty:0.1, spicy: 0, bitter: 0, sour: 0 }, pca: [-25, 5] },
+    { id: 'sesame-oil', name: '芝麻油', nameEn: 'Sesame Oil', category: 'spice', flavor: { sweet: 0.1, umami: 0.2, fatty:0.85, spicy: 0.05, bitter: 0.05, sour: 0 }, pca: [10, 50] },
+    { id: 'peanut', name: '花生', nameEn: 'Peanut', category: 'grain', flavor: { sweet: 0.15, umami: 0.3, fatty:0.7, spicy: 0, bitter: 0.05, sour: 0 }, pca: [-15, 40] },
+    { id: 'egg', name: '鸡蛋', nameEn: 'Egg', category: 'dairy', flavor: { sweet: 0.05, umami: 0.5, fatty:0.5, spicy: 0, bitter: 0, sour: 0 }, pca: [-25, 20] },
+    { id: 'cilantro', name: '香菜', nameEn: 'Cilantro', category: 'vegetable', flavor: { sweet: 0.05, umami: 0.1, fatty:0, spicy: 0.15, bitter: 0.1, sour: 0.05 }, pca: [25, -35] },
+    { id: 'basil', name: '罗勒', nameEn: 'Basil', category: 'spice', flavor: { sweet: 0.1, umami: 0.1, fatty:0, spicy: 0.2, bitter: 0.1, sour: 0 }, pca: [35, -45] },
+    { id: 'star-anise', name: '八角', nameEn: 'Star Anise', category: 'spice', flavor: { sweet: 0.2, umami: 0.05, fatty:0, spicy: 0.3, bitter: 0.15, sour: 0 }, pca: [55, -70] },
+    { id: 'cinnamon', name: '肉桂', nameEn: 'Cinnamon', category: 'spice', flavor: { sweet: 0.35, umami: 0, fatty:0, spicy: 0.4, bitter: 0.1, sour: 0 }, pca: [45, -75] },
+    { id: 'sichuan-pepper', name: '花椒', nameEn: 'Sichuan Pepper', category: 'spice', flavor: { sweet: 0, umami: 0.05, fatty:0, spicy: 0.85, bitter: 0.2, sour: 0.05 }, pca: [50, -85] },
+    { id: 'bell-pepper', name: '甜椒', nameEn: 'Bell Pepper', category: 'vegetable', flavor: { sweet: 0.5, umami: 0.1, fatty:0, spicy: 0.05, bitter: 0.05, sour: 0.1 }, pca: [15, -25] },
+    { id: 'cabbage', name: '白菜', nameEn: 'Cabbage', category: 'vegetable', flavor: { sweet: 0.2, umami: 0.15, fatty:0, spicy: 0.05, bitter: 0.05, sour: 0.05 }, pca: [-5, -20] },
+    { id: 'carrot', name: '胡萝卜', nameEn: 'Carrot', category: 'vegetable', flavor: { sweet: 0.55, umami: 0.1, fatty:0, spicy: 0, bitter: 0.05, sour: 0.05 }, pca: [0, -30] },
+    { id: 'potato', name: '土豆', nameEn: 'Potato', category: 'vegetable', flavor: { sweet: 0.15, umami: 0.2, fatty:0.05, spicy: 0, bitter: 0, sour: 0 }, pca: [-20, 0] },
+    { id: 'corn', name: '玉米', nameEn: 'Corn', category: 'grain', flavor: { sweet: 0.6, umami: 0.15, fatty:0.1, spicy: 0, bitter: 0, sour: 0 }, pca: [-10, -15] },
+    { id: 'lime', name: '青柠', nameEn: 'Lime', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fatty:0, spicy: 0, bitter: 0.1, sour: 0.9 }, pca: [55, -35] },
+    { id: 'lemon', name: '柠檬', nameEn: 'Lemon', category: 'fruit', flavor: { sweet: 0.1, umami: 0.05, fatty:0, spicy: 0, bitter: 0.1, sour: 0.85 }, pca: [50, -30] },
+    { id: 'sugar', name: '白糖', nameEn: 'Sugar', category: 'other', flavor: { sweet: 0.95, umami: 0, fatty:0, spicy: 0, bitter: 0, sour: 0 }, pca: [0, -50] },
   ];
 
   state.cooccurrencePairs = [
@@ -357,6 +372,6 @@ async function loadMockData(): Promise<void> {
     allergy: '排除含有特定过敏原的菜谱。点击后选择你要排除的过敏源（花生、海鲜、大豆等），也可以自定义输入。',
     vegan: '排除所有含肉类、海鲜、动物制品的菜谱，只保留纯素食选项。',
     keto: '排除高碳水食材（米饭、面条、土豆等）的菜谱，保留低碳水、高脂肪的选项。',
-    lowfat: '优先推荐使用低脂食材（鸡胸肉、豆腐、蔬菜）的菜谱，排除高脂肪搭配。',
+    lowfatty:'优先推荐使用低脂食材（鸡胸肉、豆腐、蔬菜）的菜谱，排除高脂肪搭配。',
   };
 }

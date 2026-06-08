@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
+import * as React from 'react';
 import { getIngredients, getCooccurrencePairs, getSurprisePairs, CATEGORY_COLORS, type Ingredient } from '../data/ingredients';
 
 interface FlavorWheelProps {
@@ -30,6 +31,7 @@ interface NodePosition extends Ingredient {
  * to prevent the two-step render flash (old positions → new positions).
  */
 export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelProps) {
+  const glowId = React.useId();
   // User-manual zoom/pan overrides auto-fit when set
   const [userZoom, setUserZoom] = useState<number | null>(null);
   const [userPan, setUserPan] = useState<{ x: number; y: number } | null>(null);
@@ -263,9 +265,25 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     setDragStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
   }, [pan]);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+  // Add window-level event listeners during drag for better handling
+  useEffect(() => {
     if (!isDragging) return;
-    setUserPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setUserPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
   }, [isDragging, dragStart]);
 
   const handleMouseUp = useCallback(() => setIsDragging(false), []);
@@ -303,19 +321,18 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
         viewBox={`0 0 ${size} ${size}`}
         preserveAspectRatio="xMidYMid meet"
         onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
       >
         {/* Subtle radial background */}
         <defs>
-          <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+          <radialGradient id={`centerGlow-${glowId}`} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#fff8f5" stopOpacity="0.9" />
             <stop offset="100%" stopColor="#fff8f5" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <circle cx={cx + pan.x} cy={cy + pan.y} r={baseOrbitR * zoom * 1.4} fill="url(#centerGlow)" />
+        <circle cx={cx + pan.x} cy={cy + pan.y} r={baseOrbitR * zoom * 1.4} fill={`url(#centerGlow-${glowId})`} />
 
         {/* Inner orbit ring */}
         <circle
@@ -384,7 +401,11 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
           return (
             <g
               key={p.id}
+              role="button"
+              tabIndex={0}
+              aria-label={p.name}
               onClick={() => onSelect?.(p.id)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect?.(p.id); } }}
               onMouseEnter={(e) => {
                 setHoveredId(p.id);
                 if (p.isBridge && p.bridgeExplanation) {

@@ -12,9 +12,9 @@ interface RadarChartProps {
   size?: number;
 }
 
-const DIMENSIONS = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'];
+const DIMENSIONS = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'];
 const DIMENSION_LABELS: Record<string, string> = {
-  sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fat: '脂肪',
+  sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fatty: '脂肪',
 };
 
 function polarToCartesian(angle: number, radius: number, cx: number, cy: number) {

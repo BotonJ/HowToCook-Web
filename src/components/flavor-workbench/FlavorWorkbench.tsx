@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FlaskConical, Handshake, UtensilsCrossed, TestTube } from 'lucide-react';
 import { TabFlavorOverview } from './tabs/TabFlavorOverview';
 import { TabPairing } from './tabs/TabPairing';
@@ -7,9 +7,7 @@ import { TabRecipes } from './tabs/TabRecipes';
 import { TabSlerp } from './tabs/TabSlerp';
 import { loadWorkbenchData, isWorkbenchDataLoaded } from './data/ingredients';
 import { loadHowToCookRecipes, isHowToCookRecipesLoaded } from './data/recipe-loader';
-// c3v2 loader — kept for future tab use (currently ~11MB, skipped in loadAll)
-import { loadC3V2Data, isC3V2Loaded } from './data/c3v2-loader';
-void loadC3V2Data; void isC3V2Loaded;
+// TODO: Enable c3v2 embeddings tab when semantic search is implemented
 
 type Tab = 'overview' | 'pairing' | 'recipes' | 'slerp';
 
@@ -23,23 +21,49 @@ const TABS: { key: Tab; label: string; icon: React.ReactNode }[] = [
 export function FlavorWorkbench() {
   const [tab, setTab] = useState<Tab>('overview');
   const [ready, setReady] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadAll() {
-      if (!isWorkbenchDataLoaded()) {
-        await loadWorkbenchData();
+      try {
+        if (!isWorkbenchDataLoaded()) {
+          await loadWorkbenchData();
+        }
+        if (!isHowToCookRecipesLoaded()) {
+          await loadHowToCookRecipes();
+        }
+        // c3v2 embeddings: not yet used by any tab, skip loading to save ~11MB bandwidth
+        // if (!isC3V2Loaded()) {
+        //   try { await loadC3V2Data(); } catch { /* optional */ }
+        // }
+        setReady(true);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : '加载风味数据失败';
+        setError(message);
+        console.error('FlavorWorkbench data loading error:', err);
       }
-      if (!isHowToCookRecipesLoaded()) {
-        await loadHowToCookRecipes();
-      }
-      // c3v2 embeddings: not yet used by any tab, skip loading to save ~11MB bandwidth
-      // if (!isC3V2Loaded()) {
-      //   try { await loadC3V2Data(); } catch { /* optional */ }
-      // }
-      setReady(true);
     }
     loadAll();
   }, []);
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center py-20 text-[#8c7168]">
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-red-600 text-sm">加载失败: {error}</div>
+          <button
+            onClick={() => {
+              setError(null);
+              window.location.reload();
+            }}
+            className="px-4 py-2 bg-[#ae3a04] text-white rounded-lg hover:bg-[#8c2c03] transition"
+          >
+            重试
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (!ready) {
     return (
@@ -69,12 +93,14 @@ export function FlavorWorkbench() {
 
       {/* Tab bar */}
       <div className="sticky top-14 z-40 bg-[#fff8f5]/80 backdrop-blur-sm border-b border-[#e0c0b5]">
-        <div className="max-w-[1200px] mx-auto px-4 flex">
+        <div className="max-w-[1200px] mx-auto px-4 flex" role="tablist" aria-label="Flavor analysis tools">
           {TABS.map(t => {
             const active = tab === t.key;
             return (
               <button
                 key={t.key}
+                role="tab"
+                aria-selected={tab === t.key}
                 onClick={() => setTab(t.key)}
                 className="relative flex items-center gap-1.5 px-4 py-3 text-sm font-medium transition-colors"
                 style={{ color: active ? '#ae3a04' : '#8c7168' }}
@@ -96,20 +122,18 @@ export function FlavorWorkbench() {
 
       {/* Tab content */}
       <main className="max-w-[1200px] mx-auto px-4 py-5 pb-16">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={tab}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-          >
-            {tab === 'overview' && <TabFlavorOverview />}
-            {tab === 'pairing' && <TabPairing />}
-            {tab === 'recipes' && <TabRecipes />}
-            {tab === 'slerp' && <TabSlerp />}
-          </motion.div>
-        </AnimatePresence>
+        <div style={{ display: tab === 'overview' ? 'block' : 'none' }}>
+          <TabFlavorOverview />
+        </div>
+        <div style={{ display: tab === 'pairing' ? 'block' : 'none' }}>
+          <TabPairing />
+        </div>
+        <div style={{ display: tab === 'recipes' ? 'block' : 'none' }}>
+          <TabRecipes />
+        </div>
+        <div style={{ display: tab === 'slerp' ? 'block' : 'none' }}>
+          <TabSlerp />
+        </div>
       </main>
     </div>
   );

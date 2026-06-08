@@ -8,16 +8,17 @@ import {
   CATEGORY_COLORS,
   type Ingredient,
 } from '../data/ingredients';
+import { getActiveIngredients } from '../data/ingredients-active';
 import { RadarChart } from '../ui/RadarChart';
 import type { RadarDataset } from '../ui/RadarChart';
 
 const MAX_SELECT = 6;
 
 const DIM_LABELS: Record<string, string> = {
-  sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fat: '脂肪',
+  sour: '酸', sweet: '甜', bitter: '苦', spicy: '辣', umami: '鲜', fatty: '脂肪',
 };
 
-const DIM_ORDER = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fat'];
+const DIM_ORDER = ['sour', 'sweet', 'bitter', 'spicy', 'umami', 'fatty'];
 
 export function TabPairing() {
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -36,17 +37,7 @@ export function TabPairing() {
   );
 
   // Only show ingredients that have at least 1 cooccurrence pair (sync with TabFlavorOverview)
-  const activeIngredients = useMemo(() => {
-    const all = getIngredients();
-    if (all.length === 0) return [];
-    const pairs = getCooccurrencePairs();
-    const connectedIds = new Set<string>();
-    for (const p of pairs) {
-      connectedIds.add(p.a);
-      connectedIds.add(p.b);
-    }
-    return all.filter(i => connectedIds.has(i.id));
-  }, [getIngredients().length]);
+  const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
 
   const [search, setSearch] = useState('');
   const filteredIngredients = useMemo(

@@ -72,9 +72,9 @@ export function transformSearchResult(
     difficulty: result.difficulty ?? 0,
     cuisine: result.cuisine ?? '',
     cooking_method: result.cooking_method ?? '',
-    cook_time: '',
-    ingredients: [],
-    main_ingredients: [],
-    source: 'howtocook',
+    cook_time: result.cook_time ?? '',
+    ingredients: result.ingredients ?? [],
+    main_ingredients: result.main_ingredients ?? [],
+    source: result.source ?? 'howtocook',
   };
 }

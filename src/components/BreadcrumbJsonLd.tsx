@@ -23,7 +23,7 @@ export function BreadcrumbJsonLd({ categoryName, recipeName }: BreadcrumbJsonLdP
         '@type': 'ListItem',
         position: 2,
         name: categoryDisplay,
-        item: `${SITE_URL}/category/${categoryName}`,
+        item: `${SITE_URL}/category/${encodeURIComponent(categoryName)}`,
       },
       {
         '@type': 'ListItem',

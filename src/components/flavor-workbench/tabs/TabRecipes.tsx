@@ -109,6 +109,7 @@ export function TabRecipes() {
             onChange={(e) => setIngredientSearch(e.target.value)}
             placeholder="搜索食材..."
             className="w-full pl-8 pr-3 py-1.5 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168]"
+            aria-label="Search recipes by name or ingredients"
           />
         </div>
         <div className="flex flex-wrap gap-1.5 max-h-32 overflow-y-auto">

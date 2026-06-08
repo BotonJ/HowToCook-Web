@@ -6,6 +6,11 @@ export interface ApiSearchResult {
   cuisine: string;
   cooking_method: string;
   image_url: string | null;
+  cook_time?: string;
+  ingredients?: string[];
+  main_ingredients?: string[];
+  tags?: string[];
+  source?: string;
 }
 
 export interface ApiSearchResponse {

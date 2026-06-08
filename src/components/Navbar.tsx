@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Languages } from 'lucide-react';
 import { useI18n, useT } from '@/lib/i18n';
+import { useClickOutside } from '../hooks/useClickOutside';
 
 function useCollections() {
   const t = useT();
@@ -29,15 +30,7 @@ export function Navbar() {
   const t = useT();
   const COLLECTIONS = useCollections();
 
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setShowCollections(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  useClickOutside([dropdownRef], () => setShowCollections(false), showCollections);
 
   const toggleLang = () => {
     setLang(lang === 'zh' ? 'en' : 'zh');
@@ -125,6 +118,7 @@ export function Navbar() {
             href="https://github.com/BotonJ/HowToCook-Web"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="View source code on GitHub"
             className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
           >
             GitHub

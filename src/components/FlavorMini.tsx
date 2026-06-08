@@ -1,3 +1,4 @@
+import React from 'react';
 import type { FlavorVector } from '@/lib/epicure/types';
 import { useT } from '@/lib/i18n';
 import { FLAVOR_DIM_CONFIG } from '@/lib/flavor-dims';
@@ -8,7 +9,7 @@ interface FlavorMiniProps {
   profile: FlavorProfile;
 }
 
-export function FlavorMini({ profile }: FlavorMiniProps) {
+export const FlavorMini = React.memo(function FlavorMini({ profile }: FlavorMiniProps) {
   const t = useT();
   return (
     <div className="flex items-center gap-1" style={{ maxWidth: 120 }}>
@@ -35,4 +36,4 @@ export function FlavorMini({ profile }: FlavorMiniProps) {
       })}
     </div>
   );
-}
+});
