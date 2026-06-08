@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import * as React from 'react';
 import { getIngredients, getCooccurrencePairs, getSurprisePairs, CATEGORY_COLORS, type Ingredient } from '../data/ingredients';
 
@@ -26,12 +26,36 @@ interface NodePosition extends Ingredient {
  * - Flavor bridges orbit in outer ring
  * - Unrelated ingredients are hidden
  * - Supports zoom and pan
+ * - Auto-detects container dimensions via ResizeObserver for correct aspect ratio
  *
  * Auto-fit is computed synchronously inside positions useMemo
  * to prevent the two-step render flash (old positions → new positions).
  */
 export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelProps) {
   const glowId = React.useId();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerSize, setContainerSize] = useState<{ w: number; h: number } | null>(null);
+
+  // Observe container dimensions so viewBox matches actual aspect ratio
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const { width, height } = entry.contentRect;
+        if (width > 0 && height > 0) {
+          setContainerSize({ w: Math.round(width), h: Math.round(height) });
+        }
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Use observed container size, fallback to prop
+  const viewW = containerSize?.w ?? size;
+  const viewH = containerSize?.h ?? size;
+
   // User-manual zoom/pan overrides auto-fit when set
   const [userZoom, setUserZoom] = useState<number | null>(null);
   const [userPan, setUserPan] = useState<{ x: number; y: number } | null>(null);
@@ -46,11 +70,12 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     explanation: string;
   }>({ visible: false, x: 0, y: 0, title: '', explanation: '' });
 
-  const cx = size / 2;
-  const cy = size / 2;
-  const baseOrbitR = size * 0.32;
-  const bridgeOrbitR = size * 0.52;
-  const centerRadius = 32;
+  const cx = viewW / 2;
+  const cy = viewH / 2;
+  const refDim = Math.min(viewW, viewH);
+  const baseOrbitR = refDim * 0.28;
+  const bridgeOrbitR = refDim * 0.45;
+  const centerRadius = Math.max(20, refDim * 0.045);
 
   // Find related pairs for selected ingredient (deduplicated)
   const relatedPairs = useMemo(() => {
@@ -146,9 +171,10 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       });
     });
 
-    // Step 2: auto-fit zoom/pan from bounding box
+    // Step 2: auto-fit zoom/pan from bounding box — use actual viewW/viewH
     const padding = 60;
-    const available = size - padding * 2;
+    const availableW = viewW - padding * 2;
+    const availableH = viewH - padding * 2;
     let fitZoom = 1;
     let fitPan = { x: 0, y: 0 };
 
@@ -166,8 +192,8 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       const contentW = maxX - minX;
       const contentH = maxY - minY;
       if (contentW > 0 && contentH > 0) {
-        const scale = Math.min(available / contentW, available / contentH, 1.2);
-        fitZoom = scale * 0.55; // Reduced from 0.7 to 0.55 for smaller default zoom
+        const scale = Math.min(availableW / contentW, availableH / contentH, 1.2);
+        fitZoom = scale * 0.55;
 
         const contentCx = (minX + maxX) / 2;
         const contentCy = (minY + maxY) / 2;
@@ -245,7 +271,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     });
 
     return { positions: result, zoom: finalZoom, pan: finalPan };
-  }, [selectedId, cx, cy, userZoom, userPan, relatedPairs, bridgePairs, connectedIds]);
+  }, [selectedId, cx, cy, viewW, viewH, userZoom, userPan, relatedPairs, bridgePairs, connectedIds]);
 
   const centerNode = positions.find(p => p.isCenter);
 
@@ -289,7 +315,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
   const handleMouseUp = useCallback(() => setIsDragging(false), []);
 
   return (
-    <div className="relative w-full h-full" style={{ minHeight: size }}>
+    <div ref={containerRef} className="relative w-full h-full">
       {/* Zoom controls */}
       <div className="absolute top-3 right-3 z-20 flex flex-col gap-1">
         <button
@@ -318,7 +344,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       <svg
         width="100%"
         height="100%"
-        viewBox={`0 0 ${size} ${size}`}
+        viewBox={`0 0 ${viewW} ${viewH}`}
         preserveAspectRatio="xMidYMid meet"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -551,8 +577,8 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
         <div
           className="absolute z-30 max-w-[220px] bg-white/95 backdrop-blur rounded-xl p-3 shadow-lg border border-[#e0c0b5]/40 pointer-events-none"
           style={{
-            left: Math.min(tooltip.x + 16, size - 236),
-            top: Math.min(tooltip.y + 16, size - 120),
+            left: Math.min(tooltip.x + 16, viewW - 236),
+            top: Math.min(tooltip.y + 16, viewH - 120),
           }}
         >
           <div className="text-xs font-bold text-[#58413a] mb-1">{tooltip.title}</div>

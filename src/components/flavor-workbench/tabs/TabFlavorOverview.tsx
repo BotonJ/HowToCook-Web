@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import {
   getIngredients,
@@ -13,7 +13,6 @@ import { FlavorWheel } from '../ui/FlavorWheel';
 export function TabFlavorOverview() {
   const [selectedId, setSelectedId] = useState<string>('');
   const [search, setSearch] = useState('');
-  const [showSearch, setShowSearch] = useState(false);
 
   // Only show ingredients that have at least 1 cooccurrence pair
   const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
@@ -71,39 +70,46 @@ export function TabFlavorOverview() {
     <div className="flex flex-col h-[calc(100vh-112px)] gap-3">
       {/* Combined selector + category legend strip */}
       <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-3 flex-shrink-0">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          {/* Search + quick chips */}
+        <div className="flex gap-3">
+          {/* Left: category legend (multi-column) */}
+          <div className="flex-shrink-0 grid grid-cols-2 gap-x-3 gap-y-1">
+            {Object.entries(CATEGORY_LABELS).map(([cat, label]) => (
+              <div key={cat} className="flex items-center gap-1.5">
+                <div
+                  className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                  style={{ background: CATEGORY_COLORS[cat] }}
+                />
+                <span className="text-[10px] text-[#58413a] font-medium whitespace-nowrap">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Right: search + ingredient chips */}
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <h3 className="font-semibold text-[#2c2825] text-sm flex-shrink-0">食材选择</h3>
 
-            <button
-              onClick={() => setShowSearch(!showSearch)}
-              className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#f5ece7] transition flex-shrink-0"
-            >
-              {showSearch ? <X size={16} className="text-[#58413a]" /> : <Search size={16} className="text-[#58413a]" />}
-            </button>
-
-            <AnimatePresence>
-              {showSearch && (
-                <motion.div
-                  initial={{ width: 0, opacity: 0 }}
-                  animate={{ width: 'auto', opacity: 1 }}
-                  exit={{ width: 0, opacity: 0 }}
-                  className="overflow-hidden"
+            {/* Always-visible search */}
+            <div className="relative flex-shrink-0">
+              <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="搜索..."
+                className="w-28 pl-7 pr-2 py-1 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168]"
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch('')}
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
                 >
-                  <input
-                    type="text"
-                    value={search}
-                    onChange={e => setSearch(e.target.value)}
-                    placeholder="搜索..."
-                    className="w-32 px-2 py-1 rounded-lg bg-[#f5ece7] border-none outline-none text-xs text-[#2c2825] placeholder:text-[#8c7168]"
-                    autoFocus
-                  />
-                </motion.div>
+                  <X size={12} />
+                </button>
               )}
-            </AnimatePresence>
+            </div>
 
-            {showSearch && filtered.length > 0 && (
+            {/* Search results (shown when typing) */}
+            {search && filtered.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {filtered.map(i => (
                   <button
@@ -111,7 +117,6 @@ export function TabFlavorOverview() {
                     onClick={() => {
                       setSelectedId(i.id);
                       setSearch('');
-                      setShowSearch(false);
                     }}
                     className="px-2 py-0.5 rounded-full text-[10px] font-medium transition-all hover:scale-105"
                     style={{
@@ -126,8 +131,9 @@ export function TabFlavorOverview() {
               </div>
             )}
 
+            {/* Ingredient chips */}
             <div className="flex flex-wrap gap-1 flex-1 max-h-20 overflow-y-auto">
-              {activeIngredients.map(i => (
+              {(search ? filtered : activeIngredients).map(i => (
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}
@@ -148,19 +154,6 @@ export function TabFlavorOverview() {
                 </button>
               ))}
             </div>
-          </div>
-
-          {/* Category legend inline */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {Object.entries(CATEGORY_LABELS).map(([cat, label]) => (
-              <div key={cat} className="flex items-center gap-1">
-                <div
-                  className="w-2 h-2 rounded-full flex-shrink-0"
-                  style={{ background: CATEGORY_COLORS[cat] }}
-                />
-                <span className="text-[10px] text-[#58413a] font-medium">{label}</span>
-              </div>
-            ))}
           </div>
         </div>
       </div>
