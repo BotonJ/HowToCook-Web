@@ -25,10 +25,14 @@ interface NodePosition extends Ingredient {
  * - Flavor bridges orbit in outer ring
  * - Unrelated ingredients are hidden
  * - Supports zoom and pan
+ *
+ * Auto-fit is computed synchronously inside positions useMemo
+ * to prevent the two-step render flash (old positions → new positions).
  */
 export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelProps) {
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({ x: 0, y: 0 });
+  // User-manual zoom/pan overrides auto-fit when set
+  const [userZoom, setUserZoom] = useState<number | null>(null);
+  const [userPan, setUserPan] = useState<{ x: number; y: number } | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -46,12 +50,19 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
   const bridgeOrbitR = size * 0.52;
   const centerRadius = 32;
 
-  // Find related pairs for selected ingredient
+  // Find related pairs for selected ingredient (deduplicated)
   const relatedPairs = useMemo(() => {
     if (!selectedId) return [];
+    const seen = new Set<string>();
     return getCooccurrencePairs()
       .filter(p => p.a === selectedId || p.b === selectedId)
       .sort((a, b) => b.pmi - a.pmi)
+      .filter(p => {
+        const key = [p.a, p.b].sort().join('|');
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
       .slice(0, 10);
   }, [selectedId]);
 
@@ -68,42 +79,138 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       .slice(0, 4);
   }, [selectedId]);
 
+  // Reset user zoom/pan overrides when selectedId changes
+  useEffect(() => {
+    setUserZoom(null);
+    setUserPan(null);
+  }, [selectedId]);
 
-  const positions = useMemo((): NodePosition[] => {
-    if (!selectedId) return [];
+  // Compute positions with auto-fit baked in (synchronous, no useEffect flash)
+  const { positions, zoom, pan } = useMemo(() => {
+    const defaultResult = { positions: [] as NodePosition[], zoom: 1, pan: { x: 0, y: 0 } };
+    if (!selectedId) return defaultResult;
 
     const selected = getIngredients().find(i => i.id === selectedId);
-    if (!selected) return [];
+    if (!selected) return defaultResult;
 
-    const result: NodePosition[] = [];
+    // Step 1: compute node positions at zoom=1, pan=(0,0) to measure bounding box
+    const rawNodes: Array<{ id: string; x: number; y: number; radius: number }> = [];
 
-    // Center node
-    result.push({
-      ...selected,
-      x: cx + pan.x,
-      y: cy + pan.y,
-      radius: centerRadius * Math.min(zoom, 1.4),
-      isCenter: true,
-      isConnected: false,
-      isBridge: false,
-    });
+    // Center
+    const cRadius = centerRadius;
+    rawNodes.push({ id: selected.id, x: cx, y: cy, radius: cRadius });
 
-    // Connected nodes arranged by PMI (strongest at top, clockwise)
-    const orbitR = baseOrbitR * zoom;
+    // Connected nodes
+    const orbitR = baseOrbitR;
+    const connCount = relatedPairs.length;
     relatedPairs.forEach((pair, i) => {
       const otherId = pair.a === selectedId ? pair.b : pair.a;
       const other = getIngredients().find(ing => ing.id === otherId);
       if (!other) return;
 
       const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;
-      const angle = (-Math.PI / 2) + (i * 0.55);
+      const angle = connCount > 0
+        ? (-Math.PI / 2) + (i * 2 * Math.PI / connCount)
+        : 0;
       const r = orbitR * (0.9 + intensity * 0.15);
+
+      rawNodes.push({
+        id: other.id,
+        x: cx + r * Math.cos(angle),
+        y: cy + r * Math.sin(angle),
+        radius: (10 + intensity * 10),
+      });
+    });
+
+    // Bridge nodes
+    const bOrbitR = bridgeOrbitR;
+    const bridgeCount = bridgePairs.length;
+    bridgePairs.forEach((pair, i) => {
+      const otherId = pair.a === selectedId ? pair.b : pair.a;
+      const other = getIngredients().find(ing => ing.id === otherId);
+      if (!other || connectedIds.has(otherId)) return;
+
+      const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;
+      const angle = bridgeCount > 1
+        ? (Math.PI / 6) + (i * (2 * Math.PI / 3) / (bridgeCount - 1))
+        : Math.PI / 3;
+      const r = bOrbitR * (0.85 + intensity * 0.2);
+
+      rawNodes.push({
+        id: other.id,
+        x: cx + r * Math.cos(angle),
+        y: cy + r * Math.sin(angle),
+        radius: (8 + intensity * 8),
+      });
+    });
+
+    // Step 2: auto-fit zoom/pan from bounding box
+    const padding = 60;
+    const available = size - padding * 2;
+    let fitZoom = 1;
+    let fitPan = { x: 0, y: 0 };
+
+    if (rawNodes.length > 1) {
+      let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+      for (const n of rawNodes) {
+        const labelOffset = n.id === selected.id ? 24 : 18;
+        const r = n.radius + labelOffset;
+        minX = Math.min(minX, n.x - r);
+        maxX = Math.max(maxX, n.x + r);
+        minY = Math.min(minY, n.y - r);
+        maxY = Math.max(maxY, n.y + r);
+      }
+
+      const contentW = maxX - minX;
+      const contentH = maxY - minY;
+      if (contentW > 0 && contentH > 0) {
+        const scale = Math.min(available / contentW, available / contentH, 1.2);
+        fitZoom = scale * 0.7;
+
+        const contentCx = (minX + maxX) / 2;
+        const contentCy = (minY + maxY) / 2;
+        fitPan = {
+          x: cx - contentCx * fitZoom,
+          y: cy - contentCy * fitZoom,
+        };
+      }
+    }
+
+    // Use user override if available (manual zoom/pan after selection)
+    const finalZoom = userZoom ?? fitZoom;
+    const finalPan = (userZoom !== null && userPan !== null) ? userPan : fitPan;
+
+    // Step 3: build final NodePosition[] with final zoom/pan applied
+    const result: NodePosition[] = [];
+
+    // Center node
+    result.push({
+      ...selected,
+      x: cx + finalPan.x,
+      y: cy + finalPan.y,
+      radius: centerRadius * Math.min(finalZoom, 1.4),
+      isCenter: true,
+      isConnected: false,
+      isBridge: false,
+    });
+
+    // Connected nodes
+    relatedPairs.forEach((pair, i) => {
+      const otherId = pair.a === selectedId ? pair.b : pair.a;
+      const other = getIngredients().find(ing => ing.id === otherId);
+      if (!other) return;
+
+      const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;
+      const angle = connCount > 0
+        ? (-Math.PI / 2) + (i * 2 * Math.PI / connCount)
+        : 0;
+      const r = (baseOrbitR * finalZoom) * (0.9 + intensity * 0.15);
 
       result.push({
         ...other,
-        x: cx + pan.x + r * Math.cos(angle),
-        y: cy + pan.y + r * Math.sin(angle),
-        radius: (10 + intensity * 10) * Math.min(zoom, 1.3),
+        x: cx + finalPan.x + r * Math.cos(angle),
+        y: cy + finalPan.y + r * Math.sin(angle),
+        radius: (10 + intensity * 10) * Math.min(finalZoom, 1.3),
         isCenter: false,
         isConnected: true,
         isBridge: false,
@@ -111,22 +218,23 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       });
     });
 
-    // Bridge nodes on outer ring
-    const bOrbitR = bridgeOrbitR * zoom;
+    // Bridge nodes
     bridgePairs.forEach((pair, i) => {
       const otherId = pair.a === selectedId ? pair.b : pair.a;
       const other = getIngredients().find(ing => ing.id === otherId);
       if (!other || connectedIds.has(otherId)) return;
 
       const intensity = Object.values(other.flavor).reduce((s, v) => s + v, 0) / 6;
-      const angle = (Math.PI / 6) + (i * 1.1); // lower-right quadrant spread
-      const r = bOrbitR * (0.85 + intensity * 0.2);
+      const angle = bridgeCount > 1
+        ? (Math.PI / 6) + (i * (2 * Math.PI / 3) / (bridgeCount - 1))
+        : Math.PI / 3;
+      const r = (bridgeOrbitR * finalZoom) * (0.85 + intensity * 0.2);
 
       result.push({
         ...other,
-        x: cx + pan.x + r * Math.cos(angle),
-        y: cy + pan.y + r * Math.sin(angle),
-        radius: (8 + intensity * 8) * Math.min(zoom, 1.2),
+        x: cx + finalPan.x + r * Math.cos(angle),
+        y: cy + finalPan.y + r * Math.sin(angle),
+        radius: (8 + intensity * 8) * Math.min(finalZoom, 1.2),
         isCenter: false,
         isConnected: false,
         isBridge: true,
@@ -134,50 +242,21 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       });
     });
 
-    return result;
-  }, [selectedId, cx, cy, pan.x, pan.y, zoom, relatedPairs, bridgePairs, connectedIds]);
+    return { positions: result, zoom: finalZoom, pan: finalPan };
+  }, [selectedId, cx, cy, userZoom, userPan, relatedPairs, bridgePairs, connectedIds]);
 
   const centerNode = positions.find(p => p.isCenter);
 
-  // Auto-fit: when selected ingredient changes, compute zoom/pan so all nodes fit in view
-  useEffect(() => {
-    if (positions.length === 0 || !selectedId) return;
-
-    const padding = 60; // margin from viewport edge
-    const availableW = size - padding * 2;
-    const availableH = size - padding * 2;
-
-    // Compute bounding box of all nodes (including their radii and labels)
-    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const p of positions) {
-      const r = p.radius + (p.isCenter ? 24 : 18);
-      minX = Math.min(minX, p.x - r);
-      maxX = Math.max(maxX, p.x + r);
-      minY = Math.min(minY, p.y - r);
-      maxY = Math.max(maxY, p.y + r);
-    }
-
-    const contentW = maxX - minX;
-    const contentH = maxY - minY;
-    if (contentW <= 0 || contentH <= 0) return;
-
-    const scaleX = availableW / contentW;
-    const scaleY = availableH / contentH;
-    const newZoom = Math.min(scaleX, scaleY, 1.2) * 0.7; // default 70% to avoid oversized center node
-
-    // Center the content
-    const contentCx = (minX + maxX) / 2;
-    const contentCy = (minY + maxY) / 2;
-    const newPanX = cx - contentCx * newZoom;
-    const newPanY = cy - contentCy * newZoom;
-
-    setZoom(newZoom);
-    setPan({ x: newPanX, y: newPanY });
-  }, [selectedId, size, cx, cy]);
-
-  const handleZoomIn = useCallback(() => setZoom(z => Math.min(z * 1.2, 3)), []);
-  const handleZoomOut = useCallback(() => setZoom(z => Math.max(z / 1.2, 0.5)), []);
-  const handleReset = useCallback(() => { setZoom(1); setPan({ x: 0, y: 0 }); }, []);
+  const handleZoomIn = useCallback(() => {
+    setUserZoom(z => Math.min((z ?? zoom) * 1.2, 3));
+  }, [zoom]);
+  const handleZoomOut = useCallback(() => {
+    setUserZoom(z => Math.max((z ?? zoom) / 1.2, 0.5));
+  }, [zoom]);
+  const handleReset = useCallback(() => {
+    setUserZoom(null);
+    setUserPan(null);
+  }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     setIsDragging(true);
@@ -186,7 +265,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isDragging) return;
-    setPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
+    setUserPan({ x: e.clientX - dragStart.x, y: e.clientY - dragStart.y });
   }, [isDragging, dragStart]);
 
   const handleMouseUp = useCallback(() => setIsDragging(false), []);

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import {
   getIngredients,
+  getCooccurrencePairs,
   CATEGORY_COLORS,
   CATEGORY_LABELS,
   getIngredientDescription,
@@ -10,14 +11,35 @@ import {
 import { FlavorWheel } from '../ui/FlavorWheel';
 
 export function TabFlavorOverview() {
-  const [selectedId, setSelectedId] = useState<string>('chicken');
+  const [selectedId, setSelectedId] = useState<string>('');
   const [search, setSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false);
-  const [showAll, setShowAll] = useState(false);
+
+  // Only show ingredients that have at least 1 cooccurrence pair
+  const activeIngredients = useMemo(() => {
+    const all = getIngredients();
+    if (all.length === 0) return [];
+    const pairs = getCooccurrencePairs();
+    const connectedIds = new Set<string>();
+    for (const p of pairs) {
+      connectedIds.add(p.a);
+      connectedIds.add(p.b);
+    }
+    return all.filter(i => connectedIds.has(i.id));
+  }, [getIngredients().length]);
+
+  // Set default selectedId to the first active ingredient
+  useEffect(() => {
+    if (!selectedId && activeIngredients.length > 0) {
+      setSelectedId(activeIngredients[0].id);
+    } else if (selectedId && !activeIngredients.find(i => i.id === selectedId)) {
+      setSelectedId(activeIngredients[0]?.id ?? '');
+    }
+  }, [activeIngredients.length, selectedId]);
 
   const selected = useMemo(
-    () => getIngredients().find(i => i.id === selectedId) || getIngredients()[0],
-    [selectedId],
+    () => activeIngredients.find(i => i.id === selectedId) || activeIngredients[0],
+    [selectedId, activeIngredients],
   );
 
   const description = useMemo(
@@ -25,24 +47,16 @@ export function TabFlavorOverview() {
     [selectedId],
   );
 
-  // Update selectedId if current one doesn't exist after data loads
-  useEffect(() => {
-    const ingredients = getIngredients();
-    if (ingredients.length > 0 && !ingredients.find(i => i.id === selectedId)) {
-      setSelectedId(ingredients[0].id);
-    }
-  }, [getIngredients().length, selectedId]);
-
   const filtered = useMemo(
     () =>
       search
-        ? getIngredients().filter(
+        ? activeIngredients.filter(
             i =>
               i.name.includes(search) ||
               i.nameEn.toLowerCase().includes(search.toLowerCase()),
           ).slice(0, 8)
         : [],
-    [search],
+    [search, activeIngredients],
   );
 
   const flavorBars = [
@@ -53,6 +67,15 @@ export function TabFlavorOverview() {
     { key: 'umami', label: '鲜', color: '#ae3a04' },
     { key: 'fat', label: '脂肪', color: '#7c4a7c' },
   ];
+
+  // Guard: don't render until data is loaded and a valid ingredient is selected
+  if (!selected) {
+    return (
+      <div className="flex items-center justify-center h-[calc(100vh-112px)] text-[#8c7168]">
+        <div className="animate-pulse">加载食材数据中...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col h-[calc(100vh-112px)] gap-3">
@@ -114,7 +137,7 @@ export function TabFlavorOverview() {
             )}
 
             <div className="flex flex-wrap gap-1 flex-1 max-h-20 overflow-y-auto">
-              {(showAll ? getIngredients() : getIngredients().slice(0, 24)).map(i => (
+              {activeIngredients.map(i => (
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}
@@ -134,14 +157,6 @@ export function TabFlavorOverview() {
                   {i.name}
                 </button>
               ))}
-              {getIngredients().length > 24 && (
-                <button
-                  onClick={() => setShowAll(!showAll)}
-                  className="text-[10px] text-[#ae3a04] hover:underline self-center"
-                >
-                  {showAll ? '收起' : `+${getIngredients().length - 24} 更多`}
-                </button>
-              )}
             </div>
           </div>
 
