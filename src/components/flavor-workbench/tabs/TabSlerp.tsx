@@ -9,22 +9,45 @@ const TIMELINE_STOPS = [0, 0.25, 0.5, 0.75, 1.0];
 export function TabSlerp() {
   const [vectorA, setVectorA] = useState('');
   const [vectorB, setVectorB] = useState('');
+
+  // Auto-select defaults when data loads
+  useEffect(() => {
+    if (INGREDIENTS.length > 0) {
+      if (!vectorA || !INGREDIENTS.find(i => i.id === vectorA)) setVectorA(INGREDIENTS[0].id);
+      if (!vectorB || !INGREDIENTS.find(i => i.id === vectorB)) setVectorB(INGREDIENTS[Math.min(5, INGREDIENTS.length - 1)].id);
+    }
+  }, [INGREDIENTS.length]);
+
+  const ingA = useMemo(() => INGREDIENTS.find(i => i.id === vectorA), [vectorA]);
+  const ingB = useMemo(() => INGREDIENTS.find(i => i.id === vectorB), [vectorB]);
+
+  // Guard: don't render inner component until both ingredients are resolved
+  if (!ingA || !ingB) {
+    return (
+      <div className="flex items-center justify-center py-20 text-[#8c7168]">
+        <div className="animate-pulse">加载食材数据中...</div>
+      </div>
+    );
+  }
+
+  return <TabSlerpInner ingA={ingA} ingB={ingB} vectorA={vectorA} vectorB={vectorB} setVectorA={setVectorA} setVectorB={setVectorB} />;
+}
+
+interface TabSlerpInnerProps {
+  ingA: typeof INGREDIENTS[number];
+  ingB: typeof INGREDIENTS[number];
+  vectorA: string;
+  vectorB: string;
+  setVectorA: (v: string) => void;
+  setVectorB: (v: string) => void;
+}
+
+function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }: TabSlerpInnerProps) {
   const [t, setT] = useState(0.45);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-
-  // Auto-select defaults when data loads
-  useEffect(() => {
-    if (INGREDIENTS.length > 0) {
-      if (!vectorA) setVectorA(INGREDIENTS[0].id);
-      if (!vectorB) setVectorB(INGREDIENTS[Math.min(5, INGREDIENTS.length - 1)].id);
-    }
-  }, [INGREDIENTS.length]);
-
-  const ingA = useMemo(() => INGREDIENTS.find(i => i.id === vectorA)!, [vectorA]);
-  const ingB = useMemo(() => INGREDIENTS.find(i => i.id === vectorB)!, [vectorB]);
 
   const currentPos = useMemo((): Vec2 => {
     return slerp2d(

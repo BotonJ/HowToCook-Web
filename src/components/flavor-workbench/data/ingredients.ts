@@ -107,27 +107,33 @@ let loaded = false;
 export async function loadWorkbenchData(): Promise<void> {
   if (loaded) return;
 
-  // Try to load from recipe-embedding generated JSON first
+  // Strategy: try real data first; if ingredients exist but recipes don't,
+  // fall back to full mock data because IDs are incompatible between real and mock.
+  let useRealData = false;
+
   try {
     const resp = await fetch('/data/flavor-workbench/workbench-data.json');
     if (resp.ok) {
       const data = await resp.json();
-      INGREDIENTS = data.ingredients || [];
-      COOCCURRENCE_PAIRS = data.cooccurrence || [];
-      SURPRISE_PAIRS = data.surprise || [];
-      RECIPES = data.recipes || [];
-      SUBSTITUTIONS = data.substitutions || [];
-      COMMON_ALLERGENS = data.allergens || [];
-      SCENARIO_EXPLANATIONS = data.scenarioExplanations || {};
-      loaded = true;
-      return;
+      if (data.ingredients?.length && data.recipes?.length) {
+        // Real data is complete — use it
+        INGREDIENTS = data.ingredients;
+        COOCCURRENCE_PAIRS = data.cooccurrence || [];
+        SURPRISE_PAIRS = data.surprise || [];
+        RECIPES = data.recipes;
+        SUBSTITUTIONS = data.substitutions || [];
+        COMMON_ALLERGENS = data.allergens || [];
+        SCENARIO_EXPLANATIONS = data.scenarioExplanations || {};
+        useRealData = true;
+      }
     }
   } catch {
-    // Fallback to mock data
+    // Fall through to mock data
   }
 
-  // Fallback: load mock data inline
-  await loadMockData();
+  if (!useRealData) {
+    await loadMockData();
+  }
   loaded = true;
 }
 
