@@ -1,8 +1,9 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getIngredients, CATEGORY_COLORS } from '../data/ingredients';
+import { getIngredients, getCooccurrencePairs, CATEGORY_COLORS } from '../data/ingredients';
 import { slerp2d, nearestK, arcPath, type Vec2 } from '../lib/slerp';
 import { RadarChart } from '../ui/RadarChart';
+import { Search, X } from 'lucide-react';
 
 const TIMELINE_STOPS = [0, 0.25, 0.5, 0.75, 1.0];
 
@@ -10,28 +11,71 @@ export function TabSlerp() {
   const [vectorA, setVectorA] = useState('');
   const [vectorB, setVectorB] = useState('');
 
-  // Auto-select defaults when data loads
-  useEffect(() => {
-    const ingredients = getIngredients();
-    if (ingredients.length > 0) {
-      if (!vectorA || !ingredients.find(i => i.id === vectorA)) setVectorA(ingredients[0].id);
-      if (!vectorB || !ingredients.find(i => i.id === vectorB)) setVectorB(ingredients[Math.min(5, ingredients.length - 1)].id);
+  // Only show ingredients that have at least 1 cooccurrence pair
+  const activeIngredients = useMemo(() => {
+    const all = getIngredients();
+    if (all.length === 0) return [];
+    const pairs = getCooccurrencePairs();
+    const connectedIds = new Set<string>();
+    for (const p of pairs) {
+      connectedIds.add(p.a);
+      connectedIds.add(p.b);
     }
+    return all.filter(i => connectedIds.has(i.id));
   }, [getIngredients().length]);
 
   const ingA = useMemo(() => getIngredients().find(i => i.id === vectorA), [vectorA]);
   const ingB = useMemo(() => getIngredients().find(i => i.id === vectorB), [vectorB]);
 
-  // Guard: don't render inner component until both ingredients are resolved
+  // Guard: show empty state when no ingredients selected
   if (!ingA || !ingB) {
     return (
-      <div className="flex items-center justify-center py-20 text-[#8c7168]">
-        <div className="animate-pulse">加载食材数据中...</div>
+      <div className="flex flex-col gap-4">
+        {/* Core concept */}
+        <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-5">
+          <h2 className="text-lg font-bold text-[#2c2825] mb-2">
+            SLERP Lab — 风味走廊
+          </h2>
+          <p className="text-sm text-[#58413a] leading-relaxed mb-2">
+            拖动滑块，从食材 A 的风味领地走向食材 B。你会经过一条「风味走廊」，那里住着既像 A、又像 B 的隐藏味道。
+          </p>
+          <p className="text-xs text-[#8c7168] leading-relaxed">
+            如果把每种食材想象成高维空间里的一个「风味指纹」，简单混合就像两种果汁兑在一起——越中间越寡淡、变「水」。SLERP（球面线性插值）不走直线，而是沿着球面表面画一条弧线，始终保持风味的饱满度。你在这条走廊上发现的每一种中介食材，都是弧线上真实存在的风味坐标。
+          </p>
+        </div>
+
+        {/* Empty state + ingredient selector */}
+        <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-5">
+          <div className="flex flex-col items-center justify-center py-10 text-center">
+            <h3 className="text-lg font-semibold text-[#2c2825] mb-2">开始探索</h3>
+            <p className="text-sm text-[#58413a] mb-4">请选择两种食材开始探索风味走廊</p>
+            <div className="grid grid-cols-2 gap-4 w-full max-w-md">
+              <div>
+                <label className="text-xs text-[#8c7168] uppercase tracking-wider font-bold mb-2 block">食材 A（起点）</label>
+                <IngredientSelector
+                  value={vectorA}
+                  onChange={setVectorA}
+                  activeIngredients={activeIngredients}
+                  placeholder="选择起点食材..."
+                />
+              </div>
+              <div>
+                <label className="text-xs text-[#8c7168] uppercase tracking-wider font-bold mb-2 block">食材 B（终点）</label>
+                <IngredientSelector
+                  value={vectorB}
+                  onChange={setVectorB}
+                  activeIngredients={activeIngredients}
+                  placeholder="选择终点食材..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
-  return <TabSlerpInner ingA={ingA} ingB={ingB} vectorA={vectorA} vectorB={vectorB} setVectorA={setVectorA} setVectorB={setVectorB} />;
+  return <TabSlerpInner ingA={ingA} ingB={ingB} vectorA={vectorA} vectorB={vectorB} setVectorA={setVectorA} setVectorB={setVectorB} activeIngredients={activeIngredients} />;
 }
 
 import type { Ingredient } from '../data/ingredients';
@@ -43,14 +87,17 @@ interface TabSlerpInnerProps {
   vectorB: string;
   setVectorA: (v: string) => void;
   setVectorB: (v: string) => void;
+  activeIngredients: Ingredient[];
 }
 
-function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }: TabSlerpInnerProps) {
+function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, activeIngredients }: TabSlerpInnerProps) {
   const [t, setT] = useState(0.45);
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [searchA, setSearchA] = useState('');
+  const [searchB, setSearchB] = useState('');
 
   const currentPos = useMemo((): Vec2 => {
     return slerp2d(
@@ -215,7 +262,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
               </defs>
               <rect width="100%" height="100%" fill="url(#slerp-grid)" />
 
-              {getIngredients().map(ing => {
+              {activeIngredients.map(ing => {
                 const x = mapX(ing.pca[0]);
                 const y = mapY(ing.pca[1]);
                 if (ing.id === vectorA || ing.id === vectorB) return null;
@@ -268,27 +315,77 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
             <div className="grid grid-cols-2 gap-3 mb-4">
               <div>
                 <label className="text-[10px] text-[#8c7168] uppercase tracking-wider font-bold mb-1 block">起点</label>
-                <select
-                  value={vectorA}
-                  onChange={e => setVectorA(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none"
-                >
-                  {getIngredients().map(i => (
-                    <option key={i.id} value={i.id}>{i.name}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+                  <input
+                    type="text"
+                    value={searchA}
+                    onChange={e => setSearchA(e.target.value)}
+                    placeholder={ingA.name}
+                    className="w-full pl-7 pr-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none placeholder:text-[#8c7168]"
+                  />
+                  {searchA && (
+                    <button
+                      onClick={() => setSearchA('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
+                    >
+                      <X size={12} />
+                    </button>
+                  )}
+                </div>
+                {searchA && (
+                  <div className="mt-1 max-h-24 overflow-y-auto rounded-lg bg-white border border-[#e0c0b5]/30">
+                    {activeIngredients
+                      .filter(i => i.name.includes(searchA) || i.nameEn.toLowerCase().includes(searchA.toLowerCase()))
+                      .slice(0, 10)
+                      .map(i => (
+                        <button
+                          key={i.id}
+                          onClick={() => { setVectorA(i.id); setSearchA(''); }}
+                          className="w-full px-2 py-1 text-left text-xs hover:bg-[#f5ece7] transition"
+                        >
+                          {i.name}
+                        </button>
+                      ))}
+                  </div>
+                )}
               </div>
               <div>
                 <label className="text-[10px] text-[#8c7168] uppercase tracking-wider font-bold mb-1 block">终点</label>
-                <select
-                  value={vectorB}
-                  onChange={e => setVectorB(e.target.value)}
-                  className="w-full px-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none"
-                >
-                  {getIngredients().map(i => (
-                    <option key={i.id} value={i.id}>{i.name}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <Search size={12} className="absolute left-2 top-1/2 -translate-y-1/2 text-[#8c7168]" />
+                  <input
+                    type="text"
+                    value={searchB}
+                    onChange={e => setSearchB(e.target.value)}
+                    placeholder={ingB.name}
+                    className="w-full pl-7 pr-2 py-1.5 rounded-lg bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none placeholder:text-[#8c7168]"
+                  />
+                  {searchB && (
+                    <button
+                      onClick={() => setSearchB('')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-[#8c7168] hover:text-[#2c2825]"
+                    >
+                      <X size={12} />
+                    </button>
+                  )}
+                </div>
+                {searchB && (
+                  <div className="mt-1 max-h-24 overflow-y-auto rounded-lg bg-white border border-[#e0c0b5]/30">
+                    {activeIngredients
+                      .filter(i => i.name.includes(searchB) || i.nameEn.toLowerCase().includes(searchB.toLowerCase()))
+                      .slice(0, 10)
+                      .map(i => (
+                        <button
+                          key={i.id}
+                          onClick={() => { setVectorB(i.id); setSearchB(''); }}
+                          className="w-full px-2 py-1 text-left text-xs hover:bg-[#f5ece7] transition"
+                        >
+                          {i.name}
+                        </button>
+                      ))}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -396,6 +493,86 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB }:
           })}
         </div>
       </div>
+    </div>
+  );
+}
+
+// Ingredient selector component
+interface IngredientSelectorProps {
+  value: string;
+  onChange: (value: string) => void;
+  activeIngredients: Ingredient[];
+  placeholder: string;
+}
+
+function IngredientSelector({ value, onChange, activeIngredients, placeholder }: IngredientSelectorProps) {
+  const [search, setSearch] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const selected = activeIngredients.find(i => i.id === value);
+
+  const filtered = useMemo(() => {
+    if (!search) return activeIngredients.slice(0, 50);
+    return activeIngredients.filter(i =>
+      i.name.includes(search) || i.nameEn.toLowerCase().includes(search.toLowerCase())
+    ).slice(0, 20);
+  }, [search, activeIngredients]);
+
+  return (
+    <div className="relative">
+      <div
+        onClick={() => setShowDropdown(!showDropdown)}
+        className="w-full px-3 py-2 rounded-lg bg-[#f5ece7] border border-[#e0c0b5]/30 cursor-pointer text-sm text-[#2c2825] min-h-[40px] flex items-center"
+      >
+        {selected ? (
+          <span className="font-medium">{selected.name}</span>
+        ) : (
+          <span className="text-[#8c7168]">{placeholder}</span>
+        )}
+      </div>
+
+      {showDropdown && (
+        <>
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => setShowDropdown(false)}
+          />
+          <div className="absolute z-20 w-full mt-1 bg-white rounded-lg shadow-lg border border-[#e0c0b5]/30 max-h-60 overflow-hidden">
+            <div className="p-2 border-b border-[#e0c0b5]/20">
+              <input
+                type="text"
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+                placeholder="搜索食材..."
+                className="w-full px-2 py-1.5 rounded bg-[#f5ece7] border-none text-xs text-[#2c2825] outline-none"
+                autoFocus
+              />
+            </div>
+            <div className="max-h-48 overflow-y-auto">
+              {filtered.map(i => (
+                <button
+                  key={i.id}
+                  onClick={() => { onChange(i.id); setShowDropdown(false); setSearch(''); }}
+                  className="w-full px-3 py-2 text-left text-sm hover:bg-[#f5ece7] transition flex items-center gap-2"
+                >
+                  <div
+                    className="w-5 h-5 rounded-full flex items-center justify-center text-white text-[10px] font-medium flex-shrink-0"
+                    style={{ background: CATEGORY_COLORS[i.category] }}
+                  >
+                    {i.name[0]}
+                  </div>
+                  <span>{i.name}</span>
+                </button>
+              ))}
+              {filtered.length === 0 && (
+                <div className="px-3 py-4 text-center text-xs text-[#8c7168]">
+                  没有找到匹配的食材
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
