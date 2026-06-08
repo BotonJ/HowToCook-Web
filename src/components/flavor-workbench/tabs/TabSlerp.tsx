@@ -184,19 +184,25 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return scored;
   }, [activeIngredients, zoom, arcPoints, corridorNeighbors, neighbors, vectorA, vectorB]);
 
-  // Label style: all visible nodes get labels, style varies by importance
-  const getLabelStyle = useCallback((ing: Ingredient): { fontSize: number; fontWeight: number } => {
-    if ([vectorA, vectorB].includes(ing.id)) return { fontSize: 14, fontWeight: 700 };
+  // Deterministic label visibility — only show for important nodes
+  const shouldShowLabel = useCallback((ing: Ingredient): boolean => {
+    if ([vectorA, vectorB].includes(ing.id)) return true;
 
     const waypointIdList = corridorNeighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name);
-    if (waypointIdList.includes(ing.id)) return { fontSize: 11, fontWeight: 600 };
+    if (waypointIdList.includes(ing.id)) return true;
 
     const neighborIdList = neighbors.map(n => 'id' in n ? n.id : n.name);
     const nIdx = neighborIdList.indexOf(ing.id);
-    if (nIdx >= 0 && nIdx < 3) return { fontSize: 11, fontWeight: 600 };
+    if (nIdx >= 0 && nIdx < 3) return true;
 
-    return { fontSize: 10, fontWeight: 400 };
-  }, [vectorA, vectorB, neighbors, corridorNeighbors]);
+    // Search highlight
+    if (highlightSearch && (
+      ing.name.includes(highlightSearch) ||
+      ing.nameEn.toLowerCase().includes(highlightSearch.toLowerCase())
+    )) return true;
+
+    return false;
+  }, [vectorA, vectorB, neighbors, corridorNeighbors, highlightSearch]);
 
   // Auto-fit to A, B + neighbors
   const autoFitView = useCallback(() => {
@@ -423,7 +429,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 const y = mapY(ing.pca[1]);
                 if (ing.id === vectorA || ing.id === vectorB) return null;
 
-                const labelStyle = getLabelStyle(ing);
+                const showLabel = shouldShowLabel(ing);
                 const isNeighbor = neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id);
                 const isWaypoint = corridorNeighbors.some(n => n && ('id' in n ? n.id : n.name) === ing.id);
                 const isHighlighted = highlightSearch && (
@@ -450,16 +456,18 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                       stroke={isHighlighted ? '#ae3a04' : 'white'}
                       strokeWidth={strokeW}
                     />
-                    <text
-                      x={x + nodeSize + 3}
-                      y={y + 4}
-                      fontSize={isHighlighted ? 12 : labelStyle.fontSize}
-                      fontWeight={isHighlighted ? 700 : labelStyle.fontWeight}
-                      fill={isHighlighted ? '#ae3a04' : '#58413a'}
-                      fontFamily="Quicksand, sans-serif"
-                    >
-                      {ing.name}
-                    </text>
+                    {showLabel && (
+                      <text
+                        x={x + nodeSize + 3}
+                        y={y + 4}
+                        fontSize={isHighlighted ? 12 : isWaypoint || isNeighbor ? 11 : 10}
+                        fontWeight={isHighlighted ? 700 : isWaypoint || isNeighbor ? 600 : 400}
+                        fill={isHighlighted ? '#ae3a04' : '#58413a'}
+                        fontFamily="Quicksand, sans-serif"
+                      >
+                        {ing.name}
+                      </text>
+                    )}
                   </g>
                 );
               })}
