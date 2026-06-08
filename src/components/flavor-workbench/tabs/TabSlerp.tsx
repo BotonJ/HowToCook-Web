@@ -184,34 +184,19 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
     return scored;
   }, [activeIngredients, zoom, arcPoints, corridorNeighbors, neighbors, vectorA, vectorB]);
 
-  // Deterministic label visibility
-  const shouldShowLabel = useCallback((ing: Ingredient): boolean => {
-    if ([vectorA, vectorB].includes(ing.id)) return true;
+  // Label style: all visible nodes get labels, style varies by importance
+  const getLabelStyle = useCallback((ing: Ingredient): { fontSize: number; fontWeight: number } => {
+    if ([vectorA, vectorB].includes(ing.id)) return { fontSize: 14, fontWeight: 700 };
+
+    const waypointIdList = corridorNeighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name);
+    if (waypointIdList.includes(ing.id)) return { fontSize: 11, fontWeight: 600 };
 
     const neighborIdList = neighbors.map(n => 'id' in n ? n.id : n.name);
-    const waypointIdList = corridorNeighbors.filter(Boolean).map(n => 'id' in n ? n.id : n.name);
-
-    // Neighbors: show top 3
     const nIdx = neighborIdList.indexOf(ing.id);
-    if (nIdx >= 0 && nIdx < 3) return true;
+    if (nIdx >= 0 && nIdx < 3) return { fontSize: 11, fontWeight: 600 };
 
-    // Waypoints always get labels
-    if (waypointIdList.includes(ing.id)) return true;
-
-    // Search highlight
-    if (highlightSearch && (
-      ing.name.includes(highlightSearch) ||
-      ing.nameEn.toLowerCase().includes(highlightSearch.toLowerCase())
-    )) return true;
-
-    // At zoom > 1.3, show labels for nearby ingredients deterministically
-    if (zoom > 1.3) {
-      const hash = ing.id.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
-      return hash % 3 === 0;
-    }
-
-    return false;
-  }, [zoom, vectorA, vectorB, neighbors, corridorNeighbors, highlightSearch]);
+    return { fontSize: 10, fontWeight: 400 };
+  }, [vectorA, vectorB, neighbors, corridorNeighbors]);
 
   // Auto-fit to A, B + neighbors
   const autoFitView = useCallback(() => {
@@ -438,7 +423,7 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 const y = mapY(ing.pca[1]);
                 if (ing.id === vectorA || ing.id === vectorB) return null;
 
-                const showLabel = shouldShowLabel(ing);
+                const labelStyle = getLabelStyle(ing);
                 const isNeighbor = neighbors.some(n => ('id' in n ? n.id : n.name) === ing.id);
                 const isWaypoint = corridorNeighbors.some(n => n && ('id' in n ? n.id : n.name) === ing.id);
                 const isHighlighted = highlightSearch && (
@@ -449,7 +434,6 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                 const nodeSize = isHighlighted ? 10 : isWaypoint ? 8 : isNeighbor ? 7 : 5;
                 const nodeOpacity = isHighlighted ? 1 : isWaypoint ? 0.9 : isNeighbor ? 0.75 : 0.4;
                 const strokeW = isHighlighted ? 3 : isWaypoint ? 2 : 1.5;
-                const fontSize = isHighlighted ? 12 : isWaypoint ? 11 : isNeighbor ? 11 : 10;
 
                 return (
                   <g
@@ -466,18 +450,16 @@ function TabSlerpInner({ ingA, ingB, vectorA, vectorB, setVectorA, setVectorB, a
                       stroke={isHighlighted ? '#ae3a04' : 'white'}
                       strokeWidth={strokeW}
                     />
-                    {showLabel && (
-                      <text
-                        x={x + nodeSize + 3}
-                        y={y + 4}
-                        fontSize={fontSize}
-                        fontWeight={isHighlighted ? 700 : isWaypoint ? 600 : 400}
-                        fill={isHighlighted ? '#ae3a04' : '#58413a'}
-                        fontFamily="Quicksand, sans-serif"
-                      >
-                        {ing.name}
-                      </text>
-                    )}
+                    <text
+                      x={x + nodeSize + 3}
+                      y={y + 4}
+                      fontSize={isHighlighted ? 12 : labelStyle.fontSize}
+                      fontWeight={isHighlighted ? 700 : labelStyle.fontWeight}
+                      fill={isHighlighted ? '#ae3a04' : '#58413a'}
+                      fontFamily="Quicksand, sans-serif"
+                    >
+                      {ing.name}
+                    </text>
                   </g>
                 );
               })}
