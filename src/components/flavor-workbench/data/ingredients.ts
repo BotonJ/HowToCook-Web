@@ -72,6 +72,62 @@ export const CATEGORY_LABELS: Record<string, string> = {
   other: '其他',
 };
 
+// ── Ingredient flavor descriptions ────────────────────────────
+
+export const INGREDIENT_DESCRIPTIONS: Record<string, {
+  summary: string;
+  bestPairs: string[];
+  tips: string;
+}> = {
+  chicken: {
+    summary: '鸡肉鲜味中等、脂肪适中，是最百搭的肉类食材。它的风味温和，能吸收调料和配菜的味道。',
+    bestPairs: ['生姜（去腥增香）', '葱（提鲜）', '酱油（上色入味）', '花生（口感对比）'],
+    tips: '鸡胸肉适合快炒，鸡腿肉适合炖煮。',
+  },
+  pork: {
+    summary: '猪肉鲜味突出、脂肪丰富，是中式烹饪的核心食材。不同部位差异大：里脊适合快炒，五花适合红烧。',
+    bestPairs: ['酱油（鲜味叠加）', '大蒜（解腻）', '生姜（去腥）', '八角（增香）'],
+    tips: '猪肉与酱油的搭配是中餐最经典的鲜味组合。',
+  },
+  beef: {
+    summary: '牛肉鲜味最强、脂肪适中，含有丰富的铁质和肌红蛋白。炖煮后风味更加浓郁。',
+    bestPairs: ['酱油（鲜味叠加）', '八角（增香去腥）', '花椒（麻辣）', '大蒜（解腻）'],
+    tips: '牛肉适合长时间炖煮，短时间高温快炒也不错。',
+  },
+  tofu: {
+    summary: '豆腐风味温和、蛋白质丰富，是素食者的肉类替代品。能吸收周围食材的味道。',
+    bestPairs: ['酱油（入味）', '葱（提鲜）', '芝麻油（增香）', '辣椒（提味）'],
+    tips: '嫩豆腐适合汤类，老豆腐适合煎炒。',
+  },
+  shrimp: {
+    summary: '虾肉鲜甜、脂肪低，是海鲜中最受欢迎的食材之一。新鲜虾的甜味是最大特点。',
+    bestPairs: ['大蒜（蒜蓉虾）', '生姜（去腥）', '葱（提鲜）', '辣椒（辣炒虾）'],
+    tips: '虾不要煮太久，过熟会变硬变柴。',
+  },
+  tomato: {
+    summary: '番茄酸甜适中、富含谷氨酸（鲜味），是少数兼具酸味和鲜味的食材。',
+    bestPairs: ['鸡蛋（番茄炒蛋）', '大蒜（增香）', '糖（平衡酸味）'],
+    tips: '炒番茄时加一点糖可以平衡酸味。',
+  },
+  mushroom: {
+    summary: '蘑菇鲜味极强（富含鸟苷酸），是天然的鲜味炸弹。适合与肉类搭配增强整体鲜味。',
+    bestPairs: ['酱油（鲜味叠加）', '大蒜（增香）', '黄油（西式做法）'],
+    tips: '蘑菇不需要洗太久，快速冲洗即可。',
+  },
+  chili: {
+    summary: '辣椒辣味强烈，含有丰富的维生素 C。不同品种辣度差异大。',
+    bestPairs: ['大蒜（经典搭配）', '花椒（麻辣）', '花生（辣子鸡）'],
+    tips: '辣椒籽是最辣的部分，去籽可降低辣度。',
+  },
+  'coconut-milk': {
+    summary: '椰奶脂肪含量高、口感醇厚，带有天然甜味。是东南亚菜系的灵魂食材。',
+    bestPairs: ['香茅（冬阴功）', '南姜（增香）', '辣椒（咖喱）'],
+    tips: '椰奶加热时容易分离，最后再加入。',
+  },
+};
+
+export const getIngredientDescription = (id: string) => INGREDIENT_DESCRIPTIONS[id];
+
 // ── Substitution types ───────────────────────────────────────
 
 export interface Substitution {

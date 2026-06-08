@@ -5,6 +5,7 @@ import {
   getIngredients,
   CATEGORY_COLORS,
   CATEGORY_LABELS,
+  getIngredientDescription,
 } from '../data/ingredients';
 import { FlavorWheel } from '../ui/FlavorWheel';
 
@@ -16,6 +17,11 @@ export function TabFlavorOverview() {
 
   const selected = useMemo(
     () => getIngredients().find(i => i.id === selectedId) || getIngredients()[0],
+    [selectedId],
+  );
+
+  const description = useMemo(
+    () => getIngredientDescription(selectedId),
     [selectedId],
   );
 
@@ -153,6 +159,30 @@ export function TabFlavorOverview() {
           </div>
         </div>
       </div>
+
+      {/* Flavor summary card */}
+      {description && (
+        <div className="bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 p-4 flex-shrink-0">
+          <h4 className="text-sm font-semibold text-[#2c2825] mb-2">
+            {selected.name} · 风味概要
+          </h4>
+          <p className="text-sm text-[#58413a] leading-relaxed mb-3">
+            {description.summary}
+          </p>
+          {description.bestPairs.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-3">
+              {description.bestPairs.map(pair => (
+                <span key={pair} className="px-2 py-0.5 rounded-full text-xs bg-[#f5ece7] text-[#58413a]">
+                  {pair}
+                </span>
+              ))}
+            </div>
+          )}
+          <p className="text-xs text-[#8c7168] italic">
+            💡 {description.tips}
+          </p>
+        </div>
+      )}
 
       {/* Main content: full-screen flavor wheel */}
       <div className="relative flex-1 min-h-0 bg-white rounded-xl shadow-sm border border-[#e0c0b5]/30 overflow-hidden">

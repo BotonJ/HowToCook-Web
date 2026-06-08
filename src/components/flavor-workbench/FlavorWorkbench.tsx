@@ -6,7 +6,9 @@ import { TabPairing } from './tabs/TabPairing';
 import { TabRecipes } from './tabs/TabRecipes';
 import { TabSlerp } from './tabs/TabSlerp';
 import { loadWorkbenchData, isWorkbenchDataLoaded } from './data/ingredients';
+// c3v2 loader — kept for future tab use (currently ~11MB, skipped in loadAll)
 import { loadC3V2Data, isC3V2Loaded } from './data/c3v2-loader';
+void loadC3V2Data; void isC3V2Loaded;
 
 type Tab = 'overview' | 'pairing' | 'recipes' | 'slerp';
 
@@ -26,14 +28,10 @@ export function FlavorWorkbench() {
       if (!isWorkbenchDataLoaded()) {
         await loadWorkbenchData();
       }
-      // Also try to load c3v2 embeddings (non-blocking for now)
-      if (!isC3V2Loaded()) {
-        try {
-          await loadC3V2Data();
-        } catch {
-          // c3v2 data is optional for now
-        }
-      }
+      // c3v2 embeddings: not yet used by any tab, skip loading to save ~11MB bandwidth
+      // if (!isC3V2Loaded()) {
+      //   try { await loadC3V2Data(); } catch { /* optional */ }
+      // }
       setReady(true);
     }
     loadAll();
