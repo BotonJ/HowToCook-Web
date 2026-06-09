@@ -554,9 +554,15 @@ function SearchableSelect({ value, onChange, options }: SearchableSelectProps) {
 
   const filtered = useMemo(() => {
     if (!search) return options.slice(0, 50);
-    const q = search.toLowerCase();
+    const q = search.trim();
+    if (!q) return options.slice(0, 50);
+    const exact = options.filter(i => i.name === q);
+    if (exact.length > 0) return exact;
+    const prefix = options.filter(i => i.name.startsWith(q));
+    if (prefix.length > 0) return prefix.slice(0, 30);
+    const qLower = q.toLowerCase();
     return options
-      .filter(i => i.name.includes(search) || i.nameEn.toLowerCase().includes(q))
+      .filter(i => i.name.includes(q) || i.nameEn.toLowerCase().includes(qLower))
       .slice(0, 30);
   }, [search, options]);
 

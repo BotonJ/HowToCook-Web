@@ -30,7 +30,9 @@ export function RadarChart({ datasets, size = 280 }: RadarChartProps) {
 
   const toPoints = (d: Record<string, number>) =>
     DIMENSIONS.map((dim, i) => {
-      const r = (d[dim] ?? 0) * maxR;
+      // real data uses 'fat', interface uses 'fatty' — support both
+      const val = d[dim] ?? (dim === 'fatty' ? d['fat'] : 0) ?? 0;
+      const r = val * maxR;
       return polarToCartesian(i * angleStep, r, cx, cy);
     });
 

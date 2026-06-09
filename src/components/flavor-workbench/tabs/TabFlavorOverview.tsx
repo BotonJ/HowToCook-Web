@@ -36,17 +36,21 @@ export function TabFlavorOverview() {
     [selectedId],
   );
 
-  const filtered = useMemo(
-    () =>
-      search
-        ? activeIngredients.filter(
-            i =>
-              i.name.includes(search) ||
-              i.nameEn.toLowerCase().includes(search.toLowerCase()),
-          ).slice(0, 8)
-        : [],
-    [search, activeIngredients],
-  );
+  const filtered = useMemo(() => {
+    if (!search) return [];
+    const q = search.trim();
+    if (!q) return [];
+    // 精确匹配优先：有精确结果时只显示精确项
+    const exact = activeIngredients.filter(i => i.name === q);
+    if (exact.length > 0) return exact;
+    // 前缀匹配
+    const prefix = activeIngredients.filter(i => i.name.startsWith(q));
+    if (prefix.length > 0) return prefix.slice(0, 8);
+    // 子串兜底
+    return activeIngredients.filter(
+      i => i.name.includes(q) || i.nameEn.toLowerCase().includes(q.toLowerCase()),
+    ).slice(0, 8);
+  }, [search, activeIngredients]);
 
   const flavorBars = [
     { key: 'sour', label: '酸', color: '#4a7c8c' },
@@ -133,7 +137,7 @@ export function TabFlavorOverview() {
 
             {/* Ingredient chips */}
             <div className="flex flex-wrap gap-1 flex-1 max-h-20 overflow-y-auto">
-              {(search ? filtered : activeIngredients).map(i => (
+              {activeIngredients.map(i => (
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}

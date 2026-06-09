@@ -50,12 +50,18 @@ export function TabPairing() {
   const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
 
   const [search, setSearch] = useState('');
-  const filteredIngredients = useMemo(
-    () => activeIngredients.filter(i =>
-      !search || i.name.includes(search) || i.nameEn.toLowerCase().includes(search.toLowerCase())
-    ),
-    [search, activeIngredients]
-  );
+  const filteredIngredients = useMemo(() => {
+    if (!search) return activeIngredients;
+    const q = search.trim();
+    if (!q) return activeIngredients;
+    const exact = activeIngredients.filter(i => i.name === q);
+    if (exact.length > 0) return exact;
+    const prefix = activeIngredients.filter(i => i.name.startsWith(q));
+    if (prefix.length > 0) return prefix;
+    return activeIngredients.filter(
+      i => i.name.includes(q) || i.nameEn.toLowerCase().includes(q.toLowerCase()),
+    );
+  }, [search, activeIngredients]);
 
   // ── Synthesis flavor (average) ──
   const synthesisFlavor = useMemo(() => {
