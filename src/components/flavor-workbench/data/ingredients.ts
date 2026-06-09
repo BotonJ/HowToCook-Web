@@ -133,6 +133,9 @@ export const INGREDIENT_DESCRIPTIONS: Record<string, {
 
 export const getIngredientDescription = (id: string) => INGREDIENT_DESCRIPTIONS[id];
 
+// ── Data normalization (noise filtering) ─────────────────────
+import { normalizeIngredients, normalizeCooccurrence, normalizeSurprise } from './ingredient-normalize';
+
 // ── Substitution types ───────────────────────────────────────
 
 export interface Substitution {
@@ -203,9 +206,11 @@ export async function loadWorkbenchData(): Promise<void> {
         }
       }
       if (data.ingredients?.length) {
-        state.ingredients = data.ingredients;
-        state.cooccurrencePairs = data.cooccurrence || [];
-        state.surprisePairs = data.surprise || [];
+        // Normalize: map noise → real ingredients, delete non-food, merge dupes
+        const normalized = normalizeIngredients(data.ingredients);
+        state.ingredients = normalized.ingredients;
+        state.cooccurrencePairs = normalizeCooccurrence(data.cooccurrence || [], normalized.validIds);
+        state.surprisePairs = normalizeSurprise(data.surprise || [], normalized.validIds);
         state.recipes = data.recipes || [];
         state.substitutions = data.substitutions || [];
         state.commonAllergens = data.allergens || [];
