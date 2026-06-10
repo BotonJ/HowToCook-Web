@@ -14,7 +14,7 @@ export async function loadC3V2Data(): Promise<void> {
   if (loaded) return;
 
   const [embResp, vocabResp] = await Promise.all([
-    fetch('/data/flavor-workbench/embeddings.f32'),
+    fetch('https://pub-73438d19783a40fd9e247cf1f60eb88e.r2.dev/embeddings.f32'),
     fetch('/data/flavor-workbench/vocab.json'),
   ]);
 
