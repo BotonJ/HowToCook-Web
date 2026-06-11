@@ -22,6 +22,13 @@ export const DELETE_PATTERNS: RegExp[] = [
   /^(原料准备|调料准备|量材料)/,   // 步骤描述
   /练切$/,                        // 烘焙工艺
   /^(丝袜|手冲壶|分享壶|酵素机|枫叶|^母$|^酵$|^ｇ$)/,  // 非食材
+  // ── 设备/工具/非食材 ──
+  /^(一台|家用|普通家用)/,         // 设备前缀
+  /咖啡机|微波炉|烤箱|破壁机|料理机|搅拌机|榨汁机|原汁机|豆浆机|冰箱|磨豆机|酸奶机/,  // 设备
+  /拉花嘴|压粉锤|滤纸|模具|裱花袋|裱花嘴|锡纸|油纸|保鲜膜/,  // 工具
+  /脂肪含量|蛋白质含量|热量/,       // 营养指标
+  /^「[a-d]$/,                     // 残留引号标签
+  /^#[A-D]$/,                      // 井号标签
 ];
 
 // ── Exact delete (pure noise, no mapping) ─────────────────────
@@ -185,6 +192,14 @@ function normalizeName(name: string): string | null {
 
   // 5. Measurement prefix map
   if (name in MEASUREMENT_PREFIX_MAP) return MEASUREMENT_PREFIX_MAP[name];
+
+  // 6. Strip A/B/C/D suffix labels from Chinese ingredient names
+  //    "细砂糖A" → "细砂糖", "低筋面粉B" → "低筋面粉"
+  //    Only strip when the name contains Chinese characters (avoids "Feta", "Paprika")
+  if (/[一-鿿]/.test(name)) {
+    const stripped = name.replace(/[A-Da-d]$/, '');
+    if (stripped !== name && stripped.length > 0) return stripped;
+  }
 
   return name; // no change
 }
