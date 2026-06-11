@@ -7,15 +7,15 @@ import {
   CATEGORY_LABELS,
   getIngredientDescription,
 } from '../data/ingredients';
-import { getActiveIngredients } from '../data/ingredients-active';
+// import { getActiveIngredients } from '../data/ingredients-active';
 import { FlavorWheel } from '../ui/FlavorWheel';
 
 export function TabFlavorOverview() {
   const [selectedId, setSelectedId] = useState<string>('');
   const [search, setSearch] = useState('');
 
-  // Only show ingredients that have at least 1 cooccurrence pair
-  const activeIngredients = useMemo(() => getActiveIngredients(), [getIngredients().length]);
+  // Show all dict-filtered ingredients (not just those with co-occurrence)
+  const activeIngredients = useMemo(() => getIngredients(), [getIngredients().length]);
 
   // Set default selectedId to the first active ingredient
   useEffect(() => {
