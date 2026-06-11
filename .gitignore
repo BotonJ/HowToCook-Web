@@ -37,3 +37,4 @@ fix-recipe-not-found.md
 .env.production
 .gstack/
 *.bak.*
+embeddings.f32
