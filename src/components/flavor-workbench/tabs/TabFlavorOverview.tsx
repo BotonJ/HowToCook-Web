@@ -215,8 +215,8 @@ export function TabFlavorOverview() {
                         transition={{ duration: 0.4, ease: 'easeOut' }}
                       />
                     </div>
-                    <span className="text-[10px] text-[#8c7168] w-5">
-                      {(val * 100).toFixed(0)}
+                    <span className="text-[10px] text-[#8c7168] w-6">
+                      {(val * 10).toFixed(1)}
                     </span>
                   </div>
                 );
@@ -230,7 +230,7 @@ export function TabFlavorOverview() {
               关于 PMI
             </h4>
             <p className="text-xs text-[#58413a] leading-relaxed">
-              点互信息，数值越高表示两种食材在真实菜谱中共同出现的频率越高。PMI {'>'} 2.0
+              点互信息，数值越高表示两种食材在真实菜谱中共同出现的频率越高。分数 {'>'} 5.0
               通常意味着经典搭配。
             </p>
           </div>

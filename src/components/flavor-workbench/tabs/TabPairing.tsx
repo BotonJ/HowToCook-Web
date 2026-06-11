@@ -362,7 +362,7 @@ export function TabPairing() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f5ece7] border border-[#e0c0b5]">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#8c7168]">张力指数</span>
                   <span className="text-lg font-bold text-[#ae3a04]" style={{ fontFamily: 'Quicksand, sans-serif' }}>
-                    {tensionIndex.toFixed(2)}
+                    {(tensionIndex * 10).toFixed(1)}
                   </span>
                   <span className="text-[10px] text-[#8c7168]">
                     {tensionIndex < 0.3 ? '和谐' : tensionIndex > 0.6 ? '高张力' : '平衡'}
@@ -466,10 +466,10 @@ export function TabPairing() {
                   <div className="w-16 h-1.5 rounded-full bg-[#e0c0b5] overflow-hidden">
                     <div
                       className="h-full rounded-full bg-[#ae3a04]"
-                      style={{ width: `${Math.min((p.pmi / 6) * 100, 100)}%` }}
+                      style={{ width: `${Math.min(p.pmi * 100, 100)}%` }}
                     />
                   </div>
-                  <span className="text-xs font-bold text-[#ae3a04]">{p.pmi.toFixed(1)}</span>
+                  <span className="text-xs font-bold text-[#ae3a04]">{(p.pmi * 10).toFixed(1)}</span>
                 </div>
               </motion.div>
             ))}
