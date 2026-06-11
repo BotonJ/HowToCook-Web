@@ -84,13 +84,15 @@ def _search_via_api(
 
 
 def _ensure_synced() -> None:
-    """Lazy-init: call auto_sync_if_needed() once per process."""
+    """Lazy-init: call auto_sync_if_needed() and auto_update_if_needed() once per process."""
     global _synced
     if _synced:
         return
     _synced = True
     from sync import auto_sync_if_needed
+    from update import auto_update_if_needed
     auto_sync_if_needed(silent=True)
+    auto_update_if_needed(silent=True)
 
 
 CATEGORY_NAMES = {
@@ -293,20 +295,77 @@ def format_search_results(dishes: list) -> str:
 
 
 def format_recipe_detail(dish: dict) -> str:
-    from parser import read_recipe_file, format_recipe
+    """获取菜谱详情。API 实时查询，不读取本地文件。"""
+    from mcp_tools import get_recipe, ApiError
 
-    path = dish.get("path", "")
-    if not path:
-        return "菜谱路径未找到"
-
-    abs_path = skill_path(path)
-    recipe = read_recipe_file(str(abs_path))
-    if not recipe:
-        return "菜谱内容读取失败"
-
-    source = dish.get("source", "")
     dish_id = dish.get("id", "")
-    return format_recipe(recipe, source, dish_id)
+    if not dish_id:
+        return "菜谱 ID 未找到"
+
+    try:
+        recipe = get_recipe(dish_id)
+    except (ApiError, Exception) as exc:
+        logger.debug("API 获取详情失败: %s", exc)
+        return f"获取菜谱详情失败: {exc}"
+
+    return _format_api_recipe(recipe)
+
+
+def _format_api_recipe(recipe: dict) -> str:
+    """格式化 API 返回的菜谱详情。"""
+    name = recipe.get("name", "未知")
+    difficulty = recipe.get("difficulty", 3)
+    source = recipe.get("source", "")
+    cuisine = recipe.get("cuisine", "")
+    method = recipe.get("cooking_method", "")
+    dish_id = recipe.get("id", "")
+
+    stars = render_stars(difficulty)
+    lines = [f"🍳 {name} {stars}"]
+
+    meta = []
+    if cuisine and cuisine != "家常":
+        meta.append(f"菜系: {cuisine}")
+    if method and method != "其他":
+        meta.append(f"烹饪: {method}")
+    if source:
+        meta.append(f"来源: {source}")
+    if meta:
+        lines.append(" · ".join(meta))
+
+    # 食材
+    ingredients = recipe.get("ingredients", [])
+    optional = recipe.get("optional_ingredients", [])
+    if ingredients:
+        lines.append("")
+        lines.append("【食材】")
+        lines.append("主料: " + "、".join(ingredients))
+    if optional:
+        lines.append("可选: " + "、".join(optional))
+
+    # 步骤
+    steps = recipe.get("steps", [])
+    if steps:
+        lines.append("")
+        lines.append("【步骤】")
+        for i, step in enumerate(steps, 1):
+            lines.append(f"{i}. {step}")
+
+    # 提示
+    tips = recipe.get("tips", [])
+    if tips:
+        lines.append("")
+        lines.append("【提示】")
+        for tip in tips:
+            lines.append(f"- {tip}")
+
+    # 网站链接
+    if dish_id:
+        url = f"https://howtocook.cn/recipe/{dish_id}"
+        lines.append("")
+        lines.append(f"👉 {url}")
+
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":
