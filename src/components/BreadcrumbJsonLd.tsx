@@ -1,4 +1,5 @@
 import { SITE_URL, CATEGORY_LABELS } from '@/lib/constants';
+import { safeJsonLd } from '@/lib/utils';
 
 interface BreadcrumbJsonLdProps {
   categoryName: string;
@@ -15,14 +16,14 @@ export function BreadcrumbJsonLd({ categoryName, recipeName }: BreadcrumbJsonLdP
       {
         '@type': 'ListItem',
         position: 1,
-        name: '首页',
+        name: 'Home',
         item: SITE_URL,
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: categoryDisplay,
-        item: `${SITE_URL}/category/${categoryName}`,
+        item: `${SITE_URL}/category/${encodeURIComponent(categoryName)}`,
       },
       {
         '@type': 'ListItem',
@@ -35,7 +36,7 @@ export function BreadcrumbJsonLd({ categoryName, recipeName }: BreadcrumbJsonLdP
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
     />
   );
 }

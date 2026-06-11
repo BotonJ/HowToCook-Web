@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
+import { useT } from '@/lib/i18n';
 
 interface SourceTab {
   id: string;
@@ -6,23 +8,31 @@ interface SourceTab {
   disabled?: boolean;
 }
 
-const sources: SourceTab[] = [
-  { id: 'howtocook', label: 'HowToCook' },
-  { id: '随便做', label: '随便做' },
-];
+function useSources() {
+  const t = useT();
+  return useMemo<SourceTab[]>(() => [
+    { id: 'all', label: t.sourceNav.all },
+    { id: 'howtocook', label: 'HowToCook' },
+    { id: '随便做', label: t.sourceNav.suibianzuo },
+    { id: '面食之神', label: t.sourceNav.noodleGod },
+  ], [t]);
+}
 
 interface SourceNavProps {
   activeSource: string;
   onSourceChange: (source: string) => void;
+  sourceCounts?: Record<string, number>;
 }
 
-export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
+export function SourceNav({ activeSource, onSourceChange, sourceCounts }: SourceNavProps) {
+  const sources = useSources();
   return (
     <div className="w-full bg-surface-container-low border-b border-outline-variant sticky top-20 z-30">
       <div className="container mx-auto px-4 overflow-x-auto no-scrollbar py-3 flex gap-2">
         {sources.map((source) => {
           const isActive = source.id === activeSource;
           const isDisabled = source.disabled;
+          const count = sourceCounts?.[source.id];
 
           return (
             <button
@@ -39,6 +49,9 @@ export function SourceNav({ activeSource, onSourceChange }: SourceNavProps) {
               )}
             >
               {source.label}
+              {count !== undefined && count > 0 && (
+                <span className="ml-1.5 text-xs opacity-70">{count}</span>
+              )}
               {isDisabled && (
                 <span className="ml-1.5 text-xs opacity-70">coming soon</span>
               )}

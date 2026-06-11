@@ -15,13 +15,14 @@ export function transformDishIndex(dish: DishIndex): Recipe {
     main_ingredients: dish.main_ingredients,
     tags: dish.tags,
     source: dish.source,
+    language: dish.language,
   };
 }
 
 export function transformApiRecipe(api: ApiRecipeDetail): Recipe {
   const ingredientsLines = [
     ...api.ingredients,
-    ...(api.optional_ingredients?.map(i => `可选：${i}`) ?? []),
+    ...(api.optional_ingredients?.map(i => `Optional: ${i}`) ?? []),
   ];
 
   const stepsText = api.steps
@@ -71,9 +72,9 @@ export function transformSearchResult(
     difficulty: result.difficulty ?? 0,
     cuisine: result.cuisine ?? '',
     cooking_method: result.cooking_method ?? '',
-    cook_time: '',
-    ingredients: [],
-    main_ingredients: [],
-    source: 'howtocook',
+    cook_time: result.cook_time ?? '',
+    ingredients: result.ingredients ?? [],
+    main_ingredients: result.main_ingredients ?? [],
+    source: result.source ?? 'howtocook',
   };
 }

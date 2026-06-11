@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, ChefHat, Flame, Leaf, Lightbulb, AlertTriangle } from 'lucide-react';
 import { Layout } from '@/components/Layout';
+import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
 import { withBaseUrl } from '@/lib/utils';
-import { COOK_TIME_LABELS, DIFFICULTY_LABELS, SITE_URL } from '@/lib/constants';
+import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
-import { getFullRecipeData } from '@/hooks/useRecipes';
+import { useT, useBasePath } from '@/lib/i18n';
+import { findRecipeById } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
 
@@ -32,13 +34,18 @@ function renderMarkdownList(text: string) {
 
 function renderSteps(text: string) {
   if (!text) return null;
-  // Group lines by numbered steps: a new step starts with "N." at the beginning of a line
+  // Group lines by step boundaries:
+  // - Numbered: "N. xxx" or "N、xxx"
+  // - Bullet: "- xxx" or "* xxx"
   const groups: string[] = [];
   let current = '';
   for (const line of text.split('\n')) {
-    if (/^\d+\.\s/.test(line.trimStart())) {
+    const trimmed = line.trimStart();
+    const isNumbered = /^\d+[.、]\s/.test(trimmed);
+    const isBullet = /^[-*]\s/.test(trimmed);
+    if (isNumbered || isBullet) {
       if (current) groups.push(current);
-      current = line.trimStart().replace(/^\d+\.\s*/, '');
+      current = trimmed.replace(/^\d+[.、]\s*/, '').replace(/^[-*]\s*/, '');
     } else if (current) {
       current += '\n' + line;
     }
@@ -68,8 +75,12 @@ function renderSteps(text: string) {
 
 export function RecipeDetail() {
   const params = useParams();
-  const recipeId = params['*'] || params.recipeId;
+  const rawId = params['*'] || params.recipeId;
+  // Sanitize URL parameter: strip control characters and limit length
+  const recipeId = rawId?.replace(/[\x00-\x1f]/gu, '').slice(0, 200) || '';
   const navigate = useNavigate();
+  const base = useBasePath();
+  const t = useT();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -77,11 +88,10 @@ export function RecipeDetail() {
     if (!recipeId) { setLocalRecipe(null); setLocalLoaded(true); return; }
     let cancelled = false;
     setLocalLoaded(false);
-    getFullRecipeData()
-      .then(cats => {
+    findRecipeById(recipeId)
+      .then(r => {
         if (cancelled) return;
-        const all = cats.flatMap(c => c.recipes);
-        setLocalRecipe(all.find(r => r.id === recipeId) ?? null);
+        setLocalRecipe(r);
         setLocalLoaded(true);
       })
       .catch(() => { if (!cancelled) setLocalLoaded(true); });
@@ -98,7 +108,7 @@ export function RecipeDetail() {
 
   useMeta({
     title: recipe?.name,
-    description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name} 的做法` : undefined),
+    description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name}的做法` : undefined),
     ogImage: recipe?.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
     ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.id)}` : undefined,
   });
@@ -118,7 +128,7 @@ export function RecipeDetail() {
       <Layout>
         <div className="text-center py-20">
           <p className="text-on-surface-variant text-lg font-body">菜谱未找到</p>
-          <Link to="/" className="text-primary hover:underline mt-4 inline-block font-body">返回首页</Link>
+          <Link to={`${base}/`} className="text-primary hover:underline mt-4 inline-block font-body">返回首页</Link>
         </div>
       </Layout>
     );
@@ -182,7 +192,7 @@ export function RecipeDetail() {
                   <ChefHat size={18} className="text-primary flex-shrink-0" />
                   <div>
                     <div className="text-label-sm text-on-surface-variant">难度</div>
-                    <div className="text-label-lg text-on-surface font-semibold">{DIFFICULTY_LABELS[recipe.difficulty]}</div>
+                    <div className="text-label-lg text-on-surface font-semibold">{t.constants.difficulty[recipe.difficulty]}</div>
                   </div>
                 </div>
               )}
@@ -191,7 +201,7 @@ export function RecipeDetail() {
                   <Clock size={18} className="text-tertiary flex-shrink-0" />
                   <div>
                     <div className="text-label-sm text-on-surface-variant">时间</div>
-                    <div className="text-label-lg text-on-surface font-semibold">{COOK_TIME_LABELS[recipe.cook_time] || recipe.cook_time}</div>
+                    <div className="text-label-lg text-on-surface font-semibold">{(t.constants.cookTime as Record<string, string>)[recipe.cook_time] || recipe.cook_time}</div>
                   </div>
                 </div>
               )}
@@ -232,6 +242,18 @@ export function RecipeDetail() {
                 </div>
               ))}
             </div>
+
+            {/* Flavor Radar */}
+            {recipe.flavorProfile && (
+              <section className="mb-10">
+                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
+                  风味画像
+                </h2>
+                <div className="flex justify-center">
+                  <FlavorRadar profile={recipe.flavorProfile} size={280} interactive />
+                </div>
+              </section>
+            )}
 
             {/* Ingredients */}
             {recipe.ingredients_text && (

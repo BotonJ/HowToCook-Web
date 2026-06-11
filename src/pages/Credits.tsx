@@ -1,61 +1,56 @@
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
+import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 
-const credits = [
-  {
-    name: 'HowToCook 源仓库',
-    description: '开源菜谱项目（GitHub 100k+ stars），程序员风格菜谱。精确量化，步骤带公式。',
-    link: 'https://github.com/Anduin2017/HowToCook',
-  },
-  {
-    name: '随便做',
-    description: '火遍全网的国宴大厨隋坡，140 道简易/进阶菜谱。随便一做，怎么都好吃。',
-  },
-  {
-    name: '金谷园',
-    description: '第一个开源的饺子馆 Skill，招牌甜品牛奶醪糟鸡蛋。',
-  },
-];
+const CREDIT_KEYS = ['howtocook', 'jingxiang', 'suibo', 'jinguyuan'] as const;
+const CREDIT_LINKS: Record<string, string> = {
+  howtocook: 'https://github.com/Anduin2017/HowToCook',
+  jingxiang: 'https://king-jingxiang.github.io/HowToCook/',
+};
 
 export function Credits() {
+  const t = useT();
   useMeta({
-    title: '致谢',
-    description: '感谢 HowToCook 源仓库、随便做、金谷园等项目和创作者的贡献。',
+    title: t.credits.metaTitle,
+    description: t.credits.metaDesc,
     ogUrl: `${SITE_URL}/credits`,
   });
 
   return (
     <Layout>
       <div className="py-8 space-y-8">
-        <h1 className="font-display text-headline-xl text-on-surface">致谢</h1>
+        <h1 className="font-display text-headline-xl text-on-surface">{t.credits.title}</h1>
         <p className="font-body text-body-lg text-on-surface-variant max-w-xl">
-          感谢以下项目和创作者的贡献，让 HowToCook 的菜谱库不断丰富。
+          {t.credits.intro}
         </p>
         <div className="grid gap-4 max-w-2xl">
-          {credits.map((credit) => (
-            <div
-              key={credit.name}
-              className="bg-surface-container-low rounded-lg p-6 shadow-ambient"
-            >
-              <h3 className="font-display text-headline-md text-on-surface mb-2">
-                {credit.name}
-              </h3>
-              <p className="font-body text-body-md text-on-surface-variant">
-                {credit.description}
-              </p>
-              {credit.link && (
-                <a
-                  href={credit.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-2 text-primary hover:underline font-label-lg text-label-lg"
-                >
-                  访问项目 →
-                </a>
-              )}
-            </div>
-          ))}
+          {CREDIT_KEYS.map((key) => {
+            const item = t.credits.items[key];
+            return (
+              <div
+                key={key}
+                className="bg-surface-container-low rounded-lg p-6 shadow-ambient"
+              >
+                <h3 className="font-display text-headline-md text-on-surface mb-2">
+                  {item.name}
+                </h3>
+                <p className="font-body text-body-md text-on-surface-variant">
+                  {item.description}
+                </p>
+                {CREDIT_LINKS[key] && (
+                  <a
+                    href={CREDIT_LINKS[key]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block mt-2 text-primary hover:underline font-label-lg text-label-lg"
+                  >
+                    {t.credits.visitProject}
+                  </a>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </Layout>

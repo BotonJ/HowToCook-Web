@@ -3,6 +3,8 @@ import { motion, type HTMLMotionProps } from 'framer-motion';
 import { Recipe } from '@/types';
 import { withBaseUrl } from '@/lib/utils';
 import { COOK_TIME_SHORT, CATEGORY_LABELS } from '@/lib/constants';
+import { FlavorMini } from '@/components/FlavorMini';
+import { useT, useBasePath } from '@/lib/i18n';
 
 /** Shared entrance/hover animation for recipe cards (no `layout` — too expensive with many cards). */
 const cardMotionProps: HTMLMotionProps<'div'> = {
@@ -20,10 +22,12 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   const cookTimeLabel = COOK_TIME_SHORT[recipe.cook_time];
   const isSpicy = recipe.tags?.spicy;
   const categoryLabel = CATEGORY_LABELS[recipe.category] || recipe.category;
+  const t = useT();
+  const base = useBasePath();
 
   if (!recipe.imagePath) {
     return (
-      <Link to={`/recipe/${recipe.id}`}>
+      <Link to={`${base}/recipe/${recipe.id}`}>
         <motion.div {...cardMotionProps} className="group cursor-pointer">
           <div className="relative overflow-hidden rounded-lg shadow-ambient hover:shadow-lg transition-shadow duration-300 aspect-[9/16] bg-gradient-to-br from-primary/10 via-surface-container to-secondary/10 flex flex-col items-center justify-center p-6">
             <h3 className="font-display font-bold text-headline-lg text-on-surface text-center leading-tight mb-3">
@@ -42,10 +46,15 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
               )}
               {isSpicy && (
                 <span className="bg-surface/80 backdrop-blur-sm text-label-sm px-3 py-1 rounded-full">
-                  🌶️ 辣
+                  🌶️ {t.recipe.spicy}
                 </span>
               )}
             </div>
+            {recipe.flavorProfile && (
+              <div className="flex justify-center mb-3">
+                <FlavorMini profile={recipe.flavorProfile} />
+              </div>
+            )}
             <p className="text-label-sm text-on-surface-variant">{categoryLabel}</p>
           </div>
         </motion.div>
@@ -54,7 +63,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
   }
 
   return (
-    <Link to={`/recipe/${recipe.id}`}>
+    <Link to={`${base}/recipe/${recipe.id}`}>
       <motion.div {...cardMotionProps} className="group cursor-pointer">
         <div className="relative overflow-hidden rounded-lg bg-surface-container-lowest shadow-ambient hover:shadow-lg transition-shadow duration-300">
           <div className="aspect-[9/16] bg-surface-container relative">
@@ -67,24 +76,29 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
 
           </div>
 
-          <div className="p-3 flex items-center gap-2">
-            <h3 className="font-display font-semibold text-on-surface text-base truncate min-w-0">
-              {recipe.name}
-            </h3>
-            <div className="flex shrink-0 gap-1.5">
-              {cookTimeLabel && (
-                <span className="bg-surface/80 text-on-surface text-xs px-2 py-0.5 rounded-full border border-outline-variant">
-                  {cookTimeLabel}
-                </span>
-              )}
-              {isSpicy && (
-                <span className="bg-surface/80 text-xs px-2 py-0.5 rounded-full border border-outline-variant">
-                  🌶️
-                </span>
-              )}
+          <div className="p-3">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="font-display font-semibold text-on-surface text-base truncate min-w-0">
+                {recipe.name}
+              </h3>
+              <div className="flex shrink-0 gap-1.5">
+                {cookTimeLabel && (
+                  <span className="bg-surface/80 text-on-surface text-xs px-2 py-0.5 rounded-full border border-outline-variant">
+                    {cookTimeLabel}
+                  </span>
+                )}
+                {isSpicy && (
+                  <span className="bg-surface/80 text-xs px-2 py-0.5 rounded-full border border-outline-variant">
+                    🌶️
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="text-xs text-on-surface-variant">{categoryLabel}</p>
+              {recipe.flavorProfile && <FlavorMini profile={recipe.flavorProfile} />}
             </div>
           </div>
-          <p className="text-xs text-on-surface-variant px-3 pb-3 -mt-1">{categoryLabel}</p>
         </div>
       </motion.div>
     </Link>

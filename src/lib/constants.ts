@@ -27,4 +27,5 @@ export const CATEGORY_LABELS: Record<string, string> = {
   dessert: '甜品',
   'semi-finished': '半成品',
   condiment: '酱料',
+  other: '其他',
 };

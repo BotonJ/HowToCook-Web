@@ -11,8 +11,8 @@ import '@fontsource-variable/literata'
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('/sw.js')
-    .catch((err) => {
-      console.warn('SW registration failed:', err)
+    .catch(() => {
+      // SW registration failed silently — non-critical for SPA functionality
     })
 }
 

@@ -1,10 +1,11 @@
 import { SITE_URL } from '@/lib/constants';
+import { safeJsonLd } from '@/lib/utils';
 
 export function WebsiteJsonLd() {
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: '做饭指北',
+    name: 'HowToCook',
     alternateName: 'HowToCook',
     url: SITE_URL,
     potentialAction: {
@@ -17,7 +18,7 @@ export function WebsiteJsonLd() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
     />
   );
 }

@@ -1,7 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { SourceNav } from '@/components/SourceNav';
 import { CategoryNav } from '@/components/CategoryNav';
+import { CuisineNav } from '@/components/CuisineNav';
+import { SourceNav } from '@/components/SourceNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
@@ -9,11 +10,14 @@ import { WebsiteJsonLd } from '@/components/WebsiteJsonLd';
 import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
+import { useI18n } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
 
 const SOURCE_LABELS: Record<string, string> = {
+  all: '全部',
   howtocook: 'HowToCook',
   '随便做': '随便做',
+  '面食之神': '面食之神',
 };
 
 export function Home() {
@@ -21,23 +25,84 @@ export function Home() {
   const [searchParams] = useSearchParams();
   const initialQuery = searchParams.get('q') || '';
   const [searchTerm, setSearchTerm] = useState(initialQuery);
-  const [activeSource, setActiveSource] = useState('howtocook');
+  const [activeCuisine, setActiveCuisine] = useState<string>('all');
+  const [activeSource, setActiveSource] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
+  const { lang, t } = useI18n();
 
   useMeta({
     title: categoryId
-      ? (categories.find(c => c.id === categoryId)?.displayName || '分类')
+      ? (categories.find(c => c.id === categoryId)?.displayName || t.home.category)
       : undefined,
-    description: '做饭指北 — 世界首个 AI 驱动的食谱百科与烹饪 Skill。',
+    description: t.home.metaDesc,
     ogImage: `${SITE_URL}/og.png`,
     ogUrl: categoryId ? `${SITE_URL}/category/${categoryId}` : SITE_URL,
   });
 
+  const normalizedSearch = searchTerm.trim().toLowerCase();
+
+  // Flat recipe list — computed once, shared by all downstream memos
+  const flatRecipes = useMemo(() => categories.flatMap(c => c.recipes), [categories]);
+
+  // Filter recipes based on language and cuisine
   const allRecipes = useMemo(() => {
-    return categories
-      .flatMap(c => c.recipes)
-      .filter(recipe => recipe.source === activeSource);
-  }, [categories, activeSource]);
+    // Chinese mode: show all Chinese recipes, filtered by source
+    if (lang === 'zh') {
+      const zhRecipes = flatRecipes.filter(r => (r.language || 'zh') !== 'en');
+      if (activeSource === 'all') return zhRecipes;
+      return zhRecipes.filter(r => r.source === activeSource);
+    }
+
+    // English mode: filter by cuisine
+    if (activeCuisine === 'all') {
+      return flatRecipes.filter(r => (r.language || 'zh') === 'en');
+    }
+
+    // Chinese sub-options
+    if (activeCuisine === 'chinese-original') {
+      return flatRecipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
+    }
+    if (activeCuisine === 'chinese-western') {
+      return flatRecipes.filter(r => r.cuisine === 'chinese' && r.language === 'en');
+    }
+
+    // Other cuisines
+    return flatRecipes
+      .filter(r => (r.language || 'zh') === 'en')
+      .filter(r => r.cuisine === activeCuisine);
+  }, [flatRecipes, lang, activeCuisine, activeSource]);
+
+  // Calculate cuisine counts for English mode
+  const cuisineCounts = useMemo(() => {
+    if (lang !== 'en') return {};
+    const enRecipes = flatRecipes.filter(r => (r.language || 'zh') === 'en');
+    const counts: Record<string, number> = { all: enRecipes.length };
+
+    enRecipes.forEach(r => {
+      if (r.cuisine) {
+        counts[r.cuisine] = (counts[r.cuisine] || 0) + 1;
+      }
+    });
+
+    const zhRecipes = flatRecipes.filter(r => r.cuisine === 'chinese' && (r.language || 'zh') !== 'en');
+    counts['chinese-original'] = zhRecipes.length;
+    counts['chinese'] = (counts['chinese'] || 0) + zhRecipes.length;
+
+    return counts;
+  }, [flatRecipes, lang]);
+
+  // Calculate source counts for Chinese mode
+  const sourceCounts = useMemo(() => {
+    if (lang !== 'zh') return {};
+    const zhRecipes = flatRecipes.filter(r => (r.language || 'zh') !== 'en');
+    const counts: Record<string, number> = { all: zhRecipes.length };
+    zhRecipes.forEach(r => {
+      if (r.source) {
+        counts[r.source] = (counts[r.source] || 0) + 1;
+      }
+    });
+    return counts;
+  }, [flatRecipes, lang]);
 
   const displayedRecipes = useMemo(() => {
     const list = categoryId
@@ -45,8 +110,6 @@ export function Home() {
       : allRecipes;
     return [...list].sort((a, b) => (a.imagePath ? 0 : 1) - (b.imagePath ? 0 : 1));
   }, [categoryId, allRecipes]);
-
-  const normalizedSearch = searchTerm.trim().toLowerCase();
 
   // API search (triggered when search term is present)
   const { results: searchResults, loading: searchLoading } = useSearch(searchTerm, allRecipes);
@@ -64,7 +127,7 @@ export function Home() {
       <Layout>
         <div className="text-center py-20">
           <div className="inline-block w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-          <p className="text-on-surface-variant text-lg font-body mt-4">加载菜谱中...</p>
+          <p className="text-on-surface-variant text-lg font-body mt-4">{t.common.loading}</p>
         </div>
       </Layout>
     );
@@ -79,7 +142,7 @@ export function Home() {
             onClick={retry}
             className="px-4 py-2 bg-primary text-on-primary rounded-lg font-body hover:opacity-90 transition"
           >
-            重试
+            {t.common.retry}
           </button>
         </div>
       </Layout>
@@ -89,27 +152,46 @@ export function Home() {
   return (
     <Layout>
       {!categoryId && <WebsiteJsonLd />}
-      <SourceNav activeSource={activeSource} onSourceChange={setActiveSource} />
       <div className="mt-4 mb-2 px-2">
         <McpBanner />
       </div>
-      <CategoryNav categories={categories} />
+
+      {/* Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
+      {lang === 'en' ? (
+        <CuisineNav
+          activeCuisine={activeCuisine}
+          onCuisineChange={setActiveCuisine}
+          cuisineCounts={cuisineCounts}
+        />
+      ) : (
+        <>
+          <SourceNav
+            activeSource={activeSource}
+            onSourceChange={setActiveSource}
+            sourceCounts={sourceCounts}
+          />
+          <CategoryNav categories={categories} />
+        </>
+      )}
 
       <div className="mt-6">
         <div className="mb-6 px-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h1 className="font-display text-headline-lg text-on-surface">
             {categoryId
-              ? categories.find(c => c.id === categoryId)?.displayName || '分类'
-              : SOURCE_LABELS[activeSource] || activeSource}
+              ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
+              : lang === 'en'
+                ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
+                : (activeSource === 'all' ? t.home.category : SOURCE_LABELS[activeSource] || activeSource)}
             <span className="text-on-surface-variant text-body-md font-normal ml-3">
-              ({filteredRecipes.length} 道菜)
+              ({t.home.recipeCount(filteredRecipes.length)})
             </span>
           </h1>
           <div className="w-full sm:w-72 relative">
             <input
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder="输入关键词搜索菜谱"
+              placeholder={t.home.searchPlaceholder}
+              aria-label={t.home.searchPlaceholder}
               className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
             />
             {searchLoading && (
@@ -120,7 +202,7 @@ export function Home() {
 
         <RecipeGrid
           recipes={filteredRecipes}
-          emptyMessage={normalizedSearch ? '未找到匹配的菜谱，试试其他关键词' : undefined}
+          emptyMessage={normalizedSearch ? t.home.emptySearch : undefined}
         />
       </div>
     </Layout>

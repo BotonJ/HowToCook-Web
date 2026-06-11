@@ -1,5 +1,6 @@
 import type { Recipe } from '@/types';
 import { SITE_URL } from '@/lib/constants';
+import { safeJsonLd } from '@/lib/utils';
 
 const COOK_TIME_ISO: Record<string, string> = {
   quick: 'PT15M',
@@ -9,9 +10,9 @@ const COOK_TIME_ISO: Record<string, string> = {
 };
 
 const DIET_SCHEMA: Record<string, string> = {
-  '素食': 'https://schema.org/VegetarianDiet',
-  '清真': 'https://schema.org/KosherDiet',
-  '低碳': 'https://schema.org/LowCalorieDiet',
+  Vegetarian: 'https://schema.org/VegetarianDiet',
+  Halal: 'https://schema.org/HalalDiet',
+  'Low Carb': 'https://schema.org/Diet',
 };
 
 function parseSteps(text: string) {
@@ -43,16 +44,18 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
     '@context': 'https://schema.org',
     '@type': 'Recipe',
     name: recipe.name,
-    description: recipe.description || `${recipe.name} 的做法`,
+    description: recipe.description || `${recipe.name} Recipe`,
     url: recipeUrl,
-    image: recipe.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
+    image: recipe.imagePath
+      ? (recipe.imagePath.startsWith('http') ? recipe.imagePath : `${SITE_URL}/${recipe.imagePath}`)
+      : undefined,
     recipeCategory: recipe.category,
-    recipeCuisine: recipe.cuisine || '中国菜',
+    recipeCuisine: recipe.cuisine || 'Chinese',
     keywords: [recipe.name, recipe.cuisine, recipe.cooking_method].filter(Boolean).join(', '),
     recipeIngredient: recipe.ingredients || [],
     author: {
       '@type': 'Organization',
-      name: '做饭指北',
+      name: 'HowToCook',
       url: SITE_URL,
     },
     ...(recipe.cook_time && {
@@ -75,7 +78,7 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
     }),
     publisher: {
       '@type': 'Organization',
-      name: '做饭指北',
+      name: 'HowToCook',
       url: SITE_URL,
     },
   };
@@ -83,7 +86,7 @@ export function RecipeJsonLd({ recipe }: RecipeJsonLdProps) {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/<\/script>/gi, '<\\/script>') }}
+      dangerouslySetInnerHTML={{ __html: safeJsonLd(ld) }}
     />
   );
 }

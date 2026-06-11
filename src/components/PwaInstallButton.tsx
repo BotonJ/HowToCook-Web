@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Download } from 'lucide-react'
+import { useT } from '@/lib/i18n'
 
 export function PwaInstallButton() {
-  const [deferredPrompt, setDeferredPrompt] = useState<Event | null>(null)
+  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const t = useT()
 
   useEffect(() => {
-    const handler = (e: Event) => {
+    const handler = (e: BeforeInstallPromptEvent) => {
       e.preventDefault()
       setDeferredPrompt(e)
       setIsVisible(true)
@@ -25,10 +27,8 @@ export function PwaInstallButton() {
   const handleInstall = async () => {
     if (!deferredPrompt) return
 
-    // @ts-expect-error - beforeinstallprompt event has prompt method
     deferredPrompt.prompt()
 
-    // @ts-expect-error
     const { outcome } = await deferredPrompt.userChoice
     if (outcome === 'accepted') {
       setIsVisible(false)
@@ -44,7 +44,7 @@ export function PwaInstallButton() {
       className="fixed bottom-4 right-4 z-50 bg-primary text-on-primary px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 text-label-md hover:bg-primary-container transition-colors"
     >
       <Download size={18} />
-      <span>添加到主屏幕</span>
+      <span>{t.pwa.addToHome}</span>
     </button>
   )
 }

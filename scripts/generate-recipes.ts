@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const IMAGES_DIR = path.join(PROJECT_ROOT, 'public/images/dishes');
 const OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes.json');
+const META_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-meta.json');
+const DETAIL_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-detail.json');
 const INDEX_FILE = path.resolve(__dirname, '../../howtocook-skill/index.json');
 const DISHES_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes');
 
@@ -75,6 +77,7 @@ interface Recipe {
     diet?: string[];
   };
   source: string;
+  language?: string;
   description?: string;
   ingredients_text?: string;
   calculation_text?: string;
@@ -127,8 +130,8 @@ function parseMarkdownSections(content: string): {
       continue;
     }
 
-    // Detect section headers
-    if (stripped.startsWith('##')) {
+    // Detect section headers (## only, not ### sub-headers)
+    if (stripped.startsWith('## ') ) {
       // Save previous section
       if (currentSection && sectionLines.length > 0) {
         const text = sectionLines.join('\n').trim();
@@ -165,8 +168,10 @@ function parseMarkdownSections(content: string): {
     }
 
     // Collect lines for current section or description
-    if (foundTitle && !currentSection && stripped && !stripped.startsWith('![')) {
-      // This is description text before any section
+    if (foundTitle && !currentSection && stripped && !stripped.startsWith('![')
+      && !stripped.startsWith('<!--') && !stripped.startsWith('[!video')
+      && !stripped.startsWith('>')) {
+      // This is description text before any section (skip HTML comments, video embeds, blockquotes)
       sectionLines.push(line);
     } else if (currentSection) {
       sectionLines.push(line);
@@ -206,9 +211,10 @@ function buildIndexMap(): Map<string, IndexDish> {
 
   const index = JSON.parse(fs.readFileSync(INDEX_FILE, 'utf8'));
   for (const dish of index.dishes) {
-    indexMap.set(dish.name, dish);
+    if (dish.source === '面食之神') continue; // P0-2: 面食之神由 noodle-recipes.json 独立管理
+    indexMap.set(`${dish.source}/${dish.name}`, dish);
   }
-  console.log(`Loaded ${indexMap.size} entries (${index.dishes.length} dishes, ${index.dishes.length - indexMap.size} duplicates merged).`);
+  console.log(`Loaded ${indexMap.size} entries from ${index.dishes.length} index dishes (filtered 面食之神 + dedup by source/name).`);
   return indexMap;
 }
 
@@ -297,18 +303,22 @@ function scanRecipes(): Category[] {
 
     // For duplicate names: 随便做 version gets a suffix so both are preserved
     let displayName = dish.name;
-    let imageLookupName = dish.name;
+    const imageLookupName = dish.name;
     if (duplicateNames.has(dish.name) && dish.source === '随便做') {
       displayName = `${dish.name}(随便做)`;
       // Keep imageLookupName as original so image lookup finds the howtocook version
     }
 
     // Build recipe with all fields
+    const imagePath = imageMap.get(imageLookupName);
+    if (!imagePath) {
+      console.warn(`  ⚠ 无图片: ${dish.name} (${dish.source})`);
+    }
     const recipe: Recipe = {
-      id: `${dish.source}/${dish.name}`,
+      id: dish.id || `${dish.source}/${dish.name}`,
       name: displayName,
       category: dish.category,
-      imagePath: imageMap.get(imageLookupName),
+      imagePath,
       difficulty: dish.difficulty,
       cuisine: dish.cuisine,
       cooking_method: dish.cooking_method,
@@ -317,6 +327,7 @@ function scanRecipes(): Category[] {
       main_ingredients: dish.main_ingredients,
       tags: dish.tags,
       source: dish.source,
+      language: 'zh',
       description: textContent.description || undefined,
       ingredients_text: textContent.ingredients_text || undefined,
       calculation_text: textContent.calculation_text || undefined,
@@ -355,8 +366,38 @@ function main() {
   const categories = scanRecipes();
   const totalRecipes = categories.reduce((acc, c) => acc + c.recipes.length, 0);
 
+  // Full output (legacy, keep for compatibility)
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(categories, null, 2));
+
+  // Meta output (card fields only, for首屏)
+  const metaCategories = categories.map(cat => ({
+    ...cat,
+    recipes: cat.recipes.map(r => ({
+      id: r.id,
+      name: r.name,
+      category: r.category,
+      imagePath: r.imagePath,
+      difficulty: r.difficulty,
+      cuisine: r.cuisine,
+      cooking_method: r.cooking_method,
+      cook_time: r.cook_time,
+      ingredients: r.ingredients,
+      main_ingredients: r.main_ingredients,
+      tags: r.tags,
+      source: r.source,
+      language: r.language,
+    }))
+  }));
+  fs.writeFileSync(META_OUTPUT_FILE, JSON.stringify(metaCategories, null, 2));
+
+  // Detail output (full data, for 详情页)
+  fs.writeFileSync(DETAIL_OUTPUT_FILE, JSON.stringify(categories, null, 2));
+
+  const metaSize = fs.statSync(META_OUTPUT_FILE).size;
+  const detailSize = fs.statSync(DETAIL_OUTPUT_FILE).size;
   console.log(`Generated ${categories.length} categories with ${totalRecipes} recipes.`);
+  console.log(`  Meta:   ${(metaSize / 1024).toFixed(0)} KB`);
+  console.log(`  Detail: ${(detailSize / 1024).toFixed(0)} KB`);
 
   // Verify field completeness
   let missingFields = 0;

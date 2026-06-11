@@ -17,6 +17,10 @@ interface Recipe {
   source?: string;
   category?: string;
   difficulty?: number;
+  cuisine?: string;
+  cooking_method?: string;
+  cook_time?: string;
+  ingredients?: string[];
 }
 
 interface Category {
@@ -72,6 +76,26 @@ function checkFile(filePath: string) {
       // 检查必填字段
       if (!recipe.name) {
         console.error(`  ❌  [${fileName}] 缺少 name (id: ${recipe.id})`);
+        fileErrors++;
+      }
+      if (!recipe.difficulty) {
+        console.error(`  ❌  [${fileName}] 缺少 difficulty (id: ${recipe.id})`);
+        fileErrors++;
+      }
+      if (!recipe.cuisine) {
+        console.error(`  ❌  [${fileName}] 缺少 cuisine (id: ${recipe.id})`);
+        fileErrors++;
+      }
+      if (!recipe.cooking_method) {
+        console.error(`  ❌  [${fileName}] 缺少 cooking_method (id: ${recipe.id})`);
+        fileErrors++;
+      }
+      if (!recipe.cook_time) {
+        console.error(`  ❌  [${fileName}] 缺少 cook_time (id: ${recipe.id})`);
+        fileErrors++;
+      }
+      if (!recipe.ingredients?.length) {
+        console.error(`  ❌  [${fileName}] 缺少 ingredients (id: ${recipe.id})`);
         fileErrors++;
       }
     }

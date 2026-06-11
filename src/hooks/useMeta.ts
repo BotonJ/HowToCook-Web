@@ -12,7 +12,7 @@ export function useMeta({ title, description, ogImage, ogUrl }: MetaOptions) {
 
   useEffect(() => {
     const tracked: Element[] = (trackedRef.current = []);
-    const fullTitle = title ? `${title} - 做饭指北` : '做饭指北 - HowToCook';
+    const fullTitle = title ? `${title} - HowToCook` : 'HowToCook';
     document.title = fullTitle;
 
     const setMeta = (name: string, content: string, property = false) => {

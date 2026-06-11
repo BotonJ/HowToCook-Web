@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+
 :root {
   font-family: "Plus Jakarta Sans", "Noto Sans SC", sans-serif;
   line-height: 1.5;
@@ -18,4 +20,183 @@
 ::selection {
   background-color: #ff6b35;
   color: #ffffff;
+}
+
+/* Tip article HTML content styles */
+.tip-content h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  color: #1b1c1c;
+}
+
+.tip-content h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #1b1c1c;
+}
+
+.tip-content p {
+  margin-bottom: 0.75rem;
+  line-height: 1.8;
+}
+
+.tip-content ul,
+.tip-content ol {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.tip-content ul {
+  list-style-type: disc;
+}
+
+.tip-content ol {
+  list-style-type: decimal;
+}
+
+.tip-content li {
+  margin-bottom: 0.35rem;
+  line-height: 1.7;
+}
+
+.tip-content li strong {
+  color: #1b1c1c;
+}
+
+.tip-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+}
+
+.tip-content th,
+.tip-content td {
+  border: 1px solid #d1d5db;
+  padding: 0.5rem 0.75rem;
+  text-align: center;
+}
+
+.tip-content th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+  color: #1b1c1c;
+}
+
+.tip-content td {
+  color: #374151;
+}
+
+.tip-content blockquote {
+  border-left: 4px solid #ff6b35;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  background-color: #fef7f4;
+  border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.tip-content blockquote p {
+  margin-bottom: 0.25rem;
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+
+.tip-content code {
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  color: #dc2626;
+}
+
+.tip-content pre {
+  background-color: #1b1c1c;
+  color: #e5e7eb;
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.tip-content pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.tip-content hr {
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  margin: 2rem 0;
+}
+
+.tip-content strong {
+  font-weight: 600;
+  color: #1b1c1c;
+}
+
+.tip-content em {
+  font-style: italic;
+}
+
+.tip-content sup {
+  font-size: 0.75em;
+  color: #ff6b35;
+}
+
+.tip-content .footnote {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Flavor workbench styles ─────────────────────────────────── */
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.5; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Flavor workbench range inputs */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #e0c0b5;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ae3a04;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ae3a04;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }

@@ -6,6 +6,11 @@ export interface ApiSearchResult {
   cuisine: string;
   cooking_method: string;
   image_url: string | null;
+  cook_time?: string;
+  ingredients?: string[];
+  main_ingredients?: string[];
+  tags?: string[];
+  source?: string;
 }
 
 export interface ApiSearchResponse {
@@ -61,6 +66,7 @@ export interface DishIndex {
     diet?: string[];
   };
   has_duplicate?: boolean;
+  language?: string; // "zh" | "en", 默认 "zh"
 }
 
 export interface ApiRecipesResponse {
@@ -83,4 +89,66 @@ export interface ApiVersionResponse {
   version: string;
   recipe_count: number;
   last_updated: string;
+}
+
+/** English recipe entry from en_index_curated.json */
+export interface EnDish {
+  name: string;
+  difficulty: number;
+  category: string;
+  source: string;
+  source_id?: string;
+  cuisine: string;
+  cuisine_zh?: string;
+  cooking_method: string;
+  cook_time: string;
+  main_ingredients: string[];
+  ingredients: string[];
+  instructions?: string[];
+  technique_primary?: string;
+  technique_secondary?: string[];
+  language: string;
+  bridge_to?: string[];
+  source_dataset?: string;
+  tags?: {
+    spicy?: boolean;
+    allergens?: string[];
+    diet?: string[];
+  };
+  epicurious_meta?: {
+    description?: string;
+  };
+}
+
+/** English index file envelope */
+export interface EnIndexData {
+  version: string;
+  total: number;
+  source: string;
+  dishes: EnDish[];
+}
+
+/** Noodle recipe entry from noodle-recipes.json */
+export interface NoodleDish {
+  id: string;
+  name: string;
+  category: string;
+  source: string;
+  difficulty: number;
+  cook_time: string;
+  cooking_method: string;
+  cuisine: string;
+  main_ingredients: string[];
+  ingredients: string[];
+  language: string;
+  description: string;
+  steps_text: string;
+}
+
+/** Noodle recipes file envelope */
+export interface NoodleData {
+  version: string;
+  total: number;
+  source: string;
+  dishes: NoodleDish[];
 }
