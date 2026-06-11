@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "title": "口味偏好设置",
+  "description": "几道问题帮你设置口味偏好，之后会随使用自动学习",
+  "steps": [
+    {
+      "id": "allergens",
+      "question": "你有什么食物过敏吗？",
+      "type": "multi_select",
+      "options": [
+        {"value": "花生", "label": "花生"},
+        {"value": "海鲜", "label": "海鲜（鱼虾蟹）"},
+        {"value": "麸质", "label": "麸质（面食）"},
+        {"value": "乳制品", "label": "乳制品"},
+        {"value": "鸡蛋", "label": "鸡蛋"},
+        {"value": "大豆", "label": "大豆/豆制品"}
+      ],
+      "none_option": "都没有"
+    },
+    {
+      "id": "diet",
+      "question": "你有饮食限制吗？",
+      "type": "single_select",
+      "options": [
+        {"value": [], "label": "没有"},
+        {"value": ["素食"], "label": "素食"},
+        {"value": ["清真"], "label": "清真"},
+        {"value": ["低碳"], "label": "低碳水"}
+      ]
+    },
+    {
+      "id": "spicy",
+      "question": "你能吃多辣？",
+      "type": "single_select",
+      "options": [
+        {"value": 0.0, "label": "完全不吃辣"},
+        {"value": 0.3, "label": "微辣就好"},
+        {"value": 0.7, "label": "挺能吃辣"},
+        {"value": 1.0, "label": "越辣越好"}
+      ]
+    },
+    {
+      "id": "cuisine",
+      "question": "你偏好哪些菜系？（可多选）",
+      "type": "multi_select",
+      "options": [
+        {"value": "川菜", "label": "川菜（麻辣）"},
+        {"value": "粤菜", "label": "粤菜（清淡）"},
+        {"value": "湘菜", "label": "湘菜（香辣）"},
+        {"value": "鲁菜", "label": "鲁菜（咸鲜）"},
+        {"value": "东北", "label": "东北菜（量大实在）"},
+        {"value": "日式", "label": "日式"},
+        {"value": "家常", "label": "家常菜（不挑）"}
+      ]
+    },
+    {
+      "id": "cook_time",
+      "question": "日常做饭你偏好？",
+      "type": "single_select",
+      "options": [
+        {"value": "quick", "label": "快手菜（15分钟内）"},
+        {"value": "medium", "label": "常规（30分钟左右）"},
+        {"value": "long", "label": "愿意花时间做硬菜"}
+      ]
+    },
+    {
+      "id": "disliked",
+      "question": "有什么食材你绝对不吃？（可多选）",
+      "type": "multi_select",
+      "options": [
+        {"value": "香菜", "label": "香菜"},
+        {"value": "胡萝卜", "label": "胡萝卜"},
+        {"value": "洋葱", "label": "洋葱"},
+        {"value": "内脏", "label": "动物内脏"},
+        {"value": "羊肉", "label": "羊肉"},
+        {"value": "豆腐", "label": "豆腐"}
+      ],
+      "none_option": "都能吃"
+    }
+  ]
+}
