@@ -20,9 +20,10 @@ class ApiError(Exception):
 
 def _api_get(path: str, params: dict[str, str] | None = None) -> dict[str, Any]:
     """GET JSON from the HowToCook API. Raises ApiError on failure."""
+    import urllib.parse
     url = f"{API_BASE}{path}"
     if params:
-        query = "&".join(f"{k}={v}" for k, v in params.items() if v)
+        query = urllib.parse.urlencode({k: v for k, v in params.items() if v})
         if query:
             url = f"{url}?{query}"
     logger.debug("API request: %s", url)
@@ -90,6 +91,32 @@ def check_api_health() -> bool:
         return False
 
 
+def get_version() -> dict[str, Any]:
+    """获取版本信息。返回 {version, recipe_count, checksum, skill_version}。"""
+    return _api_get("/version")
+
+
+def epicure_pair(q: str, k: int = 10) -> dict[str, Any]:
+    """食材搭配推荐。返回 {results: [{ingredient, score}], query, total}。"""
+    if not q:
+        raise ApiError("q 不能为空")
+    return _api_get("/epicure/pair", {"q": q, "k": str(k)})
+
+
+def epicure_substitute(q: str, k: int = 5) -> dict[str, Any]:
+    """食材替代建议。返回 {results: [{ingredient, score}], query, total}。"""
+    if not q:
+        raise ApiError("q 不能为空")
+    return _api_get("/epicure/substitute", {"q": q, "k": str(k)})
+
+
+def epicure_search(q: str, limit: int = 20) -> dict[str, Any]:
+    """搜索食材（Epicure 词表）。返回 {results: [string], query, total}。"""
+    if not q:
+        raise ApiError("q 不能为空")
+    return _api_get("/epicure/search", {"q": q, "limit": str(limit)})
+
+
 # ── MCP tool entry points (structured JSON responses) ────────────────
 
 
@@ -120,6 +147,42 @@ def tool_categories() -> str:
         return json.dumps({"error": str(exc)}, ensure_ascii=False)
 
 
+def tool_version() -> str:
+    """MCP tool: 获取版本信息。返回 JSON 字符串。"""
+    try:
+        result = get_version()
+        return json.dumps(result, ensure_ascii=False)
+    except ApiError as exc:
+        return json.dumps({"error": str(exc)}, ensure_ascii=False)
+
+
+def tool_epicure_pair(q: str, k: int = 10) -> str:
+    """MCP tool: 食材搭配推荐。返回 JSON 字符串。"""
+    try:
+        result = epicure_pair(q=q, k=k)
+        return json.dumps(result, ensure_ascii=False)
+    except ApiError as exc:
+        return json.dumps({"error": str(exc)}, ensure_ascii=False)
+
+
+def tool_epicure_substitute(q: str, k: int = 5) -> str:
+    """MCP tool: 食材替代建议。返回 JSON 字符串。"""
+    try:
+        result = epicure_substitute(q=q, k=k)
+        return json.dumps(result, ensure_ascii=False)
+    except ApiError as exc:
+        return json.dumps({"error": str(exc)}, ensure_ascii=False)
+
+
+def tool_epicure_search(q: str, limit: int = 20) -> str:
+    """MCP tool: 搜索食材（Epicure 词表）。返回 JSON 字符串。"""
+    try:
+        result = epicure_search(q=q, limit=limit)
+        return json.dumps(result, ensure_ascii=False)
+    except ApiError as exc:
+        return json.dumps({"error": str(exc)}, ensure_ascii=False)
+
+
 if __name__ == "__main__":
     import sys
 
@@ -130,6 +193,10 @@ if __name__ == "__main__":
         print("  python mcp_tools.py search <关键词>")
         print("  python mcp_tools.py recipe <id>")
         print("  python mcp_tools.py categories")
+        print("  python mcp_tools.py version")
+        print("  python mcp_tools.py pair <食材> [k]")
+        print("  python mcp_tools.py substitute <食材> [k]")
+        print("  python mcp_tools.py epicure-search <关键词> [limit]")
         print("  python mcp_tools.py health")
         sys.exit(1)
 
@@ -145,6 +212,26 @@ if __name__ == "__main__":
         print(tool_recipe(sys.argv[2]))
     elif cmd == "categories":
         print(tool_categories())
+    elif cmd == "version":
+        print(tool_version())
+    elif cmd == "pair":
+        if len(sys.argv) < 3:
+            print("缺少食材名称", file=sys.stderr)
+            sys.exit(1)
+        k = int(sys.argv[3]) if len(sys.argv) > 3 else 10
+        print(tool_epicure_pair(sys.argv[2], k))
+    elif cmd == "substitute":
+        if len(sys.argv) < 3:
+            print("缺少食材名称", file=sys.stderr)
+            sys.exit(1)
+        k = int(sys.argv[3]) if len(sys.argv) > 3 else 5
+        print(tool_epicure_substitute(sys.argv[2], k))
+    elif cmd == "epicure-search":
+        if len(sys.argv) < 3:
+            print("缺少关键词", file=sys.stderr)
+            sys.exit(1)
+        limit = int(sys.argv[3]) if len(sys.argv) > 3 else 20
+        print(tool_epicure_search(sys.argv[2], limit))
     elif cmd == "health":
         ok = check_api_health()
         print(json.dumps({"healthy": ok}))
