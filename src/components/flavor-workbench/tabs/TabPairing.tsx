@@ -140,7 +140,7 @@ export function TabPairing() {
     const paragraphs: string[] = [];
 
     if (selectedIngredients.length === 0) {
-      paragraphs.push('请从下方选择 1-6 种食材，开始探索搭配效果。分析将显示合成风味、经典搭配和风味桥接建议。');
+      paragraphs.push('请从上方选择 1-6 种食材，开始探索搭配效果。分析将显示合成风味、经典搭配和风味桥接建议。');
       return paragraphs;
     }
 

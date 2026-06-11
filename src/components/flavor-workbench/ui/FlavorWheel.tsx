@@ -193,7 +193,7 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
       const contentH = maxY - minY;
       if (contentW > 0 && contentH > 0) {
         const scale = Math.min(availableW / contentW, availableH / contentH, 1.2);
-        fitZoom = scale * 0.55;
+        fitZoom = Math.max(scale * 0.55, 0.5);
 
         const contentCx = (minX + maxX) / 2;
         const contentCy = (minY + maxY) / 2;
@@ -205,8 +205,9 @@ export function FlavorWheel({ selectedId, onSelect, size = 600 }: FlavorWheelPro
     }
 
     // Use user override if available (manual zoom/pan after selection)
+    // When user zooms but hasn't panned yet, keep the auto-fit pan to stay centered
     const finalZoom = userZoom ?? fitZoom;
-    const finalPan = (userZoom !== null && userPan !== null) ? userPan : fitPan;
+    const finalPan = userPan ?? fitPan;
 
     // Step 3: build final NodePosition[] with final zoom/pan applied
     const result: NodePosition[] = [];

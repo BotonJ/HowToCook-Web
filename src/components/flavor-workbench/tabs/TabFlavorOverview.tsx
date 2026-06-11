@@ -83,7 +83,7 @@ export function TabFlavorOverview() {
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0"
                   style={{ background: CATEGORY_COLORS[cat] }}
                 />
-                <span className="text-[10px] text-[#58413a] font-medium whitespace-nowrap">{label}</span>
+                <span className="text-xs text-[#58413a] font-medium whitespace-nowrap">{label}</span>
               </div>
             ))}
           </div>
@@ -122,7 +122,7 @@ export function TabFlavorOverview() {
                       setSelectedId(i.id);
                       setSearch('');
                     }}
-                    className="px-2 py-0.5 rounded-full text-[10px] font-medium transition-all hover:scale-105"
+                    className="px-2 py-0.5 rounded-full text-xs font-medium transition-all hover:scale-105"
                     style={{
                       background: CATEGORY_COLORS[i.category] + '20',
                       color: CATEGORY_COLORS[i.category],
@@ -141,7 +141,7 @@ export function TabFlavorOverview() {
                 <button
                   key={i.id}
                   onClick={() => setSelectedId(i.id)}
-                  className="px-2 py-0.5 rounded-full text-[10px] font-medium transition-all"
+                  className="px-2 py-0.5 rounded-full text-xs font-medium transition-all"
                   style={{
                     background:
                       i.id === selectedId
@@ -194,7 +194,7 @@ export function TabFlavorOverview() {
         <div className="absolute top-3 left-3 z-20 flex flex-col gap-2">
           {/* 6D flavor bars */}
           <div className="bg-white/85 backdrop-blur rounded-xl p-3 shadow-sm border border-[#e0c0b5]/30 w-44">
-            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#58413a] mb-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a] mb-2">
               风味轮廓
             </h4>
             <div className="flex flex-col gap-1.5">
@@ -203,7 +203,7 @@ export function TabFlavorOverview() {
                 const val = raw !== undefined ? raw : key === 'fatty' ? (selected.flavor as Record<string, number>)['fat'] ?? 0 : 0;
                 return (
                   <div key={key} className="flex items-center gap-1.5">
-                    <span className="text-[10px] font-semibold w-3 text-right" style={{ color }}>
+                    <span className="text-xs font-semibold w-3 text-right" style={{ color }}>
                       {label}
                     </span>
                     <div className="flex-1 h-1.5 rounded-full bg-[#f5ece7] overflow-hidden">
@@ -215,7 +215,7 @@ export function TabFlavorOverview() {
                         transition={{ duration: 0.4, ease: 'easeOut' }}
                       />
                     </div>
-                    <span className="text-[9px] text-[#8c7168] w-5">
+                    <span className="text-[10px] text-[#8c7168] w-5">
                       {(val * 100).toFixed(0)}
                     </span>
                   </div>
@@ -226,10 +226,10 @@ export function TabFlavorOverview() {
 
           {/* PMI explanation */}
           <div className="bg-white/85 backdrop-blur rounded-xl p-3 shadow-sm border border-[#e0c0b5]/30 w-44">
-            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#58413a] mb-1">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a] mb-1">
               关于 PMI
             </h4>
-            <p className="text-[10px] text-[#58413a] leading-relaxed">
+            <p className="text-xs text-[#58413a] leading-relaxed">
               点互信息，数值越高表示两种食材在真实菜谱中共同出现的频率越高。PMI {'>'} 2.0
               通常意味着经典搭配。
             </p>
@@ -237,10 +237,10 @@ export function TabFlavorOverview() {
 
           {/* Flavor bridge explanation */}
           <div className="bg-white/85 backdrop-blur rounded-xl p-3 shadow-sm border border-[#e0c0b5]/30 w-44">
-            <h4 className="text-[10px] font-bold uppercase tracking-wider text-[#58413a] mb-1">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#58413a] mb-1">
               风味桥接
             </h4>
-            <p className="text-[10px] text-[#58413a] leading-relaxed">
+            <p className="text-xs text-[#58413a] leading-relaxed">
               化学成分相似，但在菜谱中很少一起出现的食材。它们可能是被你忽略的创新搭配。
             </p>
           </div>
