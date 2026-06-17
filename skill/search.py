@@ -9,6 +9,7 @@ import logging
 import os
 import random
 import time
+import urllib.parse
 from pathlib import Path
 from typing import Optional
 
@@ -27,7 +28,12 @@ _local_index_mtime: float = 0.0
 
 
 def _load_local_index_cached(index_path: str | None = None) -> dict:
-    """Load local index.json with 7-day mtime-based cache."""
+    """Load local index.json, cached by file mtime.
+
+    Cache key is the file's mtime: when ``index.json`` is rewritten (e.g. by
+    sync), the cache is invalidated automatically. The TTL only bounds how long
+    a *stale mtime* (unchanged file) is trusted before re-reading from disk.
+    """
     global _local_index_cache, _local_index_mtime
 
     if index_path is None:
@@ -65,9 +71,15 @@ def _search_via_api(
     cook_time: str = "",
     limit: int = 10,
 ) -> list[dict] | None:
-    """Try searching via remote API. Returns None on failure."""
+    """Try searching via remote API. Returns None on failure (so caller falls back to local).
+
+    Crucially, an API error response (``{error: ...}``) or a malformed payload is
+    treated as failure — NOT as a successful empty result. Otherwise the caller's
+    ``if api_results is not None`` check would return ``[]`` and silently discard
+    the complete local index (the skill-side equivalent of the 503→20 bug).
+    """
     try:
-        from mcp_tools import search_recipes, ApiError
+        from mcp_tools import search_recipes
 
         result = search_recipes(
             q=keyword,
@@ -77,18 +89,38 @@ def _search_via_api(
             cook_time=cook_time,
             limit=limit,
         )
-        return result.get("results", [])
     except Exception as exc:
         logger.debug("API 搜索失败，降级到本地: %s", exc)
         return None
 
+    if not isinstance(result, dict) or result.get("error"):
+        logger.warning("API 搜索返回错误，降级到本地: %s", result.get("error") if isinstance(result, dict) else "非对象响应")
+        return None
+
+    results = result.get("results")
+    if not isinstance(results, list):
+        # 缺少 results 字段视为协议异常，降级而非返回空。
+        logger.warning("API 响应缺少 results 字段，降级到本地")
+        return None
+    return results
+
 
 def _ensure_synced() -> None:
-    """Lazy-init: call auto_sync_if_needed() and auto_update_if_needed() once per process."""
+    """Lazy-init: call auto_sync_if_needed() and auto_update_if_needed() once per process.
+
+    Auto-sync is gated by the ``HOWTOCOOK_AUTO_SYNC`` env var (default ``"1"``).
+    Set ``HOWTOCOOK_AUTO_SYNC=0`` to disable the implicit network fetch + file
+    write — required for tests, library use, and offline environments. This keeps
+    the import/call path free of uncontrolled side effects while preserving the
+    end-user auto-refresh behavior.
+    """
     global _synced
     if _synced:
         return
     _synced = True
+    if os.environ.get("HOWTOCOOK_AUTO_SYNC", "1") != "1":
+        logger.debug("自动同步已通过 HOWTOCOOK_AUTO_SYNC=0 禁用")
+        return
     from sync import auto_sync_if_needed
     from update import auto_update_if_needed
     auto_sync_if_needed(silent=True)
@@ -111,7 +143,7 @@ CATEGORY_NAMES = {
 TIME_NAMES = {"quick": "快手菜", "medium": "常规", "long": "需要耐心", "slow": "慢工出细活"}
 
 
-def load_index(index_path: str = None) -> dict:
+def load_index(index_path: str | None = None) -> dict:
     """Load index: API-first with local fallback. Local uses 7-day mtime cache."""
     _ensure_synced()
     if index_path is None:
@@ -284,7 +316,8 @@ def format_search_results(dishes: list) -> str:
         # 网站链接
         dish_id = dish.get("id", "")
         if dish_id:
-            url = f"https://howtocook.cn/recipe/{dish_id}"
+            encoded_id = urllib.parse.quote(dish_id, safe="/")
+            url = f"https://howtocook.cn/recipe/{encoded_id}"
             output.append(f"   👉 {url}")
         output.append("")
 
@@ -361,7 +394,8 @@ def _format_api_recipe(recipe: dict) -> str:
 
     # 网站链接
     if dish_id:
-        url = f"https://howtocook.cn/recipe/{dish_id}"
+        encoded_id = urllib.parse.quote(dish_id, safe="/")
+        url = f"https://howtocook.cn/recipe/{encoded_id}"
         lines.append("")
         lines.append(f"👉 {url}")
 

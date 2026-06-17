@@ -3,7 +3,9 @@
 
 import json
 import logging
+import re
 import urllib.error
+import urllib.parse
 import urllib.request
 from typing import Any, Optional
 
@@ -20,7 +22,6 @@ class ApiError(Exception):
 
 def _api_get(path: str, params: dict[str, str] | None = None) -> dict[str, Any]:
     """GET JSON from the HowToCook API. Raises ApiError on failure."""
-    import urllib.parse
     url = f"{API_BASE}{path}"
     if params:
         query = urllib.parse.urlencode({k: v for k, v in params.items() if v})
@@ -74,7 +75,13 @@ def get_recipe(recipe_id: str) -> dict[str, Any]:
     """获取菜谱详情。返回菜谱完整数据。"""
     if not recipe_id:
         raise ApiError("recipe_id 不能为空")
-    return _api_get(f"/recipe/{recipe_id}")
+    # canonical id 形如 source/name，含 "/" 与可能的中文/特殊字符。
+    # 校验格式并对路径段编码（保留 source/name 的 "/" 字面分隔），
+    # 防止路径操纵与 URL 损坏。worker 端 safeDecode 兼容已编码形式。
+    if not re.fullmatch(r"[^/]+/[^/]+", recipe_id):
+        raise ApiError(f"recipe_id 格式应为 source/name: {recipe_id!r}")
+    encoded = urllib.parse.quote(recipe_id, safe="/")
+    return _api_get(f"/recipe/{encoded}")
 
 
 def get_categories() -> dict[str, Any]:

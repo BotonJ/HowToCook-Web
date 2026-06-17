@@ -87,7 +87,7 @@ CATEGORY_KEYWORDS_POSITIVE: dict[str, list[str]] = {
     "soup": ["汤", "羹"],
     "drink": ["饮料", "奶茶", "咖啡", "果汁", "酒", "鸡尾酒", "莫吉托", "柠檬水"],
     "vegetable_dish": ["蔬菜", "豆腐", "土豆", "茄子", "黄瓜", "白菜", "西兰花", "花菜"],
-    "staple": ["饭", "面条", "面", "饺子", "包子", "馒头", "饼", "年糕", "炒面", "捞面", "焖饭", "凉皮", "面片", "烩面", "拉条子", "花卷", "油条", "面条", "水煎包", "烧饼", "小笼包"],
+    "staple": ["饭", "面条", "面", "饺子", "包子", "馒头", "饼", "年糕", "炒面", "捞面", "焖饭", "凉皮", "面片", "烩面", "拉条子", "花卷", "油条", "水煎包", "烧饼", "小笼包"],
     "condiment": ["辣子", "糖浆", "果酱", "油泼辣子", "炝醋"],
 }
 
@@ -165,6 +165,22 @@ def _enrich_dish(dish: dict) -> dict:
         "main_ingredients": extract_main_ingredients(ings),
         "tags": extract_tags(dish),
     }
+
+
+def _mark_duplicates(dishes: list[dict]) -> list[dict]:
+    """为每道菜标注 has_duplicate / duplicate_sources（按菜名聚合，跨 source）。"""
+    sources_by_name: dict[str, list[str]] = {}
+    for dish in dishes:
+        sources_by_name.setdefault(dish["name"], []).append(dish["source"])
+
+    return [
+        {
+            **dish,
+            "has_duplicate": len(sources_by_name[dish["name"]]) > 1,
+            "duplicate_sources": sources_by_name[dish["name"]] if len(sources_by_name[dish["name"]]) > 1 else [],
+        }
+        for dish in dishes
+    ]
 
 
 def extract_dish_info(file_path: str, source: str, category: str, base_dir: Path, content: Optional[str] = None) -> Optional[dict]:
@@ -263,17 +279,8 @@ def main():
         logger.info("找到 %d 个菜谱", len(dishes))
         all_dishes.extend(dishes)
 
-    seen_names: dict[str, list[str]] = {}
-    for dish in all_dishes:
-        name = dish["name"]
-        seen_names.setdefault(name, []).append(dish["source"])
-
     all_dishes = sorted(
-        [{
-            **dish,
-            "has_duplicate": len(seen_names[dish["name"]]) > 1,
-            "duplicate_sources": seen_names[dish["name"]] if len(seen_names[dish["name"]]) > 1 else [],
-        } for dish in all_dishes],
+        _mark_duplicates(all_dishes),
         key=lambda x: x.get("name", ""),
     )
 

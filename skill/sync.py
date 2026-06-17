@@ -133,26 +133,39 @@ def _validate_dish(dish: dict) -> bool:
     path = dish.get("path", "")
     if path and (".." in path or path.startswith("/")):
         return False
+    # 无 canonical id 的旧数据会退化为按 name 合并（见 _dish_key），可能与
+    # 跨 source 同名菜冲突。告警以便上游补 id，但不拒绝（向后兼容）。
+    if not dish.get("id"):
+        logger.warning("菜谱缺少 canonical id，将按 name 合并: %s", dish.get("name"))
     return True
 
 
+def _dish_key(dish: dict) -> str:
+    """Return a stable merge key for a dish.
+
+    Prefer canonical `id` (source/name) so duplicates across sources are not
+    collapsed during sync. Fall back to name for legacy data without ids.
+    """
+    return dish.get("id") or dish.get("name") or ""
+
+
 def _merge(local: dict, remote_dishes: list[dict]) -> tuple[dict, int, int, int, int]:
-    """Merge remote dishes into local index by name.
+    """Merge remote dishes into local index by canonical id.
 
     - Remote has, local missing  -> add (path="", has_duplicate=False)
     - Both have                  -> update non-local fields, keep path + has_duplicate
     - Local has, remote missing  -> keep as-is
     """
-    local_by_name: dict[str, dict] = {d["name"]: d for d in local["dishes"]}
-    remote_names: set[str] = set()
+    local_by_key: dict[str, dict] = {_dish_key(d): d for d in local["dishes"]}
+    remote_keys: set[str] = set()
     added, updated, unchanged = 0, 0, 0
 
     merged: list[dict] = []
     for rd in remote_dishes:
-        name = rd["name"]
-        remote_names.add(name)
-        if name in local_by_name:
-            existing = local_by_name[name]
+        key = _dish_key(rd)
+        remote_keys.add(key)
+        if key in local_by_key:
+            existing = local_by_key[key]
             merged_entry = {**rd, "path": existing.get("path", ""), "has_duplicate": existing.get("has_duplicate", False)}
             if merged_entry != existing:
                 updated += 1
@@ -165,7 +178,7 @@ def _merge(local: dict, remote_dishes: list[dict]) -> tuple[dict, int, int, int,
 
     local_only = 0
     for d in local["dishes"]:
-        if d["name"] not in remote_names:
+        if _dish_key(d) not in remote_keys:
             merged.append(d)
             local_only += 1
 
