@@ -51,10 +51,10 @@
         "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "鸡蛋",
-          "辣椒（美人椒",
-          "醋溜汁：酱油",
-          "其他：香油"
+          "鸡蛋8个",
+          "辣椒（美人椒8g+8g）、蒜蓉15g、葱花10g、香葱",
+          "醋溜汁：酱油50g、醋60g、味精2g、糖6g、水",
+          "其他：香油10g、水淀粉"
         ],
         "main_ingredients": [
           "蔬菜",
@@ -114,20 +114,21 @@
         "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
-          "剁椒",
-          "纯净水"
+          "剁椒260g（控水后）、洋葱30g、姜30g、蒜20g、豆豉15g、小米辣",
+          "纯净水260g、味精3g、酱油10g、猪油100g、白糖3g、盐"
         ],
         "main_ingredients": [
-          "蛋奶"
+          "蔬菜",
+          "蛋奶",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
           "allergens": [
+            "大豆",
             "鸡蛋"
           ],
-          "diet": [
-            "蛋奶素"
-          ]
+          "diet": []
         },
         "source": "随便做",
         "language": "zh"
@@ -475,13 +476,13 @@
         "imagePath": "images/dishes/suibianzuo/酸甜荷包蛋.jpg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "煎炸",
+        "cooking_method": "调味",
         "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
-          "菠萝",
-          "番茄沙司",
-          "其他：油（润锅油适量，炸鸡蛋油"
+          "菠萝60g、甜豆米（焯过）适量",
+          "番茄沙司250g、白糖50g、蒜蓉",
+          "其他：油"
         ],
         "main_ingredients": [
           "水果",
@@ -542,14 +543,17 @@
         "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
-          "花椒"
+          "花椒1g、大料5g、桂皮2g、干辣椒2个、姜10g、茉莉花茶10g、酱油50g、盐40g、水"
         ],
         "main_ingredients": [
-          "蛋奶"
+          "蔬菜",
+          "蛋奶",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
           "allergens": [
+            "大豆",
             "鸡蛋"
           ],
           "diet": [
@@ -798,7 +802,6 @@
           "香油"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "蛋奶"
         ],
@@ -819,15 +822,16 @@
         "imagePath": "images/dishes/breakfast/燕麦鸡蛋饼.jpeg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "其他",
+        "cooking_method": "凉拌",
         "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
           "燕麦",
-          "牛奶 50-",
-          "可根据口味选择增加 "
+          "牛奶 50-100g，能够将燕麦搅拌粘稠即可",
+          "可根据口味选择增加 50g 蔬菜，如菠菜。"
         ],
         "main_ingredients": [
+          "蔬菜",
           "蛋奶"
         ],
         "tags": {
@@ -854,7 +858,7 @@
           "冷冻花卷",
           "圆碟子",
           "蒸架",
-          "水 "
+          "水"
         ],
         "main_ingredients": [],
         "tags": {
@@ -914,20 +918,23 @@
         "cooking_method": "调味",
         "cook_time": "medium",
         "ingredients": [
-          "面皮：面粉",
-          "馅儿：韭菜",
-          "油：葱油"
+          "面皮：面粉500g、水260g、盐",
+          "馅儿：韭菜320g、胡萝卜160g、尖椒75g、粉条230g、鸡蛋8个、生抽24g、盐",
+          "油：葱油150g"
         ],
         "main_ingredients": [
-          "主食"
+          "主食",
+          "蔬菜",
+          "蛋奶"
         ],
         "tags": {
           "spicy": false,
           "allergens": [
+            "鸡蛋",
             "麸质"
           ],
           "diet": [
-            "素食"
+            "蛋奶素"
           ]
         },
         "source": "随便做",
@@ -1222,7 +1229,6 @@
         ],
         "main_ingredients": [
           "牛肉",
-          "猪肉",
           "蔬菜",
           "蛋奶"
         ],
@@ -1338,18 +1344,19 @@
         "imagePath": "images/dishes/suibianzuo/宫保鸡丁豆沙粽.jpg",
         "difficulty": 4,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
-          "鸡腿肉",
+          "鸡腿肉700g、糯米",
           "花生米",
-          "二荆条辣椒",
-          "腌鸡肉汁儿配方：白糖",
-          "其他：豆沙每个粽子"
+          "二荆条辣椒30g、甘谷辣椒面30g、花椒面4g、果丹皮",
+          "腌鸡肉汁儿配方：白糖150g、生抽100g、米醋100g、味精2g、花雕酒",
+          "其他：豆沙每个粽子3g、油30g、水淀粉"
         ],
         "main_ingredients": [
           "坚果干货",
           "蔬菜",
+          "调味品",
           "鸡肉"
         ],
         "tags": {
@@ -1489,18 +1496,20 @@
         "cook_time": "quick",
         "ingredients": [
           "面条：碱水挂面",
-          "糊辣椒：糊辣椒",
-          "调料：芝麻酱",
-          "盐",
+          "糊辣椒：糊辣椒100g、芝麻10g、美人椒100g、热油",
+          "调料：芝麻酱100g、酱油60g、醋50g、蒜末30g、香葱",
+          "盐6g、味精2g、白糖3g、香油",
           "芹菜"
         ],
         "main_ingredients": [
           "主食",
-          "蔬菜"
+          "蔬菜",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
           "allergens": [
+            "大豆",
             "麸质"
           ],
           "diet": [
@@ -1552,20 +1561,22 @@
         "cooking_method": "其他",
         "cook_time": "quick",
         "ingredients": [
-          "馒头",
+          "馒头2个、鸡蛋2个",
           "葱花",
           "干净油"
         ],
         "main_ingredients": [
-          "主食"
+          "主食",
+          "蛋奶"
         ],
         "tags": {
           "spicy": false,
           "allergens": [
+            "鸡蛋",
             "麸质"
           ],
           "diet": [
-            "素食"
+            "蛋奶素"
           ]
         },
         "source": "随便做",
@@ -1727,7 +1738,7 @@
         "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "面条",
+          "面条500g",
           "肉丝",
           "尖椒",
           "洋葱",
@@ -1740,7 +1751,6 @@
         ],
         "main_ingredients": [
           "主食",
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -1762,22 +1772,28 @@
         "imagePath": "images/dishes/suibianzuo/家常锅巴.jpg",
         "difficulty": 3,
         "cuisine": "家常",
-        "cooking_method": "其他",
+        "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
           "锅巴：大米饭",
-          "五花肉",
-          "干辣椒",
-          "油"
+          "五花肉400g、土豆丁100g、虾仁",
+          "干辣椒50g、芝麻10g、洋葱100g、姜末16g、蒜末30g、干香菇",
+          "油560g、酱油70g、水700g、盐2g、味精2g、淀粉10g、小米辣"
         ],
         "main_ingredients": [
           "主食",
           "猪肉",
-          "蔬菜"
+          "菌菇",
+          "蔬菜",
+          "调味品",
+          "鱼虾"
         ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆",
+            "海鲜"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -1950,13 +1966,14 @@
         "cooking_method": "凉拌",
         "cook_time": "medium",
         "ingredients": [
-          "面条：面粉",
-          "干辣皮子",
-          "洋葱",
-          "酱油"
+          "面条：面粉500g、水225g、盐",
+          "干辣皮子150g、牛肉",
+          "洋葱120g、蒜80g、韭菜80g",
+          "酱油70g（腌牛肉20g+调味50g）、油适量、炸洋葱油120g、盐5g、味精2g、淀粉10g、水"
         ],
         "main_ingredients": [
           "主食",
+          "牛肉",
           "蔬菜",
           "调味品"
         ],
@@ -1966,9 +1983,7 @@
             "大豆",
             "麸质"
           ],
-          "diet": [
-            "素食"
-          ]
+          "diet": []
         },
         "source": "随便做",
         "language": "zh"
@@ -1984,18 +1999,20 @@
         "cook_time": "quick",
         "ingredients": [
           "米2碗",
-          "胡萝卜",
-          "底油"
+          "胡萝卜100g、土豆100g、干香菇10g、火腿肠150g、洋葱80g、小米椒",
+          "底油100g、酱油80g、盐2g、味精1g、香菜"
         ],
         "main_ingredients": [
-          "蔬菜"
+          "菌菇",
+          "蔬菜",
+          "调味品"
         ],
         "tags": {
           "spicy": false,
-          "allergens": [],
-          "diet": [
-            "素食"
-          ]
+          "allergens": [
+            "大豆"
+          ],
+          "diet": []
         },
         "source": "随便做",
         "language": "zh"
@@ -2211,7 +2228,7 @@
         "imagePath": "images/dishes/staple/麻辣减脂荞麦面.jpeg",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "火锅底料、花生酱、全脂牛奶、生抽、辣椒油、醋、花椒油",
@@ -2580,7 +2597,7 @@
         "imagePath": "images/dishes/staple/酸辣蕨根粉.jpeg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "蕨根粉",
@@ -2662,13 +2679,13 @@
           "2 个大碗",
           "1 个小碗",
           "原料",
-          "米 200 ml",
+          "米",
           "腊肠 1 根",
-          "鸡蛋 1 个",
-          "红萝卜 1 个",
+          "鸡蛋",
+          "红萝卜",
           "盐",
-          "油 15 ml",
-          "生抽 10 ml",
+          "油",
+          "生抽",
           "香葱 1 颗"
         ],
         "main_ingredients": [
@@ -2789,9 +2806,7 @@
           "白糖",
           "白胡椒粉"
         ],
-        "main_ingredients": [
-          "猪肉"
-        ],
+        "main_ingredients": [],
         "tags": {
           "spicy": true,
           "allergens": [],
@@ -2846,7 +2861,7 @@
         "cooking_method": "炖煮",
         "cook_time": "quick",
         "ingredients": [
-          "土豆",
+          "土豆400g",
           "擦丝器",
           "面粉约",
           "肉丝",
@@ -2860,7 +2875,6 @@
         ],
         "main_ingredients": [
           "主食",
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -3239,7 +3253,6 @@
         ],
         "main_ingredients": [
           "主食",
-          "猪肉",
           "调味品"
         ],
         "tags": {
@@ -3440,21 +3453,24 @@
         "name": "扒肉条",
         "category": "meat_dish",
         "difficulty": 4,
-        "cuisine": "家常",
+        "cuisine": "东北",
         "cooking_method": "炖煮",
         "cook_time": "long",
         "ingredients": [
           "牛肉",
           "色拉油适量",
-          "整葱",
-          "花椒油汁：两合油（香油"
+          "整葱50克、姜片50克、花椒2克、八角2克、酱油80克、黄酒50克、开水2500克、盐8克、味精2克、白糖5克、老抽",
+          "花椒油汁：两合油（香油30g，色拉油30g）、葱花5克、姜末2克、炖牛肉原汤150克、花椒油30克、水淀粉"
         ],
         "main_ingredients": [
-          "牛肉"
+          "牛肉",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -3514,12 +3530,10 @@
           "白酒",
           "生姜",
           "大葱",
-          "盐",
-          "白胡椒粉"
+          "盐50g",
+          "白胡椒粉20g"
         ],
-        "main_ingredients": [
-          "猪肉"
-        ],
+        "main_ingredients": [],
         "tags": {
           "spicy": true,
           "allergens": [],
@@ -3565,7 +3579,7 @@
         "cooking_method": "其他",
         "cook_time": "long",
         "ingredients": [
-          "柴鸡",
+          "柴鸡1000g",
           "纯肉方火腿",
           "冬笋",
           "香菇",
@@ -3574,7 +3588,7 @@
           "大葱姜",
           "味精",
           "盐",
-          "白胡椒粉0.",
+          "白胡椒粉",
           "淀粉"
         ],
         "main_ingredients": [
@@ -3600,16 +3614,17 @@
         "cook_time": "medium",
         "ingredients": [
           "羊腿肉",
-          "大葱",
-          "腌肉汁：酱油",
-          "姜蒜水：姜",
+          "大葱210g（腌肉时20g，炒肉时190g）、洋葱丝80g、香菜",
+          "腌肉汁：酱油90g、花椒5g、胡椒粉1g、桂皮2g、孜然3g、料酒",
+          "姜蒜水：姜15g、蒜16g、水",
           "其他：葱油适量、香油"
         ],
         "main_ingredients": [
+          "蔬菜",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "大豆"
           ],
@@ -3743,15 +3758,21 @@
         "cook_time": "long",
         "ingredients": [
           "干蹄筋",
-          "汤料：葱油鸡",
-          "发蹄筋材料：黄酒",
-          "蹄筋焯水材料：水",
-          "油"
+          "汤料：葱油鸡1000g、水2500g、猪皮500g",
+          "发蹄筋材料：黄酒100g、葱50g、姜20g、水",
+          "蹄筋焯水材料：水600g、花雕酒80g、葱50g、姜",
+          "油80g、大料2个、葱白（葱段100g，眉毛葱120g）、姜1g、酱油10g、蚝油10g、味精2g、白糖5g、胡椒粉0.1g、老抽5g、鸡汤500g、水淀粉"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "猪肉",
+          "调味品"
+        ],
         "tags": {
-          "spicy": false,
-          "allergens": [],
+          "spicy": true,
+          "allergens": [
+            "大豆",
+            "海鲜"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -3813,7 +3834,6 @@
           "消毒纱布"
         ],
         "main_ingredients": [
-          "猪肉",
           "调味品",
           "豆腐"
         ],
@@ -3836,8 +3856,8 @@
         "cooking_method": "煎炸",
         "cook_time": "long",
         "ingredients": [
-          "里脊肉",
-          "土豆淀粉",
+          "里脊肉300g",
+          "土豆淀粉250g",
           "蒜2瓣",
           "葱",
           "胡萝卜",
@@ -3848,7 +3868,6 @@
           "老抽"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -3875,7 +3894,6 @@
           "花椒、盐、味精、干辣椒、芝麻、蒜、醋、鲜味酱油"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -3964,14 +3982,19 @@
         "cooking_method": "蒸",
         "cook_time": "medium",
         "ingredients": [
-          "鸡",
-          "葱姜水（葱",
-          "最后浇油：葱花"
+          "鸡1只",
+          "葱姜水（葱50g，姜50g，水4kg）、猪油80g、剁椒230g、蒜末30g、姜末15g、豆豉22g、鲜辣椒60g、葱15g、味精5g、糖5g、鲜味酱油",
+          "最后浇油：葱花10g、油"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "蔬菜",
+          "调味品"
+        ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -4064,7 +4087,6 @@
           "盐、糖、白醋、番茄酱"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -4086,16 +4108,16 @@
         "cooking_method": "蒸",
         "cook_time": "long",
         "ingredients": [
-          "五花肉 ",
-          "蒸肉米粉 ",
-          "生抽 ",
-          "老抽 ",
-          "料酒 ",
-          "郫县豆瓣酱 ",
-          "姜末 ",
-          "蒜末 ",
-          "白砂糖 ",
-          "土豆 ",
+          "五花肉 500g",
+          "蒸肉米粉 100g",
+          "生抽",
+          "老抽",
+          "料酒",
+          "郫县豆瓣酱 10g",
+          "姜末",
+          "蒜末",
+          "白砂糖",
+          "土豆 300g",
           "清水"
         ],
         "main_ingredients": [
@@ -4278,7 +4300,7 @@
         "imagePath": "images/dishes/suibianzuo-vertical/宫保鸡丁.png",
         "difficulty": 4,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "手枪腿",
@@ -4320,7 +4342,7 @@
         "imagePath": "images/dishes/suibianzuo-vertical/宫保鸡丁.png",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "鸡腿",
@@ -4455,7 +4477,7 @@
         "imagePath": "images/dishes/meat_dish/贵州辣子鸡.jpeg",
         "difficulty": 4,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "农村玉米鸡",
@@ -4785,14 +4807,16 @@
         "cook_time": "long",
         "ingredients": [
           "猪前肘",
-          "花雕酒"
+          "花雕酒500g（焯水时100g，调味时370g，勾芡时30g）、冰糖316g（炒糖色时100g，调味时216g）、油130g（炒糖色时50g，煸葱姜时80g）、大葱60g、大姜40g、大料5g、酱油（生抽）100g、盐28g、味精2g、老抽8g、水淀粉"
         ],
         "main_ingredients": [
-          "猪肉"
+          "调味品"
         ],
         "tags": {
           "spicy": false,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -4843,17 +4867,20 @@
         "cook_time": "quick",
         "ingredients": [
           "肉馅",
-          "红枣",
-          "馅料调味：盐",
-          "汤调味：水"
+          "红枣80g、香葱3g、枸杞",
+          "馅料调味：盐2g、味精1g、香油2g、胡椒粉0.5g、淀粉2g、鸡蛋半个、葱15g、姜",
+          "汤调味：水800g、盐5g、味精1g、胡椒粉"
         ],
         "main_ingredients": [
           "坚果干货",
-          "猪肉"
+          "猪肉",
+          "蛋奶"
         ],
         "tags": {
-          "spicy": false,
-          "allergens": [],
+          "spicy": true,
+          "allergens": [
+            "鸡蛋"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -4925,7 +4952,6 @@
           "料酒"
         ],
         "main_ingredients": [
-          "猪肉",
           "调味品"
         ],
         "tags": {
@@ -4951,7 +4977,6 @@
           "盐、味精、白胡椒粉、料酒、香油、鸡蛋、玉米淀粉、小苏打"
         ],
         "main_ingredients": [
-          "猪肉",
           "蛋奶"
         ],
         "tags": {
@@ -4983,7 +5008,6 @@
           "小米辣"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜"
         ],
         "tags": {
@@ -5245,7 +5269,6 @@
           "葱花"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -5491,16 +5514,18 @@
         "cook_time": "long",
         "ingredients": [
           "新鲜猪腰子",
-          "鲜花椒",
-          "泡姜",
-          "总调味料：盐"
+          "鲜花椒20g、大蒜末",
+          "泡姜60g、青红小米辣250g、小米辣20g（腌腰子用）、韭菜",
+          "总调味料：盐6g、味精5g、胡椒粉3g、酱油30g、醋10g、香油7g、料酒100g、淀粉25g、菜籽油100g、猪油"
         ],
         "main_ingredients": [
-          "猪肉"
+          "调味品"
         ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -5746,7 +5771,7 @@
         "cook_time": "quick",
         "ingredients": [
           "鸡翅",
-          "可乐",
+          "可乐1100g、冰糖15g、料酒50g、油15g、盐2g、老抽8g、话梅",
           "葱姜共"
         ],
         "main_ingredients": [
@@ -5808,7 +5833,7 @@
         "imagePath": "images/dishes/meat_dish/口水鸡.jpeg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "半只鸡",
@@ -5858,7 +5883,6 @@
           "豆豉"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -5883,10 +5907,10 @@
         "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
-          "猪五花肉1kg、螺丝椒",
-          "笋",
-          "酱油",
-          "其他：大料"
+          "猪五花肉1kg、螺丝椒180g、小米辣",
+          "笋60g（可不加）、蒜60g、青蒜",
+          "酱油100g、味精2g、蚝油10g、白糖1g、胡椒粉",
+          "其他：大料2个、油20g、水"
         ],
         "main_ingredients": [
           "猪肉",
@@ -5895,7 +5919,8 @@
         "tags": {
           "spicy": true,
           "allergens": [
-            "大豆"
+            "大豆",
+            "海鲜"
           ],
           "diet": []
         },
@@ -5913,16 +5938,20 @@
         "cook_time": "medium",
         "ingredients": [
           "去毛五花肉",
-          "青美人椒",
-          "花雕酒（焯水时",
+          "青美人椒50g、红美人椒50g、五香鹌鹑蛋100g、蒜",
+          "花雕酒（焯水时100g，煎肉时烹入120g）、油80g、葱5g、姜5g、大料4个、桂皮4g、酱油79g、糖色25g（可不加）、老抽20g、白糖14g、盐2g、味精",
           "其他：热水"
         ],
         "main_ingredients": [
-          "猪肉"
+          "猪肉",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆",
+            "鸡蛋"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -5935,7 +5964,7 @@
         "imagePath": "images/dishes/suibianzuo/辣子鸡.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "鸡翅",
@@ -5998,7 +6027,7 @@
         "imagePath": "images/dishes/meat_dish/老妈蹄花.jpeg",
         "difficulty": 4,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "猪蹄",
@@ -6060,7 +6089,6 @@
         ],
         "main_ingredients": [
           "主食",
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -6314,7 +6342,7 @@
         "imagePath": "images/dishes/suibianzuo/麻辣香锅.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "青菜",
@@ -6346,20 +6374,23 @@
         "imagePath": "images/dishes/suibianzuo/麻辣香锅.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
-          "香锅酱：干辣椒碎",
-          "料油：洋葱",
-          "炒制食材料：灯笼椒",
-          "其他：洋葱"
+          "香锅酱：干辣椒碎150g、麻椒花椒粉共15g、火锅底料120g、海鲜酱",
+          "料油：洋葱80g、花椒麻椒各20g、油200g、水",
+          "炒制食材料：灯笼椒15个、油200g、蒜80g（炒制）、蒜末20g",
+          "其他：洋葱60g、姜10g、青红辣椒圈50g、酱油"
         ],
         "main_ingredients": [
-          "蔬菜"
+          "蔬菜",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": [
             "素食"
           ]
@@ -6374,7 +6405,7 @@
         "imagePath": "images/dishes/suibianzuo/麻婆豆腐.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "内脂豆腐",
@@ -6647,8 +6678,8 @@
         "cooking_method": "煎炸",
         "cook_time": "long",
         "ingredients": [
-          "猪蹄 ",
-          "黄飞鸿辣椒酥 ",
+          "猪蹄",
+          "黄飞鸿辣椒酥 200克、青红尖椒、洋葱",
           "葱、姜、八角、花椒、红曲米、盐、味精、白糖、胡椒粉、玉米淀粉、料酒"
         ],
         "main_ingredients": [
@@ -6765,9 +6796,9 @@
         "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "青椒",
+          "青椒360克、红椒50g、肥瘦肉丝",
           "拍蒜",
-          "食用油"
+          "食用油40g、大料1个、生抽"
         ],
         "main_ingredients": [
           "蔬菜"
@@ -6790,7 +6821,7 @@
         "cook_time": "medium",
         "ingredients": [
           "青椒",
-          "猪肉（",
+          "猪肉",
           "葱",
           "生姜",
           "生抽",
@@ -6868,14 +6899,14 @@
         "cook_time": "medium",
         "ingredients": [
           "五花肉（精五花肉）约",
-          "马蹄 ",
-          "玉米淀粉 ",
-          "葱 ",
-          "姜 ",
-          "盐 ",
+          "马蹄",
+          "玉米淀粉",
+          "葱",
+          "姜",
+          "盐",
           "味精 2-",
-          "胡椒粉 ",
-          "白菜叶 "
+          "胡椒粉",
+          "白菜叶"
         ],
         "main_ingredients": [
           "猪肉",
@@ -6899,13 +6930,16 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "带骨羊腿肉",
-          "药材：当归",
-          "葱姜共"
+          "带骨羊腿肉1000g、白萝卜",
+          "药材：当归2g、党参10g、白胡椒",
+          "葱姜共50g、味精2g、盐8g、枸杞适量"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "坚果干货",
+          "蔬菜"
+        ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": []
         },
@@ -6985,11 +7019,12 @@
         "cooking_method": "其他",
         "cook_time": "long",
         "ingredients": [
-          "鸡蛋",
+          "鸡蛋5个",
           "白糖",
-          "水"
+          "水150g、土豆淀粉40g、油"
         ],
         "main_ingredients": [
+          "蔬菜",
           "蛋奶"
         ],
         "tags": {
@@ -7132,7 +7167,7 @@
         "cook_time": "medium",
         "ingredients": [
           "猪肝",
-          "线椒",
+          "线椒500克",
           "料酒",
           "盐",
           "味精",
@@ -7258,7 +7293,7 @@
           "花椒粉",
           "香葱",
           "芝麻",
-          "水",
+          "水3000毫升",
           "味精",
           "生抽",
           "白糖",
@@ -7342,12 +7377,13 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "肥牛",
-          "姜",
-          "黄灯笼辣椒酱"
+          "肥牛400g、金针菇",
+          "姜30g、蒜30g、各50g青红辣椒（炝锅）、各30g青红辣椒",
+          "黄灯笼辣椒酱80g、白醋60g、白糖5g、味精3g、熟南瓜茸60g、香油10g、香菜20g、汤"
         ],
         "main_ingredients": [
           "牛肉",
+          "菌菇",
           "蔬菜",
           "调味品"
         ],
@@ -7504,7 +7540,7 @@
         "imagePath": "images/dishes/suibianzuo-vertical/糖醋里脊.png",
         "difficulty": 4,
         "cuisine": "鲁菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "里脊肉",
@@ -7520,7 +7556,6 @@
           "盐"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜",
           "蛋奶",
           "调味品"
@@ -7543,7 +7578,7 @@
         "imagePath": "images/dishes/suibianzuo-vertical/糖醋里脊.png",
         "difficulty": 2,
         "cuisine": "鲁菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "里脊肉",
@@ -7552,7 +7587,6 @@
         ],
         "main_ingredients": [
           "主食",
-          "猪肉",
           "蔬菜",
           "调味品"
         ],
@@ -7573,7 +7607,7 @@
         "imagePath": "images/dishes/suibianzuo/糖醋排骨.jpg",
         "difficulty": 4,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "排骨",
@@ -7611,19 +7645,20 @@
         "imagePath": "images/dishes/suibianzuo/糖醋排骨.jpg",
         "difficulty": 3,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "排骨1kg",
-          "花雕酒",
-          "香料：大料",
-          "冰糖"
+          "花雕酒200g、淀粉30g、油560g、葱40g、姜",
+          "香料：大料2个、桂皮1g、花椒",
+          "冰糖160g、米醋或香醋190g、糖色16g（可用老抽代替）、盐6g、水"
         ],
         "main_ingredients": [
-          "猪肉"
+          "猪肉",
+          "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": []
         },
@@ -7640,7 +7675,7 @@
         "cook_time": "long",
         "ingredients": [
           "大田螺",
-          "猪肉（",
+          "猪肉",
           "新鲜薄荷叶",
           "紫苏叶",
           "生姜",
@@ -7649,7 +7684,7 @@
           "生抽",
           "食盐",
           "食用油",
-          "酸笋（可选，",
+          "酸笋",
           "大蒜",
           "干辣椒",
           "蚝油",
@@ -7721,7 +7756,7 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "牛肋条",
+          "牛肋条2000g",
           "土豆",
           "豆瓣酱",
           "黄豆酱",
@@ -7809,7 +7844,7 @@
           "胡萝卜",
           "豆腐",
           "干香菇",
-          "肉馅",
+          "肉馅250g",
           "蛋饺1盒",
           "粉丝",
           "葱",
@@ -7950,7 +7985,7 @@
           "牛腩",
           "燃气灶",
           "高压锅/砂锅/普通铝锅",
-          "2cm 两段葱段、两片姜片，葱花、姜各 ",
+          "2cm 两段葱段、两片姜片，葱花、姜各",
           "生抽、白胡椒粉，白糖，料/黄酒，八角三小片",
           "牛腩"
         ],
@@ -8176,7 +8211,7 @@
         "imagePath": "images/dishes/meat_dish/香辣鸡爪煲.jpeg",
         "difficulty": 4,
         "cuisine": "家常",
-        "cooking_method": "炖煮",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "鸡爪",
@@ -8265,7 +8300,6 @@
         ],
         "main_ingredients": [
           "牛肉",
-          "猪肉",
           "蔬菜"
         ],
         "tags": {
@@ -8492,18 +8526,19 @@
         "cooking_method": "炖煮",
         "cook_time": "very_long",
         "ingredients": [
-          "鸡汤：鸡",
-          "卤汤：水10斤+鸡汤8斤、酱油",
-          "香料：陈皮",
-          "熏内时：糖",
+          "鸡汤：鸡1800g、水10斤",
+          "卤汤：水10斤+鸡汤8斤、酱油100g、白糖80g、盐100g、黄酱100g、大油（猪油）500g、洋葱500g、大葱80g、姜",
+          "香料：陈皮5g、辣椒3g、香叶2g、草果5g、大料20g、花椒10g、白蔻5g、砂仁2g、丁香1g、桂皮5g、小茴香",
+          "熏内时：糖100g、花茶",
           "猪蹄、鸡肉、猪尾巴、猪耳朵等"
         ],
         "main_ingredients": [
           "猪肉",
+          "蔬菜",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "大豆"
           ],
@@ -8555,14 +8590,21 @@
         "cooking_method": "凉拌",
         "cook_time": "medium",
         "ingredients": [
-          "羊腿肉",
-          "大葱",
-          "花椒油"
+          "羊腿肉（小羊）1000g、碱水挂面",
+          "大葱150g、姜10g、蒜20g、干辣椒15g、芝麻",
+          "花椒油60g、酱油65g、味精2g、胡椒粉2g、香油30g、醋35g、糖"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "主食",
+          "蔬菜",
+          "调味品"
+        ],
         "tags": {
           "spicy": true,
-          "allergens": [],
+          "allergens": [
+            "大豆",
+            "麸质"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -8708,9 +8750,7 @@
           "葱姜蒜、花椒",
           "盐、胡椒粉、香油、花椒油、料酒、玉米淀粉"
         ],
-        "main_ingredients": [
-          "猪肉"
-        ],
+        "main_ingredients": [],
         "tags": {
           "spicy": true,
           "allergens": [],
@@ -8729,17 +8769,17 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "鸡腿 ",
-          "土豆 ",
-          "西红柿 半个（约",
-          "蒜 ",
-          "小米辣 40-",
-          "葱 ",
-          "姜 ",
-          "香茅 ",
-          "盐 ",
-          "味精 ",
-          "蚝油 "
+          "鸡腿 2个",
+          "土豆 2个",
+          "西红柿 半个",
+          "蒜",
+          "小米辣 40-80克",
+          "葱",
+          "姜",
+          "香茅",
+          "盐",
+          "味精",
+          "蚝油"
         ],
         "main_ingredients": [
           "蔬菜",
@@ -8763,7 +8803,7 @@
         "imagePath": "images/dishes/suibianzuo/鱼香茄子.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "茄子",
@@ -8799,27 +8839,26 @@
         "imagePath": "images/dishes/suibianzuo-vertical/鱼香肉丝.png",
         "difficulty": 4,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
-          "里脊肉 ",
-          "胡萝卜 ",
-          "青椒 ",
-          "木耳（干） ",
-          "生抽 ",
-          "料酒 ",
-          "蛋清 1 个",
-          "淀粉 ",
-          "醋 ",
-          "白糖 ",
-          "盐 ",
-          "姜 ",
-          "葱 ",
+          "里脊肉",
+          "胡萝卜",
+          "青椒",
+          "木耳",
+          "生抽",
+          "料酒",
+          "蛋清",
+          "淀粉",
+          "醋",
+          "白糖",
+          "盐",
+          "姜",
+          "葱",
           "蒜 2 瓣",
-          "豆瓣酱 "
+          "豆瓣酱"
         ],
         "main_ingredients": [
-          "猪肉",
           "菌菇",
           "蔬菜",
           "调味品"
@@ -8842,22 +8881,24 @@
         "imagePath": "images/dishes/suibianzuo-vertical/鱼香肉丝.png",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "猪通脊",
-          "美人椒碎",
-          "肉丝腌制：盐",
-          "碗汁：番茄酱"
+          "猪通脊400g",
+          "美人椒碎40g、60g笋丝、30g木耳、5g葱、10g姜、20g蒜末",
+          "肉丝腌制：盐1g、味精1g、水80g、淀粉10g、油",
+          "碗汁：番茄酱10g、酱油30g、醋38g、白糖40g、盐5g、味精2g、胡椒粉1g、油10g、淀粉"
         ],
         "main_ingredients": [
-          "猪肉",
+          "菌菇",
           "蔬菜",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
-          "allergens": [],
+          "spicy": true,
+          "allergens": [
+            "大豆"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -8905,7 +8946,7 @@
         "cooking_method": "煎炸",
         "cook_time": "quick",
         "ingredients": [
-          "萝卜",
+          "萝卜1000g",
           "面粉",
           "淀粉",
           "泡打粉",
@@ -8939,17 +8980,19 @@
         "cook_time": "medium",
         "ingredients": [
           "猪梅花肉",
-          "盐",
-          "香料水：葱",
-          "糊：红薯粉"
+          "盐3g、味精1g、花椒粉2g、十三香",
+          "香料水：葱33g、姜40g、小米辣25g、水",
+          "糊：红薯粉220g、鸡蛋5个（230g）、油"
         ],
         "main_ingredients": [
-          "猪肉",
-          "蔬菜"
+          "蔬菜",
+          "蛋奶"
         ],
         "tags": {
-          "spicy": false,
-          "allergens": [],
+          "spicy": true,
+          "allergens": [
+            "鸡蛋"
+          ],
           "diet": []
         },
         "source": "随便做",
@@ -9353,9 +9396,9 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "娃娃菜",
+          "娃娃菜260g、去皮板栗",
           "汤底：黄油鸡吊的汤",
-          "盐"
+          "盐3g、味精2g、淀粉10g、葱10g、姜"
         ],
         "main_ingredients": [
           "蔬菜",
@@ -9606,16 +9649,18 @@
         "cook_time": "medium",
         "ingredients": [
           "干腐竹",
-          "大葱丝",
-          "葱油"
+          "大葱丝78g、大葱段80g、红椒",
+          "葱油200g、大料1个、海米20g、蚝油15g、水500g、味精1g、白糖5g、盐2g、老抽5g、淀粉"
         ],
         "main_ingredients": [
+          "调味品",
           "豆腐"
         ],
         "tags": {
           "spicy": false,
           "allergens": [
-            "大豆"
+            "大豆",
+            "海鲜"
           ],
           "diet": [
             "素食"
@@ -9635,16 +9680,17 @@
         "cook_time": "quick",
         "ingredients": [
           "白菜",
-          "木耳",
+          "木耳20g、蒜",
           "油",
-          "碗汁配方：老抽"
+          "碗汁配方：老抽10g、醋60g、盐5g、味精2g、白糖2g、淀粉20g、红辣椒10g、蒜10g、香油"
         ],
         "main_ingredients": [
           "菌菇",
-          "蔬菜"
+          "蔬菜",
+          "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": [
             "素食"
@@ -9663,20 +9709,22 @@
         "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "羊外脊",
-          "葱",
-          "羊肉腌制：酱油",
-          "碗汁：醋",
-          "炒制：油"
+          "羊外脊300g、鸡蛋",
+          "葱30g、姜",
+          "羊肉腌制：酱油15g、胡椒粉1g、味精1g、盐1g、水50g、淀粉15g、食用油",
+          "碗汁：醋60g、酱油40g、盐1g、味精2g、胡椒粉1g、水50g、老抽5g、淀粉10g、蒜30g、葱",
+          "炒制：油80g、醋"
         ],
         "main_ingredients": [
           "羊肉",
+          "蛋奶",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
-            "大豆"
+            "大豆",
+            "鸡蛋"
           ],
           "diet": []
         },
@@ -9951,16 +9999,16 @@
         "cooking_method": "蒸",
         "cook_time": "quick",
         "ingredients": [
-          "胡萝卜",
-          "面粉（蔬菜表面均匀沾满即可）、葱油",
-          "蒜汁配方：薄荷叶"
+          "胡萝卜580g、白萝卜850g、蒿子秆700g",
+          "面粉（蔬菜表面均匀沾满即可）、葱油20g（其它油也可以）、食用油40g、干辣椒10g、蒜末20g、盐2g、味精",
+          "蒜汁配方：薄荷叶20g、蒜50g（放一起砸成泥）、水30g、盐2g、香油"
         ],
         "main_ingredients": [
           "主食",
           "蔬菜"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "麸质"
           ],
@@ -10254,8 +10302,8 @@
           "生粉",
           "蒜",
           "油",
-          "生抽 8 ml",
-          "蚝油 15 ml",
+          "生抽",
+          "蚝油",
           "盐",
           "鸡精",
           "番茄酱",
@@ -10288,14 +10336,18 @@
         "cooking_method": "其他",
         "cook_time": "quick",
         "ingredients": [
-          "尖椒",
-          "葱",
-          "油"
+          "尖椒130g、干豆腐",
+          "葱130g、蒜",
+          "油140g、水750g、盐8g、味精2g、淀粉"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "豆腐"
+        ],
         "tags": {
           "spicy": false,
-          "allergens": [],
+          "allergens": [
+            "大豆"
+          ],
           "diet": [
             "素食"
           ]
@@ -10753,17 +10805,17 @@
         "cook_time": "quick",
         "ingredients": [
           "松花蛋",
-          "酱油",
-          "香菜",
+          "酱油60g、米醋35g、香油",
+          "香菜5g、小米辣3g、姜",
           "黄瓜",
-          "酱油",
-          "蒜",
+          "酱油40g、米醋15g、香油",
+          "蒜20g、麻酱30g（纯）、小米辣",
           "秋葵",
-          "米醋",
-          "洋葱",
+          "米醋100g、一品鲜酱油130g、耗油20g、白糖",
+          "洋葱60g、蒜60g、香菜20g、姜50g、小米辣25g、纯净水100g、食用油",
           "花生米",
-          "米醋",
-          "香菜"
+          "米醋130g、冰糖100g、酱油40g、耗油",
+          "香菜15g、大料1个、香叶2片、花椒0.5g、小米辣2个、尖椒20g、洋葱"
         ],
         "main_ingredients": [
           "坚果干货",
@@ -10771,7 +10823,7 @@
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "大豆",
             "花生",
@@ -10791,7 +10843,7 @@
         "imagePath": "images/dishes/suibianzuo/麻婆豆腐.jpg",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "韧豆腐2盒",
@@ -10942,15 +10994,15 @@
         "cook_time": "quick",
         "ingredients": [
           "娃娃菜",
-          "葱丝",
-          "白醋"
+          "葱丝35g、蒜泥40g、小米辣10g、芝麻5g、干辣椒",
+          "白醋40g、盐6g、味精2g、糖2g、香油18g、炸好的辣椒油"
         ],
         "main_ingredients": [
           "蔬菜",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": [
             "素食"
@@ -10969,7 +11021,7 @@
         "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
-          "圆白菜",
+          "圆白菜430g",
           "花椒",
           "干辣椒",
           "生抽",
@@ -11089,18 +11141,20 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "韧豆腐2盒、梭子蟹",
-          "大葱",
-          "鸡蛋",
+          "韧豆腐2盒、梭子蟹2只（冻蟹）、娃娃菜",
+          "大葱50g、生姜10g、香葱5g、枸杞10g",
+          "鸡蛋2个、盐7g、味精2g、胡椒粉",
           "汤料：鸡汤4斤、水1斤"
         ],
         "main_ingredients": [
+          "坚果干货",
+          "蔬菜",
           "蛋奶",
           "豆腐",
           "鱼虾"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "大豆",
             "海鲜",
@@ -11317,19 +11371,20 @@
         "imagePath": "images/dishes/suibianzuo/酸辣豆芽.jpg",
         "difficulty": 1,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "绿豆芽",
-          "醋",
-          "蒜末",
-          "其他：油"
+          "醋25g、盐3g、味精1g、香油3g、白糖",
+          "蒜末14g、干辣椒6个（6g）、花椒",
+          "其他：油60g、淀粉"
         ],
         "main_ingredients": [
+          "蔬菜",
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": [
             "素食"
@@ -11345,7 +11400,7 @@
         "imagePath": "images/dishes/vegetable_dish/酸辣土豆丝.jpeg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "土豆",
@@ -11379,7 +11434,7 @@
         "imagePath": "images/dishes/vegetable_dish/酸辣土豆丝.jpeg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "土豆",
@@ -11414,15 +11469,16 @@
         "imagePath": "images/dishes/suibianzuo/酸辣小黄瓜.jpg",
         "difficulty": 1,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "黄瓜",
           "杀水用：盐",
-          "腌制用调味料：小米辣"
+          "腌制用调味料：小米辣20g、蒜米53g、香菜27g、生抽80g、米醋25g、白糖18g、味精2g、花椒油"
         ],
         "main_ingredients": [
-          "蔬菜"
+          "蔬菜",
+          "调味品"
         ],
         "tags": {
           "spicy": true,
@@ -11511,7 +11567,7 @@
         "cooking_method": "调味",
         "cook_time": "quick",
         "ingredients": [
-          "西兰花 1 个",
+          "西兰花",
           "大蒜 3-4 瓣",
           "生抽",
           "蚝油",
@@ -11746,7 +11802,6 @@
           "味精"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜"
         ],
         "tags": {
@@ -11766,7 +11821,7 @@
         "imagePath": "images/dishes/suibianzuo/香辣土豆丝.jpg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "土豆",
@@ -12019,7 +12074,7 @@
         "cook_time": "medium",
         "ingredients": [
           "土豆1kg",
-          "五花肉",
+          "五花肉180g",
           "青蒜",
           "红薯（或土豆）淀粉",
           "蒜",
@@ -12032,7 +12087,7 @@
           "翠红干料",
           "生抽",
           "洋葱",
-          "油（炸的时候"
+          "油"
         ],
         "main_ingredients": [
           "猪肉",
@@ -12053,7 +12108,7 @@
         "imagePath": "images/dishes/suibianzuo/鱼香茄子.jpg",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "茄子",
@@ -12096,7 +12151,7 @@
         "imagePath": "images/dishes/suibianzuo/鱼香土豆泥.jpg",
         "difficulty": 2,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "黄心土豆",
@@ -12228,7 +12283,6 @@
           "花雕酒、盐、味精、白胡椒粉、葱姜、猪油"
         ],
         "main_ingredients": [
-          "猪肉",
           "菌菇",
           "鱼虾"
         ],
@@ -12456,15 +12510,16 @@
         "imagePath": "images/dishes/suibianzuo/国宴菜翡翠虾球.jpg",
         "difficulty": 4,
         "cuisine": "家常",
-        "cooking_method": "其他",
+        "cooking_method": "凉拌",
         "cook_time": "long",
         "ingredients": [
-          "虾肉",
-          "生粉",
-          "淀粉糊：淀粉",
-          "腌制虾仁：盐"
+          "虾肉400g、菠菜",
+          "生粉30g（加在菠菜茸中）、姜2g（炝锅）、葱油10g",
+          "淀粉糊：淀粉1g、花雕酒2g、盐1g、糖1g、水20g、味精",
+          "腌制虾仁：盐1g、味精"
         ],
         "main_ingredients": [
+          "蔬菜",
           "鱼虾"
         ],
         "tags": {
@@ -12641,7 +12696,7 @@
         "cooking_method": "炖煮",
         "cook_time": "long",
         "ingredients": [
-          "注：如果有可能，尽量另准备一把菜刀，超市或市场上均有廉价且刀片更厚的菜刀，刀片厚度在 5-",
+          "注：如果有可能，尽量另准备一把菜刀，超市或市场上均有廉价且刀片更厚的菜刀，刀片厚度在 5-7mm 为最佳。",
           "大葱、姜、大蒜、香菜、美人椒",
           "油、盐、鸡精、生抽、老抽、陈醋、黑胡椒粉、料酒",
           "八角、干辣椒",
@@ -12712,7 +12767,7 @@
         "cook_time": "medium",
         "ingredients": [
           "鲜虾",
-          "黄油（推荐安佳，一次用一小盒 ",
+          "黄油",
           "黑胡椒粒",
           "生抽",
           "盐",
@@ -12975,21 +13030,23 @@
         "imagePath": "images/dishes/suibianzuo/麻辣小龙虾.jpg",
         "difficulty": 3,
         "cuisine": "川菜",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "小龙虾",
-          "大葱姜",
-          "干辣椒",
-          "其他：油"
+          "大葱姜250g、大蒜180g、蒜蓉50g",
+          "干辣椒180g、花椒80g、麻椒40g、火锅底料60g、豆瓣酱",
+          "其他：油200g、味精5g、白糖5g、盐10g、水4斤"
         ],
         "main_ingredients": [
           "蔬菜",
+          "调味品",
           "鱼虾"
         ],
         "tags": {
           "spicy": true,
           "allergens": [
+            "大豆",
             "海鲜"
           ],
           "diet": []
@@ -13055,7 +13112,6 @@
         ],
         "main_ingredients": [
           "坚果干货",
-          "猪肉",
           "豆腐",
           "鱼虾"
         ],
@@ -13300,17 +13356,19 @@
         "cooking_method": "调味",
         "cook_time": "medium",
         "ingredients": [
-          "虾",
+          "虾500g、泡好的粉丝",
           "青、红辣椒粒共",
-          "蒜蓉"
+          "蒜蓉200g、油70g、盐2g、味精1g、糖1g、蚝油20g、香油10g、酱油"
         ],
         "main_ingredients": [
           "蔬菜",
+          "调味品",
           "鱼虾"
         ],
         "tags": {
           "spicy": true,
           "allergens": [
+            "大豆",
             "海鲜"
           ],
           "diet": []
@@ -13390,19 +13448,22 @@
         "cooking_method": "炖煮",
         "cook_time": "quick",
         "ingredients": [
-          "带鱼",
-          "花雕酒",
-          "兑汁：酱油"
+          "带鱼500g",
+          "花雕酒25g、食用油130g、蒜30g、姜30g、花椒10g、干辣椒段150g、葱花30g、花生米80g、淀粉",
+          "兑汁：酱油50g、米醋50g、白糖80g、味精1g、料酒"
         ],
         "main_ingredients": [
+          "坚果干货",
+          "蔬菜",
           "调味品",
           "鱼虾"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
             "大豆",
-            "海鲜"
+            "海鲜",
+            "花生"
           ],
           "diet": []
         },
@@ -13416,7 +13477,7 @@
         "imagePath": "images/dishes/aquatic/糖醋鲤鱼.jpeg",
         "difficulty": 4,
         "cuisine": "客家",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "long",
         "ingredients": [
           "鲤鱼",
@@ -13455,15 +13516,17 @@
         "imagePath": "images/dishes/suibianzuo/糖醋鱼片.jpg",
         "difficulty": 3,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
-          "鲤鱼（约",
-          "葱",
-          "盐（清洗",
-          "其他：淀粉"
+          "鲤鱼",
+          "葱50g、姜50g、蒜",
+          "盐（清洗5g+调味3g）、糖100g、番茄酱70g、白醋",
+          "其他：淀粉130g、油适量"
         ],
         "main_ingredients": [
+          "蔬菜",
+          "调味品",
           "鱼虾"
         ],
         "tags": {
@@ -13642,7 +13705,6 @@
           "猪油"
         ],
         "main_ingredients": [
-          "猪肉",
           "调味品",
           "鱼虾"
         ],
@@ -13778,7 +13840,7 @@
         "cook_time": "medium",
         "ingredients": [
           "剑骨鱼或鲤鱼",
-          "漓泉啤酒（一瓶，约 ",
+          "漓泉啤酒",
           "番茄",
           "青椒",
           "红椒",
@@ -13845,7 +13907,7 @@
         "cooking_method": "炖煮",
         "cook_time": "medium",
         "ingredients": [
-          "大虾",
+          "大虾100g",
           "葱姜丝各",
           "番茄酱",
           "白糖",
@@ -13877,16 +13939,19 @@
         "cooking_method": "调味",
         "cook_time": "long",
         "ingredients": [
-          "鲍鱼",
+          "鲍鱼15个",
           "青红美人椒",
-          "蒜蓉香葱混合"
+          "蒜蓉香葱混合30g、酱油80g（含20g水）、葱油100g、花雕酒60g、焯水葱姜各20g、辣椒面80g、热油"
         ],
         "main_ingredients": [
+          "蔬菜",
+          "调味品",
           "鱼虾"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
+            "大豆",
             "海鲜"
           ],
           "diet": []
@@ -14004,16 +14069,17 @@
         "cooking_method": "炖煮",
         "cook_time": "quick",
         "ingredients": [
-          "老鸭",
+          "老鸭1200g、带皮冬瓜",
           "薏米仁",
-          "料酒",
+          "料酒50g、生姜30g、盐5g、味精2g、胡椒粉",
           "其他：水"
         ],
         "main_ingredients": [
-          "坚果干货"
+          "坚果干货",
+          "蔬菜"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [],
           "diet": []
         },
@@ -14031,10 +14097,12 @@
         "cook_time": "quick",
         "ingredients": [
           "鸡",
-          "党参",
-          "花雕酒"
+          "党参30g、红枣10g、桂圆5g、枸杞5g、姜片",
+          "花雕酒50g、水1600g、盐5g、味精"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "坚果干货"
+        ],
         "tags": {
           "spicy": false,
           "allergens": [],
@@ -14081,24 +14149,28 @@
         "category": "soup",
         "imagePath": "images/dishes/suibianzuo/疙瘩汤.jpg",
         "difficulty": 2,
-        "cuisine": "家常",
+        "cuisine": "川菜",
         "cooking_method": "炖煮",
         "cook_time": "quick",
         "ingredients": [
-          "面疙瘩：面粉",
-          "煮汤料：西红柿"
+          "面疙瘩：面粉200g、鸡蛋1个（和面）、水",
+          "煮汤料：西红柿210g、油菜60g、葱75g、鸡蛋2个（出锅前甩鸡蛋）、水30g、香菜20g、油80g、酱油30g、盐"
         ],
         "main_ingredients": [
           "主食",
-          "蔬菜"
+          "蔬菜",
+          "蛋奶",
+          "调味品"
         ],
         "tags": {
           "spicy": false,
           "allergens": [
+            "大豆",
+            "鸡蛋",
             "麸质"
           ],
           "diet": [
-            "素食"
+            "蛋奶素"
           ]
         },
         "source": "随便做",
@@ -14144,7 +14216,7 @@
         "cooking_method": "炖煮",
         "cook_time": "long",
         "ingredients": [
-          "贵州红酸汤 ",
+          "贵州红酸汤 500克",
           "辣椒（小米辣） 适量",
           "油 适量",
           "葱、姜、蒜、西红柿 适量",
@@ -14357,7 +14429,7 @@
         "cooking_method": "炖煮",
         "cook_time": "quick",
         "ingredients": [
-          "香菇",
+          "香菇750g",
           "五花肉",
           "大料",
           "水约",
@@ -14367,7 +14439,7 @@
           "味精",
           "白胡椒粉",
           "酱油",
-          "香葱"
+          "香葱10g"
         ],
         "main_ingredients": [
           "猪肉",
@@ -14430,9 +14502,9 @@
         "cooking_method": "炖煮",
         "cook_time": "long",
         "ingredients": [
-          "小白菜",
-          "大葱",
-          "盐"
+          "小白菜600g（颜色翠绿、新鲜的）、毛豆300g",
+          "大葱80g",
+          "盐3g、味精2g、鸡汤"
         ],
         "main_ingredients": [
           "蔬菜"
@@ -14440,9 +14512,7 @@
         "tags": {
           "spicy": false,
           "allergens": [],
-          "diet": [
-            "素食"
-          ]
+          "diet": []
         },
         "source": "随便做",
         "language": "zh"
@@ -14600,13 +14670,13 @@
         "imagePath": "images/dishes/suibianzuo/酸辣鸡蛋汤.jpg",
         "difficulty": 1,
         "cuisine": "家常",
-        "cooking_method": "炖煮",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "鸡蛋",
-          "木耳",
-          "醋",
-          "其他：水"
+          "木耳30g、香菜",
+          "醋50g、酱油40g、盐2g、味精2g、胡椒粉",
+          "其他：水600g、玉米淀粉18g、葱花10g、蒜末2g、香油"
         ],
         "main_ingredients": [
           "菌菇",
@@ -14614,8 +14684,9 @@
           "调味品"
         ],
         "tags": {
-          "spicy": false,
+          "spicy": true,
           "allergens": [
+            "大豆",
             "鸡蛋"
           ],
           "diet": [
@@ -14920,10 +14991,10 @@
         "cooking_method": "其他",
         "cook_time": "quick",
         "ingredients": [
-          "冰粉籽 ",
+          "冰粉籽",
           "过滤豆浆渣的纱布一块",
-          "凉白开 ",
-          "薄荷汁 ",
+          "凉白开",
+          "薄荷汁 10ml / 薄荷粉",
           "一次性透明塑料杯",
           "遇水发光冰块"
         ],
@@ -15176,12 +15247,12 @@
         "cooking_method": "蒸",
         "cook_time": "long",
         "ingredients": [
-          "糯米 ",
-          "安琪甜酒曲一包 (",
-          "清水 ",
+          "糯米 800g",
+          "安琪甜酒曲一包 (8g)",
+          "清水 720g + 600g",
           "蒸锅",
           "温度计",
-          "干净密封玻璃或陶瓷容器 1 个"
+          "干净密封玻璃或陶瓷容器"
         ],
         "main_ingredients": [],
         "tags": {
@@ -15536,7 +15607,7 @@
           "枫糖浆",
           "可乐",
           "冰块",
-          "高球杯（容量 "
+          "高球杯"
         ],
         "main_ingredients": [
           "水果"
@@ -15719,10 +15790,10 @@
         "cooking_method": "其他",
         "cook_time": "quick",
         "ingredients": [
-          "龟苓膏粉 25 克",
-          "冷水 120 毫升",
-          "开水 500 毫升",
-          "白砂糖 100 克",
+          "龟苓膏粉",
+          "冷水",
+          "开水",
+          "白砂糖",
           "小锅",
           "搅拌工具",
           "模具或碗"
@@ -15748,7 +15819,7 @@
         "cooking_method": "烘焙",
         "cook_time": "quick",
         "ingredients": [
-          "红薯",
+          "红薯1500g",
           "面包糠",
           "全蛋液",
           "黄油",
@@ -15851,14 +15922,24 @@
         "cooking_method": "其他",
         "cook_time": "long",
         "ingredients": [
+          "125ml 淡奶油",
+          "250ml 椰树牌椰汁",
+          "35ml espresso 意式浓缩",
+          "50ml 椰子水",
+          "10g 吉利丁",
           "过滤网"
         ],
-        "main_ingredients": [],
+        "main_ingredients": [
+          "水果",
+          "蛋奶"
+        ],
         "tags": {
           "spicy": false,
-          "allergens": [],
+          "allergens": [
+            "乳制品"
+          ],
           "diet": [
-            "素食"
+            "蛋奶素"
           ]
         },
         "source": "howtocook",
@@ -15908,13 +15989,13 @@
         "cooking_method": "烤",
         "cook_time": "quick",
         "ingredients": [
-          "奶油奶酪：",
+          "奶油奶酪：212g ",
           "白砂糖：",
-          "鸡蛋：2 个",
-          "鸡蛋黄：1 个",
+          "鸡蛋：",
+          "鸡蛋黄：",
           "淡奶油：",
           "低筋面粉：",
-          "巧克力："
+          "巧克力：38g"
         ],
         "main_ingredients": [
           "主食",
@@ -15946,8 +16027,8 @@
         "ingredients": [
           "绿豆",
           "糯米",
-          "柠檬",
-          "其他：水",
+          "柠檬30g、冰糖",
+          "其他：水2000g、小布丁8根",
           "水果粒（可选）：橙子、绿甜瓜、梨"
         ],
         "main_ingredients": [
@@ -16157,14 +16238,14 @@
         "cook_time": "very_long",
         "ingredients": [
           "高筋面粉：",
-          "牛奶: ",
+          "牛奶:",
           "酵母：",
-          "鸡蛋：1 个",
+          "鸡蛋：",
           "白砂糖：",
-          "盐: ",
-          "黄油: ",
+          "盐:",
+          "黄油:",
           "蜂蜜：",
-          "水: ",
+          "水:",
           "芝麻"
         ],
         "main_ingredients": [
@@ -16458,7 +16539,7 @@
         "imagePath": "images/dishes/condiment/糖醋汁.jpeg",
         "difficulty": 2,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "quick",
         "ingredients": [
           "清水",
@@ -16487,7 +16568,7 @@
         "imagePath": "images/dishes/condiment/油泼辣子.jpeg",
         "difficulty": 3,
         "cuisine": "家常",
-        "cooking_method": "调味",
+        "cooking_method": "炒",
         "cook_time": "medium",
         "ingredients": [
           "蒜头",
@@ -16655,7 +16736,7 @@
         "cooking_method": "煎炸",
         "cook_time": "quick",
         "ingredients": [
-          "必备：鸡翅中（推荐买泰森的奥尔良鸡翅中，JD 打折的话 30 多一袋 ",
+          "必备：鸡翅中",
           "可选：罗勒碎",
           "可选：云南单山蘸水"
         ],
@@ -16680,7 +16761,7 @@
         "cooking_method": "煎炸",
         "cook_time": "medium",
         "ingredients": [
-          "必备：羊排（推荐 JD 购买大庄园 新西兰进口 羔羊法式肩排，",
+          "必备：羊排",
           "必备：黑椒混合牛排调味料",
           "必备：蒜蓉酱",
           "必备：厨房纸",
@@ -16772,42 +16853,40 @@
         "cooking_method": "调味",
         "cook_time": "very_long",
         "ingredients": [
-          "牛油 4500 g",
-          "（色拉油 或 菜籽油） 1000 ml",
-          "纯猪油 500 g",
-          "豆瓣（郫县） 1000 g",
-          "糍粑辣椒 3000 g",
-          "老姜（切片） 250 g",
-          "大葱（切段） 100 g",
-          "洋葱（切丝） 100 g",
-          "大蒜（切片） 200 g",
-          "豆鼓（剁碎）（永川） 10 g",
-          "豆母子 140 g",
-          "红花椒 150 g",
-          "老油 ? 颗粒香料 100 g : 整形香料 150 g",
-          "麦芽粉（肉香） 12.5 g",
-          "白酒(52%VOL) 150 ml",
-          "老油 ?? 干辣椒面 15 g",
-          "山奈 5 g",
-          "八角 10 g",
-          "草果 10 g",
-          "肉桂 10 g",
-          "丁香 5 g",
-          "小茴香 10 g",
-          "白芷 10 g",
-          "荜拨 5 g",
-          "香草 10 g",
-          "香果 10 g",
-          "山楂 10 g",
-          "陈皮 5 g",
-          "香茅 10 g",
-          "砂仁 10 g",
-          "白蔻 10 g",
-          "香叶 10 g",
+          "牛油",
+          "纯猪油",
+          "豆瓣",
+          "糍粑辣椒",
+          "老姜",
+          "大葱",
+          "洋葱",
+          "大蒜",
+          "豆鼓（剁碎）",
+          "豆母子",
+          "红花椒",
+          "老油 ? 颗粒香料 100 g : 整形香料",
+          "麦芽粉",
+          "白酒",
+          "老油 ?? 干辣椒面",
+          "山奈",
+          "八角",
+          "草果",
+          "肉桂",
+          "丁香",
+          "小茴香",
+          "白芷",
+          "荜拨",
+          "香草",
+          "香果",
+          "山楂",
+          "陈皮",
+          "香茅",
+          "砂仁",
+          "白蔻",
+          "香叶",
           "粉碎机"
         ],
         "main_ingredients": [
-          "猪肉",
           "蔬菜"
         ],
         "tags": {

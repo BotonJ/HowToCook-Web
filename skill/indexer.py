@@ -158,6 +158,7 @@ def _enrich_dish(dish: dict) -> dict:
     ings = dish["ingredients"]
     return {
         **dish,
+        "id": f"{dish['source']}/{dish['name']}",
         "cuisine": extract_cuisine(dish["name"], ings),
         "cooking_method": extract_cooking_method(dish["name"], ings),
         "cook_time": extract_cook_time(dish["difficulty"]),
