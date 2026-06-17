@@ -7,9 +7,8 @@ const __dirname = path.dirname(__filename);
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const IMAGES_DIR = path.join(PROJECT_ROOT, 'public/images/dishes');
-const OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes.json');
-const META_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-meta.json');
-const DETAIL_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/recipes-detail.json');
+const PUBLIC_DATA_DIR = path.join(PROJECT_ROOT, 'public/data');
+const SRC_DATA_DIR = path.join(PROJECT_ROOT, 'src/data');
 const INDEX_FILE = path.resolve(__dirname, '../../howtocook-skill/index.json');
 const DISHES_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes');
 
@@ -362,14 +361,36 @@ function scanRecipes(): Category[] {
   return categories;
 }
 
+function ensureDir(dir: string) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+function writeDataFile(name: string, data: unknown): { src: string; public: string } {
+  ensureDir(SRC_DATA_DIR);
+  ensureDir(PUBLIC_DATA_DIR);
+  const json = JSON.stringify(data, null, 2);
+  const srcPath = path.join(SRC_DATA_DIR, name);
+  const publicPath = path.join(PUBLIC_DATA_DIR, name);
+  fs.writeFileSync(srcPath, json);
+  fs.writeFileSync(publicPath, json);
+  return { src: srcPath, public: publicPath };
+}
+
+function writeSrcOnlyFile(name: string, data: unknown): string {
+  ensureDir(SRC_DATA_DIR);
+  const json = JSON.stringify(data, null, 2);
+  const srcPath = path.join(SRC_DATA_DIR, name);
+  fs.writeFileSync(srcPath, json);
+  return srcPath;
+}
+
 function main() {
   const categories = scanRecipes();
   const totalRecipes = categories.reduce((acc, c) => acc + c.recipes.length, 0);
 
-  // Full output (legacy, keep for compatibility)
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(categories, null, 2));
-
-  // Meta output (card fields only, for首屏)
+  // Meta output (card fields only, for 首屏 /data/recipes-meta.json)
   const metaCategories = categories.map(cat => ({
     ...cat,
     recipes: cat.recipes.map(r => ({
@@ -388,16 +409,19 @@ function main() {
       language: r.language,
     }))
   }));
-  fs.writeFileSync(META_OUTPUT_FILE, JSON.stringify(metaCategories, null, 2));
 
-  // Detail output (full data, for 详情页)
-  fs.writeFileSync(DETAIL_OUTPUT_FILE, JSON.stringify(categories, null, 2));
+  // Detail output (full data, for 详情页 /data/recipes-detail.json)
+  const metaPaths = writeDataFile('recipes-meta.json', metaCategories);
+  const detailPaths = writeDataFile('recipes-detail.json', categories);
+  // Legacy full output is kept in src/data for scripts that still reference it.
+  const legacyPath = writeSrcOnlyFile('recipes.json', categories);
 
-  const metaSize = fs.statSync(META_OUTPUT_FILE).size;
-  const detailSize = fs.statSync(DETAIL_OUTPUT_FILE).size;
+  const metaSize = fs.statSync(metaPaths.public).size;
+  const detailSize = fs.statSync(detailPaths.public).size;
   console.log(`Generated ${categories.length} categories with ${totalRecipes} recipes.`);
-  console.log(`  Meta:   ${(metaSize / 1024).toFixed(0)} KB`);
-  console.log(`  Detail: ${(detailSize / 1024).toFixed(0)} KB`);
+  console.log(`  Meta:   ${(metaSize / 1024).toFixed(0)} KB -> ${metaPaths.public}`);
+  console.log(`  Detail: ${(detailSize / 1024).toFixed(0)} KB -> ${detailPaths.public}`);
+  console.log(`  Legacy: ${legacyPath}`);
 
   // Verify field completeness
   let missingFields = 0;

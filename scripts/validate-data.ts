@@ -5,11 +5,6 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const DATA_FILES = [
-  path.join(PROJECT_ROOT, 'src/data/recipes.json'),
-  path.join(PROJECT_ROOT, 'public/data/recipes.json'),
-  path.join(PROJECT_ROOT, 'public/data/recipes-index.json'),
-];
 
 interface Recipe {
   id?: string;
@@ -28,30 +23,44 @@ interface Category {
   recipes: Recipe[];
 }
 
+const DATA_FILES: { file: string; required: boolean }[] = [
+  // Public data is what the deployed website actually fetches at runtime.
+  { file: path.join(PROJECT_ROOT, 'public/data/recipes-meta.json'), required: true },
+  { file: path.join(PROJECT_ROOT, 'public/data/recipes-detail.json'), required: true },
+  // src/data is used by local scripts; keep it in sync with public/data.
+  { file: path.join(PROJECT_ROOT, 'src/data/recipes-meta.json'), required: true },
+  { file: path.join(PROJECT_ROOT, 'src/data/recipes-detail.json'), required: true },
+];
+
 let errors = 0;
 let totalRecipes = 0;
 
-function checkFile(filePath: string) {
+function loadCategories(filePath: string): Category[] | null {
   if (!fs.existsSync(filePath)) {
-    console.warn(`  ⚠  文件不存在，跳过: ${filePath}`);
-    return;
+    console.error(`  ❌  文件不存在: ${filePath}`);
+    errors++;
+    return null;
   }
 
   const content = fs.readFileSync(filePath, 'utf-8');
-  let data: Category[];
   try {
-    data = JSON.parse(content);
+    const data = JSON.parse(content) as Category[];
+    if (!Array.isArray(data)) {
+      console.error(`  ❌  格式错误（不是数组）: ${filePath}`);
+      errors++;
+      return null;
+    }
+    return data;
   } catch {
     console.error(`  ❌  JSON 解析失败: ${filePath}`);
     errors++;
-    return;
+    return null;
   }
+}
 
-  if (!Array.isArray(data)) {
-    console.error(`  ❌  格式错误（不是数组）: ${filePath}`);
-    errors++;
-    return;
-  }
+function checkFile(filePath: string) {
+  const data = loadCategories(filePath);
+  if (!data) return;
 
   const fileName = path.basename(filePath);
   let fileErrors = 0;
@@ -108,12 +117,38 @@ function checkFile(filePath: string) {
   totalRecipes += fileTotal;
 }
 
-console.log('=== 菜谱数据预检查 ===');
-for (const f of DATA_FILES) {
-  checkFile(f);
+function checkSync(srcPath: string, publicPath: string) {
+  const srcData = loadCategories(srcPath);
+  const publicData = loadCategories(publicPath);
+  if (!srcData || !publicData) return;
+
+  const srcIds = srcData.flatMap(c => c.recipes.map(r => r.id)).sort();
+  const publicIds = publicData.flatMap(c => c.recipes.map(r => r.id)).sort();
+
+  if (srcIds.length !== publicIds.length || srcIds.some((id, i) => id !== publicIds[i])) {
+    console.error(`  ❌  src/data 与 public/data 不同步: ${path.basename(srcPath)}`);
+    errors++;
+  } else {
+    console.log(`  ✅  src/data 与 public/data 同步: ${path.basename(srcPath)} (${srcIds.length} 条)`);
+  }
 }
 
-console.log(`\n合计: ${totalRecipes} 条菜谱`);
+console.log('=== 菜谱数据预检查 ===');
+for (const { file } of DATA_FILES) {
+  checkFile(file);
+}
+
+console.log('\n=== 数据同步检查 ===');
+checkSync(
+  path.join(PROJECT_ROOT, 'src/data/recipes-meta.json'),
+  path.join(PROJECT_ROOT, 'public/data/recipes-meta.json'),
+);
+checkSync(
+  path.join(PROJECT_ROOT, 'src/data/recipes-detail.json'),
+  path.join(PROJECT_ROOT, 'public/data/recipes-detail.json'),
+);
+
+console.log(`\n合计: ${totalRecipes} 条菜谱（按文件累加）`);
 if (errors > 0) {
   console.error(`❌  预检查失败: ${errors} 项异常`);
   process.exit(1);

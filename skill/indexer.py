@@ -87,8 +87,8 @@ CATEGORY_KEYWORDS_POSITIVE: dict[str, list[str]] = {
     "soup": ["汤", "羹"],
     "drink": ["饮料", "奶茶", "咖啡", "果汁", "酒", "鸡尾酒", "莫吉托", "柠檬水"],
     "vegetable_dish": ["蔬菜", "豆腐", "土豆", "茄子", "黄瓜", "白菜", "西兰花", "花菜"],
-    "staple": ["饭", "面条", "饺子", "包子", "馒头", "饼", "年糕", "炒面", "捞面", "焖饭"],
-    "condiment": ["辣子", "糖浆", "果酱"],
+    "staple": ["饭", "面条", "面", "饺子", "包子", "馒头", "饼", "年糕", "炒面", "捞面", "焖饭", "凉皮", "面片", "烩面", "拉条子", "花卷", "油条", "面条", "水煎包", "烧饼", "小笼包"],
+    "condiment": ["辣子", "糖浆", "果酱", "油泼辣子", "炝醋"],
 }
 
 CATEGORY_NEGATIVE: dict[str, list[str]] = {
@@ -97,7 +97,7 @@ CATEGORY_NEGATIVE: dict[str, list[str]] = {
     "soup": ["酸梅汤", "金汤力", "胡辣汤"],
 }
 
-SKIP_NAMES = ["交接计划", "standard", "template", "readme", "标准", "模板", "示例"]
+SKIP_NAMES = {"交接计划", "standard", "template", "readme", "标准", "模板", "示例", "license", "contributing"}
 
 
 def get_category_howtocook(path_str: str) -> str:
@@ -146,7 +146,7 @@ def _parse_ingredients(lines: list[str]) -> list[str]:
             continue
         if in_ingredients and (stripped.startswith('- ') or stripped.startswith('* ') or stripped.startswith('+ ')):
             ingredient = stripped[2:].strip()
-            ingredient = re.sub(r'\d+[g克ml毫升个只条片块]+.*$', '', ingredient)
+            ingredient = re.sub(r'\s*\d+(?:\.\d+)?\s*(?:g|克|ml|毫升|个|只|条|片|块|勺|碗|杯)\s*$', '', ingredient)
             ingredient = re.sub(r'[（(][^）)]*[）)]$', '', ingredient)
             ingredient = re.sub(r'^主料：|^调味料：|^辅料：', '', ingredient)
             if ingredient:
@@ -176,6 +176,7 @@ def extract_dish_info(file_path: str, source: str, category: str, base_dir: Path
         lines = content.split('\n')
         name = _extract_name_from_content(content)
         if not name:
+            logger.warning("标题格式不匹配，跳过: %s", file_path)
             return None
 
         difficulty = 3
@@ -212,7 +213,7 @@ def index_directory(directory: Path, source: str, base_dir: Path) -> list:
     logger.info("  找到 %d 个 .md 文件", len(md_files))
 
     for md_file in md_files:
-        if any(x in md_file.name for x in SKIP_NAMES):
+        if md_file.stem.lower() in SKIP_NAMES:
             continue
 
         content: Optional[str] = None
@@ -242,6 +243,7 @@ def main():
         "howtocook": script_dir / "dishes" / "howtocook",
         "随便做": script_dir / "dishes" / "随便做",
         "金谷园": script_dir / "dishes" / "金谷园",
+        "面食之神": script_dir / "dishes" / "面食之神",
     }
 
     all_dishes: list[dict] = []
@@ -260,13 +262,17 @@ def main():
         logger.info("找到 %d 个菜谱", len(dishes))
         all_dishes.extend(dishes)
 
-    seen_names: dict[str, int] = {}
+    seen_names: dict[str, list[str]] = {}
     for dish in all_dishes:
         name = dish["name"]
-        seen_names[name] = seen_names.get(name, 0) + 1
+        seen_names.setdefault(name, []).append(dish["source"])
 
     all_dishes = sorted(
-        [{**dish, "has_duplicate": seen_names[dish["name"]] > 1} for dish in all_dishes],
+        [{
+            **dish,
+            "has_duplicate": len(seen_names[dish["name"]]) > 1,
+            "duplicate_sources": seen_names[dish["name"]] if len(seen_names[dish["name"]]) > 1 else [],
+        } for dish in all_dishes],
         key=lambda x: x.get("name", ""),
     )
 

@@ -236,6 +236,19 @@ async function fetchFromApiAndUpdate(): Promise<void> {
     ]);
     const categories = buildCategoriesFromApi(dishes, apiCategories);
     const recipes = categories.flatMap(c => c.recipes);
+
+    // Guard against API returning a partial/truncated dataset (e.g. default pagination)
+    // and overwriting the richer local static index. Local data is the source of truth
+    // for card listings; background API refresh should only enhance, not degrade it.
+    const localCount = cachedRecipes?.length ?? 0;
+    if (recipes.length < localCount) {
+      console.warn(
+        `[useRecipes] API refresh skipped: returned ${recipes.length} recipes, ` +
+          `which is fewer than the ${localCount} already loaded locally.`,
+      );
+      return;
+    }
+
     cachedCategories = categories;
     cachedRecipes = recipes;
     notifyListeners(categories, recipes);

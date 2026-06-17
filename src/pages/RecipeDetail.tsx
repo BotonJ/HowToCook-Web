@@ -77,6 +77,7 @@ export function RecipeDetail() {
   const params = useParams();
   const rawId = params['*'] || params.recipeId;
   // Sanitize URL parameter: strip control characters and limit length
+  // eslint-disable-next-line no-control-regex
   const recipeId = rawId?.replace(/[\x00-\x1f]/gu, '').slice(0, 200) || '';
   const navigate = useNavigate();
   const base = useBasePath();

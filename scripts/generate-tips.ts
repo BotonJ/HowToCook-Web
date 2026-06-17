@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const TIPS_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes/tips');
-const OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/tips.json');
+const SRC_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/tips.json');
+const PUBLIC_OUTPUT_FILE = path.join(PROJECT_ROOT, 'public/data/tips.json');
 
 // 填充后格式: { '中文文件名': 'english-slug' }
 const SLUG_MAP: Record<string, string> = {
@@ -166,16 +167,30 @@ function buildTable(tableLines: string[]): string {
   return `<table>${thead}${tbody}</table>`;
 }
 
+function ensureDir(dir: string) {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+function writeTips(data: TipMeta[]) {
+  const json = JSON.stringify(data, null, 2);
+  ensureDir(path.dirname(SRC_OUTPUT_FILE));
+  ensureDir(path.dirname(PUBLIC_OUTPUT_FILE));
+  fs.writeFileSync(SRC_OUTPUT_FILE, json);
+  fs.writeFileSync(PUBLIC_OUTPUT_FILE, json);
+}
+
 function main() {
   if (!fs.existsSync(TIPS_DIR)) {
     console.warn(`Tips directory not found: ${TIPS_DIR}`);
-    fs.writeFileSync(OUTPUT_FILE, '[]');
+    writeTips([]);
     return;
   }
 
   if (Object.keys(SLUG_MAP).length === 0) {
     console.log('SLUG_MAP is empty — generating empty tips.json');
-    fs.writeFileSync(OUTPUT_FILE, '[]');
+    writeTips([]);
     return;
   }
 
@@ -205,8 +220,8 @@ function main() {
     });
   }
 
-  fs.writeFileSync(OUTPUT_FILE, JSON.stringify(tips, null, 2));
-  console.log(`Generated ${tips.length} tips`);
+  writeTips(tips);
+  console.log(`Generated ${tips.length} tips -> ${PUBLIC_OUTPUT_FILE}`);
 }
 
 main();

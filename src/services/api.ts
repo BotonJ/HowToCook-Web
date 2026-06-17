@@ -54,8 +54,35 @@ export async function getRecipeDetail(id: string, signal?: AbortSignal): Promise
 }
 
 export async function fetchAllRecipes(): Promise<DishIndex[]> {
-  const data = await fetchApi<ApiRecipesResponse>('/recipes');
-  return data.recipes;
+  // Fetch all recipes from the paginated API. Use a large page size so the
+  // ~700-recipe index typically fits in a single request, but loop to handle
+  // future growth or an API-enforced smaller cap.
+  const PAGE_SIZE = 2000;
+  const allRecipes: DishIndex[] = [];
+  let page = 1;
+
+  while (true) {
+    const data = await fetchApi<ApiRecipesResponse>(
+      `/recipes?page=${page}&limit=${PAGE_SIZE}`,
+    );
+    const pageRecipes = data.recipes ?? [];
+    if (pageRecipes.length === 0) break;
+
+    allRecipes.push(...pageRecipes);
+
+    // Stop when we've fetched the full dataset or the last page.
+    if (pageRecipes.length < PAGE_SIZE) break;
+    if (allRecipes.length >= (data.pagination?.total ?? data.total ?? 0)) break;
+
+    page += 1;
+    // Safety cap to avoid runaway requests if the API misbehaves.
+    if (page > 20) {
+      console.warn('[fetchAllRecipes] pagination safety cap reached');
+      break;
+    }
+  }
+
+  return allRecipes;
 }
 
 export async function fetchCategories(): Promise<ApiCategory[]> {

@@ -72,6 +72,12 @@ export interface DishIndex {
 export interface ApiRecipesResponse {
   recipes: DishIndex[];
   total: number;
+  pagination?: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
 }
 
 export interface ApiCategory {
