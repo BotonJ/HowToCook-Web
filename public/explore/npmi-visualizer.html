@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食材风味图谱 - NPMI & Word2Vec 可视化</title>
+    <script src="https://unpkg.com/vis-network@9.1.6/standalone/umd/vis-network.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; }
+
+        .container { display: flex; height: 100vh; }
+
+        /* 左侧面板 */
+        .sidebar {
+            width: 320px; background: #1a1a1a; border-right: 1px solid #333;
+            display: flex; flex-direction: column; overflow: hidden;
+        }
+        .sidebar-header {
+            padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sidebar-header h1 { font-size: 1.4rem; margin-bottom: 8px; }
+        .sidebar-header p { font-size: 0.85rem; opacity: 0.9; }
+
+        .search-box {
+            padding: 15px; border-bottom: 1px solid #333;
+        }
+        .search-box input {
+            width: 100%; padding: 10px 15px; background: #2a2a2a; border: 1px solid #444;
+            border-radius: 8px; color: #fff; font-size: 14px;
+        }
+        .search-box input:focus { outline: none; border-color: #667eea; }
+
+        .controls {
+            padding: 15px; border-bottom: 1px solid #333;
+        }
+        .control-group { margin-bottom: 12px; }
+        .control-group label {
+            display: block; font-size: 0.8rem; color: #888; margin-bottom: 5px;
+        }
+        .control-group input[type="range"] {
+            width: 100%; accent-color: #667eea;
+        }
+        .control-group .value {
+            float: right; font-size: 0.8rem; color: #667eea;
+        }
+
+        .stats-panel {
+            padding: 15px; border-bottom: 1px solid #333;
+        }
+        .stat-item {
+            display: flex; justify-content: space-between; padding: 5px 0;
+            font-size: 0.85rem;
+        }
+        .stat-item .label { color: #888; }
+        .stat-item .value { color: #667eea; font-weight: 600; }
+
+        .legend {
+            padding: 15px; flex: 1; overflow-y: auto;
+        }
+        .legend h3 { font-size: 0.9rem; color: #888; margin-bottom: 10px; }
+        .legend-item {
+            display: flex; align-items: center; padding: 5px 0; font-size: 0.85rem;
+        }
+        .legend-color {
+            width: 12px; height: 12px; border-radius: 50%; margin-right: 10px;
+        }
+
+        .node-info {
+            padding: 15px; border-top: 1px solid #333; background: #222;
+        }
+        .node-info h3 { font-size: 1rem; margin-bottom: 8px; color: #667eea; }
+        .node-info .detail { font-size: 0.85rem; color: #aaa; margin: 4px 0; }
+
+        /* 主图区域 */
+        .main-content { flex: 1; position: relative; }
+        #network { width: 100%; height: 100%; }
+
+        .loading {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .loading .spinner {
+            width: 50px; height: 50px; border: 3px solid #333;
+            border-top-color: #667eea; border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading p { margin-top: 15px; color: #888; }
+
+        /* 悬浮提示 */
+        .tooltip {
+            position: absolute; background: #2a2a2a; border: 1px solid #444;
+            border-radius: 8px; padding: 12px; pointer-events: none;
+            font-size: 0.85rem; max-width: 250px; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+        .tooltip.hidden { display: none; }
+
+        /* 嵌入向量可视化 */
+        .embedding-view {
+            position: absolute; bottom: 20px; right: 20px;
+            width: 300px; height: 300px; background: #1a1a1a;
+            border: 1px solid #333; border-radius: 12px; overflow: hidden;
+        }
+        .embedding-view h4 {
+            padding: 10px; background: #222; font-size: 0.85rem; color: #888;
+        }
+        #embedding-canvas { width: 100%; height: calc(100% - 35px); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>🍜 食材风味图谱</h1>
+                <p>NPMI 共现关系 + Word2Vec 词向量</p>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索食材 (如: 番茄, 牛肉, 酱油)...">
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label>NPMI 阈值 <span class="value" id="npmiValue">0.05</span></label>
+                    <input type="range" id="npmiThreshold" min="0" max="0.3" step="0.01" value="0.05">
+                </div>
+                <div class="control-group">
+                    <label>显示节点数 <span class="value" id="nodeCountValue">200</span></label>
+                    <input type="range" id="nodeCount" min="50" max="500" step="10" value="200">
+                </div>
+                <div class="control-group">
+                    <label>边透明度 <span class="value" id="edgeOpacityValue">0.6</span></label>
+                    <input type="range" id="edgeOpacity" min="0.1" max="1" step="0.1" value="0.6">
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="label">总食材数</span>
+                    <span class="value" id="totalNodes">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">显示节点</span>
+                    <span class="value" id="visibleNodes">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">显示边数</span>
+                    <span class="value" id="visibleEdges">-</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">选中节点</span>
+                    <span class="value" id="selectedNode">-</span>
+                </div>
+            </div>
+
+            <div class="legend">
+                <h3>食材分类</h3>
+                <div id="legendItems"></div>
+            </div>
+
+            <div class="node-info" id="nodeInfo" style="display: none;">
+                <h3 id="nodeInfoTitle">-</h3>
+                <div class="detail" id="nodeInfoCount">-</div>
+                <div class="detail" id="nodeInfoCategory">-</div>
+                <div class="detail" id="nodeInfoNeighbors">-</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="network"></div>
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>加载食材数据中...</p>
+            </div>
+            <div class="tooltip hidden" id="tooltip"></div>
+
+            <div class="embedding-view">
+                <h4>Word2Vec 降维视图 (t-SNE)</h4>
+                <canvas id="embedding-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 配置
+        const CONFIG = {
+            dataUrl: '/data/npmi_visualization.json',
+            embeddingUrl: '/data/embeddings_2d.json',
+            maxNodes: 500,
+            defaultNpmi: 0.05,
+            categories: {
+                '蔬菜': { color: '#4CAF50', keywords: ['菜', '瓜', '豆', '笋', '菇', '菌'] },
+                '肉类': { color: '#F44336', keywords: ['肉', '鸡', '鸭', '鱼', '虾', '蟹', '牛', '猪', '羊'] },
+                '海鲜': { color: '#00BCD4', keywords: ['鱼', '虾', '蟹', '贝', '蚝', '鲍', '参'] },
+                '调味料': { color: '#FF9800', keywords: ['酱', '油', '醋', '盐', '糖', '料酒', '生抽', '老抽', '蚝油'] },
+                '主食': { color: '#2196F3', keywords: ['米', '面', '粉', '馒头', '饺子', '包子'] },
+                '水果': { color: '#E91E63', keywords: ['果', '桃', '梨', '苹果', '香蕉', '橙'] },
+                '干货': { color: '#795548', keywords: ['干', '菇', '木耳', '银耳', '莲子', '红枣'] },
+                '其他': { color: '#9E9E9E', keywords: [] }
+            }
+        };
+
+        // 全局状态
+        let allNodes = [];
+        let allEdges = [];
+        let network = null;
+        let selectedNodeId = null;
+
+        // 分类函数
+        function categorizeIngredient(name) {
+            for (const [category, config] of Object.entries(CONFIG.categories)) {
+                if (config.keywords.some(kw => name.includes(kw))) {
+                    return category;
+                }
+            }
+            return '其他';
+        }
+
+        // 加载数据
+        async function loadData() {
+            try {
+                // 加载可视化数据
+                const response = await fetch(CONFIG.dataUrl);
+                const data = await response.json();
+
+                allNodes = data.nodes.map(n => ({
+                    id: n.id,
+                    label: n.label,
+                    count: n.count,
+                    category: n.category || categorizeIngredient(n.id),
+                    color: CONFIG.categories[n.category || categorizeIngredient(n.id)].color,
+                    size: Math.max(5, Math.min(30, Math.log2(n.count) * 3)),
+                    tsne: n.tsne || [0, 0]
+                }));
+
+                allEdges = data.edges.map(e => ({
+                    from: e.source,
+                    to: e.target,
+                    npmI: e.npmi,
+                    weight: e.weight,
+                    title: `NPMI: ${e.npmi.toFixed(3)}\n共现次数: ${e.weight}`
+                }));
+
+                document.getElementById('totalNodes').textContent = data.metadata.total_ingredients;
+                updateLegend();
+                updateVisualization();
+                loadEmbeddingView();
+
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                document.querySelector('.loading p').textContent = '加载失败，请刷新重试';
+            }
+        }
+
+        // 加载 embedding 2D 视图
+        async function loadEmbeddingView() {
+            try {
+                const response = await fetch(CONFIG.embeddingUrl);
+                const data = await response.json();
+
+                const canvas = document.getElementById('embedding-canvas');
+                const ctx = canvas.getContext('2d');
+                const width = canvas.width = canvas.offsetWidth * 2;
+                const height = canvas.height = canvas.offsetHeight * 2;
+
+                // 计算坐标范围
+                const coords = Object.values(data.tsne);
+                const xMin = Math.min(...coords.map(c => c[0]));
+                const xMax = Math.max(...coords.map(c => c[0]));
+                const yMin = Math.min(...coords.map(c => c[1]));
+                const yMax = Math.max(...coords.map(c => c[1]));
+
+                const padding = 40;
+                const scaleX = (width - padding * 2) / (xMax - xMin);
+                const scaleY = (height - padding * 2) / (yMax - yMin);
+
+                // 绘制点
+                ctx.fillStyle = '#0a0a0a';
+                ctx.fillRect(0, 0, width, height);
+
+                for (const [word, coord] of Object.entries(data.tsne)) {
+                    const x = padding + (coord[0] - xMin) * scaleX;
+                    const y = padding + (coord[1] - yMin) * scaleY;
+
+                    const node = allNodes.find(n => n.id === word);
+                    const color = node ? CONFIG.categories[node.category].color : '#666';
+
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fillStyle = color;
+                    ctx.fill();
+                }
+            } catch (error) {
+                console.error('加载 embedding 数据失败:', error);
+            }
+        }
+
+        // 更新可视化
+        function updateVisualization() {
+            const npmiThreshold = parseFloat(document.getElementById('npmiThreshold').value);
+            const maxNodes = parseInt(document.getElementById('nodeCount').value);
+            const edgeOpacity = parseFloat(document.getElementById('edgeOpacity').value);
+
+            // 按 count 排序，取 top N
+            const sortedNodes = [...allNodes].sort((a, b) => b.count - a.count);
+            const visibleNodeIds = new Set(sortedNodes.slice(0, maxNodes).map(n => n.id));
+
+            // 过滤边
+            const filteredEdges = allEdges
+                .filter(e => visibleNodeIds.has(e.from) && visibleNodeIds.has(e.to) && e.npmI >= npmiThreshold)
+                .map(e => ({
+                    ...e,
+                    color: { color: `rgba(102, 126, 234, ${edgeOpacity})`, highlight: '#667eea' },
+                    width: Math.max(0.5, e.npmi * 3)
+                }));
+
+            // 更新统计
+            document.getElementById('visibleNodes').textContent = visibleNodeIds.size;
+            document.getElementById('visibleEdges').textContent = filteredEdges.length;
+
+            // 创建网络
+            const nodes = new vis.DataSet(sortedNodes.filter(n => visibleNodeIds.has(n.id)));
+            const edges = new vis.DataSet(filteredEdges);
+
+            const container = document.getElementById('network');
+            const data = { nodes, edges };
+            const options = {
+                physics: {
+                    solver: 'forceAtlas2Based',
+                    forceAtlas2Based: {
+                        gravitationalConstant: -50,
+                        centralGravity: 0.01,
+                        springLength: 100,
+                        springConstant: 0.08
+                    },
+                    stabilization: { iterations: 100 }
+                },
+                nodes: {
+                    shape: 'dot',
+                    font: { size: 12, color: '#fff', strokeWidth: 2, strokeColor: '#000' },
+                    borderWidth: 2,
+                    shadow: true
+                },
+                edges: {
+                    smooth: { type: 'continuous' },
+                    hoverWidth: 2
+                },
+                interaction: {
+                    hover: true,
+                    tooltipDelay: 200,
+                    zoomView: true,
+                    dragView: true
+                }
+            };
+
+            if (network) {
+                network.destroy();
+            }
+            network = new vis.Network(container, data, options);
+
+            // 事件监听
+            network.on('click', function(params) {
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    selectNode(nodeId);
+                } else {
+                    deselectNode();
+                }
+            });
+
+            network.on('hoverNode', function(params) {
+                const node = allNodes.find(n => n.id === params.node);
+                if (node) {
+                    showTooltip(params.event.center, node);
+                }
+            });
+
+            network.on('blurNode', function() {
+                hideTooltip();
+            });
+        }
+
+        // 选中节点
+        function selectNode(nodeId) {
+            selectedNodeId = nodeId;
+            const node = allNodes.find(n => n.id === nodeId);
+            if (!node) return;
+
+            document.getElementById('selectedNode').textContent = node.label;
+            document.getElementById('nodeInfo').style.display = 'block';
+            document.getElementById('nodeInfoTitle').textContent = node.label;
+            document.getElementById('nodeInfoCount').textContent = `出现次数: ${node.count}`;
+            document.getElementById('nodeInfoCategory').textContent = `分类: ${node.category}`;
+
+            // 获取邻居节点
+            const neighbors = allEdges
+                .filter(e => (e.from === nodeId || e.to === nodeId) && e.npmi >= CONFIG.defaultNpmi)
+                .sort((a, b) => b.npmi - a.npmi)
+                .slice(0, 10)
+                .map(e => e.from === nodeId ? e.to : e.from);
+
+            document.getElementById('nodeInfoNeighbors').textContent = `主要搭配: ${neighbors.join(', ')}`;
+
+            // 高亮邻居节点
+            highlightNeighbors(nodeId);
+        }
+
+        // 取消选中
+        function deselectNode() {
+            selectedNodeId = null;
+            document.getElementById('selectedNode').textContent = '-';
+            document.getElementById('nodeInfo').style.display = 'none';
+        }
+
+        // 高亮邻居节点
+        function highlightNeighbors(nodeId) {
+            if (!network) return;
+
+            const allNodeIds = allNodes.map(n => n.id);
+            const neighborIds = new Set();
+
+            allEdges.forEach(e => {
+                if (e.from === nodeId) neighborIds.add(e.to);
+                if (e.to === nodeId) neighborIds.add(e.from);
+            });
+
+            const updates = allNodeIds.map(id => ({
+                id,
+                opacity: id === nodeId || neighborIds.has(id) ? 1 : 0.2
+            }));
+
+            network.body.data.nodes.update(updates);
+        }
+
+        // 显示提示框
+        function showTooltip(position, node) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.innerHTML = `
+                <strong>${node.label}</strong><br>
+                分类: ${node.category}<br>
+                出现次数: ${node.count}
+            `;
+            tooltip.style.left = (position.x + 15) + 'px';
+            tooltip.style.top = (position.y + 15) + 'px';
+            tooltip.classList.remove('hidden');
+        }
+
+        // 隐藏提示框
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.add('hidden');
+        }
+
+        // 更新图例
+        function updateLegend() {
+            const legendContainer = document.getElementById('legendItems');
+            legendContainer.innerHTML = Object.entries(CONFIG.categories).map(([name, config]) => `
+                <div class="legend-item">
+                    <div class="legend-color" style="background: ${config.color}"></div>
+                    <span>${name}</span>
+                </div>
+            `).join('');
+        }
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.trim();
+            if (!query) return;
+
+            const node = allNodes.find(n => n.label.includes(query));
+            if (node && network) {
+                network.focus(node.id, { scale: 1.5, animation: true });
+                network.selectNodes([node.id]);
+                selectNode(node.id);
+            }
+        });
+
+        // 控制面板事件
+        document.getElementById('npmiThreshold').addEventListener('input', function(e) {
+            document.getElementById('npmiValue').textContent = e.target.value;
+            updateVisualization();
+        });
+
+        document.getElementById('nodeCount').addEventListener('input', function(e) {
+            document.getElementById('nodeCountValue').textContent = e.target.value;
+            updateVisualization();
+        });
+
+        document.getElementById('edgeOpacity').addEventListener('input', function(e) {
+            document.getElementById('edgeOpacityValue').textContent = e.target.value;
+            updateVisualization();
+        });
+
+        // 初始化
+        loadData();
+    </script>
+</body>
+</html>
