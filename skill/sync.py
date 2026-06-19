@@ -7,9 +7,9 @@ import logging
 import os
 import sys
 import tempfile
-import urllib.error
-import urllib.request
 from datetime import datetime, timezone, timedelta
+
+from http_client import api_get, ApiError, API_BASE  # noqa: F401 — API_BASE re-exported
 
 logger = logging.getLogger(__name__)
 
@@ -19,9 +19,11 @@ AUTO_SYNC_INTERVAL_DAYS = 7
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INDEX_PATH = os.path.join(SCRIPT_DIR, "index.json")
 STATE_PATH = os.path.join(SCRIPT_DIR, ".sync-state.json")
-API_BASE = "https://api.howtocook.cn"
 
-_MAX_RESPONSE_SIZE = 50 * 1024 * 1024  # 50 MB
+# sync 拉 /sync 全量索引，需要比 mcp_tools 单条查询更大的上限与超时。
+_SYNC_TIMEOUT = 30
+_SYNC_MAX_RESPONSE_SIZE = 50 * 1024 * 1024  # 50 MB
+_SYNC_USER_AGENT = "howtocook-sync/1.0"
 
 
 class SyncError(Exception):
@@ -32,20 +34,23 @@ class SyncError(Exception):
 
 
 def _api_get(endpoint: str) -> dict:
-    """GET JSON from remote API. Raises SyncError on failure."""
-    url = f"{API_BASE}/{endpoint}"
-    logger.info("连接远程: %s", url)
+    """GET JSON from remote API. Raises SyncError on failure.
+
+    Delegates to the shared :func:`http_client.api_get` with sync-specific
+    limits (50 MB cap, 30 s timeout) and translates :class:`ApiError` into
+    :class:`SyncError` so callers see a single exception type.
+    """
+    path = endpoint if endpoint.startswith("/") else f"/{endpoint}"
+    logger.info("连接远程: %s%s", API_BASE, path)
     try:
-        req = urllib.request.Request(url, headers={"Accept": "application/json", "User-Agent": "howtocook-sync/1.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            raw = resp.read(_MAX_RESPONSE_SIZE + 1)
-            if len(raw) > _MAX_RESPONSE_SIZE:
-                raise SyncError(f"响应过大（超过 {_MAX_RESPONSE_SIZE} bytes）: {url}")
-            return json.loads(raw.decode("utf-8"))
-    except urllib.error.URLError as exc:
-        raise SyncError(f"网络错误: {exc.reason}") from exc
-    except json.JSONDecodeError as exc:
-        raise SyncError(f"JSON 解析错误: {exc}") from exc
+        return api_get(
+            path,
+            timeout=_SYNC_TIMEOUT,
+            max_response_size=_SYNC_MAX_RESPONSE_SIZE,
+            user_agent=_SYNC_USER_AGENT,
+        )
+    except ApiError as exc:
+        raise SyncError(str(exc)) from exc
 
 
 def _load_local_index() -> dict:
@@ -123,11 +128,36 @@ def auto_sync_if_needed(silent: bool = False) -> None:
         logger.warning("[检查菜谱资源] 同步失败: %s", exc)
 
 
+# 与 API (/sync 返回的 search:index 条目) 对齐的核心契约字段。
+# 必需字段：缺则拒绝该条目（防止坏数据污染本地 index）。
+# 参考 howtocook-api/src/lib/validate.ts 的 isDishIndex。
+_REQUIRED_DISH_FIELDS = {"name", "category", "source", "difficulty"}
+# 类型契约：键 -> 期望 Python 类型。与 API 类型约束一一对应。
+_DISH_FIELD_TYPES: dict[str, type] = {
+    "name": str,
+    "category": str,
+    "source": str,
+    "difficulty": int,
+    "cuisine": str,
+    "cooking_method": str,
+    "cook_time": str,
+    "ingredients": list,
+    "main_ingredients": list,
+}
+
+
 def _validate_dish(dish: dict) -> bool:
     if not isinstance(dish, dict):
         return False
     if not _REQUIRED_DISH_FIELDS.issubset(dish):
         return False
+    # 类型校验（与 API isDishIndex 对齐）：任一必需字段类型不符即拒绝
+    for field, expected in _DISH_FIELD_TYPES.items():
+        value = dish.get(field)
+        if value is None:
+            continue  # 非必需字段缺失允许（向后兼容本地旧数据）
+        if field in _REQUIRED_DISH_FIELDS and not isinstance(value, expected):
+            return False
     if not isinstance(dish["name"], str) or not dish["name"]:
         return False
     path = dish.get("path", "")
@@ -149,12 +179,31 @@ def _dish_key(dish: dict) -> str:
     return dish.get("id") or dish.get("name") or ""
 
 
+def _strip_local_path(dish: dict) -> dict:
+    """Drop any local `dishes/...md` path reference from a dish.
+
+    The skill fetches recipe details via API at runtime; a residual local
+    `path` is a dangling reference that only existed for the legacy
+    markdown reader. Strip it from every dish that flows through sync so
+    the distributed index never points at files the user does not have.
+    """
+    if "path" not in dish:
+        # Remote dishes carry no path; stamp an explicit empty string so the
+        # distributed index keeps a stable schema (path always present, blank).
+        return {**dish, "path": ""}
+    result = {**dish}
+    result["path"] = ""
+    return result
+
+
 def _merge(local: dict, remote_dishes: list[dict]) -> tuple[dict, int, int, int, int]:
     """Merge remote dishes into local index by canonical id.
 
     - Remote has, local missing  -> add (path="", has_duplicate=False)
-    - Both have                  -> update non-local fields, keep path + has_duplicate
-    - Local has, remote missing  -> keep as-is
+    - Both have                  -> update with remote fields, carry over
+                                    has_duplicate; path is always blanked
+                                    (runtime reads via API, never local md)
+    - Local has, remote missing  -> keep as-is, but blank its stale local path
     """
     local_by_key: dict[str, dict] = {_dish_key(d): d for d in local["dishes"]}
     remote_keys: set[str] = set()
@@ -162,24 +211,25 @@ def _merge(local: dict, remote_dishes: list[dict]) -> tuple[dict, int, int, int,
 
     merged: list[dict] = []
     for rd in remote_dishes:
+        rd = _strip_local_path(rd)
         key = _dish_key(rd)
         remote_keys.add(key)
         if key in local_by_key:
             existing = local_by_key[key]
-            merged_entry = {**rd, "path": existing.get("path", ""), "has_duplicate": existing.get("has_duplicate", False)}
+            merged_entry = {**rd, "has_duplicate": existing.get("has_duplicate", False)}
             if merged_entry != existing:
                 updated += 1
             else:
                 unchanged += 1
             merged.append(merged_entry)
         else:
-            merged.append({**rd, "path": "", "has_duplicate": False})
+            merged.append({**rd, "has_duplicate": False})
             added += 1
 
     local_only = 0
     for d in local["dishes"]:
         if _dish_key(d) not in remote_keys:
-            merged.append(d)
+            merged.append(_strip_local_path(d))
             local_only += 1
 
     result = {**local, "dishes": merged, "total": len(merged)}

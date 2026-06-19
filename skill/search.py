@@ -106,7 +106,7 @@ def _search_via_api(
 
 
 def _ensure_synced() -> None:
-    """Lazy-init: call auto_sync_if_needed() and auto_update_if_needed() once per process.
+    """Lazy-init: call auto_sync_if_needed() once per process.
 
     Auto-sync is gated by the ``HOWTOCOOK_AUTO_SYNC`` env var (default ``"1"``).
     Set ``HOWTOCOOK_AUTO_SYNC=0`` to disable the implicit network fetch + file
@@ -122,9 +122,7 @@ def _ensure_synced() -> None:
         logger.debug("自动同步已通过 HOWTOCOOK_AUTO_SYNC=0 禁用")
         return
     from sync import auto_sync_if_needed
-    from update import auto_update_if_needed
     auto_sync_if_needed(silent=True)
-    auto_update_if_needed(silent=True)
 
 
 CATEGORY_NAMES = {
@@ -230,37 +228,87 @@ def search_dishes(keyword: str, index: dict, limit: int = 10,
     return [dish for dish, score in results[:limit]]
 
 
+def _recommend_via_api(
+    source: str = "",
+    category: str = "",
+    difficulty_max: int | None = None,
+    limit: int = 200,
+) -> list[dict] | None:
+    """API 优先取推荐候选集。失败返回 None 触发本地 fallback。
+
+    语义同 _search_via_api：错误响应/协议异常视为失败（None），不当作空结果。
+    API 阶段只用 source/category 粗筛——不下发 profile 的中文 cuisine/method
+    偏好，因为英文菜 API 端 cuisine 是英文，等值过滤会漏；维度匹配在
+    normalize_dish + score_dish（skill 侧）完成，profile 不外泄。
+    """
+    try:
+        from mcp_tools import recommend_recipes
+
+        result = recommend_recipes(
+            source=source, category=category,
+            difficulty_max=difficulty_max, limit=limit,
+        )
+    except Exception as exc:
+        logger.debug("API 推荐失败，降级到本地: %s", exc)
+        return None
+
+    if not isinstance(result, dict) or result.get("error"):
+        logger.warning("API 推荐返回错误，降级到本地: %s", result.get("error") if isinstance(result, dict) else "非对象响应")
+        return None
+
+    results = result.get("results")
+    if not isinstance(results, list):
+        logger.warning("API 响应缺少 results 字段，降级到本地")
+        return None
+    return results
+
+
+def _score_and_sample(candidates: list[dict], profile: dict | None,
+                      limit: int) -> list:
+    """共享打分抽样：filter_by_constraints → score_dish → top-N → random.sample。
+
+    无 profile 时直接从候选池随机。返回空列表表示无候选。
+    """
+    if not candidates:
+        return []
+    if profile:
+        candidates = filter_by_constraints(profile, candidates)
+        if not candidates:
+            return []
+        decayed = apply_decay(profile)
+        scored = [(d, score_dish(decayed, d)) for d in candidates]
+        scored.sort(key=lambda x: x[1], reverse=True)
+        top_n = max(limit, len(scored) // 5)
+        pool = [d for d, _ in scored[:top_n]]
+    else:
+        pool = candidates
+    return random.sample(pool, min(limit, len(pool)))
+
+
 def recommend_dish(index: dict, keyword: str = "", source: str = "",
                    category: str = "", limit: int = 3) -> list:
     profile = load_profile()
+    kw_cats = _keyword_to_categories(keyword) if keyword else []
+
+    # === API 优先（候选覆盖 KV 全量，含英文菜） ===
+    api_results = _recommend_via_api(source=source, category=category, limit=200)
+    if api_results is not None:
+        from cuisine_map import normalize_dish  # 唯一挂载点：英文维度→中文词表
+        candidates = [normalize_dish(d) for d in api_results]
+        # keyword 的 category 映射 API 不认，需在 skill 侧二次过滤
+        if kw_cats:
+            candidates = [d for d in candidates if d.get("category") in kw_cats]
+        return _score_and_sample(candidates, profile, limit)
+
+    # === 本地 fallback（原逻辑；本地 index 已是中文，不调 normalize） ===
     candidates = index.get("dishes", [])
-
-    if profile:
-        candidates = filter_by_constraints(profile, candidates)
-
     if source:
         candidates = [d for d in candidates if d.get("source") == source]
     if category:
         candidates = [d for d in candidates if d.get("category") == category]
-    if keyword:
-        kw_cats = _keyword_to_categories(keyword)
-        if kw_cats:
-            candidates = [d for d in candidates if d.get("category") in kw_cats]
-
-    if not candidates:
-        return []
-
-    if profile:
-        profile = apply_decay(profile)
-        scored = [(d, score_dish(profile, d)) for d in candidates]
-        scored.sort(key=lambda x: x[1], reverse=True)
-        top_n = max(limit, len(scored) // 5)
-        pool = [d for d, s in scored[:top_n]]
-    else:
-        pool = candidates
-
-    selected = random.sample(pool, min(limit, len(pool)))
-    return selected
+    if kw_cats:
+        candidates = [d for d in candidates if d.get("category") in kw_cats]
+    return _score_and_sample(candidates, profile, limit)
 
 
 def _keyword_to_categories(keyword: str) -> list:
@@ -394,8 +442,7 @@ def _format_api_recipe(recipe: dict) -> str:
 
     # 网站链接
     if dish_id:
-        encoded_id = urllib.parse.quote(dish_id, safe="/")
-        url = f"https://howtocook.cn/recipe/{encoded_id}"
+        url = f"https://howtocook.cn/recipe/{dish_id}"
         lines.append("")
         lines.append(f"👉 {url}")
 

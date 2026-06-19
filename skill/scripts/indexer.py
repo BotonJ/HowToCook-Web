@@ -1,11 +1,28 @@
 #!/usr/bin/env python3
-"""HowToCook Recipe Indexer — 遍历数据源目录，生成合并的 index.json"""
+"""HowToCook Recipe Indexer — 遍历数据源目录，生成合并的 index.json。
+
+⚠️ BUILD-ONLY（构建工具，非运行时代码）。
+本脚本只在**开发/构建**阶段运行：从仓库根的 ``dishes/`` 菜谱 markdown 生成
+``index.json``，作为分发给用户的运行时索引。普通用户安装的 skill 包**不含**
+``dishes/`` 也**不会运行**本脚本——运行时菜谱数据全部走 API（见 mcp_tools.py /
+search.py）。不要在运行时路径 import 本模块。
+
+运行方式（仓库根目录下）::
+
+    python scripts/indexer.py
+"""
 
 import json
 import logging
 import re
+import sys
 from pathlib import Path
 from typing import Optional
+
+# 仓库根在 scripts/ 的上一级；运行时需把根加入 sys.path 才能 import 根级模块。
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 
 from schema import (
     extract_cook_time,
@@ -255,12 +272,13 @@ def index_directory(directory: Path, source: str, base_dir: Path) -> list:
 def main():
     logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-    script_dir = Path(__file__).parent
+    # 仓库根：dishes/ 与 index.json 都相对仓库根，而非 scripts/。
+    repo_root = Path(__file__).resolve().parent.parent
     sources = {
-        "howtocook": script_dir / "dishes" / "howtocook",
-        "随便做": script_dir / "dishes" / "随便做",
-        "金谷园": script_dir / "dishes" / "金谷园",
-        "面食之神": script_dir / "dishes" / "面食之神",
+        "howtocook": repo_root / "dishes" / "howtocook",
+        "随便做": repo_root / "dishes" / "随便做",
+        "金谷园": repo_root / "dishes" / "金谷园",
+        "面食之神": repo_root / "dishes" / "面食之神",
     }
 
     all_dishes: list[dict] = []
@@ -275,7 +293,7 @@ def main():
             logger.info("路径不存在，跳过")
             continue
 
-        dishes = index_directory(source_path, source_name, script_dir)
+        dishes = index_directory(source_path, source_name, repo_root)
         logger.info("找到 %d 个菜谱", len(dishes))
         all_dishes.extend(dishes)
 
@@ -291,7 +309,7 @@ def main():
         "dishes": all_dishes,
     }
 
-    index_path = Path(__file__).parent / "index.json"
+    index_path = repo_root / "index.json"
     with open(index_path, 'w', encoding='utf-8') as f:
         json.dump(index, f, ensure_ascii=False, indent=2)
 

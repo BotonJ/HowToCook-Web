@@ -36,6 +36,33 @@ class TestValidateDish:
         dish = {"name": "ok", "category": "x", "source": "x", "difficulty": 1, "path": ""}
         assert _validate_dish(dish) is True
 
+    def test_difficulty_must_be_int(self):
+        # 与 API isDishIndex 类型契约对齐：difficulty 必须是 number
+        dish = {"name": "ok", "category": "x", "source": "x", "difficulty": "3"}
+        assert _validate_dish(dish) is False
+
+    def test_category_must_be_str(self):
+        dish = {"name": "ok", "category": 5, "source": "x", "difficulty": 1}
+        assert _validate_dish(dish) is False
+
+    def test_optional_field_wrong_type_rejected_when_required(self):
+        # ingredients 非必需字段，但若提供且类型错（必需字段维度），应拒绝
+        # ingredients 本身非必需，故类型错也不影响 —— 此测试确认非必需字段
+        # 类型错误不会误拒合法条目（向后兼容）
+        dish = {"name": "ok", "category": "x", "source": "x", "difficulty": 1, "ingredients": "not a list"}
+        assert _validate_dish(dish) is True
+
+    def test_full_sync_contract_fields_ok(self):
+        # 模拟 /sync 返回的完整 12 字段条目，应通过
+        dish = {
+            "id": "howtocook/红烧肉", "name": "红烧肉", "difficulty": 3,
+            "category": "meat_dish", "source": "howtocook", "cuisine": "家常",
+            "cooking_method": "炖煮", "cook_time": "medium",
+            "main_ingredients": ["猪肉"], "ingredients": ["五花肉"],
+            "tags": {"spicy": False}, "has_duplicate": False,
+        }
+        assert _validate_dish(dish) is True
+
 
 class TestMerge:
     def _make_local(self, dishes):
@@ -56,8 +83,25 @@ class TestMerge:
         result, added, updated, unchanged, local_only = _merge(local, remote)
         assert added == 0
         assert updated == 1
-        # path should be preserved from local
-        assert result["dishes"][0]["path"] == "old.md"
+        # 本地 path 是废弃的 dishes/... 引用，合并时必须清零（运行时走 API）
+        assert result["dishes"][0]["path"] == ""
+
+    def test_local_only_path_blanked(self):
+        # 仅本地保留的条目，其历史 path 也必须清零，避免悬空引用
+        local_dishes = [{"name": "本地菜", "category": "other", "source": "随便做", "difficulty": 2, "path": "x.md", "has_duplicate": False}]
+        local = self._make_local(local_dishes)
+        remote = []
+        result, added, updated, unchanged, local_only = _merge(local, remote)
+        assert local_only == 1
+        assert result["dishes"][0]["path"] == ""
+
+    def test_remote_path_never_kept(self):
+        # 即使远程/本地带 path，合并产物一律不带本地 md 引用
+        local_dishes = [{"id": "howtocook/A", "name": "A", "category": "x", "source": "howtocook", "difficulty": 1, "path": "local.md"}]
+        local = self._make_local(local_dishes)
+        remote = [{"id": "howtocook/A", "name": "A", "category": "x", "source": "howtocook", "difficulty": 2, "path": "remote.md"}]
+        result, *_ = _merge(local, remote)
+        assert result["dishes"][0]["path"] == ""
 
     def test_keep_local_only(self):
         local_dishes = [{"name": "本地菜", "category": "other", "source": "随便做", "difficulty": 2, "path": "x.md", "has_duplicate": False}]

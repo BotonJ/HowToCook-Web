@@ -12,6 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 def read_recipe_file(path: str) -> Optional[dict]:
+    """[DEPRECATED] 从本地 markdown 文件读取菜谱。
+
+    运行时菜谱详情已全部走 API（``search.format_recipe_detail`` →
+    ``mcp_tools.get_recipe``），不再读取本地 ``dishes/*.md``。本函数仅保留
+    供 ``parser.py`` 的 CLI 调试入口与历史调用方使用，未来版本可能移除；
+    新代码请勿调用。
+    """
     try:
         abs_path = skill_path(path)
         with open(abs_path, 'r', encoding='utf-8') as f:

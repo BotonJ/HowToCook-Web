@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 """HowToCook Meal Planner — 购物清单 + 时间预算推荐 + 一周菜单生成"""
 
-import json
 import logging
 import random
 import re
 import sys
-from pathlib import Path
 from typing import Optional
 
-from utils import skill_dir, skill_path, render_stars
+from utils import render_stars
 
 logger = logging.getLogger(__name__)
 
@@ -17,15 +15,20 @@ _TEMPLATE_DISH_NAME = "{菜名}"
 
 
 def _import_deps():
-    from parser import read_recipe_file, parse_recipe, format_recipe
     from search import load_index, search_dishes, recommend_dish
-    return read_recipe_file, parse_recipe, format_recipe, load_index, search_dishes, recommend_dish
+    return load_index, search_dishes, recommend_dish
 
 
 def load_index_local() -> dict:
-    idx = skill_dir() / "index.json"
-    with open(idx, 'r', encoding='utf-8') as f:
-        return json.load(f)
+    """Load the recipe index, API-first with local fallback.
+
+    Delegates to ``search.load_index()`` so the planner shares the same
+    data path as search/recommend: remote version probe, 7-day mtime-cached
+    local index, and the ``HOWTOCOOK_AUTO_SYNC`` env gate. The historical
+    name is kept for backward compatibility with existing callers/tests.
+    """
+    from search import load_index
+    return load_index()
 
 
 def get_dishes_by_names(names: list[str], index: dict) -> list[dict]:
@@ -34,14 +37,6 @@ def get_dishes_by_names(names: list[str], index: dict) -> list[dict]:
 
 
 def get_dish_ingredients(dish: dict, index: dict) -> list[str]:
-    read_recipe_file, _, _, _, _, _ = _import_deps()
-    path = dish.get('path', '')
-    if not path:
-        return dish.get('ingredients', [])
-
-    recipe = read_recipe_file(path)
-    if recipe:
-        return recipe.get('ingredients', []) or dish.get('ingredients', [])
     return dish.get('ingredients', [])
 
 
@@ -130,17 +125,9 @@ DEFAULT_TIME_ESTIMATE = {
 }
 
 
-def recommend_by_time_budget(profile_key: str = "", custom_difficulty: int = 0, category: str = "") -> str:
+def _local_candidates_by_difficulty(category: str, max_diff: int) -> list[dict]:
+    """本地 fallback：按难度上界过滤，附加 time_estimate。"""
     index = load_index_local()
-
-    if profile_key and profile_key in TIME_PROFILES:
-        profile = TIME_PROFILES[profile_key]
-        max_diff = profile['max_difficulty']
-        hint = profile['description']
-    else:
-        max_diff = custom_difficulty or 3
-        hint = f"⭐ 难度{max_diff}以内"
-
     candidates = []
     for d in index['dishes']:
         if d['name'] == _TEMPLATE_DISH_NAME:
@@ -150,6 +137,31 @@ def recommend_by_time_budget(profile_key: str = "", custom_difficulty: int = 0, 
             if category and d.get('category') != category:
                 continue
             candidates.append({**d, 'time_estimate': DEFAULT_TIME_ESTIMATE.get(diff, "未知")})
+    return candidates
+
+
+def recommend_by_time_budget(profile_key: str = "", custom_difficulty: int = 0, category: str = "") -> str:
+    if profile_key and profile_key in TIME_PROFILES:
+        profile = TIME_PROFILES[profile_key]
+        max_diff = profile['max_difficulty']
+        hint = profile['description']
+    else:
+        max_diff = custom_difficulty or 3
+        hint = f"⭐ 难度{max_diff}以内"
+
+    # === API 优先（候选覆盖 KV 全量，含英文菜） ===
+    from search import _recommend_via_api
+    api_results = _recommend_via_api(category=category, difficulty_max=max_diff, limit=200)
+    if api_results is not None:
+        from cuisine_map import normalize_dish  # 唯一挂载点：英文维度→中文词表
+        candidates = [
+            {**normalize_dish(d),
+             "time_estimate": DEFAULT_TIME_ESTIMATE.get(d.get("difficulty", 3), "未知")}
+            for d in api_results if d.get("name") != _TEMPLATE_DISH_NAME
+        ]
+    else:
+        # === 本地 fallback（原逻辑） ===
+        candidates = _local_candidates_by_difficulty(category, max_diff)
 
     if not candidates:
         return "❌ 没有找到符合条件的菜谱"
