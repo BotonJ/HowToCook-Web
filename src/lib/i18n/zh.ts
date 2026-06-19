@@ -252,7 +252,7 @@ export const zh = {
     bitter: '苦',
     umami: '鲜',
     spicy: '辣',
-    fatty: '脂肪',
+    fat: '脂肪', salty: '咸', aromatic: '香',
   },
 
   // ── 分类 / 难度 / 时间 ────────────────────────────────────────────

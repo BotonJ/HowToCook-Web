@@ -22,7 +22,9 @@ export interface Recipe {
     bitter: number;
     umami: number;
     spicy: number;   // pungent
-    fatty: number;
+    fat: number;
+    salty: number;
+    aromatic: number;
   };
   description?: string;
   ingredients_text?: string;

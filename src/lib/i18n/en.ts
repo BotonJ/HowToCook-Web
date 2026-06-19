@@ -251,7 +251,7 @@ export const en = {
     bitter: 'Bitter',
     umami: 'Umami',
     spicy: 'Spicy',
-    fatty: 'Fatty',
+    fat: 'Fatty', salty: 'Salty', aromatic: 'Aromatic',
   },
 
   // ── Constants (difficulty / cook time / categories) ────────────────

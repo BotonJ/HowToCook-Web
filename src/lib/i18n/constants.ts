@@ -31,7 +31,7 @@ export function getCategoryLabels(lang: Lang): Record<string, string> {
   return locales[lang].constants.categories;
 }
 
-/** Flavor dimension labels (sweet, sour, bitter, umami, spicy, fatty). */
+/** Flavor dimension labels (sweet, sour, bitter, umami, spicy, fat, salty, aromatic). */
 export function getFlavorLabels(lang: Lang) {
   return locales[lang].flavor;
 }
