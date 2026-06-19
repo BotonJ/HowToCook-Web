@@ -38,3 +38,10 @@ fix-recipe-not-found.md
 .gstack/
 *.bak.*
 embeddings.f32
+
+# Wrangler local state
+.wrangler/
+
+# Python cache
+__pycache__/
+*.pyc
