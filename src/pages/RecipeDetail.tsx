@@ -5,7 +5,7 @@ import { Layout } from '@/components/Layout';
 import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
-import { withBaseUrl } from '@/lib/utils';
+import { withBaseUrl, toAbsoluteUrl } from '@/lib/utils';
 import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 import { useT, useBasePath } from '@/lib/i18n';
@@ -110,7 +110,7 @@ export function RecipeDetail() {
   useMeta({
     title: recipe?.name,
     description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name}的做法` : undefined),
-    ogImage: recipe?.imagePath ? `${SITE_URL}/${recipe.imagePath}` : undefined,
+    ogImage: recipe?.imagePath ? toAbsoluteUrl(recipe.imagePath) : undefined,
     ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.id)}` : undefined,
   });
 

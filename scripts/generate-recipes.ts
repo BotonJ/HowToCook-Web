@@ -245,6 +245,12 @@ function buildImageMap(): Map<string, string> {
 }
 
 function readMarkdownFile(source: string, recipePath: string): string | null {
+  // Guard against empty/blank path (current skill index.json has path="" for all
+  // entries). Without this, path.join resolves to a directory and readFileSync
+  // throws EISDIR, crashing the whole generate-recipes build.
+  if (!recipePath || !recipePath.trim()) {
+    return null;
+  }
   const fullPath = path.join(DISHES_DIR, '..', recipePath);
   if (!fs.existsSync(fullPath)) {
     // Try relative to DISHES_DIR
@@ -254,6 +260,9 @@ function readMarkdownFile(source: string, recipePath: string): string | null {
     }
     return null;
   }
+  // Guard against path resolving to a directory (would throw EISDIR on read)
+  const stat = fs.statSync(fullPath);
+  if (!stat.isFile()) return null;
   return fs.readFileSync(fullPath, 'utf8');
 }
 
