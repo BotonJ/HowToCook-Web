@@ -27,9 +27,6 @@ const DATA_FILES: { file: string; required: boolean }[] = [
   // Public data is what the deployed website actually fetches at runtime.
   { file: path.join(PROJECT_ROOT, 'public/data/recipes-meta.json'), required: true },
   { file: path.join(PROJECT_ROOT, 'public/data/recipes-detail.json'), required: true },
-  // src/data is used by local scripts; keep it in sync with public/data.
-  { file: path.join(PROJECT_ROOT, 'src/data/recipes-meta.json'), required: true },
-  { file: path.join(PROJECT_ROOT, 'src/data/recipes-detail.json'), required: true },
 ];
 
 let errors = 0;
@@ -117,36 +114,10 @@ function checkFile(filePath: string) {
   totalRecipes += fileTotal;
 }
 
-function checkSync(srcPath: string, publicPath: string) {
-  const srcData = loadCategories(srcPath);
-  const publicData = loadCategories(publicPath);
-  if (!srcData || !publicData) return;
-
-  const srcIds = srcData.flatMap(c => c.recipes.map(r => r.id)).sort();
-  const publicIds = publicData.flatMap(c => c.recipes.map(r => r.id)).sort();
-
-  if (srcIds.length !== publicIds.length || srcIds.some((id, i) => id !== publicIds[i])) {
-    console.error(`  ❌  src/data 与 public/data 不同步: ${path.basename(srcPath)}`);
-    errors++;
-  } else {
-    console.log(`  ✅  src/data 与 public/data 同步: ${path.basename(srcPath)} (${srcIds.length} 条)`);
-  }
-}
-
 console.log('=== 菜谱数据预检查 ===');
 for (const { file } of DATA_FILES) {
   checkFile(file);
 }
-
-console.log('\n=== 数据同步检查 ===');
-checkSync(
-  path.join(PROJECT_ROOT, 'src/data/recipes-meta.json'),
-  path.join(PROJECT_ROOT, 'public/data/recipes-meta.json'),
-);
-checkSync(
-  path.join(PROJECT_ROOT, 'src/data/recipes-detail.json'),
-  path.join(PROJECT_ROOT, 'public/data/recipes-detail.json'),
-);
 
 console.log(`\n合计: ${totalRecipes} 条菜谱（按文件累加）`);
 if (errors > 0) {

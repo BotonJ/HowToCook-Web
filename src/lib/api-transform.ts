@@ -7,6 +7,11 @@ export function transformDishIndex(dish: DishIndex): Recipe {
     id: dish.id,
     name: dish.name,
     category: dish.category,
+    imagePath: dish.image_url
+      ? dish.image_url.startsWith('http')
+        ? dish.image_url
+        : withBaseUrl(dish.image_url)
+      : undefined,
     difficulty: dish.difficulty,
     cuisine: dish.cuisine,
     cooking_method: dish.cooking_method,

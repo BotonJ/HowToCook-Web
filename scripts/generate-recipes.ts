@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const IMAGES_DIR = path.join(PROJECT_ROOT, 'public/images/dishes');
 const PUBLIC_DATA_DIR = path.join(PROJECT_ROOT, 'public/data');
-const SRC_DATA_DIR = path.join(PROJECT_ROOT, 'src/data');
+
 const INDEX_FILE = path.resolve(__dirname, '../../howtocook-skill/index.json');
 const DISHES_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes');
 
@@ -376,24 +376,14 @@ function ensureDir(dir: string) {
   }
 }
 
-function writeDataFile(name: string, data: unknown): { src: string; public: string } {
-  ensureDir(SRC_DATA_DIR);
+function writeDataFile(name: string, data: unknown): { public: string } {
   ensureDir(PUBLIC_DATA_DIR);
   const json = JSON.stringify(data, null, 2);
-  const srcPath = path.join(SRC_DATA_DIR, name);
   const publicPath = path.join(PUBLIC_DATA_DIR, name);
-  fs.writeFileSync(srcPath, json);
   fs.writeFileSync(publicPath, json);
-  return { src: srcPath, public: publicPath };
+  return { public: publicPath };
 }
 
-function writeSrcOnlyFile(name: string, data: unknown): string {
-  ensureDir(SRC_DATA_DIR);
-  const json = JSON.stringify(data, null, 2);
-  const srcPath = path.join(SRC_DATA_DIR, name);
-  fs.writeFileSync(srcPath, json);
-  return srcPath;
-}
 
 function main() {
   const categories = scanRecipes();
@@ -422,15 +412,12 @@ function main() {
   // Detail output (full data, for 详情页 /data/recipes-detail.json)
   const metaPaths = writeDataFile('recipes-meta.json', metaCategories);
   const detailPaths = writeDataFile('recipes-detail.json', categories);
-  // Legacy full output is kept in src/data for scripts that still reference it.
-  const legacyPath = writeSrcOnlyFile('recipes.json', categories);
 
   const metaSize = fs.statSync(metaPaths.public).size;
   const detailSize = fs.statSync(detailPaths.public).size;
   console.log(`Generated ${categories.length} categories with ${totalRecipes} recipes.`);
   console.log(`  Meta:   ${(metaSize / 1024).toFixed(0)} KB -> ${metaPaths.public}`);
   console.log(`  Detail: ${(detailSize / 1024).toFixed(0)} KB -> ${detailPaths.public}`);
-  console.log(`  Legacy: ${legacyPath}`);
 
   // Verify field completeness
   let missingFields = 0;

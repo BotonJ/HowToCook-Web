@@ -67,6 +67,7 @@ export interface DishIndex {
   };
   has_duplicate?: boolean;
   language?: string; // "zh" | "en", 默认 "zh"
+  image_url?: string;
 }
 
 export interface ApiRecipesResponse {

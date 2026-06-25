@@ -7,7 +7,7 @@ set -e
 WEBSITE_DIR="/Users/dor/Projects/HowToCook_Plan/website"
 SRC_IMG_DIR="$WEBSITE_DIR/public/images/dishes/suibianzuo"
 OUTPUT_DIR="$WEBSITE_DIR/public/images/dishes/suibianzuo-vertical"
-DETAIL_FILE="$WEBSITE_DIR/src/data/recipes-detail.json"
+DETAIL_FILE="$WEBSITE_DIR/public/data/recipes-detail.json"
 PROMPT_TEMPLATE="/Users/dor/Projects/HowToCook_Plan/菜谱生图提示词.txt"
 
 # 修复 DNS 问题：直接用真实 IP
