@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FlavorVector } from '@/lib/epicure/types';
+import type { FlavorVector } from '@/lib/flavor-types';
 import { useT } from '@/lib/i18n';
 import { FLAVOR_DIM_CONFIG } from '@/lib/flavor-dims';
 
@@ -14,13 +14,12 @@ export const FlavorMini = React.memo(function FlavorMini({ profile }: FlavorMini
   return (
     <div className="flex items-center gap-1" style={{ maxWidth: 120 }}>
       {FLAVOR_DIM_CONFIG.map((dim) => {
-        const value = Math.min(10, Math.max(0, profile[dim.key]));
-        const ratio = value / 10;
+        const ratio = Math.min(1, Math.max(0, profile[dim.key]));
         return (
           <div
             key={dim.key}
             className="flex flex-col items-center gap-0.5"
-            title={`${t.flavor[dim.key]}: ${value}`}
+            title={`${t.flavor[dim.key]}: ${ratio.toFixed(2)}`}
           >
             <div
               className="rounded-full"

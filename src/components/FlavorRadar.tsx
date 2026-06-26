@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { FlavorVector } from '@/lib/epicure/types';
+import type { FlavorVector } from '@/lib/flavor-types';
 import { useT } from '@/lib/i18n';
 import { FLAVOR_DIMS } from '@/lib/flavor-dims';
 
@@ -20,7 +20,7 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
 
 function hexagonPoints(cx: number, cy: number, r: number) {
   return FLAVOR_DIMS.map((_, i) => {
-    const angle = (360 / 6) * i;
+    const angle = (360 / 8) * i;
     return polarToCartesian(cx, cy, r, angle);
   });
 }
@@ -34,9 +34,8 @@ export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240
   const maxRadius = size / 2 - 32; // padding for labels
 
   const dataPoints = FLAVOR_DIMS.map((key, i) => {
-    const value = Math.min(10, Math.max(0, profile[key]));
-    const ratio = value / 10;
-    const angle = (360 / 6) * i;
+    const ratio = Math.min(1, Math.max(0, profile[key]));
+    const angle = (360 / 8) * i;
     return polarToCartesian(cx, cy, maxRadius * ratio, angle);
   });
 
@@ -110,7 +109,7 @@ export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240
 
         {/* Labels */}
         {FLAVOR_DIMS.map((key, i) => {
-          const angle = (360 / 6) * i;
+          const angle = (360 / 8) * i;
           const labelPos = polarToCartesian(cx, cy, maxRadius + 20, angle);
           const value = profile[key];
           const isHovered = hoveredIndex === i;
