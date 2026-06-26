@@ -131,7 +131,7 @@ async function fetchNoodleRecipes(): Promise<Category[]> {
 
 async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; sour: number; bitter: number; umami: number; spicy: number; fat: number; salty: number; aromatic: number }>> {
   try {
-    const res = await fetch('/data/epicure/flavor-profiles.json');
+    const res = await fetch('/data/flavor/recipe-flavor-profiles.json');
     if (!res.ok) return {};
     return res.json();
   } catch {
