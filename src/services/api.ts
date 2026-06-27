@@ -32,7 +32,6 @@ export async function searchRecipes(params: {
   cooking_method?: string;
   cook_time?: string;
   limit?: number;
-  turnstileToken?: string;
   signal?: AbortSignal;
 }): Promise<ApiSearchResponse> {
   const query = new URLSearchParams();
@@ -45,7 +44,6 @@ export async function searchRecipes(params: {
   if (params.cooking_method) query.set('cooking_method', params.cooking_method);
   if (params.cook_time) query.set('cook_time', params.cook_time);
   if (params.limit) query.set('limit', String(params.limit));
-  if (params.turnstileToken) query.set('cf_turnstile', params.turnstileToken);
   return fetchApi<ApiSearchResponse>(`/search?${query.toString()}`, params.signal);
 }
 

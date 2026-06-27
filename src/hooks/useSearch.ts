@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { searchRecipes } from '@/services/api';
-import { useTurnstileToken } from '@/components/TurnstileProvider';
 import type { Recipe } from '@/types';
 import type { ApiSearchResult } from '@/types/api';
 import { transformSearchResult } from '@/lib/api-transform';
@@ -22,7 +21,6 @@ export function useSearch(
   const [results, setResults] = useState<Recipe[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { getToken } = useTurnstileToken();
 
   const localMap = useMemo(
     () => new Map(localRecipes.map(r => [r.id, r])),
@@ -67,9 +65,7 @@ export function useSearch(
       setError(null);
       try {
         apiTimestamps.current.push(Date.now());
-        const turnstileToken = await getToken();
-        if (controller.signal.aborted) return;
-        const response = await searchRecipes({ q: trimmed, turnstileToken });
+        const response = await searchRecipes({ q: trimmed, signal: controller.signal });
         if (controller.signal.aborted) return;
         const recipes = response.results
           .map((r: ApiSearchResult) => transformSearchResult(r, localMap))
@@ -90,7 +86,7 @@ export function useSearch(
       controller.abort();
       clearTimeout(timer);
     };
-  }, [query, localMap, sourceIds, debounceMs, getToken, localRecipes]);
+  }, [query, localMap, sourceIds, debounceMs, localRecipes]);
 
   return { results, loading, error };
 }
