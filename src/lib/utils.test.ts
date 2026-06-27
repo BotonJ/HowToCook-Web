@@ -11,7 +11,8 @@ describe('cn', () => {
   })
 
   it('handles conditional classes', () => {
-    expect(cn('base', false && 'hidden', 'end')).toBe('base end')
+    const isHidden = false as boolean
+    expect(cn('base', isHidden && 'hidden', 'end')).toBe('base end')
   })
 
   it('returns empty string for no arguments', () => {

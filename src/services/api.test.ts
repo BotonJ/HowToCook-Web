@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { searchRecipes, getRecipeDetail, fetchAllRecipes, fetchCategories } from './api'
 
 function mockFetch(body: unknown, init?: ResponseInit) {
