@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const TIPS_DIR = path.resolve(__dirname, '../../howtocook-skill/dishes/tips');
-const SRC_OUTPUT_FILE = path.join(PROJECT_ROOT, 'src/data/tips.json');
 const PUBLIC_OUTPUT_FILE = path.join(PROJECT_ROOT, 'public/data/tips.json');
 
 // 填充后格式: { '中文文件名': 'english-slug' }
@@ -175,9 +174,7 @@ function ensureDir(dir: string) {
 
 function writeTips(data: TipMeta[]) {
   const json = JSON.stringify(data, null, 2);
-  ensureDir(path.dirname(SRC_OUTPUT_FILE));
   ensureDir(path.dirname(PUBLIC_OUTPUT_FILE));
-  fs.writeFileSync(SRC_OUTPUT_FILE, json);
   fs.writeFileSync(PUBLIC_OUTPUT_FILE, json);
 }
 
