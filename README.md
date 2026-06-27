@@ -91,7 +91,10 @@ npm run dev
 # API
 cd howtocook-api
 npm install
-npm run dev
+# 本地开发必须用 preview 环境：默认 wrangler dev 跑生产配置，
+# CORS 只放行 howtocook.cn，会拦截 localhost:5173 的请求。
+# preview 环境的 ALLOWED_ORIGIN 含 http://localhost:5173。
+npm run dev -- --env preview
 
 # 数据同步
 cd howtocook-skill
