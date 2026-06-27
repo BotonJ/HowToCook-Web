@@ -4,6 +4,8 @@ import { useRecipeDetail } from './useRecipeDetail'
 import type { Recipe } from '@/types'
 import type { ApiRecipeDetail } from '@/types/api'
 
+type Props = { id: string; fallback: Recipe | null }
+
 const localRecipe: Recipe = {
   id: 'r1',
   name: '红烧肉',
@@ -143,8 +145,8 @@ describe('useRecipeDetail', () => {
   it('refetches when recipeId changes', async () => {
     mockGetRecipeDetail.mockResolvedValueOnce(apiDetail)
     const { result, rerender } = renderHook(
-      ({ id, fallback }) => useRecipeDetail(id, fallback),
-      { initialProps: { id: 'r1', fallback: localRecipe } },
+      ({ id, fallback }: Props) => useRecipeDetail(id, fallback),
+      { initialProps: { id: 'r1', fallback: localRecipe } } as { initialProps: Props },
     )
 
     await waitFor(() => expect(result.current.fromApi).toBe(true))
@@ -152,7 +154,7 @@ describe('useRecipeDetail', () => {
     const apiDetail2: ApiRecipeDetail = { ...apiDetail, id: 'r2', name: '糖醋里脊' }
     mockGetRecipeDetail.mockResolvedValueOnce(apiDetail2)
 
-    rerender({ id: 'r2', fallback: null })
+    rerender({ id: 'r2', fallback: null } as Props)
 
     await waitFor(() => expect(result.current.fromApi).toBe(true))
     expect(mockGetRecipeDetail).toHaveBeenCalledWith('r2')
