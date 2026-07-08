@@ -1,4 +1,4 @@
-const CACHE_NAME = 'howtocook-v2'
+const CACHE_NAME = 'howtocook-v3'
 
 // ── Install: wait for natural activation (no skipWaiting) ──────
 self.addEventListener('install', () => {
