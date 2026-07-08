@@ -39,9 +39,16 @@ function buildCategoriesFromApi(
 }
 
 async function fetchIndex(): Promise<Category[]> {
-  const res = await fetch('/data/recipes-meta.json');
-  if (!res.ok) throw new Error(`Index fetch failed: ${res.status}`);
-  return res.json() as Promise<Category[]>;
+  // API-primary: fetch all Chinese recipes from the API (§6 migration).
+  // 面食之神(noodle) recipes are served from noodle-recipes.json (kept static
+  // this round, pending id-scheme reconciliation + bulk-detail endpoint).
+  // Excluding them here prevents duplicate noodle entries in the listing.
+  const [dishes, apiCategories] = await Promise.all([
+    fetchAllRecipes(),
+    fetchCategories(),
+  ]);
+  const zhDishes = dishes.filter((d) => d.source !== '面食之神');
+  return buildCategoriesFromApi(zhDishes, apiCategories);
 }
 
 async function fetchEnglishIndex(): Promise<Category[]> {
@@ -222,40 +229,6 @@ export function findRecipeById(id: string): Promise<Recipe | null> {
 let cachedCategories: Category[] | null = null;
 let cachedRecipes: Recipe[] | null = null;
 let inflight: Promise<{ categories: Category[]; recipes: Recipe[] }> | null = null;
-const listeners = new Set<(cats: Category[], recs: Recipe[]) => void>();
-
-function notifyListeners(cats: Category[], recs: Recipe[]): void {
-  for (const fn of listeners) fn(cats, recs);
-}
-
-async function fetchFromApiAndUpdate(): Promise<void> {
-  try {
-    const [dishes, apiCategories] = await Promise.all([
-      fetchAllRecipes(),
-      fetchCategories(),
-    ]);
-    const categories = buildCategoriesFromApi(dishes, apiCategories);
-    const recipes = categories.flatMap(c => c.recipes);
-
-    // Guard against API returning a partial/truncated dataset (e.g. default pagination)
-    // and overwriting the richer local static index. Local data is the source of truth
-    // for card listings; background API refresh should only enhance, not degrade it.
-    const localCount = cachedRecipes?.length ?? 0;
-    if (recipes.length < localCount) {
-      console.warn(
-        `[useRecipes] API refresh skipped: returned ${recipes.length} recipes, ` +
-          `which is fewer than the ${localCount} already loaded locally.`,
-      );
-      return;
-    }
-
-    cachedCategories = categories;
-    cachedRecipes = recipes;
-    notifyListeners(categories, recipes);
-  } catch {
-    // API refresh failed silently; local data is already loaded
-  }
-}
 
 async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[] }> {
   if (cachedCategories && cachedRecipes) {
@@ -265,7 +238,7 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
   if (inflight) return inflight;
 
   inflight = (async () => {
-    // 1. Load local index immediately for instant render (~12KB gzip)
+    // 1. Load data: API (Chinese index) + static files (EN/noodle/flavor, deferred)
     const [categories, englishCategories, noodleCategories, flavorProfiles] = await Promise.all([
       fetchIndex(),
       fetchEnglishIndex(),
@@ -326,9 +299,6 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
     cachedCategories = finalCategories;
     cachedRecipes = recipesWithFlavor;
 
-    // 5. Refresh from API in background (fire-and-forget)
-    fetchFromApiAndUpdate().catch(() => {});
-
     return { categories: finalCategories, recipes: recipesWithFlavor };
   })();
 
@@ -376,17 +346,9 @@ export function useRecipes(): UseRecipesResult {
 
   useEffect(() => {
     mountedRef.current = true;
-    const onUpdate = (cats: Category[], recs: Recipe[]) => {
-      if (mountedRef.current) {
-        setCategories(cats);
-        setRecipes(recs);
-      }
-    };
-    listeners.add(onUpdate);
     doLoad();
     return () => {
       mountedRef.current = false;
-      listeners.delete(onUpdate);
     };
   }, []);
 

@@ -4,32 +4,6 @@ import { renderHook, waitFor } from '@testing-library/react'
 function mockFetchResponses() {
   globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
     const u = String(url)
-    if (u.includes('recipes-meta.json')) {
-      return new Response(
-        JSON.stringify([
-          {
-            id: 'meat',
-            name: '荤菜',
-            displayName: '荤菜',
-            count: 1,
-            recipes: [
-              {
-                id: 'r1',
-                name: '红烧肉',
-                category: 'meat',
-                difficulty: 3,
-                cuisine: 'Hunan',
-                cooking_method: 'braise',
-                cook_time: '60min',
-                ingredients: ['pork'],
-                main_ingredients: ['pork'],
-                source: 'howtocook',
-              },
-            ],
-          },
-        ]),
-      )
-    }
     if (u.includes('en_index_curated.json')) {
       return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
     }
@@ -123,47 +97,9 @@ describe('useRecipes hook', () => {
     expect(result.current.categories[0].id).toBe('meat')
   })
 
-  it('does not overwrite local data when API returns fewer recipes', async () => {
+  it('API is the primary source and returns correct data', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(
-          JSON.stringify([
-            {
-              id: 'meat',
-              name: '荤菜',
-              displayName: '荤菜',
-              count: 2,
-              recipes: [
-                {
-                  id: 'r1',
-                  name: '红烧肉',
-                  category: 'meat',
-                  difficulty: 3,
-                  cuisine: 'Hunan',
-                  cooking_method: 'braise',
-                  cook_time: '60min',
-                  ingredients: ['pork'],
-                  main_ingredients: ['pork'],
-                  source: 'howtocook',
-                },
-                {
-                  id: 'r2',
-                  name: '糖醋里脊',
-                  category: 'meat',
-                  difficulty: 3,
-                  cuisine: 'Shandong',
-                  cooking_method: 'fry',
-                  cook_time: '45min',
-                  ingredients: ['pork'],
-                  main_ingredients: ['pork'],
-                  source: 'howtocook',
-                },
-              ],
-            },
-          ]),
-        )
-      }
       if (u.includes('en_index_curated.json')) {
         return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       }
@@ -177,7 +113,6 @@ describe('useRecipes hook', () => {
         return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
       }
       if (u.includes('/recipes')) {
-        // API returns only 1 recipe, simulating the default pagination bug
         return new Response(
           JSON.stringify({
             recipes: [
@@ -194,8 +129,21 @@ describe('useRecipes hook', () => {
                 source: 'howtocook',
                 tags: {},
               },
+              {
+                id: 'r2',
+                name: '糖醋里脊',
+                category: 'meat',
+                difficulty: 3,
+                cuisine: 'Shandong',
+                cooking_method: 'fry',
+                cook_time: '45min',
+                ingredients: ['pork'],
+                main_ingredients: ['pork'],
+                source: 'howtocook',
+                tags: {},
+              },
             ],
-            total: 1,
+            total: 2,
           }),
         )
       }
@@ -206,10 +154,7 @@ describe('useRecipes hook', () => {
     await waitFor(() => expect(result.current.loading).toBe(false))
     expect(result.current.recipes.length).toBe(2)
     expect(result.current.recipes.map(r => r.name)).toContain('糖醋里脊')
-
-    // Give the fire-and-forget background API refresh time to run
-    await new Promise(resolve => setTimeout(resolve, 50))
-    expect(result.current.recipes.length).toBe(2)
+    expect(result.current.recipes.map(r => r.name)).toContain('红烧肉')
   })
 })
 
@@ -274,13 +219,6 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('merges English categories into Chinese categories', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'meat', name: '荤菜', displayName: '荤菜', count: 1, recipes: [
-            { id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) {
         return new Response(JSON.stringify({
           version: '1', total: 1, source: 'en',
@@ -290,7 +228,7 @@ describe('useRecipes with English/noodle/flavor data', () => {
       if (u.includes('noodle-recipes.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'noodle', dishes: [] }))
       if (u.includes('flavor-profiles.json')) return new Response(JSON.stringify({}))
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -308,13 +246,6 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('merges noodle recipes into existing categories', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'staple', name: '主食', displayName: '主食', count: 1, recipes: [
-            { id: 'r1', name: '米饭', category: 'staple', difficulty: 1, cuisine: 'Chinese', cooking_method: 'steam', cook_time: '30min', ingredients: ['rice'], main_ingredients: ['rice'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       if (u.includes('noodle-recipes.json')) {
         return new Response(JSON.stringify({
@@ -324,7 +255,7 @@ describe('useRecipes with English/noodle/flavor data', () => {
       }
       if (u.includes('flavor-profiles.json')) return new Response(JSON.stringify({}))
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'staple', name: '主食' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '米饭', category: 'staple', difficulty: 1, cuisine: 'Chinese', cooking_method: 'steam', cook_time: '30min', ingredients: ['rice'], main_ingredients: ['rice'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -342,20 +273,13 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('merges flavor profiles into recipes', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'meat', name: '荤菜', displayName: '荤菜', count: 1, recipes: [
-            { id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       if (u.includes('noodle-recipes.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'noodle', dishes: [] }))
       if (u.includes('flavor-profiles.json')) {
         return new Response(JSON.stringify({ r1: { sweet: 3, sour: 1, bitter: 0, umami: 8, spicy: 2, fat: 7, salty: 6, aromatic: 5 } }))
       }
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -372,18 +296,11 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('handles English index fetch failure gracefully', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'meat', name: '荤菜', displayName: '荤菜', count: 1, recipes: [
-            { id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) return new Response('', { status: 500 })
       if (u.includes('noodle-recipes.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'noodle', dishes: [] }))
       if (u.includes('flavor-profiles.json')) return new Response(JSON.stringify({}))
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -400,18 +317,11 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('handles noodle recipes fetch failure gracefully', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'meat', name: '荤菜', displayName: '荤菜', count: 1, recipes: [
-            { id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       if (u.includes('noodle-recipes.json')) throw new TypeError('Network error')
       if (u.includes('flavor-profiles.json')) return new Response(JSON.stringify({}))
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -427,18 +337,11 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('handles flavor profiles fetch failure gracefully', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) {
-        return new Response(JSON.stringify([
-          { id: 'meat', name: '荤菜', displayName: '荤菜', count: 1, recipes: [
-            { id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook' },
-          ]},
-        ]))
-      }
       if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       if (u.includes('noodle-recipes.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'noodle', dishes: [] }))
       if (u.includes('flavor-profiles.json')) return new Response('', { status: 500 })
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [], total: 0 }))
+      if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
       return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
@@ -454,8 +357,12 @@ describe('useRecipes with English/noodle/flavor data', () => {
   it('shows error when main index fetch fails', async () => {
     globalThis.fetch = vi.fn(async (url: string | Request | URL) => {
       const u = String(url)
-      if (u.includes('recipes-meta.json')) return new Response('', { status: 500 })
-      return new Response('[]')
+      if (u.includes('/recipes')) return new Response('', { status: 500 })
+      if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
+      if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
+      if (u.includes('noodle-recipes.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'noodle', dishes: [] }))
+      if (u.includes('flavor-profiles.json')) return new Response(JSON.stringify({}))
+      return new Response('', { status: 404 })
     }) as unknown as typeof globalThis.fetch
 
     vi.resetModules()
