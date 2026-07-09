@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { fetchAllRecipes, fetchCategories } from '@/services/api';
 import { transformDishIndex } from '@/lib/api-transform';
 import type { Recipe, Category } from '@/types';
-import type { DishIndex, ApiCategory, EnIndexData, NoodleData } from '@/types/api';
+import type { DishIndex, ApiCategory, EnIndexData } from '@/types/api';
 
 interface UseRecipesResult {
   recipes: Recipe[];
@@ -39,16 +39,12 @@ function buildCategoriesFromApi(
 }
 
 async function fetchIndex(): Promise<Category[]> {
-  // API-primary: fetch all Chinese recipes from the API (§6 migration).
-  // 面食之神(noodle) recipes are served from noodle-recipes.json (kept static
-  // this round, pending id-scheme reconciliation + bulk-detail endpoint).
-  // Excluding them here prevents duplicate noodle entries in the listing.
+  // API-primary: fetch all Chinese recipes (incl. 面食之神) from the API (§6).
   const [dishes, apiCategories] = await Promise.all([
     fetchAllRecipes(),
     fetchCategories(),
   ]);
-  const zhDishes = dishes.filter((d) => d.source !== '面食之神');
-  return buildCategoriesFromApi(zhDishes, apiCategories);
+  return buildCategoriesFromApi(dishes, apiCategories);
 }
 
 async function fetchEnglishIndex(): Promise<Category[]> {
@@ -93,48 +89,6 @@ async function fetchEnglishIndex(): Promise<Category[]> {
   }
 }
 
-async function fetchNoodleRecipes(): Promise<Category[]> {
-  try {
-    const res = await fetch('/data/noodle-recipes.json');
-    if (!res.ok) return [];
-    const data: NoodleData = await res.json();
-    const recipes: Recipe[] = data.dishes.map((dish) => ({
-      id: dish.id,
-      name: dish.name,
-      category: dish.category,
-      imagePath: '',
-      difficulty: dish.difficulty,
-      cuisine: dish.cuisine,
-      cooking_method: dish.cooking_method,
-      cook_time: dish.cook_time,
-      ingredients: dish.ingredients,
-      main_ingredients: dish.main_ingredients ?? [],
-      tags: {},
-      source: dish.source,
-      description: dish.description,
-      language: 'zh' as const,
-      steps_text: dish.steps_text,
-    }));
-    const grouped = new Map<string, Recipe[]>();
-    for (const recipe of recipes) {
-      const list = grouped.get(recipe.category);
-      if (list) {
-        list.push(recipe);
-      } else {
-        grouped.set(recipe.category, [recipe]);
-      }
-    }
-    return Array.from(grouped.entries()).map(([id, recs]) => ({
-      id: `noodle-${id}`,
-      name: `面食之神 ${id}`,
-      displayName: '面食之神',
-      count: recs.length,
-      recipes: recs,
-    }));
-  } catch {
-    return [];
-  }
-}
 
 async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; sour: number; bitter: number; umami: number; spicy: number; fat: number; salty: number; aromatic: number }>> {
   try {
@@ -156,10 +110,9 @@ let fullDataCache: Category[] | null = null;
 
 async function getFullRecipeData(): Promise<Category[]> {
   if (fullDataCache) return fullDataCache;
-  const [data, englishCategories, noodleCategories, flavorProfiles] = await Promise.all([
+  const [data, englishCategories, flavorProfiles] = await Promise.all([
     fetchFullFallback(),
     fetchEnglishIndex(),
-    fetchNoodleRecipes(),
     fetchFlavorProfiles(),
   ]);
   // Merge English categories into Chinese categories (same logic as loadRecipes)
@@ -175,21 +128,6 @@ async function getFullRecipeData(): Promise<Category[]> {
       };
     } else {
       mergedCategories.push(enCat);
-    }
-  }
-  // Merge noodle recipes into categories (same logic as loadRecipes)
-  for (const noodleCat of noodleCategories) {
-    const realCatId = noodleCat.id.replace('noodle-', '');
-    const existingIdx = mergedCategories.findIndex(c => c.id === realCatId);
-    if (existingIdx !== -1) {
-      const existing = mergedCategories[existingIdx];
-      mergedCategories[existingIdx] = {
-        ...existing,
-        recipes: [...existing.recipes, ...noodleCat.recipes],
-        count: existing.recipes.length + noodleCat.recipes.length,
-      };
-    } else {
-      mergedCategories.push(noodleCat);
     }
   }
   // Merge flavor profiles immutably
@@ -238,11 +176,10 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
   if (inflight) return inflight;
 
   inflight = (async () => {
-    // 1. Load data: API (Chinese index) + static files (EN/noodle/flavor, deferred)
-    const [categories, englishCategories, noodleCategories, flavorProfiles] = await Promise.all([
+    // 1. Load data: API (Chinese index) + static files (EN/flavor, deferred)
+    const [categories, englishCategories, flavorProfiles] = await Promise.all([
       fetchIndex(),
       fetchEnglishIndex(),
-      fetchNoodleRecipes(),
       fetchFlavorProfiles(),
     ]);
 
@@ -259,23 +196,6 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
         };
       } else {
         mergedCategories.push(enCat);
-      }
-    }
-
-    // 3. Merge noodle recipes (面食之神) into their real categories immutably
-    for (const noodleCat of noodleCategories) {
-      // noodleCat.id is like "noodle-staple" — extract real category id
-      const realCatId = noodleCat.id.replace('noodle-', '');
-      const existingIdx = mergedCategories.findIndex(c => c.id === realCatId);
-      if (existingIdx !== -1) {
-        const existing = mergedCategories[existingIdx];
-        mergedCategories[existingIdx] = {
-          ...existing,
-          recipes: [...existing.recipes, ...noodleCat.recipes],
-          count: existing.recipes.length + noodleCat.recipes.length,
-        };
-      } else {
-        mergedCategories.push(noodleCat);
       }
     }
 
