@@ -3,6 +3,7 @@
  * Wraps components with required providers (Router + i18n).
  */
 import { type ReactNode } from 'react';
+import { vi } from 'vitest';
 import { MemoryRouter } from 'react-router-dom';
 import { render, type RenderOptions } from '@testing-library/react';
 import { LangProvider } from '@/lib/i18n';

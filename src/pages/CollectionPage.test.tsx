@@ -1,8 +1,7 @@
 import { type ReactNode } from 'react';
 import { Routes, Route, MemoryRouter } from 'react-router-dom';
-import { render } from '@testing-library/react';
-import { renderWithProviders, MOCK_RECIPE, MOCK_CATEGORY } from '@/test-utils';
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { MOCK_RECIPE, MOCK_CATEGORY } from '@/test-utils';
 import { useRecipes } from '@/hooks/useRecipes';
 import { CollectionPage } from './CollectionPage';
 import { LangProvider } from '@/lib/i18n';
