@@ -87,3 +87,17 @@ export async function fetchCategories(): Promise<ApiCategory[]> {
   const data = await fetchApi<{ categories: ApiCategory[]; total: number }>('/categories');
   return data.categories;
 }
+
+/**
+ * Flavor workbench data (ingredients + cooccurrence + surprise + ...).
+ * The endpoint transparently proxies the full workbench-data.json blob, so the
+ * shape matches the old static file 1:1 — callers parse it the same way.
+ */
+export async function fetchFlavorWorkbench(): Promise<Record<string, unknown>> {
+  return fetchApi<Record<string, unknown>>('/flavor/workbench');
+}
+
+/** NPMI co-occurrence graph for the flavor atlas visualization. */
+export async function fetchNpmiGraph(): Promise<Record<string, unknown>> {
+  return fetchApi<Record<string, unknown>>('/flavor/npmi-graph');
+}
