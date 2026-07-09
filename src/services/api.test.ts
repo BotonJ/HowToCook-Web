@@ -203,12 +203,10 @@ describe('fetchAllRecipes', () => {
     // Multi-round pressure test: simulate a dataset larger than a single page
     // split across 6 responses (5 full pages + 1 partial). Verifies:
     //   - correct page sequencing (page=1..6 in the request URLs)
-    //   - every item from every page is present exactly once
+    //   - every item from every page is present exactly once, in order
     //   - the loop stops at the partial page (does not request page 7)
-    //   - total field is honored as the stop condition
     const PAGE_SIZE = 2000
     const lastPageSize = 432
-    const total = PAGE_SIZE * 5 + lastPageSize // 10,432
 
     const makePage = (page: number, size: number) => ({
       body: {
@@ -216,8 +214,8 @@ describe('fetchAllRecipes', () => {
           const globalIndex = (page - 1) * PAGE_SIZE + i
           return { id: `r${globalIndex}`, name: `dish-${globalIndex}` }
         }),
-        total,
-        pagination: { page, limit: PAGE_SIZE, total, pages: 6 },
+        total: PAGE_SIZE * 5 + lastPageSize,
+        pagination: { page, limit: PAGE_SIZE, total: PAGE_SIZE * 5 + lastPageSize, pages: 6 },
       },
     })
 
@@ -233,30 +231,16 @@ describe('fetchAllRecipes', () => {
 
     const result = await fetchAllRecipes()
 
-    // Total accumulated correctly
-    expect(result).toHaveLength(total)
-
-    // Page sequence is exactly 1..6 (URLs contain page=1..6)
+    // Page sequence is exactly 1..6, no 7th request past the partial page.
     const calls = (globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls
-    const requestedPages = calls.map(c => {
-      const url = String(c[0])
-      const m = url.match(/page=(\d+)/)
-      return m ? Number(m[1]) : null
+    expect(calls).toHaveLength(6)
+    calls.forEach((c, i) => {
+      expect(String(c[0])).toContain(`page=${i + 1}`)
     })
-    expect(requestedPages).toEqual([1, 2, 3, 4, 5, 6])
-    expect(calls).toHaveLength(6) // no 7th request past the partial page
 
-    // No gaps and no duplicates: ids form a contiguous 0..total-1 range
-    const ids = result.map(r => Number((r.id as string).slice(1)))
-    const idSet = new Set(ids)
-    expect(idSet.size).toBe(total)               // no duplicates
-    expect(Math.min(...ids)).toBe(0)
-    expect(Math.max(...ids)).toBe(total - 1)     // contiguous, no gaps
-
-    // Order preserved across page boundaries (stable concatenation)
-    for (let i = 0; i < total; i++) {
-      expect(ids[i]).toBe(i)
-    }
+    // One-shot: order + exact membership across page boundaries. Strictly
+    // stronger than separate length/min/max/dup checks (those are all implied).
+    expect(result).toEqual(responses.flatMap(r => r.body.recipes))
   })
 })
 
