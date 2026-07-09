@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import { CategoryNav } from '@/components/CategoryNav';
 import { CuisineNav } from '@/components/CuisineNav';
 import { SourceNav } from '@/components/SourceNav';
@@ -157,45 +158,52 @@ export function Home() {
       </div>
 
       {/* Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
-      {lang === 'en' ? (
-        <CuisineNav
-          activeCuisine={activeCuisine}
-          onCuisineChange={setActiveCuisine}
-          cuisineCounts={cuisineCounts}
-        />
-      ) : (
-        <>
-          <SourceNav
-            activeSource={activeSource}
-            onSourceChange={setActiveSource}
-            sourceCounts={sourceCounts}
+      <div className="mb-8">
+        {lang === 'en' ? (
+          <CuisineNav
+            activeCuisine={activeCuisine}
+            onCuisineChange={setActiveCuisine}
+            cuisineCounts={cuisineCounts}
           />
-          <CategoryNav categories={categories} />
-        </>
-      )}
+        ) : (
+          <>
+            <SourceNav
+              activeSource={activeSource}
+              onSourceChange={setActiveSource}
+              sourceCounts={sourceCounts}
+            />
+            <CategoryNav categories={categories} />
+          </>
+        )}
+      </div>
 
-      <div className="mt-6">
-        <div className="mb-6 px-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="font-display text-headline-lg text-on-surface">
+      <div className="px-2">
+        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="font-display text-headline-xl text-on-surface">
             {categoryId
               ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
               : lang === 'en'
                 ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
                 : (activeSource === 'all' ? t.home.category : SOURCE_LABELS[activeSource] || activeSource)}
-            <span className="text-on-surface-variant text-body-md font-normal ml-3">
+            <span className="text-on-surface-variant text-body-lg font-normal ml-3">
               ({t.home.recipeCount(filteredRecipes.length)})
             </span>
           </h1>
-          <div className="w-full sm:w-72 relative">
+          <div className="w-full sm:w-80 relative">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <Search size={18} className="text-outline" />
+            </div>
             <input
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder={t.home.searchPlaceholder}
               aria-label={t.home.searchPlaceholder}
-              className="w-full rounded-full border border-outline-variant bg-surface-container-lowest px-4 py-2 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+              className="w-full bg-surface-container-lowest input-zen rounded-full py-3 pl-11 pr-4 text-sm text-on-surface placeholder:text-outline outline-none transition"
             />
             {searchLoading && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">...</span>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              </div>
             )}
           </div>
         </div>
@@ -205,6 +213,17 @@ export function Home() {
           emptyMessage={normalizedSearch ? t.home.emptySearch : undefined}
         />
       </div>
+
+      <style>{`
+        .input-zen {
+          border: 1px solid #c3c8bf;
+          transition: all 0.3s ease;
+        }
+        .input-zen:focus-within {
+          border-color: #4c644e;
+          box-shadow: 0 0 0 4px rgba(76, 100, 78, 0.1);
+        }
+      `}</style>
     </Layout>
   );
 }
