@@ -17,7 +17,7 @@ export function Layout({ children }: LayoutProps) {
         Skip to content
       </a>
       <Navbar />
-      <main id="main-content" className="flex-1 container mx-auto px-4 md:px-margin-desktop py-6">
+      <main id="main-content" className="flex-1 container mx-auto px-4 md:px-margin-desktop pt-20 pb-6">
         {children}
       </main>
       <footer className="bg-surface-container border-t border-outline-variant py-8 text-center text-on-surface-variant text-sm">

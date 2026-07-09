@@ -16,8 +16,6 @@
     "compress-images": "tsx scripts/compress-images.ts"
   },
   "dependencies": {
-    "@fontsource-variable/literata": "^5.2.8",
-    "@fontsource/plus-jakarta-sans": "^5.2.8",
     "@marsidev/react-turnstile": "^1.5.2",
     "clsx": "^2.1.1",
     "dompurify": "^3.4.7",

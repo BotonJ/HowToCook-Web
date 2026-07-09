@@ -37,8 +37,8 @@ export function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-40 w-full bg-surface/80 backdrop-blur-md border-b border-outline-variant">
-      <div className="container mx-auto px-4 md:px-margin-desktop h-20 flex items-center justify-between">
+    <nav className="fixed top-0 z-50 w-full bg-surface/90 backdrop-blur-md shadow-sm hover:shadow-md transition-shadow duration-300">
+      <div className="container mx-auto px-4 md:px-16 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
           <img
             src={lang === 'zh' ? '/images/logo_cn_v2.png' : '/images/logo_en_v2.png'}
@@ -50,20 +50,20 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-8">
           <Link
             to="/academy"
-            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
           >
             {t.nav.academy}
           </Link>
 
           {/* 专题下拉菜单 */}
-          <div className="relative hidden sm:block" ref={dropdownRef}>
+          <div className="relative hidden md:block" ref={dropdownRef}>
             <button
               type="button"
               onClick={() => setShowCollections(!showCollections)}
-              className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
+              className="flex items-center gap-1 text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg"
             >
               {t.nav.collections}
               <ChevronDown size={16} className={`transition-transform ${showCollections ? 'rotate-180' : ''}`} />
@@ -87,19 +87,19 @@ export function Navbar() {
 
           <Link
             to="/explore"
-            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
           >
             {t.nav.explore}
           </Link>
           <Link
             to="/about"
-            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
           >
             {t.nav.about}
           </Link>
           <Link
             to="/credits"
-            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
           >
             {t.nav.credits}
           </Link>
@@ -107,11 +107,11 @@ export function Navbar() {
           {/* Language switcher - state toggle, no page reload */}
           <button
             onClick={toggleLang}
-            className="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors text-label-lg"
+            className="flex items-center gap-1 text-on-surface-variant hover:text-primary hover:bg-surface-container-low p-2 rounded-full transition-all"
             title={lang === 'zh' ? 'Switch to English' : '切换到中文'}
           >
             <Languages size={18} />
-            <span className="hidden sm:inline">{lang === 'zh' ? 'EN' : '中'}</span>
+            <span className="hidden md:inline">{lang === 'zh' ? 'EN' : '中'}</span>
           </button>
 
           <a
@@ -119,7 +119,7 @@ export function Navbar() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="View source code on GitHub"
-            className="text-on-surface-variant hover:text-primary transition-colors text-label-lg hidden sm:block"
+            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low p-2 rounded-full transition-all hidden md:block"
           >
             GitHub
           </a>
