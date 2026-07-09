@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ mode }) => ({
   base: '/',
+  resolve: {
+    // Native replacement for the vite-tsconfig-paths plugin (Vite 6+).
+    tsconfigPaths: true,
+  },
   build: {
     sourcemap: false,
   },
@@ -15,7 +18,6 @@ export default defineConfig(({ mode }) => ({
           : [],
       },
     }),
-    tsconfigPaths(),
     // Chunk splitting for Vite 8 (Rolldown)
     {
       name: 'chunk-split',

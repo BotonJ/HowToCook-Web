@@ -1,9 +1,12 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  plugins: [react()],
+  resolve: {
+    // Native replacement for the vite-tsconfig-paths plugin (Vite 6+).
+    tsconfigPaths: true,
+  },
   define: {
     'import.meta.env.BASE_URL': JSON.stringify('/'),
     'import.meta.env.VITE_API_BASE': JSON.stringify('https://test-api.example.com'),
