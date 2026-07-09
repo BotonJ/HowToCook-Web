@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { fetchAllRecipes, fetchCategories, getRecipeDetail } from '@/services/api';
-import { transformDishIndex, transformApiRecipe } from '@/lib/api-transform';
+import { fetchAllRecipes, fetchCategories } from '@/services/api';
+import { transformDishIndex } from '@/lib/api-transform';
 import type { Recipe, Category } from '@/types';
 import type { DishIndex, ApiCategory, EnIndexData } from '@/types/api';
 
@@ -101,22 +101,25 @@ async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; so
 }
 
 /**
- * Look up a single recipe by ID via the API, merging flavor profiles from
- * the static profiles file (§5 rebuild pending). Replaces the former bulk
- * recipes-detail.json (1.3MB) approach.
+ * Look up a single recipe by ID in the local cached index (O(1) Map lookup).
+ * The cache is populated by loadRecipes() — which already merges flavor
+ * profiles — so the returned recipe carries its flavorProfile.
+ *
+ * On a deep-link/refresh where the cache is empty, we populate it first via
+ * loadRecipes() (the same API index the listing page uses). This is the
+ * local-first fallback for RecipeDetail; the rich detail (steps/introduction)
+ * is then layered on by useRecipeDetail's API call.
  */
+let recipeIndexCache: Map<string, Recipe> | null = null;
+
 export async function findRecipeById(id: string): Promise<Recipe | null> {
-  try {
-    const [apiRecipe, profiles] = await Promise.all([
-      getRecipeDetail(id),
-      fetchFlavorProfiles(),
-    ]);
-    const recipe = transformApiRecipe(apiRecipe);
-    const fp = profiles[id];
-    return fp ? { ...recipe, flavorProfile: fp } : recipe;
-  } catch {
-    return null;
+  if (!cachedRecipes) {
+    await loadRecipes();
   }
+  if (!recipeIndexCache && cachedRecipes) {
+    recipeIndexCache = new Map(cachedRecipes.map(r => [r.id, r]));
+  }
+  return recipeIndexCache?.get(id) ?? null;
 }
 
 // Module-level cache so data is fetched only once across re-renders/remounts
@@ -232,6 +235,7 @@ export function useRecipes(): UseRecipesResult {
     cachedCategories = null;
     cachedRecipes = null;
     inflight = null;
+    recipeIndexCache = null;
     doLoad();
   };
 

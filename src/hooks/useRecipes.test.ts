@@ -11,7 +11,6 @@ function mockFetchResponses() {
       return new Response(JSON.stringify({}))
     }
     if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
-    if (u.includes('/recipe/r1') && !u.includes('/recipes')) return new Response(JSON.stringify({ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', image_url: null, introduction: '经典红烧肉', steps: ['切肉', '炒糖色', '炖煮'], tips: ['选用五花肉'], optional_ingredients: [], tags: {} }))
     if (u.includes('/recipes')) return new Response(JSON.stringify({
       recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }],
       total: 1,
@@ -139,11 +138,16 @@ describe('findRecipeById', () => {
     vi.restoreAllMocks()
   })
 
-  it('finds recipe by id', async () => {
+  it('finds recipe by id from local cache (no detail API call)', async () => {
+    // findRecipeById resolves from the cached index populated by loadRecipes.
+    // It must NOT hit the per-recipe detail endpoint (that's useRecipeDetail's job).
     const recipe = await mod.findRecipeById('r1')
     expect(recipe).not.toBeNull()
     expect(recipe?.name).toBe('红烧肉')
     expect(recipe?.category).toBe('meat')
+
+    const calledUrls = (globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls.map(c => String(c[0]))
+    expect(calledUrls.some(u => u.includes('/recipe/r1') && !u.includes('/recipes'))).toBe(false)
   })
 
   it('returns null for unknown id', async () => {

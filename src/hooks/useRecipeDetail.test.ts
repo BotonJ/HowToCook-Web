@@ -19,6 +19,11 @@ const localRecipe: Recipe = {
   source: 'howtocook',
 }
 
+const localRecipeWithFlavor: Recipe = {
+  ...localRecipe,
+  flavorProfile: { sweet: 3, sour: 1, bitter: 0, umami: 8, spicy: 2, fat: 7, salty: 6, aromatic: 5 },
+}
+
 const apiDetail: ApiRecipeDetail = {
   id: 'r1',
   name: '红烧肉',
@@ -158,5 +163,17 @@ describe('useRecipeDetail', () => {
 
     await waitFor(() => expect(result.current.fromApi).toBe(true))
     expect(mockGetRecipeDetail).toHaveBeenCalledWith('r2')
+  })
+
+  it('preserves flavorProfile from local fallback after API data loads', async () => {
+    // Regression: API detail does not carry flavorProfile. Without preserving
+    // it from the fallback, the radar chart would disappear once the API responds.
+    mockGetRecipeDetail.mockResolvedValue(apiDetail)
+    const { result } = renderHook(() => useRecipeDetail('r1', localRecipeWithFlavor))
+
+    await waitFor(() => expect(result.current.fromApi).toBe(true))
+    // API enriched ingredients, AND flavor from fallback survived
+    expect(result.current.recipe?.ingredients).toEqual(['pork', 'soy sauce'])
+    expect(result.current.recipe?.flavorProfile).toEqual(localRecipeWithFlavor.flavorProfile)
   })
 })

@@ -46,7 +46,12 @@ export function useRecipeDetail(
       try {
         const apiRecipe = await getRecipeDetail(id);
         if (!cancelled) {
-          setRecipe(transformApiRecipe(apiRecipe));
+          // API detail enriches steps/introduction/etc. but does NOT carry
+          // flavorProfile — preserve the one already on the local fallback
+          // (merged by loadRecipes) so the radar chart survives the API swap.
+          const base = transformApiRecipe(apiRecipe);
+          const fp = fallbackRef.current?.flavorProfile;
+          setRecipe(fp ? { ...base, flavorProfile: fp } : base);
           setFromApi(true);
         }
       } catch (err) {

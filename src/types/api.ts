@@ -134,28 +134,3 @@ export interface EnIndexData {
   source: string;
   dishes: EnDish[];
 }
-
-/** Noodle recipe entry from noodle-recipes.json */
-export interface NoodleDish {
-  id: string;
-  name: string;
-  category: string;
-  source: string;
-  difficulty: number;
-  cook_time: string;
-  cooking_method: string;
-  cuisine: string;
-  main_ingredients: string[];
-  ingredients: string[];
-  language: string;
-  description: string;
-  steps_text: string;
-}
-
-/** Noodle recipes file envelope */
-export interface NoodleData {
-  version: string;
-  total: number;
-  source: string;
-  dishes: NoodleDish[];
-}
