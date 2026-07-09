@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Languages } from 'lucide-react';
+import { ChevronDown, Languages, Search } from 'lucide-react';
 import { useI18n, useT } from '@/lib/i18n';
 import { useClickOutside } from '../hooks/useClickOutside';
 
@@ -102,6 +102,14 @@ export function Navbar() {
             className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
           >
             {t.nav.credits}
+          </Link>
+
+          <Link
+            to="/search"
+            className="flex items-center gap-1 text-on-surface-variant hover:text-primary hover:bg-surface-container-low p-2 rounded-full transition-all"
+            title={t.common.search}
+          >
+            <Search size={18} />
           </Link>
 
           {/* Language switcher - state toggle, no page reload */}
