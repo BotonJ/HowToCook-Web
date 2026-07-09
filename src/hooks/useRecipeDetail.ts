@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { getRecipeDetail } from '@/services/api';
-import { transformApiRecipe } from '@/lib/api-transform';
+import { transformApiRecipe, withFlavorProfile } from '@/lib/api-transform';
 import type { Recipe } from '@/types';
 
 interface UseRecipeDetailResult {
@@ -46,12 +46,15 @@ export function useRecipeDetail(
       try {
         const apiRecipe = await getRecipeDetail(id);
         if (!cancelled) {
-          // API detail enriches steps/introduction/etc. but does NOT carry
-          // flavorProfile — preserve the one already on the local fallback
+          // API detail enriches steps/introduction but does NOT carry
+          // flavorProfile — re-attach the one from the local fallback
           // (merged by loadRecipes) so the radar chart survives the API swap.
-          const base = transformApiRecipe(apiRecipe);
-          const fp = fallbackRef.current?.flavorProfile;
-          setRecipe(fp ? { ...base, flavorProfile: fp } : base);
+          setRecipe(
+            withFlavorProfile(
+              transformApiRecipe(apiRecipe),
+              fallbackRef.current?.flavorProfile,
+            ),
+          );
           setFromApi(true);
         }
       } catch (err) {

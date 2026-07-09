@@ -2,6 +2,19 @@ import type { Recipe } from '@/types';
 import type { ApiRecipeDetail, ApiSearchResult, DishIndex } from '@/types/api';
 import { withBaseUrl } from '@/lib/utils';
 
+/**
+ * Attach a flavor profile to a recipe immutably. The single home for the
+ * "Recipe objects carry their flavorProfile when available" invariant — the
+ * API detail envelope and the index entries never carry it, so every consumer
+ * that swaps in such data must re-attach flavor via this helper.
+ */
+export function withFlavorProfile(
+  recipe: Recipe,
+  fp: Recipe['flavorProfile'],
+): Recipe {
+  return fp ? { ...recipe, flavorProfile: fp } : recipe;
+}
+
 export function transformDishIndex(dish: DishIndex): Recipe {
   return {
     id: dish.id,

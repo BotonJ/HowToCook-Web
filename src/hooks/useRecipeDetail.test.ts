@@ -60,6 +60,10 @@ vi.mock('@/lib/api-transform', () => ({
     main_ingredients: r.main_ingredients,
     source: r.source,
   })),
+  // Real passthrough: attach fp when present, else return recipe unchanged.
+  withFlavorProfile: vi.fn(<R extends Recipe>(recipe: R, fp: Recipe['flavorProfile']) =>
+    fp ? { ...recipe, flavorProfile: fp } : recipe,
+  ),
 }))
 
 import { getRecipeDetail } from '@/services/api'

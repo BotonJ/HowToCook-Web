@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { fetchAllRecipes, fetchCategories } from '@/services/api';
-import { transformDishIndex } from '@/lib/api-transform';
+import { transformDishIndex, withFlavorProfile } from '@/lib/api-transform';
 import type { Recipe, Category } from '@/types';
 import type { DishIndex, ApiCategory, EnIndexData } from '@/types/api';
 
@@ -101,25 +101,20 @@ async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; so
 }
 
 /**
- * Look up a single recipe by ID in the local cached index (O(1) Map lookup).
- * The cache is populated by loadRecipes() — which already merges flavor
- * profiles — so the returned recipe carries its flavorProfile.
+ * Look up a single recipe by ID in the local cached index. The cache is
+ * populated by loadRecipes() — which already merges flavor profiles — so the
+ * returned recipe carries its flavorProfile.
  *
  * On a deep-link/refresh where the cache is empty, we populate it first via
  * loadRecipes() (the same API index the listing page uses). This is the
  * local-first fallback for RecipeDetail; the rich detail (steps/introduction)
  * is then layered on by useRecipeDetail's API call.
  */
-let recipeIndexCache: Map<string, Recipe> | null = null;
-
 export async function findRecipeById(id: string): Promise<Recipe | null> {
   if (!cachedRecipes) {
     await loadRecipes();
   }
-  if (!recipeIndexCache && cachedRecipes) {
-    recipeIndexCache = new Map(cachedRecipes.map(r => [r.id, r]));
-  }
-  return recipeIndexCache?.get(id) ?? null;
+  return cachedRecipes?.find(r => r.id === id) ?? null;
 }
 
 // Module-level cache so data is fetched only once across re-renders/remounts
@@ -161,18 +156,16 @@ async function loadRecipes(): Promise<{ categories: Category[]; recipes: Recipe[
     const recipes = mergedCategories.flatMap(c => c.recipes);
 
     // 4. Merge flavor profiles into recipes immutably
-    const recipesWithFlavor = recipes.map(recipe => {
-      const fp = flavorProfiles[recipe.id];
-      return fp ? { ...recipe, flavorProfile: fp } : recipe;
-    });
+    const recipesWithFlavor = recipes.map(recipe =>
+      withFlavorProfile(recipe, flavorProfiles[recipe.id]),
+    );
 
     // Rebuild categories with updated recipe references
     const finalCategories = mergedCategories.map(cat => ({
       ...cat,
-      recipes: cat.recipes.map(r => {
-        const fp = flavorProfiles[r.id];
-        return fp ? { ...r, flavorProfile: fp } : r;
-      }),
+      recipes: cat.recipes.map(r =>
+        withFlavorProfile(r, flavorProfiles[r.id]),
+      ),
     }));
 
     cachedCategories = finalCategories;
@@ -235,7 +228,6 @@ export function useRecipes(): UseRecipesResult {
     cachedCategories = null;
     cachedRecipes = null;
     inflight = null;
-    recipeIndexCache = null;
     doLoad();
   };
 
