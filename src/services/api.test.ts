@@ -168,6 +168,96 @@ describe('fetchAllRecipes', () => {
     const result = await fetchAllRecipes()
     expect(result).toHaveLength(1)
   })
+
+  it('stops once accumulated count reaches total (full last page boundary)', async () => {
+    // First page is full (2000) AND reaches the declared total exactly — the
+    // `allRecipes.length >= total` guard must stop without a second request,
+    // even though the page is full (which alone would not stop the loop).
+    const fullPage = Array.from({ length: 2000 }, (_, i) => ({ id: `r${i}`, name: `d${i}` }))
+    mockFetch({
+      recipes: fullPage,
+      total: 2000,
+      pagination: { page: 1, limit: 2000, total: 2000, pages: 1 },
+    })
+
+    const result = await fetchAllRecipes()
+    expect(result).toHaveLength(2000)
+    // Only one request should have been issued (no over-fetching past total).
+    expect((globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls).toHaveLength(1)
+  })
+
+  it('treats missing/null recipes field as an empty page and stops', async () => {
+    // `data.recipes ?? []` must coerce a missing or null field to [] so the
+    // `length === 0` break fires instead of crashing on `.length`.
+    mockFetchSequence([
+      { body: { recipes: [{ id: 'r1' }], total: 1 } },
+      { body: { recipes: null, total: 1 } },   // null -> []
+      { body: { total: 1 } },                   // missing -> []
+    ])
+
+    const result = await fetchAllRecipes()
+    expect(result).toHaveLength(1)
+  })
+
+  it('stress: accumulates 6 pages in order with no gaps or duplicates', async () => {
+    // Multi-round pressure test: simulate a dataset larger than a single page
+    // split across 6 responses (5 full pages + 1 partial). Verifies:
+    //   - correct page sequencing (page=1..6 in the request URLs)
+    //   - every item from every page is present exactly once
+    //   - the loop stops at the partial page (does not request page 7)
+    //   - total field is honored as the stop condition
+    const PAGE_SIZE = 2000
+    const lastPageSize = 432
+    const total = PAGE_SIZE * 5 + lastPageSize // 10,432
+
+    const makePage = (page: number, size: number) => ({
+      body: {
+        recipes: Array.from({ length: size }, (_, i) => {
+          const globalIndex = (page - 1) * PAGE_SIZE + i
+          return { id: `r${globalIndex}`, name: `dish-${globalIndex}` }
+        }),
+        total,
+        pagination: { page, limit: PAGE_SIZE, total, pages: 6 },
+      },
+    })
+
+    const responses = [
+      makePage(1, PAGE_SIZE),
+      makePage(2, PAGE_SIZE),
+      makePage(3, PAGE_SIZE),
+      makePage(4, PAGE_SIZE),
+      makePage(5, PAGE_SIZE),
+      makePage(6, lastPageSize), // partial -> loop stops here
+    ]
+    mockFetchSequence(responses)
+
+    const result = await fetchAllRecipes()
+
+    // Total accumulated correctly
+    expect(result).toHaveLength(total)
+
+    // Page sequence is exactly 1..6 (URLs contain page=1..6)
+    const calls = (globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls
+    const requestedPages = calls.map(c => {
+      const url = String(c[0])
+      const m = url.match(/page=(\d+)/)
+      return m ? Number(m[1]) : null
+    })
+    expect(requestedPages).toEqual([1, 2, 3, 4, 5, 6])
+    expect(calls).toHaveLength(6) // no 7th request past the partial page
+
+    // No gaps and no duplicates: ids form a contiguous 0..total-1 range
+    const ids = result.map(r => Number((r.id as string).slice(1)))
+    const idSet = new Set(ids)
+    expect(idSet.size).toBe(total)               // no duplicates
+    expect(Math.min(...ids)).toBe(0)
+    expect(Math.max(...ids)).toBe(total - 1)     // contiguous, no gaps
+
+    // Order preserved across page boundaries (stable concatenation)
+    for (let i = 0; i < total; i++) {
+      expect(ids[i]).toBe(i)
+    }
+  })
 })
 
 describe('fetchCategories', () => {
