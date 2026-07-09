@@ -13,6 +13,7 @@ interface CollectionDef {
   title: string;
   description: string;
   seoKeywords: string;
+  emoji: string;
   filter: (recipe: Recipe) => boolean;
 }
 
@@ -23,6 +24,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '空气炸锅系列',
     description: '用空气炸锅做出美味佳肴，简单又健康',
     seoKeywords: '空气炸锅, air fryer, 炸鸡翅, 烤肉',
+    emoji: '🍳',
     filter: (r) => {
       if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
@@ -34,6 +36,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '微波炉快手菜',
     description: '叮一下就好，懒人必备',
     seoKeywords: '微波炉, microwave, 快手菜',
+    emoji: '📡',
     filter: (r) => {
       if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
@@ -45,6 +48,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '电饭煲料理',
     description: '一个电饭煲搞定一餐，懒人福音',
     seoKeywords: '电饭煲, rice cooker, 焖饭, 懒人料理',
+    emoji: '🍚',
     filter: (r) => {
       if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
@@ -56,6 +60,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '懒人菜谱',
     description: '简单省事，一学就会',
     seoKeywords: '懒人菜谱, 简单菜, 快手菜, 新手菜',
+    emoji: '😴',
     filter: (r) => {
       if (r.language !== 'zh') return false;
       if (r.difficulty > 2) return false;
@@ -74,6 +79,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '下饭菜',
     description: '一口菜扒三碗饭',
     seoKeywords: '下饭菜, 拌饭, 盖饭, 炒饭',
+    emoji: '🌶️',
     filter: (r) => {
       if (r.language !== 'zh') return false;
       if (r.difficulty > 2) return false;
@@ -91,6 +97,7 @@ const COLLECTIONS: Record<string, CollectionDef> = {
     title: '烤箱烘焙',
     description: '烤出美味，烘焙幸福',
     seoKeywords: '烤箱, oven, 烘焙, 烤肉, 烤鸡翅',
+    emoji: '🔥',
     filter: (r) => {
       if (!r.ingredients || r.language !== 'zh') return false;
       const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
@@ -214,24 +221,85 @@ export function CollectionPage() {
 
   return (
     <Layout>
-      <div className="mt-6 mb-2 px-2">
-        <Link to={`${base}/`} className="text-primary text-sm hover:underline">{t.collection.backHome}</Link>
-      </div>
-      <div className="mt-4 mb-6 px-2">
-        <h1 className="font-display text-headline-lg text-on-surface">
-          {collection.title}
-          <span className="text-on-surface-variant text-body-md font-normal ml-3">
-            ({filteredRecipes.length} recipes)
+      {/* ── Breadcrumb ──────────────────────────────────────────── */}
+      <nav className="mt-6 mb-4 px-2" aria-label="Breadcrumb">
+        <Link
+          to={`${base}/`}
+          className="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-primary transition-colors duration-200"
+        >
+          <span className="text-base">←</span>
+          <span>{t.collection.backHome}</span>
+        </Link>
+      </nav>
+
+      {/* ── Hero Header ─────────────────────────────────────────── */}
+      <header className="mb-8 px-2 pb-8 border-b border-outline-variant">
+        <div className="flex items-start gap-4 mb-3">
+          {/* Emoji Icon */}
+          <span
+            className="text-5xl md:text-6xl leading-none select-none"
+            role="img"
+            aria-hidden="true"
+          >
+            {collection.emoji}
           </span>
-        </h1>
-        <p className="text-on-surface-variant text-body-md mt-1">{collection.description}</p>
-      </div>
-      <div className="px-2">
-        <RecipeGrid
-          recipes={filteredRecipes}
-          emptyMessage={t.collection.empty}
-        />
-      </div>
+
+          <div className="flex-1 min-w-0">
+            {/* Title */}
+            <h1 className="font-display text-headline-lg md:text-headline-xl text-on-surface tracking-tight">
+              {collection.title}
+            </h1>
+
+            {/* Description */}
+            <p className="text-body-lg text-on-surface-variant mt-1">
+              {collection.description}
+            </p>
+          </div>
+        </div>
+
+        {/* Stats Bar */}
+        <div className="flex items-center gap-3 mt-4">
+          <span className="text-primary font-semibold text-body-lg">
+            {filteredRecipes.length}
+          </span>
+          <span className="text-on-surface-variant text-body-md">
+            道菜谱
+          </span>
+          {filteredRecipes.length > 0 && (
+            <>
+              <span className="text-outline-variant">·</span>
+              <span className="text-on-surface-variant text-body-md">
+                简单易做
+              </span>
+            </>
+          )}
+        </div>
+      </header>
+
+      {/* ── Recipe Grid ──────────────────────────────────────────── */}
+      <section className="mb-12 px-2">
+        {filteredRecipes.length === 0 ? (
+          <div className="text-center py-20">
+            <span className="text-6xl mb-4 block" role="img" aria-hidden="true">
+              🍽️
+            </span>
+            <p className="text-on-surface-variant text-body-lg font-body">
+              {t.collection.empty}
+            </p>
+            <Link
+              to={`${base}/`}
+              className="text-primary hover:underline mt-3 inline-block text-body-md"
+            >
+              {t.collection.backHome}
+            </Link>
+          </div>
+        ) : (
+          <RecipeGrid
+            recipes={filteredRecipes}
+            emptyMessage={t.collection.empty}
+          />
+        )}
+      </section>
     </Layout>
   );
 }
