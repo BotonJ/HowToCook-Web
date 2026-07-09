@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
-import { fetchAllRecipes, fetchCategories } from '@/services/api';
-import { transformDishIndex } from '@/lib/api-transform';
+import { fetchAllRecipes, fetchCategories, getRecipeDetail } from '@/services/api';
+import { transformDishIndex, transformApiRecipe } from '@/lib/api-transform';
 import type { Recipe, Category } from '@/types';
 import type { DishIndex, ApiCategory, EnIndexData } from '@/types/api';
 
@@ -100,67 +100,23 @@ async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; so
   }
 }
 
-async function fetchFullFallback(): Promise<Category[]> {
-  const res = await fetch('/data/recipes-detail.json');
-  if (!res.ok) throw new Error(`Fallback fetch failed: ${res.status}`);
-  return res.json() as Promise<Category[]>;
-}
-
-let fullDataCache: Category[] | null = null;
-
-async function getFullRecipeData(): Promise<Category[]> {
-  if (fullDataCache) return fullDataCache;
-  const [data, englishCategories, flavorProfiles] = await Promise.all([
-    fetchFullFallback(),
-    fetchEnglishIndex(),
-    fetchFlavorProfiles(),
-  ]);
-  // Merge English categories into Chinese categories (same logic as loadRecipes)
-  const mergedCategories = [...data];
-  for (const enCat of englishCategories) {
-    const existingIdx = mergedCategories.findIndex(c => c.id === enCat.id.replace('en-', ''));
-    if (existingIdx !== -1) {
-      const existing = mergedCategories[existingIdx];
-      mergedCategories[existingIdx] = {
-        ...existing,
-        recipes: [...existing.recipes, ...enCat.recipes],
-        count: existing.recipes.length + enCat.recipes.length,
-      };
-    } else {
-      mergedCategories.push(enCat);
-    }
+/**
+ * Look up a single recipe by ID via the API, merging flavor profiles from
+ * the static profiles file (§5 rebuild pending). Replaces the former bulk
+ * recipes-detail.json (1.3MB) approach.
+ */
+export async function findRecipeById(id: string): Promise<Recipe | null> {
+  try {
+    const [apiRecipe, profiles] = await Promise.all([
+      getRecipeDetail(id),
+      fetchFlavorProfiles(),
+    ]);
+    const recipe = transformApiRecipe(apiRecipe);
+    const fp = profiles[id];
+    return fp ? { ...recipe, flavorProfile: fp } : recipe;
+  } catch {
+    return null;
   }
-  // Merge flavor profiles immutably
-  const merged = mergedCategories.map(cat => ({
-    ...cat,
-    recipes: cat.recipes.map(recipe => {
-      const fp = flavorProfiles[recipe.id];
-      return fp ? { ...recipe, flavorProfile: fp } : recipe;
-    }),
-  }));
-  fullDataCache = merged;
-  return merged;
-}
-
-export { getFullRecipeData };
-
-/** Look up a single recipe by ID in O(1) using a pre-built index. */
-let recipeIndexCache: Map<string, Recipe> | null = null;
-
-function getRecipeIndex(categories: Category[]): Map<string, Recipe> {
-  if (recipeIndexCache) return recipeIndexCache;
-  const map = new Map<string, Recipe>();
-  for (const cat of categories) {
-    for (const r of cat.recipes) {
-      map.set(r.id, r);
-    }
-  }
-  recipeIndexCache = map;
-  return map;
-}
-
-export function findRecipeById(id: string): Promise<Recipe | null> {
-  return getFullRecipeData().then(cats => getRecipeIndex(cats).get(id) ?? null);
 }
 
 // Module-level cache so data is fetched only once across re-renders/remounts
@@ -276,8 +232,6 @@ export function useRecipes(): UseRecipesResult {
     cachedCategories = null;
     cachedRecipes = null;
     inflight = null;
-    fullDataCache = null;
-    recipeIndexCache = null;
     doLoad();
   };
 
