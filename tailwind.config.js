@@ -80,15 +80,21 @@ export default {
         "margin-desktop": "64px",
         "section-gap": "80px",
       },
+      // 注：本刻度为项目自定义上移版，非 Tailwind 默认（默认 lg=0.5rem/xl=0.75rem）。
+      // 2xl/3xl 为新增，恢复 xl 之后单调性（旧版 2xl 回落默认值导致 xl>2xl 倒挂）。
       borderRadius: {
         sm: "0.25rem",
         DEFAULT: "0.5rem",
         md: "0.75rem",
         lg: "1rem",
         xl: "1.5rem",
+        "2xl": "2rem",
+        "3xl": "2.5rem",
+        // full 走 Tailwind 默认 (9999px)
       },
       boxShadow: {
         ambient: "0 20px 40px -15px rgba(51, 51, 51, 0.04)",
+        zen: "0 20px 40px -15px rgba(51, 51, 51, 0.04)",
       },
     },
   },
