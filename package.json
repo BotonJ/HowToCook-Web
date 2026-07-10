@@ -13,7 +13,8 @@
     "test:watch": "vitest",
     "generate-recipes": "tsx scripts/generate-recipes.ts && tsx scripts/validate-data.ts",
     "generate-menu-pdfs": "tsx scripts/generate-menu-pdfs.ts",
-    "compress-images": "tsx scripts/compress-images.ts"
+    "compress-images": "tsx scripts/compress-images.ts",
+    "deploy:preview": "VITE_API_BASE=https://api-preview.howtocook.cn npm run build && wrangler pages deploy dist --project-name howtocook --branch preview"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.5.2",

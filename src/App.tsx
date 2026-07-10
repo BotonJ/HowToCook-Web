@@ -1,7 +1,6 @@
 import { lazy, Suspense, Component, type ReactNode, type ErrorInfo } from 'react';
 import { createBrowserRouter, RouterProvider, useRouteError, Link } from 'react-router-dom';
 import { PwaInstallButton } from './components/PwaInstallButton';
-import { TurnstileProvider } from './components/TurnstileProvider';
 import { LangProvider, useI18n } from './lib/i18n';
 
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -112,10 +111,8 @@ const router = createBrowserRouter([
 function App() {
   return (
     <LangProvider>
-      <TurnstileProvider>
-        <RouterProvider router={router} />
-        <PwaInstallButton />
-      </TurnstileProvider>
+      <RouterProvider router={router} />
+      <PwaInstallButton />
     </LangProvider>
   );
 }

@@ -1,6 +1,8 @@
-# CSP single source of truth: the API host is https://api.howtocook.cn
+# CSP single source of truth: API hosts are
+#   - https://api.howtocook.cn      (production, API_BASE default)
+#   - https://api-preview.howtocook.cn  (preview deployments, VITE_API_BASE)
 # (= src/services/api.ts API_BASE). Every connect-src block below MUST include
-# it. If you change the host, update all blocks + API_BASE in lockstep.
+# both. If you change the host, update all blocks + API_BASE in lockstep.
 # Cloudflare Pages replaces (does not merge) header values per more-specific
 # path, so the /explore/* block needs its own copy despite the /* block above.
 /*
@@ -8,15 +10,15 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; worker-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https:; connect-src 'self' https://api.howtocook.cn; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; worker-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.howtocook.cn https://api-preview.howtocook.cn; frame-ancestors 'none'
 
-# Keep in sync with the /* connect-src above (same API host).
+# Keep in sync with the /* connect-src above (same API hosts).
 # Note: /explore currently reads only same-origin /data/* files, but the API
 # host is allowed here so a future API call from Explore won't be CSP-blocked.
 /explore/*
   X-Frame-Options: SAMEORIGIN
   X-Content-Type-Options: nosniff
-  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.howtocook.cn; frame-ancestors 'self'
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.howtocook.cn https://api-preview.howtocook.cn; frame-ancestors 'self'
 
 /sw.js
   Cache-Control: no-cache
