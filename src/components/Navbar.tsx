@@ -106,6 +106,10 @@ export function Navbar() {
             <Search size={18} />
           </Link>
 
+          {/* USER_MODULE_SEAM: 未来用户菜单（auth / profile / 收藏）接入点。
+              本轮不建 auth（安全面需正经做），渲染 null。见 plan §用户模块站位。
+              未来：在此处 drop <UserMenu />，无需改布局。 */}
+
           {/* Language switcher - state toggle, no page reload */}
           <button
             onClick={toggleLang}
