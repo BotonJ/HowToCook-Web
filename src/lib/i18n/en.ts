@@ -128,6 +128,15 @@ export const en = {
     metaTitle: 'Cooking Academy',
     metaDesc: 'Cooking fundamentals, technique tutorials, kitchen tips — data dashboard, content roadmap, and changelog, all in one place.',
     subtitle: 'Kitchen guide from scratch — recipes, techniques, terminology, continuously being built.',
+    heroBadge: '正念烹饪', // TODO-i18n-en
+    heroSubtitle: '通过基础技法、正念练习和对风味的深刻理解，掌握直觉式烹饪的艺术。', // TODO-i18n-en
+    featuredTitle: '精选系列', // TODO-i18n-en
+    featuredSubtitle: '正念厨房的核心知识。', // TODO-i18n-en
+    startSeries: '开始学习', // TODO-i18n-en
+    exploreTitle: '按学科探索', // TODO-i18n-en
+    modules: (n: number) => `${n} 模块`, // TODO-i18n-en
+    articles: (n: number) => `${n} 篇`, // TODO-i18n-en
+    beginner: '入门', // TODO-i18n-en
     stats: {
       recipes: 'Recipes',
       terms: 'Terms',

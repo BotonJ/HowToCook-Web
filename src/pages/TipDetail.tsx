@@ -147,7 +147,7 @@ export function TipDetail() {
             )}
           </div>
 
-          <h1 className="font-display text-headline-xl text-on-surface mb-4">{tip.title}</h1>
+           <h1 className="font-display text-headline-lg md:text-headline-xl text-on-surface mb-4">{tip.title}</h1>
           <div
             className="font-body text-body-md text-on-surface-variant leading-relaxed tip-content"
             dangerouslySetInnerHTML={{ __html: renderedContent }}
