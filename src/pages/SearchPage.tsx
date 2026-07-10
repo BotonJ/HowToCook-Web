@@ -10,7 +10,7 @@ import { useMeta } from '@/hooks/useMeta';
 import { SITE_URL } from '@/lib/constants';
 import type { Recipe } from '@/types';
 
-type SortOption = 'relevance' | 'newest' | 'quickest';
+type SortOption = 'relevance' | 'quickest';
 type TimeFilter = 'all' | 'quick' | 'medium' | 'long';
 type DifficultyFilter = 'all' | '1' | '2' | '3' | '4';
 
@@ -48,9 +48,6 @@ function sortRecipes(recipes: Recipe[], sort: SortOption): Recipe[] {
         const order = { quick: 0, medium: 1, long: 2, very_long: 3 };
         return (order[a.cook_time as keyof typeof order] ?? 9) - (order[b.cook_time as keyof typeof order] ?? 9);
       });
-    case 'newest':
-      // No timestamp available; sort by id descending as proxy
-      return sorted.sort((a, b) => b.id.localeCompare(a.id));
     case 'relevance':
     default:
       return sorted;
@@ -442,7 +439,6 @@ export function SearchPage() {
                   className="bg-transparent border-none text-primary font-medium focus:ring-0 cursor-pointer text-sm pl-0 py-1 pr-6"
                 >
                   <option value="relevance">{lang === 'zh' ? '相关度' : 'Relevance'}</option>
-                  <option value="newest">{lang === 'zh' ? '最新' : 'Newest'}</option>
                   <option value="quickest">{lang === 'zh' ? '最快' : 'Quickest'}</option>
                 </select>
               </div>
