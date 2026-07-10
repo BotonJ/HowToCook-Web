@@ -104,68 +104,6 @@ const COLLECTIONS: Record<string, CollectionDef> = {
       return text.includes('烤箱') || r.cooking_method === '烤';
     },
   },
-
-  // ── 英文专题（保留原有） ─────────────────────────────────────────────
-  // 'chinese-recipes': {
-  //   id: 'chinese-recipes',
-  //   title: 'Chinese Recipes',
-  //   description: 'Authentic Chinese recipes — stir-fry, braised, steamed, and more.',
-  //   seoKeywords: 'chinese recipe, chinese food, 中餐',
-  //   filter: (r) => r.language === 'en' && r.cuisine === 'chinese',
-  // },
-  // 'chinese-all': {
-  //   id: 'chinese-all',
-  //   title: 'All Chinese Recipes',
-  //   description: 'Complete collection of authentic Chinese recipes — 481+ dishes from every region.',
-  //   seoKeywords: 'chinese recipe, chinese food, 中餐, all chinese recipes',
-  //   filter: (r) => r.language !== 'en', // 中文菜谱
-  // },
-  // 'chicken-recipes': {
-  //   id: 'chicken-recipes',
-  //   title: 'Chicken Recipes',
-  //   description: 'Easy and delicious chicken recipes for every occasion.',
-  //   seoKeywords: 'chicken recipe, chicken dinner',
-  //   filter: (r) => r.language === 'en' && r.main_ingredients.some((i) => i.toLowerCase().includes('chicken')),
-  // },
-  // 'baking': {
-  //   id: 'baking',
-  //   title: 'Baking Recipes',
-  //   description: 'Breads, cakes, cookies, and pastries from professional baking sources.',
-  //   seoKeywords: 'baking recipes, bread, cake, pastry',
-  //   filter: (r) => r.language === 'en' && (r.source === 'professional_baking' || r.category === 'dessert'),
-  // },
-  // 'air-fryer-en': {
-  //   id: 'air-fryer-en',
-  //   title: 'Air Fryer Recipes',
-  //   description: 'Quick and healthy air fryer recipes.',
-  //   seoKeywords: 'air fryer recipe, air fryer',
-  //   filter: (r) =>
-  //     r.language === 'en' && (
-  //       r.name.toLowerCase().includes('air fryer') ||
-  //       r.ingredients.some((i) => i.toLowerCase().includes('air fryer'))
-  //     ),
-  // },
-  // 'italian': {
-  //   id: 'italian',
-  //   title: 'Italian Recipes',
-  //   description: 'Classic Italian dishes — pasta, risotto, and more.',
-  //   seoKeywords: 'italian recipe, italian food, pasta',
-  //   filter: (r) => r.language === 'en' && r.cuisine === 'italian',
-  // },
-  // 'french': {
-  //   id: 'french',
-  //   title: 'French Recipes',
-  //   description: 'Elegant French cuisine — sauces, pastries, and refined dishes.',
-  //   seoKeywords: 'french recipe, french cuisine, french food',
-  //   filter: (r) => r.language === 'en' && r.cuisine === 'french',
-  // },
-  // 'japanese': {
-  //   id: 'japanese',
-  //   title: 'Japanese Recipes',
-  //   description: 'Delicate Japanese flavors — sushi, ramen, and traditional dishes.',
-  //   seoKeywords: 'japanese recipe, japanese food, sushi, ramen',
-  //   filter: (r) => r.language === 'en' && r.cuisine === 'japanese',
-  // },
 };
 
 export function CollectionPage() {

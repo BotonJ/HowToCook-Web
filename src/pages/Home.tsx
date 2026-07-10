@@ -213,17 +213,6 @@ export function Home() {
           emptyMessage={normalizedSearch ? t.home.emptySearch : undefined}
         />
       </div>
-
-      <style>{`
-        .input-zen {
-          border: 1px solid #c3c8bf;
-          transition: all 0.3s ease;
-        }
-        .input-zen:focus-within {
-          border-color: #4c644e;
-          box-shadow: 0 0 0 4px rgba(76, 100, 78, 0.1);
-        }
-      `}</style>
     </Layout>
   );
 }

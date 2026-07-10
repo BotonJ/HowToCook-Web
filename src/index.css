@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@layer components {
+  /* 圆角搜索框聚焦效果 — Home/SearchPage 共享 */
+  .input-zen {
+    border: 1px solid #c3c8bf;
+    transition: all 0.3s ease;
+  }
+  .input-zen:focus-within {
+    border-color: #4c644e;
+    box-shadow: 0 0 0 4px rgba(76, 100, 78, 0.1);
+  }
+}
 
 :root {
   font-family: "Inter", "Noto Sans SC", sans-serif;

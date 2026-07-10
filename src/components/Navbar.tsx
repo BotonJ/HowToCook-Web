@@ -14,12 +14,6 @@ function useCollections() {
     { id: 'lazy-meal', label: t.nav.collectionLabels['lazy-meal'], emoji: '😴' },
     { id: 'rice-killer', label: t.nav.collectionLabels['rice-killer'], emoji: '🍚' },
     { id: 'oven', label: t.nav.collectionLabels['oven'], emoji: '🔥' },
-    // ── 英文专题（保留原有） ────────────────────────────────────────
-    // { id: 'chinese-recipes', label: t.nav.collectionLabels['chinese-recipes'], emoji: '🥢' },
-    // { id: 'chicken-recipes', label: t.nav.collectionLabels['chicken-recipes'], emoji: '🍗' },
-    // { id: 'baking', label: t.nav.collectionLabels['baking'], emoji: '🍞' },
-    // { id: 'air-fryer-en', label: t.nav.collectionLabels['air-fryer-en'], emoji: '🍟' },
-    // { id: 'pasta', label: t.nav.collectionLabels['pasta'], emoji: '🍝' },
   ], [t]);
 }
 

@@ -438,6 +438,7 @@ export function SearchPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as SortOption)}
+                  aria-label={lang === 'zh' ? '排序方式' : 'Sort by'}
                   className="bg-transparent border-none text-primary font-medium focus:ring-0 cursor-pointer text-sm pl-0 py-1 pr-6"
                 >
                   <option value="relevance">{lang === 'zh' ? '相关度' : 'Relevance'}</option>
@@ -461,18 +462,6 @@ export function SearchPage() {
           />
         </div>
       </div>
-
-      {/* input-zen CSS (inline for focus effect) */}
-      <style>{`
-        .input-zen {
-          border: 1px solid var(--tw-ring-color, #c3c8bf);
-          transition: all 0.3s ease;
-        }
-        .input-zen:focus-within {
-          border-color: #4c644e;
-          box-shadow: 0 0 0 4px rgba(76, 100, 78, 0.1);
-        }
-      `}</style>
     </Layout>
   );
 }
