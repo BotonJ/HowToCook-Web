@@ -5,7 +5,7 @@ import { Layout } from '@/components/Layout';
 import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
-import { withBaseUrl, toAbsoluteUrl } from '@/lib/utils';
+import { toAbsoluteUrl } from '@/lib/utils';
 import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 import { useT, useBasePath } from '@/lib/i18n';
@@ -109,7 +109,7 @@ export function RecipeDetail() {
 
   useMeta({
     title: recipe?.name,
-    description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name}的做法` : undefined),
+    description: recipe?.description?.slice(0, 160) || (recipe ? `${recipe.name}${t.recipe.descriptionSuffix}` : undefined),
     ogImage: recipe?.imagePath ? toAbsoluteUrl(recipe.imagePath) : undefined,
     ogUrl: recipe ? `${SITE_URL}/recipe/${encodeURIComponent(recipe.id)}` : undefined,
   });
@@ -118,7 +118,7 @@ export function RecipeDetail() {
     return (
       <Layout>
         <div className="text-center py-20">
-          <p className="text-on-surface-variant text-lg font-body">加载中...</p>
+          <p className="text-on-surface-variant text-lg font-body">{t.common.loading}</p>
         </div>
       </Layout>
     );
@@ -128,8 +128,8 @@ export function RecipeDetail() {
     return (
       <Layout>
         <div className="text-center py-20">
-          <p className="text-on-surface-variant text-lg font-body">菜谱未找到</p>
-          <Link to={`${base}/`} className="text-primary hover:underline mt-4 inline-block font-body">返回首页</Link>
+          <p className="text-on-surface-variant text-lg font-body">{t.recipe.notFound}</p>
+          <Link to={`${base}/`} className="text-primary hover:underline mt-4 inline-block font-body">{t.recipe.backHome}</Link>
         </div>
       </Layout>
     );
@@ -158,170 +158,171 @@ export function RecipeDetail() {
           className="flex items-center gap-1.5 text-on-surface-variant hover:text-on-surface transition-colors mb-6"
         >
           <ArrowLeft size={18} />
-          <span className="text-sm font-body">返回</span>
+          <span className="text-sm font-body">{t.recipe.back}</span>
         </button>
 
-        {/* Two-column layout on desktop, single column on mobile */}
-        <div className="flex flex-col md:flex-row gap-gutter-desktop">
-          {/* Left column: Image (sticky on desktop) */}
-          <div className="md:w-2/5 md:sticky md:top-32 md:self-start">
-            {recipe.imagePath && (
-              <div className="rounded-lg overflow-hidden shadow-ambient">
-                <img
-                  src={withBaseUrl(recipe.imagePath)}
-                  alt={recipe.name}
-                  className="w-full aspect-[9/16] object-contain bg-surface-container-low"
-                />
+        {/* Hero Section: grid-cols-12, image col-span-7, info col-span-5 */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16">
+          {/* Hero Image */}
+          <div className="md:col-span-7 h-[400px] md:h-[560px] rounded-2xl overflow-hidden shadow-ambient bg-surface-container">
+            {recipe.imagePath ? (
+              <img
+                src={recipe.imagePath}
+                alt={recipe.name}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-primary-container/40 via-surface to-tertiary-container/30 flex items-center justify-center">
+                <ChefHat size={64} className="text-primary/30" />
               </div>
             )}
           </div>
 
-          {/* Right column: Content */}
-          <div className="md:w-3/5 min-w-0">
-            {/* Title - prominent */}
-            <h1 className="font-display text-headline-xl text-on-surface tracking-tight mb-4 text-center">{recipe.name}</h1>
+          {/* Right: Title, Description, Meta Grid */}
+          <div className="md:col-span-5 flex flex-col justify-center">
+            <h1 className="font-display text-headline-xl text-on-surface tracking-tight mb-4">{recipe.name}</h1>
 
-            {/* Description */}
             {cleanDescription && (
               <p className="text-on-surface-variant font-body text-body-lg leading-relaxed mb-8 whitespace-pre-line">{cleanDescription}</p>
             )}
 
-            {/* Meta badges - grid layout for better readability */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10">
+            {/* Meta Grid */}
+            <div className="grid grid-cols-2 gap-3">
               {recipe.difficulty > 0 && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-surface-container-low">
+                <div className="bg-surface-container-low rounded-lg p-4 flex items-center gap-2">
                   <ChefHat size={18} className="text-primary flex-shrink-0" />
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">难度</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.difficulty}</div>
                     <div className="text-label-lg text-on-surface font-semibold">{t.constants.difficulty[recipe.difficulty]}</div>
                   </div>
                 </div>
               )}
               {recipe.cook_time && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-surface-container-low">
+                <div className="bg-surface-container-low rounded-lg p-4 flex items-center gap-2">
                   <Clock size={18} className="text-tertiary flex-shrink-0" />
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">时间</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.time}</div>
                     <div className="text-label-lg text-on-surface font-semibold">{(t.constants.cookTime as Record<string, string>)[recipe.cook_time] || recipe.cook_time}</div>
                   </div>
                 </div>
               )}
               {recipe.cuisine && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-surface-container-low">
+                <div className="bg-surface-container-low rounded-lg p-4 flex items-center gap-2">
                   <Flame size={18} className="text-on-surface-variant flex-shrink-0" />
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">菜系</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.cuisine}</div>
                     <div className="text-label-lg text-on-surface font-semibold">{recipe.cuisine}</div>
                   </div>
                 </div>
               )}
               {recipe.cooking_method && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-surface-container-low">
+                <div className="bg-surface-container-low rounded-lg p-4 flex items-center gap-2">
                   <Flame size={18} className="text-on-surface-variant flex-shrink-0" />
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">做法</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.method}</div>
                     <div className="text-label-lg text-on-surface font-semibold">{recipe.cooking_method}</div>
                   </div>
                 </div>
               )}
               {recipe.tags?.spicy && (
-                <div className="flex items-center gap-2 px-4 py-3 rounded-lg bg-error-container/40">
+                <div className="bg-error-container/40 rounded-lg p-4 flex items-center gap-2">
                   <span className="text-lg">🌶️</span>
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">口味</div>
-                    <div className="text-label-lg text-error font-semibold">辣</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.taste}</div>
+                    <div className="text-label-lg text-error font-semibold">{t.recipe.spicy}</div>
                   </div>
                 </div>
               )}
               {recipe.tags?.diet && recipe.tags.diet.length > 0 && recipe.tags.diet.map(d => (
-                <div key={d} className="flex items-center gap-2 px-4 py-3 rounded-lg bg-secondary-container/20">
+                <div key={d} className="bg-secondary-container/20 rounded-lg p-4 flex items-center gap-2">
                   <Leaf size={18} className="text-secondary flex-shrink-0" />
                   <div>
-                    <div className="text-label-sm text-on-surface-variant">饮食</div>
+                    <div className="text-label-sm text-on-surface-variant">{t.recipe.diet}</div>
                     <div className="text-label-lg text-secondary font-semibold">{d}</div>
                   </div>
                 </div>
               ))}
             </div>
-
-            {/* Flavor Radar */}
-            {recipe.flavorProfile && (
-              <section className="mb-10">
-                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
-                  风味画像
-                </h2>
-                <div className="flex justify-center">
-                  <FlavorRadar profile={recipe.flavorProfile} size={280} interactive />
-                </div>
-              </section>
-            )}
-
-            {/* Ingredients */}
-            {recipe.ingredients_text && (
-              <section className="mb-10">
-                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
-                  食材
-                </h2>
-                <div className="space-y-1">
-                  {renderMarkdownList(recipe.ingredients_text)}
-                </div>
-              </section>
-            )}
-
-            {/* Calculation */}
-            {recipe.calculation_text && (
-              <section className="mb-10">
-                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
-                  用量
-                </h2>
-                <div className="bg-surface-container-low rounded-lg p-6">
-                  {renderMarkdownList(recipe.calculation_text)}
-                </div>
-              </section>
-            )}
-
-            {/* Steps */}
-            {recipe.steps_text && (
-              <section className="mb-10">
-                <h2 className="font-display text-headline-lg text-on-surface mb-5 pb-3 border-b border-outline-variant text-center">
-                  步骤
-                </h2>
-                {renderSteps(recipe.steps_text)}
-              </section>
-            )}
-
-            {/* Extra tips */}
-            {recipe.extra_text && (
-              <section className="mb-10">
-                <div className="bg-primary-fixed/20 border border-primary-fixed rounded-lg p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <Lightbulb size={20} className="text-primary" />
-                    <h3 className="font-display text-headline-md text-on-primary-fixed">小贴士</h3>
-                  </div>
-                  <div className="space-y-1">
-                    {renderMarkdownList(recipe.extra_text)}
-                  </div>
-                </div>
-              </section>
-            )}
-
-            {/* Allergens */}
-            {recipe.tags?.allergens && recipe.tags.allergens.length > 0 && (
-              <section className="mb-10">
-                <div className="flex items-center gap-2 mb-3">
-                  <AlertTriangle size={18} className="text-error" />
-                  <h3 className="font-display text-headline-md text-on-surface">过敏原提示</h3>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {recipe.tags.allergens.map(a => (
-                    <span key={a} className="px-3 py-1.5 rounded-full bg-error-container text-error text-sm font-body font-medium">
-                      {a}
-                    </span>
-                  ))}
-                </div>
-              </section>
-            )}
           </div>
+        </div>
+
+        {/* Content Sections */}
+        <div className="space-y-12 pb-16">
+          {/* Flavor Radar */}
+          {recipe.flavorProfile && (
+            <section className="bg-surface-container-low rounded-2xl p-6 md:p-8 shadow-ambient">
+              <h2 className="font-display text-headline-lg text-on-surface mb-6 text-center">
+                {t.recipe.flavorProfile}
+              </h2>
+              <div className="flex justify-center">
+                <FlavorRadar profile={recipe.flavorProfile} size={280} interactive />
+              </div>
+            </section>
+          )}
+
+          {/* Ingredients */}
+          {recipe.ingredients_text && (
+            <section className="bg-surface-container-low rounded-2xl p-6 md:p-8 shadow-ambient">
+              <h2 className="font-display text-headline-lg text-on-surface mb-6 text-center">
+                {t.recipe.ingredients}
+              </h2>
+              <div className="space-y-1">
+                {renderMarkdownList(recipe.ingredients_text)}
+              </div>
+            </section>
+          )}
+
+          {/* Calculation */}
+          {recipe.calculation_text && (
+            <section className="bg-surface-container-low rounded-2xl p-6 md:p-8 shadow-ambient">
+              <h2 className="font-display text-headline-lg text-on-surface mb-6 text-center">
+                {t.recipe.amount}
+              </h2>
+              <div className="space-y-1">
+                {renderMarkdownList(recipe.calculation_text)}
+              </div>
+            </section>
+          )}
+
+          {/* Steps */}
+          {recipe.steps_text && (
+            <section className="bg-surface-container-low rounded-2xl p-6 md:p-8 shadow-ambient">
+              <h2 className="font-display text-headline-lg text-on-surface mb-6 text-center">
+                {t.recipe.steps}
+              </h2>
+              {renderSteps(recipe.steps_text)}
+            </section>
+          )}
+
+          {/* Chef's Note (小贴士) */}
+          {recipe.extra_text && (
+            <section className="bg-primary/10 border border-primary/20 rounded-2xl p-6 md:p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Lightbulb size={20} className="text-primary" />
+                <h3 className="font-display text-headline-md text-on-surface">{t.recipe.tips}</h3>
+              </div>
+              <div className="space-y-1">
+                {renderMarkdownList(recipe.extra_text)}
+              </div>
+            </section>
+          )}
+
+          {/* Allergens */}
+          {recipe.tags?.allergens && recipe.tags.allergens.length > 0 && (
+            <section className="bg-surface-container-low rounded-2xl p-6 md:p-8 shadow-ambient">
+              <div className="flex items-center gap-2 mb-4">
+                <AlertTriangle size={18} className="text-error" />
+                <h3 className="font-display text-headline-md text-on-surface">{t.recipe.allergenNotice}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {recipe.tags.allergens.map(a => (
+                  <span key={a} className="px-3 py-1.5 rounded-full bg-error-container text-error text-sm font-body font-medium">
+                    {a}
+                  </span>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </div>
     </Layout>
