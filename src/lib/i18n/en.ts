@@ -93,6 +93,12 @@ export const en = {
     intro: 'HowToCook is an AI-powered recipe platform providing precise, actionable cooking guides for everyone who cooks.',
     description1: '496 recipes covering 17 major cuisines including Sichuan, Cantonese, Shandong, and Hunan, with multi-dimensional filtering by difficulty, time, ingredients, and spice level. The preference learning system gets to know your taste the more you use it.',
     description2: 'The site also provides an MCP protocol interface, allowing AI assistants like Claude Code to directly call the recipe engine for smart recommendations and shopping list generation.',
+    heroSubtitle: '从家常小炒到风味探索，AI 为你的每一餐提供精准指南。', // TODO-i18n-en
+    statsTitle: '数据一览', // TODO-i18n-en
+    stats: {
+      recipes: '道菜谱', // TODO-i18n-en
+      categories: '个分类', // TODO-i18n-en
+    },
   },
 
   // ── Credits ───────────────────────────────────────────────────────
