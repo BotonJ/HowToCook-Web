@@ -110,8 +110,8 @@ describe('CollectionPage', () => {
     // MOCK_RECIPE does not match the air-fryer filter
     renderCollection('air-fryer');
 
-    // The collection shows 0 recipes
-    expect(screen.getByText('0')).toBeInTheDocument();
+    // The collection shows 0 recipes via i18n key
+    expect(screen.getByText('0 道菜谱')).toBeInTheDocument();
   });
 
   it('shows recipes when they match the collection filter', () => {
@@ -125,7 +125,7 @@ describe('CollectionPage', () => {
     renderCollection('air-fryer');
 
     expect(screen.getByText('空气炸锅鸡翅')).toBeInTheDocument();
-    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('1 道菜谱')).toBeInTheDocument();
   });
 
   it('shows error message for invalid collectionId', () => {

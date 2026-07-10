@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
-import { Search } from 'lucide-react';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 import { CategoryNav } from '@/components/CategoryNav';
 import { CuisineNav } from '@/components/CuisineNav';
 import { SourceNav } from '@/components/SourceNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
+import { SearchInput } from '@/components/ui/SearchInput';
 import { Layout } from '@/components/Layout';
 import { WebsiteJsonLd } from '@/components/WebsiteJsonLd';
 import { useSearch } from '@/hooks/useSearch';
@@ -13,6 +14,7 @@ import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
 import { useI18n } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
+import { COLLECTIONS, COLLECTION_IDS } from '@/lib/collections';
 
 const SOURCE_LABELS: Record<string, string> = {
   all: '全部',
@@ -123,6 +125,16 @@ export function Home() {
     return displayedRecipes.filter(recipe => recipe.name.toLowerCase().includes(normalizedSearch));
   }, [displayedRecipes, normalizedSearch, searchResults]);
 
+  // Curated collections with recipe counts (from real data)
+  const curatedCollections = useMemo(() => {
+    return COLLECTION_IDS.map(id => {
+      const def = COLLECTIONS[id];
+      if (!def) return null;
+      const count = flatRecipes.filter(def.filter).length;
+      return { ...def, count };
+    }).filter(Boolean) as { id: string; title: string; description: string; emoji: string; count: number }[];
+  }, [flatRecipes]);
+
   if (loading) {
     return (
       <Layout>
@@ -153,11 +165,53 @@ export function Home() {
   return (
     <Layout>
       {!categoryId && <WebsiteJsonLd />}
-      <div className="mt-4 mb-2 px-2">
+
+      {/* ── Section 1: Hero ───────────────────────────────────────── */}
+      {!categoryId && (
+        <section className="relative pt-12 pb-10 md:pt-20 md:pb-16 text-center">
+          {/* Decorative background glow */}
+          <div className="absolute inset-0 -z-10 overflow-hidden">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container/15 rounded-full blur-[120px]" />
+          </div>
+
+          <h1 className="font-display text-headline-xl text-on-surface tracking-tight mb-4">
+            {lang === 'en' ? 'HowToCook AI' : '做饭指北'}
+          </h1>
+
+          <div className="max-w-lg mx-auto relative">
+            <SearchInput
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder={t.home.searchPlaceholder}
+              aria-label={t.home.searchPlaceholder}
+            />
+            {searchLoading && (
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* ── Section 2: Brand Tagline ──────────────────────────────── */}
+      {!categoryId && (
+        <p className="text-body-lg text-on-surface-variant text-center mb-8 max-w-xl mx-auto px-4">
+          {t.home.tagline}
+        </p>
+      )}
+
+      {/* ── Section 3: AI Flavor Seam (placeholder, no render) ──── */}
+      {/* AI_FLAVOR_SEAM: 未来 AI 风味雷达区块接入点。
+          本轮不渲染——依赖 5 维公式数据清洗（见 flavor 决策"数据先行"铁律）。
+          数据干净后在此 drop 雷达 + 特性卡片。 */}
+
+      {/* ── MCP Banner ────────────────────────────────────────────── */}
+      <div className="mb-8 px-2">
         <McpBanner />
       </div>
 
-      {/* Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
+      {/* ── Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
       <div className="mb-8">
         {lang === 'en' ? (
           <CuisineNav
@@ -177,33 +231,24 @@ export function Home() {
         )}
       </div>
 
-      <div className="px-2">
-        <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <h1 className="font-display text-headline-xl text-on-surface">
-            {categoryId
-              ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
-              : lang === 'en'
-                ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
-                : (activeSource === 'all' ? t.home.category : SOURCE_LABELS[activeSource] || activeSource)}
-            <span className="text-on-surface-variant text-body-lg font-normal ml-3">
-              ({t.home.recipeCount(filteredRecipes.length)})
-            </span>
-          </h1>
-          <div className="w-full sm:w-80 relative">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <Search size={18} className="text-outline" />
-            </div>
-            <input
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder={t.home.searchPlaceholder}
-              aria-label={t.home.searchPlaceholder}
-              className="w-full bg-surface-container-lowest input-zen rounded-full py-3 pl-11 pr-4 text-sm text-on-surface placeholder:text-outline outline-none transition"
-            />
-            {searchLoading && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              </div>
+      {/* ── Section 4: Discovery Grid ────────────────────────────── */}
+      <section className="px-2 mb-16">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-display text-headline-lg text-on-surface">
+              {categoryId
+                ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
+                : lang === 'en'
+                  ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
+                  : (activeSource === 'all' ? t.home.discoveryTitle : SOURCE_LABELS[activeSource] || activeSource)}
+              <span className="text-on-surface-variant text-body-lg font-normal ml-2">
+                ({t.home.recipeCount(filteredRecipes.length)})
+              </span>
+            </h2>
+            {!categoryId && (
+              <p className="text-on-surface-variant text-body-md mt-1">
+                {t.home.discoverySubtitle}
+              </p>
             )}
           </div>
         </div>
@@ -212,7 +257,77 @@ export function Home() {
           recipes={filteredRecipes}
           emptyMessage={normalizedSearch ? t.home.emptySearch : undefined}
         />
-      </div>
+      </section>
+
+      {/* ── Section 5: Curated Collections (bento) ───────────────── */}
+      {!categoryId && curatedCollections.length > 0 && (
+        <section className="mb-16 px-2">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="font-display text-headline-lg text-on-surface">
+                {t.home.curatedTitle}
+              </h2>
+              <p className="text-on-surface-variant text-body-md mt-1">
+                {t.home.curatedSubtitle}
+              </p>
+            </div>
+            <Link
+              to="/collection/air-fryer"
+              className="text-primary text-label-lg flex items-center gap-1 hover:gap-2 transition-all group"
+            >
+              {t.home.viewAllCollections}
+              <ChevronRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 auto-rows-[240px] md:auto-rows-[280px]">
+            {curatedCollections.map((col, idx) => (
+              <Link
+                key={col.id}
+                to={`/collection/${col.id}`}
+                className={`
+                  group relative rounded-2xl overflow-hidden shadow-ambient
+                  hover:-translate-y-1 transition-transform duration-300
+                  ${idx === 0 ? 'md:col-span-2 md:row-span-2' : ''}
+                `}
+              >
+                {/* Gradient background with collection color tint */}
+                <div className={`
+                  absolute inset-0
+                  ${idx === 0
+                    ? 'bg-gradient-to-br from-primary/20 via-surface-container to-secondary-container/30'
+                    : idx % 2 === 0
+                      ? 'bg-gradient-to-br from-primary-container/30 via-surface-container-low to-surface-container'
+                      : 'bg-gradient-to-br from-secondary-container/30 via-surface-container-low to-surface-container'
+                  }
+                `} />
+
+                {/* Content */}
+                <div className="relative h-full p-6 md:p-8 flex flex-col justify-end">
+                  <span className={`
+                    text-4xl md:text-5xl mb-3 select-none
+                    ${idx === 0 ? 'md:text-6xl md:mb-4' : ''}
+                  `} role="img" aria-hidden="true">
+                    {col.emoji}
+                  </span>
+                  <h3 className={`
+                    font-display text-on-surface tracking-tight
+                    ${idx === 0 ? 'text-headline-md md:text-headline-lg' : 'text-headline-sm'}
+                  `}>
+                    {col.title}
+                  </h3>
+                  <p className="text-on-surface-variant text-body-md mt-1 line-clamp-2">
+                    {col.description}
+                  </p>
+                  <span className="text-primary text-label-lg mt-2">
+                    {t.home.recipeCount(col.count)}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </Layout>
   );
 }

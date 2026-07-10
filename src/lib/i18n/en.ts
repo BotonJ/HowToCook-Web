@@ -55,6 +55,12 @@ export const en = {
     sourceAll: 'All',
     sourceZh: 'Chinese',
     sourceEn: 'English',
+    tagline: 'AI 驱动的食谱百科，让每一餐都有章可循', // TODO-i18n-en
+    discoveryTitle: '探索发现', // TODO-i18n-en
+    discoverySubtitle: '海量菜谱，按你的方式发现', // TODO-i18n-en
+    curatedTitle: '精选合集', // TODO-i18n-en
+    curatedSubtitle: '按场景策划的菜谱专题，一道一道攒出来', // TODO-i18n-en
+    viewAllCollections: '查看全部合集', // TODO-i18n-en
   },
 
   // ── Recipe Detail ─────────────────────────────────────────────────
@@ -332,5 +338,7 @@ export const en = {
     error: 'Failed to load',
     notFound: 'Collection not found',
     backHome: '← Back to Home',
+    recipeCount: (n: number) => `${n} 道菜谱`, // TODO-i18n-en
+    easyToMake: '简单易做', // TODO-i18n-en
   },
 } as const;

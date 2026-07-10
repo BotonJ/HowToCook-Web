@@ -56,6 +56,12 @@ export const zh = {
     sourceAll: '全部',
     sourceZh: '中文',
     sourceEn: 'English',
+    tagline: 'AI 驱动的食谱百科，让每一餐都有章可循',
+    discoveryTitle: '探索发现',
+    discoverySubtitle: '海量菜谱，按你的方式发现',
+    curatedTitle: '精选合集',
+    curatedSubtitle: '按场景策划的菜谱专题，一道一道攒出来',
+    viewAllCollections: '查看全部合集',
   },
 
   // ── 菜谱详情 ──────────────────────────────────────────────────────
@@ -329,9 +335,11 @@ export const zh = {
   // ── CollectionPage ────────────────────────────────────────────────
   collection: {
     loading: '加载中...',
-    empty: 'No recipes found in this collection.',
+    empty: '该合集暂无菜谱',
     error: '加载失败',
     notFound: '聚合页不存在',
     backHome: '← 返回首页',
+    recipeCount: (n: number) => `${n} 道菜谱`,
+    easyToMake: '简单易做',
   },
 } as const;

@@ -1,110 +1,13 @@
 import { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { RecipeGrid } from '@/components/RecipeGrid';
 import { Layout } from '@/components/Layout';
 import { useMeta } from '@/hooks/useMeta';
 import { useRecipes } from '@/hooks/useRecipes';
 import { SITE_URL } from '@/lib/constants';
+import { COLLECTIONS } from '@/lib/collections';
 import { useT, useBasePath } from '@/lib/i18n';
-import type { Recipe } from '@/types';
-
-interface CollectionDef {
-  id: string;
-  title: string;
-  description: string;
-  seoKeywords: string;
-  emoji: string;
-  filter: (recipe: Recipe) => boolean;
-}
-
-const COLLECTIONS: Record<string, CollectionDef> = {
-  // ── 中文专题（2026-06-02） ──────────────────────────────────────────
-  'air-fryer': {
-    id: 'air-fryer',
-    title: '空气炸锅系列',
-    description: '用空气炸锅做出美味佳肴，简单又健康',
-    seoKeywords: '空气炸锅, air fryer, 炸鸡翅, 烤肉',
-    emoji: '🍳',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('空气炸锅');
-    },
-  },
-  'microwave': {
-    id: 'microwave',
-    title: '微波炉快手菜',
-    description: '叮一下就好，懒人必备',
-    seoKeywords: '微波炉, microwave, 快手菜',
-    emoji: '📡',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('微波炉');
-    },
-  },
-  'rice-cooker': {
-    id: 'rice-cooker',
-    title: '电饭煲料理',
-    description: '一个电饭煲搞定一餐，懒人福音',
-    seoKeywords: '电饭煲, rice cooker, 焖饭, 懒人料理',
-    emoji: '🍚',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('电饭煲');
-    },
-  },
-  'lazy-meal': {
-    id: 'lazy-meal',
-    title: '懒人菜谱',
-    description: '简单省事，一学就会',
-    seoKeywords: '懒人菜谱, 简单菜, 快手菜, 新手菜',
-    emoji: '😴',
-    filter: (r) => {
-      if (r.language !== 'zh') return false;
-      if (r.difficulty > 2) return false;
-      if (r.cook_time !== 'quick') return false;
-      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
-      // 使用更严格的关键词组合
-      const strictKeywords = ['懒人', '省事', '一锅', '新手友好', '零失败', '小白'];
-      const hasStrict = strictKeywords.some(kw => text.includes(kw));
-      // 或者：名称中包含"简单"且难度为1
-      const isSimpleAndEasy = r.name.includes('简单') && r.difficulty === 1;
-      return hasStrict || isSimpleAndEasy;
-    },
-  },
-  'rice-killer': {
-    id: 'rice-killer',
-    title: '下饭菜',
-    description: '一口菜扒三碗饭',
-    seoKeywords: '下饭菜, 拌饭, 盖饭, 炒饭',
-    emoji: '🌶️',
-    filter: (r) => {
-      if (r.language !== 'zh') return false;
-      if (r.difficulty > 2) return false;
-      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
-      // 名称中包含关键词
-      const nameKeywords = ['下饭', '拌饭', '盖饭', '炒饭'];
-      const hasInName = nameKeywords.some(kw => r.name.includes(kw));
-      // 或者描述中明确提到"下饭"
-      const hasInDesc = text.includes('下饭');
-      return hasInName || hasInDesc;
-    },
-  },
-  'oven': {
-    id: 'oven',
-    title: '烤箱烘焙',
-    description: '烤出美味，烘焙幸福',
-    seoKeywords: '烤箱, oven, 烘焙, 烤肉, 烤鸡翅',
-    emoji: '🔥',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('烤箱') || r.cooking_method === '烤';
-    },
-  },
-};
 
 export function CollectionPage() {
   const { collectionId } = useParams<{ collectionId: string }>();
@@ -165,7 +68,7 @@ export function CollectionPage() {
           to={`${base}/`}
           className="inline-flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-primary transition-colors duration-200"
         >
-          <span className="text-base">←</span>
+          <ArrowLeft size={16} />
           <span>{t.collection.backHome}</span>
         </Link>
       </nav>
@@ -198,16 +101,13 @@ export function CollectionPage() {
         {/* Stats Bar */}
         <div className="flex items-center gap-3 mt-4">
           <span className="text-primary font-semibold text-body-lg">
-            {filteredRecipes.length}
-          </span>
-          <span className="text-on-surface-variant text-body-md">
-            道菜谱
+            {t.collection.recipeCount(filteredRecipes.length)}
           </span>
           {filteredRecipes.length > 0 && (
             <>
               <span className="text-outline-variant">·</span>
               <span className="text-on-surface-variant text-body-md">
-                简单易做
+                {t.collection.easyToMake}
               </span>
             </>
           )}
