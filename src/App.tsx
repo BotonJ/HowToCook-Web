@@ -54,6 +54,21 @@ class LazyErrorBoundary extends Component<
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('[LazyLoad] chunk load failed:', error, info);
+    // Version-skew recovery: a lazy chunk fails to load when a new deploy
+    // ships while the user has an old tab open (old SW/page requests a hash
+    // the new deployment serves differently, or the CDN edge hasn't
+    // propagated it). Auto-reload ONCE to pick up the fresh deployment.
+    // One attempt per session (sessionStorage flag) — if the reload doesn't
+    // fix it, the error UI below remains as the manual-recovery fallback.
+    const isChunkLoadFail =
+      /Failed to fetch dynamically imported module|Importing a module script failed|error loading dynamically imported module/i.test(
+        error.message,
+      );
+    if (isChunkLoadFail && !sessionStorage.getItem('htc-chunk-reload')) {
+      sessionStorage.setItem('htc-chunk-reload', '1');
+      window.location.reload();
+      return;
+    }
   }
 
   render() {
