@@ -230,7 +230,7 @@ describe('useRecipes with English/noodle/flavor data', () => {
     await waitFor(() => expect(result.current.loading).toBe(false))
     const recipe = result.current.recipes.find(r => r.id === 'r1')
     expect(recipe).toBeDefined()
-    expect(recipe!.flavorProfile).toEqual({ sweet: 3, sour: 1, bitter: 0, umami: 8, spicy: 2, fat: 7, salty: 6, aromatic: 5 })
+    expect(recipe!.flavorProfile).toEqual({ sweet: 3, sour: 1, umami: 8, spicy: 2 })
   })
 
   it('handles English index fetch failure gracefully', async () => {

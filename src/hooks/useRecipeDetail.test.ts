@@ -21,7 +21,7 @@ const localRecipe: Recipe = {
 
 const localRecipeWithFlavor: Recipe = {
   ...localRecipe,
-  flavorProfile: { sweet: 3, sour: 1, bitter: 0, umami: 8, spicy: 2, fat: 7, salty: 6, aromatic: 5 },
+  flavorProfile: { sweet: 3, sour: 1, umami: 8, spicy: 2 },
 }
 
 const apiDetail: ApiRecipeDetail = {
