@@ -90,8 +90,7 @@ export async function fetchCategories(): Promise<ApiCategory[]> {
 
 /**
  * Flavor workbench data (ingredients + cooccurrence + surprise + ...).
- * The endpoint transparently proxies the full workbench-data.json blob, so the
- * shape matches the old static file 1:1 — callers parse it the same way.
+ * Served as a single opaque blob; callers parse the object as-is.
  */
 export async function fetchFlavorWorkbench(): Promise<Record<string, unknown>> {
   return fetchApi<Record<string, unknown>>('/flavor/workbench');
