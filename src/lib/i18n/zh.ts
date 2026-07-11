@@ -270,10 +270,8 @@ export const zh = {
   flavor: {
     sweet: '甜',
     sour: '酸',
-    bitter: '苦',
     umami: '鲜',
     spicy: '辣',
-    fat: '脂肪', salty: '咸', aromatic: '香',
   },
 
   // ── 分类 / 难度 / 时间 ────────────────────────────────────────────

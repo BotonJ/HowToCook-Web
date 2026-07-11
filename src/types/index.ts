@@ -17,14 +17,10 @@ export interface Recipe {
   source: string;
   language?: string; // "zh" | "en", 默认 "zh"
   flavorProfile?: {
-    sweet: number;   // 0-10
+    sweet: number;   // 0-1
     sour: number;
-    bitter: number;
     umami: number;
-    spicy: number;   // pungent
-    fat: number;
-    salty: number;
-    aromatic: number;
+    spicy: number;
   };
   description?: string;
   ingredients_text?: string;

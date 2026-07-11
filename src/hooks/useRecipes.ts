@@ -90,7 +90,7 @@ async function fetchEnglishIndex(): Promise<Category[]> {
 }
 
 
-async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; sour: number; bitter: number; umami: number; spicy: number; fat: number; salty: number; aromatic: number }>> {
+async function fetchFlavorProfiles(): Promise<Record<string, { sweet: number; sour: number; umami: number; spicy: number }>> {
   try {
     const res = await fetch('/data/flavor/recipe-flavor-profiles.json');
     if (!res.ok) return {};
