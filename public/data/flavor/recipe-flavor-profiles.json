@@ -1,4832 +1,3212 @@
 {
-  "howtocook/茶叶蛋": {
-    "sweet": 0.71,
-    "sour": 0.64,
-    "bitter": 0.49,
-    "umami": 0.59,
-    "spicy": 0.53,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/醋炒蛋": {
-    "sweet": 0.45,
-    "sour": 0.39,
-    "bitter": 0.31,
-    "umami": 0.54,
-    "spicy": 0.3,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蛋煎糍粑": {
-    "sweet": 0.29,
-    "sour": 0.31,
-    "bitter": 0.24,
-    "umami": 0.37,
-    "spicy": 0.42,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/剁椒炒鸡蛋": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/桂圆红枣粥": {
-    "sweet": 0.75,
-    "sour": 0.83,
-    "bitter": 0.2,
-    "umami": 0.66,
-    "spicy": 0.97,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/韩国麻药鸡蛋": {
-    "sweet": 0.54,
-    "sour": 0.51,
-    "bitter": 0.3,
-    "umami": 0.7,
-    "spicy": 0.37,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鸡蛋三明治": {
-    "sweet": 0.33,
-    "sour": 0.52,
-    "bitter": 0.66,
-    "umami": 0.77,
-    "spicy": 0.28,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/煎饺": {
-    "sweet": 0.53,
-    "sour": 0.55,
-    "bitter": 0.32,
-    "umami": 0.71,
-    "spicy": 0.39,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金枪鱼酱三明治": {
-    "sweet": 0.3,
-    "sour": 0.56,
-    "bitter": 0.75,
-    "umami": 1.0,
-    "spicy": 0.21,
-    "fat": 0.74,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/空气炸锅面包片": {
-    "sweet": 0.4,
-    "sour": 0.83,
-    "bitter": 0.88,
-    "umami": 1.0,
-    "spicy": 0.43,
-    "fat": 1.0,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/美式炒蛋": {
-    "sweet": 0.23,
-    "sour": 0.3,
-    "bitter": 0.4,
-    "umami": 0.57,
-    "spicy": 0.35,
-    "fat": 0.5,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/牛奶燕麦": {
-    "sweet": 0.32,
-    "sour": 0.44,
-    "bitter": 0.35,
-    "umami": 0.57,
-    "spicy": 0.58,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/手抓饼": {
-    "sweet": 0.19,
-    "sour": 0.38,
-    "bitter": 0.54,
-    "umami": 0.74,
-    "spicy": 0.2,
-    "fat": 0.5,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/水煮玉米": {
-    "sweet": 0.53,
-    "sour": 0.52,
-    "bitter": 0.62,
-    "umami": 0.56,
-    "spicy": 0.38,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/苏格兰蛋": {
-    "sweet": 0.21,
-    "sour": 0.38,
-    "bitter": 0.74,
-    "umami": 0.92,
-    "spicy": 0.25,
-    "fat": 0.83,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸甜荷包蛋": {
-    "sweet": 0.57,
-    "sour": 0.53,
-    "bitter": 0.7,
-    "umami": 0.74,
-    "spicy": 0.49,
-    "fat": 0.86,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/太阳蛋": {
-    "sweet": 0.22,
-    "sour": 0.35,
-    "bitter": 0.36,
-    "umami": 0.42,
-    "spicy": 0.19,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/溏心茶叶蛋": {
-    "sweet": 0.41,
-    "sour": 0.33,
-    "bitter": 0.26,
-    "umami": 0.54,
-    "spicy": 0.35,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/溏心蛋": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/吐司果酱": {
-    "sweet": 0.39,
-    "sour": 0.75,
-    "bitter": 1.0,
-    "umami": 0.96,
-    "spicy": 0.31,
-    "fat": 0.98,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/完美水煮蛋": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/微波炉蛋糕": {
-    "sweet": 0.14,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.3,
-    "spicy": 0.37,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/微波炉荷包蛋": {
-    "sweet": 0.35,
-    "sour": 0.47,
-    "bitter": 0.3,
-    "umami": 0.64,
-    "spicy": 0.34,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/微波炉蒸蛋": {
-    "sweet": 0.38,
-    "sour": 0.42,
-    "bitter": 0.24,
-    "umami": 0.6,
-    "spicy": 0.28,
-    "fat": 0.15,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/温泉蛋": {
-    "sweet": 0.47,
-    "sour": 0.52,
-    "bitter": 0.28,
-    "umami": 0.67,
-    "spicy": 0.39,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/香煎金钱蛋": {
+  "howtocook/B52轰炸机": {
     "sweet": 0.6,
-    "sour": 0.62,
-    "bitter": 0.37,
-    "umami": 0.68,
-    "spicy": 0.47,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/燕麦鸡蛋饼": {
-    "sweet": 0.32,
-    "sour": 0.44,
-    "bitter": 0.35,
-    "umami": 0.57,
-    "spicy": 0.58,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒸水蛋": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/菜蟒": {
-    "sweet": 0.4,
-    "sour": 0.49,
-    "bitter": 0.57,
-    "umami": 0.41,
-    "spicy": 0.26,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒方便面": {
-    "sweet": 0.13,
-    "sour": 0.3,
-    "bitter": 0.45,
-    "umami": 0.66,
-    "spicy": 0.2,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒河粉": {
-    "sweet": 0.69,
-    "sour": 0.66,
-    "bitter": 0.46,
-    "umami": 0.88,
-    "spicy": 0.51,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒凉粉": {
-    "sweet": 0.59,
-    "sour": 0.56,
-    "bitter": 0.43,
-    "umami": 0.69,
-    "spicy": 0.39,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒馍": {
-    "sweet": 0.55,
-    "sour": 0.61,
-    "bitter": 0.5,
-    "umami": 0.59,
-    "spicy": 0.37,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒年糕": {
-    "sweet": 0.62,
-    "sour": 0.66,
-    "bitter": 0.3,
-    "umami": 0.71,
-    "spicy": 0.48,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒意大利面": {
-    "sweet": 0.39,
-    "sour": 0.71,
-    "bitter": 0.8,
-    "umami": 0.78,
-    "spicy": 0.32,
-    "fat": 0.73,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/葱油拌面": {
-    "sweet": 0.49,
-    "sour": 0.47,
-    "bitter": 0.21,
-    "umami": 0.52,
-    "spicy": 0.4,
-    "fat": 0.08,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蛋包饭": {
-    "sweet": 0.46,
-    "sour": 0.58,
-    "bitter": 0.66,
-    "umami": 0.8,
-    "spicy": 0.39,
-    "fat": 0.72,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蛋炒饭": {
-    "sweet": 0.53,
-    "sour": 0.62,
-    "bitter": 0.6,
-    "umami": 0.79,
-    "spicy": 0.36,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/电饭煲三文鱼炊饭": {
-    "sweet": 0.37,
-    "sour": 0.52,
-    "bitter": 0.66,
-    "umami": 0.78,
-    "spicy": 0.22,
-    "fat": 0.61,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/电饭煲蒸米饭": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/豆角焖面": {
-    "sweet": 0.68,
-    "sour": 0.63,
-    "bitter": 0.44,
-    "umami": 0.73,
-    "spicy": 0.45,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/宫保鸡丁豆沙粽": {
-    "sweet": 0.82,
-    "sour": 0.64,
-    "bitter": 0.62,
-    "umami": 0.87,
-    "spicy": 0.53,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/韩式拌饭": {
-    "sweet": 0.58,
-    "sour": 0.71,
-    "bitter": 0.55,
-    "umami": 0.94,
-    "spicy": 0.48,
-    "fat": 0.6,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/河南蒸面条": {
-    "sweet": 0.55,
-    "sour": 0.47,
-    "bitter": 0.24,
-    "umami": 0.64,
-    "spicy": 0.35,
-    "fat": 0.11,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红芸豆拌饭": {
-    "sweet": 0.75,
-    "sour": 0.77,
-    "bitter": 0.79,
-    "umami": 0.7,
-    "spicy": 0.42,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糊辣椒拌面": {
-    "sweet": 0.35,
-    "sour": 0.37,
-    "bitter": 0.37,
-    "umami": 0.43,
-    "spicy": 0.18,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/黄金炒饭": {
-    "sweet": 0.5,
-    "sour": 0.57,
-    "bitter": 0.39,
-    "umami": 0.62,
-    "spicy": 0.41,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/黄金馒头片": {
-    "sweet": 0.78,
-    "sour": 0.9,
-    "bitter": 0.5,
-    "umami": 0.82,
-    "spicy": 0.64,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/火腿饭团": {
-    "sweet": 0.51,
-    "sour": 0.72,
-    "bitter": 0.68,
-    "umami": 0.89,
-    "spicy": 0.47,
-    "fat": 0.69,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/鸡丝凉面": {
-    "sweet": 0.63,
-    "sour": 0.59,
-    "bitter": 0.37,
-    "umami": 0.68,
-    "spicy": 0.46,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/基础牛奶面包": {
-    "sweet": 0.23,
-    "sour": 0.3,
-    "bitter": 0.21,
-    "umami": 0.43,
-    "spicy": 0.34,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/茄子肉煎饼": {
-    "sweet": 0.49,
-    "sour": 0.63,
-    "bitter": 0.29,
-    "umami": 0.68,
-    "spicy": 0.49,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/家常炒面": {
-    "sweet": 0.52,
-    "sour": 0.53,
-    "bitter": 0.39,
-    "umami": 0.69,
-    "spicy": 0.3,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/家常锅巴": {
-    "sweet": 0.62,
-    "sour": 0.54,
-    "bitter": 0.52,
-    "umami": 0.53,
-    "spicy": 0.28,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鲣鱼海苔玉米饭": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/酱拌荞麦面": {
-    "sweet": 0.63,
-    "sour": 0.79,
-    "bitter": 0.5,
-    "umami": 0.95,
-    "spicy": 0.49,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/韭菜盒子": {
-    "sweet": 0.27,
-    "sour": 0.35,
-    "bitter": 0.16,
-    "umami": 0.58,
-    "spicy": 0.24,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/可乐炒饭": {
-    "sweet": 0.55,
-    "sour": 0.49,
-    "bitter": 0.42,
-    "umami": 0.64,
-    "spicy": 0.33,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/空气炸锅照烧鸡饭": {
-    "sweet": 0.37,
-    "sour": 0.19,
-    "bitter": 0.08,
-    "umami": 0.3,
-    "spicy": 0.31,
-    "fat": 0.1,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/辣皮子拌面": {
-    "sweet": 0.31,
-    "sour": 0.43,
-    "bitter": 0.32,
-    "umami": 0.57,
-    "spicy": 0.26,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/懒人焖饭": {
-    "sweet": 0.67,
-    "sour": 0.78,
-    "bitter": 0.63,
-    "umami": 0.91,
-    "spicy": 0.58,
-    "fat": 0.7,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/醪糟小汤圆": {
-    "sweet": 0.69,
-    "sour": 0.67,
-    "bitter": 0.23,
-    "umami": 0.55,
-    "spicy": 0.8,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/老干妈拌面": {
-    "sweet": 0.35,
-    "sour": 0.29,
-    "bitter": 0.12,
-    "umami": 0.48,
-    "spicy": 0.21,
-    "fat": 0.1,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/老友猪肉粉": {
-    "sweet": 0.64,
-    "sour": 0.59,
-    "bitter": 0.46,
-    "umami": 0.71,
-    "spicy": 0.38,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烙饼": {
-    "sweet": 0.14,
-    "sour": 0.24,
-    "bitter": 0.21,
-    "umami": 0.2,
-    "spicy": 0.21,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉粉": {
-    "sweet": 0.68,
-    "sour": 0.74,
-    "bitter": 0.58,
-    "umami": 0.82,
-    "spicy": 0.53,
-    "fat": 0.52,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/螺蛳粉": {
-    "sweet": 0.74,
-    "sour": 0.6,
-    "bitter": 0.39,
-    "umami": 0.87,
-    "spicy": 0.53,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/麻辣减脂荞麦面": {
-    "sweet": 0.61,
-    "sour": 0.49,
-    "bitter": 0.3,
-    "umami": 0.52,
-    "spicy": 0.25,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/麻油拌面": {
-    "sweet": 0.58,
-    "sour": 0.56,
-    "bitter": 0.48,
-    "umami": 0.64,
-    "spicy": 0.31,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/披萨饼皮": {
-    "sweet": 0.19,
-    "sour": 0.46,
-    "bitter": 0.45,
-    "umami": 0.52,
-    "spicy": 0.31,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炝锅面": {
-    "sweet": 0.31,
-    "sour": 0.44,
-    "bitter": 0.23,
-    "umami": 0.43,
-    "spicy": 0.31,
-    "fat": 0.11,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糗糕": {
-    "sweet": 0.59,
-    "sour": 0.58,
-    "bitter": 0.42,
-    "umami": 0.35,
-    "spicy": 0.7,
-    "fat": 0.58,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/热干面": {
-    "sweet": 0.58,
-    "sour": 0.65,
-    "bitter": 0.47,
-    "umami": 0.75,
-    "spicy": 0.39,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/日式肥牛丼饭": {
-    "sweet": 0.64,
-    "sour": 0.83,
-    "bitter": 0.48,
-    "umami": 0.89,
-    "spicy": 0.53,
-    "fat": 0.5,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/日式咖喱饭": {
-    "sweet": 0.58,
-    "sour": 0.8,
-    "bitter": 0.74,
-    "umami": 0.86,
-    "spicy": 0.47,
-    "fat": 0.73,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/肉蛋盖饭": {
-    "sweet": 0.53,
-    "sour": 0.51,
-    "bitter": 0.3,
-    "umami": 0.62,
-    "spicy": 0.41,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/陕西油泼面": {
-    "sweet": 0.55,
-    "sour": 0.61,
-    "bitter": 0.46,
-    "umami": 0.72,
-    "spicy": 0.35,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/手工水饺": {
-    "sweet": 0.21,
-    "sour": 0.28,
-    "bitter": 0.02,
-    "umami": 0.38,
-    "spicy": 0.27,
-    "fat": 0.0,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/酸辣蕨根粉": {
-    "sweet": 0.53,
-    "sour": 0.61,
-    "bitter": 0.3,
-    "umami": 0.6,
-    "spicy": 0.46,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/汤面": {
-    "sweet": 0.42,
-    "sour": 0.58,
-    "bitter": 0.59,
-    "umami": 0.77,
-    "spicy": 0.33,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/微波炉腊肠煲仔饭": {
-    "sweet": 0.5,
-    "sour": 0.65,
-    "bitter": 0.36,
-    "umami": 0.74,
-    "spicy": 0.44,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿鸡蛋挂面": {
-    "sweet": 0.46,
-    "sour": 0.55,
-    "bitter": 0.45,
-    "umami": 0.76,
-    "spicy": 0.31,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鲜肉烧卖": {
-    "sweet": 0.6,
-    "sour": 0.6,
-    "bitter": 0.38,
-    "umami": 0.74,
-    "spicy": 0.46,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/咸肉菜饭": {
-    "sweet": 0.55,
-    "sour": 0.5,
-    "bitter": 0.52,
-    "umami": 0.64,
-    "spicy": 0.41,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/扬州炒饭": {
-    "sweet": 0.54,
-    "sour": 0.65,
-    "bitter": 0.59,
-    "umami": 0.71,
-    "spicy": 0.42,
-    "fat": 0.5,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/洋芋擦擦": {
-    "sweet": 0.54,
-    "sour": 0.75,
-    "bitter": 0.49,
-    "umami": 0.8,
-    "spicy": 0.54,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/意式肉酱面": {
-    "sweet": 0.39,
-    "sour": 0.95,
-    "bitter": 0.96,
-    "umami": 1.0,
-    "spicy": 0.48,
-    "fat": 0.95,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/印度烤饼": {
-    "sweet": 0.43,
-    "sour": 0.47,
-    "bitter": 0.38,
-    "umami": 0.59,
-    "spicy": 0.43,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/印度焖饭": {
-    "sweet": 0.65,
-    "sour": 0.67,
-    "bitter": 0.66,
-    "umami": 0.67,
-    "spicy": 0.41,
-    "fat": 0.53,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鹰嘴豆炸饼": {
-    "sweet": 0.77,
-    "sour": 0.77,
-    "bitter": 0.72,
-    "umami": 0.69,
-    "spicy": 0.5,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/照烧鸡腿饭": {
-    "sweet": 0.67,
-    "sour": 0.69,
-    "bitter": 0.56,
-    "umami": 0.81,
-    "spicy": 0.48,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒸卤面": {
-    "sweet": 0.53,
-    "sour": 0.48,
-    "bitter": 0.39,
-    "umami": 0.67,
-    "spicy": 0.3,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/芝麻烧饼": {
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/Mojito莫吉托": {
     "sweet": 0.0,
-    "sour": 0.13,
-    "bitter": 0.0,
-    "umami": 0.13,
-    "spicy": 0.26,
-    "fat": 0.05,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/中式馅饼": {
-    "sweet": 0.37,
-    "sour": 0.41,
-    "bitter": 0.31,
-    "umami": 0.51,
-    "spicy": 0.3,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/万能辣卤": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.5
   },
-  "howtocook/猪油拌饭": {
-    "sweet": 0.58,
-    "sour": 0.54,
-    "bitter": 0.35,
-    "umami": 0.67,
-    "spicy": 0.43,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/三不沾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/煮锅蒸米饭": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/煮泡面加蛋": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/澳门湿版免治牛肉饭": {
-    "sweet": 0.51,
-    "sour": 0.54,
-    "bitter": 0.48,
-    "umami": 0.72,
-    "spicy": 0.37,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/八宝葫芦鸭": {
-    "sweet": 0.67,
-    "sour": 0.67,
-    "bitter": 0.36,
-    "umami": 0.74,
-    "spicy": 0.56,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/巴基斯坦牛肉咖喱": {
-    "sweet": 0.72,
-    "sour": 0.73,
-    "bitter": 0.84,
-    "umami": 0.89,
-    "spicy": 0.47,
-    "fat": 0.78,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/扒肉条": {
-    "sweet": 0.5,
-    "sour": 0.54,
-    "bitter": 0.73,
-    "umami": 0.66,
-    "spicy": 0.26,
-    "fat": 0.69,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/白菜猪肉炖粉条": {
-    "sweet": 0.6,
-    "sour": 0.64,
-    "bitter": 0.48,
-    "umami": 0.84,
-    "spicy": 0.43,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/白卤肘子": {
-    "sweet": 0.78,
-    "sour": 0.73,
-    "bitter": 0.59,
-    "umami": 0.62,
-    "spicy": 0.55,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/宝塔肉": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/柴把鸡": {
-    "sweet": 0.61,
-    "sour": 0.67,
-    "bitter": 0.46,
-    "umami": 0.8,
-    "spicy": 0.46,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炒烤羊肉": {
-    "sweet": 0.6,
-    "sour": 0.67,
-    "bitter": 0.42,
-    "umami": 0.77,
-    "spicy": 0.43,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/豉汁排骨": {
-    "sweet": 0.68,
-    "sour": 0.57,
-    "bitter": 0.32,
-    "umami": 0.69,
-    "spicy": 0.44,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/豉汁蒸白鱔": {
-    "sweet": 0.64,
-    "sour": 0.5,
-    "bitter": 0.26,
+  "howtocook/上汤娃娃菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
     "umami": 0.6,
-    "spicy": 0.43,
-    "fat": 0.15,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/葱爆羊肉": {
-    "sweet": 0.6,
-    "sour": 0.56,
-    "bitter": 0.39,
-    "umami": 0.71,
-    "spicy": 0.38,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/葱烧蹄筋": {
-    "sweet": 0.4,
-    "sour": 0.49,
-    "bitter": 0.57,
-    "umami": 0.41,
-    "spicy": 0.26,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/脆炸腐乳肉": {
-    "sweet": 0.57,
-    "sour": 0.55,
-    "bitter": 0.37,
-    "umami": 0.67,
-    "spicy": 0.36,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/带把肘子": {
-    "sweet": 0.75,
-    "sour": 0.74,
-    "bitter": 0.6,
-    "umami": 0.75,
-    "spicy": 0.52,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.0
   },
   "随便做/东北饭店锅包肉": {
-    "sweet": 0.69,
-    "sour": 0.67,
-    "bitter": 0.58,
-    "umami": 0.71,
-    "spicy": 0.43,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.0
   },
   "随便做/东坡肘子": {
-    "sweet": 0.67,
-    "sour": 0.45,
-    "bitter": 0.38,
-    "umami": 0.58,
-    "spicy": 0.41,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.7
+  },
+  "howtocook/中式馅饼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "随便做/九转大肠": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.65
+  },
+  "howtocook/乡村啤酒鸭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.73
+  },
+  "howtocook/乾隆白菜": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "面食之神/八宝粥": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/八宝葫芦鸭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.64,
+    "spicy": 0.0
+  },
+  "howtocook/农家一碗香": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/冬瓜茶": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/冬瓜薏米老鸭汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
   },
   "howtocook/冬瓜酿肉": {
-    "sweet": 0.66,
-    "sour": 0.62,
-    "bitter": 0.43,
+    "sweet": 0.0,
+    "sour": 0.0,
     "umami": 0.7,
-    "spicy": 0.5,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.6
   },
-  "howtocook/豆豉鲮鱼油麦菜": {
-    "sweet": 0.67,
-    "sour": 0.69,
-    "bitter": 0.54,
-    "umami": 0.79,
-    "spicy": 0.45,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/冰粉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.3
   },
-  "随便做/剁椒蒸鸡": {
-    "sweet": 0.61,
-    "sour": 0.56,
-    "bitter": 0.82,
+  "howtocook/冷吃兔": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.62
+  },
+  "howtocook/凉拌木耳": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.65,
+    "spicy": 0.8
+  },
+  "howtocook/凉拌油麦菜": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.75,
+    "spicy": 0.5
+  },
+  "随便做/凉拌炸青椒": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/凉拌莴笋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.9
+  },
+  "howtocook/凉拌豆腐": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/凉拌金针菇": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.65,
+    "spicy": 0.9
+  },
+  "howtocook/凉拌鸡丝": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/凉拌黄瓜": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/凉皮": {
+    "sweet": 0.0,
+    "sour": 0.7,
     "umami": 0.78,
-    "spicy": 0.42,
-    "fat": 0.89,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.5
   },
-  "随便做/番茄炖牛腩": {
-    "sweet": 0.63,
-    "sour": 0.58,
-    "bitter": 0.52,
-    "umami": 0.63,
-    "spicy": 0.38,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "面食之神/凉皮": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/番茄红酱": {
-    "sweet": 0.49,
-    "sour": 0.58,
-    "bitter": 0.68,
+  "howtocook/凉粉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/凉菜合集（浇汁松花蛋、拍黄瓜、捞汁秋葵、老醋花生米）": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.68
+  },
+  "面食之神/刀削面": {
+    "sweet": 0.6,
+    "sour": 0.0,
     "umami": 0.73,
-    "spicy": 0.31,
-    "fat": 0.6,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.75
   },
   "随便做/分子锅包肉": {
-    "sweet": 0.25,
-    "sour": 0.35,
-    "bitter": 0.39,
-    "umami": 0.38,
-    "spicy": 0.1,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.5,
+    "spicy": 0.0
   },
-  "howtocook/粉蒸肉": {
-    "sweet": 0.72,
-    "sour": 0.63,
-    "bitter": 0.48,
-    "umami": 0.76,
-    "spicy": 0.44,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/利提巧卡": {
+    "sweet": 0.0,
+    "sour": 0.45,
+    "umami": 0.5,
+    "spicy": 0.62
   },
-  "随便做/腐乳红烧肉": {
-    "sweet": 0.84,
-    "sour": 0.7,
-    "bitter": 0.49,
-    "umami": 0.66,
-    "spicy": 0.58,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/剁椒炒鸡蛋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.7
   },
-  "howtocook/腐乳肉": {
-    "sweet": 0.81,
-    "sour": 0.67,
-    "bitter": 0.4,
-    "umami": 0.67,
-    "spicy": 0.59,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/剁椒蒸鸡": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.9
   },
-  "随便做/干巴牛肉": {
-    "sweet": 0.75,
-    "sour": 0.7,
-    "bitter": 0.62,
-    "umami": 0.79,
-    "spicy": 0.48,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/勾芡香菇汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.0
   },
-  "howtocook/干煸仔鸡": {
-    "sweet": 0.61,
-    "sour": 0.58,
-    "bitter": 0.52,
-    "umami": 0.73,
-    "spicy": 0.37,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/包菜炒鸡蛋粉丝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.9
   },
-  "随便做/干炸丸子": {
-    "sweet": 0.53,
-    "sour": 0.51,
-    "bitter": 0.32,
+  "面食之神/千层饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/半成品意面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/南派红烧肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/卤菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
     "umami": 0.72,
-    "spicy": 0.34,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.6
   },
-  "随便做/宫保鸡丁": {
-    "sweet": 0.54,
-    "sour": 0.66,
-    "bitter": 0.44,
-    "umami": 0.64,
-    "spicy": 0.38,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/印度土豆花菜": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.62
   },
-  "随便做/宫廷十方肉": {
-    "sweet": 0.78,
-    "sour": 0.9,
-    "bitter": 0.5,
-    "umami": 0.82,
-    "spicy": 0.64,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/印度奶茶": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.6
+  },
+  "howtocook/印度烤饼": {
+    "sweet": 0.7,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/印度焖饭": {
+    "sweet": 0.0,
+    "sour": 0.45,
+    "umami": 0.55,
+    "spicy": 0.6
+  },
+  "howtocook/印度葫芦丸子": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.62
+  },
+  "howtocook/反沙芋头": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/口水鸡": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.77
+  },
+  "howtocook/可乐桶": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/可乐炒饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.6
+  },
+  "howtocook/可乐鸡翅": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "随便做/可乐鸡翅": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/台式卤肉饭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/名菜翠珠鱼花": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "howtocook/吐司果酱": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
   "howtocook/咕噜肉": {
-    "sweet": 0.57,
-    "sour": 0.46,
-    "bitter": 0.5,
-    "umami": 0.69,
-    "spicy": 0.32,
-    "fat": 0.46,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/广式萝卜牛腩": {
-    "sweet": 0.76,
-    "sour": 0.66,
-    "bitter": 0.45,
-    "umami": 0.62,
-    "spicy": 0.48,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/贵州辣子鸡": {
-    "sweet": 0.8,
+    "sweet": 0.7,
     "sour": 0.7,
-    "bitter": 0.69,
-    "umami": 0.79,
-    "spicy": 0.49,
-    "fat": 0.55,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "umami": 0.8,
+    "spicy": 0.0
   },
-  "howtocook/桂林十八酿": {
-    "sweet": 0.49,
-    "sour": 0.55,
-    "bitter": 0.53,
-    "umami": 0.66,
-    "spicy": 0.3,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/咖啡椰奶冻": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "随便做/锅烧肘子": {
-    "sweet": 0.65,
-    "sour": 0.62,
-    "bitter": 0.42,
-    "umami": 0.64,
-    "spicy": 0.46,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/过桥排骨": {
-    "sweet": 0.91,
-    "sour": 0.9,
-    "bitter": 0.63,
-    "umami": 0.76,
-    "spicy": 0.69,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/荷兰豆炒腊肠": {
-    "sweet": 0.51,
-    "sour": 0.55,
-    "bitter": 0.23,
-    "umami": 0.67,
-    "spicy": 0.42,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/黑粉炸鸡（黑暗料理）": {
-    "sweet": 0.65,
-    "sour": 0.61,
-    "bitter": 0.47,
-    "umami": 0.65,
-    "spicy": 0.48,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/黑椒牛柳": {
-    "sweet": 0.56,
-    "sour": 0.61,
-    "bitter": 0.64,
-    "umami": 0.78,
-    "spicy": 0.33,
-    "fat": 0.55,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧鸡翅": {
-    "sweet": 0.82,
-    "sour": 0.77,
-    "bitter": 0.58,
-    "umami": 0.75,
-    "spicy": 0.54,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红烧狮子头": {
-    "sweet": 0.69,
-    "sour": 0.61,
-    "bitter": 0.41,
-    "umami": 0.62,
-    "spicy": 0.48,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红烧肘子": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧猪蹄": {
-    "sweet": 0.81,
-    "sour": 0.71,
-    "bitter": 0.54,
-    "umami": 0.62,
-    "spicy": 0.56,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红枣肉丸汤": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/湖南家常红烧肉": {
-    "sweet": 0.81,
-    "sour": 0.73,
-    "bitter": 0.48,
+  "howtocook/咖喱炒蟹": {
+    "sweet": 0.0,
+    "sour": 0.0,
     "umami": 0.6,
-    "spicy": 0.64,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.45
   },
-  "howtocook/虎皮肘子": {
-    "sweet": 0.74,
-    "sour": 0.65,
-    "bitter": 0.52,
-    "umami": 0.61,
-    "spicy": 0.49,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/咖喱肥牛": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.45
   },
-  "随便做/滑溜里脊": {
-    "sweet": 0.51,
-    "sour": 0.67,
-    "bitter": 0.38,
-    "umami": 0.67,
-    "spicy": 0.46,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/咸肉菜饭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.6
   },
-  "howtocook/黄瓜炒肉": {
-    "sweet": 0.58,
-    "sour": 0.78,
-    "bitter": 0.45,
+  "随便做/咸蛋黄茄子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/响油鳝丝": {
+    "sweet": 0.7,
+    "sour": 0.0,
     "umami": 0.77,
-    "spicy": 0.56,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.6
   },
-  "howtocook/黄焖鸡": {
-    "sweet": 0.66,
-    "sour": 0.63,
-    "bitter": 0.51,
-    "umami": 0.77,
-    "spicy": 0.4,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/响油鳝糊": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.7
   },
-  "howtocook/黄油鸡": {
-    "sweet": 0.73,
-    "sour": 0.77,
-    "bitter": 0.69,
-    "umami": 0.69,
-    "spicy": 0.5,
-    "fat": 0.55,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/徽派红烧肉": {
-    "sweet": 0.64,
-    "sour": 0.55,
-    "bitter": 0.36,
+  "howtocook/商芝肉": {
+    "sweet": 0.7,
+    "sour": 0.7,
     "umami": 0.63,
-    "spicy": 0.4,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.0
+  },
+  "howtocook/啤酒鸭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.74,
+    "spicy": 0.9
+  },
+  "howtocook/回锅肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.65
   },
   "随便做/回锅肉": {
-    "sweet": 0.74,
-    "sour": 0.69,
-    "bitter": 0.37,
-    "umami": 0.69,
-    "spicy": 0.57,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.65,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.67
   },
-  "howtocook/尖椒炒牛肉": {
-    "sweet": 0.55,
-    "sour": 0.48,
-    "bitter": 0.37,
-    "umami": 0.6,
-    "spicy": 0.29,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/团圆十锦": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.6
   },
-  "howtocook/尖叫牛蛙": {
+  "随便做/国宴菜翡翠虾球": {
     "sweet": 0.7,
-    "sour": 0.67,
-    "bitter": 0.65,
-    "umami": 0.81,
-    "spicy": 0.47,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
   },
-  "howtocook/煎烤羊排": {
-    "sweet": 0.78,
-    "sour": 0.74,
-    "bitter": 0.67,
-    "umami": 0.6,
-    "spicy": 0.51,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/土豆炖排骨": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.8
   },
-  "howtocook/简易红烧肉": {
-    "sweet": 0.59,
-    "sour": 0.5,
-    "bitter": 0.47,
-    "umami": 0.6,
-    "spicy": 0.47,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/土豆炖牛肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.65
+  },
+  "howtocook/地三鲜": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.9
+  },
+  "howtocook/基础牛奶面包": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/大虾烧白菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/太阳蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/奇异果菠菜特调": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/奥利奥冰淇淋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/奶汤鲫鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/奶油蘑菇汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.5,
+    "spicy": 0.45
+  },
+  "howtocook/奶茶": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/奶酪培根通心粉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.3
   },
   "howtocook/姜炒鸡": {
-    "sweet": 0.72,
-    "sour": 0.7,
-    "bitter": 0.59,
-    "umami": 0.78,
-    "spicy": 0.54,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
   },
   "howtocook/姜葱捞鸡": {
-    "sweet": 0.61,
-    "sour": 0.56,
-    "bitter": 0.82,
-    "umami": 0.78,
-    "spicy": 0.42,
-    "fat": 0.89,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
   },
-  "howtocook/酱牛肉": {
-    "sweet": 0.78,
-    "sour": 0.66,
-    "bitter": 0.49,
+  "howtocook/孜然牛肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.65
+  },
+  "随便做/孜然羊肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "howtocook/完美水煮蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/宝塔肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/宫保鸡丁": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.9
+  },
+  "随便做/宫保鸡丁": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.73
+  },
+  "随便做/宫保鸡丁豆沙粽": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.8
+  },
+  "随便做/宫廷十方肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/家常日本豆腐": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.3
+  },
+  "随便做/家常炒面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.76
+  },
+  "随便做/家常锅巴": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.66,
+    "spicy": 0.65
+  },
+  "howtocook/小炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/小炒藕丁": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/小炒鸡肝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.5
+  },
+  "howtocook/小炒黄牛肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.9
+  },
+  "随便做/小白菜烧豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.7
+  },
+  "面食之神/小笼包": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/小米粥": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/小米辣炒肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.9
+  },
+  "howtocook/小酥肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.67
+  },
+  "howtocook/小龙虾": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "howtocook/尖叫牛蛙": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.65,
+    "spicy": 0.8
+  },
+  "随便做/尖椒干豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/尖椒炒牛肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/山西过油肉": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.68,
+    "spicy": 0.47
+  },
+  "howtocook/巴基斯坦牛肉咖喱": {
+    "sweet": 0.0,
+    "sour": 0.45,
+    "umami": 0.55,
+    "spicy": 0.9
+  },
+  "howtocook/带把肘子": {
+    "sweet": 0.6,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.0
+  },
+  "随便做/干巴牛肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "随便做/干炸丸子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.5
+  },
+  "howtocook/干煎阿根廷红虾": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.7,
+    "spicy": 0.45
+  },
+  "howtocook/干煸仔鸡": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.65
+  },
+  "howtocook/干锅花菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/广式萝卜牛腩": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.9
+  },
+  "面食之神/开花馒头": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/微波炉腊肠煲仔饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/微波炉荷包蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/微波炉蒸蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/微波炉蛋糕": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/微波葱姜黑鳕鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/徽派红烧肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "howtocook/意式烤鸡": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "howtocook/意式肉酱面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.3
+  },
+  "howtocook/意式香肠北非蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.6
+  },
+  "随便做/懒人焖饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.6
+  },
+  "howtocook/懒人蛋挞": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "面食之神/戗面馒头": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/戚风蛋糕": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/手工水饺": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/手抓饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/手撕包菜": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.65
+  },
+  "面食之神/手擀大宽裤带面": {
+    "sweet": 0.5,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.9
+  },
+  "随便做/扒肉条": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.7
+  },
+  "howtocook/扬州炒饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/披萨饼皮": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/抬格子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "随便做/拆烩鲢鱼头": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.61,
+    "spicy": 0.6
+  },
+  "面食之神/拉条子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/拔丝土豆": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/排骨山药玉米汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/排骨苦瓜汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/提拉米苏": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.3,
+    "spicy": 0.0
+  },
+  "面食之神/擀饺子皮": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "随便做/文思豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/新疆大盘鸡": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "howtocook/无厨师机蜂蜜面包": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/无骨鸡爪": {
+    "sweet": 0.7,
+    "sour": 0.65,
+    "umami": 0.7,
+    "spicy": 0.63
+  },
+  "howtocook/日式咖喱饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.45
+  },
+  "howtocook/日式肥牛丼饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.4
+  },
+  "howtocook/昂刺鱼豆腐汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "面食之神/春饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/朱雀汤": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/杀猪菜": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.6,
+    "spicy": 0.9
+  },
+  "howtocook/杨枝甘露": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/松仁玉米": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/松鼠桂鱼": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/板栗扒白菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/枝竹羊腩煲": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.3
+  },
+  "随便做/枣香红烧肉": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
+  },
+  "howtocook/柠檬水": {
+    "sweet": 0.5,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/柱候牛腩": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.85
+  },
+  "随便做/柴把鸡": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.6
+  },
+  "howtocook/桂圆红枣粥": {
+    "sweet": 0.4,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/桂林十八酿": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.56,
+    "spicy": 0.0
+  },
+  "howtocook/梅菜扣肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.9
+  },
+  "随便做/梅菜扣肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
+  },
+  "howtocook/椒盐排条": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/椒盐玉米": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "随便做/椒麻腰花": {
+    "sweet": 0.0,
+    "sour": 0.65,
+    "umami": 0.73,
+    "spicy": 0.78
+  },
+  "howtocook/榄菜肉末四季豆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.9
+  },
+  "随便做/樱桃肉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/水油焖蔬菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "面食之神/水煎包": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.7
+  },
+  "howtocook/水煮牛肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.9
+  },
+  "随便做/水煮牛肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.68
+  },
+  "howtocook/水煮玉米": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/水煮肉片": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.7
+  },
+  "howtocook/水煮鱼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.65
+  },
+  "面食之神/水盆羊肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "面食之神/汤心饺子": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.6
+  },
+  "howtocook/汤面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/河南蒸菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/河南蒸面条": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.4
+  },
+  "howtocook/油泼辣子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.0,
+    "spicy": 0.75
+  },
+  "面食之神/油泼辣子": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "面食之神/油泼面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "随便做/油泼鲍鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/油焖大虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "随便做/油焖大虾": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/油焖鸡": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.0
+  },
+  "随便做/油爆双脆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.67
+  },
+  "随便做/油辣干锅土豆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.62
+  },
+  "howtocook/油酥": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "面食之神/油酥饼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/油醋爆蛋": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.75,
+    "spicy": 0.9
+  },
+  "howtocook/泰国手标红茶": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/洋芋擦擦": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/洋葱炒猪肉": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.3
+  },
+  "howtocook/洋葱炒鸡蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.3
+  },
+  "随便做/浓汤菜豆糊": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/海边落日": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/淄博烧烤": {
+    "sweet": 0.6,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.5
+  },
+  "howtocook/清炒花菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/清炖狮子头": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/清炖羊肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.6
+  },
+  "howtocook/清蒸南瓜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/清蒸生蚝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/清蒸鲈鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/清蒸鳜鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/温泉蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/湖南家常红烧肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.9
+  },
+  "howtocook/湘祁米夫鸭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.75
+  },
+  "随便做/溏心茶叶蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "howtocook/溏心蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/滑溜里脊": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/澳门湿版免治牛肉饭": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.68,
+    "spicy": 0.45
+  },
+  "howtocook/火腿饭团": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/炒凉粉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.0
+  },
+  "howtocook/炒年糕": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/炒意大利面": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "howtocook/炒方便面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/炒河粉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.4
+  },
+  "howtocook/炒滑蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/炒烤羊肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.5
+  },
+  "howtocook/炒茄子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.67,
+    "spicy": 0.0
+  },
+  "howtocook/炒青菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/炒馍": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.4
+  },
+  "随便做/炖鸡汤": {
+    "sweet": 0.4,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "随便做/炝拌菜心": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.77
+  },
+  "随便做/炝炒莲花白": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "面食之神/炝醋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.9
+  },
+  "随便做/炝锅面": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.0
+  },
+  "howtocook/炸串酱料": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.62
+  },
+  "随便做/炸萝卜丸子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/炸薯条": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/炸酥肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.8
+  },
+  "howtocook/炸酱面": {
+    "sweet": 0.6,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.0
+  },
+  "面食之神/炸酱面": {
+    "sweet": 0.6,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.3
+  },
+  "howtocook/炸鲜奶": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/烙饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/烤箱版巴斯克芝士蛋糕": {
+    "sweet": 0.6,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/烤羊排": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.56
+  },
+  "howtocook/烤茄子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.65
+  },
+  "howtocook/烤蛋挞": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/烤鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.65,
+    "spicy": 0.6
+  },
+  "howtocook/烤鸡翅": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/烧椒猪肝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.7
+  },
+  "面食之神/烩面片": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.6,
+    "spicy": 0.9
+  },
+  "howtocook/热干面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.67
+  },
+  "howtocook/煎烤羊排": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.58
+  },
+  "howtocook/煎饺": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/照烧鸡腿饭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/煮泡面加蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/煮锅蒸米饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/煳辣炝锅鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.7
+  },
+  "随便做/熏酱猪蹄": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.64,
+    "spicy": 0.63
+  },
+  "howtocook/燕麦鸡蛋饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/牛奶燕麦": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/牛排": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "howtocook/牛油果拉西": {
+    "sweet": 0.7,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.3
+  },
+  "howtocook/牛油火锅底料": {
+    "sweet": 0.0,
+    "sour": 0.5,
+    "umami": 0.7,
+    "spicy": 0.47
+  },
+  "howtocook/猪油拌饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "howtocook/猪皮冻": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.7
+  },
+  "howtocook/猪肉烩酸菜": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/玉米排骨汤": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.6,
+    "spicy": 0.6
+  },
+  "howtocook/玛格丽特饼干": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/甜辣烤全翅": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.8
+  },
+  "howtocook/生汆丸子汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.63,
+    "spicy": 0.6
+  },
+  "howtocook/田螺酿": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.6
+  },
+  "howtocook/电饭煲三文鱼炊饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.53,
+    "spicy": 0.0
+  },
+  "howtocook/电饭煲蒸米饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/番茄炖牛腩": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/番茄牛肉蛋花汤": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.6
+  },
+  "howtocook/番茄红酱": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.45
+  },
+  "随便做/疙瘩汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/瘦肉土豆片": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.4
+  },
+  "随便做/白卤肘子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.65
+  },
+  "howtocook/白灼菜心": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.9
+  },
+  "howtocook/白灼虾": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.4
+  },
+  "howtocook/白菜猪肉炖粉条": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.0
+  },
+  "howtocook/百香果橙子特调": {
+    "sweet": 0.7,
+    "sour": 0.45,
+    "umami": 0.0,
+    "spicy": 0.3
+  },
+  "howtocook/皮蛋瘦肉粥": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/皮蛋肉丸": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/皮蛋豆腐": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/砂糖椰子冰沙": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/砂锅豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "面食之神/空心饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.5
+  },
+  "howtocook/空气炸锅照烧鸡饭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/空气炸锅羊排": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/空气炸锅脆皮现腌炸鸡": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.7,
+    "spicy": 0.45
+  },
+  "howtocook/空气炸锅面包片": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/空气炸锅鸡翅中": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/简易版炒糖色": {
+    "sweet": 0.68,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/简易红烧肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.63,
+    "spicy": 0.0
+  },
+  "howtocook/米粥": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/粉蒸肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "随便做/糊辣椒拌面": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.7
+  },
+  "howtocook/糖拌西红柿": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "howtocook/糖醋排骨": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.7,
+    "spicy": 0.5
+  },
+  "随便做/糖醋排骨": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.6,
+    "spicy": 0.7
+  },
+  "howtocook/糖醋汁": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/糖醋里脊": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.65,
+    "spicy": 0.6
+  },
+  "随便做/糖醋里脊": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "随便做/糖醋鱼片": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "howtocook/糖醋鲤鱼": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/糗糕": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/糯香猪手": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.62
+  },
+  "howtocook/素炒豆角": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/紫菜蛋花汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/红枣肉丸汤": {
+    "sweet": 0.4,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/红柚蛋糕": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/红烧冬瓜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.78,
+    "spicy": 0.0
+  },
+  "随便做/红烧带鱼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.75
+  },
+  "随便做/红烧狮子头": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/红烧猪蹄": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
+  },
+  "随便做/红烧肘子": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.0
+  },
+  "howtocook/红烧茄子": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.6
+  },
+  "howtocook/红烧鱼": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.77,
+    "spicy": 0.9
+  },
+  "howtocook/红烧鱼头": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.75,
+    "spicy": 0.8
+  },
+  "howtocook/红烧鲤鱼": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "随便做/红烧鲤鱼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.0
+  },
+  "howtocook/红烧鸡翅": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.67
+  },
+  "howtocook/红芸豆拌饭": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.62
+  },
+  "随便做/红薯丸子": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/绿豆沙": {
+    "sweet": 0.65,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/罗宋汤": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "howtocook/羊排焖面": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "随便做/羊肉捞面": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.68
+  },
+  "howtocook/羊肉汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.5
+  },
+  "面食之神/羊肉汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.7
+  },
+  "howtocook/美式炒蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/老友猪肉粉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.75
+  },
+  "howtocook/老妈蹄花": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.75,
+    "spicy": 0.78
+  },
+  "howtocook/老干妈拌面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/老式锅包肉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.5
+  },
+  "面食之神/老潼关肉夹馍": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/老醋焖肉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "面食之神/老面馒头": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/耙耙柑茶": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/肉蛋盖饭": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.0
+  },
+  "howtocook/肉蟹煲": {
+    "sweet": 0.65,
+    "sour": 0.3,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/肉饼炖蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/胡萝卜甜糕": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/脆炸腐乳肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/脆皮豆腐": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.0
+  },
+  "howtocook/腊八粥": {
+    "sweet": 0.4,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/腐乳红烧肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
+  },
+  "howtocook/腐乳肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "面食之神/臊子面": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.7
+  },
+  "howtocook/芋泥雪媚娘": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/芝士菠萝咕咾肉": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "howtocook/芝麻烧饼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/芥末罗氏虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.73
+  },
+  "howtocook/芥末黄油罗氏虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "随便做/芫爆蛰头": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.75
+  },
+  "howtocook/芹菜拌茶树菇": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.0
+  },
+  "howtocook/苏格兰蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/英式司康": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/茄子炖土豆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/茄子肉煎饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "面食之神/茄子麦饭": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "howtocook/茭白炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/茶叶蛋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/草莓冰淇淋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/草莓酱": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/荔枝肉": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.68,
+    "spicy": 0.5
+  },
+  "howtocook/荷兰豆炒腊肠": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/莴笋叶煎饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/菌菇炖乳鸽": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/菜蟒": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "面食之神/菠菜大油条": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/菠菜炒鸡蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/菠萝咖啡特调": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/萝卜炖羊排": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.7
+  },
+  "howtocook/葱油": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.3
+  },
+  "howtocook/葱油拌面": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/葱油桂鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "面食之神/葱油饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/葱烧海参": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/葱烧腐竹": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "随便做/葱烧豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "随便做/葱烧蹄筋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.74,
+    "spicy": 0.6
+  },
+  "howtocook/葱煎豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/葱爆羊肉": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/蒜苔炒肉末": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.4
+  },
+  "howtocook/蒜蓉空心菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "随便做/蒜蓉粉丝虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.9
+  },
+  "howtocook/蒜蓉虾": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/蒜蓉西兰花": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.0
+  },
+  "howtocook/蒜香酱油": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.5
+  },
+  "howtocook/蒜香黄油虾": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/蒲烧茄子": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/蒸卤面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.8
+  },
+  "howtocook/蒸水蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/蒸花卷": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "面食之神/蒸花卷": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.6
+  },
+  "howtocook/蔗糖糖浆": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/蘑菇汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.6
+  },
+  "howtocook/虎皮肘子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.7
+  },
+  "howtocook/虎皮青椒": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/蚂蚁上树": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "howtocook/蚝油三鲜菇": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.63,
+    "spicy": 0.9
+  },
+  "howtocook/蚝油生菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.0
+  },
+  "howtocook/蛋包饭": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.55,
+    "spicy": 0.3
+  },
+  "howtocook/蛋炒饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/蛋煎糍粑": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/蛏抱蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.3
+  },
+  "howtocook/螺蛳粉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.55,
+    "spicy": 0.9
+  },
+  "howtocook/血浆鸭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.9
+  },
+  "随便做/裹烧豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.6
+  },
+  "随便做/西湖醋鱼": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.6
+  },
+  "howtocook/西红柿土豆炖牛肉": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.68,
+    "spicy": 0.53
+  },
+  "howtocook/西红柿炒鸡蛋": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "howtocook/西红柿牛腩": {
+    "sweet": 0.7,
+    "sour": 0.3,
     "umami": 0.62,
-    "spicy": 0.52,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.6
+  },
+  "howtocook/西红柿豆腐汤羹": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.0
+  },
+  "howtocook/西红柿鸡蛋挂面": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.67,
+    "spicy": 0.0
+  },
+  "howtocook/西红柿鸡蛋汤": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.65,
+    "spicy": 0.0
+  },
+  "howtocook/西葫芦炒鸡蛋": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "howtocook/话梅煮毛豆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/豆角焖面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/豆豉鲮鱼油麦菜": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "howtocook/豉汁排骨": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.5
+  },
+  "howtocook/豉汁蒸白鱔": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.0
+  },
+  "howtocook/贵州辣子鸡": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.75,
+    "spicy": 0.55
+  },
+  "随便做/贵州酸汤火锅": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.62,
+    "spicy": 0.9
+  },
+  "随便做/赛螃蟹": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/辣子鸡": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.7
+  },
+  "howtocook/辣椒炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
+  },
+  "随便做/辣椒炒肉汤泡饭": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.7
+  },
+  "随便做/辣椒红烧肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/辣皮子拌面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.3
+  },
+  "随便做/过桥排骨": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.62
+  },
+  "howtocook/速冻水饺": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/速冻汤圆": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/速冻馄饨": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.6
+  },
+  "howtocook/酒酿醪糟": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/酱拌荞麦面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
   "howtocook/酱排骨": {
     "sweet": 0.7,
-    "sour": 0.67,
-    "bitter": 0.39,
-    "umami": 0.69,
-    "spicy": 0.53,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/茭白炒肉": {
-    "sweet": 0.62,
-    "sour": 0.62,
-    "bitter": 0.46,
-    "umami": 0.69,
-    "spicy": 0.42,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/椒麻腰花": {
-    "sweet": 0.67,
-    "sour": 0.45,
-    "bitter": 0.38,
-    "umami": 0.58,
-    "spicy": 0.41,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/椒盐排条": {
-    "sweet": 0.21,
-    "sour": 0.27,
-    "bitter": 0.22,
-    "umami": 0.38,
-    "spicy": 0.24,
-    "fat": 0.13,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/芥末罗氏虾": {
-    "sweet": 0.58,
-    "sour": 0.68,
-    "bitter": 0.46,
+    "sour": 0.0,
     "umami": 0.72,
-    "spicy": 0.5,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/九转大肠": {
-    "sweet": 0.6,
-    "sour": 0.38,
-    "bitter": 0.3,
-    "umami": 0.3,
-    "spicy": 0.46,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/咖喱肥牛": {
-    "sweet": 0.64,
-    "sour": 0.79,
-    "bitter": 0.78,
-    "umami": 0.86,
-    "spicy": 0.5,
-    "fat": 0.77,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烤鸡翅": {
-    "sweet": 0.53,
-    "sour": 0.53,
-    "bitter": 0.56,
-    "umami": 0.61,
-    "spicy": 0.23,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/烤羊排": {
-    "sweet": 0.72,
-    "sour": 0.63,
-    "bitter": 0.56,
-    "umami": 0.77,
-    "spicy": 0.49,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/可乐鸡翅": {
-    "sweet": 0.54,
-    "sour": 0.26,
-    "bitter": 0.43,
-    "umami": 0.27,
-    "spicy": 0.24,
-    "fat": 0.58,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/空气炸锅脆皮现腌炸鸡": {
-    "sweet": 0.53,
-    "sour": 0.61,
-    "bitter": 0.53,
-    "umami": 0.73,
-    "spicy": 0.47,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/口水鸡": {
-    "sweet": 0.69,
-    "sour": 0.54,
-    "bitter": 0.42,
-    "umami": 0.76,
-    "spicy": 0.45,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/辣椒炒肉": {
-    "sweet": 0.61,
-    "sour": 0.55,
-    "bitter": 0.45,
-    "umami": 0.69,
-    "spicy": 0.34,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/辣椒炒肉汤泡饭": {
-    "sweet": 0.46,
-    "sour": 0.39,
-    "bitter": 0.27,
-    "umami": 0.57,
-    "spicy": 0.24,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/辣椒红烧肉": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/辣子鸡": {
-    "sweet": 0.6,
-    "sour": 0.54,
-    "bitter": 0.43,
-    "umami": 0.72,
-    "spicy": 0.38,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/老醋焖肉": {
-    "sweet": 0.66,
-    "sour": 0.67,
-    "bitter": 0.34,
-    "umami": 0.69,
-    "spicy": 0.57,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/老妈蹄花": {
-    "sweet": 0.68,
-    "sour": 0.72,
-    "bitter": 0.47,
-    "umami": 0.7,
-    "spicy": 0.56,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/老式锅包肉": {
-    "sweet": 0.74,
-    "sour": 0.73,
-    "bitter": 0.57,
-    "umami": 0.77,
-    "spicy": 0.52,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/冷吃兔": {
-    "sweet": 0.77,
-    "sour": 0.7,
-    "bitter": 0.57,
-    "umami": 0.7,
-    "spicy": 0.48,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/利提巧卡": {
-    "sweet": 0.71,
-    "sour": 0.8,
-    "bitter": 0.7,
-    "umami": 0.75,
-    "spicy": 0.49,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/荔枝肉": {
-    "sweet": 0.52,
-    "sour": 0.47,
-    "bitter": 0.31,
-    "umami": 0.64,
-    "spicy": 0.36,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌鸡丝": {
-    "sweet": 0.58,
-    "sour": 0.49,
-    "bitter": 0.33,
-    "umami": 0.59,
-    "spicy": 0.35,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/卤菜": {
-    "sweet": 0.67,
-    "sour": 0.58,
-    "bitter": 0.47,
-    "umami": 0.72,
-    "spicy": 0.4,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/萝卜炖羊排": {
-    "sweet": 0.84,
-    "sour": 0.76,
-    "bitter": 0.43,
-    "umami": 0.7,
-    "spicy": 0.66,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/麻辣香锅": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蚂蚁上树": {
-    "sweet": 0.69,
-    "sour": 0.72,
-    "bitter": 0.42,
-    "umami": 0.75,
-    "spicy": 0.54,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/梅菜扣肉": {
-    "sweet": 0.66,
-    "sour": 0.54,
-    "bitter": 0.32,
-    "umami": 0.61,
-    "spicy": 0.42,
-    "fat": 0.21,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/奶酪培根通心粉": {
-    "sweet": 0.37,
-    "sour": 0.53,
-    "bitter": 0.7,
-    "umami": 0.87,
-    "spicy": 0.41,
-    "fat": 0.79,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/南派红烧肉": {
-    "sweet": 0.4,
-    "sour": 0.49,
-    "bitter": 0.57,
-    "umami": 0.41,
-    "spicy": 0.26,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/牛排": {
-    "sweet": 0.53,
-    "sour": 0.68,
-    "bitter": 0.8,
-    "umami": 0.74,
-    "spicy": 0.36,
-    "fat": 0.68,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/农家一碗香": {
-    "sweet": 0.71,
-    "sour": 0.71,
-    "bitter": 0.53,
-    "umami": 0.8,
-    "spicy": 0.53,
-    "fat": 0.46,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糯香猪手": {
-    "sweet": 0.79,
-    "sour": 0.74,
-    "bitter": 0.48,
-    "umami": 0.73,
-    "spicy": 0.49,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/皮蛋肉丸": {
-    "sweet": 0.49,
-    "sour": 0.44,
-    "bitter": 0.43,
-    "umami": 0.65,
-    "spicy": 0.38,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/啤酒鸭": {
-    "sweet": 0.79,
-    "sour": 0.66,
-    "bitter": 0.56,
-    "umami": 0.69,
-    "spicy": 0.48,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/黔式腊肠娃娃菜": {
-    "sweet": 0.45,
-    "sour": 0.59,
-    "bitter": 0.19,
-    "umami": 0.67,
-    "spicy": 0.48,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/青椒炒肉丝": {
-    "sweet": 0.44,
-    "sour": 0.55,
-    "bitter": 0.84,
-    "umami": 0.77,
-    "spicy": 0.22,
-    "fat": 0.72,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/青椒酿": {
-    "sweet": 0.61,
-    "sour": 0.57,
-    "bitter": 0.45,
-    "umami": 0.71,
-    "spicy": 0.41,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/青椒土豆炒肉": {
-    "sweet": 0.68,
-    "sour": 0.7,
-    "bitter": 0.62,
-    "umami": 0.84,
-    "spicy": 0.44,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/清炖狮子头": {
-    "sweet": 0.71,
-    "sour": 0.73,
-    "bitter": 0.52,
-    "umami": 0.79,
-    "spicy": 0.51,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/清炖羊肉": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/清蒸鳜鱼": {
-    "sweet": 0.75,
-    "sour": 0.71,
-    "bitter": 0.53,
-    "umami": 0.73,
-    "spicy": 0.51,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/肉饼炖蛋": {
-    "sweet": 0.47,
-    "sour": 0.44,
-    "bitter": 0.27,
-    "umami": 0.62,
-    "spicy": 0.35,
-    "fat": 0.17,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/三不沾": {
-    "sweet": 0.1,
-    "sour": 0.23,
-    "bitter": 0.22,
-    "umami": 0.42,
-    "spicy": 0.29,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/杀猪菜": {
-    "sweet": 0.77,
-    "sour": 0.81,
-    "bitter": 0.72,
-    "umami": 0.78,
-    "spicy": 0.49,
-    "fat": 0.51,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/山西过油肉": {
-    "sweet": 0.5,
-    "sour": 0.53,
-    "bitter": 0.28,
-    "umami": 0.65,
-    "spicy": 0.38,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/商芝肉": {
-    "sweet": 0.69,
-    "sour": 0.63,
-    "bitter": 0.46,
-    "umami": 0.78,
-    "spicy": 0.51,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/烧椒猪肝": {
-    "sweet": 0.69,
-    "sour": 0.64,
-    "bitter": 0.5,
-    "umami": 0.74,
-    "spicy": 0.43,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/瘦肉土豆片": {
-    "sweet": 0.58,
-    "sour": 0.53,
-    "bitter": 0.36,
-    "umami": 0.7,
-    "spicy": 0.42,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/水煮牛肉": {
-    "sweet": 0.68,
-    "sour": 0.65,
-    "bitter": 0.45,
-    "umami": 0.74,
-    "spicy": 0.45,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/水煮肉片": {
-    "sweet": 0.65,
-    "sour": 0.61,
-    "bitter": 0.51,
-    "umami": 0.71,
-    "spicy": 0.37,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸汤肥牛": {
-    "sweet": 0.82,
-    "sour": 0.64,
-    "bitter": 0.58,
-    "umami": 0.62,
-    "spicy": 0.44,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒜苔炒肉末": {
-    "sweet": 0.55,
-    "sour": 0.43,
-    "bitter": 0.25,
-    "umami": 0.58,
-    "spicy": 0.36,
-    "fat": 0.08,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/隋式酱牛肉": {
-    "sweet": 0.73,
-    "sour": 0.67,
-    "bitter": 0.53,
-    "umami": 0.66,
-    "spicy": 0.46,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/台式卤肉饭": {
-    "sweet": 0.73,
-    "sour": 0.68,
-    "bitter": 0.48,
-    "umami": 0.71,
-    "spicy": 0.49,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/抬格子": {
-    "sweet": 0.63,
-    "sour": 0.72,
-    "bitter": 0.28,
-    "umami": 0.66,
-    "spicy": 0.69,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糖醋里脊": {
-    "sweet": 0.25,
-    "sour": 0.35,
-    "bitter": 0.39,
-    "umami": 0.38,
-    "spicy": 0.1,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糖醋排骨": {
-    "sweet": 0.69,
-    "sour": 0.66,
-    "bitter": 0.43,
-    "umami": 0.51,
-    "spicy": 0.58,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/田螺酿": {
-    "sweet": 0.72,
-    "sour": 0.63,
-    "bitter": 0.49,
-    "umami": 0.71,
-    "spicy": 0.45,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/甜辣烤全翅": {
-    "sweet": 0.58,
-    "sour": 0.55,
-    "bitter": 0.54,
-    "umami": 0.65,
-    "spicy": 0.33,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/土豆炖牛肉": {
-    "sweet": 0.75,
-    "sour": 0.68,
-    "bitter": 0.56,
-    "umami": 0.69,
-    "spicy": 0.48,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/土豆炖排骨": {
-    "sweet": 0.73,
-    "sour": 0.62,
-    "bitter": 0.46,
-    "umami": 0.66,
-    "spicy": 0.46,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/团圆十锦": {
-    "sweet": 0.58,
-    "sour": 0.61,
-    "bitter": 0.42,
-    "umami": 0.78,
-    "spicy": 0.4,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/万能辣卤": {
-    "sweet": 0.73,
-    "sour": 0.7,
-    "bitter": 0.5,
-    "umami": 0.71,
-    "spicy": 0.51,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/无骨鸡爪": {
-    "sweet": 0.72,
-    "sour": 0.75,
-    "bitter": 0.55,
-    "umami": 0.73,
-    "spicy": 0.53,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿牛腩": {
-    "sweet": 0.68,
-    "sour": 0.72,
-    "bitter": 0.6,
-    "umami": 0.83,
-    "spicy": 0.48,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿土豆炖牛肉": {
-    "sweet": 0.78,
-    "sour": 0.76,
-    "bitter": 0.74,
-    "umami": 0.83,
-    "spicy": 0.48,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/乡村啤酒鸭": {
-    "sweet": 0.87,
-    "sour": 0.83,
-    "bitter": 0.7,
-    "umami": 0.76,
-    "spicy": 0.63,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香干芹菜炒肉": {
-    "sweet": 0.63,
-    "sour": 0.54,
-    "bitter": 0.42,
-    "umami": 0.67,
-    "spicy": 0.37,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香干肉丝": {
-    "sweet": 0.51,
-    "sour": 0.56,
-    "bitter": 0.49,
-    "umami": 0.7,
-    "spicy": 0.33,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香菇滑鸡": {
-    "sweet": 0.85,
-    "sour": 0.92,
-    "bitter": 0.62,
-    "umami": 0.91,
-    "spicy": 0.66,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香煎五花肉": {
-    "sweet": 0.57,
-    "sour": 0.61,
-    "bitter": 0.49,
-    "umami": 0.78,
-    "spicy": 0.37,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香辣鸡爪煲": {
-    "sweet": 0.72,
-    "sour": 0.72,
-    "bitter": 0.52,
-    "umami": 0.7,
-    "spicy": 0.51,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/湘祁米夫鸭": {
-    "sweet": 0.51,
-    "sour": 0.53,
-    "bitter": 0.44,
-    "umami": 0.62,
-    "spicy": 0.37,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小炒黄牛肉": {
-    "sweet": 0.7,
-    "sour": 0.83,
-    "bitter": 0.53,
-    "umami": 0.64,
-    "spicy": 0.66,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小炒鸡肝": {
-    "sweet": 0.86,
-    "sour": 0.95,
-    "bitter": 0.69,
-    "umami": 0.83,
-    "spicy": 0.63,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小炒肉": {
-    "sweet": 0.61,
-    "sour": 0.65,
-    "bitter": 0.35,
-    "umami": 0.67,
-    "spicy": 0.49,
-    "fat": 0.21,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小米辣炒肉": {
-    "sweet": 0.63,
-    "sour": 0.63,
-    "bitter": 0.39,
-    "umami": 0.69,
-    "spicy": 0.48,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小酥肉": {
-    "sweet": 0.6,
-    "sour": 0.52,
-    "bitter": 0.39,
-    "umami": 0.64,
-    "spicy": 0.4,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/新疆大盘鸡": {
-    "sweet": 0.69,
-    "sour": 0.68,
-    "bitter": 0.68,
-    "umami": 0.86,
-    "spicy": 0.45,
-    "fat": 0.58,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/血浆鸭": {
-    "sweet": 0.72,
-    "sour": 0.61,
-    "bitter": 0.44,
-    "umami": 0.66,
-    "spicy": 0.44,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/熏酱猪蹄": {
-    "sweet": 0.51,
-    "sour": 0.53,
-    "bitter": 0.49,
-    "umami": 0.61,
-    "spicy": 0.29,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/羊排焖面": {
-    "sweet": 0.69,
-    "sour": 0.62,
-    "bitter": 0.61,
-    "umami": 0.74,
-    "spicy": 0.39,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/羊肉捞面": {
-    "sweet": 0.78,
-    "sour": 0.9,
-    "bitter": 0.5,
-    "umami": 0.82,
-    "spicy": 0.64,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/洋葱炒猪肉": {
-    "sweet": 0.62,
-    "sour": 0.68,
-    "bitter": 0.56,
-    "umami": 0.91,
-    "spicy": 0.46,
-    "fat": 0.6,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/意式烤鸡": {
-    "sweet": 0.66,
-    "sour": 0.8,
-    "bitter": 0.91,
-    "umami": 0.78,
-    "spicy": 0.41,
-    "fat": 0.77,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/意式香肠北非蛋": {
-    "sweet": 0.43,
-    "sour": 0.59,
-    "bitter": 0.68,
-    "umami": 0.81,
-    "spicy": 0.33,
-    "fat": 0.63,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/樱桃肉": {
-    "sweet": 0.79,
-    "sour": 0.74,
-    "bitter": 0.56,
-    "umami": 0.69,
-    "spicy": 0.52,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/油爆双脆": {
-    "sweet": 0.48,
-    "sour": 0.4,
-    "bitter": 0.38,
-    "umami": 0.5,
-    "spicy": 0.26,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/油焖鸡": {
-    "sweet": 0.74,
-    "sour": 0.78,
-    "bitter": 0.57,
-    "umami": 0.81,
-    "spicy": 0.54,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/鱼香肉丝": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/枣香红烧肉": {
-    "sweet": 0.78,
-    "sour": 0.64,
-    "bitter": 0.49,
-    "umami": 0.55,
-    "spicy": 0.55,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炸萝卜丸子": {
-    "sweet": 0.31,
-    "sour": 0.47,
-    "bitter": 0.23,
-    "umami": 0.47,
-    "spicy": 0.38,
-    "fat": 0.15,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炸酥肉": {
-    "sweet": 0.35,
-    "sour": 0.48,
-    "bitter": 0.49,
-    "umami": 0.4,
-    "spicy": 0.19,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/芝士菠萝咕咾肉": {
-    "sweet": 0.47,
-    "sour": 0.61,
-    "bitter": 0.61,
-    "umami": 0.85,
-    "spicy": 0.35,
-    "fat": 0.53,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/枝竹羊腩煲": {
-    "sweet": 0.79,
-    "sour": 0.75,
-    "bitter": 0.45,
-    "umami": 0.7,
-    "spicy": 0.59,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/猪皮冻": {
-    "sweet": 0.97,
-    "sour": 0.84,
-    "bitter": 0.73,
-    "umami": 0.65,
-    "spicy": 0.69,
-    "fat": 0.52,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/猪肉烩酸菜": {
-    "sweet": 0.75,
-    "sour": 0.7,
-    "bitter": 0.53,
-    "umami": 0.72,
-    "spicy": 0.48,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/柱候牛腩": {
-    "sweet": 0.66,
-    "sour": 0.49,
-    "bitter": 0.32,
-    "umami": 0.57,
-    "spicy": 0.36,
-    "fat": 0.15,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/孜然牛肉": {
-    "sweet": 0.58,
-    "sour": 0.7,
-    "bitter": 0.51,
-    "umami": 0.66,
-    "spicy": 0.45,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/孜然羊肉": {
-    "sweet": 0.58,
-    "sour": 0.63,
-    "bitter": 0.58,
-    "umami": 0.65,
-    "spicy": 0.34,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/淄博烧烤": {
-    "sweet": 0.68,
-    "sour": 0.87,
-    "bitter": 0.48,
-    "umami": 0.8,
-    "spicy": 0.63,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/醉排骨": {
-    "sweet": 0.53,
-    "sour": 0.53,
-    "bitter": 0.3,
-    "umami": 0.68,
-    "spicy": 0.36,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/拔丝土豆": {
-    "sweet": 0.59,
-    "sour": 0.69,
-    "bitter": 0.47,
-    "umami": 0.87,
-    "spicy": 0.52,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/白灼菜心": {
-    "sweet": 0.59,
-    "sour": 0.6,
-    "bitter": 0.38,
-    "umami": 0.74,
-    "spicy": 0.42,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/板栗扒白菜": {
-    "sweet": 0.25,
-    "sour": 0.35,
-    "bitter": 0.39,
-    "umami": 0.38,
-    "spicy": 0.1,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/包菜炒鸡蛋粉丝": {
-    "sweet": 0.54,
-    "sour": 0.64,
-    "bitter": 0.48,
-    "umami": 0.75,
-    "spicy": 0.43,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/菠菜炒鸡蛋": {
-    "sweet": 0.26,
-    "sour": 0.56,
-    "bitter": 0.51,
-    "umami": 0.73,
-    "spicy": 0.44,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒滑蛋": {
-    "sweet": 0.23,
-    "sour": 0.3,
-    "bitter": 0.34,
-    "umami": 0.57,
-    "spicy": 0.42,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒茄子": {
-    "sweet": 0.64,
-    "sour": 0.62,
-    "bitter": 0.35,
-    "umami": 0.72,
-    "spicy": 0.48,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/炒青菜": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/葱煎豆腐": {
-    "sweet": 0.59,
-    "sour": 0.57,
-    "bitter": 0.35,
-    "umami": 0.62,
-    "spicy": 0.34,
-    "fat": 0.17,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/葱烧豆腐": {
-    "sweet": 0.62,
-    "sour": 0.58,
-    "bitter": 0.33,
-    "umami": 0.65,
-    "spicy": 0.41,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/葱烧腐竹": {
-    "sweet": 0.72,
-    "sour": 0.79,
-    "bitter": 0.39,
-    "umami": 0.78,
-    "spicy": 0.59,
-    "fat": 0.28,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/醋溜白菜": {
-    "sweet": 0.65,
-    "sour": 0.81,
-    "bitter": 0.55,
-    "umami": 0.85,
-    "spicy": 0.54,
-    "fat": 0.51,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/醋溜木须": {
-    "sweet": 0.63,
-    "sour": 0.67,
-    "bitter": 0.48,
-    "umami": 0.69,
-    "spicy": 0.41,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/脆皮豆腐": {
-    "sweet": 0.48,
-    "sour": 0.4,
-    "bitter": 0.17,
-    "umami": 0.57,
-    "spicy": 0.34,
-    "fat": 0.09,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/地三鲜": {
-    "sweet": 0.68,
-    "sour": 0.65,
-    "bitter": 0.45,
-    "umami": 0.73,
-    "spicy": 0.47,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/风味茄子": {
-    "sweet": 0.72,
-    "sour": 0.69,
-    "bitter": 0.48,
-    "umami": 0.77,
-    "spicy": 0.47,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/干锅花菜": {
-    "sweet": 0.58,
-    "sour": 0.67,
-    "bitter": 0.55,
-    "umami": 0.73,
-    "spicy": 0.37,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/裹烧豆腐": {
-    "sweet": 0.46,
-    "sour": 0.46,
-    "bitter": 0.33,
-    "umami": 0.67,
-    "spicy": 0.31,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蚝油三鲜菇": {
-    "sweet": 0.62,
-    "sour": 0.68,
-    "bitter": 0.32,
-    "umami": 0.7,
-    "spicy": 0.54,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蚝油生菜": {
-    "sweet": 0.55,
-    "sour": 0.61,
-    "bitter": 0.48,
-    "umami": 0.74,
-    "spicy": 0.35,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/河南蒸菜": {
-    "sweet": 0.32,
-    "sour": 0.41,
-    "bitter": 0.32,
-    "umami": 0.48,
-    "spicy": 0.38,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧冬瓜": {
-    "sweet": 0.67,
-    "sour": 0.58,
-    "bitter": 0.32,
-    "umami": 0.66,
-    "spicy": 0.48,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧茄子": {
-    "sweet": 0.52,
-    "sour": 0.63,
-    "bitter": 0.48,
-    "umami": 0.73,
-    "spicy": 0.39,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/虎皮青椒": {
-    "sweet": 0.53,
-    "sour": 0.57,
-    "bitter": 0.55,
-    "umami": 0.76,
-    "spicy": 0.33,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/话梅煮毛豆": {
-    "sweet": 0.51,
-    "sour": 0.53,
-    "bitter": 0.32,
-    "umami": 0.63,
-    "spicy": 0.4,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鸡蛋羹": {
-    "sweet": 0.44,
-    "sour": 0.41,
-    "bitter": 0.25,
-    "umami": 0.62,
-    "spicy": 0.32,
-    "fat": 0.16,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鸡蛋花": {
-    "sweet": 0.14,
-    "sour": 0.27,
-    "bitter": 0.27,
-    "umami": 0.42,
-    "spicy": 0.18,
-    "fat": 0.2,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鸡蛋火腿炒黄瓜": {
-    "sweet": 0.42,
-    "sour": 0.47,
-    "bitter": 0.4,
-    "umami": 0.7,
-    "spicy": 0.28,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/茄子炖土豆": {
-    "sweet": 0.61,
-    "sour": 0.71,
-    "bitter": 0.57,
-    "umami": 0.79,
-    "spicy": 0.39,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/家常日本豆腐": {
-    "sweet": 0.51,
-    "sour": 0.58,
-    "bitter": 0.5,
-    "umami": 0.76,
-    "spicy": 0.33,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/尖椒干豆腐": {
-    "sweet": 0.69,
-    "sour": 0.68,
-    "bitter": 0.51,
-    "umami": 0.65,
-    "spicy": 0.42,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/椒盐玉米": {
-    "sweet": 0.56,
-    "sour": 0.59,
-    "bitter": 0.51,
-    "umami": 0.7,
-    "spicy": 0.46,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金钱蛋": {
-    "sweet": 0.54,
-    "sour": 0.56,
-    "bitter": 0.25,
-    "umami": 0.63,
-    "spicy": 0.49,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金针菇日本豆腐煲": {
-    "sweet": 0.5,
-    "sour": 0.54,
-    "bitter": 0.18,
-    "umami": 0.57,
-    "spicy": 0.45,
-    "fat": 0.08,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烤茄子": {
-    "sweet": 0.71,
-    "sour": 0.69,
-    "bitter": 0.55,
-    "umami": 0.7,
-    "spicy": 0.38,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/榄菜肉末四季豆": {
-    "sweet": 0.64,
-    "sour": 0.9,
-    "bitter": 0.53,
-    "umami": 0.89,
-    "spicy": 0.68,
-    "fat": 0.55,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/雷椒皮蛋": {
-    "sweet": 0.58,
-    "sour": 0.68,
-    "bitter": 0.38,
-    "umami": 0.75,
-    "spicy": 0.5,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌豆腐": {
-    "sweet": 0.61,
-    "sour": 0.6,
-    "bitter": 0.36,
-    "umami": 0.77,
-    "spicy": 0.42,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌黄瓜": {
-    "sweet": 0.61,
-    "sour": 0.68,
-    "bitter": 0.52,
-    "umami": 0.87,
-    "spicy": 0.43,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌金针菇": {
-    "sweet": 0.66,
-    "sour": 0.68,
-    "bitter": 0.41,
-    "umami": 0.83,
-    "spicy": 0.49,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌木耳": {
-    "sweet": 0.57,
-    "sour": 0.7,
-    "bitter": 0.32,
-    "umami": 0.74,
-    "spicy": 0.54,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌莴笋": {
-    "sweet": 0.64,
-    "sour": 0.78,
-    "bitter": 0.43,
-    "umami": 0.74,
-    "spicy": 0.59,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/凉拌油麦菜": {
-    "sweet": 0.53,
-    "sour": 0.58,
-    "bitter": 0.4,
-    "umami": 0.7,
-    "spicy": 0.36,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/凉拌炸青椒": {
-    "sweet": 0.68,
-    "sour": 0.57,
-    "bitter": 0.49,
-    "umami": 0.68,
-    "spicy": 0.41,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/凉菜合集（浇汁松花蛋、拍黄瓜、捞汁秋葵、老醋花生米）": {
-    "sweet": 0.75,
-    "sour": 0.77,
-    "bitter": 0.61,
-    "umami": 0.86,
-    "spicy": 0.49,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/麻婆豆腐": {
-    "sweet": 0.65,
-    "sour": 0.57,
-    "bitter": 0.41,
-    "umami": 0.68,
-    "spicy": 0.38,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/皮蛋豆腐": {
-    "sweet": 0.68,
-    "sour": 0.62,
-    "bitter": 0.39,
-    "umami": 0.8,
-    "spicy": 0.49,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒲烧茄子": {
-    "sweet": 0.63,
-    "sour": 0.61,
-    "bitter": 0.39,
-    "umami": 0.69,
-    "spicy": 0.48,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/乾隆白菜": {
-    "sweet": 0.53,
-    "sour": 0.62,
-    "bitter": 0.26,
-    "umami": 0.7,
-    "spicy": 0.44,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炝拌菜心": {
-    "sweet": 0.67,
-    "sour": 0.69,
-    "bitter": 0.5,
-    "umami": 0.71,
-    "spicy": 0.47,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炝炒莲花白": {
-    "sweet": 0.57,
-    "sour": 0.48,
-    "bitter": 0.31,
-    "umami": 0.62,
-    "spicy": 0.33,
-    "fat": 0.17,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/芹菜拌茶树菇": {
-    "sweet": 0.51,
-    "sour": 0.47,
-    "bitter": 0.24,
-    "umami": 0.61,
-    "spicy": 0.32,
-    "fat": 0.13,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/清炒花菜": {
-    "sweet": 0.54,
-    "sour": 0.83,
-    "bitter": 0.69,
-    "umami": 0.87,
-    "spicy": 0.43,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/清蒸南瓜": {
-    "sweet": 0.52,
-    "sour": 0.81,
-    "bitter": 0.37,
-    "umami": 0.52,
-    "spicy": 0.84,
-    "fat": 0.53,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/砂锅豆腐": {
-    "sweet": 0.46,
-    "sour": 0.54,
-    "bitter": 0.23,
-    "umami": 0.65,
-    "spicy": 0.41,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/陕北熬豆角": {
-    "sweet": 0.68,
-    "sour": 0.71,
-    "bitter": 0.59,
-    "umami": 0.84,
-    "spicy": 0.46,
-    "fat": 0.46,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/上汤娃娃菜": {
-    "sweet": 0.59,
-    "sour": 0.57,
-    "bitter": 0.38,
-    "umami": 0.65,
-    "spicy": 0.43,
-    "fat": 0.21,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/手撕包菜": {
-    "sweet": 0.6,
-    "sour": 0.61,
-    "bitter": 0.34,
-    "umami": 0.58,
-    "spicy": 0.51,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/水油焖蔬菜": {
-    "sweet": 0.4,
-    "sour": 0.39,
-    "bitter": 0.29,
-    "umami": 0.51,
-    "spicy": 0.21,
-    "fat": 0.09,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/松仁玉米": {
-    "sweet": 0.57,
-    "sour": 0.67,
-    "bitter": 0.65,
-    "umami": 0.77,
-    "spicy": 0.45,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/素炒豆角": {
-    "sweet": 0.64,
-    "sour": 0.77,
-    "bitter": 0.46,
-    "umami": 0.78,
-    "spicy": 0.55,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸辣豆芽": {
-    "sweet": 0.66,
-    "sour": 0.67,
-    "bitter": 0.53,
-    "umami": 0.89,
-    "spicy": 0.43,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸辣土豆丝": {
-    "sweet": 0.63,
-    "sour": 0.63,
-    "bitter": 0.54,
-    "umami": 0.74,
-    "spicy": 0.35,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸辣小黄瓜": {
-    "sweet": 0.57,
-    "sour": 0.78,
-    "bitter": 0.55,
-    "umami": 0.88,
-    "spicy": 0.54,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸萝卜炒百叶": {
-    "sweet": 0.57,
-    "sour": 0.55,
-    "bitter": 0.32,
-    "umami": 0.7,
-    "spicy": 0.34,
-    "fat": 0.2,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒜蓉空心菜": {
-    "sweet": 0.66,
-    "sour": 0.69,
-    "bitter": 0.46,
-    "umami": 0.72,
-    "spicy": 0.43,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒜蓉西兰花": {
-    "sweet": 0.6,
-    "sour": 0.71,
-    "bitter": 0.49,
-    "umami": 0.87,
-    "spicy": 0.45,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/糖拌西红柿": {
-    "sweet": 0.57,
-    "sour": 0.7,
-    "bitter": 1.0,
-    "umami": 0.83,
-    "spicy": 0.4,
-    "fat": 0.97,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/文思豆腐": {
-    "sweet": 0.48,
-    "sour": 0.44,
-    "bitter": 0.27,
-    "umami": 0.57,
-    "spicy": 0.31,
-    "fat": 0.13,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/莴笋叶煎饼": {
-    "sweet": 0.43,
-    "sour": 0.39,
-    "bitter": 0.19,
-    "umami": 0.59,
-    "spicy": 0.36,
-    "fat": 0.09,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿炒鸡蛋": {
-    "sweet": 0.4,
-    "sour": 0.47,
-    "bitter": 0.4,
-    "umami": 0.57,
-    "spicy": 0.33,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿豆腐汤羹": {
-    "sweet": 0.56,
-    "sour": 0.58,
-    "bitter": 0.44,
-    "umami": 0.69,
-    "spicy": 0.4,
-    "fat": 0.3,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西葫芦炒鸡蛋": {
-    "sweet": 0.39,
-    "sour": 0.72,
-    "bitter": 0.75,
-    "umami": 0.82,
-    "spicy": 0.46,
-    "fat": 0.73,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/咸蛋黄茄子": {
-    "sweet": 0.56,
-    "sour": 0.69,
-    "bitter": 0.3,
-    "umami": 0.68,
-    "spicy": 0.53,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/香辣土豆丝": {
-    "sweet": 0.67,
-    "sour": 0.71,
-    "bitter": 0.64,
-    "umami": 0.82,
-    "spicy": 0.42,
-    "fat": 0.53,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/小白菜烧豆腐": {
-    "sweet": 0.6,
-    "sour": 0.64,
-    "bitter": 0.35,
-    "umami": 0.73,
-    "spicy": 0.43,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小炒藕丁": {
-    "sweet": 0.62,
-    "sour": 0.69,
-    "bitter": 0.32,
-    "umami": 0.65,
-    "spicy": 0.57,
-    "fat": 0.21,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/洋葱炒鸡蛋": {
-    "sweet": 0.43,
-    "sour": 0.63,
-    "bitter": 0.5,
-    "umami": 0.73,
-    "spicy": 0.37,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/印度葫芦丸子": {
-    "sweet": 0.8,
-    "sour": 0.81,
-    "bitter": 0.8,
-    "umami": 0.71,
-    "spicy": 0.45,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/印度土豆花菜": {
-    "sweet": 0.78,
-    "sour": 0.84,
-    "bitter": 0.83,
-    "umami": 0.79,
-    "spicy": 0.47,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/油醋爆蛋": {
-    "sweet": 0.55,
-    "sour": 0.65,
-    "bitter": 0.35,
-    "umami": 0.67,
-    "spicy": 0.5,
-    "fat": 0.26,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/油辣干锅土豆": {
-    "sweet": 0.6,
-    "sour": 0.72,
-    "bitter": 0.49,
-    "umami": 0.85,
-    "spicy": 0.49,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/鱼香茄子": {
-    "sweet": 0.72,
-    "sour": 0.68,
-    "bitter": 0.46,
-    "umami": 0.75,
-    "spicy": 0.49,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/鱼香土豆泥": {
-    "sweet": 0.66,
-    "sour": 0.66,
-    "bitter": 0.44,
-    "umami": 0.73,
-    "spicy": 0.46,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/白灼虾": {
-    "sweet": 0.7,
-    "sour": 0.71,
-    "bitter": 0.5,
-    "umami": 0.81,
-    "spicy": 0.48,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鳊鱼炖豆腐": {
-    "sweet": 0.79,
-    "sour": 0.7,
-    "bitter": 0.52,
-    "umami": 0.66,
-    "spicy": 0.52,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/拆烩鲢鱼头": {
-    "sweet": 0.47,
-    "sour": 0.49,
-    "bitter": 0.66,
-    "umami": 0.67,
-    "spicy": 0.27,
-    "fat": 0.58,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蛏抱蛋": {
-    "sweet": 0.44,
-    "sour": 0.5,
-    "bitter": 0.32,
-    "umami": 0.69,
-    "spicy": 0.36,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/葱烧海参": {
-    "sweet": 0.56,
-    "sour": 0.63,
-    "bitter": 0.28,
-    "umami": 0.64,
-    "spicy": 0.5,
-    "fat": 0.19,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/葱油桂鱼": {
-    "sweet": 0.66,
-    "sour": 0.78,
-    "bitter": 0.49,
-    "umami": 0.65,
-    "spicy": 0.58,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/醋椒鱼": {
-    "sweet": 0.73,
-    "sour": 0.66,
-    "bitter": 0.57,
-    "umami": 0.7,
-    "spicy": 0.4,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/大虾烧白菜": {
-    "sweet": 0.46,
-    "sour": 0.44,
-    "bitter": 0.25,
-    "umami": 0.59,
-    "spicy": 0.32,
-    "fat": 0.15,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/干煎阿根廷红虾": {
-    "sweet": 0.88,
-    "sour": 0.78,
-    "bitter": 0.82,
-    "umami": 0.84,
-    "spicy": 0.51,
-    "fat": 0.76,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/国宴菜翡翠虾球": {
-    "sweet": 0.46,
-    "sour": 0.46,
-    "bitter": 0.34,
-    "umami": 0.77,
-    "spicy": 0.35,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红烧带鱼": {
-    "sweet": 0.79,
-    "sour": 0.74,
-    "bitter": 0.58,
-    "umami": 0.77,
-    "spicy": 0.49,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红烧鲤鱼": {
-    "sweet": 0.66,
-    "sour": 0.6,
-    "bitter": 0.37,
-    "umami": 0.65,
-    "spicy": 0.46,
-    "fat": 0.22,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧鱼": {
-    "sweet": 0.73,
-    "sour": 0.73,
-    "bitter": 0.49,
-    "umami": 0.74,
-    "spicy": 0.55,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红烧鱼头": {
-    "sweet": 0.8,
-    "sour": 0.81,
-    "bitter": 0.62,
-    "umami": 0.69,
-    "spicy": 0.58,
-    "fat": 0.42,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/煳辣炝锅鱼": {
-    "sweet": 0.72,
-    "sour": 0.57,
-    "bitter": 0.39,
-    "umami": 0.65,
-    "spicy": 0.47,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/黄油煎虾": {
-    "sweet": 0.54,
-    "sour": 0.5,
-    "bitter": 0.5,
-    "umami": 0.64,
-    "spicy": 0.34,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.9
   },
   "howtocook/酱炖蟹": {
-    "sweet": 0.61,
-    "sour": 0.52,
-    "bitter": 0.38,
-    "umami": 0.68,
-    "spicy": 0.4,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/芥末黄油罗氏虾": {
-    "sweet": 0.6,
-    "sour": 0.63,
-    "bitter": 0.53,
-    "umami": 0.73,
-    "spicy": 0.41,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/咖喱炒蟹": {
-    "sweet": 0.57,
-    "sour": 0.67,
-    "bitter": 0.5,
-    "umami": 0.69,
-    "spicy": 0.45,
-    "fat": 0.52,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烤鱼": {
-    "sweet": 0.81,
-    "sour": 0.75,
-    "bitter": 0.59,
-    "umami": 0.78,
-    "spicy": 0.53,
-    "fat": 0.44,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/鲤鱼炖白菜": {
-    "sweet": 0.74,
-    "sour": 0.63,
-    "bitter": 0.48,
-    "umami": 0.67,
-    "spicy": 0.45,
-    "fat": 0.29,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/龙腾盛世麒麟鱼": {
-    "sweet": 0.49,
-    "sour": 0.55,
-    "bitter": 0.42,
-    "umami": 0.76,
-    "spicy": 0.36,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/麻辣小龙虾": {
-    "sweet": 0.64,
-    "sour": 0.65,
-    "bitter": 0.48,
-    "umami": 0.72,
-    "spicy": 0.37,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/名菜翠珠鱼花": {
-    "sweet": 0.45,
-    "sour": 0.39,
-    "bitter": 0.34,
-    "umami": 0.56,
-    "spicy": 0.24,
-    "fat": 0.16,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/奶汤鲫鱼": {
-    "sweet": 0.74,
-    "sour": 0.68,
-    "bitter": 0.52,
-    "umami": 0.72,
-    "spicy": 0.5,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/清蒸鲈鱼": {
-    "sweet": 0.81,
-    "sour": 0.71,
-    "bitter": 0.49,
-    "umami": 0.69,
-    "spicy": 0.5,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/清蒸生蚝": {
-    "sweet": 0.71,
-    "sour": 0.71,
-    "bitter": 0.55,
-    "umami": 0.84,
-    "spicy": 0.44,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/肉蟹煲": {
-    "sweet": 0.64,
-    "sour": 0.59,
-    "bitter": 0.49,
-    "umami": 0.77,
-    "spicy": 0.39,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/赛螃蟹": {
-    "sweet": 0.51,
-    "sour": 0.45,
-    "bitter": 0.34,
-    "umami": 0.62,
-    "spicy": 0.35,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/水煮鱼": {
-    "sweet": 0.45,
-    "sour": 0.44,
-    "bitter": 0.41,
-    "umami": 0.5,
-    "spicy": 0.28,
-    "fat": 0.24,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/松鼠桂鱼": {
-    "sweet": 0.47,
-    "sour": 0.44,
-    "bitter": 0.24,
-    "umami": 0.56,
-    "spicy": 0.4,
-    "fat": 0.11,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/蒜蓉粉丝虾": {
-    "sweet": 0.46,
-    "sour": 0.46,
-    "bitter": 0.48,
-    "umami": 0.74,
-    "spicy": 0.23,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒜蓉虾": {
-    "sweet": 0.53,
-    "sour": 0.41,
-    "bitter": 0.26,
-    "umami": 0.61,
-    "spicy": 0.27,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/蒜香黄油虾": {
-    "sweet": 0.76,
-    "sour": 0.63,
-    "bitter": 0.76,
-    "umami": 0.82,
-    "spicy": 0.51,
-    "fat": 0.97,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/隋卞带鱼": {
-    "sweet": 0.5,
-    "sour": 0.42,
-    "bitter": 0.31,
-    "umami": 0.5,
-    "spicy": 0.29,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/糖醋鲤鱼": {
-    "sweet": 0.63,
-    "sour": 0.55,
-    "bitter": 0.47,
-    "umami": 0.63,
-    "spicy": 0.36,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/糖醋鱼片": {
-    "sweet": 0.66,
-    "sour": 0.61,
-    "bitter": 0.3,
-    "umami": 0.65,
-    "spicy": 0.47,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/微波葱姜黑鳕鱼": {
-    "sweet": 0.6,
-    "sour": 0.53,
-    "bitter": 0.38,
-    "umami": 0.72,
-    "spicy": 0.36,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/西湖醋鱼": {
-    "sweet": 0.57,
-    "sour": 0.52,
-    "bitter": 0.39,
-    "umami": 0.66,
-    "spicy": 0.33,
-    "fat": 0.25,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/香煎翘嘴鱼": {
-    "sweet": 0.71,
-    "sour": 0.65,
-    "bitter": 0.56,
-    "umami": 0.72,
-    "spicy": 0.42,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/响油鳝糊": {
-    "sweet": 0.67,
-    "sour": 0.45,
-    "bitter": 0.38,
-    "umami": 0.58,
-    "spicy": 0.41,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/响油鳝丝": {
-    "sweet": 0.72,
-    "sour": 0.69,
-    "bitter": 0.54,
-    "umami": 0.77,
-    "spicy": 0.48,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小龙虾": {
-    "sweet": 0.69,
-    "sour": 0.57,
-    "bitter": 0.52,
-    "umami": 0.63,
-    "spicy": 0.39,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/雪菜蒸鱼": {
-    "sweet": 0.75,
-    "sour": 0.68,
-    "bitter": 0.46,
-    "umami": 0.75,
-    "spicy": 0.45,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/芫爆蛰头": {
-    "sweet": 0.75,
-    "sour": 0.69,
-    "bitter": 0.57,
-    "umami": 0.76,
-    "spicy": 0.44,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/阳朔啤酒鱼": {
-    "sweet": 0.69,
-    "sour": 0.63,
-    "bitter": 0.59,
-    "umami": 0.76,
-    "spicy": 0.41,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/油焖大虾": {
-    "sweet": 0.2,
-    "sour": 0.27,
-    "bitter": 0.41,
-    "umami": 0.41,
-    "spicy": 0.0,
-    "fat": 0.27,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/油泼鲍鱼": {
-    "sweet": 0.74,
-    "sour": 0.93,
-    "bitter": 0.43,
-    "umami": 0.78,
-    "spicy": 0.73,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/鱼骨汆鱼丸": {
-    "sweet": 0.56,
-    "sour": 0.57,
-    "bitter": 0.71,
-    "umami": 0.73,
-    "spicy": 0.36,
-    "fat": 0.52,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/昂刺鱼豆腐汤": {
-    "sweet": 0.8,
-    "sour": 0.75,
-    "bitter": 0.6,
-    "umami": 0.75,
-    "spicy": 0.5,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/陈皮排骨汤": {
-    "sweet": 0.48,
-    "sour": 0.48,
-    "bitter": 0.32,
-    "umami": 0.45,
-    "spicy": 0.39,
-    "fat": 0.21,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/冬瓜薏米老鸭汤": {
-    "sweet": 0.48,
-    "sour": 0.58,
-    "bitter": 0.15,
-    "umami": 0.44,
-    "spicy": 0.74,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/炖鸡汤": {
-    "sweet": 0.61,
-    "sour": 0.56,
-    "bitter": 0.82,
-    "umami": 0.78,
-    "spicy": 0.42,
-    "fat": 0.89,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/番茄牛肉蛋花汤": {
-    "sweet": 0.56,
-    "sour": 0.65,
-    "bitter": 0.73,
-    "umami": 0.79,
-    "spicy": 0.36,
-    "fat": 0.62,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/疙瘩汤": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/勾芡香菇汤": {
-    "sweet": 0.69,
-    "sour": 0.78,
-    "bitter": 0.35,
-    "umami": 0.83,
-    "spicy": 0.64,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/贵州酸汤火锅": {
-    "sweet": 0.56,
-    "sour": 0.55,
-    "bitter": 0.34,
-    "umami": 0.59,
-    "spicy": 0.34,
-    "fat": 0.16,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/黄瓜皮蛋汤": {
-    "sweet": 0.58,
-    "sour": 0.73,
-    "bitter": 0.49,
-    "umami": 0.82,
-    "spicy": 0.46,
-    "fat": 0.37,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金针菇汤": {
-    "sweet": 0.46,
-    "sour": 0.61,
-    "bitter": 0.29,
-    "umami": 0.73,
-    "spicy": 0.53,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/菌菇炖乳鸽": {
-    "sweet": 0.89,
-    "sour": 0.77,
-    "bitter": 0.87,
-    "umami": 0.76,
-    "spicy": 0.6,
-    "fat": 0.81,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/腊八粥": {
-    "sweet": 0.76,
-    "sour": 0.68,
-    "bitter": 0.31,
-    "umami": 0.86,
-    "spicy": 0.83,
-    "fat": 0.62,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/罗宋汤": {
-    "sweet": 0.56,
-    "sour": 0.61,
-    "bitter": 0.8,
-    "umami": 0.83,
-    "spicy": 0.32,
-    "fat": 0.82,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/米粥": {
-    "sweet": 0.53,
-    "sour": 0.65,
-    "bitter": 0.54,
-    "umami": 0.7,
-    "spicy": 0.44,
-    "fat": 0.56,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/蘑菇汤": {
-    "sweet": 0.75,
-    "sour": 0.72,
-    "bitter": 0.47,
-    "umami": 0.75,
-    "spicy": 0.52,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/奶油蘑菇汤": {
-    "sweet": 0.39,
-    "sour": 0.52,
-    "bitter": 0.65,
-    "umami": 0.75,
-    "spicy": 0.39,
-    "fat": 0.69,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/浓汤菜豆糊": {
-    "sweet": 0.63,
-    "sour": 0.78,
-    "bitter": 0.42,
-    "umami": 0.74,
-    "spicy": 0.52,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/排骨苦瓜汤": {
-    "sweet": 0.76,
-    "sour": 0.75,
-    "bitter": 0.35,
-    "umami": 0.75,
-    "spicy": 0.59,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/排骨山药玉米汤": {
-    "sweet": 0.75,
-    "sour": 0.83,
-    "bitter": 0.68,
-    "umami": 0.77,
-    "spicy": 0.57,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/皮蛋瘦肉粥": {
-    "sweet": 0.68,
-    "sour": 0.67,
-    "bitter": 0.56,
-    "umami": 0.75,
-    "spicy": 0.42,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/生汆丸子汤": {
-    "sweet": 0.65,
-    "sour": 0.65,
-    "bitter": 0.57,
-    "umami": 0.75,
-    "spicy": 0.42,
-    "fat": 0.4,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/酸辣鸡蛋汤": {
-    "sweet": 0.52,
-    "sour": 0.58,
-    "bitter": 0.36,
-    "umami": 0.78,
-    "spicy": 0.53,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/西红柿鸡蛋汤": {
-    "sweet": 0.47,
-    "sour": 0.59,
-    "bitter": 0.46,
-    "umami": 0.73,
-    "spicy": 0.37,
-    "fat": 0.36,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/小米粥": {
-    "sweet": 0.55,
-    "sour": 1.0,
-    "bitter": 0.31,
-    "umami": 0.6,
-    "spicy": 1.0,
-    "fat": 0.46,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/银耳莲子粥": {
-    "sweet": 0.77,
-    "sour": 0.72,
-    "bitter": 0.22,
-    "umami": 0.59,
-    "spicy": 0.88,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/玉米排骨汤": {
-    "sweet": 0.83,
-    "sour": 0.8,
-    "bitter": 0.78,
-    "umami": 0.85,
-    "spicy": 0.56,
-    "fat": 0.68,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/朱雀汤": {
-    "sweet": 0.3,
-    "sour": 0.38,
-    "bitter": 0.16,
-    "umami": 0.61,
-    "spicy": 0.32,
-    "fat": 0.18,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/紫菜蛋花汤": {
-    "sweet": 0.44,
-    "sour": 0.6,
-    "bitter": 0.38,
-    "umami": 0.72,
-    "spicy": 0.39,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/耙耙柑茶": {
-    "sweet": 0.47,
-    "sour": 0.35,
-    "bitter": 0.31,
-    "umami": 0.37,
-    "spicy": 0.46,
-    "fat": 0.57,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/百香果橙子特调": {
-    "sweet": 1.0,
-    "sour": 0.66,
-    "bitter": 0.7,
+    "sweet": 0.7,
+    "sour": 0.3,
     "umami": 0.64,
-    "spicy": 0.76,
-    "fat": 0.97,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.0
   },
-  "howtocook/冰粉": {
-    "sweet": 0.78,
-    "sour": 0.61,
-    "bitter": 0.46,
-    "umami": 0.51,
-    "spicy": 0.66,
-    "fat": 0.65,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/菠萝咖啡特调": {
-    "sweet": 0.55,
-    "sour": 0.26,
-    "bitter": 0.37,
-    "umami": 0.46,
-    "spicy": 0.52,
-    "fat": 0.68,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/冬瓜茶": {
-    "sweet": 0.73,
-    "sour": 0.64,
-    "bitter": 0.23,
-    "umami": 0.61,
-    "spicy": 0.71,
-    "fat": 0.34,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/海边落日": {
-    "sweet": 0.66,
-    "sour": 0.34,
-    "bitter": 0.43,
-    "umami": 0.23,
-    "spicy": 0.43,
-    "fat": 0.65,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金菲士": {
-    "sweet": 0.81,
-    "sour": 0.68,
-    "bitter": 0.78,
-    "umami": 0.47,
-    "spicy": 0.55,
-    "fat": 0.83,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "金谷园/金谷园牛奶醪糟鸡蛋": {
-    "sweet": 0.37,
-    "sour": 0.41,
-    "bitter": 0.24,
-    "umami": 0.46,
-    "spicy": 0.58,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/金汤力": {
-    "sweet": 0.81,
-    "sour": 0.68,
-    "bitter": 0.78,
-    "umami": 0.47,
-    "spicy": 0.55,
-    "fat": 0.83,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/酒酿醪糟": {
-    "sweet": 0.67,
-    "sour": 0.66,
-    "bitter": 0.14,
-    "umami": 0.66,
-    "spicy": 0.79,
-    "fat": 0.39,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/可乐桶": {
-    "sweet": 0.74,
-    "sour": 0.42,
-    "bitter": 0.62,
-    "umami": 0.45,
-    "spicy": 0.4,
-    "fat": 0.9,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/奶茶": {
-    "sweet": 0.52,
-    "sour": 0.43,
-    "bitter": 0.37,
-    "umami": 0.51,
-    "spicy": 0.53,
-    "fat": 0.59,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/柠檬水": {
-    "sweet": 0.81,
-    "sour": 0.68,
-    "bitter": 0.78,
-    "umami": 0.47,
-    "spicy": 0.55,
-    "fat": 0.83,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/牛油果拉西": {
-    "sweet": 0.67,
-    "sour": 0.67,
-    "bitter": 0.67,
-    "umami": 0.69,
-    "spicy": 0.58,
-    "fat": 0.77,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/奇异果菠菜特调": {
-    "sweet": 0.59,
-    "sour": 0.78,
-    "bitter": 0.76,
-    "umami": 0.81,
-    "spicy": 0.71,
-    "fat": 0.9,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/砂糖椰子冰沙": {
-    "sweet": 0.74,
-    "sour": 0.54,
-    "bitter": 0.37,
-    "umami": 0.58,
-    "spicy": 0.64,
-    "fat": 0.72,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/酸梅汤": {
-    "sweet": 0.72,
-    "sour": 0.63,
-    "bitter": 0.29,
-    "umami": 0.61,
-    "spicy": 0.77,
-    "fat": 0.47,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/酸梅汤（半成品加工）": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/泰国手标红茶": {
-    "sweet": 0.32,
-    "sour": 0.25,
-    "bitter": 0.11,
-    "umami": 0.38,
-    "spicy": 0.48,
-    "fat": 0.33,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/杨枝甘露": {
-    "sweet": 0.22,
-    "sour": 0.1,
-    "bitter": 0.14,
-    "umami": 0.16,
-    "spicy": 0.3,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/印度奶茶": {
-    "sweet": 0.76,
-    "sour": 0.61,
-    "bitter": 0.59,
-    "umami": 0.51,
-    "spicy": 0.59,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/长岛冰茶": {
-    "sweet": 0.77,
-    "sour": 0.38,
-    "bitter": 0.57,
-    "umami": 0.39,
-    "spicy": 0.45,
-    "fat": 0.82,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/B52轰炸机": {
-    "sweet": 0.53,
-    "sour": 0.11,
-    "bitter": 0.32,
-    "umami": 0.22,
-    "spicy": 0.32,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/Mojito莫吉托": {
-    "sweet": 0.56,
-    "sour": 0.31,
-    "bitter": 0.34,
-    "umami": 0.21,
-    "spicy": 0.46,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/奥利奥冰淇淋": {
-    "sweet": 0.31,
+  "howtocook/酱牛肉": {
+    "sweet": 0.7,
     "sour": 0.0,
-    "bitter": 0.15,
-    "umami": 0.0,
-    "spicy": 0.29,
-    "fat": 0.31,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/草莓冰淇淋": {
-    "sweet": 0.39,
-    "sour": 0.11,
-    "bitter": 0.17,
-    "umami": 0.15,
-    "spicy": 0.41,
-    "fat": 0.32,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/反沙芋头": {
-    "sweet": 0.77,
-    "sour": 0.96,
-    "bitter": 0.37,
-    "umami": 0.79,
-    "spicy": 0.81,
-    "fat": 0.41,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/龟苓膏": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/红薯丸子": {
-    "sweet": 0.32,
-    "sour": 0.54,
-    "bitter": 0.52,
-    "umami": 0.73,
-    "spicy": 0.48,
-    "fat": 0.69,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/红柚蛋糕": {
-    "sweet": 0.12,
-    "sour": 0.16,
-    "bitter": 0.1,
-    "umami": 0.21,
-    "spicy": 0.23,
-    "fat": 0.09,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/胡萝卜甜糕": {
-    "sweet": 0.54,
-    "sour": 0.56,
-    "bitter": 0.44,
-    "umami": 0.53,
-    "spicy": 0.62,
-    "fat": 0.49,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/咖啡椰奶冻": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烤蛋挞": {
-    "sweet": 0.23,
-    "sour": 0.3,
-    "bitter": 0.34,
-    "umami": 0.57,
-    "spicy": 0.42,
-    "fat": 0.54,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/烤箱版巴斯克芝士蛋糕": {
-    "sweet": 0.09,
-    "sour": 0.1,
-    "bitter": 0.12,
-    "umami": 0.23,
-    "spicy": 0.25,
-    "fat": 0.17,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "随便做/绿豆沙": {
-    "sweet": 0.64,
-    "sour": 0.6,
-    "bitter": 0.18,
-    "umami": 0.43,
-    "spicy": 0.69,
-    "fat": 0.35,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/玛格丽特饼干": {
-    "sweet": 0.35,
-    "sour": 0.33,
-    "bitter": 0.36,
-    "umami": 0.54,
-    "spicy": 0.36,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/魔芋蛋糕": {
-    "sweet": 0.26,
-    "sour": 0.3,
-    "bitter": 0.08,
-    "umami": 0.32,
-    "spicy": 0.41,
-    "fat": 0.13,
-    "salty": 0.0,
-    "aromatic": 0.0
-  },
-  "howtocook/戚风蛋糕": {
-    "sweet": 0.43,
-    "sour": 0.43,
-    "bitter": 0.48,
-    "umami": 0.58,
-    "spicy": 0.48,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "umami": 0.72,
+    "spicy": 0.7
   },
   "howtocook/酸奶意式奶冻": {
-    "sweet": 0.29,
-    "sour": 0.12,
-    "bitter": 0.1,
-    "umami": 0.23,
-    "spicy": 0.3,
-    "fat": 0.17,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sweet": 0.7,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/提拉米苏": {
-    "sweet": 0.37,
-    "sour": 0.28,
-    "bitter": 0.54,
-    "umami": 0.66,
-    "spicy": 0.38,
-    "fat": 0.7,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/酸梅汤": {
+    "sweet": 0.55,
+    "sour": 0.5,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/无厨师机蜂蜜面包": {
-    "sweet": 0.32,
-    "sour": 0.39,
-    "bitter": 0.33,
-    "umami": 0.62,
-    "spicy": 0.42,
-    "fat": 0.45,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/酸梅汤（半成品加工）": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/酸汤肥牛": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.63,
+    "spicy": 0.0
+  },
+  "随便做/酸甜荷包蛋": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "随便做/酸萝卜炒百叶": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/酸辣土豆丝": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/酸辣土豆丝": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.85
+  },
+  "随便做/酸辣小黄瓜": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.7
+  },
+  "howtocook/酸辣蕨根粉": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/酸辣豆芽": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "随便做/酸辣鸡蛋汤": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/醉排骨": {
+    "sweet": 0.7,
+    "sour": 0.5,
+    "umami": 0.6,
+    "spicy": 0.5
+  },
+  "随便做/醋椒鱼": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "随便做/醋溜木须": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.76,
+    "spicy": 0.6
+  },
+  "随便做/醋溜白菜": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "随便做/醋炒蛋": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/醪糟小汤圆": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "面食之神/金丝饼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/金枪鱼酱三明治": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.45,
+    "spicy": 0.0
+  },
+  "howtocook/金汤力": {
+    "sweet": 0.0,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/金菲士": {
+    "sweet": 0.7,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/金谷园牛奶醪糟鸡蛋": {
+    "sweet": 0.4,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/金针菇日本豆腐煲": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.67,
+    "spicy": 0.9
+  },
+  "howtocook/金针菇汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "howtocook/金钱蛋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.9
+  },
+  "howtocook/银耳莲子粥": {
+    "sweet": 0.55,
+    "sour": 0.0,
+    "umami": 0.5,
+    "spicy": 0.0
+  },
+  "随便做/锅烧肘子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.6
+  },
+  "howtocook/长岛冰茶": {
+    "sweet": 0.65,
+    "sour": 0.6,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/阳朔啤酒鱼": {
+    "sweet": 0.7,
+    "sour": 0.3,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/陈皮排骨汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
+  },
+  "howtocook/陕北熬豆角": {
+    "sweet": 0.0,
+    "sour": 0.3,
+    "umami": 0.67,
+    "spicy": 0.9
+  },
+  "面食之神/陕西扯面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/陕西油泼面": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "随便做/隋卞带鱼": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.8
+  },
+  "随便做/隋式酱牛肉": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.8
   },
   "howtocook/雪花酥": {
-    "sweet": 0.27,
-    "sour": 0.24,
-    "bitter": 0.36,
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/雪菜蒸鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.5
+  },
+  "howtocook/雷椒皮蛋": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/青椒土豆炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "随便做/青椒炒肉丝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.0
+  },
+  "howtocook/青椒酿": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.6
+  },
+  "howtocook/韩国麻药鸡蛋": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.9
+  },
+  "howtocook/韩式拌饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
     "umami": 0.5,
-    "spicy": 0.33,
-    "fat": 0.43,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.65
   },
-  "howtocook/英式司康": {
-    "sweet": 0.19,
-    "sour": 0.19,
-    "bitter": 0.2,
-    "umami": 0.29,
-    "spicy": 0.29,
-    "fat": 0.23,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/韭菜盒子": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.0
   },
-  "howtocook/芋泥雪媚娘": {
-    "sweet": 0.51,
-    "sour": 0.54,
-    "bitter": 0.27,
+  "随便做/风味茄子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.7
+  },
+  "面食之神/饺子": {
+    "sweet": 0.0,
+    "sour": 0.0,
     "umami": 0.7,
-    "spicy": 0.66,
-    "fat": 0.52,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.65
   },
-  "howtocook/炸鲜奶": {
-    "sweet": 0.31,
-    "sour": 0.48,
-    "bitter": 0.51,
-    "umami": 0.79,
-    "spicy": 0.38,
-    "fat": 0.66,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/香干肉丝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.0
   },
-  "howtocook/草莓酱": {
-    "sweet": 0.75,
-    "sour": 0.49,
-    "bitter": 0.66,
-    "umami": 0.54,
-    "spicy": 0.75,
-    "fat": 0.87,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/香干芹菜炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.8
   },
-  "howtocook/葱油": {
-    "sweet": 0.81,
-    "sour": 0.83,
-    "bitter": 0.77,
-    "umami": 0.79,
-    "spicy": 0.53,
-    "fat": 0.6,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/香煎五花肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.0
   },
-  "howtocook/简易版炒糖色": {
-    "sweet": 0.56,
-    "sour": 0.35,
-    "bitter": 0.07,
-    "umami": 0.31,
-    "spicy": 0.54,
-    "fat": 0.14,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/香煎翘嘴鱼": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.77,
+    "spicy": 0.0
   },
-  "howtocook/蒜香酱油": {
-    "sweet": 0.57,
-    "sour": 0.55,
-    "bitter": 0.31,
-    "umami": 0.76,
-    "spicy": 0.4,
-    "fat": 0.38,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/香煎金钱蛋": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.73
   },
-  "howtocook/糖醋汁": {
+  "howtocook/香菇滑鸡": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.55,
+    "spicy": 0.0
+  },
+  "随便做/香辣土豆丝": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.7
+  },
+  "howtocook/香辣鸡爪煲": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.74,
+    "spicy": 0.9
+  },
+  "howtocook/魔芋蛋糕": {
     "sweet": 0.55,
-    "sour": 0.44,
-    "bitter": 0.36,
-    "umami": 0.59,
-    "spicy": 0.32,
-    "fat": 0.2,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/油酥": {
-    "sweet": 0.16,
-    "sour": 0.27,
-    "bitter": 0.26,
-    "umami": 0.26,
-    "spicy": 0.16,
-    "fat": 0.12,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/鱼香土豆泥": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.9
   },
-  "howtocook/炸串酱料": {
-    "sweet": 0.77,
-    "sour": 0.8,
-    "bitter": 0.78,
-    "umami": 0.78,
-    "spicy": 0.46,
-    "fat": 0.63,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鱼香肉丝": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.65,
+    "spicy": 0.0
   },
-  "howtocook/蔗糖糖浆": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/鱼香肉丝": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.67,
+    "spicy": 0.75
   },
-  "howtocook/半成品意面": {
-    "sweet": 0.32,
-    "sour": 0.93,
-    "bitter": 0.93,
-    "umami": 0.94,
-    "spicy": 0.49,
-    "fat": 0.91,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鱼香茄子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.74,
+    "spicy": 0.0
   },
-  "howtocook/空气炸锅鸡翅中": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/鱼香茄子": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.72,
+    "spicy": 0.9
   },
-  "howtocook/空气炸锅羊排": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "随便做/鱼骨汆鱼丸": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.75
   },
-  "howtocook/懒人蛋挞": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鲜肉烧卖": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.62,
+    "spicy": 0.6
   },
-  "howtocook/牛油火锅底料": {
-    "sweet": 0.82,
-    "sour": 0.76,
-    "bitter": 0.63,
-    "umami": 0.69,
-    "spicy": 0.56,
-    "fat": 0.48,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鲣鱼海苔玉米饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/速冻馄饨": {
-    "sweet": 0.68,
-    "sour": 0.68,
-    "bitter": 0.69,
+  "howtocook/鲤鱼炖白菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.9
+  },
+  "howtocook/鳊鱼炖豆腐": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.73,
+    "spicy": 0.9
+  },
+  "随便做/鸡丝凉面": {
+    "sweet": 0.7,
+    "sour": 0.7,
+    "umami": 0.73,
+    "spicy": 0.7
+  },
+  "howtocook/鸡蛋三明治": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.45,
+    "spicy": 0.6
+  },
+  "howtocook/鸡蛋火腿炒黄瓜": {
+    "sweet": 0.0,
+    "sour": 0.0,
     "umami": 0.7,
-    "spicy": 0.36,
-    "fat": 0.46,
-    "salty": 0.0,
-    "aromatic": 0.0
+    "spicy": 0.9
   },
-  "howtocook/速冻水饺": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鸡蛋羹": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.7
   },
-  "howtocook/速冻汤圆": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鸡蛋花": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   },
-  "howtocook/炸薯条": {
-    "sweet": 0.36,
-    "sour": 0.4,
-    "bitter": 0.53,
-    "umami": 0.32,
-    "spicy": 0.35,
-    "fat": 0.64,
-    "salty": 0.0,
-    "aromatic": 0.0
+  "howtocook/鹰嘴豆炸饼": {
+    "sweet": 0.0,
+    "sour": 0.45,
+    "umami": 0.5,
+    "spicy": 0.62
+  },
+  "howtocook/麻婆豆腐": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.8
+  },
+  "随便做/麻婆豆腐": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.72,
+    "spicy": 0.73
+  },
+  "howtocook/麻油拌面": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.6
+  },
+  "howtocook/麻辣减脂荞麦面": {
+    "sweet": 0.0,
+    "sour": 0.7,
+    "umami": 0.8,
+    "spicy": 0.8
+  },
+  "随便做/麻辣小龙虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.77
+  },
+  "howtocook/麻辣香锅": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.9
+  },
+  "随便做/麻辣香锅": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.77
+  },
+  "面食之神/麻酱烧饼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.5
+  },
+  "howtocook/黄油煎虾": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/黄油鸡": {
+    "sweet": 0.7,
+    "sour": 0.45,
+    "umami": 0.55,
+    "spicy": 0.53
+  },
+  "howtocook/黄焖鸡": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.68,
+    "spicy": 0.75
+  },
+  "howtocook/黄瓜炒肉": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.9
+  },
+  "howtocook/黄瓜皮蛋汤": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.8,
+    "spicy": 0.0
+  },
+  "随便做/黄金炒饭": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/黄金馒头片": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "howtocook/黑椒牛柳": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.6,
+    "spicy": 0.5
+  },
+  "随便做/黑粉炸鸡（黑暗料理）": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.7,
+    "spicy": 0.6
+  },
+  "howtocook/黔式腊肠娃娃菜": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
+  },
+  "随便做/龙腾盛世麒麟鱼": {
+    "sweet": 0.0,
+    "sour": 0.0,
+    "umami": 0.62,
+    "spicy": 0.0
+  },
+  "howtocook/龟苓膏": {
+    "sweet": 0.7,
+    "sour": 0.0,
+    "umami": 0.0,
+    "spicy": 0.0
   }
 }
