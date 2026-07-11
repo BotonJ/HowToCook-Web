@@ -216,7 +216,7 @@ describe('useRecipes with English/noodle/flavor data', () => {
       const u = String(url)
       if (u.includes('en_index_curated.json')) return new Response(JSON.stringify({ version: '1', total: 0, source: 'en', dishes: [] }))
       if (u.includes('flavor-profiles.json')) {
-        return new Response(JSON.stringify({ r1: { sweet: 3, sour: 1, bitter: 0, umami: 8, spicy: 2, fat: 7, salty: 6, aromatic: 5 } }))
+        return new Response(JSON.stringify({ r1: { sweet: 3, sour: 1, umami: 8, spicy: 2 } }))
       }
       if (u.includes('/categories')) return new Response(JSON.stringify({ categories: [{ id: 'meat', name: '荤菜' }], total: 1 }))
       if (u.includes('/recipes')) return new Response(JSON.stringify({ recipes: [{ id: 'r1', name: '红烧肉', category: 'meat', difficulty: 3, cuisine: 'Hunan', cooking_method: 'braise', cook_time: '60min', ingredients: ['pork'], main_ingredients: ['pork'], source: 'howtocook', tags: {} }], total: 1 }))
