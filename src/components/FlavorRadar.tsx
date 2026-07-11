@@ -18,9 +18,9 @@ function polarToCartesian(cx: number, cy: number, r: number, angleDeg: number) {
   return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
 }
 
-function hexagonPoints(cx: number, cy: number, r: number) {
+function polygonPoints(cx: number, cy: number, r: number) {
   return FLAVOR_DIMS.map((_, i) => {
-    const angle = (360 / 8) * i;
+    const angle = (360 / FLAVOR_DIMS.length) * i;
     return polarToCartesian(cx, cy, r, angle);
   });
 }
@@ -35,11 +35,11 @@ export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240
 
   const dataPoints = FLAVOR_DIMS.map((key, i) => {
     const ratio = Math.min(1, Math.max(0, profile[key]));
-    const angle = (360 / 8) * i;
+    const angle = (360 / FLAVOR_DIMS.length) * i;
     return polarToCartesian(cx, cy, maxRadius * ratio, angle);
   });
 
-  const vertexPoints = hexagonPoints(cx, cy, maxRadius);
+  const vertexPoints = polygonPoints(cx, cy, maxRadius);
 
   return (
     <div className="flex justify-center">
@@ -55,7 +55,7 @@ export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240
         <desc>Radar chart showing flavor dimensions for this recipe</desc>
         {/* Grid hexagons */}
         {GRID_LEVELS.map((level) => {
-          const pts = hexagonPoints(cx, cy, maxRadius * level);
+          const pts = polygonPoints(cx, cy, maxRadius * level);
           return (
             <polygon
               key={level}
@@ -109,7 +109,7 @@ export const FlavorRadar = React.memo(function FlavorRadar({ profile, size = 240
 
         {/* Labels */}
         {FLAVOR_DIMS.map((key, i) => {
-          const angle = (360 / 8) * i;
+          const angle = (360 / FLAVOR_DIMS.length) * i;
           const labelPos = polarToCartesian(cx, cy, maxRadius + 20, angle);
           const value = profile[key];
           const isHovered = hoveredIndex === i;
