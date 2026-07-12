@@ -20,13 +20,13 @@
   "随便做/三不沾": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/上汤娃娃菜": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "随便做/东北饭店锅包肉": {
@@ -44,7 +44,7 @@
   "howtocook/中式馅饼": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.0
   },
   "随便做/九转大肠": {
@@ -98,7 +98,7 @@
   "howtocook/冬瓜酿肉": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "howtocook/冰粉": {
@@ -182,7 +182,7 @@
   "随便做/凉菜合集（浇汁松花蛋、拍黄瓜、捞汁秋葵、老醋花生米）": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.8,
+    "umami": 0.73,
     "spicy": 0.68
   },
   "面食之神/刀削面": {
@@ -206,7 +206,7 @@
   "随便做/剁椒炒鸡蛋": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.77,
+    "umami": 0.65,
     "spicy": 0.7
   },
   "随便做/剁椒蒸鸡": {
@@ -224,7 +224,7 @@
   "howtocook/包菜炒鸡蛋粉丝": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.77,
+    "umami": 0.65,
     "spicy": 0.9
   },
   "面食之神/千层饼": {
@@ -302,7 +302,7 @@
   "howtocook/可乐炒饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.72,
+    "umami": 0.65,
     "spicy": 0.6
   },
   "howtocook/可乐鸡翅": {
@@ -320,7 +320,7 @@
   "howtocook/台式卤肉饭": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "随便做/名菜翠珠鱼花": {
@@ -350,7 +350,7 @@
   "howtocook/咖喱炒蟹": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.45
   },
   "howtocook/咖喱肥牛": {
@@ -368,7 +368,7 @@
   "随便做/咸蛋黄茄子": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.9
   },
   "howtocook/响油鳝丝": {
@@ -410,7 +410,7 @@
   "随便做/团圆十锦": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.65,
+    "umami": 0.56,
     "spicy": 0.6
   },
   "随便做/国宴菜翡翠虾球": {
@@ -440,7 +440,7 @@
   "howtocook/基础牛奶面包": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/大虾烧白菜": {
@@ -452,7 +452,7 @@
   "howtocook/太阳蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/奇异果菠菜特调": {
@@ -464,7 +464,7 @@
   "howtocook/奥利奥冰淇淋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/奶汤鲫鱼": {
@@ -518,7 +518,7 @@
   "howtocook/完美水煮蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/宝塔肉": {
@@ -620,7 +620,7 @@
   "howtocook/小酥肉": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.68,
     "spicy": 0.67
   },
   "howtocook/小龙虾": {
@@ -650,7 +650,7 @@
   "howtocook/山西过油肉": {
     "sweet": 0.0,
     "sour": 0.7,
-    "umami": 0.68,
+    "umami": 0.6,
     "spicy": 0.47
   },
   "howtocook/巴基斯坦牛肉咖喱": {
@@ -710,25 +710,25 @@
   "howtocook/微波炉腊肠煲仔饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.0
   },
   "howtocook/微波炉荷包蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/微波炉蒸蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.0
   },
   "howtocook/微波炉蛋糕": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/微波葱姜黑鳕鱼": {
@@ -758,7 +758,7 @@
   "howtocook/意式香肠北非蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.6
   },
   "随便做/懒人焖饭": {
@@ -770,7 +770,7 @@
   "howtocook/懒人蛋挞": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "面食之神/戗面馒头": {
@@ -782,7 +782,7 @@
   "howtocook/戚风蛋糕": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/手工水饺": {
@@ -794,7 +794,7 @@
   "howtocook/手抓饼": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/手撕包菜": {
@@ -818,7 +818,7 @@
   "howtocook/扬州炒饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/披萨饼皮": {
@@ -890,7 +890,7 @@
   "howtocook/无厨师机蜂蜜面包": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.5
   },
   "howtocook/无骨鸡爪": {
@@ -902,13 +902,13 @@
   "howtocook/日式咖喱饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.45
   },
   "howtocook/日式肥牛丼饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.4
   },
   "howtocook/昂刺鱼豆腐汤": {
@@ -926,7 +926,7 @@
   "howtocook/朱雀汤": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/杀猪菜": {
@@ -998,7 +998,7 @@
   "howtocook/桂林十八酿": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.56,
+    "umami": 0.53,
     "spicy": 0.0
   },
   "howtocook/梅菜扣肉": {
@@ -1016,7 +1016,7 @@
   "howtocook/椒盐排条": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/椒盐玉米": {
@@ -1058,13 +1058,13 @@
   "howtocook/水煮牛肉": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.67,
+    "umami": 0.57,
     "spicy": 0.9
   },
   "随便做/水煮牛肉": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.75,
+    "umami": 0.69,
     "spicy": 0.68
   },
   "howtocook/水煮玉米": {
@@ -1076,7 +1076,7 @@
   "howtocook/水煮肉片": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.72,
+    "umami": 0.64,
     "spicy": 0.7
   },
   "howtocook/水煮鱼": {
@@ -1100,7 +1100,7 @@
   "howtocook/汤面": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/河南蒸菜": {
@@ -1184,7 +1184,7 @@
   "howtocook/油醋爆蛋": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.75,
+    "umami": 0.6,
     "spicy": 0.9
   },
   "howtocook/泰国手标红茶": {
@@ -1208,7 +1208,7 @@
   "howtocook/洋葱炒鸡蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.3
   },
   "随便做/浓汤菜豆糊": {
@@ -1274,7 +1274,7 @@
   "howtocook/温泉蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/湖南家常红烧肉": {
@@ -1292,25 +1292,25 @@
   "随便做/溏心茶叶蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.8
   },
   "howtocook/溏心蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/滑溜里脊": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "howtocook/澳门湿版免治牛肉饭": {
     "sweet": 0.7,
     "sour": 0.3,
-    "umami": 0.68,
+    "umami": 0.6,
     "spicy": 0.45
   },
   "howtocook/火腿饭团": {
@@ -1328,7 +1328,7 @@
   "howtocook/炒年糕": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.0
   },
   "howtocook/炒意大利面": {
@@ -1340,19 +1340,19 @@
   "howtocook/炒方便面": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/炒河粉": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.75,
+    "umami": 0.66,
     "spicy": 0.4
   },
   "howtocook/炒滑蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/炒烤羊肉": {
@@ -1376,7 +1376,7 @@
   "howtocook/炒馍": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.4
   },
   "随便做/炖鸡汤": {
@@ -1406,7 +1406,7 @@
   "随便做/炝锅面": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.65,
+    "umami": 0.53,
     "spicy": 0.0
   },
   "howtocook/炸串酱料": {
@@ -1430,7 +1430,7 @@
   "随便做/炸酥肉": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.8
   },
   "howtocook/炸酱面": {
@@ -1448,7 +1448,7 @@
   "howtocook/炸鲜奶": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/烙饼": {
@@ -1460,7 +1460,7 @@
   "howtocook/烤箱版巴斯克芝士蛋糕": {
     "sweet": 0.6,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/烤羊排": {
@@ -1478,7 +1478,7 @@
   "howtocook/烤蛋挞": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/烤鱼": {
@@ -1502,7 +1502,7 @@
   "面食之神/烩面片": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.6,
+    "umami": 0.53,
     "spicy": 0.9
   },
   "howtocook/热干面": {
@@ -1532,7 +1532,7 @@
   "howtocook/煮泡面加蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/煮锅蒸米饭": {
@@ -1556,13 +1556,13 @@
   "howtocook/燕麦鸡蛋饼": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/牛奶燕麦": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/牛排": {
@@ -1610,7 +1610,7 @@
   "howtocook/玛格丽特饼干": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/甜辣烤全翅": {
@@ -1652,7 +1652,7 @@
   "howtocook/番茄牛肉蛋花汤": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.55,
+    "umami": 0.47,
     "spicy": 0.6
   },
   "howtocook/番茄红酱": {
@@ -1664,7 +1664,7 @@
   "随便做/疙瘩汤": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.47,
     "spicy": 0.0
   },
   "howtocook/瘦肉土豆片": {
@@ -1706,19 +1706,19 @@
   "howtocook/皮蛋瘦肉粥": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.6,
     "spicy": 0.6
   },
   "随便做/皮蛋肉丸": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.46,
     "spicy": 0.6
   },
   "howtocook/皮蛋豆腐": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.9
   },
   "howtocook/砂糖椰子冰沙": {
@@ -1730,7 +1730,7 @@
   "随便做/砂锅豆腐": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "面食之神/空心饼": {
@@ -1754,7 +1754,7 @@
   "howtocook/空气炸锅脆皮现腌炸鸡": {
     "sweet": 0.0,
     "sour": 0.6,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.45
   },
   "howtocook/空气炸锅面包片": {
@@ -1826,7 +1826,7 @@
   "howtocook/糖醋里脊": {
     "sweet": 0.7,
     "sour": 0.5,
-    "umami": 0.65,
+    "umami": 0.58,
     "spicy": 0.6
   },
   "随便做/糖醋里脊": {
@@ -1868,19 +1868,19 @@
   "howtocook/紫菜蛋花汤": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.55,
+    "umami": 0.47,
     "spicy": 0.0
   },
   "随便做/红枣肉丸汤": {
     "sweet": 0.4,
     "sour": 0.0,
-    "umami": 0.73,
+    "umami": 0.62,
     "spicy": 0.6
   },
   "howtocook/红柚蛋糕": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/红烧冬瓜": {
@@ -1916,7 +1916,7 @@
   "howtocook/红烧茄子": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.65,
+    "umami": 0.53,
     "spicy": 0.6
   },
   "howtocook/红烧鱼": {
@@ -1958,7 +1958,7 @@
   "随便做/红薯丸子": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/绿豆沙": {
@@ -2000,7 +2000,7 @@
   "howtocook/美式炒蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/老友猪肉粉": {
@@ -2054,7 +2054,7 @@
   "howtocook/肉蛋盖饭": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.73,
+    "umami": 0.62,
     "spicy": 0.0
   },
   "howtocook/肉蟹煲": {
@@ -2066,7 +2066,7 @@
   "howtocook/肉饼炖蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "howtocook/胡萝卜甜糕": {
@@ -2084,7 +2084,7 @@
   "howtocook/脆皮豆腐": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.77,
+    "umami": 0.65,
     "spicy": 0.0
   },
   "howtocook/腊八粥": {
@@ -2108,7 +2108,7 @@
   "面食之神/臊子面": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.75,
+    "umami": 0.66,
     "spicy": 0.7
   },
   "howtocook/芋泥雪媚娘": {
@@ -2156,13 +2156,13 @@
   "howtocook/苏格兰蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "howtocook/英式司康": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/茄子炖土豆": {
@@ -2174,7 +2174,7 @@
   "howtocook/茄子肉煎饼": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "面食之神/茄子麦饭": {
@@ -2192,7 +2192,7 @@
   "howtocook/茶叶蛋": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.63,
     "spicy": 0.0
   },
   "howtocook/草莓冰淇淋": {
@@ -2210,7 +2210,7 @@
   "howtocook/荔枝肉": {
     "sweet": 0.7,
     "sour": 0.5,
-    "umami": 0.68,
+    "umami": 0.6,
     "spicy": 0.5
   },
   "howtocook/荷兰豆炒腊肠": {
@@ -2222,7 +2222,7 @@
   "howtocook/莴笋叶煎饼": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.63,
     "spicy": 0.0
   },
   "howtocook/菌菇炖乳鸽": {
@@ -2234,19 +2234,19 @@
   "随便做/菜蟒": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.9
   },
   "面食之神/菠菜大油条": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/菠菜炒鸡蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/菠萝咖啡特调": {
@@ -2378,7 +2378,7 @@
   "howtocook/蒸水蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/蒸花卷": {
@@ -2438,25 +2438,25 @@
   "howtocook/蛋包饭": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.55,
+    "umami": 0.47,
     "spicy": 0.3
   },
   "howtocook/蛋炒饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "howtocook/蛋煎糍粑": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/蛏抱蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.73,
+    "umami": 0.62,
     "spicy": 0.3
   },
   "howtocook/螺蛳粉": {
@@ -2474,7 +2474,7 @@
   "随便做/裹烧豆腐": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.67,
+    "umami": 0.57,
     "spicy": 0.6
   },
   "随便做/西湖醋鱼": {
@@ -2492,7 +2492,7 @@
   "howtocook/西红柿炒鸡蛋": {
     "sweet": 0.7,
     "sour": 0.3,
-    "umami": 0.5,
+    "umami": 0.4,
     "spicy": 0.0
   },
   "howtocook/西红柿牛腩": {
@@ -2504,25 +2504,25 @@
   "howtocook/西红柿豆腐汤羹": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.65,
+    "umami": 0.53,
     "spicy": 0.0
   },
   "howtocook/西红柿鸡蛋挂面": {
     "sweet": 0.7,
     "sour": 0.3,
-    "umami": 0.67,
+    "umami": 0.57,
     "spicy": 0.0
   },
   "howtocook/西红柿鸡蛋汤": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.65,
+    "umami": 0.53,
     "spicy": 0.0
   },
   "howtocook/西葫芦炒鸡蛋": {
     "sweet": 0.0,
     "sour": 0.3,
-    "umami": 0.5,
+    "umami": 0.4,
     "spicy": 0.0
   },
   "howtocook/话梅煮毛豆": {
@@ -2570,7 +2570,7 @@
   "随便做/赛螃蟹": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.7,
+    "umami": 0.5,
     "spicy": 0.6
   },
   "随便做/辣子鸡": {
@@ -2594,7 +2594,7 @@
   "随便做/辣椒红烧肉": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.68,
     "spicy": 0.9
   },
   "随便做/辣皮子拌面": {
@@ -2648,7 +2648,7 @@
   "howtocook/酱炖蟹": {
     "sweet": 0.7,
     "sour": 0.3,
-    "umami": 0.64,
+    "umami": 0.58,
     "spicy": 0.0
   },
   "howtocook/酱牛肉": {
@@ -2684,7 +2684,7 @@
   "随便做/酸甜荷包蛋": {
     "sweet": 0.7,
     "sour": 0.3,
-    "umami": 0.5,
+    "umami": 0.4,
     "spicy": 0.0
   },
   "随便做/酸萝卜炒百叶": {
@@ -2726,13 +2726,13 @@
   "随便做/酸辣鸡蛋汤": {
     "sweet": 0.0,
     "sour": 0.7,
-    "umami": 0.7,
+    "umami": 0.6,
     "spicy": 0.6
   },
   "howtocook/醉排骨": {
     "sweet": 0.7,
     "sour": 0.5,
-    "umami": 0.6,
+    "umami": 0.53,
     "spicy": 0.5
   },
   "随便做/醋椒鱼": {
@@ -2744,7 +2744,7 @@
   "随便做/醋溜木须": {
     "sweet": 0.0,
     "sour": 0.7,
-    "umami": 0.76,
+    "umami": 0.68,
     "spicy": 0.6
   },
   "随便做/醋溜白菜": {
@@ -2756,7 +2756,7 @@
   "随便做/醋炒蛋": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.8,
+    "umami": 0.63,
     "spicy": 0.9
   },
   "howtocook/醪糟小汤圆": {
@@ -2792,7 +2792,7 @@
   "howtocook/金谷园牛奶醪糟鸡蛋": {
     "sweet": 0.4,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/金针菇日本豆腐煲": {
@@ -2804,13 +2804,13 @@
   "howtocook/金针菇汤": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.5,
+    "umami": 0.4,
     "spicy": 0.0
   },
   "howtocook/金钱蛋": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.73,
+    "umami": 0.62,
     "spicy": 0.9
   },
   "howtocook/银耳莲子粥": {
@@ -2822,7 +2822,7 @@
   "随便做/锅烧肘子": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.73,
+    "umami": 0.62,
     "spicy": 0.6
   },
   "howtocook/长岛冰茶": {
@@ -2888,7 +2888,7 @@
   "howtocook/雷椒皮蛋": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.9
   },
   "howtocook/青椒土豆炒肉": {
@@ -2906,25 +2906,25 @@
   "howtocook/青椒酿": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.72,
+    "umami": 0.64,
     "spicy": 0.6
   },
   "howtocook/韩国麻药鸡蛋": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.9
   },
   "howtocook/韩式拌饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.5,
+    "umami": 0.4,
     "spicy": 0.65
   },
   "howtocook/韭菜盒子": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.6,
+    "umami": 0.45,
     "spicy": 0.0
   },
   "随便做/风味茄子": {
@@ -2966,7 +2966,7 @@
   "随便做/香煎金钱蛋": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.73
   },
   "howtocook/香菇滑鸡": {
@@ -2990,7 +2990,7 @@
   "howtocook/魔芋蛋糕": {
     "sweet": 0.55,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/鱼香土豆泥": {
@@ -3002,7 +3002,7 @@
   "howtocook/鱼香肉丝": {
     "sweet": 0.7,
     "sour": 0.7,
-    "umami": 0.65,
+    "umami": 0.58,
     "spicy": 0.0
   },
   "随便做/鱼香肉丝": {
@@ -3062,25 +3062,25 @@
   "howtocook/鸡蛋三明治": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.45,
+    "umami": 0.4,
     "spicy": 0.6
   },
   "howtocook/鸡蛋火腿炒黄瓜": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.9
   },
   "howtocook/鸡蛋羹": {
     "sweet": 0.0,
     "sour": 0.7,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.7
   },
   "howtocook/鸡蛋花": {
     "sweet": 0.7,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/鹰嘴豆炸饼": {
@@ -3092,7 +3092,7 @@
   "howtocook/麻婆豆腐": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.7,
+    "umami": 0.57,
     "spicy": 0.8
   },
   "随便做/麻婆豆腐": {
@@ -3164,19 +3164,19 @@
   "howtocook/黄瓜皮蛋汤": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.8,
+    "umami": 0.55,
     "spicy": 0.0
   },
   "随便做/黄金炒饭": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "随便做/黄金馒头片": {
     "sweet": 0.0,
     "sour": 0.0,
-    "umami": 0.0,
+    "umami": 0.3,
     "spicy": 0.0
   },
   "howtocook/黑椒牛柳": {
