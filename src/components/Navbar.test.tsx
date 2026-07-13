@@ -13,13 +13,18 @@ describe('Navbar', () => {
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 
-  it('displays navigation links (academy, collections, explore, about, credits)', () => {
+  it('displays navigation links (academy, collections, about, credits)', () => {
     renderWithProviders(<Navbar />);
     expect(screen.getByText('烹饪学院')).toBeInTheDocument();
     expect(screen.getByText('专题')).toBeInTheDocument();
-    expect(screen.getByText('风味工作台')).toBeInTheDocument();
     expect(screen.getByText('关于')).toBeInTheDocument();
     expect(screen.getByText('致谢')).toBeInTheDocument();
+  });
+
+  it('hides the /explore nav link (decision #10: route kept, nav entry removed)', () => {
+    renderWithProviders(<Navbar />);
+    // The 风味工作台 nav link should no longer appear in the navbar.
+    expect(screen.queryByText('风味工作台')).not.toBeInTheDocument();
   });
 
   it('displays search icon link to /search', () => {
@@ -64,7 +69,6 @@ describe('Navbar', () => {
   it('navigation links have correct hrefs', () => {
     renderWithProviders(<Navbar />);
     expect(screen.getByText('烹饪学院').closest('a')).toHaveAttribute('href', '/academy');
-    expect(screen.getByText('风味工作台').closest('a')).toHaveAttribute('href', '/explore');
     expect(screen.getByText('关于').closest('a')).toHaveAttribute('href', '/about');
     expect(screen.getByText('致谢').closest('a')).toHaveAttribute('href', '/credits');
   });

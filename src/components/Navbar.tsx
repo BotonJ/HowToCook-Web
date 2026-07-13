@@ -79,12 +79,8 @@ export function Navbar() {
             )}
           </div>
 
-          <Link
-            to="/explore"
-            className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"
-          >
-            {t.nav.explore}
-          </Link>
+          {/* /explore link hidden per handoff decision #10 — route + component
+              preserved (deep-linkable), only the nav entry is removed. */}
           <Link
             to="/about"
             className="text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg hidden md:block"

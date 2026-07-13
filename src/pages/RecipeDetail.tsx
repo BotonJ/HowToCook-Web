@@ -5,13 +5,54 @@ import { Layout } from '@/components/Layout';
 import { FlavorRadar } from '@/components/FlavorRadar';
 import { RecipeJsonLd } from '@/components/RecipeJsonLd';
 import { BreadcrumbJsonLd } from '@/components/BreadcrumbJsonLd';
+import { SubstituteList } from '@/components/SubstituteList';
 import { toAbsoluteUrl } from '@/lib/utils';
 import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
+import { useSubstituteProfiles, type SubstituteEntry } from '@/hooks/useSubstituteProfiles';
 import { useT, useBasePath } from '@/lib/i18n';
 import { findRecipeById } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
 import { useMeta } from '@/hooks/useMeta';
+
+/**
+ * Render the ingredients markdown list, attaching an inline "替换" button to
+ * any line whose cleaned text is a known ingredient in the substitute map.
+ *
+ * Ingredient lines from the API are plain names ("大葱", "姜"); the substitute
+ * button appears below the row only when a precomputed profile exists for that
+ * name. Lines that don't match (quantities, free text, seasonings excluded by
+ * the precompute) render unchanged — passive display, no noise.
+ */
+function renderIngredientsList(
+  text: string,
+  getSubstitutes: (name: string) => SubstituteEntry[] | null,
+) {
+  if (!text) return null;
+  const lines = text.split('\n').filter(l => l.trim());
+  return (
+    <ul className="space-y-1 text-on-surface-variant font-body text-body-md">
+      {lines.map((line, i) => {
+        const indent = line.startsWith('  ');
+        const cleaned = line.trim().replace(/^[-*]\s*/, '').replace(/^\d+\.\s*/, '');
+        const subs = getSubstitutes(cleaned);
+        return (
+          <li key={i} className={`${indent ? 'pl-6 text-on-surface-variant/80' : ''}`}>
+            <div className="flex gap-2">
+              <span className={`mt-0.5 ${indent ? 'text-outline' : 'text-primary'}`}>{indent ? '◦' : '•'}</span>
+              <span className="leading-relaxed">{cleaned}</span>
+            </div>
+            {subs && subs.length > 0 && (
+              <div className="pl-5">
+                <SubstituteList ingredient={cleaned} substitutes={subs} />
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 function renderMarkdownList(text: string) {
   if (!text) return null;
@@ -82,6 +123,10 @@ export function RecipeDetail() {
   const navigate = useNavigate();
   const base = useBasePath();
   const t = useT();
+  // Lazy-load the substitute profiles JSON once per session (module-cached).
+  // The fetch fires on detail-page mount; the ingredient list renders first
+  // and the "替换" buttons appear once the data arrives.
+  const { getSubstitutes } = useSubstituteProfiles();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -267,7 +312,7 @@ export function RecipeDetail() {
                 {t.recipe.ingredients}
               </h2>
               <div className="space-y-1">
-                {renderMarkdownList(recipe.ingredients_text)}
+                {renderIngredientsList(recipe.ingredients_text, getSubstitutes)}
               </div>
             </section>
           )}
