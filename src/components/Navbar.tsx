@@ -1,30 +1,10 @@
-import { useState, useRef, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Languages, Search } from 'lucide-react';
+import { Languages, Search } from 'lucide-react';
 import { useI18n, useT } from '@/lib/i18n';
-import { useClickOutside } from '../hooks/useClickOutside';
-
-function useCollections() {
-  const t = useT();
-  return useMemo(() => [
-    // ── 中文专题（2026-06-02） ──────────────────────────────────────
-    { id: 'air-fryer', label: t.nav.collectionLabels['air-fryer'], emoji: '🍳' },
-    { id: 'microwave', label: t.nav.collectionLabels['microwave'], emoji: '📡' },
-    { id: 'rice-cooker', label: t.nav.collectionLabels['rice-cooker'], emoji: '🍚' },
-    { id: 'lazy-meal', label: t.nav.collectionLabels['lazy-meal'], emoji: '😴' },
-    { id: 'rice-killer', label: t.nav.collectionLabels['rice-killer'], emoji: '🍚' },
-    { id: 'oven', label: t.nav.collectionLabels['oven'], emoji: '🔥' },
-  ], [t]);
-}
 
 export function Navbar() {
-  const [showCollections, setShowCollections] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const { lang, setLang } = useI18n();
   const t = useT();
-  const COLLECTIONS = useCollections();
-
-  useClickOutside([dropdownRef], () => setShowCollections(false), showCollections);
 
   const toggleLang = () => {
     setLang(lang === 'zh' ? 'en' : 'zh');
@@ -51,33 +31,6 @@ export function Navbar() {
           >
             {t.nav.academy}
           </Link>
-
-          {/* 专题下拉菜单 */}
-          <div className="relative hidden md:block" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setShowCollections(!showCollections)}
-              className="flex items-center gap-1 text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-2 rounded-lg transition-all text-label-lg"
-            >
-              {t.nav.collections}
-              <ChevronDown size={16} className={`transition-transform ${showCollections ? 'rotate-180' : ''}`} />
-            </button>
-            {showCollections && (
-              <div className="absolute top-full right-0 mt-2 w-48 bg-surface-container-lowest border border-outline-variant rounded-lg shadow-lg py-1 z-50">
-                {COLLECTIONS.map((col) => (
-                  <Link
-                    key={col.id}
-                    to={`/collection/${col.id}`}
-                    onClick={() => setShowCollections(false)}
-                    className="flex items-center gap-2 px-4 py-2 text-sm text-on-surface hover:bg-surface-container transition-colors"
-                  >
-                    <span>{col.emoji}</span>
-                    <span>{col.label}</span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* /explore link hidden per handoff decision #10 — route + component
               preserved (deep-linkable), only the nav entry is removed. */}

@@ -13,10 +13,9 @@ describe('Navbar', () => {
     expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
 
-  it('displays navigation links (academy, collections, about, credits)', () => {
+  it('displays navigation links (academy, about, credits)', () => {
     renderWithProviders(<Navbar />);
     expect(screen.getByText('烹饪学院')).toBeInTheDocument();
-    expect(screen.getByText('专题')).toBeInTheDocument();
     expect(screen.getByText('关于')).toBeInTheDocument();
     expect(screen.getByText('致谢')).toBeInTheDocument();
   });
@@ -51,19 +50,6 @@ describe('Navbar', () => {
 
     // After toggle, should be in en — button shows "中"
     expect(screen.getByText('中')).toBeInTheDocument();
-  });
-
-  it('shows collection dropdown items when collections button is clicked', () => {
-    renderWithProviders(<Navbar />);
-    const collectionsBtn = screen.getByText('专题');
-    fireEvent.click(collectionsBtn);
-
-    expect(screen.getByText('空气炸锅系列')).toBeInTheDocument();
-    expect(screen.getByText('微波炉快手菜')).toBeInTheDocument();
-    expect(screen.getByText('电饭煲料理')).toBeInTheDocument();
-    expect(screen.getByText('懒人菜谱')).toBeInTheDocument();
-    expect(screen.getByText('下饭菜')).toBeInTheDocument();
-    expect(screen.getByText('烤箱烘焙')).toBeInTheDocument();
   });
 
   it('navigation links have correct hrefs', () => {
