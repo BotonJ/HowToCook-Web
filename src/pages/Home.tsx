@@ -1,15 +1,13 @@
 import { useState, useMemo } from 'react';
-import { useParams, useSearchParams, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { CategoryNav } from '@/components/CategoryNav';
 import { CuisineNav } from '@/components/CuisineNav';
 import { SourceNav } from '@/components/SourceNav';
 import { McpBanner } from '@/components/McpBanner';
 import { RecipeGrid } from '@/components/RecipeGrid';
-import { SearchInput } from '@/components/ui/SearchInput';
 import { Layout } from '@/components/Layout';
 import { WebsiteJsonLd } from '@/components/WebsiteJsonLd';
-import { useSearch } from '@/hooks/useSearch';
 import { useRecipes } from '@/hooks/useRecipes';
 import { useMeta } from '@/hooks/useMeta';
 import { useI18n } from '@/lib/i18n';
@@ -25,9 +23,6 @@ const SOURCE_LABELS: Record<string, string> = {
 
 export function Home() {
   const { categoryId } = useParams<{ categoryId: string }>();
-  const [searchParams] = useSearchParams();
-  const initialQuery = searchParams.get('q') || '';
-  const [searchTerm, setSearchTerm] = useState(initialQuery);
   const [activeCuisine, setActiveCuisine] = useState<string>('all');
   const [activeSource, setActiveSource] = useState('all');
   const { categories, loading, error, retry } = useRecipes();
@@ -41,8 +36,6 @@ export function Home() {
     ogImage: `${SITE_URL}/og.png`,
     ogUrl: categoryId ? `${SITE_URL}/category/${categoryId}` : SITE_URL,
   });
-
-  const normalizedSearch = searchTerm.trim().toLowerCase();
 
   // Flat recipe list — computed once, shared by all downstream memos
   const flatRecipes = useMemo(() => categories.flatMap(c => c.recipes), [categories]);
@@ -114,17 +107,6 @@ export function Home() {
     return [...list].sort((a, b) => (a.imagePath ? 0 : 1) - (b.imagePath ? 0 : 1));
   }, [categoryId, allRecipes]);
 
-  // API search (triggered when search term is present)
-  const { results: searchResults, loading: searchLoading } = useSearch(searchTerm, allRecipes);
-
-  // Final display: API results > local fallback > category browsing
-  const filteredRecipes = useMemo(() => {
-    if (!normalizedSearch) return displayedRecipes;
-    if (searchResults !== null) return searchResults;
-    // API search failed or still loading, fall back to local search
-    return displayedRecipes.filter(recipe => recipe.name.toLowerCase().includes(normalizedSearch));
-  }, [displayedRecipes, normalizedSearch, searchResults]);
-
   // Curated collections with recipe counts (from real data)
   const curatedCollections = useMemo(() => {
     return COLLECTION_IDS.map(id => {
@@ -177,20 +159,6 @@ export function Home() {
           <h1 className="font-display text-headline-xl text-on-surface tracking-tight mb-4">
             {lang === 'en' ? 'HowToCook AI' : '做饭指北'}
           </h1>
-
-          <div className="max-w-lg mx-auto relative">
-            <SearchInput
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={t.home.searchPlaceholder}
-              aria-label={t.home.searchPlaceholder}
-            />
-            {searchLoading && (
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              </div>
-            )}
-          </div>
         </section>
       )}
 
@@ -210,54 +178,6 @@ export function Home() {
       <div className="mb-8 px-2">
         <McpBanner />
       </div>
-
-      {/* ── Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
-      <div className="mb-8">
-        {lang === 'en' ? (
-          <CuisineNav
-            activeCuisine={activeCuisine}
-            onCuisineChange={setActiveCuisine}
-            cuisineCounts={cuisineCounts}
-          />
-        ) : (
-          <>
-            <SourceNav
-              activeSource={activeSource}
-              onSourceChange={setActiveSource}
-              sourceCounts={sourceCounts}
-            />
-            <CategoryNav categories={categories} />
-          </>
-        )}
-      </div>
-
-      {/* ── Section 4: Discovery Grid ────────────────────────────── */}
-      <section className="px-2 mb-16">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="font-display text-headline-lg text-on-surface">
-              {categoryId
-                ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
-                : lang === 'en'
-                  ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
-                  : (activeSource === 'all' ? t.home.discoveryTitle : SOURCE_LABELS[activeSource] || activeSource)}
-              <span className="text-on-surface-variant text-body-lg font-normal ml-2">
-                ({t.home.recipeCount(filteredRecipes.length)})
-              </span>
-            </h2>
-            {!categoryId && (
-              <p className="text-on-surface-variant text-body-md mt-1">
-                {t.home.discoverySubtitle}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <RecipeGrid
-          recipes={filteredRecipes}
-          emptyMessage={normalizedSearch ? t.home.emptySearch : undefined}
-        />
-      </section>
 
       {/* ── Section 5: Curated Collections (bento) ───────────────── */}
       {!categoryId && curatedCollections.length > 0 && (
@@ -328,6 +248,54 @@ export function Home() {
           </div>
         </section>
       )}
+
+      {/* ── Navigation: SourceNav + CategoryNav for Chinese, CuisineNav for English */}
+      <div className="mb-8">
+        {lang === 'en' ? (
+          <CuisineNav
+            activeCuisine={activeCuisine}
+            onCuisineChange={setActiveCuisine}
+            cuisineCounts={cuisineCounts}
+          />
+        ) : (
+          <>
+            <SourceNav
+              activeSource={activeSource}
+              onSourceChange={setActiveSource}
+              sourceCounts={sourceCounts}
+            />
+            <CategoryNav categories={categories} />
+          </>
+        )}
+      </div>
+
+      {/* ── Section 4: Discovery Grid ────────────────────────────── */}
+      <section className="px-2 mb-16">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-display text-headline-lg text-on-surface">
+              {categoryId
+                ? categories.find(c => c.id === categoryId)?.displayName || t.home.category
+                : lang === 'en'
+                  ? (activeCuisine === 'all' ? 'All Recipes' : activeCuisine === 'chinese-original' ? 'Original Chinese' : activeCuisine === 'chinese-western' ? 'Western Chinese' : activeCuisine)
+                  : (activeSource === 'all' ? t.home.discoveryTitle : SOURCE_LABELS[activeSource] || activeSource)}
+              <span className="text-on-surface-variant text-body-lg font-normal ml-2">
+                ({t.home.recipeCount(displayedRecipes.length)})
+              </span>
+            </h2>
+            {!categoryId && (
+              <p className="text-on-surface-variant text-body-md mt-1">
+                {t.home.discoverySubtitle}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <RecipeGrid
+          recipes={displayedRecipes}
+        />
+      </section>
+
     </Layout>
   );
 }

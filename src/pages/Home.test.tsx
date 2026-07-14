@@ -1,7 +1,6 @@
 import { renderWithProviders, MOCK_RECIPE, MOCK_CATEGORY } from '@/test-utils';
 import { screen, fireEvent } from '@testing-library/react';
 import { useRecipes } from '@/hooks/useRecipes';
-import { useSearch } from '@/hooks/useSearch';
 import { Home } from './Home';
 
 vi.mock('@/hooks/useRecipes', () => ({
@@ -13,10 +12,6 @@ vi.mock('@/hooks/useRecipes', () => ({
     retry: vi.fn(),
   })),
   findRecipeById: vi.fn(),
-}));
-
-vi.mock('@/hooks/useSearch', () => ({
-  useSearch: vi.fn(() => ({ results: null, loading: false, error: null })),
 }));
 
 vi.mock('@/hooks/useMeta', () => ({
@@ -65,7 +60,6 @@ vi.mock('@/components/Layout', () => ({
 }));
 
 const mockUseRecipes = vi.mocked(useRecipes);
-const mockUseSearch = vi.mocked(useSearch);
 
 describe('Home', () => {
   beforeEach(() => {
@@ -79,7 +73,6 @@ describe('Home', () => {
       error: null,
       retry: vi.fn(),
     } as unknown as ReturnType<typeof useRecipes>);
-    mockUseSearch.mockReturnValue({ results: null, loading: false, error: null } as unknown as ReturnType<typeof useSearch>);
   });
 
   it('shows loading spinner when loading', () => {
@@ -116,11 +109,8 @@ describe('Home', () => {
     expect(retryFn).toHaveBeenCalled();
   });
 
-  it('renders search box, category nav and recipe grid in normal state', () => {
+  it('renders category nav and recipe grid in normal state', () => {
     renderWithProviders(<Home />);
-
-    // Search input
-    expect(screen.getByPlaceholderText('输入关键词搜索菜谱')).toBeInTheDocument();
 
     // Category nav (zh mode renders SourceNav + CategoryNav)
     expect(screen.getByTestId('category-nav')).toBeInTheDocument();
@@ -129,15 +119,6 @@ describe('Home', () => {
     // Recipe grid
     expect(screen.getByTestId('recipe-grid')).toBeInTheDocument();
     expect(screen.getByText('红烧肉')).toBeInTheDocument();
-  });
-
-  it('updates search term when typing in search box', () => {
-    renderWithProviders(<Home />);
-
-    const input = screen.getByPlaceholderText('输入关键词搜索菜谱');
-    fireEvent.change(input, { target: { value: '红烧' } });
-
-    expect(input).toHaveValue('红烧');
   });
 
   it('displays category display names in category navigation', () => {
