@@ -91,7 +91,7 @@ export const zh = {
 
   // ── 关于页 ────────────────────────────────────────────────────────
   about: {
-    title: '关于 HowToCook',
+    title: '关于做饭指北（HowToCook）',
     metaTitle: '关于',
     metaDesc: 'HowToCook — AI 驱动的菜谱平台，500+ 道菜谱覆盖 17 大菜系，支持 MCP 协议接口。',
     intro: 'HowToCook 是一个 AI 驱动的菜谱平台，为所有下厨的人提供精确、可执行的烹饪指南。',
