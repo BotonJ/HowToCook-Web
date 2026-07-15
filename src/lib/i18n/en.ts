@@ -128,6 +128,10 @@ export const en = {
         name: 'king-jingxiang Recipe Images',
         description: 'Converts the original Markdown tutorials into beautifully styled recipe images using NanoBananaPro, making kitchen practice more intuitive.',
       },
+      zhihu: {
+        name: 'Zhihu',
+        description: 'Where questions find answers.',
+      },
     },
   },
 
