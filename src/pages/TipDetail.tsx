@@ -53,6 +53,13 @@ const SERIES_LABELS: Record<SeriesType, string> = {
   tips: '基础技法',
 };
 
+const TIP_COVER_IMAGES: Record<string, string> = {
+  'removing-fishy-smell': '/images/tips/去腥.webp',
+  'oil-temperature': '/images/tips/油温判断技巧.webp',
+  'food-safety': '/images/tips/食品安全.webp',
+  'food-compatibility': '/images/tips/食材相克与禁忌.webp',
+};
+
 export function TipDetail() {
   const { slug } = useParams<{ slug: string }>();
   const base = useBasePath();
@@ -123,9 +130,11 @@ export function TipDetail() {
   const nextItem = currentIndex < seriesItems.length - 1 ? seriesItems[currentIndex + 1] : null;
   const seriesTotal = tip.series === 'academy' ? cachedAcademyCount : cachedTipsCount;
 
+  const coverImage = TIP_COVER_IMAGES[slug ?? ''];
+
   return (
     <Layout>
-      <div className="py-8 max-w-3xl">
+      <div className="py-8">
         <Link
           to={`${base}/academy`}
           className="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors text-label-lg mb-6"
@@ -134,25 +143,37 @@ export function TipDetail() {
           {t.tipDetail.backToAcademy}
         </Link>
 
-        <article className="tip-content max-w-none">
-          {/* Series breadcrumb */}
-          <div className="flex items-center gap-2 mb-4 text-label-sm text-on-surface-variant">
-            <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full">
-              {SERIES_LABELS[tip.series]}
-            </span>
-            {tip.series === 'academy' && (
-              <span className="text-on-surface-variant">
-                {currentIndex + 1} / {seriesTotal}
+        <div className={`flex gap-12 ${coverImage ? '' : 'max-w-3xl'}`}>
+          {/* Left: article content */}
+          <article className={`tip-content flex-1 min-w-0 ${coverImage ? 'max-w-3xl' : ''}`}>
+            {/* Series breadcrumb */}
+            <div className="flex items-center gap-2 mb-4 text-label-sm text-on-surface-variant">
+              <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                {SERIES_LABELS[tip.series]}
               </span>
-            )}
-          </div>
+              {tip.series === 'academy' && (
+                <span className="text-on-surface-variant">
+                  {currentIndex + 1} / {seriesTotal}
+                </span>
+              )}
+            </div>
 
-           <h1 className="font-display text-headline-lg md:text-headline-xl text-on-surface mb-4">{tip.title}</h1>
-          <div
-            className="font-body text-body-md text-on-surface-variant leading-relaxed tip-content"
-            dangerouslySetInnerHTML={{ __html: renderedContent }}
-          />
-        </article>
+             <h1 className="font-display text-headline-lg md:text-headline-xl text-on-surface mb-4">{tip.title}</h1>
+            <div
+              className="font-body text-body-md text-on-surface-variant leading-relaxed tip-content"
+              dangerouslySetInnerHTML={{ __html: renderedContent }}
+            />
+          </article>
+
+          {/* Right: cover image (sticky sidebar) */}
+          {coverImage && (
+            <aside className="hidden lg:block w-80 flex-shrink-0">
+              <div className="sticky top-28">
+                <img src={coverImage} alt={tip.title} className="w-full rounded-2xl shadow-ambient object-cover" />
+              </div>
+            </aside>
+          )}
+        </div>
 
         {/* Series navigation */}
         <nav className="mt-12 pt-6 border-t border-outline-variant flex items-center justify-between gap-4">
