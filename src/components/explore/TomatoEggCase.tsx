@@ -21,71 +21,92 @@ export function TomatoEggCase() {
   }
 
   return (
-    <section className="mb-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="font-display text-headline-lg text-on-surface mb-2">
-          番茄 → 鸡蛋
-        </h2>
-        <p className="font-body text-body-md text-on-surface-variant mb-6 leading-relaxed">
-          番茄炒蛋，中国人的国民菜。
-          <br />
-          但在风味空间里，番茄住在"蔬菜社区"，鸡蛋住在"烘焙社区"，相似度只有 {data.cosine}。
-          <br />
-          可它们在 {data.cooccurrence.toLocaleString()} 份菜谱里同时出现。
-          <br />
-          有些经典搭配，不是"相似"，而是"互补"。
-        </p>
+    <section className="py-24 bg-surface-container-highest/30">
+      <div className="max-w-6xl mx-auto px-4 md:px-16">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20 space-y-4">
+          <h2 className="font-display text-headline-xl">跨界奇迹：西红柿与鸡蛋</h2>
+          <p className="text-body-md text-on-surface-variant">为什么原本分属于"蔬菜社群"与"烘焙/蛋白质社群"的两者，在数据上却呈现出惊人的亲和力？</p>
+        </div>
 
-        <div className="bg-surface-container-low rounded-2xl shadow-ambient p-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            {/* Tomato cluster */}
-            <div className="text-center">
-              <div className="text-4xl mb-3">🍅</div>
-              <h3 className="font-display text-headline-md text-on-surface mb-3">蔬菜社区</h3>
-              <div className="space-y-1.5">
-                {data.tomato.neighbors.map((n, i) => (
-                  <span key={i} className="inline-block bg-vegetable/10 text-vegetable text-body-sm px-3 py-1 rounded-full mr-1.5 mb-1.5">
-                    {n}
-                  </span>
-                ))}
+        {/* Three columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          {/* Tomato card */}
+          <div className="bg-white p-10 rounded-[32px] shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-8">
+                <span className="text-label-sm font-bold text-error tracking-widest uppercase">Ingredient A</span>
+                <span className="material-symbols-outlined text-error">nutrition</span>
+              </div>
+              <h3 className="font-display text-headline-lg mb-2">西红柿</h3>
+              <div className="space-y-4 mt-6">
+                <div className="flex justify-between text-body-md">
+                  <span className="text-on-surface-variant">社区分类</span>
+                  <span className="font-bold">蔬菜社群</span>
+                </div>
+                <div className="flex justify-between text-body-md">
+                  <span className="text-on-surface-variant">主要化合物</span>
+                  <span className="font-bold text-error">谷氨酸盐</span>
+                </div>
               </div>
             </div>
+            {/* Image */}
+            <div className="mt-12 h-40 rounded-2xl bg-surface-container overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCosaCypdRsMI3VfdkLKs-ZSWrmjmahtUiyA6JGFuFV4S45ZNU2knVEtzdQu6PSke2r2tVb1308Ua_G25bxfHj4aEmyR-h-aSoiq6J91YsXEmK-jO2xtTYTm7jkp8KIazPqnfOgpe3v4r14bwclL0C-9I1Oy1-nChKgpfb-He9TSfHR1Z8T7H1Zd2sqeBhfsKBDT139sEz_mziAjBUx-KIvjf4o0WIOapSDxfcp3w4M9JVmNaYwiNcD"
+                alt="西红柿"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
 
-            {/* Arrow + stats */}
-            <div className="flex flex-col items-center gap-4">
-              <svg width="80" height="40" viewBox="0 0 80 40">
-                <defs>
-                  <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-                    <polygon points="0 0, 8 3, 0 6" fill="#737971" />
-                  </marker>
-                </defs>
-                <line x1="0" y1="20" x2="70" y2="20" stroke="#737971" strokeWidth="2" markerEnd="url(#arrowhead)" strokeDasharray="4 3" />
-              </svg>
-              <div className="text-center">
-                <div className="font-display text-headline-md text-primary">
-                  {data.cooccurrence.toLocaleString()}
-                </div>
-                <div className="text-body-sm text-on-surface-variant">份菜谱同时出现</div>
-              </div>
-              <div className="text-center">
-                <div className="font-display text-headline-sm text-tertiary">
-                  cosine {data.cosine}
-                </div>
-                <div className="text-body-sm text-on-surface-variant">风味相似度</div>
+          {/* Center: link & stats */}
+          <div className="flex flex-col items-center justify-center space-y-8 p-6 text-center">
+            <div className="relative w-full">
+              <div className="h-px w-full bg-outline-variant absolute top-1/2 -z-10" />
+              <div className="bg-secondary-fixed text-on-secondary-fixed px-6 py-2 rounded-full inline-block font-mono text-sm font-bold border border-secondary">
+                COSINE {data.cosine}
               </div>
             </div>
+            <div className="space-y-2">
+              <div className="text-headline-xl font-bold text-primary">{data.cooccurrence.toLocaleString()}</div>
+              <p className="text-label-sm text-on-surface-variant font-bold tracking-widest">共现频次</p>
+            </div>
+            <div className="p-6 bg-primary-fixed/20 rounded-2xl border border-primary/10">
+              <p className="text-body-md italic text-primary leading-relaxed">
+                "它们在鲜味分子维度上的高度互补，完美中和了番茄的酸性与蛋液的油脂感。"
+              </p>
+            </div>
+          </div>
 
-            {/* Egg cluster */}
-            <div className="text-center">
-              <div className="text-4xl mb-3">🥚</div>
-              <h3 className="font-display text-headline-md text-on-surface mb-3">烘焙社区</h3>
-              <div className="space-y-1.5">
-                {data.egg.neighbors.map((n, i) => (
-                  <span key={i} className="inline-block bg-grain/10 text-grain text-body-sm px-3 py-1 rounded-full mr-1.5 mb-1.5">
-                    {n}
-                  </span>
-                ))}
+          {/* Egg card */}
+          <div className="bg-white p-10 rounded-[32px] shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex justify-between items-start mb-8">
+                <span className="text-label-sm font-bold text-secondary tracking-widest uppercase">Ingredient B</span>
+                <span className="material-symbols-outlined text-secondary">egg</span>
               </div>
+              <h3 className="font-display text-headline-lg mb-2">鸡蛋</h3>
+              <div className="space-y-4 mt-6">
+                <div className="flex justify-between text-body-md">
+                  <span className="text-on-surface-variant">社区分类</span>
+                  <span className="font-bold">烘焙/蛋白质</span>
+                </div>
+                <div className="flex justify-between text-body-md">
+                  <span className="text-on-surface-variant">主要化合物</span>
+                  <span className="font-bold text-secondary">硫化物/卵磷脂</span>
+                </div>
+              </div>
+            </div>
+            {/* Image */}
+            <div className="mt-12 h-40 rounded-2xl bg-surface-container overflow-hidden">
+              <img
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4_Hy7WXsxeZAnAg3Fp9-iV6DmRqyIHW3E1GOxVmKeinSiQFb9Tb_meUo_O0mfafyZbWR03nGcOsbXa-QvxV4sle7We79C8eAWUOSHGf92B2GBfF2CaS3-pATpqxcyyYQ9LVJSLidahAzPV93H_B4DO8TGm--pk2nCvdtwk0MSIVzP_fT0_omTXERKv98EnbyZ3Fhc9Jm6VC_DtGb3WnZ9fwrHRDAyExpZbkjcEM6jajF4LPagzMJs"
+                alt="鸡蛋"
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

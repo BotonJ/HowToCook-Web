@@ -18,18 +18,6 @@ interface NetworkData {
   edges: Edge[];
 }
 
-const NODE_COLORS: Record<string, string> = {
-  姜: '#b5651d',
-  葱: '#3a7d44',
-  蒜: '#856a14',
-  盐: '#5f6b6e',
-  酱油: '#6b4e8c',
-  生抽: '#6b4e8c',
-  糖: '#b03b5e',
-  料酒: '#2f7a8c',
-  味精: '#7d7530',
-};
-
 export function CoreFlavorNetwork() {
   const [data, setData] = useState<NetworkData | null>(null);
 
@@ -43,93 +31,95 @@ export function CoreFlavorNetwork() {
     return <div className="text-center py-20 text-on-surface-variant">加载中...</div>;
   }
 
-  const W = 480;
-  const H = 400;
-  const PAD = 60;
+  // Only keep top 3 nodes for the triangle (姜/蒜/葱)
+  const triangleNames = ['姜', '蒜', '葱'];
 
-  // Normalize coords to canvas
-  const xs = data.nodes.map(n => n.x);
-  const ys = data.nodes.map(n => n.y);
-  const xMin = Math.min(...xs), xMax = Math.max(...xs);
-  const yMin = Math.min(...ys), yMax = Math.max(...ys);
-  const xRange = xMax - xMin || 1;
-  const yRange = yMax - yMin || 1;
+  // Triangle layout: fixed positions for clean triangle
+  const trianglePositions: Record<string, { x: number; y: number }> = {
+    '姜': { x: 200, y: 80 },
+    '蒜': { x: 320, y: 280 },
+    '葱': { x: 80, y: 280 },
+  };
 
-  const toX = (x: number) => PAD + ((x - xMin) / xRange) * (W - 2 * PAD);
-  const toY = (y: number) => PAD + ((y - yMin) / yRange) * (H - 2 * PAD);
+  // Edges between triangle nodes only
+  const triangleEdges = data.edges.filter(
+    e => triangleNames.includes(e.source) && triangleNames.includes(e.target)
+  );
 
-  const nodeMap = Object.fromEntries(data.nodes.map(n => [n.name, n]));
-
-  // Find max count for line width scaling
   const maxCount = Math.max(...data.edges.map(e => e.count));
 
   return (
-    <section className="mb-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="font-display text-headline-lg text-on-surface mb-2">
-          姜葱蒜铁三角
-        </h2>
-        <p className="font-body text-body-md text-on-surface-variant mb-6 leading-relaxed">
-          中餐的"底层操作系统"。
-          <br />
-          姜和盐共同出现 121,867 次——比任何食材对都多。
-          <br />
-          但论羁绊强度，姜和葱（0.43）、姜和料酒（0.43）才是铁三角。
-        </p>
+    <section className="py-24">
+      <div className="max-w-6xl mx-auto px-4 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        {/* Left: text content */}
+        <div className="space-y-8">
+          <h2 className="font-display text-headline-xl text-primary leading-tight">
+            中式烹饪的<br />黄金三角网格
+          </h2>
+          <p className="text-body-md text-on-surface-variant leading-relaxed">
+            在中式厨艺的长河中，姜、蒜、葱构成了风味的底层逻辑。通过对 180 万道中餐菜谱的 NPMI（归一化逐点互信息）分析，我们发现这三者之间的共现频率远超随机分布。
+          </p>
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <span className="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-label-sm">01</span>
+              <div>
+                <h4 className="font-bold text-on-surface text-body-md">强耦合关联</h4>
+                <p className="text-label-sm text-on-surface-variant">姜与葱在爆锅环节的共现率高达 89%</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="w-12 h-12 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary font-bold text-label-sm">02</span>
+              <div>
+                <h4 className="font-bold text-on-surface text-body-md">风味去腥逻辑</h4>
+                <p className="text-label-sm text-on-surface-variant">大蒜在肉类处理中的中和作用具有极高的统计学意义</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className="bg-surface-container-low rounded-2xl shadow-ambient p-6 flex justify-center">
-          <svg viewBox={`0 0 ${W} ${H}`} className="w-full max-w-lg" style={{ height: '400px' }}>
+        {/* Right: SVG network */}
+        <div className="relative bg-white rounded-[40px] p-8 aspect-square flex items-center justify-center overflow-hidden shadow-xl">
+          <svg viewBox="0 0 400 400" className="w-full h-full max-w-[400px]">
             {/* Edges */}
-            {data.edges.map((e, i) => {
-              const s = nodeMap[e.source];
-              const t = nodeMap[e.target];
+            {triangleEdges.map((e, i) => {
+              const s = trianglePositions[e.source];
+              const t = trianglePositions[e.target];
               if (!s || !t) return null;
-              const width = 1 + (e.count / maxCount) * 6;
-              const opacity = 0.3 + (e.npmi / 0.5) * 0.5;
+              const width = 2 + (e.count / maxCount) * 6;
               return (
                 <line
                   key={i}
-                  x1={toX(s.x)} y1={toY(s.y)}
-                  x2={toX(t.x)} y2={toY(t.y)}
-                  stroke="#737971"
+                  x1={s.x} y1={s.y}
+                  x2={t.x} y2={t.y}
+                  stroke="#4c644e"
                   strokeWidth={width}
-                  strokeOpacity={Math.min(opacity, 0.8)}
+                  opacity={0.8}
+                  className="network-line"
                 />
               );
             })}
 
             {/* Nodes */}
-            {data.nodes.map((n, i) => {
-              const cx = toX(n.x);
-              const cy = toY(n.y);
-              const color = NODE_COLORS[n.name] || '#5f6b6e';
+            {triangleNames.map((name) => {
+              const pos = trianglePositions[name];
+              if (!pos) return null;
               return (
-                <g key={i}>
-                  <circle cx={cx} cy={cy} r={18} fill={color} fillOpacity={0.15} stroke={color} strokeWidth={2} />
-                  <text x={cx} y={cy} textAnchor="middle" dominantBaseline="central"
-                    fontSize={13} fontWeight={600} fill={color}>
-                    {n.name}
+                <g key={name}>
+                  <circle cx={pos.x} cy={pos.y} r={name === '蒜' ? 40 : name === '姜' ? 35 : 30}
+                    fill="#f8faf3" stroke="#4c644e" strokeWidth={2} />
+                  <text className="font-display" x={pos.x} y={pos.y + 5}
+                    textAnchor="middle" fill="#4c644e" fontSize={16} fontWeight={600}>
+                    {name}
                   </text>
                 </g>
               );
             })}
-          </svg>
-        </div>
 
-        {/* Key stat */}
-        <div className="flex justify-center gap-8 mt-4">
-          <div className="text-center">
-            <div className="font-display text-headline-md text-primary">121,867</div>
-            <div className="text-body-sm text-on-surface-variant">姜↔盐 共现次数</div>
-          </div>
-          <div className="text-center">
-            <div className="font-display text-headline-md text-primary">0.43</div>
-            <div className="text-body-sm text-on-surface-variant">姜↔葱 NPMI</div>
-          </div>
-          <div className="text-center">
-            <div className="font-display text-headline-md text-primary">0.43</div>
-            <div className="text-body-sm text-on-surface-variant">姜↔料酒 NPMI</div>
-          </div>
+            {/* Supplementary small dots */}
+            <circle cx="250" cy="180" fill="#dfec60" opacity="0.6" r="8" />
+            <circle cx="150" cy="180" fill="#dfec60" opacity="0.4" r="10" />
+            <circle cx="200" cy="300" fill="#dfec60" opacity="0.7" r="6" />
+          </svg>
         </div>
       </div>
     </section>

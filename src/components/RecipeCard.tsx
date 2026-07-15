@@ -46,7 +46,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
               )}
               {isSpicy && (
                 <span className="bg-surface/80 backdrop-blur-sm text-label-sm px-3 py-1 rounded-full">
-                  🌶️ {t.recipe.spicy}
+                  辣 {t.recipe.spicy}
                 </span>
               )}
             </div>
@@ -89,7 +89,7 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
                 )}
                 {isSpicy && (
                   <span className="bg-surface/80 text-xs px-2 py-0.5 rounded-full border border-outline-variant">
-                    🌶️
+                    辣
                   </span>
                 )}
               </div>

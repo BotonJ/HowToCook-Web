@@ -15,7 +15,7 @@
 }
 
 :root {
-  font-family: "Inter", "Noto Sans SC", sans-serif;
+  font-family: "Noto Serif SC", "Inter", sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #191c18;
@@ -209,4 +209,26 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* ── Explore page styles ────────────────────────────────────── */
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(76, 100, 78, 0.1);
+}
+
+.network-line {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s ease-in-out forwards;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: 0; }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
 }

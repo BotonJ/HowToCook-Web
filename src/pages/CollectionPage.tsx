@@ -77,15 +77,6 @@ export function CollectionPage() {
       {/* ── Hero Header ─────────────────────────────────────────── */}
       <header className="mb-8 px-2 pb-8 border-b border-outline-variant">
         <div className="flex items-start gap-4 mb-3">
-          {/* Emoji Icon */}
-          <span
-            className="text-5xl md:text-6xl leading-none select-none"
-            role="img"
-            aria-hidden="true"
-          >
-            {collection.emoji}
-          </span>
-
           <div className="flex-1 min-w-0">
             {/* Title */}
             <h1 className="font-display text-headline-lg md:text-headline-xl text-on-surface tracking-tight">
@@ -119,9 +110,6 @@ export function CollectionPage() {
       <section className="mb-12 px-2">
         {filteredRecipes.length === 0 ? (
           <div className="text-center py-20">
-            <span className="text-6xl mb-4 block" role="img" aria-hidden="true">
-              🍽️
-            </span>
             <p className="text-on-surface-variant text-body-lg font-body">
               {t.collection.empty}
             </p>

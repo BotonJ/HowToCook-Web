@@ -83,11 +83,10 @@ describe('CollectionPage', () => {
     expect(screen.getByTestId('layout')).toBeInTheDocument();
   });
 
-  it('displays collection title and emoji', () => {
+  it('displays collection title', () => {
     renderCollection('kitchen-appliances');
 
     expect(screen.getByText('厨电料理')).toBeInTheDocument();
-    expect(screen.getByText('🍳')).toBeInTheDocument();
   });
 
   it('displays recipe grid when recipes match recipeIds', () => {

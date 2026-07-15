@@ -271,7 +271,7 @@ export function RecipeDetail() {
               )}
               {recipe.tags?.spicy && (
                 <div className="bg-error-container/40 rounded-lg p-4 flex items-center gap-2">
-                  <span className="text-lg">🌶️</span>
+                  <span className="text-lg">辣</span>
                   <div>
                     <div className="text-label-sm text-on-surface-variant">{t.recipe.taste}</div>
                     <div className="text-label-lg text-error font-semibold">{t.recipe.spicy}</div>

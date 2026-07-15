@@ -114,7 +114,7 @@ export function Home() {
       if (!def) return null;
       const count = def.recipeIds.filter(recipeId => flatRecipes.some(r => r.id === recipeId)).length;
       return { ...def, count };
-    }).filter(Boolean) as { id: string; title: string; description: string; emoji: string; count: number }[];
+    }).filter(Boolean) as { id: string; title: string; description: string; count: number }[];
   }, [flatRecipes]);
 
   if (loading) {
@@ -205,12 +205,6 @@ export function Home() {
 
                 {/* Content */}
                 <div className="relative h-full p-6 md:p-8 flex flex-col justify-end">
-                  <span className={`
-                    text-4xl md:text-5xl mb-3 select-none
-                    ${idx === 0 ? 'md:text-6xl md:mb-4' : ''}
-                  `} role="img" aria-hidden="true">
-                    {col.emoji}
-                  </span>
                   <h3 className={`
                     font-display text-on-surface tracking-tight
                     ${idx === 0 ? 'text-headline-md md:text-headline-lg' : 'text-headline-sm'}

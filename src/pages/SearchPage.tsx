@@ -306,7 +306,7 @@ export function SearchPage() {
                         : 'bg-surface-container-high text-on-surface-variant border-transparent hover:bg-surface-variant'
                     }`}
                   >
-                    {tag === 'spicy' ? '🌶️ ' : ''}{dietaryLabel(tag)}
+                    {tag === 'spicy' ? '辣 ' : ''}{dietaryLabel(tag)}
                   </button>
                 );
               })}

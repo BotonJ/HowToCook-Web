@@ -2,7 +2,7 @@
  * Four-dimensional flavor system constants.
  * Shared across all recipe-level radar components.
  *
- * Single source of truth for dimension keys, labels (zh), colors, and emojis.
+ * Single source of truth for dimension keys, labels (zh), and colors.
  * Import from here instead of defining local constants.
  */
 
@@ -21,10 +21,9 @@ export const FLAVOR_DIM_CONFIG: ReadonlyArray<{
   readonly key: FlavorDim;
   readonly label: string;
   readonly color: string;
-  readonly emoji: string;
 }> = [
-  { key: 'sweet',  label: '甜', color: '#ff6b9d', emoji: '🍬' },
-  { key: 'sour',   label: '酸', color: '#ffd166', emoji: '🍋' },
-  { key: 'umami',  label: '鲜', color: '#4ecdc4', emoji: '🍄' },
-  { key: 'spicy',  label: '辣', color: '#ef476f', emoji: '🌶️' },
+  { key: 'sweet',  label: '甜', color: '#ff6b9d' },
+  { key: 'sour',   label: '酸', color: '#ffd166' },
+  { key: 'umami',  label: '鲜', color: '#4ecdc4' },
+  { key: 'spicy',  label: '辣', color: '#ef476f' },
 ] as const;
