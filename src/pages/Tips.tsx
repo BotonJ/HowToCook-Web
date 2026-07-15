@@ -47,13 +47,10 @@ async function loadTips(): Promise<TipMeta[]> {
 
 function AcademyHero({ t }: { t: ReturnType<typeof useT> }) {
   return (
-    <section className="relative rounded-2xl overflow-hidden bg-surface-container-low min-h-[320px] md:min-h-[400px] flex flex-col items-center justify-center p-8 md:p-16 text-center shadow-ambient mb-16 md:mb-24">
-      {/* Decorative gradient layers */}
-      <div className="absolute inset-0 -z-0 opacity-40">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary-container/20 to-secondary-container/15" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-container/25 rounded-full blur-[100px]" />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-transparent z-0" />
+    <section className="relative rounded-2xl overflow-hidden min-h-[320px] md:min-h-[400px] flex flex-col items-center justify-center p-8 md:p-16 text-center shadow-ambient mb-16 md:mb-24">
+      {/* Background image */}
+      <img src="/images/kitchen-academy-hero.webp" alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
 
       <motion.div
         className="relative z-10 max-w-2xl w-full"
@@ -61,14 +58,11 @@ function AcademyHero({ t }: { t: ReturnType<typeof useT> }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <span className="inline-block py-1 px-4 rounded-full bg-primary-container/50 text-on-primary-container text-label-sm mb-6 backdrop-blur-sm border border-primary-container/50">
-          {t.tips.heroBadge}
-        </span>
-        <h1 className="font-display text-headline-xl text-primary mb-4 tracking-tight">
+        <h1 className="font-display text-headline-xl text-white mb-4 tracking-tight">
           {t.tips.title}
         </h1>
-        <p className="text-body-lg text-on-surface-variant max-w-xl mx-auto">
-          {t.tips.heroSubtitle}
+        <p className="text-body-lg text-white/80 max-w-xl mx-auto">
+          通过基础技法、对风味的深刻理解，掌握烹饪的艺术。
         </p>
       </motion.div>
     </section>
