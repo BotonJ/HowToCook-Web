@@ -1,8 +1,8 @@
 /**
  * Shared collection definitions for Home and CollectionPage.
- * Each collection has a filter function that determines which recipes belong to it.
+ * Each collection has a human-curated recipeIds list (形态 A).
  */
-import type { Recipe } from '@/types';
+import { COLLECTION_RECIPES } from './collection-recipes';
 
 export interface CollectionDef {
   id: string;
@@ -10,100 +10,57 @@ export interface CollectionDef {
   description: string;
   seoKeywords: string;
   emoji: string;
-  filter: (recipe: Recipe) => boolean;
+  recipeIds: string[];
 }
 
 export const COLLECTIONS: Record<string, CollectionDef> = {
-  // ── 中文专题（2026-06-02） ──────────────────────────────────────────
-  'air-fryer': {
-    id: 'air-fryer',
-    title: '空气炸锅系列',
-    description: '用空气炸锅做出美味佳肴，简单又健康',
-    seoKeywords: '空气炸锅, air fryer, 炸鸡翅, 烤肉',
+  'kitchen-appliances': {
+    id: 'kitchen-appliances',
+    title: '厨电料理',
+    description: '不用明火也能做菜——空气炸锅、烤箱、微波炉、电饭煲，四种设备解锁厨房新姿势',
+    seoKeywords: '空气炸锅, 烤箱, 微波炉, 电饭煲, 厨电料理, 无火烹饪',
     emoji: '🍳',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('空气炸锅');
-    },
+    recipeIds: COLLECTION_RECIPES['kitchen-appliances'],
   },
-  'microwave': {
-    id: 'microwave',
-    title: '微波炉快手菜',
-    description: '叮一下就好，懒人必备',
-    seoKeywords: '微波炉, microwave, 快手菜',
-    emoji: '📡',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('微波炉');
-    },
-  },
-  'rice-cooker': {
-    id: 'rice-cooker',
-    title: '电饭煲料理',
-    description: '一个电饭煲搞定一餐，懒人福音',
-    seoKeywords: '电饭煲, rice cooker, 焖饭, 懒人料理',
-    emoji: '🍚',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('电饭煲');
-    },
-  },
-  'lazy-meal': {
-    id: 'lazy-meal',
-    title: '懒人菜谱',
-    description: '简单省事，一学就会',
-    seoKeywords: '懒人菜谱, 简单菜, 快手菜, 新手菜',
+  'lazy-meals': {
+    id: 'lazy-meals',
+    title: '懒人快手',
+    description: '零失败入门菜——步骤少、食材常见、新手友好，帮厨房小白建立信心',
+    seoKeywords: '懒人菜谱, 快手菜, 新手菜, 简单菜',
     emoji: '😴',
-    filter: (r) => {
-      if (r.language !== 'zh') return false;
-      if (r.difficulty > 2) return false;
-      if (r.cook_time !== 'quick') return false;
-      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
-      const strictKeywords = ['懒人', '省事', '一锅', '新手友好', '零失败', '小白'];
-      const hasStrict = strictKeywords.some(kw => text.includes(kw));
-      const isSimpleAndEasy = r.name.includes('简单') && r.difficulty === 1;
-      return hasStrict || isSimpleAndEasy;
-    },
+    recipeIds: COLLECTION_RECIPES['lazy-meals'],
   },
   'rice-killer': {
     id: 'rice-killer',
     title: '下饭菜',
-    description: '一口菜扒三碗饭',
-    seoKeywords: '下饭菜, 拌饭, 盖饭, 炒饭',
+    description: '一口菜扒三碗饭——咸鲜/辣/重口味，纯粹的食欲驱动',
+    seoKeywords: '下饭菜, 拌饭, 盖饭, 米饭杀手',
     emoji: '🌶️',
-    filter: (r) => {
-      if (r.language !== 'zh') return false;
-      if (r.difficulty > 2) return false;
-      const text = `${r.name} ${r.description || ''} ${r.steps_text || ''}`;
-      const nameKeywords = ['下饭', '拌饭', '盖饭', '炒饭'];
-      const hasInName = nameKeywords.some(kw => r.name.includes(kw));
-      const hasInDesc = text.includes('下饭');
-      return hasInName || hasInDesc;
-    },
+    recipeIds: COLLECTION_RECIPES['rice-killer'],
   },
-  'oven': {
-    id: 'oven',
-    title: '烤箱烘焙',
-    description: '烤出美味，烘焙幸福',
-    seoKeywords: '烤箱, oven, 烘焙, 烤肉, 烤鸡翅',
-    emoji: '🔥',
-    filter: (r) => {
-      if (!r.ingredients || r.language !== 'zh') return false;
-      const text = `${r.name} ${r.ingredients.join(' ')} ${r.steps_text || ''}`;
-      return text.includes('烤箱') || r.cooking_method === '烤';
-    },
+  'noodles': {
+    id: 'noodles',
+    title: '面食专题',
+    description: '面/饼/馒头/饺子——碳水的艺术，展示面食制作的工艺感',
+    seoKeywords: '面食, 面条, 饺子, 馒头, 饼, 拉面',
+    emoji: '🍜',
+    recipeIds: COLLECTION_RECIPES['noodles'],
+  },
+  'summer': {
+    id: 'summer',
+    title: '夏日清凉',
+    description: '夏天的味道——冷饮冰品、清凉甜品、凉拌菜、凉主食，消暑解腻',
+    seoKeywords: '夏日, 冰品, 凉拌, 冷饮, 消暑, 甜品',
+    emoji: '🌞',
+    recipeIds: COLLECTION_RECIPES['summer'],
   },
 };
 
 /** Ordered list of collection IDs for display (bento grid order). */
 export const COLLECTION_IDS = [
-  'air-fryer',
+  'kitchen-appliances',
+  'lazy-meals',
   'rice-killer',
-  'lazy-meal',
-  'microwave',
-  'rice-cooker',
-  'oven',
+  'noodles',
+  'summer',
 ] as const;

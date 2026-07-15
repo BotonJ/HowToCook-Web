@@ -36,14 +36,12 @@ vi.mock('@/components/Layout', () => ({
 
 const mockUseRecipes = vi.mocked(useRecipes);
 
-/** A recipe that matches the 'air-fryer' collection filter (contains '空气炸锅'). */
-const AIR_FRYER_RECIPE = {
+/** A recipe whose id matches the 'kitchen-appliances' collection recipeIds. */
+const KITCHEN_RECIPE = {
   ...MOCK_RECIPE,
-  id: 'air-fryer-1',
-  name: '空气炸锅鸡翅',
+  id: 'howtocook/炸薯条',
+  name: '炸薯条',
   language: 'zh' as const,
-  ingredients: ['鸡翅', '空气炸锅'],
-  steps_text: '用空气炸锅烤制',
 };
 
 /**
@@ -81,50 +79,49 @@ describe('CollectionPage', () => {
   });
 
   it('renders without crashing with a valid collectionId', () => {
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
     expect(screen.getByTestId('layout')).toBeInTheDocument();
   });
 
   it('displays collection title and emoji', () => {
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
-    expect(screen.getByText('空气炸锅系列')).toBeInTheDocument();
+    expect(screen.getByText('厨电料理')).toBeInTheDocument();
     expect(screen.getByText('🍳')).toBeInTheDocument();
   });
 
-  it('displays recipe grid when recipes match filter', () => {
+  it('displays recipe grid when recipes match recipeIds', () => {
     mockUseRecipes.mockReturnValue({
       categories: [MOCK_CATEGORY],
-      recipes: [AIR_FRYER_RECIPE],
+      recipes: [KITCHEN_RECIPE],
       loading: false,
       error: null,
     } as unknown as ReturnType<typeof useRecipes>);
 
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
     expect(screen.getByTestId('recipe-grid')).toBeInTheDocument();
-    expect(screen.getByTestId('recipe-item')).toHaveTextContent('空气炸锅鸡翅');
+    expect(screen.getByTestId('recipe-item')).toHaveTextContent('炸薯条');
   });
 
-  it('shows empty state when no recipes match the collection filter', () => {
-    // MOCK_RECIPE does not match the air-fryer filter
-    renderCollection('air-fryer');
+  it('shows empty state when no recipes match the collection recipeIds', () => {
+    // MOCK_RECIPE id 'howtocook/红烧肉' is not in kitchen-appliances recipeIds
+    renderCollection('kitchen-appliances');
 
-    // The collection shows 0 recipes via i18n key
     expect(screen.getByText('0 道菜谱')).toBeInTheDocument();
   });
 
-  it('shows recipes when they match the collection filter', () => {
+  it('shows recipes when they match the collection recipeIds', () => {
     mockUseRecipes.mockReturnValue({
       categories: [MOCK_CATEGORY],
-      recipes: [AIR_FRYER_RECIPE],
+      recipes: [KITCHEN_RECIPE],
       loading: false,
       error: null,
     } as unknown as ReturnType<typeof useRecipes>);
 
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
-    expect(screen.getByText('空气炸锅鸡翅')).toBeInTheDocument();
+    expect(screen.getByText('炸薯条')).toBeInTheDocument();
     expect(screen.getByText('1 道菜谱')).toBeInTheDocument();
   });
 
@@ -143,7 +140,7 @@ describe('CollectionPage', () => {
       error: null,
     } as unknown as ReturnType<typeof useRecipes>);
 
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
     expect(screen.getByText('加载中...')).toBeInTheDocument();
   });
@@ -156,14 +153,14 @@ describe('CollectionPage', () => {
       error: '网络错误',
     } as unknown as ReturnType<typeof useRecipes>);
 
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
     expect(screen.getByText('网络错误')).toBeInTheDocument();
   });
 
   it('displays collection description', () => {
-    renderCollection('air-fryer');
+    renderCollection('kitchen-appliances');
 
-    expect(screen.getByText('用空气炸锅做出美味佳肴，简单又健康')).toBeInTheDocument();
+    expect(screen.getByText(/不用明火也能做菜/)).toBeInTheDocument();
   });
 });

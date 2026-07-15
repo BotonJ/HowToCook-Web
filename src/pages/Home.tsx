@@ -112,7 +112,7 @@ export function Home() {
     return COLLECTION_IDS.map(id => {
       const def = COLLECTIONS[id];
       if (!def) return null;
-      const count = flatRecipes.filter(def.filter).length;
+      const count = def.recipeIds.filter(recipeId => flatRecipes.some(r => r.id === recipeId)).length;
       return { ...def, count };
     }).filter(Boolean) as { id: string; title: string; description: string; emoji: string; count: number }[];
   }, [flatRecipes]);
@@ -148,26 +148,7 @@ export function Home() {
     <Layout>
       {!categoryId && <WebsiteJsonLd />}
 
-      {/* ── Section 1: Hero ───────────────────────────────────────── */}
-      {!categoryId && (
-        <section className="relative pt-12 pb-10 md:pt-20 md:pb-16 text-center">
-          {/* Decorative background glow */}
-          <div className="absolute inset-0 -z-10 overflow-hidden">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary-container/15 rounded-full blur-[120px]" />
-          </div>
-
-          <h1 className="font-display text-headline-xl text-on-surface tracking-tight mb-4">
-            {lang === 'en' ? 'HowToCook AI' : '做饭指北'}
-          </h1>
-        </section>
-      )}
-
-      {/* ── Section 2: Brand Tagline ──────────────────────────────── */}
-      {!categoryId && (
-        <p className="text-body-lg text-on-surface-variant text-center mb-8 max-w-xl mx-auto px-4">
-          {t.home.tagline}
-        </p>
-      )}
+      {/* ── Hero removed: title + tagline deleted 2026-07-15 */}
 
       {/* ── Section 3: AI Flavor Seam (placeholder, no render) ──── */}
       {/* AI_FLAVOR_SEAM: 未来 AI 风味雷达区块接入点。
@@ -192,7 +173,7 @@ export function Home() {
               </p>
             </div>
             <Link
-              to="/collection/air-fryer"
+              to="/collection/kitchen-appliances"
               className="text-primary text-label-lg flex items-center gap-1 hover:gap-2 transition-all group"
             >
               {t.home.viewAllCollections}

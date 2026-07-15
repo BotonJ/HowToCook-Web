@@ -25,7 +25,8 @@ export function CollectionPage() {
 
   const filteredRecipes = useMemo(() => {
     if (!collection) return [];
-    return recipes.filter(collection.filter);
+    const idSet = new Set(collection.recipeIds);
+    return recipes.filter(r => idSet.has(r.id));
   }, [recipes, collection]);
 
   if (!collection) {
