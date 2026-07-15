@@ -10,6 +10,7 @@ import { toAbsoluteUrl } from '@/lib/utils';
 import { SITE_URL } from '@/lib/constants';
 import { useRecipeDetail } from '@/hooks/useRecipeDetail';
 import { useSubstituteProfiles, type SubstituteEntry } from '@/hooks/useSubstituteProfiles';
+import { useIngredientFlavor } from '@/hooks/useIngredientFlavor';
 import { useT, useBasePath } from '@/lib/i18n';
 import { findRecipeById } from '@/hooks/useRecipes';
 import type { Recipe } from '@/types';
@@ -27,6 +28,7 @@ import { useMeta } from '@/hooks/useMeta';
 function renderIngredientsList(
   text: string,
   getSubstitutes: (name: string) => SubstituteEntry[] | null,
+  hasIngredient: (name: string) => boolean,
 ) {
   if (!text) return null;
   const lines = text.split('\n').filter(l => l.trim());
@@ -36,11 +38,16 @@ function renderIngredientsList(
         const indent = line.startsWith('  ');
         const cleaned = line.trim().replace(/^[-*]\s*/, '').replace(/^\d+\.\s*/, '');
         const subs = getSubstitutes(cleaned);
+        const linked = hasIngredient(cleaned);
         return (
           <li key={i} className={`${indent ? 'pl-6 text-on-surface-variant/80' : ''}`}>
             <div className="flex gap-2">
               <span className={`mt-0.5 ${indent ? 'text-outline' : 'text-primary'}`}>{indent ? '◦' : '•'}</span>
-              <span className="leading-relaxed">{cleaned}</span>
+              {linked ? (
+                <Link to={`/ingredient/${encodeURIComponent(cleaned)}`} className="leading-relaxed text-primary hover:underline">{cleaned}</Link>
+              ) : (
+                <span className="leading-relaxed">{cleaned}</span>
+              )}
             </div>
             {subs && subs.length > 0 && (
               <div className="pl-5">
@@ -127,6 +134,7 @@ export function RecipeDetail() {
   // The fetch fires on detail-page mount; the ingredient list renders first
   // and the "替换" buttons appear once the data arrives.
   const { getSubstitutes } = useSubstituteProfiles();
+  const { hasIngredient } = useIngredientFlavor();
 
   const [localRecipe, setLocalRecipe] = useState<Recipe | null>(null);
   const [localLoaded, setLocalLoaded] = useState(false);
@@ -312,7 +320,7 @@ export function RecipeDetail() {
                 {t.recipe.ingredients}
               </h2>
               <div className="space-y-1">
-                {renderIngredientsList(recipe.ingredients_text, getSubstitutes)}
+                {renderIngredientsList(recipe.ingredients_text, getSubstitutes, hasIngredient)}
               </div>
             </section>
           )}

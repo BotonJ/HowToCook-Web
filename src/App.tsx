@@ -12,6 +12,7 @@ const Tips = lazy(() => import('./pages/Tips').then(m => ({ default: m.Tips })))
 const TipDetail = lazy(() => import('./pages/TipDetail').then(m => ({ default: m.TipDetail })));
 const Explore = lazy(() => import('./pages/Explore').then(m => ({ default: m.Explore })));
 const SearchPage = lazy(() => import('./pages/SearchPage').then(m => ({ default: m.SearchPage })));
+const IngredientPage = lazy(() => import('./pages/IngredientPage').then(m => ({ default: m.IngredientPage })));
 
 function PageLoader() {
   return (
@@ -119,6 +120,7 @@ const router = createBrowserRouter([
   { path: '/academy/:slug', element: <LazyPage><TipDetail /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '/search', element: <LazyPage><SearchPage /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '/explore', element: <LazyPage><Explore /></LazyPage>, errorElement: <ErrorBoundary /> },
+  { path: '/ingredient/:name', element: <LazyPage><IngredientPage /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '/credits', element: <LazyPage><Credits /></LazyPage>, errorElement: <ErrorBoundary /> },
   { path: '*', element: <NotFoundPage /> },
 ]);
