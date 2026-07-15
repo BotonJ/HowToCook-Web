@@ -299,21 +299,12 @@ export function About() {
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             <div className="relative rounded-2xl overflow-hidden shadow-ambient h-[320px] md:h-[440px]">
-              {/* Multi-layer gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary-container/40 via-surface-container to-secondary-container/20" />
-              <div className="absolute top-1/4 right-1/4 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
-              <div className="absolute bottom-1/3 left-1/4 w-32 h-32 bg-tertiary-container/30 rounded-full blur-2xl" />
-
-              {/* Center icon */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center border border-primary/10">
-                  <ChefHat size={40} className="text-primary/70" />
-                </div>
-              </div>
+              {/* Cover image */}
+              <img src="/images/about-hero.webp" alt="" className="absolute inset-0 w-full h-full object-cover" />
 
               {/* Bottom text overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-surface/80 to-transparent">
-                <p className="font-body text-body-sm text-on-surface-variant leading-relaxed">
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+                <p className="font-body text-body-sm text-white/80 leading-relaxed">
                   {t.about.intro}
                 </p>
               </div>
