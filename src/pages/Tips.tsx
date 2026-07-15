@@ -7,7 +7,7 @@ import { Tag } from '@/components/ui/Tag';
 import { useMeta } from '@/hooks/useMeta';
 import { useT } from '@/lib/i18n';
 import { SITE_URL } from '@/lib/constants';
-import { Layers, BookOpen, ArrowRight, GraduationCap } from 'lucide-react';
+import { Layers, BookOpen, ArrowRight } from 'lucide-react';
 
 interface TipMeta {
   slug: string;
@@ -99,16 +99,10 @@ function FeaturedMVK({
         transition={{ duration: 0.4 }}
       >
         <div className="flex flex-col md:flex-row gap-0">
-          {/* Gradient card — acts as cover image */}
+          {/* Cover image */}
           <div className="w-full md:w-1/2 relative overflow-hidden aspect-video md:aspect-auto md:min-h-[360px]">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary-container/30 to-secondary-container/20 group-hover:scale-105 transition-transform duration-700" />
+            <img src="/images/kitchen-mvk-cover.webp" alt="" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/60 to-transparent" />
-            {/* Decorative orb */}
-            <div className="absolute top-1/3 left-1/3 w-48 h-48 bg-primary-container/30 rounded-full blur-3xl" />
-            {/* Center icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <GraduationCap size={64} className="text-primary/30" strokeWidth={1.5} />
-            </div>
             {/* Badge */}
             <div className="absolute top-4 left-4 bg-secondary-container text-on-secondary-container text-label-sm py-1 px-3 rounded-full shadow-sm">
               Course
