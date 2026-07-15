@@ -174,19 +174,19 @@ export const en = {
     roadmap: {
       techniqueTutorials: {
         title: 'Technique Tutorials',
-        description: 'Stir-fry, steam, boil, marinate, blanch... 18 basic technique articles are ready',
+        description: 'Deodorizing, food safety, ingredient compatibility, oil temperature... 4 basic technique articles online',
       },
       glossary: {
         title: 'Glossary',
-        description: '84 bilingual cooking terms covering knife skills, heat control, and seasoning',
+        description: '103 bilingual cooking terms covering preprocessing, knife skills, heat control, and seasoning',
       },
       recipeLibrary: {
-        title: '15K Recipe Library',
-        description: 'Full HowToCook open-source recipe integration, covering 17 major cuisines',
+        title: 'Recipe Library',
+        description: '535 open-source recipes across 10 categories: meat, staples, vegetables, seafood, and more',
       },
       kitchenGuide: {
-        title: 'Minimal Kitchen Guide',
-        description: 'From pots and knives to food safety, 14-module beginner\'s manual',
+        title: 'Minimal Kitchen MVK',
+        description: 'From pots and knives to food safety, 44 modules + iOS app in development',
       },
       videoTutorials: {
         title: 'Video Tutorials',
@@ -194,6 +194,18 @@ export const en = {
       },
     },
     changelogEntries: {
+      v4eModel: {
+        title: 'Iterated zhongcan_v4e Flavor Model',
+        description: 'Ingredient vectors upgraded from v1 to v4e, 4389 ingredients × 300 dimensions, t-SNE neighbor retention 41.5%.',
+      },
+      siteRedesign: {
+        title: 'Full Site Redesign',
+        description: 'Homepage IA rearrangement, curated collections, ingredient page, Explore narrative page, Cooking Academy all launched.',
+      },
+      iosDev: {
+        title: 'iOS App Development Started',
+        description: 'Minimal Kitchen MVK mobile, native iOS development in progress.',
+      },
       seoOptimization: {
         title: 'SEO Optimization Launched',
         description: 'Site-wide JSON-LD structured data, breadcrumb navigation, Open Graph tags completed.',

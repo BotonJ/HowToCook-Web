@@ -204,8 +204,8 @@ function ContentRoadmap() {
 
 // ── Changelog ─────────────────────────────────────────────────────
 
-const CHANGELOG_KEYS = ['seoOptimization', 'academyFramework', 'mcpBanner', 'multiSource', 'searchFeature'] as const;
-const CHANGELOG_DATES = ['2026-05-28', '2026-05-27', '2026-05-25', '2026-05-20', '2026-05-15'];
+const CHANGELOG_KEYS = ['v4eModel', 'siteRedesign', 'iosDev', 'seoOptimization', 'academyFramework', 'mcpBanner', 'multiSource', 'searchFeature'] as const;
+const CHANGELOG_DATES = ['2026-07-13', '2026-07-15', '2026-07-01', '2026-05-28', '2026-05-27', '2026-05-25', '2026-05-20', '2026-05-15'];
 
 function Changelog() {
   const t = useT();

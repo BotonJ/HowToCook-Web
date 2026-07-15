@@ -175,19 +175,19 @@ export const zh = {
     roadmap: {
       techniqueTutorials: {
         title: '技法教程',
-        description: '炒、蒸、煮、腌、焯水… 18 篇基础技法文章已就绪',
+        description: '去腥、食品安全、食材相克、油温判断… 4 篇基础技法文章已上线',
       },
       glossary: {
         title: '术语词典',
-        description: '84 个中英对照烹饪术语，涵盖刀工、火候、调味',
+        description: '103 个中英对照烹饪术语，涵盖预处理、刀工、火候、调味全流程',
       },
       recipeLibrary: {
-        title: '15K 菜谱库',
-        description: 'HowToCook 开源菜谱全量接入，覆盖 17 大菜系',
+        title: '菜谱库',
+        description: '535 道开源菜谱，覆盖肉禽、主食、蔬菜、水产等 10 大分类',
       },
       kitchenGuide: {
-        title: '最小厨房指南',
-        description: '从锅具刀具到食品安全，14 模块入门手册',
+        title: '最小厨房 MVK',
+        description: '从锅具刀具到食品安全，44 个模块 + iOS App 开发中',
       },
       videoTutorials: {
         title: '视频教程',
@@ -195,6 +195,18 @@ export const zh = {
       },
     },
     changelogEntries: {
+      v4eModel: {
+        title: '迭代 zhongcan_v4e 风味模型',
+        description: '食材向量从 v1 升级到 v4e，4389 食材 × 300 维，t-SNE 近邻保持率 41.5%。',
+      },
+      siteRedesign: {
+        title: '网页全新改版',
+        description: '首页 IA 重排、策展合集、食材页、Explore 品牌叙事页、烹饪学院全面上线。',
+      },
+      iosDev: {
+        title: 'iOS App 开发启动',
+        description: '最小厨房 MVK 移动端，原生 iOS 开发进行中。',
+      },
       seoOptimization: {
         title: 'SEO 优化上线',
         description: '全站 JSON-LD 结构化数据、面包屑导航、Open Graph 标签完善。',
