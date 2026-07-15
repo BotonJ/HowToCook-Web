@@ -113,8 +113,8 @@ export function Home() {
       const def = COLLECTIONS[id];
       if (!def) return null;
       const count = def.recipeIds.filter(recipeId => flatRecipes.some(r => r.id === recipeId)).length;
-      return { ...def, count };
-    }).filter(Boolean) as { id: string; title: string; description: string; count: number }[];
+      return { ...def, count, coverImage: def.coverImage };
+    }).filter(Boolean) as { id: string; title: string; description: string; count: number; coverImage?: string }[];
   }, [flatRecipes]);
 
   if (loading) {
@@ -195,26 +195,35 @@ export function Home() {
                 {/* Gradient background with collection color tint */}
                 <div className={`
                   absolute inset-0
-                  ${idx === 0
-                    ? 'bg-gradient-to-br from-primary/20 via-surface-container to-secondary-container/30'
-                    : idx % 2 === 0
-                      ? 'bg-gradient-to-br from-primary-container/30 via-surface-container-low to-surface-container'
-                      : 'bg-gradient-to-br from-secondary-container/30 via-surface-container-low to-surface-container'
+                  ${col.coverImage
+                    ? ''
+                    : idx === 0
+                      ? 'bg-gradient-to-br from-primary/20 via-surface-container to-secondary-container/30'
+                      : idx % 2 === 0
+                        ? 'bg-gradient-to-br from-primary-container/30 via-surface-container-low to-surface-container'
+                        : 'bg-gradient-to-br from-secondary-container/30 via-surface-container-low to-surface-container'
                   }
                 `} />
+                {col.coverImage && (
+                  <>
+                    <img src={col.coverImage} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  </>
+                )}
 
                 {/* Content */}
                 <div className="relative h-full p-6 md:p-8 flex flex-col justify-end">
                   <h3 className={`
-                    font-display text-on-surface tracking-tight
+                    font-display tracking-tight
+                    ${col.coverImage ? 'text-white' : 'text-on-surface'}
                     ${idx === 0 ? 'text-headline-md md:text-headline-lg' : 'text-headline-sm'}
                   `}>
                     {col.title}
                   </h3>
-                  <p className="text-on-surface-variant text-body-md mt-1 line-clamp-2">
+                  <p className={`text-body-md mt-1 line-clamp-2 ${col.coverImage ? 'text-white/80' : 'text-on-surface-variant'}`}>
                     {col.description}
                   </p>
-                  <span className="text-primary text-label-lg mt-2">
+                  <span className={`text-label-lg mt-2 ${col.coverImage ? 'text-white/90' : 'text-primary'}`}>
                     {t.home.recipeCount(col.count)}
                   </span>
                 </div>
