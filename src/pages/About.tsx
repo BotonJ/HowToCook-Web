@@ -280,12 +280,20 @@ export function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
+              className="flex gap-3"
             >
               <Link
                 to="/tips"
                 className="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-full text-label-lg font-semibold hover:brightness-95 shadow-sm active:scale-90 transition-all"
               >
                 {t.tips.title}
+                <ArrowRight size={16} />
+              </Link>
+              <Link
+                to="/explore"
+                className="inline-flex items-center gap-2 bg-surface-container text-on-surface px-6 py-3 rounded-full text-label-lg font-semibold hover:bg-surface-container-high shadow-sm active:scale-90 transition-all"
+              >
+                风味宇宙
                 <ArrowRight size={16} />
               </Link>
             </motion.div>

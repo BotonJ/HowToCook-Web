@@ -88,15 +88,3 @@ export async function fetchCategories(): Promise<ApiCategory[]> {
   return data.categories;
 }
 
-/**
- * Flavor workbench data (ingredients + cooccurrence + surprise + ...).
- * Served as a single opaque blob; callers parse the object as-is.
- */
-export async function fetchFlavorWorkbench(): Promise<Record<string, unknown>> {
-  return fetchApi<Record<string, unknown>>('/flavor/workbench');
-}
-
-/** NPMI co-occurrence graph for the flavor atlas visualization. */
-export async function fetchNpmiGraph(): Promise<Record<string, unknown>> {
-  return fetchApi<Record<string, unknown>>('/flavor/npmi-graph');
-}
