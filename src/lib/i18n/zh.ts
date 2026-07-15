@@ -110,24 +110,28 @@ export const zh = {
     title: '致谢',
     metaTitle: '致谢',
     metaDesc: '感谢 HowToCook 源仓库、随便做、金谷园等项目和创作者的贡献。',
-    intro: '感谢以下项目和创作者的贡献，让 HowToCook 的菜谱库不断丰富。',
+    intro: '感谢以下各方的支持，让 做饭指北 得以持续发展。',
     visitProject: '访问项目 →',
     items: {
       howtocook: {
         name: 'HowToCook 源仓库',
         description: '开源菜谱项目（GitHub 100k+ stars），程序员风格菜谱。精确量化，步骤带公式。',
       },
+      jingxiang: {
+        name: 'king-jingxiang 菜谱图片版',
+        description: '基于 NanoBananaPro 将原版 Markdown 教程全量转化为精美菜谱图片，让厨房实操更加直观。',
+      },
       suibo: {
         name: '随便做',
-        description: '火遍全网的国宴大厨隋坡，140 道简易/进阶菜谱。随便一做，怎么都好吃。',
+        description: '火遍全网的国宴大厨，140 道简易/进阶菜谱。随便一做，怎么都好吃。',
       },
       jinguyuan: {
         name: '金谷园',
         description: '第一个开源的饺子馆 Skill，招牌甜品牛奶醪糟鸡蛋。',
       },
-      jingxiang: {
-        name: 'king-jingxiang 菜谱图片版',
-        description: '基于 NanoBananaPro 将原版 Markdown 教程全量转化为精美菜谱图片，让厨房实操更加直观。',
+      zhihu: {
+        name: '知乎',
+        description: '有问题，就会有答案。',
       },
     },
   },
