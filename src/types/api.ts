@@ -31,6 +31,7 @@ export interface ApiRecipeDetail {
   name: string;
   category: string;
   image_url: string | null;
+  hero_url?: string | null;
   introduction: string | null;
   difficulty: number;
   cuisine: string;

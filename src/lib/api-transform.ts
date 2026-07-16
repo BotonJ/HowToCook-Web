@@ -56,6 +56,11 @@ export function transformApiRecipe(api: ApiRecipeDetail): Recipe {
         ? api.image_url
         : withBaseUrl(api.image_url)
       : undefined,
+    heroImagePath: api.hero_url
+      ? api.hero_url.startsWith('http')
+        ? api.hero_url
+        : withBaseUrl(api.hero_url)
+      : undefined,
     difficulty: api.difficulty,
     cuisine: api.cuisine,
     cooking_method: api.cooking_method,

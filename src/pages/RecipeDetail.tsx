@@ -217,12 +217,12 @@ export function RecipeDetail() {
         {/* Hero Section: grid-cols-12, image col-span-7, info col-span-5 */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 mb-16">
           {/* Hero Image */}
-          <div className="md:col-span-7 h-[400px] md:h-[560px] rounded-2xl overflow-hidden shadow-ambient bg-surface-container">
-            {recipe.imagePath ? (
+          <div className="md:col-span-7 aspect-square rounded-2xl overflow-hidden shadow-ambient bg-surface-container">
+            {recipe.heroImagePath || recipe.imagePath ? (
               <img
-                src={recipe.imagePath}
+                src={recipe.heroImagePath || recipe.imagePath}
                 alt={recipe.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-primary-container/40 via-surface to-tertiary-container/30 flex items-center justify-center">

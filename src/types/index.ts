@@ -3,6 +3,7 @@ export interface Recipe {
   name: string;
   category: string;
   imagePath?: string;
+  heroImagePath?: string;
   difficulty: number;
   cuisine: string;
   cooking_method: string;
