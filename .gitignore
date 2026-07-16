@@ -62,5 +62,5 @@ public/data/epicure/epicure_mapping.json
 public/data/epicure/recipenlg_epicure_mapping.json
 public/data/epicure/ingredient-cooccurrence.json
 public/data/epicure/mode-labels-zh.json
-# Dish images — truth source is R2, local copies are staging only
-public/images/dishes/
+
+
