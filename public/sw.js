@@ -1,8 +1,8 @@
-const CACHE_NAME = 'howtocook-v4'
+const CACHE_NAME = 'howtocook-v5'
 
-// ── Install: wait for natural activation (no skipWaiting) ──────
-self.addEventListener('install', () => {
-  // Removed skipWaiting() — let browser activate after old tabs close
+// ── Install: skip waiting so new SW activates immediately on next navigation ──
+self.addEventListener('install', (event) => {
+  event.waitUntil(self.skipWaiting())
 })
 
 // ── Activate: clean old caches, claim clients ─────────────────
@@ -24,10 +24,11 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return
 
   const url = new URL(event.request.url)
-  // 放行图片域（img.howtocook.cn），其他跨域请求（API 等）仍交由浏览器处理。
-  // <img> 对图片域名发的是 no-cors 请求，SW 拿到 opaque response，需在策略函数里特殊放行（见下）。
-  const IMAGE_ORIGIN = 'https://img.howtocook.cn'
-  if (url.origin !== self.location.origin && url.origin !== IMAGE_ORIGIN) return
+  // 只拦截同源请求；所有跨域请求（含 img.howtocook.cn 图片、API 等）一律交回浏览器原生处理。
+  // 理由：<img> 对跨域图片发的是 no-cors 请求，SW 拿到 opaque response，在弱网下
+  // staleWhileRevalidate 一旦 fetch 失败会返回 undefined 给浏览器，导致图片永久加载失败。
+  // 浏览器原生 <img> 加载自带重试，比 SW 托管跨域图片更稳。
+  if (url.origin !== self.location.origin) return
 
   // Skip API calls
   if (url.pathname.startsWith('/api/')) return
@@ -50,7 +51,7 @@ self.addEventListener('fetch', (event) => {
 
 // ── Strategies ─────────────────────────────────────────────────
 
-// 100 MB：opaque response 按 7MB 估算（见 trimCache），50MB 只够约 7 张图，提到 100MB
+// 100 MB 上限：只缓存同源资源（HTML/assets/同源图片），跨域图片不再经 SW
 const MAX_CACHE_BYTES = 100 * 1024 * 1024 // 100 MB
 
 async function trimCache() {
@@ -60,12 +61,8 @@ async function trimCache() {
   const entries = []
   for (const req of keys) {
     const resp = await cache.match(req)
-    // opaque response（跨域 no-cors 图片）的 headers 不可读，content-length 为 null。
-    // 按 Chrome 规范，每条 opaque response 占用按 7MB 估算，否则 size 恒为 0 会让 trimCache 形同虚设。
     const size = resp
-      ? (resp.type === 'opaque'
-          ? 7 * 1024 * 1024
-          : parseInt(resp.headers.get('content-length') || '0', 10) || 0)
+      ? parseInt(resp.headers.get('content-length') || '0', 10) || 0
       : 0
     totalSize += size
     entries.push({ req, size })
