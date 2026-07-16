@@ -1,4 +1,4 @@
-const CACHE_NAME = 'howtocook-v3'
+const CACHE_NAME = 'howtocook-v4'
 
 // ── Install: wait for natural activation (no skipWaiting) ──────
 self.addEventListener('install', () => {
@@ -24,7 +24,10 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return
 
   const url = new URL(event.request.url)
-  if (url.origin !== self.location.origin) return
+  // 放行图片域（img.howtocook.cn），其他跨域请求（API 等）仍交由浏览器处理。
+  // <img> 对图片域名发的是 no-cors 请求，SW 拿到 opaque response，需在策略函数里特殊放行（见下）。
+  const IMAGE_ORIGIN = 'https://img.howtocook.cn'
+  if (url.origin !== self.location.origin && url.origin !== IMAGE_ORIGIN) return
 
   // Skip API calls
   if (url.pathname.startsWith('/api/')) return
@@ -47,7 +50,8 @@ self.addEventListener('fetch', (event) => {
 
 // ── Strategies ─────────────────────────────────────────────────
 
-const MAX_CACHE_BYTES = 50 * 1024 * 1024 // 50 MB
+// 100 MB：opaque response 按 7MB 估算（见 trimCache），50MB 只够约 7 张图，提到 100MB
+const MAX_CACHE_BYTES = 100 * 1024 * 1024 // 100 MB
 
 async function trimCache() {
   const cache = await caches.open(CACHE_NAME)
@@ -56,7 +60,13 @@ async function trimCache() {
   const entries = []
   for (const req of keys) {
     const resp = await cache.match(req)
-    const size = resp ? parseInt(resp.headers.get('content-length') || '0', 10) : 0
+    // opaque response（跨域 no-cors 图片）的 headers 不可读，content-length 为 null。
+    // 按 Chrome 规范，每条 opaque response 占用按 7MB 估算，否则 size 恒为 0 会让 trimCache 形同虚设。
+    const size = resp
+      ? (resp.type === 'opaque'
+          ? 7 * 1024 * 1024
+          : parseInt(resp.headers.get('content-length') || '0', 10) || 0)
+      : 0
     totalSize += size
     entries.push({ req, size })
   }
@@ -74,7 +84,7 @@ async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME)
   try {
     const response = await fetch(request)
-    if (response.ok) {
+    if (response.ok || response.type === 'opaque') {
       cache.put(request, response.clone())
     }
     return response
@@ -91,7 +101,7 @@ async function cacheFirst(request) {
   const cache = await caches.open(CACHE_NAME)
   try {
     const response = await fetch(request)
-    if (response.ok) {
+    if (response.ok || response.type === 'opaque') {
       cache.put(request, response.clone())
     }
     return response
@@ -106,7 +116,7 @@ async function staleWhileRevalidate(request) {
 
   const fetchPromise = fetch(request)
     .then((response) => {
-      if (response.ok) {
+      if (response.ok || response.type === 'opaque') {
         cache.put(request, response.clone())
       }
       return response
