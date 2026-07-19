@@ -64,3 +64,6 @@ public/data/epicure/ingredient-cooccurrence.json
 public/data/epicure/mode-labels-zh.json
 
 
+
+# 图片不入 git（由 CF Pages 从本地 dist/ 提供服务，不进版本控制）
+public/images/
